@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkRoute">
         <activity
+            android:name=".activitys.ConfirmLogin"
+            android:exported="false" />
+        <activity
             android:name=".activitys.LoginActivity"
             android:exported="false" />
         <activity
