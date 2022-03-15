@@ -1,22 +1,32 @@
 package com.example.workroute.activitys;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.workroute.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class CreateAccount extends AppCompatActivity {
 
@@ -25,6 +35,8 @@ public class CreateAccount extends AppCompatActivity {
     private TextInputEditText ed_name,ed_email,ed_password,ed_confirmPassword;
     private MaterialButton create,log_in;
     private TextInputLayout layout_mail,layout_name,layout_pass,layout_passConfirm;
+    private FirebaseAuth firebaseAuth;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Register);
@@ -49,6 +61,10 @@ public class CreateAccount extends AppCompatActivity {
         layout_mail=findViewById(R.id.layout_email);
         layout_pass=findViewById(R.id.layout_pass);
         layout_passConfirm=findViewById(R.id.layout_confirm_pass);
+        firebaseAuth=FirebaseAuth.getInstance();
+        progressDialog=new ProgressDialog(this);
+        ed_name.requestFocus();
+        setColorsFocus(card_name,ed_name,layout_name);
         initListeners();
     }
 
@@ -112,6 +128,13 @@ public class CreateAccount extends AppCompatActivity {
                 finish();
             }
         });
+
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkData(v);
+            }
+        });
     }
 
     private void setColorsFocus(MaterialCardView card,TextInputEditText ed,TextInputLayout txt){
@@ -129,5 +152,63 @@ public class CreateAccount extends AppCompatActivity {
         txt.setHintTextColor(ColorStateList.valueOf(Color.parseColor("#D5D5D5")));
         txt.setStartIconTintList(ColorStateList.valueOf(Color.parseColor("#D5D5D5")));
         txt.setEndIconTintList(ColorStateList.valueOf(Color.parseColor("#D5D5D5")));
+    }
+
+    private void checkData(View v){
+        if(ed_name.getText().toString().isEmpty()||ed_email.getText().toString().isEmpty()||ed_password.getText().toString().isEmpty()||
+            ed_confirmPassword.getText().toString().isEmpty()){
+            showSnackbar("You must fill al fields",v);
+            clearFields(ed_name,ed_email,ed_password,ed_confirmPassword);
+        }else if(!ed_password.getText().toString().trim().equals(ed_confirmPassword.getText().toString().trim())){
+            showSnackbar("The passwords must be the same",v);
+            clearFields(ed_password,ed_confirmPassword);
+        }else{
+            createAccount(v);
+            progressDialog.show();
+        }
+    }
+
+    private void showSnackbar(String message,View v){
+        Snackbar.make(v,message,Snackbar.LENGTH_SHORT).show();
+    }
+
+    private void clearFields(EditText ... ed){
+        for(int i=0;i<ed.length;i++){
+            ed[i].setText("");
+        }
+        ed[0].requestFocus();
+    }
+
+    private void createAccount(View v){
+        firebaseAuth.createUserWithEmailAndPassword(ed_email.getText().toString().trim(),ed_password.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    progressDialog.dismiss();
+                    showSnackbar("Account created successfully",v);
+                    Intent intent=new Intent();
+                    intent.putExtra("Email",ed_email.getText().toString().trim());
+                    intent.putExtra("Password",ed_password.getText().toString().trim());
+                    setResult(RESULT_OK,intent);
+                    finish();
+                }else{
+                    progressDialog.dismiss();
+                    showSnackbar("The email is already in use",v);
+                    clearFields(ed_email);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
+                Log.d("EMAIL CONTRASEÑA CREAR","Error al crear usuario con email y contraseña");
+            }
+        });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        setResult(RESULT_CANCELED,null);
     }
 }
