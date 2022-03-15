@@ -1,8 +1,10 @@
-package com.example.workroute;
+package com.example.workroute.activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.workroute.R;
 
 public class MainActivity extends AppCompatActivity {
 

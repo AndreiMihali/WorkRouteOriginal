@@ -104,32 +104,6 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_locality"
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:theme="@style/Theme.MaterialComponents.DayNight"
-            android:layout_gravity="center"
-            app:cardCornerRadius="100dp"
-            app:contentPadding="10dp"
-            android:outlineProvider="none"
-            app:contentPaddingLeft="20dp"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/ed_locality_register"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@android:color/transparent"
-                android:drawableStart="@drawable/ic_baseline_location_city_24"
-                android:drawablePadding="10dp"
-                android:drawableTint="#BABABA"
-                android:hint="Locality"
-                android:textColor="@color/secondary"
-                android:textColorHint="#BABABA"
-                tools:ignore="TouchTargetSizeCheck" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_password"
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"

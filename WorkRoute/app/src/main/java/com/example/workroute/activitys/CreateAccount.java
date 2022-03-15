@@ -17,8 +17,8 @@ import com.google.android.material.card.MaterialCardView;
 public class CreateAccount extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private MaterialCardView card_name,card_email,card_locality,card_pass,card_confirmPass;
-    private EditText ed_name,ed_email,ed_country,ed_password,ed_confirmPassword;
+    private MaterialCardView card_name,card_email,card_pass,card_confirmPass;
+    private EditText ed_name,ed_email,ed_password,ed_confirmPassword;
     private MaterialButton create,log_in;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +32,14 @@ public class CreateAccount extends AppCompatActivity {
         toolbar=findViewById(R.id.toolbar);
         card_name=findViewById(R.id.card_name);
         card_email=findViewById(R.id.card_email);
-        card_locality=findViewById(R.id.card_locality);
         card_pass=findViewById(R.id.card_password);
         card_confirmPass=findViewById(R.id.card_password_confirm);
         ed_name=findViewById(R.id.ed_username_register);
         ed_email=findViewById(R.id.ed_email_register);
-        ed_country=findViewById(R.id.ed_locality_register);
         ed_password=findViewById(R.id.ed_pass_register);
         ed_confirmPassword=findViewById(R.id.ed_confirmpass_register);
-
+        create=findViewById(R.id.button_create);
+        log_in=findViewById(R.id.button_signin);
         initListeners();
     }
 
@@ -75,17 +74,6 @@ public class CreateAccount extends AppCompatActivity {
             }
         });
 
-        ed_country.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus){
-                    setColorsFocus(card_locality,ed_country);
-                }else{
-                    removeColorsFocus(card_locality,ed_country);
-                }
-            }
-        });
-
         ed_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -105,6 +93,14 @@ public class CreateAccount extends AppCompatActivity {
                 }else{
                     removeColorsFocus(card_confirmPass,ed_confirmPassword);
                 }
+            }
+        });
+
+        log_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+                finish();
             }
         });
     }
