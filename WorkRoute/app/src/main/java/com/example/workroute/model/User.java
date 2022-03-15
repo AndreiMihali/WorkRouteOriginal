@@ -4,32 +4,53 @@ public class User {
     private String uid;
     private String nombre;
     private int edad;
+    private String pais;
     private String localidad;
     private String direccion;
     private int nivel;
     private boolean activo;
     private boolean suscrito;
+    private boolean online;
     private int nivelSuscripcion;
     private String fotoPerfil;
     private String alias;
     private boolean conductor;
-    private int vecesConectadas;
 
-    public User(String uid, String nombre, int edad, String localidad, String direccion, int nivel, boolean activo, boolean suscrito, int nivelSuscripcion, String fotoPerfil, String alias, boolean conductor, int vecesConectadas) {
+    public User(String uid, String nombre, int edad, String pais, String localidad, String direccion, int nivel, boolean activo, boolean suscrito, boolean online, int nivelSuscripcion, String fotoPerfil, String alias, boolean conductor, int vecesConectadas) {
         this.uid = uid;
         this.nombre = nombre;
         this.edad = edad;
+        this.pais = pais;
         this.localidad = localidad;
         this.direccion = direccion;
         this.nivel = nivel;
         this.activo = activo;
         this.suscrito = suscrito;
+        this.online = online;
         this.nivelSuscripcion = nivelSuscripcion;
         this.fotoPerfil = fotoPerfil;
         this.alias = alias;
         this.conductor = conductor;
         this.vecesConectadas = vecesConectadas;
     }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
+
+    private int vecesConectadas;
 
     public String getUid() {
         return uid;

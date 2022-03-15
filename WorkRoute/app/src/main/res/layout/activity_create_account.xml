@@ -57,22 +57,26 @@
             android:layout_gravity="center"
             app:cardCornerRadius="100dp"
             android:outlineProvider="none"
-            app:contentPadding="10dp"
-            app:contentPaddingLeft="20dp"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/ed_username_register"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_name"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@android:color/transparent"
-                android:drawableStart="@drawable/ic_baseline_person_24"
-                android:drawablePadding="10dp"
-                android:drawableTint="#BABABA"
+                app:boxStrokeWidth="0dp"
                 android:hint="Name"
-                android:textColor="@color/secondary"
                 android:textColorHint="#BABABA"
-                tools:ignore="TouchTargetSizeCheck" />
+                app:boxStrokeWidthFocused="0dp"
+                app:startIconTint="#BABABA"
+                android:layout_marginStart="10dp"
+                app:startIconDrawable="@drawable/ic_baseline_person_24"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_username_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/secondary" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -84,23 +88,27 @@
             android:layout_gravity="center"
             app:cardCornerRadius="100dp"
             android:outlineProvider="none"
-            app:contentPadding="10dp"
-            app:contentPaddingLeft="20dp"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/ed_email_register"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_email"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@android:color/transparent"
-                android:drawableStart="@drawable/ic_baseline_email_24"
-                android:drawablePadding="10dp"
-                android:drawableTint="#BABABA"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                android:layout_marginStart="10dp"
                 android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/secondary"
                 android:textColorHint="#BABABA"
-                tools:ignore="TouchTargetSizeCheck" />
+                app:startIconTint="#BABABA"
+                app:startIconDrawable="@drawable/ic_baseline_email_24"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_email_register"
+                    android:layout_width="match_parent"
+                    android:inputType="textEmailAddress"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/secondary" />
+            </com.google.android.material.textfield.TextInputLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -110,24 +118,31 @@
             android:theme="@style/Theme.MaterialComponents.DayNight"
             android:layout_gravity="center"
             app:cardCornerRadius="100dp"
-            app:contentPadding="10dp"
             android:outlineProvider="none"
-            app:contentPaddingLeft="20dp"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/ed_pass_register"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_pass"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@android:color/transparent"
-                android:drawableStart="@drawable/ic_baseline_lock_24"
-                android:drawablePadding="10dp"
-                android:drawableTint="#BABABA"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:hint="Password"
-                android:inputType="textPassword"
-                android:textColor="@color/secondary"
                 android:textColorHint="#BABABA"
-                tools:ignore="TouchTargetSizeCheck" />
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:endIconMode="password_toggle"
+                app:endIconTint="#BABABA"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                app:startIconTint="#BABABA">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_pass_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:inputType="textPassword"
+                    android:textColor="@color/secondary" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -138,24 +153,30 @@
             android:theme="@style/Theme.MaterialComponents.DayNight"
             android:layout_gravity="center"
             app:cardCornerRadius="100dp"
-            app:contentPadding="10dp"
             android:outlineProvider="none"
-            app:contentPaddingLeft="20dp"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/ed_confirmpass_register"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_confirm_pass"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@android:color/transparent"
-                android:drawableStart="@drawable/ic_baseline_lock_24"
-                android:drawablePadding="10dp"
-                android:drawableTint="#BABABA"
+                app:boxStrokeWidth="0dp"
                 android:hint="Confirm password"
-                android:inputType="textPassword"
-                android:textColor="@color/secondary"
+                android:layout_marginStart="10dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:endIconMode="password_toggle"
+                app:endIconTint="#BABABA"
                 android:textColorHint="#BABABA"
-                tools:ignore="TouchTargetSizeCheck" />
+                app:startIconTint="#BABABA"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_confirmpass_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/secondary" />
+            </com.google.android.material.textfield.TextInputLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 

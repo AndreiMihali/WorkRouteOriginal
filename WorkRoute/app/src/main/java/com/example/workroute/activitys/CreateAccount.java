@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,13 +15,16 @@ import android.widget.EditText;
 import com.example.workroute.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class CreateAccount extends AppCompatActivity {
 
     private Toolbar toolbar;
     private MaterialCardView card_name,card_email,card_pass,card_confirmPass;
-    private EditText ed_name,ed_email,ed_password,ed_confirmPassword;
+    private TextInputEditText ed_name,ed_email,ed_password,ed_confirmPassword;
     private MaterialButton create,log_in;
+    private TextInputLayout layout_mail,layout_name,layout_pass,layout_passConfirm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Register);
@@ -40,6 +45,10 @@ public class CreateAccount extends AppCompatActivity {
         ed_confirmPassword=findViewById(R.id.ed_confirmpass_register);
         create=findViewById(R.id.button_create);
         log_in=findViewById(R.id.button_signin);
+        layout_name=findViewById(R.id.layout_name);
+        layout_mail=findViewById(R.id.layout_email);
+        layout_pass=findViewById(R.id.layout_pass);
+        layout_passConfirm=findViewById(R.id.layout_confirm_pass);
         initListeners();
     }
 
@@ -56,9 +65,9 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus){
-                    setColorsFocus(card_name,ed_name);
+                    setColorsFocus(card_name,ed_name,layout_name);
                 }else{
-                    removeColorsFocus(card_name,ed_name);
+                    removeColorsFocus(card_name,ed_name,layout_name);
                 }
             }
         });
@@ -67,9 +76,9 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus){
-                    setColorsFocus(card_email,ed_email);
+                    setColorsFocus(card_email,ed_email,layout_mail);
                 }else{
-                    removeColorsFocus(card_email,ed_email);
+                    removeColorsFocus(card_email,ed_email,layout_mail);
                 }
             }
         });
@@ -78,9 +87,9 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus){
-                    setColorsFocus(card_pass,ed_password);
+                    setColorsFocus(card_pass,ed_password,layout_pass);
                 }else{
-                    removeColorsFocus(card_pass,ed_password);
+                    removeColorsFocus(card_pass,ed_password,layout_pass);
                 }
             }
         });
@@ -89,9 +98,9 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus){
-                    setColorsFocus(card_confirmPass,ed_confirmPassword);
+                    setColorsFocus(card_confirmPass,ed_confirmPassword,layout_passConfirm);
                 }else{
-                    removeColorsFocus(card_confirmPass,ed_confirmPassword);
+                    removeColorsFocus(card_confirmPass,ed_confirmPassword,layout_passConfirm);
                 }
             }
         });
@@ -105,18 +114,20 @@ public class CreateAccount extends AppCompatActivity {
         });
     }
 
-    private void setColorsFocus(MaterialCardView card,EditText ed){
+    private void setColorsFocus(MaterialCardView card,TextInputEditText ed,TextInputLayout txt){
         card.setStrokeColor(Color.parseColor("#0391FF"));
         card.setStrokeWidth(3);
+        txt.setHintTextColor(ColorStateList.valueOf(getColor(R.color.secondary)));
+        txt.setStartIconTintList(ColorStateList.valueOf(getColor(R.color.secondary)));
         ed.setTextColor(getColor(R.color.secondary));
-        ed.setHintTextColor(getColor(R.color.secondary));
-        ed.setCompoundDrawableTintList(ColorStateList.valueOf(getColor(R.color.secondary)));
+        txt.setEndIconTintList(ColorStateList.valueOf(getColor(R.color.secondary)));
     }
 
-    private void removeColorsFocus(MaterialCardView card,EditText ed){
+    private void removeColorsFocus(MaterialCardView card,TextInputEditText ed,TextInputLayout txt){
         card.setStrokeWidth(0);
         ed.setTextColor(Color.parseColor("#BABABA"));
-        ed.setHintTextColor(Color.parseColor("#D5D5D5"));
-        ed.setCompoundDrawableTintList(ColorStateList.valueOf(Color.parseColor("#BABABA")));
+        txt.setHintTextColor(ColorStateList.valueOf(Color.parseColor("#D5D5D5")));
+        txt.setStartIconTintList(ColorStateList.valueOf(Color.parseColor("#D5D5D5")));
+        txt.setEndIconTintList(ColorStateList.valueOf(Color.parseColor("#D5D5D5")));
     }
 }
