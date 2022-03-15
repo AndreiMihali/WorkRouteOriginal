@@ -5,21 +5,25 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.workroute.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -28,11 +32,14 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class ConfirmLogin extends AppCompatActivity {
 
+    private static final int GOOGLE_SIGN_IN = 1;
     private MaterialButton button_signUp;
     private MaterialCardView card_email,card_pass;
     private TextView password_for;
@@ -42,6 +49,7 @@ public class ConfirmLogin extends AppCompatActivity {
     private FirebaseAuth auth;
     private ProgressDialog progressDialog;
     private ActivityResultLauncher<Intent> activityResultLauncher;
+    private ActivityResultLauncher<Intent> activityResultLauncherGoogle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Register);
@@ -81,10 +89,8 @@ public class ConfirmLogin extends AppCompatActivity {
                             String pass=intent.getStringExtra("Password");
                             ed_email.setText(email);
                             ed_password.setText(pass);
-                            ed_email.requestFocus();
-                        }else{
-                            ed_email.requestFocus();
                         }
+                        ed_email.requestFocus();
                     }
                 }
         );
@@ -126,6 +132,13 @@ public class ConfirmLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkData(v);
+            }
+        });
+
+        button_google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signInGoogle();
             }
         });
     }
@@ -193,5 +206,48 @@ public class ConfirmLogin extends AppCompatActivity {
     }
 
     private void showHome(){
+    }
+
+    private void signInGoogle(){
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("789989127519-t29vd0ruodrb86um9d1lmggdh8h9k83h.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
+
+        GoogleSignInClient gsc= GoogleSignIn.getClient(getApplicationContext(),gso);
+        gsc.signOut();
+        startActivityForResult(gsc.getSignInIntent(),GOOGLE_SIGN_IN);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==GOOGLE_SIGN_IN){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try{
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                Log.d("TAG", "firebaseAuthWithGoogle:" + account.getId());
+                firebaseAuthWithGoogle(account.getIdToken());
+            }catch (ApiException e){
+                Log.w("TAG", "Google sign in failed", e);
+            }
+        }
+    }
+
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        auth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                           showHome();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("TAG", "signInWithCredential:failure", task.getException());
+                        }
+                    }
+                });
     }
 }
