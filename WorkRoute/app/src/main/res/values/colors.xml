@@ -11,4 +11,5 @@
     <color name="primary">#FFFFFF</color>
     <color name="textOnPrimary">#000000</color>
     <color name="secondary">#004ba0</color>
+    <color name="back_login">#F6F6F6</color>
 </resources>

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#F6F6F6"
+    android:layout_height="match_parent"
+    tools:context=".activitys.CreateAccount">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:elevation="0dp"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:navigationIconTint="@color/textOnPrimary" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:id="@+id/texts"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_below="@id/toolbar"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Let´s Get Started!"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="#9C9A9A"
+            android:textSize="14sp"
+            android:text="Create an account to WorkRoute to get access"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/inputs"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/texts"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_name"
+            android:layout_width="match_parent"
+            android:theme="@style/Theme.MaterialComponents.DayNight"
+            android:layout_gravity="center"
+            app:cardCornerRadius="100dp"
+            android:outlineProvider="none"
+            app:contentPadding="10dp"
+            app:contentPaddingLeft="20dp"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/ed_username_register"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/ic_baseline_person_24"
+                android:drawablePadding="10dp"
+                android:drawableTint="#BABABA"
+                android:hint="Name"
+                android:textColor="@color/secondary"
+                android:textColorHint="#BABABA"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_email"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:theme="@style/Theme.MaterialComponents.DayNight"
+            android:layout_gravity="center"
+            app:cardCornerRadius="100dp"
+            android:outlineProvider="none"
+            app:contentPadding="10dp"
+            app:contentPaddingLeft="20dp"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/ed_email_register"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/ic_baseline_email_24"
+                android:drawablePadding="10dp"
+                android:drawableTint="#BABABA"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/secondary"
+                android:textColorHint="#BABABA"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_locality"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:theme="@style/Theme.MaterialComponents.DayNight"
+            android:layout_gravity="center"
+            app:cardCornerRadius="100dp"
+            app:contentPadding="10dp"
+            android:outlineProvider="none"
+            app:contentPaddingLeft="20dp"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/ed_locality_register"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/ic_baseline_location_city_24"
+                android:drawablePadding="10dp"
+                android:drawableTint="#BABABA"
+                android:hint="Locality"
+                android:textColor="@color/secondary"
+                android:textColorHint="#BABABA"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_password"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:theme="@style/Theme.MaterialComponents.DayNight"
+            android:layout_gravity="center"
+            app:cardCornerRadius="100dp"
+            app:contentPadding="10dp"
+            android:outlineProvider="none"
+            app:contentPaddingLeft="20dp"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/ed_pass_register"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/ic_baseline_lock_24"
+                android:drawablePadding="10dp"
+                android:drawableTint="#BABABA"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textColor="@color/secondary"
+                android:textColorHint="#BABABA"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_password_confirm"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:theme="@style/Theme.MaterialComponents.DayNight"
+            android:layout_gravity="center"
+            app:cardCornerRadius="100dp"
+            app:contentPadding="10dp"
+            android:outlineProvider="none"
+            app:contentPaddingLeft="20dp"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/ed_confirmpass_register"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/ic_baseline_lock_24"
+                android:drawablePadding="10dp"
+                android:drawableTint="#BABABA"
+                android:hint="Confirm password"
+                android:inputType="textPassword"
+                android:textColor="@color/secondary"
+                android:textColorHint="#BABABA"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_create"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/inputs"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        android:padding="10dp"
+        android:text="CREATE"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:backgroundTint="@color/secondary"
+        app:cornerRadius="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/button_create"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="#F0000000"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
+            android:layout_gravity="center"
+            android:text="Already have an account?"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_signin"
+            android:layout_width="wrap_content"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:text="Login here"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="#307DD3"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</RelativeLayout>

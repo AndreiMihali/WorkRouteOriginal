@@ -13,7 +13,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginActivity extends AppCompatActivity {
 
     private Button button_login;
-    private Button button_signup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Login);
@@ -24,7 +23,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void init(){
         button_login=findViewById(R.id.button_login);
-        button_signup=findViewById(R.id.button_signup);
 
         //Metodo para inilializar todos los escuchadores de eventos
         initListeners();
@@ -39,11 +37,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        button_signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 }
