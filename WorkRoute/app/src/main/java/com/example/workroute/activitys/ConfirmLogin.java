@@ -214,7 +214,8 @@ public class ConfirmLogin extends AppCompatActivity {
 
     private void showHome(){
         if(isFirstTime()){
-            Toast.makeText(getApplicationContext(),"Primera vez",Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(ConfirmLogin.this,FirstTimeActivity.class);
+            startActivity(intent);
         }else{
 
         }
@@ -268,7 +269,7 @@ public class ConfirmLogin extends AppCompatActivity {
                 auth.getUid(),
                 name,
                 0,
-                "",
+                "Spain",
                 "",
                 "",
                 0,

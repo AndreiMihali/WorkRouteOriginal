@@ -217,7 +217,7 @@ public class CreateAccount extends AppCompatActivity {
                 firebaseAuth.getUid(),
                 ed_name.getText().toString().trim(),
                 0,
-                "",
+                "Spain",
                 "",
                 "",
                 0,
