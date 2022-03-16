@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.workroute.R;
+import com.example.workroute.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +28,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 public class CreateAccount extends AppCompatActivity {
 
@@ -184,13 +188,8 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    progressDialog.dismiss();
                     showSnackbar("Account created successfully",v);
-                    Intent intent=new Intent();
-                    intent.putExtra("Email",ed_email.getText().toString().trim());
-                    intent.putExtra("Password",ed_password.getText().toString().trim());
-                    setResult(RESULT_OK,intent);
-                    finish();
+                    setDataFirebase();
                 }else{
                     progressDialog.dismiss();
                     showSnackbar("The email is already in use",v);
@@ -210,5 +209,47 @@ public class CreateAccount extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         setResult(RESULT_CANCELED,null);
+    }
+
+
+    private void setDataFirebase(){
+        User user=new User(
+                firebaseAuth.getUid(),
+                ed_name.getText().toString().trim(),
+                0,
+                "",
+                "",
+                "",
+                0,
+                true,
+                false,
+                true,
+                0,
+                "",
+                "",
+                false,
+                0,
+                new ArrayList<>()
+        );
+
+        FirebaseFirestore firestore=FirebaseFirestore.getInstance();
+
+        firestore.collection("Usuarios").document(firebaseAuth.getUid()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                progressDialog.dismiss();
+                Intent intent=new Intent();
+                intent.putExtra("Email",ed_email.getText().toString().trim());
+                intent.putExtra("Password",ed_password.getText().toString().trim());
+                setResult(RESULT_OK,intent);
+                finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
+                Log.d("INSERTAR DATOS","Error al insertar los datos");
+            }
+        });
     }
 }

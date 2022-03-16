@@ -1,5 +1,7 @@
 package com.example.workroute.model;
 
+import java.util.ArrayList;
+
 public class User {
     private String uid;
     private String nombre;
@@ -16,7 +18,17 @@ public class User {
     private String alias;
     private boolean conductor;
 
-    public User(String uid, String nombre, int edad, String pais, String localidad, String direccion, int nivel, boolean activo, boolean suscrito, boolean online, int nivelSuscripcion, String fotoPerfil, String alias, boolean conductor, int vecesConectadas) {
+    public ArrayList<Viaje> getViajes() {
+        return viajes;
+    }
+
+    public void setViajes(ArrayList<Viaje> viajes) {
+        this.viajes = viajes;
+    }
+
+    private ArrayList<Viaje> viajes;
+
+    public User(String uid, String nombre, int edad, String pais, String localidad, String direccion, int nivel, boolean activo, boolean suscrito, boolean online, int nivelSuscripcion, String fotoPerfil, String alias, boolean conductor, int vecesConectadas,ArrayList<Viaje> viajes) {
         this.uid = uid;
         this.nombre = nombre;
         this.edad = edad;
@@ -32,6 +44,7 @@ public class User {
         this.alias = alias;
         this.conductor = conductor;
         this.vecesConectadas = vecesConectadas;
+        this.viajes=viajes;
     }
 
     public String getPais() {
