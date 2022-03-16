@@ -20,14 +20,15 @@
             android:layout_width="wrap_content"
             android:text="It seems like it's your first time here"
             android:textColor="@color/textOnPrimary"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:textColor="#9C9A9A"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:text="Complete your data"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -61,14 +62,14 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:background="@android:color/transparent"
             android:layout_width="200dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:hint="Andrei Mihali"
-            android:textSize="18sp"
-            android:textColorHint="@color/secondary"
+            android:background="@android:color/transparent"
             android:gravity="center"
-            android:layout_height="wrap_content"/>
+            android:hint="GET_NOMBRE"
+            android:textColorHint="@color/secondary"
+            android:textSize="18sp" />
     </LinearLayout>
 
 
@@ -115,7 +116,7 @@
                 android:id="@+id/spinner_ciudad"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:entries="@android:array/postalAddressTypes" />
+                android:entries="@array/provinces" />
 
         </com.google.android.material.card.MaterialCardView>
 
