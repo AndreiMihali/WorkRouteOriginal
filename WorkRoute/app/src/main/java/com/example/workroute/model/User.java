@@ -7,7 +7,7 @@ public class User {
     private String uid;
     private String nombre;
     private int edad;
-    private Date fecha_naci;
+    private String fecha_naci;
     private String localidad;
     private String direccion;
     private int nivel;
@@ -23,7 +23,7 @@ public class User {
     public User() {
     }
 
-    public User(String uid, String nombre, int edad, Date fecha_naci, String localidad, String direccion, int nivel, boolean activo, boolean suscrito, boolean online, int nivelSuscripcion, String fotoPerfil, boolean conductor, ArrayList<Viaje> viajes, int vecesConectadas) {
+    public User(String uid, String nombre, int edad, String fecha_naci, String localidad, String direccion, int nivel, boolean activo, boolean suscrito, boolean online, int nivelSuscripcion, String fotoPerfil, boolean conductor, ArrayList<Viaje> viajes, int vecesConectadas) {
         this.uid = uid;
         this.nombre = nombre;
         this.edad = edad;
@@ -65,11 +65,11 @@ public class User {
         this.edad = edad;
     }
 
-    public Date getFecha_naci() {
+    public String getFecha_naci() {
         return fecha_naci;
     }
 
-    public void setFecha_naci(Date fecha_naci) {
+    public void setFecha_naci(String fecha_naci) {
         this.fecha_naci = fecha_naci;
     }
 

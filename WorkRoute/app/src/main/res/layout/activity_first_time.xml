@@ -20,14 +20,14 @@
             android:layout_width="wrap_content"
             android:text="It seems like it's your first time here"
             android:textColor="@color/textOnPrimary"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:textColor="#9C9A9A"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:text="Complete your data"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -93,14 +93,6 @@
         android:layout_marginHorizontal="20dp"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:text="Write your location"
-            android:textColor="#9C9A9A"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:layout_height="wrap_content"/>
-
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_spiiner"
             android:layout_marginTop="20dp"
@@ -115,7 +107,7 @@
             <TextView
                 android:id="@+id/spinner_ciudad"
                 android:layout_width="match_parent"
-                android:text="Madrid,Spain"
+                android:text="Enter your location"
                 android:gravity="center"
                 android:textSize="18sp"
                 android:textColor="#9C9A9A"
@@ -124,15 +116,6 @@
                 android:layout_height="30dp" />
 
         </com.google.android.material.card.MaterialCardView>
-
-        <TextView
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:text="Choose your date of birth"
-            android:textColor="#9C9A9A"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:layout_height="wrap_content"/>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_birthday"
@@ -149,9 +132,9 @@
                 android:layout_width="match_parent"
                 android:background="@android:color/transparent"
                 android:gravity="center"
-                android:text="dd/mm/yyyy"
-                android:textSize="16sp"
-                android:textColor="#BABABA"
+                android:text="Choose your day of birth"
+                android:textSize="18sp"
+                android:textColor="#9C9A9A"
                 android:drawableStart="@drawable/ic_baseline_calendar_month_24"
                 android:drawableTint="#BABABA"
                 android:layout_height="30dp"/>

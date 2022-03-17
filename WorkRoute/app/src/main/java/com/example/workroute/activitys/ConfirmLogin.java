@@ -266,7 +266,7 @@ public class ConfirmLogin extends AppCompatActivity {
                 auth.getUid(),
                 name,
                 0,
-                null,
+                "",
                 "",
                 "",
                 0,

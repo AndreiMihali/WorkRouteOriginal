@@ -59,4 +59,9 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="CalendarPicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/secondary</item>
+        <item name="colorOnPrimary">#B0CAE7</item>
+    </style>
+
 </resources>
