@@ -56,6 +56,7 @@ public class FirstTimeActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private Uri uri;
     private FirebaseFirestore firestore;
+    private TextView username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,10 @@ public class FirstTimeActivity extends AppCompatActivity {
         birthday=findViewById(R.id.ed_birth);
         button_continue=findViewById(R.id.button_continue);
         firestore=FirebaseFirestore.getInstance();
+        username=findViewById(R.id.user_name);
+
+        Bundle bundle=getIntent().getExtras();
+        username.setText(bundle.getString("Name","Username"));
         initActivityResultLauncher();
         initListeners();
     }

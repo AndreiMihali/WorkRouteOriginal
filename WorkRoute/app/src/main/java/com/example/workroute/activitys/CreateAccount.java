@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.workroute.R;
 import com.example.workroute.model.User;
@@ -37,7 +38,8 @@ public class CreateAccount extends AppCompatActivity {
     private Toolbar toolbar;
     private MaterialCardView card_name,card_email,card_pass,card_confirmPass;
     private TextInputEditText ed_name,ed_email,ed_password,ed_confirmPassword;
-    private MaterialButton create,log_in;
+    private MaterialButton create;
+    private TextView log_in;
     private TextInputLayout layout_mail,layout_name,layout_pass,layout_passConfirm;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
@@ -217,19 +219,18 @@ public class CreateAccount extends AppCompatActivity {
                 firebaseAuth.getUid(),
                 ed_name.getText().toString().trim(),
                 0,
-                "Spain",
+                null,
                 "",
                 "",
                 0,
                 true,
                 false,
-                true,
-                0,
-                "",
-                "",
                 false,
                 0,
-                new ArrayList<>()
+                "",
+                false,
+                new ArrayList<>(),
+                0
         );
 
         FirebaseFirestore firestore=FirebaseFirestore.getInstance();
@@ -241,6 +242,7 @@ public class CreateAccount extends AppCompatActivity {
                 Intent intent=new Intent();
                 intent.putExtra("Email",ed_email.getText().toString().trim());
                 intent.putExtra("Password",ed_password.getText().toString().trim());
+                intent.putExtra("Name",ed_name.getText().toString().trim());
                 setResult(RESULT_OK,intent);
                 finish();
             }

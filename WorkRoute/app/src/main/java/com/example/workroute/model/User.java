@@ -1,12 +1,13 @@
 package com.example.workroute.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class User {
     private String uid;
     private String nombre;
     private int edad;
-    private String pais;
+    private Date fecha_naci;
     private String localidad;
     private String direccion;
     private int nivel;
@@ -15,24 +16,18 @@ public class User {
     private boolean online;
     private int nivelSuscripcion;
     private String fotoPerfil;
-    private String alias;
     private boolean conductor;
-
-    public ArrayList<Viaje> getViajes() {
-        return viajes;
-    }
-
-    public void setViajes(ArrayList<Viaje> viajes) {
-        this.viajes = viajes;
-    }
-
     private ArrayList<Viaje> viajes;
+    private int vecesConectadas;
 
-    public User(String uid, String nombre, int edad, String pais, String localidad, String direccion, int nivel, boolean activo, boolean suscrito, boolean online, int nivelSuscripcion, String fotoPerfil, String alias, boolean conductor, int vecesConectadas,ArrayList<Viaje> viajes) {
+    public User() {
+    }
+
+    public User(String uid, String nombre, int edad, Date fecha_naci, String localidad, String direccion, int nivel, boolean activo, boolean suscrito, boolean online, int nivelSuscripcion, String fotoPerfil, boolean conductor, ArrayList<Viaje> viajes, int vecesConectadas) {
         this.uid = uid;
         this.nombre = nombre;
         this.edad = edad;
-        this.pais = pais;
+        this.fecha_naci = fecha_naci;
         this.localidad = localidad;
         this.direccion = direccion;
         this.nivel = nivel;
@@ -41,29 +36,10 @@ public class User {
         this.online = online;
         this.nivelSuscripcion = nivelSuscripcion;
         this.fotoPerfil = fotoPerfil;
-        this.alias = alias;
         this.conductor = conductor;
+        this.viajes = viajes;
         this.vecesConectadas = vecesConectadas;
-        this.viajes=viajes;
     }
-
-    public String getPais() {
-        return pais;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-
-    public boolean isOnline() {
-        return online;
-    }
-
-    public void setOnline(boolean online) {
-        this.online = online;
-    }
-
-    private int vecesConectadas;
 
     public String getUid() {
         return uid;
@@ -87,6 +63,14 @@ public class User {
 
     public void setEdad(int edad) {
         this.edad = edad;
+    }
+
+    public Date getFecha_naci() {
+        return fecha_naci;
+    }
+
+    public void setFecha_naci(Date fecha_naci) {
+        this.fecha_naci = fecha_naci;
     }
 
     public String getLocalidad() {
@@ -129,6 +113,14 @@ public class User {
         this.suscrito = suscrito;
     }
 
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
+
     public int getNivelSuscripcion() {
         return nivelSuscripcion;
     }
@@ -145,20 +137,20 @@ public class User {
         this.fotoPerfil = fotoPerfil;
     }
 
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
     public boolean isConductor() {
         return conductor;
     }
 
     public void setConductor(boolean conductor) {
         this.conductor = conductor;
+    }
+
+    public ArrayList<Viaje> getViajes() {
+        return viajes;
+    }
+
+    public void setViajes(ArrayList<Viaje> viajes) {
+        this.viajes = viajes;
     }
 
     public int getVecesConectadas() {
@@ -168,12 +160,4 @@ public class User {
     public void setVecesConectadas(int vecesConectadas) {
         this.vecesConectadas = vecesConectadas;
     }
-
-    public User(){}
-
-
-
-
-
-
 }

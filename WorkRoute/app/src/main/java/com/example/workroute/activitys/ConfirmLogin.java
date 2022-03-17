@@ -41,22 +41,23 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class ConfirmLogin extends AppCompatActivity {
 
     private static final int GOOGLE_SIGN_IN = 1;
-    private MaterialButton button_signUp;
     private MaterialCardView card_email,card_pass;
-    private TextView password_for;
+    private TextView password_for,button_signUp;
     private TextInputEditText ed_email,ed_password;
     private TextInputLayout layout_email,layout_password;
     private MaterialButton buttton_login,button_google;
     private FirebaseAuth auth;
     private ProgressDialog progressDialog;
     private ActivityResultLauncher<Intent> activityResultLauncher;
-    private int veces=-1;
+    private String name="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Register);
@@ -94,6 +95,7 @@ public class ConfirmLogin extends AppCompatActivity {
                             Intent intent=result.getData();
                             String email=intent.getStringExtra("Email");
                             String pass=intent.getStringExtra("Password");
+                            name=intent.getStringExtra("Name");
                             ed_email.setText(email);
                             ed_password.setText(pass);
                         }
@@ -185,7 +187,7 @@ public class ConfirmLogin extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
-                    showHome();
+                    isFirstTime(name);
                 }else{
                     progressDialog.dismiss();
                     showSnackbar("Email or password incorrect",v);
@@ -213,12 +215,7 @@ public class ConfirmLogin extends AppCompatActivity {
     }
 
     private void showHome(){
-        if(isFirstTime()){
-            Intent intent=new Intent(ConfirmLogin.this,FirstTimeActivity.class);
-            startActivity(intent);
-        }else{
-
-        }
+        Toast.makeText(getApplicationContext(),"El usuario ya existe",Toast.LENGTH_SHORT).show();
     }
 
     private void signInGoogle(){
@@ -269,43 +266,70 @@ public class ConfirmLogin extends AppCompatActivity {
                 auth.getUid(),
                 name,
                 0,
-                "Spain",
+                null,
                 "",
                 "",
                 0,
                 true,
                 false,
-                true,
-                0,
-                "",
-                "",
                 false,
                 0,
-                new ArrayList<>()
+                "",
+                false,
+                new ArrayList<>(),
+                0
         );
 
         FirebaseFirestore firestore=FirebaseFirestore.getInstance();
 
-        firestore.collection("Usuarios").document(auth.getUid()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+        firestore.collection("Usuarios").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                showHome();
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                boolean existe=false;
+                for (QueryDocumentSnapshot x:queryDocumentSnapshots){
+                    if(x.getId().equals(auth.getUid())){
+                        existe=true;
+                        break;
+                    }
+                }
+                if (existe){
+                    isFirstTime(name);
+                }else{
+                    firestore.collection("Usuarios").document(auth.getUid()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            isFirstTime(name);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Log.d("INSERTAR DATOS","Error al insertar los datos");
+                        }
+                    });
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
                 Log.d("INSERTAR DATOS","Error al insertar los datos");
             }
         });
     }
 
-    private boolean isFirstTime(){
+    private void isFirstTime(String name){
         FirebaseFirestore firestore=FirebaseFirestore.getInstance();
         firestore.collection("Usuarios").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                veces=Integer.parseInt(documentSnapshot.get("vecesConectadas").toString());
+                int veces =Integer.parseInt(documentSnapshot.get("vecesConectadas").toString());
+                if(veces<=0){
+                    Intent intent=new Intent(ConfirmLogin.this,FirstTimeActivity.class);
+                    intent.putExtra("Name",name);
+                    startActivity(intent);
+                }else{
+                    showHome();
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -313,6 +337,5 @@ public class ConfirmLogin extends AppCompatActivity {
                 Log.d("INSERTAR DATOS","Error al insertar los datos");
             }
         });
-        return (veces<=0)?true:false;
     }
 }

@@ -214,13 +214,14 @@
             android:text="Already have an account?"
             android:layout_height="wrap_content"/>
 
-        <com.google.android.material.button.MaterialButton
+        <TextView
+            android:layout_marginStart="5dp"
             android:id="@+id/button_signin"
             android:layout_width="wrap_content"
-            style="@style/Widget.AppCompat.Button.Borderless"
             android:text="Login here"
             android:layout_gravity="center"
             android:textStyle="bold"
+            android:textSize="16sp"
             android:textColor="#307DD3"
             android:layout_height="wrap_content"/>
     </LinearLayout>
