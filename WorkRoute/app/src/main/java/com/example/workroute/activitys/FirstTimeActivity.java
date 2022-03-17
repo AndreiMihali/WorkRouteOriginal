@@ -5,11 +5,13 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,10 +28,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.workroute.R;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.TypeFilter;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
@@ -42,7 +52,10 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.lang.ref.Reference;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class FirstTimeActivity extends AppCompatActivity {
 
@@ -50,14 +63,14 @@ public class FirstTimeActivity extends AppCompatActivity {
     private FloatingActionButton button_profile_photo;
     private ImageView profilePhoto;
     private MaterialCardView card_spinner,card_birthday;
-    private Spinner spinnerCity;
+    private TextView spinnerCity;
     private TextView birthday;
     private MaterialButton button_continue;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private Uri uri;
     private FirebaseFirestore firestore;
     private TextView username;
-
+    private int AUTOCOMPLETE_REQUEST_CODE=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Register);
@@ -76,7 +89,7 @@ public class FirstTimeActivity extends AppCompatActivity {
         button_continue=findViewById(R.id.button_continue);
         firestore=FirebaseFirestore.getInstance();
         username=findViewById(R.id.user_name);
-
+        Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         Bundle bundle=getIntent().getExtras();
         username.setText(bundle.getString("Name","Username"));
         initActivityResultLauncher();
@@ -111,6 +124,13 @@ public class FirstTimeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 abrirGaleria();
+            }
+        });
+
+        spinnerCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startAutocompleteIntent();
             }
         });
     }
@@ -180,6 +200,30 @@ public class FirstTimeActivity extends AppCompatActivity {
         return mimeType.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
+    private void startAutocompleteIntent(){
+        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
 
+        Intent intent = new Autocomplete.IntentBuilder(
+                AutocompleteActivityMode.OVERLAY, fields)
+                .setTypeFilter(TypeFilter.CITIES)
+                .build(this);
+        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                spinnerCity.setText(place.getAddress());
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                // TODO: Handle the error.
+                Status status = Autocomplete.getStatusFromIntent(data);
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">WorkRoute</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAgJWiVQ88f8b2ZuC0eC10fU7c3ILqoNlU</string>
     <string-array name="provinces">
         <item>Álava</item>
         <item>Albacete</item>
