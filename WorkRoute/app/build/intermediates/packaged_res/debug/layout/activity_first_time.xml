@@ -20,14 +20,14 @@
             android:layout_width="wrap_content"
             android:text="It seems like it's your first time here"
             android:textColor="@color/textOnPrimary"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:textColor="#9C9A9A"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:text="Complete your data"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/spinner_ciudad"
+                android:id="@+id/txt_ciudad"
                 android:layout_width="match_parent"
                 android:text="Enter your location"
                 android:gravity="center"
@@ -119,7 +119,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_birthday"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:theme="@style/Theme.MaterialComponents.DayNight"
             android:layout_gravity="center"
@@ -127,8 +127,9 @@
             android:outlineProvider="none"
             app:contentPadding="10dp"
             android:layout_height="wrap_content">
+
             <TextView
-                android:id="@+id/ed_birth"
+                android:id="@+id/txt_cumple"
                 android:layout_width="match_parent"
                 android:background="@android:color/transparent"
                 android:gravity="center"

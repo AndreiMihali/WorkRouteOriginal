@@ -62,7 +62,6 @@ int animator mtrl_fab_hide_motion_spec 0x7f02001c
 int animator mtrl_fab_show_motion_spec 0x7f02001d
 int animator mtrl_fab_transformation_sheet_collapse_spec 0x7f02001e
 int animator mtrl_fab_transformation_sheet_expand_spec 0x7f02001f
-int array provinces 0x7f030000
 int attr SharedValue 0x7f040000
 int attr SharedValueId 0x7f040001
 int attr actionBarDivider 0x7f040002
@@ -3198,7 +3197,6 @@ int id easeIn 0x7f0900c9
 int id easeInOut 0x7f0900ca
 int id easeOut 0x7f0900cb
 int id east 0x7f0900cc
-int id ed_birth 0x7f0900cd
 int id ed_confirmpass_register 0x7f0900ce
 int id ed_email 0x7f0900cf
 int id ed_email_register 0x7f0900d0
@@ -3463,7 +3461,6 @@ int id snapMargins 0x7f0901d2
 int id south 0x7f0901d3
 int id spacer 0x7f0901d4
 int id special_effects_controller_view_tag 0x7f0901d5
-int id spinner_ciudad 0x7f0901d6
 int id spline 0x7f0901d7
 int id split_action_bar 0x7f0901d8
 int id spread 0x7f0901d9
@@ -3540,6 +3537,8 @@ int id transition_position 0x7f09021f
 int id transition_scene_layoutid_cache 0x7f090220
 int id transition_transform 0x7f090221
 int id triangle 0x7f090222
+int id txt_ciudad 0x7f09023f
+int id txt_cumple 0x7f090240
 int id unchecked 0x7f090223
 int id uniform 0x7f090224
 int id unlabeled 0x7f090225

@@ -11,10 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -23,14 +22,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.text.Selection;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,19 +34,19 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Period;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.datepicker.DateSelector;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -59,18 +54,14 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
-import java.lang.ref.Reference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.SimpleFormatter;
 
 public class FirstTimeActivity extends AppCompatActivity {
 
@@ -78,8 +69,7 @@ public class FirstTimeActivity extends AppCompatActivity {
     private FloatingActionButton button_profile_photo;
     private ImageView profilePhoto;
     private MaterialCardView card_spinner,card_birthday;
-    private TextView spinnerCity;
-    private TextView birthday;
+    private TextView locality,birth;
     private MaterialButton button_continue;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private Uri uri;
@@ -87,6 +77,7 @@ public class FirstTimeActivity extends AppCompatActivity {
     private TextView username;
     private int AUTOCOMPLETE_REQUEST_CODE=1;
     private String fechaNac;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Register);
@@ -100,11 +91,12 @@ public class FirstTimeActivity extends AppCompatActivity {
         profilePhoto=findViewById(R.id.profileImage);
         card_spinner=findViewById(R.id.card_spiiner);
         card_birthday=findViewById(R.id.card_birthday);
-        spinnerCity=findViewById(R.id.spinner_ciudad);
-        birthday=findViewById(R.id.ed_birth);
+        locality=findViewById(R.id.txt_ciudad);
+        birth=findViewById(R.id.txt_cumple);
         button_continue=findViewById(R.id.button_continue);
         firestore=FirebaseFirestore.getInstance();
         username=findViewById(R.id.user_name);
+        progressDialog=new ProgressDialog(this);
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         Bundle bundle=getIntent().getExtras();
         username.setText(bundle.getString("Name","Username"));
@@ -156,6 +148,61 @@ public class FirstTimeActivity extends AppCompatActivity {
                 openDatePicker();
             }
         });
+
+        button_continue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkData(v);
+            }
+        });
+
+    }
+
+    private void checkData(View v) {
+        if(locality.getText().toString().trim().equals("Enter your location")||
+            birth.getText().toString().trim().equals("Choose your day of birth")){
+            Snackbar.make(v,"You need to fill all fields",Snackbar.LENGTH_SHORT).show();
+        }else{
+            progressDialog.setMessage("Please wait...");
+            progressDialog.show();
+            actualizarDatos(locality.getText().toString(),"localidad");
+            actualizarDatos(1,"vecesConectadas");
+            actualizarDatos(calcularEdad(fechaNac), "edad");
+            actualizarDatos(fechaNac,"fecha_naci");
+        }
+    }
+
+    private void openDatePicker() {
+
+        CalendarConstraints constraints=new CalendarConstraints.Builder()
+                .setValidator(DateValidatorPointBackward.now())
+                .build();
+
+        MaterialDatePicker picker=MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select your day of birth")
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .setTheme(R.style.CalendarPicker)
+                .setCalendarConstraints(constraints)
+                .build();
+
+        picker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick(Object selection) {
+                birth.setText(picker.getHeaderText());
+                fechaNac=picker.getHeaderText();
+                picker.dismiss();
+            }
+        });
+
+
+        picker.addOnNegativeButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picker.dismiss();
+            }
+        });
+
+        picker.show(getSupportFragmentManager(),"DATE PICKER");
     }
 
 
@@ -238,7 +285,7 @@ public class FirstTimeActivity extends AppCompatActivity {
         if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
-                spinnerCity.setText(place.getAddress());
+                locality.setText(place.getAddress());
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 // TODO: Handle the error.
                 Status status = Autocomplete.getStatusFromIntent(data);
@@ -250,29 +297,43 @@ public class FirstTimeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void openDatePicker(){
-        MaterialDatePicker picker=MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Select your date of birth")
-                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                .setTheme(R.style.CalendarPicker)
-                .build();
+    private int calcularEdad(String fecha){
+        Date fechaNac=null;
+        try {
+            fechaNac = new SimpleDateFormat("MMM d, yyyy").parse(fecha);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+        }
+        Calendar fechaNacimiento = Calendar.getInstance();
+        Calendar fechaActual=Calendar.getInstance();
+        fechaNacimiento.setTime(fechaNac);
 
-        picker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
+        int año = fechaActual.get(Calendar.YEAR)- fechaNacimiento.get(Calendar.YEAR);
+        int mes =fechaActual.get(Calendar.MONTH)- fechaNacimiento.get(Calendar.MONTH);
+        int dia = fechaActual.get(Calendar.DATE)- fechaNacimiento.get(Calendar.DATE);
+
+        if(mes<0 || (mes==0 && dia<0)){
+            año--;
+        }
+
+        return año;
+    }
+
+    private void actualizarDatos(Object dato,String campo){
+        HashMap<String,Object> hashMap=new HashMap<>();
+        hashMap.put(campo,dato);
+        new Handler().post(new Runnable() {
             @Override
-            public void onPositiveButtonClick(Object selection) {
-                birthday.setText(picker.getHeaderText());
-                fechaNac=picker.getHeaderText();
-                picker.dismiss();
+            public void run() {
+                firestore.collection("Usuarios").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).update(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("Gucci","Todo gucci");
+                        progressDialog.dismiss();
+                    }
+                });
             }
         });
-        picker.addOnNegativeButtonClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                picker.dismiss();
-            }
-        });
-
-        picker.show(getSupportFragmentManager(),"TAG");
     }
 }

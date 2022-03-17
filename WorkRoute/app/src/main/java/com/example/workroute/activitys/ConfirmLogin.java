@@ -246,6 +246,8 @@ public class ConfirmLogin extends AppCompatActivity {
     }
 
     private void firebaseAuthWithGoogle(String idToken,String name) {
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -292,6 +294,7 @@ public class ConfirmLogin extends AppCompatActivity {
                         break;
                     }
                 }
+                progressDialog.dismiss();
                 if (existe){
                     isFirstTime(name);
                 }else{
@@ -312,6 +315,7 @@ public class ConfirmLogin extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
                 Log.d("INSERTAR DATOS","Error al insertar los datos");
             }
         });

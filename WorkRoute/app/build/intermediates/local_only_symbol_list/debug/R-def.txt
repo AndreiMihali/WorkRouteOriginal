@@ -1,6 +1,5 @@
 R_DEF: Internal format may change without notice
 local
-array provinces
 color back_login
 color black
 color primary
@@ -43,7 +42,6 @@ id card_password
 id card_password_confirm
 id card_photo
 id card_spiiner
-id ed_birth
 id ed_confirmpass_register
 id ed_email
 id ed_email_register
@@ -64,10 +62,11 @@ id or
 id password_forgot
 id profileImage
 id rl
-id spinner_ciudad
 id texto_bienvenida
 id texts
 id toolbar
+id txt_ciudad
+id txt_cumple
 id user_name
 layout activity_confirm_login
 layout activity_create_account

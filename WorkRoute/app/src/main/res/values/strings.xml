@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">WorkRoute</string>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAgJWiVQ88f8b2ZuC0eC10fU7c3ILqoNlU</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDixetqsW0ysGw4tU9RmaQbg26OaHjTcR8</string>
 </resources>

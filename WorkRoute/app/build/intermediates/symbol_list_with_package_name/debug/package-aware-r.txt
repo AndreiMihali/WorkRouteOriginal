@@ -63,7 +63,6 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
-array provinces
 attr SharedValue
 attr SharedValueId
 attr actionBarDivider
@@ -3199,7 +3198,6 @@ id easeIn
 id easeInOut
 id easeOut
 id east
-id ed_birth
 id ed_confirmpass_register
 id ed_email
 id ed_email_register
@@ -3464,7 +3462,6 @@ id snapMargins
 id south
 id spacer
 id special_effects_controller_view_tag
-id spinner_ciudad
 id spline
 id split_action_bar
 id spread
@@ -3541,6 +3538,8 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id txt_ciudad
+id txt_cumple
 id unchecked
 id uniform
 id unlabeled
