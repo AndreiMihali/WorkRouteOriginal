@@ -162,6 +162,7 @@ public class FirstTimeActivity extends AppCompatActivity {
         if(locality.getText().toString().trim().equals("Enter your location")||
             birth.getText().toString().trim().equals("Choose your day of birth")){
             Snackbar.make(v,"You need to fill all fields",Snackbar.LENGTH_SHORT).show();
+            startActivity(new Intent(FirstTimeActivity.this,MainActivity.class));
         }else{
             progressDialog.setMessage("Please wait...");
             progressDialog.show();
