@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private void setData() {
         if(userData.getFotoPerfil().equals("")){
             profilePhoto.setImageDrawable(getDrawable(R.drawable.default_user_login));
+            Companion.user=userData;
         }else{
             Glide.with(this).load(userData.getFotoPerfil()).into(profilePhoto);
         }
