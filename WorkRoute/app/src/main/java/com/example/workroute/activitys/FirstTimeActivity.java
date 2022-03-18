@@ -143,7 +143,7 @@ public class FirstTimeActivity extends AppCompatActivity {
         card_spinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startAutocompleteIntent();
+                //startAutocompleteIntent();
             }
         });
 
@@ -164,17 +164,16 @@ public class FirstTimeActivity extends AppCompatActivity {
     }
 
     private void checkData(View v) {
-        if(locality.getText().toString().trim().equals("Enter your location")||
-            birth.getText().toString().trim().equals("Choose your day of birth")){
+        if(birth.getText().toString().trim().equals("Choose your day of birth")){
             Snackbar.make(v,"You need to fill all fields",Snackbar.LENGTH_SHORT).show();
-            startActivity(new Intent(FirstTimeActivity.this,MainActivity.class));
         }else{
             progressDialog.setMessage("Please wait...");
             progressDialog.show();
-            actualizarDatos(locality.getText().toString(),"localidad");
+            actualizarDatos("Madrid","localidad");
             actualizarDatos(1,"vecesConectadas");
             actualizarDatos(calcularEdad(fechaNac), "edad");
             actualizarDatos(fechaNac,"fecha_naci");
+            startActivity(new Intent(FirstTimeActivity.this,MainActivity.class));
         }
     }
 
@@ -277,7 +276,7 @@ public class FirstTimeActivity extends AppCompatActivity {
         return mimeType.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    private void startAutocompleteIntent(){
+    /*private void startAutocompleteIntent(){
         List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
 
         Intent intent = new Autocomplete.IntentBuilder(
@@ -285,13 +284,14 @@ public class FirstTimeActivity extends AppCompatActivity {
                 .setTypeFilter(TypeFilter.CITIES)
                 .build(this);
         startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
-    }
+    }*/
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
+                Toast.makeText(getApplicationContext(),place.getName(),Toast.LENGTH_LONG).show();
                 locality.setText(place.getAddress());
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 // TODO: Handle the error.
@@ -302,7 +302,7 @@ public class FirstTimeActivity extends AppCompatActivity {
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
+    }*/
 
     private int calcularEdad(String fecha){
         Date fechaNac=null;

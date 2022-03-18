@@ -100,6 +100,10 @@
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_splash_screen.xml"
     },
     {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_keyboard_arrow_right_24.xml.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_keyboard_arrow_right_24.xml"
+    },
+    {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_appbar_main.xml.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\appbar_main.xml"
     },
@@ -120,12 +124,20 @@
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_calendar_month_24.xml"
     },
     {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_background_susc.xml.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\background_susc.xml"
+    },
+    {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_work_icon_foreground.png.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-xhdpi\\work_icon_foreground.png"
     },
     {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_work_icon.png.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-hdpi\\work_icon.png"
+    },
+    {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_layout_suscripciones.xml.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\layout_suscripciones.xml"
     },
     {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_confirm_login.xml.flat",
@@ -150,6 +162,10 @@
     {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_chat_24.xml.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_chat_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_card_membership_24.xml.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_card_membership_24.xml"
     },
     {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_round.webp.flat",
@@ -266,6 +282,10 @@
     {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_outline_navigation_24.xml.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_outline_navigation_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_map.xml.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_map.xml"
     },
     {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_first_time.xml.flat",

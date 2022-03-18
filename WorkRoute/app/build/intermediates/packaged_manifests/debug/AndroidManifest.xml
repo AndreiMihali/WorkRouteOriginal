@@ -23,6 +23,8 @@
 
             <data android:scheme="https" />
         </intent>
+        <!-- Needs to be explicitly declared on Android R+ -->
+        <package android:name="com.google.android.apps.maps" />
     </queries>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -45,6 +47,16 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.WorkRoute" >
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name="com.example.workroute.activitys.Map"
+            android:exported="false" />
+        <activity
+            android:name="com.example.workroute.activitys.suscripcionesActivity"
+            android:exported="false" />
         <activity
             android:name="com.example.workroute.activitys.FirstTimeActivity"
             android:exported="false" />

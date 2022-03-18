@@ -15,6 +15,7 @@ color textOnPrimary
 color white
 color work_icon_background
 drawable background_login
+drawable background_susc
 drawable bottom_chat_selector
 drawable bottom_home_selector
 drawable bottom_navigation_selector
@@ -24,10 +25,12 @@ drawable default_user_login
 drawable ic_baseline_arrow_back_24
 drawable ic_baseline_calendar_month_24
 drawable ic_baseline_camera_alt_24
+drawable ic_baseline_card_membership_24
 drawable ic_baseline_chat_24
 drawable ic_baseline_edit_24
 drawable ic_baseline_email_24
 drawable ic_baseline_home_24
+drawable ic_baseline_keyboard_arrow_right_24
 drawable ic_baseline_location_city_24
 drawable ic_baseline_location_on_24
 drawable ic_baseline_lock_24
@@ -46,6 +49,7 @@ drawable steven_binotto_9vduc_sgrsi_unsplash
 drawable workroute2icono
 id appbar_main
 id bottom_navigation
+id button_card
 id button_continue
 id button_create
 id button_google
@@ -53,6 +57,7 @@ id button_login
 id button_notifications
 id button_signin
 id button_signup
+id button_suscribe
 id card_birthday
 id card_email
 id card_name
@@ -69,6 +74,7 @@ id ed_pass
 id ed_pass_register
 id ed_username_register
 id fab_camera
+id fb
 id frameLayout
 id home
 id image
@@ -81,15 +87,18 @@ id layout_name
 id layout_pass
 id linears_datos
 id logoWork
+id map
 id messages
 id or
 id password_forgot
+id prices
 id profile
 id profileImage
 id profile_image_toolbar
 id rl
 id texto_bienvenida
 id texts
+id titles
 id toolbar
 id txt_ciudad
 id txt_cumple
@@ -99,6 +108,7 @@ layout activity_create_account
 layout activity_first_time
 layout activity_login
 layout activity_main
+layout activity_map
 layout activity_splash_screen
 layout appbar_main
 layout content_main
@@ -106,6 +116,7 @@ layout fragment_home
 layout fragment_messages
 layout fragment_navigation
 layout fragment_user
+layout layout_suscripciones
 menu menur_bottom_navigation
 mipmap ic_launcher
 mipmap ic_launcher_round
@@ -126,4 +137,5 @@ style CalendarPicker
 style Login
 style Register
 style Splash
+style Subscribe
 style Theme.WorkRoute

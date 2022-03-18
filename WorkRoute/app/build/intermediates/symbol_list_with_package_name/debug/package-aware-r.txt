@@ -721,6 +721,7 @@ attr listPreferredItemPaddingStart
 attr liteMode
 attr logo
 attr logoDescription
+attr mapId
 attr mapType
 attr marginHorizontal
 attr materialAlertDialogBodyTextStyle
@@ -2880,6 +2881,7 @@ drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
 drawable background_login
+drawable background_susc
 drawable bottom_chat_selector
 drawable bottom_home_selector
 drawable bottom_navigation_selector
@@ -2925,10 +2927,12 @@ drawable googleg_standard_color_18
 drawable ic_baseline_arrow_back_24
 drawable ic_baseline_calendar_month_24
 drawable ic_baseline_camera_alt_24
+drawable ic_baseline_card_membership_24
 drawable ic_baseline_chat_24
 drawable ic_baseline_edit_24
 drawable ic_baseline_email_24
 drawable ic_baseline_home_24
+drawable ic_baseline_keyboard_arrow_right_24
 drawable ic_baseline_location_city_24
 drawable ic_baseline_location_on_24
 drawable ic_baseline_lock_24
@@ -3124,6 +3128,7 @@ id browser_actions_menu_items
 id browser_actions_menu_view
 id button
 id buttonPanel
+id button_card
 id button_continue
 id button_create
 id button_google
@@ -3131,6 +3136,7 @@ id button_login
 id button_notifications
 id button_signin
 id button_signup
+id button_suscribe
 id cache_measures
 id callMeasure
 id cancel_action
@@ -3236,6 +3242,7 @@ id expand_activities_button
 id expanded_menu
 id fab_camera
 id fade
+id fb
 id fill
 id fill_horizontal
 id fill_vertical
@@ -3308,6 +3315,7 @@ id linears_datos
 id listMode
 id list_item
 id logoWork
+id map
 id masked
 id match_constraint
 id match_parent
@@ -3428,6 +3436,7 @@ id places_autocomplete_try_again
 id places_autocomplete_try_again_progress
 id position
 id postLayout
+id prices
 id primary_button
 id profile
 id profileImage
@@ -3550,6 +3559,7 @@ id time
 id title
 id titleDividerNoCustom
 id title_template
+id titles
 id toggle
 id toolbar
 id top
@@ -3680,6 +3690,7 @@ layout activity_create_account
 layout activity_first_time
 layout activity_login
 layout activity_main
+layout activity_map
 layout activity_splash_screen
 layout appbar_main
 layout banner
@@ -3710,6 +3721,7 @@ layout fragment_messages
 layout fragment_navigation
 layout fragment_user
 layout image
+layout layout_suscripciones
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -4364,6 +4376,7 @@ style ShapeAppearanceOverlay_MaterialComponents_TextInputLayout_FilledBox
 style ShapeAppearanceOverlay_TopLeftCut
 style ShapeAppearanceOverlay_TopRightDifferentCornerSize
 style Splash
+style Subscribe
 style Test_ShapeAppearanceOverlay_MaterialComponents_MaterialCalendar_Day
 style Test_Theme_MaterialComponents_MaterialCalendar
 style Test_Widget_MaterialComponents_MaterialCalendar
@@ -5106,7 +5119,7 @@ styleable LinearLayoutCompat_Layout android_layout_gravity android_layout_width 
 styleable LinearProgressIndicator indeterminateAnimationType indicatorDirectionLinear
 styleable ListPopupWindow android_dropDownHorizontalOffset android_dropDownVerticalOffset
 styleable LoadingImageView circleCrop imageAspectRatio imageAspectRatioAdjust
-styleable MapAttrs ambientEnabled cameraBearing cameraMaxZoomPreference cameraMinZoomPreference cameraTargetLat cameraTargetLng cameraTilt cameraZoom latLngBoundsNorthEastLatitude latLngBoundsNorthEastLongitude latLngBoundsSouthWestLatitude latLngBoundsSouthWestLongitude liteMode mapType uiCompass uiMapToolbar uiRotateGestures uiScrollGestures uiScrollGesturesDuringRotateOrZoom uiTiltGestures uiZoomControls uiZoomGestures useViewLifecycle zOrderOnTop
+styleable MapAttrs ambientEnabled backgroundColor cameraBearing cameraMaxZoomPreference cameraMinZoomPreference cameraTargetLat cameraTargetLng cameraTilt cameraZoom latLngBoundsNorthEastLatitude latLngBoundsNorthEastLongitude latLngBoundsSouthWestLatitude latLngBoundsSouthWestLongitude liteMode mapId mapType uiCompass uiMapToolbar uiRotateGestures uiScrollGestures uiScrollGesturesDuringRotateOrZoom uiTiltGestures uiZoomControls uiZoomGestures useViewLifecycle zOrderOnTop
 styleable MaterialAlertDialog backgroundInsetBottom backgroundInsetEnd backgroundInsetStart backgroundInsetTop
 styleable MaterialAlertDialogTheme materialAlertDialogBodyTextStyle materialAlertDialogButtonSpacerVisibility materialAlertDialogTheme materialAlertDialogTitleIconStyle materialAlertDialogTitlePanelStyle materialAlertDialogTitleTextStyle
 styleable MaterialAutoCompleteTextView android_inputType

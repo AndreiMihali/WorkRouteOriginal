@@ -28,58 +28,73 @@
         <item name="colorOnPrimary">#B0CAE7</item>
     </style>
     <style name="Login" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        
+        <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/secondary</item>
         <item name="colorOnPrimary">@color/textOnPrimary</item>
-        
+        <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
-        
+        <!-- Status bar color. -->
         <item name="android:statusBarColor" ns1:targetApi="l">#F0000000</item>
         <item name="android:windowTranslucentNavigation">true</item>
-        
+        <!-- Customize your theme here. -->
     </style>
     <style name="Register" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        
+        <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/secondary</item>
         <item name="colorOnPrimary">@color/textOnPrimary</item>
-        
+        <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
-        
+        <!-- Status bar color. -->
         <item name="android:statusBarColor" ns1:targetApi="l">@color/back_login</item>
         <item name="android:windowLightStatusBar">true</item>
-        
+        <!-- Customize your theme here. -->
     </style>
     <style name="Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        
+        <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/secondary</item>
         <item name="colorOnPrimary">@color/textOnPrimary</item>
-        
+        <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
-        
+        <!-- Status bar color. -->
         <item name="android:statusBarColor" ns1:targetApi="l">?attr/colorPrimary</item>
         <item name="android:windowLightStatusBar">true</item>
-        
+        <!-- Customize your theme here. -->
     </style>
-    <style name="Theme.WorkRoute" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        
+    <style name="Subscribe" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/secondary</item>
         <item name="colorOnPrimary">@color/textOnPrimary</item>
-        
+        <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
-        
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" ns1:targetApi="l">#182848</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="Theme.WorkRoute" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/secondary</item>
+        <item name="colorOnPrimary">@color/textOnPrimary</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
         <item name="android:statusBarColor" ns1:targetApi="l">?attr/colorPrimary</item>
-        
+        <!-- Customize your theme here. -->
     </style>
 </resources>
