@@ -215,7 +215,9 @@ public class ConfirmLogin extends AppCompatActivity {
     }
 
     private void showHome(){
-        Toast.makeText(getApplicationContext(),"El usuario ya existe",Toast.LENGTH_SHORT).show();
+        Intent i = new Intent (ConfirmLogin.this,MainActivity.class);
+        startActivity(i);
+        //Toast.makeText(getApplicationContext(),"El usuario ya existe",Toast.LENGTH_SHORT).show();
     }
 
     private void signInGoogle(){

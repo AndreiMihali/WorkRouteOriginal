@@ -1,5 +1,9 @@
 R_DEF: Internal format may change without notice
 local
+anim close_menu
+anim open_menu
+anim rotate_backward
+anim rotate_forward
 color back_login
 color black
 color bottom_navigation_view
@@ -49,6 +53,9 @@ drawable steven_binotto_9vduc_sgrsi_unsplash
 drawable workroute2icono
 id appbar_main
 id bottom_navigation
+id button1
+id button2
+id button3
 id button_card
 id button_continue
 id button_create
@@ -108,8 +115,8 @@ layout activity_create_account
 layout activity_first_time
 layout activity_login
 layout activity_main
-layout activity_map
 layout activity_splash_screen
+layout antiguo_activity_main
 layout appbar_main
 layout content_main
 layout fragment_home

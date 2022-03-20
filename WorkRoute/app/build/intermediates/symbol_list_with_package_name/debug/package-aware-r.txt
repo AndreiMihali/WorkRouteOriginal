@@ -23,6 +23,7 @@ anim btn_radio_to_off_mtrl_ring_outer_path_animation
 anim btn_radio_to_on_mtrl_dot_group_animation
 anim btn_radio_to_on_mtrl_ring_outer_animation
 anim btn_radio_to_on_mtrl_ring_outer_path_animation
+anim close_menu
 anim design_bottom_sheet_slide_in
 anim design_bottom_sheet_slide_out
 anim design_snackbar_in
@@ -31,6 +32,9 @@ anim fragment_fast_out_extra_slow_in
 anim mtrl_bottom_sheet_slide_in
 anim mtrl_bottom_sheet_slide_out
 anim mtrl_card_lowers_interpolator
+anim open_menu
+anim rotate_backward
+anim rotate_forward
 animator design_appbar_state_list_animator
 animator design_fab_hide_motion_spec
 animator design_fab_show_motion_spec
@@ -3127,6 +3131,9 @@ id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
 id button
+id button1
+id button2
+id button3
 id buttonPanel
 id button_card
 id button_continue
@@ -3690,8 +3697,8 @@ layout activity_create_account
 layout activity_first_time
 layout activity_login
 layout activity_main
-layout activity_map
 layout activity_splash_screen
+layout antiguo_activity_main
 layout appbar_main
 layout banner
 layout browser_actions_context_menu_page

@@ -7,24 +7,38 @@
     android:layout_height="match_parent"
     tools:context=".activitys.MainActivity">
 
-
-    <include
-        android:id="@+id/appbar_main"
-        layout="@layout/appbar_main"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/bottom_navigation" />
+        android:layout_margin="20dp"
+        android:src="@drawable/workroute2icono"
+        app:tint="@color/secondary"
+        android:backgroundTint="@color/white"
+         />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_alignParentBottom="true"
-        android:paddingHorizontal="10dp"
-        app:backgroundTint="#F6F6F6"
-        app:elevation="0dp"
-        app:itemIconTint="@color/bottom_navigation_view"
-        app:itemTextColor="@color/bottom_navigation_view"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/menur_bottom_navigation" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_baseline_email_24"
+        app:tint="@color/secondary"
+        android:backgroundTint="@color/white"
+        android:layout_below="@id/button1"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:visibility="invisible"
+        android:layout_margin="20dp"
+        android:src="@drawable/btn_clear"
+        app:tint="@color/secondary"
+        android:backgroundTint="@color/white"
+        android:layout_below="@id/button2"
+        />
+
 </RelativeLayout>
