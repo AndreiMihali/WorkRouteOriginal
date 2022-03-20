@@ -25,14 +25,14 @@
         android:layout_margin="20dp"
         android:backgroundTint="@color/white"
         android:src="@drawable/ic_baseline_email_24"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:tint="@color/secondary" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:layout_margin="20dp"
         android:src="@drawable/ic_baseline_person_24"
         app:tint="@color/secondary"
@@ -51,7 +51,7 @@
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/white"
         android:src="@drawable/ic_baseline_help_24"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:tint="@color/secondary" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -65,7 +65,7 @@
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/white"
         android:src="@drawable/ic_baseline_group_work_24"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:tint="@color/secondary" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -79,7 +79,7 @@
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/white"
         android:src="@drawable/btn_clear"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:tint="@color/secondary" />
 
 
