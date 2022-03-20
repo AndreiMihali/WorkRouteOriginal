@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    FloatingActionButton b1,b2,b3;
+    FloatingActionButton button_menu,button_messages,button_profile,button_help,button_about_us,button_close;
     Animation open,close,rotateForward,rotateBackWard;
 
     boolean isOpen = false;
@@ -39,9 +39,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void controls() {
-        b1 = findViewById(R.id.button1);
-        b2 = findViewById(R.id.button2);
-        b3 = findViewById(R.id.button3);
+        button_menu = findViewById(R.id.buttonMenu);
+        button_messages = findViewById(R.id.buttonMessages);
+        button_profile = findViewById(R.id.buttonProfile);
+        button_help = findViewById(R.id.buttonHelp);
+        button_about_us = findViewById(R.id.buttonAboutUs);
+        button_close = findViewById(R.id.buttonSignOut);
+
 
         open = AnimationUtils.loadAnimation(this,R.anim.open_menu);
         close = AnimationUtils.loadAnimation(this,R.anim.close_menu);
@@ -50,20 +54,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void listeners() {
-            b1.setOnClickListener(new View.OnClickListener() {
+            button_menu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     animateMenu();
                 }
             });
 
-            b2.setOnClickListener(new View.OnClickListener() {
+        button_messages.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(getApplicationContext(),"Saludos del menu 22222", Toast.LENGTH_SHORT).show();
                 }
             });
-        b3.setOnClickListener(new View.OnClickListener() {
+
+        //TODO : FALTAN LOS LISTENERS DEL RESTO DE BOTONES
+
+
+        button_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
@@ -76,27 +84,48 @@ public class MainActivity extends AppCompatActivity {
 
     private void animateMenu() {
         if (isOpen) {
-            b1.startAnimation(rotateForward);
-            b2.startAnimation(close);
-            b3.startAnimation(close);
-            b2.setClickable(false);
+            button_menu.startAnimation(rotateForward);
 
-            b2.setVisibility(View.INVISIBLE);
-            b3.setVisibility(View.INVISIBLE);
+            button_messages.startAnimation(close);
+            button_profile.startAnimation(close);
+            button_help.startAnimation(close);
+            button_about_us.startAnimation(close);
+            button_close.startAnimation(close);
 
-            b2.setClickable(false);
-            b3.setClickable(false);
+            button_messages.setVisibility(View.INVISIBLE);
+            button_profile.setVisibility(View.INVISIBLE);
+            button_help.setVisibility(View.INVISIBLE);
+            button_about_us.setVisibility(View.INVISIBLE);
+            button_close.setVisibility(View.INVISIBLE);
+
+            button_messages.setClickable(false);
+            button_profile.setClickable(false);
+            button_help.setClickable(false);
+            button_about_us.setClickable(false);
+            button_close.setClickable(false);
+
             isOpen=false;
         } else {
-            b1.startAnimation(rotateBackWard);
-            b2.startAnimation(open);
-            b3.startAnimation(open);
+            button_menu.startAnimation(rotateBackWard);
 
-            b2.setVisibility(View.VISIBLE);
-            b3.setVisibility(View.VISIBLE);
+            button_messages.startAnimation(open);
+            button_profile.startAnimation(open);
+            button_help.startAnimation(open);
+            button_about_us.startAnimation(open);
+            button_close.startAnimation(open);
 
-            b2.setClickable(true);
-            b3.setClickable(true);
+
+            button_messages.setVisibility(View.VISIBLE);
+            button_profile.setVisibility(View.VISIBLE);
+            button_help.setVisibility(View.VISIBLE);
+            button_about_us.setVisibility(View.VISIBLE);
+            button_close.setVisibility(View.VISIBLE);
+
+            button_messages.setClickable(true);
+            button_profile.setClickable(true);
+            button_help.setClickable(true);
+            button_about_us.setClickable(true);
+            button_close.setClickable(true);
             isOpen=true;
         }
     }

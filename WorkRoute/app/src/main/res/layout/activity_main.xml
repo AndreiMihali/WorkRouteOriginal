@@ -8,7 +8,7 @@
     tools:context=".activitys.MainActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button1"
+        android:id="@+id/buttonMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -18,27 +18,69 @@
          />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button2"
+        android:id="@+id/buttonMessages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonMenu"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_baseline_email_24"
+        android:visibility="invisible"
+        app:tint="@color/secondary" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/buttonProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
         android:layout_margin="20dp"
-        android:src="@drawable/ic_baseline_email_24"
+        android:src="@drawable/ic_baseline_person_24"
         app:tint="@color/secondary"
         android:backgroundTint="@color/white"
-        android:layout_below="@id/button1"
+        android:layout_below="@id/buttonMessages"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button3"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:visibility="invisible"
-        android:layout_margin="20dp"
-        android:src="@drawable/btn_clear"
-        app:tint="@color/secondary"
+        android:id="@+id/buttonHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonProfile"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/white"
-        android:layout_below="@id/button2"
-        />
+        android:src="@drawable/ic_baseline_help_24"
+        android:visibility="invisible"
+        app:tint="@color/secondary" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/buttonAboutUs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonHelp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_baseline_group_work_24"
+        android:visibility="invisible"
+        app:tint="@color/secondary" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/buttonSignOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonAboutUs"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/btn_clear"
+        android:visibility="invisible"
+        app:tint="@color/secondary" />
+
 
 </RelativeLayout>

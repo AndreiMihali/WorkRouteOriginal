@@ -2935,6 +2935,8 @@ drawable ic_baseline_card_membership_24
 drawable ic_baseline_chat_24
 drawable ic_baseline_edit_24
 drawable ic_baseline_email_24
+drawable ic_baseline_group_work_24
+drawable ic_baseline_help_24
 drawable ic_baseline_home_24
 drawable ic_baseline_keyboard_arrow_right_24
 drawable ic_baseline_location_city_24
@@ -3131,10 +3133,13 @@ id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
 id button
-id button1
-id button2
-id button3
+id buttonAboutUs
+id buttonHelp
+id buttonMenu
+id buttonMessages
 id buttonPanel
+id buttonProfile
+id buttonSignOut
 id button_card
 id button_continue
 id button_create
