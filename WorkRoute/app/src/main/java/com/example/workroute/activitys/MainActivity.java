@@ -10,6 +10,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.example.workroute.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -17,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     FloatingActionButton button_menu,button_messages,button_profile,button_help,button_about_us,button_close;
     Animation open,close,rotateForward,rotateBackWard;
-
+    GoogleMap map;
     boolean isOpen = false;
 
     
@@ -26,17 +30,24 @@ public class MainActivity extends AppCompatActivity {
         setTheme(R.style.Register);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this::onMapReady);
         main();
-        
-        
+
     }
 
     private void main() {
         controls();
         listeners();
+
+
     }
 
+    public void onMapReady(GoogleMap googleMap) {
+        map = googleMap;
 
+    }
 
     private void controls() {
         button_menu = findViewById(R.id.buttonMenu);
