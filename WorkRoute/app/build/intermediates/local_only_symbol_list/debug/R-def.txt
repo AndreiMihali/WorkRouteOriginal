@@ -53,14 +53,13 @@ drawable ic_outline_navigation_24
 drawable login_pesonas
 drawable steven_binotto_9vduc_sgrsi_unsplash
 drawable workroute2icono
-id appbar_main
-id bottom_navigation
 id buttonAboutUs
 id buttonHelp
 id buttonMenu
 id buttonMessages
 id buttonProfile
 id buttonSignOut
+id buttonUbi
 id button_card
 id button_continue
 id button_create
@@ -86,7 +85,6 @@ id ed_pass
 id ed_pass_register
 id ed_username_register
 id fab_camera
-id fb
 id frameLayout
 id home
 id image
@@ -107,6 +105,7 @@ id prices
 id profile
 id profileImage
 id profile_image_toolbar
+id rela
 id rl
 id texto_bienvenida
 id texts
@@ -121,13 +120,8 @@ layout activity_first_time
 layout activity_login
 layout activity_main
 layout activity_splash_screen
-layout antiguo_activity_main
 layout appbar_main
 layout content_main
-layout fragment_home
-layout fragment_messages
-layout fragment_navigation
-layout fragment_user
 layout layout_suscripciones
 menu menur_bottom_navigation
 mipmap ic_launcher
