@@ -2941,6 +2941,8 @@ int drawable ic_baseline_keyboard_arrow_right_24 0x7f07008e
 int drawable ic_baseline_location_city_24 0x7f07008f
 int drawable ic_baseline_location_on_24 0x7f070090
 int drawable ic_baseline_lock_24 0x7f070091
+int drawable ic_baseline_menu_24 0x7f0700de
+int drawable ic_baseline_menu_open_24 0x7f0700df
 int drawable ic_baseline_navigation_24 0x7f070092
 int drawable ic_baseline_notifications_none_24 0x7f070093
 int drawable ic_baseline_person_24 0x7f070094

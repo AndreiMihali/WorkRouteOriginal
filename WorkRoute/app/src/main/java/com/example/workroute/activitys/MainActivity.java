@@ -207,6 +207,8 @@ public class MainActivity extends AppCompatActivity {
     private void animateMenu() {
         if (isOpen) {
             button_menu.startAnimation(rotateForward);
+            button_menu.setImageResource(R.drawable.ic_baseline_menu_24);
+
 
             button_messages.startAnimation(close);
             button_profile.startAnimation(close);
@@ -229,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
             isOpen=false;
         } else {
             button_menu.startAnimation(rotateBackWard);
-
+            button_menu.setImageResource(R.drawable.ic_baseline_menu_open_24);
             button_messages.startAnimation(open);
             button_profile.startAnimation(open);
             button_help.startAnimation(open);

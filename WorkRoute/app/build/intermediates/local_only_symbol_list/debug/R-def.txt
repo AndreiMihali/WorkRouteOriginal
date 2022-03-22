@@ -40,6 +40,8 @@ drawable ic_baseline_keyboard_arrow_right_24
 drawable ic_baseline_location_city_24
 drawable ic_baseline_location_on_24
 drawable ic_baseline_lock_24
+drawable ic_baseline_menu_24
+drawable ic_baseline_menu_open_24
 drawable ic_baseline_navigation_24
 drawable ic_baseline_notifications_none_24
 drawable ic_baseline_person_24
