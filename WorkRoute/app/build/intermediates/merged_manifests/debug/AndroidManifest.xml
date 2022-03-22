@@ -47,6 +47,13 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.WorkRoute" >
+        <activity
+            android:name="com.example.workroute.activitys.Chats"
+            android:exported="false" />
+        <activity
+            android:name="com.example.workroute.activitys.Profile"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

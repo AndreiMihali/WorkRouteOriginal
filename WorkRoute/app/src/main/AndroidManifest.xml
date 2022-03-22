@@ -16,6 +16,13 @@
         android:roundIcon="@mipmap/work_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkRoute">
+        <activity
+            android:name=".activitys.Chats"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.Profile"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

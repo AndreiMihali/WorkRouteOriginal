@@ -4,41 +4,28 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.example.workroute.R;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -47,7 +34,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
     private static final int CODE_UBI = 100;
-    FloatingActionButton button_menu, button_messages, button_profile, button_help, button_about_us, button_close, button_ubi;
+    FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_settings, button_close, button_ubi;
     Animation open, close, rotateForward, rotateBackWard;
     GoogleMap map;
     LatLng ubiActual;
@@ -154,10 +141,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void controls() {
         button_menu = findViewById(R.id.buttonMenu);
-        button_messages = findViewById(R.id.buttonMessages);
+        button_chats = findViewById(R.id.buttonMessages);
         button_profile = findViewById(R.id.buttonProfile);
-        button_help = findViewById(R.id.buttonHelp);
-        button_about_us = findViewById(R.id.buttonAboutUs);
+        button_notifications = findViewById(R.id.button_notifications);
+        button_settings = findViewById(R.id.buttonSettings);
         button_close = findViewById(R.id.buttonSignOut);
         button_ubi=findViewById(R.id.buttonUbi);
 
@@ -175,20 +162,30 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        button_messages.setOnClickListener(new View.OnClickListener() {
+            button_chats.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    animateMenu();
-                    Toast.makeText(getApplicationContext(),"Saludos del menu 22222", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MainActivity.this, Chats.class);
+                    startActivity(i);
+                    //animateMenu();
                 }
             });
 
-        button_ubi.setOnClickListener(new View.OnClickListener() {
+          button_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, Profile.class);
+                startActivity(i);
+                //animateMenu();
+            }
+        });
+
+         button_ubi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 moveToActualUbication();
             }
-        });
+          });
 
         //TODO : FALTAN LOS LISTENERS DEL RESTO DE BOTONES
 
@@ -210,45 +207,45 @@ public class MainActivity extends AppCompatActivity {
             button_menu.setImageResource(R.drawable.ic_baseline_menu_24);
 
 
-            button_messages.startAnimation(close);
+            button_chats.startAnimation(close);
             button_profile.startAnimation(close);
-            button_help.startAnimation(close);
-            button_about_us.startAnimation(close);
+            button_notifications.startAnimation(close);
+            button_settings.startAnimation(close);
             button_close.startAnimation(close);
 
-            button_messages.setVisibility(View.INVISIBLE);
+            button_chats.setVisibility(View.INVISIBLE);
             button_profile.setVisibility(View.INVISIBLE);
-            button_help.setVisibility(View.INVISIBLE);
-            button_about_us.setVisibility(View.INVISIBLE);
+            button_notifications.setVisibility(View.INVISIBLE);
+            button_settings.setVisibility(View.INVISIBLE);
             button_close.setVisibility(View.INVISIBLE);
 
-            button_messages.setClickable(false);
+            button_chats.setClickable(false);
             button_profile.setClickable(false);
-            button_help.setClickable(false);
-            button_about_us.setClickable(false);
+            button_notifications.setClickable(false);
+            button_settings.setClickable(false);
             button_close.setClickable(false);
 
             isOpen=false;
         } else {
             button_menu.startAnimation(rotateBackWard);
             button_menu.setImageResource(R.drawable.ic_baseline_menu_open_24);
-            button_messages.startAnimation(open);
+            button_chats.startAnimation(open);
             button_profile.startAnimation(open);
-            button_help.startAnimation(open);
-            button_about_us.startAnimation(open);
+            button_notifications.startAnimation(open);
+            button_settings.startAnimation(open);
             button_close.startAnimation(open);
 
 
-            button_messages.setVisibility(View.VISIBLE);
+            button_chats.setVisibility(View.VISIBLE);
             button_profile.setVisibility(View.VISIBLE);
-            button_help.setVisibility(View.VISIBLE);
-            button_about_us.setVisibility(View.VISIBLE);
+            button_notifications.setVisibility(View.VISIBLE);
+            button_settings.setVisibility(View.VISIBLE);
             button_close.setVisibility(View.VISIBLE);
 
-            button_messages.setClickable(true);
+            button_chats.setClickable(true);
             button_profile.setClickable(true);
-            button_help.setClickable(true);
-            button_about_us.setClickable(true);
+            button_notifications.setClickable(true);
+            button_settings.setClickable(true);
             button_close.setClickable(true);
             isOpen=true;
         }
