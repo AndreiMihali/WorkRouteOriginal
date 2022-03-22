@@ -27,6 +27,10 @@
         <item name="colorPrimary">@color/secondary</item>
         <item name="colorOnPrimary">#B0CAE7</item>
     </style>
+    <style name="DialogAlert" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="colorPrimary">@color/secondary</item>
+        <item name="colorOnPrimary">#B0CAE7</item>
+    </style>
     <style name="Login" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
@@ -98,5 +102,6 @@
         <!-- Customize your theme here. -->
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 </resources>

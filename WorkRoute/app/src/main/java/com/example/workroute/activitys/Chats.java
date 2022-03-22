@@ -13,6 +13,7 @@ public class Chats extends AppCompatActivity {
     Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.Register);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
         main();
@@ -25,8 +26,6 @@ public class Chats extends AppCompatActivity {
 
     private void controls() {
         toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_baseline_keyboard_backspace_24));
     }
 
     private void back() {

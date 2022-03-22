@@ -26,6 +26,7 @@ drawable bottom_navigation_selector
 drawable bottom_user_selector
 drawable bxl_google
 drawable default_user_login
+drawable ic_baseline_add_location_24
 drawable ic_baseline_arrow_back_24
 drawable ic_baseline_calendar_month_24
 drawable ic_baseline_camera_alt_24
@@ -55,9 +56,12 @@ drawable ic_launcher_foreground
 drawable ic_outline_chat_24
 drawable ic_outline_home_24
 drawable ic_outline_navigation_24
+drawable ic_outline_notifications_24
+drawable ic_outline_settings_24
 drawable login_pesonas
 drawable steven_binotto_9vduc_sgrsi_unsplash
 drawable workroute2icono
+id appbar
 id buttonMenu
 id buttonMessages
 id buttonProfile
@@ -80,6 +84,7 @@ id card_password
 id card_password_confirm
 id card_photo
 id card_spiiner
+id cared_foto
 id city
 id country
 id ed_confirmpass_register
@@ -92,6 +97,7 @@ id fab_camera
 id frameLayout
 id home
 id image
+id imagen_perfil
 id inputs
 id journeys
 id layout_confirm_pass
@@ -99,16 +105,21 @@ id layout_ed_alias
 id layout_email
 id layout_name
 id layout_pass
+id level
 id linears_datos
 id logoWork
+id lvl_actual
+id lvl_next
 id map
 id messages
+id name
 id or
 id password_forgot
 id prices
 id profile
 id profileImage
 id profile_image_toolbar
+id progress_lvl
 id rela
 id rl
 id texto_bienvenida
@@ -146,6 +157,7 @@ string google_storage_bucket
 string hello_blank_fragment
 string project_id
 style CalendarPicker
+style DialogAlert
 style Login
 style Register
 style Splash

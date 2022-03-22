@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -26,6 +28,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -107,9 +111,8 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, CODE_UBI);
             return null;
         }
-        map.setMyLocationEnabled(true);
         if (!gbsEnabled) {
-            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this,R.style.DialogAlert);
             builder.setMessage("You must enable the GPS. Do you want enable it?");
             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                 @Override
@@ -127,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         }else {
+            map.setMyLocationEnabled(true);
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             ubiActual = new LatLng(location.getLatitude(), location.getLongitude());
         }
@@ -139,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("UnsafeOptInUsageError")
     private void controls() {
         button_menu = findViewById(R.id.buttonMenu);
         button_chats = findViewById(R.id.buttonMessages);
@@ -147,9 +152,23 @@ public class MainActivity extends AppCompatActivity {
         button_settings = findViewById(R.id.buttonSettings);
         button_close = findViewById(R.id.buttonSignOut);
         button_ubi=findViewById(R.id.buttonUbi);
-
         open = AnimationUtils.loadAnimation(this,R.anim.open_menu);
         close = AnimationUtils.loadAnimation(this,R.anim.close_menu);
+        button_notifications.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @SuppressLint("UnsafeOptInUsageError")
+            @Override
+            public void onGlobalLayout() {
+                BadgeDrawable badgeDrawable = BadgeDrawable.create(MainActivity.this);
+                badgeDrawable.setNumber(2);
+                //Important to change the position of the Badge
+                badgeDrawable.setHorizontalOffset(30);
+                badgeDrawable.setVerticalOffset(20);
+
+                BadgeUtils.attachBadgeDrawable(badgeDrawable, button_notifications, null);
+
+                button_notifications.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
         rotateForward = AnimationUtils.loadAnimation(this,R.anim.rotate_forward);
         rotateBackWard = AnimationUtils.loadAnimation(this,R.anim.rotate_backward);
     }
@@ -167,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent i = new Intent(MainActivity.this, Chats.class);
                     startActivity(i);
-                    //animateMenu();
+                    animateMenu();
                 }
             });
 
@@ -176,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, Profile.class);
                 startActivity(i);
-                //animateMenu();
+                animateMenu();
             }
         });
 

@@ -2928,6 +2928,7 @@ drawable design_password_eye
 drawable design_snackbar_background
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
+drawable ic_baseline_add_location_24
 drawable ic_baseline_arrow_back_24
 drawable ic_baseline_calendar_month_24
 drawable ic_baseline_camera_alt_24
@@ -2966,6 +2967,8 @@ drawable ic_mtrl_chip_close_circle
 drawable ic_outline_chat_24
 drawable ic_outline_home_24
 drawable ic_outline_navigation_24
+drawable ic_outline_notifications_24
+drawable ic_outline_settings_24
 drawable image_placeholder
 drawable login_pesonas
 drawable m3_appbar_background
@@ -3106,6 +3109,7 @@ id animateToEnd
 id animateToStart
 id antiClockwise
 id anticipate
+id appbar
 id arc
 id asConfigured
 id async
@@ -3165,6 +3169,7 @@ id card_password_confirm
 id card_photo
 id card_root
 id card_spiiner
+id cared_foto
 id carryVelocity
 id center
 id center_horizontal
@@ -3296,6 +3301,7 @@ id image
 id image_content_root
 id image_root
 id image_view
+id imagen_perfil
 id immediateStop
 id included
 id info
@@ -3321,6 +3327,7 @@ id layout_pass
 id left
 id leftToRight
 id legacy
+id level
 id light
 id line1
 id line3
@@ -3329,6 +3336,8 @@ id linears_datos
 id listMode
 id list_item
 id logoWork
+id lvl_actual
+id lvl_next
 id map
 id masked
 id match_constraint
@@ -3392,6 +3401,7 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
+id name
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
 id navigation_bar_item_icon_view
@@ -3457,6 +3467,7 @@ id profileImage
 id profile_image_toolbar
 id progress_circular
 id progress_horizontal
+id progress_lvl
 id radio
 id ratio
 id rectangles
@@ -4282,6 +4293,7 @@ style CalendarPicker
 style CardView
 style CardView_Dark
 style CardView_Light
+style DialogAlert
 style EmptyTheme
 style FiamUI
 style FiamUI_Banner

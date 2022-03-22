@@ -13,6 +13,7 @@ public class Profile extends AppCompatActivity {
     Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.Register);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         main();
@@ -24,9 +25,7 @@ public class Profile extends AppCompatActivity {
     }
 
     private void controls() {
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_baseline_keyboard_backspace_24));
+        toolbar=findViewById(R.id.toolbar);
     }
 
     private void back() {
