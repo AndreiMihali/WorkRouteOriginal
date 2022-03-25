@@ -17,6 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkRoute">
         <activity
+            android:name=".activitys.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.Notifications"
+            android:exported="false" />
+        <activity
             android:name=".activitys.Chats"
             android:exported="false" />
         <activity
