@@ -147,7 +147,7 @@ public class Profile extends AppCompatActivity {
                             firestore.collection("Usuarios").document(FirebaseAuth.getInstance().getUid()).update(hasMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-
+                                    Companion.user.setFotoPerfil(downloadUrl);
                                 }
                             });
                         }
