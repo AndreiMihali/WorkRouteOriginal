@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@color/back_login"
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -188,11 +189,13 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
+        android:background="@android:color/transparent"
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_content"
         android:layout_marginTop="10dp"
         app:tabGravity="fill"
-        app:tabTextColor="@color/bottom_navigation_view">
+        app:tabIndicatorColor="@color/tablayout_style"
+        app:tabTextColor="@color/tablayout_style">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"

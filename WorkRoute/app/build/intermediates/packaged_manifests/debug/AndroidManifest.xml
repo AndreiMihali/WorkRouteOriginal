@@ -48,6 +48,12 @@
         android:testOnly="true"
         android:theme="@style/Theme.WorkRoute" >
         <activity
+            android:name="com.example.workroute.activitys.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.workroute.activitys.Notifications"
+            android:exported="false" />
+        <activity
             android:name="com.example.workroute.activitys.Chats"
             android:exported="false" />
         <activity

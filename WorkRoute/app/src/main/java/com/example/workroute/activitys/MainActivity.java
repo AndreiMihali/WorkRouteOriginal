@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -11,7 +12,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,17 +38,21 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements LocationListener {
 
     private static final int CODE_UBI = 100;
-    FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_settings, button_close, button_ubi;
-    Animation open, close, rotateForward, rotateBackWard;
-    GoogleMap map;
-    LatLng ubiActual;
-    SupportMapFragment mapFragment;
-    LocationManager locationManager;
-    boolean isOpen = false;
-
+    private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_settings, button_close, button_ubi;
+    private Animation open, close, rotateForward, rotateBackWard;
+    private GoogleMap map;
+    private LatLng ubiActual;
+    private SupportMapFragment mapFragment;
+    private LocationManager locationManager;
+    private boolean isOpen = false;
+    private Intent intentThatCalled;
+    private Criteria criteria;
+    private String bestProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("mapFragment");
         mapFragment.getMapAsync(this::onMapReady);
         main();
-
+        checkPermissions();
     }
 
 
@@ -72,13 +79,12 @@ public class MainActivity extends AppCompatActivity {
         map.getUiSettings().setMyLocationButtonEnabled(false);
         map.getUiSettings().setCompassEnabled(false);
         createMarker();
-        getUbiActual();
     }
 
     private void createMarker() {
         LatLng mad = new LatLng(40.42323502898525, -3.7022032760810064);
         map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(mad, 12f), 2000, null);
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(mad, 12f), 1500, null);
     }
 
 
@@ -88,12 +94,40 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case CODE_UBI: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    getUbiActual();
+                    getCurrentLocation();
                 } else {
-                    Snackbar.make(findViewById(R.id.rela), "Go to settings and enable ubication permissions", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(findViewById(R.id.rela), "Go to settings and enable location permissions", Snackbar.LENGTH_LONG).show();
                 }
             }
             return;
+        }
+    }
+
+    private void checkPermissions(){
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, CODE_UBI);
+        }else{
+            getCurrentLocation();
+        }
+    }
+
+    private boolean isLocationEnabled(){
+        locationManager=(LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private void getCurrentLocation() {
+        if(isLocationEnabled()){
+            criteria = new Criteria();
+            bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true));
+            locationManager.requestLocationUpdates(bestProvider,1000,0,this);
+        }else{
+            showDialogMessageGpsEnable();
         }
     }
 
@@ -103,45 +137,33 @@ public class MainActivity extends AppCompatActivity {
         startActivity(settingsIntent);
     }
 
-
-    private LatLng getUbiActual() {
-        locationManager = (LocationManager) MainActivity.this.getSystemService(Context.LOCATION_SERVICE);
-        final boolean gbsEnabled=locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, CODE_UBI);
-            return null;
-        }
-        if (!gbsEnabled) {
-            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this,R.style.DialogAlert);
-            builder.setMessage("You must enable the GPS. Do you want enable it?");
-            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    enableGps();
-                }
-            });
-            builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        }else {
-            map.setMyLocationEnabled(true);
-            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            ubiActual = new LatLng(location.getLatitude(), location.getLongitude());
-        }
-        return ubiActual;
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        startActivity(getIntent());
     }
 
-    private void moveToActualUbication(){
-        if(ubiActual!=null){
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(getUbiActual(),15f),2000,null);
-        }
+    private void showDialogMessageGpsEnable(){
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this,R.style.DialogAlert);
+        builder.setMessage("To get your current location, you need to enable the GPS. Do you want enable it?");
+        builder.setTitle("GPS DISABLED");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                enableGps();
+            }
+        });
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
+
 
     @SuppressLint("UnsafeOptInUsageError")
     private void controls() {
@@ -202,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
          button_ubi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveToActualUbication();
+                moveToLocation();
             }
           });
 
@@ -275,5 +297,43 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         map.clear();
         mapFragment.onDestroy();
+    }
+
+    @SuppressLint("MissingPermission")
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        map.setMyLocationEnabled(true);
+        locationManager.removeUpdates(this);
+        ubiActual=new LatLng(location.getLatitude(),location.getLongitude());
+    }
+
+    private void moveToLocation() {
+        if(isLocationEnabled()){
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubiActual,15f),2000,null);
+        }else{
+           getCurrentLocation();
+        }
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull List<Location> locations) {
+        LocationListener.super.onLocationChanged(locations);
+    }
+
+    @Override
+    public void onProviderEnabled(@NonNull String provider) {
+        LocationListener.super.onProviderEnabled(provider);
+    }
+
+    @Override
+    public void onProviderDisabled(@NonNull String provider) {
+        LocationListener.super.onProviderDisabled(provider);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        locationManager.removeUpdates(this);
     }
 }
