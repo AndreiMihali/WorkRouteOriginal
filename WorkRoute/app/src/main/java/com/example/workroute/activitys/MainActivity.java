@@ -118,9 +118,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     private void createMarker() {
-        LatLng mad = new LatLng(40.42323502898525, -3.7022032760810064);
         map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(mad,12f));
     }
 
 
@@ -382,6 +380,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         locationManager.removeUpdates(this);
         ubiActual=new LatLng(location.getLatitude(),location.getLongitude());
         progressDialog.dismiss();
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubiActual,15f),2000,null);
     }
 
     private void moveToLocation() {
