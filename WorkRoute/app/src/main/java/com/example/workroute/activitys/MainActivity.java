@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("mapFragment");
         mapFragment.getMapAsync(this::onMapReady);
         main();
-        progressDialog.setMessage("Checking your location...");
+        progressDialog.setMessage("Checking your location. This can take a while...");
         progressDialog.setCanceledOnTouchOutside(false);
         checkPermissions();
     }
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     public void onMapReady(GoogleMap googleMap) {
 
-        /*******************************************************************************************************************++
+        /******************************************************************************************************************++
          * DESHABILITAMOS EL BOTON DEL COMPAS DE GGOGLE MAPS Y EL BOTON DE UBICACION YA QUE ESE SERA PERSONALIZADO POR NOSTROS
          * TAMBIEN INICIALIZMAOS EL MAPA EN MADRID (ESTO SEGURAMENTE SE INICIE EM LA UBICACION ACTUAL)
          * *****************************************************************************************************************+*/

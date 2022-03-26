@@ -171,9 +171,11 @@ string google_maps_key
 string google_storage_bucket
 string hello_blank_fragment
 string project_id
+string sharedPreferences
 style CalendarPicker
 style DialogAlert
 style Login
+style ProgressDialog
 style Register
 style Splash
 style Subscribe
