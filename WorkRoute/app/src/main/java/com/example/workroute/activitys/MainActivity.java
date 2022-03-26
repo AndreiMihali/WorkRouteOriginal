@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("mapFragment");
         mapFragment.getMapAsync(this::onMapReady);
         main();
+        progressDialog.setMessage("We are setting all for you");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
         checkPermissions();
     }
 
@@ -136,9 +139,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     private void checkPermissions(){
-        progressDialog.setMessage("We are setting all for you");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, CODE_UBI);
         }else{
@@ -189,9 +189,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @Override
     protected void onRestart() {
         super.onRestart();
-        if(!isLocationEnabled()){
-            getCurrentLocation();
-        }
+        checkPermissions();
     }
 
     private void showDialogMessageGpsEnable(){
@@ -208,6 +206,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                progressDialog.dismiss();
             }
         });
 
