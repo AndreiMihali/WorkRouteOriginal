@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -47,6 +48,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.security.Provider;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private String bestProvider;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestore;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private void createMarker() {
         LatLng mad = new LatLng(40.42323502898525, -3.7022032760810064);
         map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(mad, 12f), 1500, null);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(mad,12f));
     }
 
 
@@ -133,6 +136,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     private void checkPermissions(){
+        progressDialog.setMessage("We are setting all for you");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, CODE_UBI);
         }else{
@@ -156,6 +162,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         }
     }
 
+
+    /**
+     * AÑADIMOS UNA BARRA DE PROGRESO PARA PODER CARGAR EL MAPA Y LA UBICACION BIEN. ASI EVITAMOS ERRORES
+     * AL OBTENER LA UBICACION.
+     * SE LLAMA SIEMPRE QUE OBTENEMOS LA UBICACION, ES DECIR SIEMPRE QUE ACTIVEMOS EL GPS, O SIEMPRE QUE QUERAMOS OBTENER LA UBICACION
+     */
     @SuppressLint("MissingPermission")
     private void getCurrentLocation() {
         if(isLocationEnabled()){
@@ -177,7 +189,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @Override
     protected void onRestart() {
         super.onRestart();
-        startActivity(getIntent());
+        if(!isLocationEnabled()){
+            getCurrentLocation();
+        }
     }
 
     private void showDialogMessageGpsEnable(){
@@ -215,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         close = AnimationUtils.loadAnimation(this,R.anim.close_menu);
         firebaseAuth=FirebaseAuth.getInstance();
         firestore=FirebaseFirestore.getInstance();
-
+        progressDialog=new ProgressDialog(this,R.style.DialogAlert);
         /** MÉTODO PARA AÑADIR ICONOS DE NOTIFICACIÓN A LOS BOTONES*/
         button_notifications.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @SuppressLint("UnsafeOptInUsageError")
@@ -346,6 +360,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         map.setMyLocationEnabled(true);
         locationManager.removeUpdates(this);
         ubiActual=new LatLng(location.getLatitude(),location.getLongitude());
+        progressDialog.dismiss();
     }
 
     private void moveToLocation() {

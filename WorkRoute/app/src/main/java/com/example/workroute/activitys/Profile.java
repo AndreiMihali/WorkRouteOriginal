@@ -143,7 +143,6 @@ public class Profile extends AppCompatActivity {
                             String downloadUrl=downloadUri.toString();
                             HashMap<String,Object> hasMap=new HashMap<>();
                             hasMap.put("fotoPerfil",downloadUrl);
-
                             firestore.collection("Usuarios").document(FirebaseAuth.getInstance().getUid()).update(hasMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
@@ -174,7 +173,7 @@ public class Profile extends AppCompatActivity {
         if(Companion.user.getFotoPerfil().equals("")){
             profile.setImageDrawable(getDrawable(R.drawable.default_user_login));
         }else{
-            Glide.with(this).load(Companion.user.getFotoPerfil()).into(profile);
+            Glide.with(getApplicationContext()).load(Companion.user.getFotoPerfil()).into(profile);
         }
 
     }
