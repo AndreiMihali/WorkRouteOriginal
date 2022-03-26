@@ -1,9 +1,14 @@
 package com.example.workroute.activitys;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
@@ -12,6 +17,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -61,12 +67,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private SupportMapFragment mapFragment;
     private LocationManager locationManager;
     private boolean isOpen = false;
-    private Intent intentThatCalled;
     private Criteria criteria;
     private String bestProvider;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestore;
     private ProgressDialog progressDialog;
+    private ActivityResultLauncher<Intent> activityResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +93,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("mapFragment");
         mapFragment.getMapAsync(this::onMapReady);
         main();
-        progressDialog.setMessage("We are setting all for you");
+        progressDialog.setMessage("Checking your location...");
         progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
         checkPermissions();
     }
 
@@ -131,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     getCurrentLocation();
                 } else {
+                    progressDialog.dismiss();
                     Snackbar.make(findViewById(R.id.rela), "Go to settings and enable location permissions", Snackbar.LENGTH_LONG).show();
                 }
             }
@@ -155,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     private boolean isLocationEnabled(){
         locationManager=(LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)||locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
             return true;
         }else{
             return false;
@@ -170,6 +176,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
      */
     @SuppressLint("MissingPermission")
     private void getCurrentLocation() {
+        progressDialog.show();
         if(isLocationEnabled()){
             criteria = new Criteria();
             bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true));
@@ -183,16 +190,16 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     /** ESTE MÉTODO HABILITA EL GPS DESDE LOS AJUSTES*/
     private void enableGps() {
         Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        startActivity(settingsIntent);
+        activityResultLauncher.launch(settingsIntent);
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        checkPermissions();
     }
 
     private void showDialogMessageGpsEnable(){
+        progressDialog.dismiss();
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this,R.style.DialogAlert);
         builder.setMessage("To get your current location, you need to enable the GPS. Do you want enable it?");
         builder.setTitle("GPS DISABLED");
@@ -217,6 +224,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     @SuppressLint("UnsafeOptInUsageError")
     private void controls() {
+        addActivityResultLauncher();
         button_menu = findViewById(R.id.buttonMenu);
         button_chats = findViewById(R.id.buttonMessages);
         button_profile = findViewById(R.id.buttonProfile);
@@ -228,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         close = AnimationUtils.loadAnimation(this,R.anim.close_menu);
         firebaseAuth=FirebaseAuth.getInstance();
         firestore=FirebaseFirestore.getInstance();
-        progressDialog=new ProgressDialog(this,R.style.DialogAlert);
+        progressDialog=new ProgressDialog(this,R.style.ProgressDialog);
         /** MÉTODO PARA AÑADIR ICONOS DE NOTIFICACIÓN A LOS BOTONES*/
         button_notifications.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @SuppressLint("UnsafeOptInUsageError")
@@ -247,6 +255,20 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         });
         rotateForward = AnimationUtils.loadAnimation(this,R.anim.rotate_forward);
         rotateBackWard = AnimationUtils.loadAnimation(this,R.anim.rotate_backward);
+    }
+
+    private void addActivityResultLauncher() {
+        activityResultLauncher=registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if(result.getResultCode()==RESULT_CANCELED){
+                            getCurrentLocation();
+                        }
+                    }
+                }
+        );
     }
 
     private void listeners() {
@@ -363,11 +385,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     private void moveToLocation() {
-        if(isLocationEnabled()){
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubiActual,15f),2000,null);
-        }else{
-           getCurrentLocation();
-        }
+       if(isLocationEnabled()){
+           map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubiActual,15f),2000,null);
+       }else{
+           showDialogMessageGpsEnable();
+       }
     }
 
     @Override
