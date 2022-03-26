@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.workroute.R;
 import com.example.workroute.model.User;
+import com.example.workroute.model.Viaje;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -229,8 +230,13 @@ public class CreateAccount extends AppCompatActivity {
                 0,
                 "",
                 false,
-                new ArrayList<>(),
-                0
+                new ArrayList<Viaje>(),
+                0,
+                0,
+                0,
+                0,
+                new ArrayList<User>(),
+                new ArrayList<User>()
         );
 
         FirebaseFirestore firestore=FirebaseFirestore.getInstance();

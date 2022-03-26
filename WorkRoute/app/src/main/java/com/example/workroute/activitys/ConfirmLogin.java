@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.workroute.R;
 import com.example.workroute.model.User;
+import com.example.workroute.model.Viaje;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -280,8 +281,13 @@ public class ConfirmLogin extends AppCompatActivity {
                 0,
                 "",
                 false,
-                new ArrayList<>(),
-                0
+                new ArrayList<Viaje>(),
+                0,
+                0,
+                0,
+                0,
+                new ArrayList<User>(),
+                new ArrayList<User>()
         );
 
         FirebaseFirestore firestore=FirebaseFirestore.getInstance();

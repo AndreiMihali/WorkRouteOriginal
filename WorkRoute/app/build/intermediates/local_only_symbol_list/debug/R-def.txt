@@ -63,6 +63,7 @@ drawable ic_outline_settings_24
 drawable login_pesonas
 drawable steven_binotto_9vduc_sgrsi_unsplash
 drawable workroute2icono
+id buttonEditProfile
 id buttonMenu
 id buttonMessages
 id buttonProfile
@@ -95,6 +96,8 @@ id ed_pass
 id ed_pass_register
 id ed_username_register
 id fab_camera
+id followers
+id following
 id frameLayout
 id home
 id image
@@ -115,6 +118,7 @@ id lvl_next
 id map
 id messages
 id name
+id opinions
 id or
 id password_forgot
 id prices

@@ -3141,6 +3141,7 @@ id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
 id button
+id buttonEditProfile
 id buttonMenu
 id buttonMessages
 id buttonPanel
@@ -3271,6 +3272,8 @@ id fitToContents
 id fixed
 id flip
 id floating
+id followers
+id following
 id forever
 id fragment_container_view_tag
 id frameLayout
@@ -3425,6 +3428,7 @@ id notification_main_column_container
 id off
 id on
 id onInterceptTouchReturnSwipe
+id opinions
 id or
 id outline
 id outward

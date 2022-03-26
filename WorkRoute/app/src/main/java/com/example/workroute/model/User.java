@@ -20,10 +20,59 @@ public class User {
     private ArrayList<Viaje> viajes;
     private int vecesConectadas;
 
+    public ArrayList<User> getFollowersProfile() {
+        return followersProfile;
+    }
+
+    public void setFollowersProfile(ArrayList<User> followersProfile) {
+        this.followersProfile = followersProfile;
+    }
+
+    public ArrayList<User> getFollowingProfile() {
+        return followingProfile;
+    }
+
+    public void setFollowingProfile(ArrayList<User> followingProfile) {
+        this.followingProfile = followingProfile;
+    }
+
+    private ArrayList<User> followersProfile;
+    private ArrayList<User> followingProfile;
+
+    public int getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(int followers) {
+        this.followers = followers;
+    }
+
+    public int getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(int following) {
+        this.following = following;
+    }
+
+    public int getOpinions() {
+        return opinions;
+    }
+
+    public void setOpinions(int opinions) {
+        this.opinions = opinions;
+    }
+
+    private int followers;
+    private int following;
+    private int opinions;
+
     public User() {
     }
 
-    public User(String uid, String nombre, int edad, String fecha_naci, String localidad, String direccion, int nivel, boolean activo, boolean suscrito, boolean online, int nivelSuscripcion, String fotoPerfil, boolean conductor, ArrayList<Viaje> viajes, int vecesConectadas) {
+    public User(String uid, String nombre, int edad, String fecha_naci, String localidad, String direccion, int nivel, boolean activo,
+                boolean suscrito, boolean online, int nivelSuscripcion, String fotoPerfil, boolean conductor,
+                ArrayList<Viaje> viajes, int vecesConectadas,int followers,int following,int opinions,ArrayList<User> followersProfile,ArrayList<User> followingProfile) {
         this.uid = uid;
         this.nombre = nombre;
         this.edad = edad;
@@ -39,6 +88,11 @@ public class User {
         this.conductor = conductor;
         this.viajes = viajes;
         this.vecesConectadas = vecesConectadas;
+        this.followers=followers;
+        this.following=following;
+        this.opinions=opinions;
+        this.followingProfile=followingProfile;
+        this.followersProfile=followersProfile;
     }
 
     public String getUid() {

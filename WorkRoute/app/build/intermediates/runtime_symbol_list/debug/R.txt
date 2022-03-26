@@ -3140,6 +3140,7 @@ int id browser_actions_menu_item_text 0x7f08006d
 int id browser_actions_menu_items 0x7f08006e
 int id browser_actions_menu_view 0x7f08006f
 int id button 0x7f080070
+int id buttonEditProfile 0x7f08025b
 int id buttonMenu 0x7f080071
 int id buttonMessages 0x7f080072
 int id buttonPanel 0x7f080073
@@ -3270,6 +3271,8 @@ int id fitToContents 0x7f0800ef
 int id fixed 0x7f0800f0
 int id flip 0x7f0800f1
 int id floating 0x7f0800f2
+int id followers 0x7f08025c
+int id following 0x7f08025d
 int id forever 0x7f0800f3
 int id fragment_container_view_tag 0x7f0800f4
 int id frameLayout 0x7f0800f5
@@ -3424,6 +3427,7 @@ int id notification_main_column_container 0x7f080189
 int id off 0x7f08018a
 int id on 0x7f08018b
 int id onInterceptTouchReturnSwipe 0x7f08018c
+int id opinions 0x7f08025e
 int id or 0x7f08018d
 int id outline 0x7f08018e
 int id outward 0x7f08018f

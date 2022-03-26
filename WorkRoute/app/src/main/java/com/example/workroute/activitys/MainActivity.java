@@ -18,7 +18,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
@@ -27,16 +29,23 @@ import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.example.workroute.R;
+import com.example.workroute.companion.Companion;
+import com.example.workroute.model.User;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -53,12 +62,22 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private Intent intentThatCalled;
     private Criteria criteria;
     private String bestProvider;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_WorkRoute);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*****************************************************************************************************************************
+        * UTILIZAMOS LA PRIMERA LINEA DE CÓDIGO PARA HACER QUE EL MAPA OCUPE LA PANTALLA ENTERA
+        * UTILIZAMOS EL MAP FRAGMENT PARA INICIAR EL MAPA DE GGOGLE. PARA ESO PREVIAMENTE HABREMOS INCLUIDO LA API KEY DEL GGOGLE MAPS
+        * QUE SE ENCUENTRA EN LA CARPETA STRINGS
+        * UNA VEZ INICIADO EL MAPA INICIAMOS LAS VARIABLES Y COMPROBAMOS QUE SE TENGAN LOS PERMISOS DE UBICACIÓN
+        *******************************************************************************************************************************/
+
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
@@ -72,9 +91,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private void main() {
         controls();
         listeners();
+        getUserData();
     }
 
     public void onMapReady(GoogleMap googleMap) {
+
+        /*******************************************************************************************************************++
+         * DESHABILITAMOS EL BOTON DEL COMPAS DE GGOGLE MAPS Y EL BOTON DE UBICACION YA QUE ESE SERA PERSONALIZADO POR NOSTROS
+         * TAMBIEN INICIALIZMAOS EL MAPA EN MADRID (ESTO SEGURAMENTE SE INICIE EM LA UBICACION ACTUAL)
+         * *****************************************************************************************************************+*/
         map = googleMap;
         map.getUiSettings().setMyLocationButtonEnabled(false);
         map.getUiSettings().setCompassEnabled(false);
@@ -88,6 +113,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
 
+    /******************************************************************************
+     * COMPROBAMOS QUE SE TENGAN LSO PERMISOS DE LOCALIZACION YA QUE SON NECESARIOS
+     * EN CASO DE NO TENERLOS SE PEDIRAN AL USUARIO
+     *****************************************************************************/
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -111,6 +140,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         }
     }
 
+    /************************************************************************************************
+     * COMPROBAMOS QUE EL GPS ESTA HABILITADO YA QUE ES NECESARIO PARA PODER IR A LA UBICACION ACTUAL
+     * EN CASO DE NO ESTARLO LE MOSTRAMOS UN DIALOG INDICANODLE QUE TIENE QUE ACEPTARLO
+     * PARA ACEPTARLO SE LE REDIRIGE A LOS AJUSTES EN LA PESTAÑA GPS PARA PODER ACTIVARLO
+     * EN CASO DE NO HACERLO SE LE MOSTRARA DICHO MENSAJE HASTA QUE LO HAGA
+     *  ********************************************************************************************/
+
     private boolean isLocationEnabled(){
         locationManager=(LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
@@ -132,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
 
+    /** ESTE MÉTODO HABILITA EL GPS DESDE LOS AJUSTES*/
     private void enableGps() {
         Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         startActivity(settingsIntent);
@@ -176,6 +213,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         button_ubi=findViewById(R.id.buttonUbi);
         open = AnimationUtils.loadAnimation(this,R.anim.open_menu);
         close = AnimationUtils.loadAnimation(this,R.anim.close_menu);
+        firebaseAuth=FirebaseAuth.getInstance();
+        firestore=FirebaseFirestore.getInstance();
+
+        /** MÉTODO PARA AÑADIR ICONOS DE NOTIFICACIÓN A LOS BOTONES*/
         button_notifications.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @SuppressLint("UnsafeOptInUsageError")
             @Override
@@ -335,5 +376,24 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     protected void onPause() {
         super.onPause();
         locationManager.removeUpdates(this);
+    }
+
+    private void getUserData(){
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                firestore.collection("Usuarios").document(firebaseAuth.getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        Companion.user = documentSnapshot.toObject(User.class);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("ERROR AL OBTENER LOS DATOS DEL USUARIO","ERROR AL OBTENER LOS DATOS DEL USUARIO "+e);
+                    }
+                });
+            }
+        });
     }
 }
