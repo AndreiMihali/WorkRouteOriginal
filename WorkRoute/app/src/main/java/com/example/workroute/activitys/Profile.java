@@ -196,7 +196,7 @@ public class Profile extends AppCompatActivity {
         });
     }
 
-    private void controls() {
+   private void controls() {
         toolbar=findViewById(R.id.toolbar);
         userName = findViewById(R.id.name);
         tabLayout=findViewById(R.id.tabLayout);

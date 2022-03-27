@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         /*****************************************************************************************************************************
         * UTILIZAMOS LA PRIMERA LINEA DE CÓDIGO PARA HACER QUE EL MAPA OCUPE LA PANTALLA ENTERA
         * UTILIZAMOS EL MAP FRAGMENT PARA INICIAR EL MAPA DE GGOGLE. PARA ESO PREVIAMENTE HABREMOS INCLUIDO LA API KEY DEL GGOGLE MAPS
@@ -119,6 +120,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     private void createMarker() {
         map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        LatLng defecto=new LatLng(40.42689401379705, -3.7022032760810064);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(defecto,10f));
     }
 
 

@@ -1,225 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/back_login"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        app:menu="@menu/menu_toolbar_profile"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-        app:navigationIconTint="@color/secondary"
-        app:titleTextColor="@color/secondary" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cared_foto"
-        android:layout_below="@id/toolbar"
-        android:layout_width="120dp"
-        android:theme="@style/Theme.MaterialComponents.DayNight"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="100dp"
-        android:layout_height="120dp">
-
-        <ImageView
-            android:id="@+id/imagen_perfil"
-            android:layout_width="match_parent"
-            android:src="@drawable/default_user_login"
-            android:scaleType="centerCrop"
-            android:layout_height="match_parent"/>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_camera"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:background="@color/back_login"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/cared_foto"
-        android:layout_alignBottom="@id/cared_foto"
-        app:backgroundTint="@color/secondary"
-        app:fabSize="mini"
-        app:srcCompat="@drawable/ic_baseline_camera_alt_24"
-        app:tint="@color/white"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <LinearLayout
-        android:id="@+id/layout_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cared_foto"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/cared_foto"
-            android:layout_gravity="center"
-            android:text="USER SJASJA"
-            android:textColor="@color/secondary"
-            android:textSize="18sp" />
-
-        <LinearLayout
+        android:layout_width="match_parent">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            app:layout_scrollFlags="enterAlways|scroll"
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            app:menu="@menu/menu_toolbar_profile"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Profile"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            app:navigationIconTint="@color/secondary"
+            app:titleTextColor="@color/secondary" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cared_foto"
+                android:layout_below="@id/toolbar"
+                android:layout_width="120dp"
+                android:theme="@style/Theme.MaterialComponents.DayNight"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="100dp"
+                android:layout_height="120dp">
+
+                <ImageView
+                    android:id="@+id/imagen_perfil"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/default_user_login"
+                    android:scaleType="centerCrop"
+                    android:layout_height="match_parent"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_camera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="40dp"
-                android:gravity="center"
+                android:layout_alignEnd="@id/cared_foto"
+                android:layout_alignBottom="@id/cared_foto"
+                app:backgroundTint="@color/secondary"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_baseline_camera_alt_24"
+                app:tint="@color/white" />
+
+            <LinearLayout
+                android:id="@+id/layout_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cared_foto"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/following"
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="202"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:layout_below="@+id/cared_foto"
+                    android:layout_gravity="center"
+                    android:text="USER SJASJA"
+                    android:textColor="@color/secondary"
+                    android:textSize="18sp" />
 
-                <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="40dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/following"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="202"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Following"
+                            android:textColor="#7E7D7D"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="40dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/followers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="202"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Followers"
+                            android:textColor="#7E7D7D"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/opinions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="202"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Opinions"
+                            android:textColor="#7E7D7D"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonEditProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Following"
-                    android:textColor="#7E7D7D"
-                    android:textSize="16sp" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="@color/secondary"
+                    android:elevation="5dp"
+                    android:text="Edit profile"
+                    android:textColor="@color/white" />
+
+                <LinearLayout
+                    android:id="@+id/level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/name"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/lvl_actual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/secondary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_lvl"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="1"
+                        android:progressTint="@color/secondary" />
+
+                    <TextView
+                        android:id="@+id/lvl_next"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textColor="@color/secondary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="40dp"
-                android:gravity="center"
-                android:orientation="vertical">
+        </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/followers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="202"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Followers"
-                    android:textColor="#7E7D7D"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/opinions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="202"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Opinions"
-                    android:textColor="#7E7D7D"
-                    android:textSize="16sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonEditProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="@color/secondary"
-            android:elevation="5dp"
-            android:text="Edit profile"
-            android:textColor="@color/white" />
-
-        <LinearLayout
-            android:id="@+id/level"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
+            android:background="@android:color/transparent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/name"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/tablayout_style"
+            app:tabTextColor="@color/tablayout_style">
 
-            <TextView
-                android:id="@+id/lvl_actual"
+            <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="@color/secondary"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:text="DETAILS" />
 
-            <ProgressBar
-                android:id="@+id/progress_lvl"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_weight="1"
-                android:progressTint="@color/secondary" />
-
-            <TextView
-                android:id="@+id/lvl_next"
+            <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textColor="@color/secondary"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </LinearLayout>
+                android:text="ACCOUNT" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:background="@android:color/transparent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout_content"
-        android:layout_marginTop="10dp"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="@color/tablayout_style"
-        app:tabTextColor="@color/tablayout_style">
+        </com.google.android.material.tabs.TabLayout>
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DETAILS" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ACCOUNT" />
-
-    </com.google.android.material.tabs.TabLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:background="@color/back_login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tabLayout">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        >
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
@@ -227,7 +239,4 @@
             android:layout_height="match_parent"
             android:paddingVertical="35dp" />
     </androidx.core.widget.NestedScrollView>
-
-
-
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
