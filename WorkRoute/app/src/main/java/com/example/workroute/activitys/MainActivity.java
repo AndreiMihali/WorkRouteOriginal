@@ -57,7 +57,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.security.Provider;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LocationListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final int CODE_UBI = 100;
     private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_settings, button_close, button_ubi;
@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private FirebaseFirestore firestore;
     private ProgressDialog progressDialog;
     private ActivityResultLauncher<Intent> activityResultLauncher;
-    private boolean permisosLocalicaion=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,25 +80,16 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        /*****************************************************************************************************************************
+        * UTILIZAMOS LA PRIMERA LINEA DE CÓDIGO PARA HACER QUE EL MAPA OCUPE LA PANTALLA ENTERA
+        * UTILIZAMOS EL MAP FRAGMENT PARA INICIAR EL MAPA DE GGOGLE. PARA ESO PREVIAMENTE HABREMOS INCLUIDO LA API KEY DEL GGOGLE MAPS
+        * QUE SE ENCUENTRA EN LA CARPETA STRINGS
+        * UNA VEZ INICIADO EL MAPA INICIAMOS LAS VARIABLES Y COMPROBAMOS QUE SE TENGAN LOS PERMISOS DE UBICACIÓN
+        *******************************************************************************************************************************/
+
+
     }
 
-    @Override
-    public void onLocationChanged(@NonNull Location location) {
 
-    }
-
-    @Override
-    public void onLocationChanged(@NonNull List<Location> locations) {
-        LocationListener.super.onLocationChanged(locations);
-    }
-
-    @Override
-    public void onProviderEnabled(@NonNull String provider) {
-        LocationListener.super.onProviderEnabled(provider);
-    }
-
-    @Override
-    public void onProviderDisabled(@NonNull String provider) {
-        LocationListener.super.onProviderDisabled(provider);
-    }
 }
