@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         map.getUiSettings().setMyLocationButtonEnabled(false);
         map.getUiSettings().setCompassEnabled(false);
         createMarker();
-        //map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubiActual,15f),2000,null);
     }
 
     private void createMarker() {
@@ -382,11 +381,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @SuppressLint("MissingPermission")
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        //map.setMyLocationEnabled(true);
         locationManager.removeUpdates(this);
         ubiActual=new LatLng(location.getLatitude(),location.getLongitude());
         progressDialog.dismiss();
-        //map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubiActual,15f),2000,null);
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubiActual,15f),2000,null);
     }
 
     private void moveToLocation() {
