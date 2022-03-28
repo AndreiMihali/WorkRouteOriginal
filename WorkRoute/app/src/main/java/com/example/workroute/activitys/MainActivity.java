@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         getUserData();
     }
 
+    @SuppressLint("MissingPermission")
     public void onMapReady(GoogleMap googleMap) {
 
         /******************************************************************************************************************++
@@ -113,9 +114,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
          * TAMBIEN INICIALIZMAOS EL MAPA EN MADRID (ESTO SEGURAMENTE SE INICIE EM LA UBICACION ACTUAL)
          * *****************************************************************************************************************+*/
         map = googleMap;
+        map.setMyLocationEnabled(true);
         map.getUiSettings().setMyLocationButtonEnabled(false);
         map.getUiSettings().setCompassEnabled(false);
         createMarker();
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubiActual,15f),2000,null);
+        //createMarker();
     }
 
     private void createMarker() {
@@ -379,11 +383,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @SuppressLint("MissingPermission")
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        map.setMyLocationEnabled(true);
+        //map.setMyLocationEnabled(true);
         locationManager.removeUpdates(this);
         ubiActual=new LatLng(location.getLatitude(),location.getLongitude());
         progressDialog.dismiss();
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubiActual,15f),2000,null);
+        //map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubiActual,15f),2000,null);
     }
 
     private void moveToLocation() {
@@ -409,6 +413,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         LocationListener.super.onProviderDisabled(provider);
     }
 
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
 
     @Override
     protected void onPause() {
