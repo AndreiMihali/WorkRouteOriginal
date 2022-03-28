@@ -118,8 +118,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         map.getUiSettings().setMyLocationButtonEnabled(false);
         map.getUiSettings().setCompassEnabled(false);
         createMarker();
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubiActual,15f),2000,null);
-        //createMarker();
+        //map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubiActual,15f),2000,null);
     }
 
     private void createMarker() {
