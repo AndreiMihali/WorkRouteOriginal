@@ -26,10 +26,11 @@ public class SplashScreen extends AppCompatActivity {
         setTheme(R.style.Splash);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+                if(user!=null){
                     startActivity(new Intent(SplashScreen.this, MainActivity.class));
                 }else{
                     startActivity(new Intent(SplashScreen.this, LoginActivity.class));
