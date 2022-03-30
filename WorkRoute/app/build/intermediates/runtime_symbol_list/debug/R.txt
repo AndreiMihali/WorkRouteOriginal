@@ -2884,6 +2884,7 @@ int drawable abc_textfield_search_material 0x7f070054
 int drawable abc_vector_test 0x7f070055
 int drawable avd_hide_password 0x7f070056
 int drawable avd_show_password 0x7f070057
+int drawable back_second_sheet 0x7f0700ea
 int drawable background_login 0x7f070058
 int drawable background_susc 0x7f070059
 int drawable bottom_chat_selector 0x7f07005a
@@ -2952,6 +2953,7 @@ int drawable ic_baseline_notifications_none_24 0x7f070098
 int drawable ic_baseline_person_24 0x7f070099
 int drawable ic_baseline_person_outline_24 0x7f07009a
 int drawable ic_baseline_photo_library_24 0x7f07009b
+int drawable ic_baseline_remove_24 0x7f0700e8
 int drawable ic_baseline_settings_24 0x7f07009c
 int drawable ic_baseline_share_24 0x7f07009d
 int drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24 0x7f0700e7
@@ -3021,6 +3023,7 @@ int drawable quantum_ic_arrow_back_grey600_24 0x7f0700dc
 int drawable quantum_ic_clear_grey600_24 0x7f0700dd
 int drawable quantum_ic_cloud_off_vd_theme_24 0x7f0700de
 int drawable quantum_ic_search_grey600_24 0x7f0700df
+int drawable round_bottom_sheet 0x7f0700e9
 int drawable rounded_layout 0x7f0700e0
 int drawable steven_binotto_9vduc_sgrsi_unsplash 0x7f0700e1
 int drawable test_custom_background 0x7f0700e2
@@ -3129,8 +3132,10 @@ int id baseline 0x7f080061
 int id beginOnFirstDraw 0x7f080062
 int id beginning 0x7f080063
 int id bestChoice 0x7f080064
+int id blockUser 0x7f080262
 int id blocking 0x7f080065
 int id body_scroll 0x7f080066
+int id boton_drag 0x7f080263
 int id bottom 0x7f080067
 int id bounce 0x7f080068
 int id bounceBoth 0x7f080069
@@ -3180,6 +3185,7 @@ int id center_vertical 0x7f080094
 int id chain 0x7f080095
 int id chain2 0x7f080096
 int id chains 0x7f080097
+int id chatTOUser 0x7f080264
 int id checkbox 0x7f080098
 int id checked 0x7f080099
 int id chip 0x7f08009a
@@ -3234,6 +3240,7 @@ int id disableIntraAutoTransition 0x7f0800ca
 int id disablePostScroll 0x7f0800cb
 int id disableScroll 0x7f0800cc
 int id disjoint 0x7f0800cd
+int id divider 0x7f080265
 int id dragAnticlockwise 0x7f0800ce
 int id dragClockwise 0x7f0800cf
 int id dragDown 0x7f0800d0
@@ -3310,6 +3317,7 @@ int id imagen_perfil 0x7f080116
 int id immediateStop 0x7f080117
 int id included 0x7f080118
 int id info 0x7f080119
+int id information_user 0x7f080266
 int id inputs 0x7f08011a
 int id invisible 0x7f08011b
 int id inward 0x7f08011c
@@ -3341,6 +3349,7 @@ int id linear 0x7f080135
 int id linears_datos 0x7f080136
 int id listMode 0x7f080137
 int id list_item 0x7f080138
+int id location_icon 0x7f080267
 int id logoWork 0x7f080139
 int id lvl_actual 0x7f08013a
 int id lvl_next 0x7f08013b
@@ -3472,6 +3481,7 @@ int id primary_button 0x7f0801b8
 int id profile 0x7f0801b9
 int id profileImage 0x7f0801ba
 int id profile_image_toolbar 0x7f0801bb
+int id profile_photo_sheet 0x7f080268
 int id progress_circular 0x7f0801bc
 int id progress_horizontal 0x7f0801bd
 int id progress_lvl 0x7f0801be
@@ -3509,6 +3519,7 @@ int id search_mag_icon 0x7f0801dd
 int id search_plate 0x7f0801de
 int id search_src_text 0x7f0801df
 int id search_voice_btn 0x7f0801e0
+int id second_sheet 0x7f080269
 int id secondary_button 0x7f0801e1
 int id select_dialog_listview 0x7f0801e2
 int id selected 0x7f0801e3
@@ -3516,6 +3527,7 @@ int id selection_type 0x7f0801e4
 int id share 0x7f0801e5
 int id sharedValueSet 0x7f0801e6
 int id sharedValueUnset 0x7f0801e7
+int id sheet 0x7f080261
 int id shortcut 0x7f0801e8
 int id showCustom 0x7f0801e9
 int id showHome 0x7f0801ea
@@ -3598,6 +3610,7 @@ int id title_template 0x7f080236
 int id titles 0x7f080237
 int id toggle 0x7f080238
 int id toolbar 0x7f080239
+int id toolbar_bottom_sheet 0x7f08026a
 int id top 0x7f08023a
 int id topPanel 0x7f08023b
 int id touch_outside 0x7f08023c
@@ -3854,6 +3867,7 @@ int layout text_view_with_theme_line_height 0x7f0b009a
 int layout text_view_without_line_height 0x7f0b009b
 int menu example_menu 0x7f0c0000
 int menu example_menu2 0x7f0c0001
+int menu manu_toolbar_sheet 0x7f0c0004
 int menu menu_toolbar_profile 0x7f0c0002
 int menu menur_bottom_navigation 0x7f0c0003
 int mipmap ic_launcher 0x7f0d0000

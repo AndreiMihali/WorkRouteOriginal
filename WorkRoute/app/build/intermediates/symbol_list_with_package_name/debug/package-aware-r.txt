@@ -2885,6 +2885,7 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable back_second_sheet
 drawable background_login
 drawable background_susc
 drawable bottom_chat_selector
@@ -2953,6 +2954,7 @@ drawable ic_baseline_notifications_none_24
 drawable ic_baseline_person_24
 drawable ic_baseline_person_outline_24
 drawable ic_baseline_photo_library_24
+drawable ic_baseline_remove_24
 drawable ic_baseline_settings_24
 drawable ic_baseline_share_24
 drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24
@@ -3022,6 +3024,7 @@ drawable quantum_ic_arrow_back_grey600_24
 drawable quantum_ic_clear_grey600_24
 drawable quantum_ic_cloud_off_vd_theme_24
 drawable quantum_ic_search_grey600_24
+drawable round_bottom_sheet
 drawable rounded_layout
 drawable steven_binotto_9vduc_sgrsi_unsplash
 drawable test_custom_background
@@ -3130,8 +3133,10 @@ id baseline
 id beginOnFirstDraw
 id beginning
 id bestChoice
+id blockUser
 id blocking
 id body_scroll
+id boton_drag
 id bottom
 id bounce
 id bounceBoth
@@ -3181,6 +3186,7 @@ id center_vertical
 id chain
 id chain2
 id chains
+id chatTOUser
 id checkbox
 id checked
 id chip
@@ -3235,6 +3241,7 @@ id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
 id disjoint
+id divider
 id dragAnticlockwise
 id dragClockwise
 id dragDown
@@ -3311,6 +3318,7 @@ id imagen_perfil
 id immediateStop
 id included
 id info
+id information_user
 id inputs
 id invisible
 id inward
@@ -3342,6 +3350,7 @@ id linear
 id linears_datos
 id listMode
 id list_item
+id location_icon
 id logoWork
 id lvl_actual
 id lvl_next
@@ -3473,6 +3482,7 @@ id primary_button
 id profile
 id profileImage
 id profile_image_toolbar
+id profile_photo_sheet
 id progress_circular
 id progress_horizontal
 id progress_lvl
@@ -3510,6 +3520,7 @@ id search_mag_icon
 id search_plate
 id search_src_text
 id search_voice_btn
+id second_sheet
 id secondary_button
 id select_dialog_listview
 id selected
@@ -3517,6 +3528,7 @@ id selection_type
 id share
 id sharedValueSet
 id sharedValueUnset
+id sheet
 id shortcut
 id showCustom
 id showHome
@@ -3599,6 +3611,7 @@ id title_template
 id titles
 id toggle
 id toolbar
+id toolbar_bottom_sheet
 id top
 id topPanel
 id touch_outside
@@ -3855,6 +3868,7 @@ layout text_view_with_theme_line_height
 layout text_view_without_line_height
 menu example_menu
 menu example_menu2
+menu manu_toolbar_sheet
 menu menu_toolbar_profile
 menu menur_bottom_navigation
 mipmap ic_launcher
