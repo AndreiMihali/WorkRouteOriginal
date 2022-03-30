@@ -9,9 +9,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.audiofx.Equalizer;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -111,11 +115,39 @@ public class SplashScreen extends AppCompatActivity {
         );
     }
 
+    private boolean checkInternetConnection(){
+        ConnectivityManager cm=(ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork=cm.getActiveNetworkInfo();
+        boolean isConnected=activeNetwork!=null&&activeNetwork.isConnectedOrConnecting();
+        if(isConnected){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
         private void checkPermissions(){
             if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, CODE_UBI);
-            }else{
+            }else if(!checkInternetConnection()){
+                Snackbar.make(findViewById(R.id.rela), "YOU MUST ABLE THE NETWORK SETTINGS", Snackbar.LENGTH_LONG).
+                        setAction("GO SETTINGS", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent i = new Intent(Settings.ACTION_NETWORK_OPERATOR_SETTINGS);
+                                activityResultLauncher.launch(i);
+                            }
+                        }).setCallback(new Snackbar.Callback(){
+                    @Override
+                    public void onDismissed(Snackbar snackbar, int event) {
+                        super.onDismissed(snackbar, event);
+                        if (event != DISMISS_EVENT_ACTION) {
+                            finish();
+                        }
+                    }
+                }).show();
+            }else
                 iniciarApp.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -129,6 +161,3 @@ public class SplashScreen extends AppCompatActivity {
                 },2000);
             }
         }
-
-
-}
