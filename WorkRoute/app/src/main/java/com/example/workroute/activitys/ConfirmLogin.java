@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.workroute.R;
 import com.example.workroute.model.User;
 import com.example.workroute.model.Viaje;
+import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -64,6 +65,7 @@ public class ConfirmLogin extends AppCompatActivity {
         setTheme(R.style.Register);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_login);
+        new NetworkCallback().enable(this);
         init();
     }
 

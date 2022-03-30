@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.workroute.R;
+import com.example.workroute.network.callback.NetworkCallback;
 
 public class Notifications extends AppCompatActivity {
 
@@ -11,5 +12,6 @@ public class Notifications extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
+        new NetworkCallback().enable(this);
     }
 }

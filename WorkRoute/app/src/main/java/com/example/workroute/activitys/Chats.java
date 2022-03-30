@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.workroute.R;
+import com.example.workroute.network.callback.NetworkCallback;
 
 public class Chats extends AppCompatActivity {
 
@@ -16,6 +17,7 @@ public class Chats extends AppCompatActivity {
         setTheme(R.style.Register);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
+        new NetworkCallback().enable(this);
         main();
     }
 

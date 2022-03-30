@@ -2954,6 +2954,7 @@ int drawable ic_baseline_person_outline_24 0x7f07009a
 int drawable ic_baseline_photo_library_24 0x7f07009b
 int drawable ic_baseline_settings_24 0x7f07009c
 int drawable ic_baseline_share_24 0x7f07009d
+int drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24 0x7f0700e7
 int drawable ic_clock_black_24dp 0x7f07009e
 int drawable ic_keyboard_black_24dp 0x7f07009f
 int drawable ic_launcher_background 0x7f0700a0
@@ -3627,6 +3628,7 @@ int id visible 0x7f080254
 int id visible_removing_fragment_view_tag 0x7f080255
 int id west 0x7f080256
 int id wide 0x7f080257
+int id wifi_signal 0x7f080260
 int id withText 0x7f080258
 int id withinBounds 0x7f080259
 int id wrap 0x7f08025a
@@ -3807,6 +3809,7 @@ int layout mtrl_picker_header_title_text 0x7f0b006e
 int layout mtrl_picker_header_toggle 0x7f0b006f
 int layout mtrl_picker_text_input_date 0x7f0b0070
 int layout mtrl_picker_text_input_date_range 0x7f0b0071
+int layout network_lose 0x7f0b009c
 int layout notification_action 0x7f0b0072
 int layout notification_action_tombstone 0x7f0b0073
 int layout notification_media_action 0x7f0b0074

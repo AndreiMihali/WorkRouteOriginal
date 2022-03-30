@@ -39,6 +39,7 @@ import android.widget.Toast;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.model.User;
+import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -75,11 +76,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private ProgressDialog progressDialog;
     private ActivityResultLauncher<Intent> activityResultLauncher;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_WorkRoute);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        new NetworkCallback().enable(this);
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);

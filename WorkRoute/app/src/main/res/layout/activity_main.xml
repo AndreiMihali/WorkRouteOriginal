@@ -109,5 +109,4 @@
         app:tint="@color/white"
         android:src="@drawable/ic_baseline_navigation_24"
         tools:ignore="SpeakableTextPresentCheck" />
-
 </RelativeLayout>

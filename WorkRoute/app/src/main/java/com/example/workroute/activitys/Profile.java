@@ -30,6 +30,7 @@ import com.bumptech.glide.Glide;
 import com.example.workroute.R;
 import com.example.workroute.adaptadores.AdapterTabsProfile;
 import com.example.workroute.companion.Companion;
+import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
@@ -66,6 +67,7 @@ public class Profile extends AppCompatActivity {
         setTheme(R.style.Register);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        new NetworkCallback().enable(this);
         main();
     }
 

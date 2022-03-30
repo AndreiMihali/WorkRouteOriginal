@@ -2955,6 +2955,7 @@ drawable ic_baseline_person_outline_24
 drawable ic_baseline_photo_library_24
 drawable ic_baseline_settings_24
 drawable ic_baseline_share_24
+drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24
 drawable ic_clock_black_24dp
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_background
@@ -3628,6 +3629,7 @@ id visible
 id visible_removing_fragment_view_tag
 id west
 id wide
+id wifi_signal
 id withText
 id withinBounds
 id wrap
@@ -3808,6 +3810,7 @@ layout mtrl_picker_header_title_text
 layout mtrl_picker_header_toggle
 layout mtrl_picker_text_input_date
 layout mtrl_picker_text_input_date_range
+layout network_lose
 layout notification_action
 layout notification_action_tombstone
 layout notification_media_action

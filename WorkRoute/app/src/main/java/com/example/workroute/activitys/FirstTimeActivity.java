@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.model.User;
+import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -88,6 +89,7 @@ public class FirstTimeActivity extends AppCompatActivity {
         setTheme(R.style.Register);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_time);
+        new NetworkCallback().enable(this);
         init();
     }
 

@@ -53,6 +53,7 @@ drawable ic_baseline_person_outline_24
 drawable ic_baseline_photo_library_24
 drawable ic_baseline_settings_24
 drawable ic_baseline_share_24
+drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_outline_chat_24
@@ -134,12 +135,14 @@ id share
 id tabLayout
 id texto_bienvenida
 id texts
+id title
 id titles
 id toolbar
 id txt_ciudad
 id txt_cumple
 id user_name
 id viewPager
+id wifi_signal
 layout activity_confirm_login
 layout activity_create_account
 layout activity_first_time
@@ -155,6 +158,7 @@ layout content_main
 layout fragment_cuenta
 layout fragment_detalle_frgament
 layout layout_suscripciones
+layout network_lose
 menu menu_toolbar_profile
 menu menur_bottom_navigation
 mipmap ic_launcher

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.workroute.R;
+import com.example.workroute.network.callback.NetworkCallback;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
@@ -18,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
         setTheme(R.style.Login);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        new NetworkCallback().enable(this);
         init();
     }
 

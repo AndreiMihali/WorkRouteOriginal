@@ -12,6 +12,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.media.audiofx.Equalizer;
 import android.net.ConnectivityManager;
 import android.net.Network;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.model.User;
+import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -78,6 +80,9 @@ public class SplashScreen extends AppCompatActivity {
 
 
                             Snackbar.make(findViewById(R.id.rela), "GO TO LOCATION SETTINGS", Snackbar.LENGTH_LONG).
+                                    setActionTextColor(Color.WHITE).
+                                    setTextColor(Color.WHITE).
+                                    setBackgroundTint(getColor(R.color.secondary)).
                                     setAction("GO SETTINGS", new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
@@ -132,6 +137,9 @@ public class SplashScreen extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, CODE_UBI);
             }else if(!checkInternetConnection()){
                 Snackbar.make(findViewById(R.id.rela), "YOU MUST ABLE THE NETWORK SETTINGS", Snackbar.LENGTH_LONG).
+                        setActionTextColor(Color.WHITE).
+                        setTextColor(Color.WHITE).
+                        setBackgroundTint(getColor(R.color.secondary)).
                         setAction("GO SETTINGS", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
