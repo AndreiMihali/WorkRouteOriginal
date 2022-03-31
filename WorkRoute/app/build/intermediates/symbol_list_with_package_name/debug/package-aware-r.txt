@@ -35,6 +35,8 @@ anim mtrl_card_lowers_interpolator
 anim open_menu
 anim rotate_backward
 anim rotate_forward
+anim slide_up_in
+anim slide_up_out
 animator design_appbar_state_list_animator
 animator design_fab_hide_motion_spec
 animator design_fab_show_motion_spec
@@ -3625,6 +3627,7 @@ id transition_transform
 id triangle
 id txt_ciudad
 id txt_cumple
+id txt_name
 id unchecked
 id uniform
 id unlabeled

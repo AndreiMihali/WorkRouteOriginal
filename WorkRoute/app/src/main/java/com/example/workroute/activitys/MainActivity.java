@@ -36,8 +36,12 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.model.User;
@@ -46,6 +50,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.badge.BadgeDrawable;
@@ -62,7 +68,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.security.Provider;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LocationListener {
+public class MainActivity extends AppCompatActivity implements LocationListener, GoogleMap.OnMarkerClickListener {
 
     private static final int CODE_UBI = 100;
     private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_settings, button_close, button_ubi;
@@ -78,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private FirebaseFirestore firestore;
     private ProgressDialog progressDialog;
     private ActivityResultLauncher<Intent> activityResultLauncher;
-
+    private BottomSheetBehavior bottomSheetBehavior;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,14 +95,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
-
-
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
 
         init();
     }
+
     private void init(){
         addActivityResultLauncher();
         button_menu = findViewById(R.id.buttonMenu);
@@ -115,15 +120,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         rotateBackWard = AnimationUtils.loadAnimation(this,R.anim.rotate_backward);
         progressDialog.setMessage("Checking your location. This can take a while...");
         progressDialog.setCanceledOnTouchOutside(false);
+        bottomSheetBehavior=BottomSheetBehavior.from(findViewById(R.id.sheet));
+        bottomSheetBehavior.setHideable(true);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         iniciarMapa();
         getUserData();
         initListeners();
-        botthomSheet();
-    }
-
-    private void botthomSheet() {
-       BottomSheetBehavior bottom= new BottomSheetBehavior();
-       bottom.from(findViewById(R.id.sheet)).setPeekHeight(0);
     }
 
     private void initListeners() {
@@ -276,8 +278,17 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         map.setMyLocationEnabled(true);
         map.getUiSettings().setMyLocationButtonEnabled(false);
         map.getUiSettings().setCompassEnabled(false);
-        map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        map.setTrafficEnabled(true);
+        map.addMarker(new MarkerOptions().position(new LatLng(40.430552799563735, -3.698083403368748)));
+        map.setOnMarkerClickListener(this::onMarkerClick);
         getCurrentLocation();
+    }
+
+    @Override
+    public boolean onMarkerClick(@NonNull Marker marker) {
+        showBottomSheet(BottomSheetBehavior.STATE_EXPANDED);
+        return false;
     }
 
 
@@ -401,4 +412,28 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
     }
+
+    /**
+     * MÉTODO PARA MOSTAR LA INFORMACIÓN DEL USUARIO
+     */
+
+    private void showBottomSheet(int state){
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                ImageView perfilPhoto=findViewById(R.id.profile_photo_sheet);
+                TextView txt_name=findViewById(R.id.txt_name);
+                if(Companion.user.getFotoPerfil().equals("")){
+                    perfilPhoto.setImageDrawable(getDrawable(R.drawable.default_user_login));
+                }else{
+                    Glide.with(MainActivity.this).load(Companion.user.getFotoPerfil()).into(perfilPhoto);
+                }
+                txt_name.setText(Companion.user.getNombre());
+                bottomSheetBehavior.setPeekHeight(200);
+                bottomSheetBehavior.setState(state);
+                bottomSheetBehavior.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
+            }
+        });
+    }
+
 }

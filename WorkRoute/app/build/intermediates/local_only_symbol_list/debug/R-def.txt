@@ -4,6 +4,8 @@ anim close_menu
 anim open_menu
 anim rotate_backward
 anim rotate_forward
+anim slide_up_in
+anim slide_up_out
 color back_login
 color black
 color bottom_navigation_view
@@ -153,6 +155,7 @@ id toolbar
 id toolbar_bottom_sheet
 id txt_ciudad
 id txt_cumple
+id txt_name
 id user_name
 id viewPager
 id wifi_signal
