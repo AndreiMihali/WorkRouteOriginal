@@ -73,10 +73,10 @@ id appbar
 id blockUser
 id boton_drag
 id buttonEditProfile
+id buttonLogOut
 id buttonMenu
 id buttonMessages
 id buttonProfile
-id buttonSettings
 id buttonSignOut
 id buttonUbi
 id button_card
@@ -129,8 +129,12 @@ id logoWork
 id lvl_actual
 id lvl_next
 id map
+id mapStyle
 id messages
+id myDrivingLicense
+id myPayMethod
 id name
+id notifications
 id opinions
 id or
 id password_forgot
@@ -153,6 +157,9 @@ id title
 id titles
 id toolbar
 id toolbar_bottom_sheet
+id tvDrivingLicense
+id tvPayMethod
+id tvPreferences
 id txt_ciudad
 id txt_cumple
 id txt_name
@@ -172,7 +179,7 @@ layout activity_splash_screen
 layout appbar_main
 layout content_main
 layout fragment_cuenta
-layout fragment_detalle_frgament
+layout fragment_detalles
 layout layout_suscripciones
 layout network_lose
 menu manu_toolbar_sheet

@@ -3151,11 +3151,11 @@ id browser_actions_menu_items
 id browser_actions_menu_view
 id button
 id buttonEditProfile
+id buttonLogOut
 id buttonMenu
 id buttonMessages
 id buttonPanel
 id buttonProfile
-id buttonSettings
 id buttonSignOut
 id buttonUbi
 id button_card
@@ -3357,6 +3357,7 @@ id logoWork
 id lvl_actual
 id lvl_next
 id map
+id mapStyle
 id masked
 id match_constraint
 id match_parent
@@ -3419,6 +3420,8 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
+id myDrivingLicense
+id myPayMethod
 id name
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
@@ -3438,6 +3441,7 @@ id north
 id notification_background
 id notification_main_column
 id notification_main_column_container
+id notifications
 id off
 id on
 id onInterceptTouchReturnSwipe
@@ -3625,6 +3629,9 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tvDrivingLicense
+id tvPayMethod
+id tvPreferences
 id txt_ciudad
 id txt_cumple
 id txt_name
@@ -3775,7 +3782,7 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout fragment_cuenta
-layout fragment_detalle_frgament
+layout fragment_detalles
 layout image
 layout layout_suscripciones
 layout m3_alert_dialog

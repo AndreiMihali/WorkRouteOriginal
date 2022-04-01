@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         button_chats = findViewById(R.id.buttonMessages);
         button_profile = findViewById(R.id.buttonProfile);
         button_notifications = findViewById(R.id.button_notifications);
-        button_settings = findViewById(R.id.buttonSettings);
+        //button_settings = findViewById(R.id.buttonSettings);
         button_close = findViewById(R.id.buttonSignOut);
         button_ubi=findViewById(R.id.buttonUbi);
         open = AnimationUtils.loadAnimation(this,R.anim.open_menu);
@@ -201,19 +201,19 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             button_chats.startAnimation(close);
             button_profile.startAnimation(close);
             button_notifications.startAnimation(close);
-            button_settings.startAnimation(close);
+            //button_settings.startAnimation(close);
             button_close.startAnimation(close);
 
             button_chats.setVisibility(View.INVISIBLE);
             button_profile.setVisibility(View.INVISIBLE);
             button_notifications.setVisibility(View.INVISIBLE);
-            button_settings.setVisibility(View.INVISIBLE);
+            //button_settings.setVisibility(View.INVISIBLE);
             button_close.setVisibility(View.INVISIBLE);
 
             button_chats.setClickable(false);
             button_profile.setClickable(false);
             button_notifications.setClickable(false);
-            button_settings.setClickable(false);
+            //button_settings.setClickable(false);
             button_close.setClickable(false);
 
             isOpen=false;
@@ -223,20 +223,20 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             button_chats.startAnimation(open);
             button_profile.startAnimation(open);
             button_notifications.startAnimation(open);
-            button_settings.startAnimation(open);
+            //button_settings.startAnimation(open);
             button_close.startAnimation(open);
 
 
             button_chats.setVisibility(View.VISIBLE);
             button_profile.setVisibility(View.VISIBLE);
             button_notifications.setVisibility(View.VISIBLE);
-            button_settings.setVisibility(View.VISIBLE);
+            //button_settings.setVisibility(View.VISIBLE);
             button_close.setVisibility(View.VISIBLE);
 
             button_chats.setClickable(true);
             button_profile.setClickable(true);
             button_notifications.setClickable(true);
-            button_settings.setClickable(true);
+            //button_settings.setClickable(true);
             button_close.setClickable(true);
             isOpen=true;
         }
@@ -374,6 +374,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         LocationListener.super.onProviderDisabled(provider);
     }
 
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
 
     @Override
     protected void onPause() {
