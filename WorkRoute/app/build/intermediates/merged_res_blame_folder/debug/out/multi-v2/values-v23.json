@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
+            "outputFile": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\valin\\.gradle\\caches\\transforms-3\\4b9f95fd5cfdf6a00e056aa59d9ec234\\transformed\\material-1.5.0\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\1629a78340868b8d3668be4c397babc4\\transformed\\material-1.5.0\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,5,8,13,17,20,23,26,31,34,38",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\valin\\.gradle\\caches\\transforms-3\\3f07c35e762b401190a848581d1b4bb8\\transformed\\appcompat-1.4.1\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\2d93efc8bf122a2d0813f4b0db67da0a\\transformed\\appcompat-1.4.1\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,20,34,35,36,39,43,44,45,46",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -34,7 +34,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\valin\\.gradle\\caches\\transforms-3\\00a2ec88d523189ef2f9f3b5c5c1d2e1\\transformed\\cardview-1.0.0\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\380f693caf7b0727b74c48d8706b5726\\transformed\\cardview-1.0.0\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

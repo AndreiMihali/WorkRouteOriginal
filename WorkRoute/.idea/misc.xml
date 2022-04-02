@@ -15,6 +15,8 @@
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/back_spinner.xml" value="0.35" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/background_login.xml" value="0.35" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/background_susc.xml" value="0.2465" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/bg_text_chat_left.xml" value="0.355" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/bg_text_chat_right.xml" value="0.355" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/bottom_chat_selector.xml" value="0.3675" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.3675" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/bottom_user_selector.xml" value="0.3675" />
@@ -26,11 +28,12 @@
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/items_bottom_navigation.xml" value="0.3675" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/menu_bottom_navigation.xml" value="0.3675" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/round_bottom_sheet.xml" value="0.3675" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_chats.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_confirm_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_create_account.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_first_time.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_main.xml" value="0.31370091896407687" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_map.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_messages.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_notifications.xml" value="0.36666666666666664" />
@@ -39,6 +42,7 @@
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_splash_screen.xml" value="0.35144927536231885" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/appbar_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/bottom_sheet_pick.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/chats_list_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/fragment_cuenta.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/fragment_detalle_frgament.xml" value="0.36666666666666664" />
@@ -46,6 +50,8 @@
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/fragment_messages.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/fragment_navigation.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/item_chat_left.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/item_chat_right.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/layout_suscripciones.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/network_lose.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/prueba.xml" value="0.36666666666666664" />
@@ -66,12 +72,9 @@
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/ic_outline_home_24.xml" value="0.1625" />
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_confirm_login.xml" value="0.2657407407407407" />
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_create_account.xml" value="0.30625" />
-        <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_splash_screen.xml" value="0.2828125" />
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/antiguo_activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/fragment_cuenta.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/fragment_detalle_frgament.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/fragment_detalles.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/layout_suscripciones.xml" value="0.36666666666666664" />
       </map>
     </option>

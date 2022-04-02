@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ldltr-v21\\values-ldltr-v21.xml",
+            "outputFile": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ldltr-v21\\values-ldltr-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\valin\\.gradle\\caches\\transforms-3\\3f07c35e762b401190a848581d1b4bb8\\transformed\\appcompat-1.4.1\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
+                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\2d93efc8bf122a2d0813f4b0db67da0a\\transformed\\appcompat-1.4.1\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

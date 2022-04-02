@@ -1325,6 +1325,7 @@ color dim_foreground_material_dark
 color dim_foreground_material_light
 color error_color_material_dark
 color error_color_material_light
+color fcm_test_color
 color foreground_material_dark
 color foreground_material_light
 color gray
@@ -2885,11 +2886,16 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable adaptive_icon
+drawable adaptive_icon_background
+drawable adaptive_icon_foreground
 drawable avd_hide_password
 drawable avd_show_password
 drawable back_second_sheet
 drawable background_login
 drawable background_susc
+drawable bg_text_chat_left
+drawable bg_text_chat_right
 drawable bottom_chat_selector
 drawable bottom_home_selector
 drawable bottom_navigation_selector
@@ -2930,6 +2936,8 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable gcm_icon
+drawable gcm_icon2
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_baseline_add_location_24
@@ -2950,6 +2958,7 @@ drawable ic_baseline_location_on_24
 drawable ic_baseline_lock_24
 drawable ic_baseline_menu_24
 drawable ic_baseline_menu_open_24
+drawable ic_baseline_mic_none_24
 drawable ic_baseline_navigation_24
 drawable ic_baseline_notifications_24
 drawable ic_baseline_notifications_none_24
@@ -2957,6 +2966,7 @@ drawable ic_baseline_person_24
 drawable ic_baseline_person_outline_24
 drawable ic_baseline_photo_library_24
 drawable ic_baseline_remove_24
+drawable ic_baseline_send_24
 drawable ic_baseline_settings_24
 drawable ic_baseline_share_24
 drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24
@@ -2976,6 +2986,7 @@ drawable ic_outline_home_24
 drawable ic_outline_navigation_24
 drawable ic_outline_notifications_24
 drawable ic_outline_settings_24
+drawable icon_with_gradient
 drawable image_placeholder
 drawable login_pesonas
 drawable m3_appbar_background
@@ -3149,6 +3160,7 @@ id browser_actions_menu_item_icon
 id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
+id btn_send
 id button
 id buttonEditProfile
 id buttonLogOut
@@ -3178,6 +3190,7 @@ id card_name
 id card_password
 id card_password_confirm
 id card_photo
+id card_profile_photo_chat_list
 id card_root
 id card_spiiner
 id cared_foto
@@ -3260,6 +3273,7 @@ id east
 id ed_confirmpass_register
 id ed_email
 id ed_email_register
+id ed_message
 id ed_pass
 id ed_pass_register
 id ed_username_register
@@ -3300,6 +3314,7 @@ id grouping
 id groups
 id guideline
 id header_title
+id helpButton
 id hideable
 id home
 id homeAsUp
@@ -3334,6 +3349,7 @@ id journeys
 id jumpToEnd
 id jumpToStart
 id labeled
+id last_seen_messages
 id layout
 id layout_confirm_pass
 id layout_content
@@ -3352,12 +3368,13 @@ id linear
 id linears_datos
 id listMode
 id list_item
+id ln_escribir
 id location_icon
 id logoWork
 id lvl_actual
 id lvl_next
 id map
-id mapStyle
+id mapStyleButton
 id masked
 id match_constraint
 id match_parent
@@ -3420,8 +3437,8 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
-id myDrivingLicense
-id myPayMethod
+id myDrivingLicenseButton
+id myPayMethodButton
 id name
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
@@ -3441,7 +3458,7 @@ id north
 id notification_background
 id notification_main_column
 id notification_main_column_container
-id notifications
+id notificationsButton
 id off
 id on
 id onInterceptTouchReturnSwipe
@@ -3488,6 +3505,8 @@ id primary_button
 id profile
 id profileImage
 id profile_image_toolbar
+id profile_photo_chat_list
+id profile_photo_messages
 id profile_photo_sheet
 id progress_circular
 id progress_horizontal
@@ -3495,6 +3514,8 @@ id progress_lvl
 id radio
 id ratio
 id rectangles
+id recycler_chats
+id recycler_mensajes
 id recycler_notifications
 id rela
 id reverseSawtooth
@@ -3618,6 +3639,7 @@ id titles
 id toggle
 id toolbar
 id toolbar_bottom_sheet
+id toolbar_messages
 id top
 id topPanel
 id touch_outside
@@ -3629,18 +3651,25 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tvAbout
 id tvDrivingLicense
 id tvPayMethod
 id tvPreferences
 id txt_ciudad
 id txt_cumple
+id txt_hora
+id txt_lastMessage_chat_list
+id txt_last_message_time_chat_list
+id txt_message
 id txt_name
+id txt_user_name_chat_list
 id unchecked
 id uniform
 id unlabeled
 id up
 id useLogo
 id user_name
+id user_name_messages
 id vertical_only
 id viewPager
 id view_offset_helper
@@ -3747,6 +3776,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_chats
 layout activity_confirm_login
 layout activity_create_account
 layout activity_first_time
@@ -3764,6 +3794,7 @@ layout browser_actions_context_menu_row
 layout card
 layout card_landscape_inner
 layout card_portrait_inner
+layout chats_list_item
 layout content_main
 layout custom_dialog
 layout design_bottom_navigation_item
@@ -3784,6 +3815,8 @@ layout design_text_input_start_icon
 layout fragment_cuenta
 layout fragment_detalles
 layout image
+layout item_chat_left
+layout item_chat_right
 layout layout_suscripciones
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
@@ -3887,6 +3920,7 @@ mipmap work_icon
 mipmap work_icon_foreground
 mipmap work_icon_round
 plurals mtrl_badge_content_description
+raw gcm_bip
 raw places_keep
 string abc_action_bar_home_description
 string abc_action_bar_up_description
@@ -3949,7 +3983,9 @@ string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string fcm_2_args
 string fcm_fallback_notification_channel_label
+string fcm_no_args
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id

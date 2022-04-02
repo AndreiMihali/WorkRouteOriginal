@@ -44,6 +44,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
+import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.model.User;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -52,8 +53,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -64,8 +67,10 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.security.Provider;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LocationListener, GoogleMap.OnMarkerClickListener {
@@ -98,10 +103,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
-
         init();
     }
-
     private void init(){
         addActivityResultLauncher();
         button_menu = findViewById(R.id.buttonMenu);
@@ -156,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         button_chats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, Chats.class);
+                Intent i = new Intent(MainActivity.this, ChatsActivity.class);
                 startActivity(i);
                 animateMenu();
             }

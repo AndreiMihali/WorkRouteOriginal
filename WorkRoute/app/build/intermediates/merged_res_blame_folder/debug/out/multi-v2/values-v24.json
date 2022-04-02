@@ -1,20 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "outputFile": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\valin\\.gradle\\caches\\transforms-3\\3f07c35e762b401190a848581d1b4bb8\\transformed\\appcompat-1.4.1\\res\\values-v24\\values-v24.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,212",
-                        "endColumns": "156,134",
-                        "endOffsets": "207,342"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\valin\\.gradle\\caches\\transforms-3\\4b9f95fd5cfdf6a00e056aa59d9ec234\\transformed\\material-1.5.0\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\1629a78340868b8d3668be4c397babc4\\transformed\\material-1.5.0\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,9,12,15",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -33,7 +23,17 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\valin\\.gradle\\caches\\transforms-3\\e4599743ce7bd4bfd7c71bdeca2b296a\\transformed\\media-1.0.0\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\2d93efc8bf122a2d0813f4b0db67da0a\\transformed\\appcompat-1.4.1\\res\\values-v24\\values-v24.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,212",
+                        "endColumns": "156,134",
+                        "endOffsets": "207,342"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\a47f16e2043a8a68d6186ac8d32972cc\\transformed\\media-1.0.0\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

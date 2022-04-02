@@ -48,13 +48,16 @@
         android:testOnly="true"
         android:theme="@style/Theme.WorkRoute" >
         <activity
+            android:name="com.example.workroute.kotlin.activities.MessagesActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.workroute.kotlin.activities.ChatsActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.workroute.activitys.SettingsActivity"
             android:exported="false" />
         <activity
             android:name="com.example.workroute.activitys.Notifications"
-            android:exported="false" />
-        <activity
-            android:name="com.example.workroute.activitys.Chats"
             android:exported="false" />
         <activity
             android:name="com.example.workroute.activitys.Profile"
@@ -93,6 +96,13 @@
         </activity>
 
         <service
+            android:name="com.example.workroute.MyFirebaseInstanceIDService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
             android:name="com.google.firebase.components.ComponentDiscoveryService"
             android:directBootAware="true"
             android:exported="false" >
@@ -106,25 +116,34 @@
                 android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.messaging.ktx.FirebaseMessagingKtxRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.database.ktx.FirebaseDatabaseKtxRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonKtxRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.inappmessaging.FirebaseInAppMessagingRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
-                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+                android:name="com.google.firebase.components:com.google.firebase.abt.component.AbtRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
-                android:name="com.google.firebase.components:com.google.firebase.abt.component.AbtRegistrar"
+                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
         </service>
 
