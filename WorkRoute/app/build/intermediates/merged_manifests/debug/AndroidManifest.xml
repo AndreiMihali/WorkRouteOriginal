@@ -48,6 +48,12 @@
         android:testOnly="true"
         android:theme="@style/Theme.WorkRoute" >
         <activity
+            android:name="com.example.workroute.activitys.PayMethod"
+            android:exported="false" />
+        <activity
+            android:name="com.example.workroute.activitys.DrivingLicense"
+            android:exported="false" />
+        <activity
             android:name="com.example.workroute.kotlin.activities.MessagesActivity"
             android:exported="false" />
         <activity

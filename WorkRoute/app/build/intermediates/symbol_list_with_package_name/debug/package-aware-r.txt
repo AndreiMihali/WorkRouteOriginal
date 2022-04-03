@@ -3637,6 +3637,7 @@ id title_template
 id titles
 id toggle
 id toolbar
+id toolbarPay
 id toolbar_bottom_sheet
 id toolbar_messages
 id top
@@ -3779,11 +3780,13 @@ layout abc_tooltip
 layout activity_chats
 layout activity_confirm_login
 layout activity_create_account
+layout activity_driving_license
 layout activity_first_time
 layout activity_login
 layout activity_main
 layout activity_messages
 layout activity_notifications
+layout activity_pay_method
 layout activity_profile
 layout activity_settings
 layout activity_splash_screen
@@ -3985,6 +3988,7 @@ string fab_transformation_sheet_behavior
 string fcm_2_args
 string fcm_fallback_notification_channel_label
 string fcm_no_args
+string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id

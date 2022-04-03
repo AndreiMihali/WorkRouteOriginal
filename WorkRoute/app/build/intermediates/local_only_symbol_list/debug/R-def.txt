@@ -170,6 +170,7 @@ id texts
 id title
 id titles
 id toolbar
+id toolbarPay
 id toolbar_bottom_sheet
 id toolbar_messages
 id tvAbout
@@ -192,11 +193,13 @@ id wifi_signal
 layout activity_chats
 layout activity_confirm_login
 layout activity_create_account
+layout activity_driving_license
 layout activity_first_time
 layout activity_login
 layout activity_main
 layout activity_messages
 layout activity_notifications
+layout activity_pay_method
 layout activity_profile
 layout activity_settings
 layout activity_splash_screen
@@ -218,6 +221,7 @@ mipmap work_icon_foreground
 mipmap work_icon_round
 string app_name
 string default_web_client_id
+string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id

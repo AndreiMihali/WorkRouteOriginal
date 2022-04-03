@@ -62,6 +62,7 @@ public class Profile extends AppCompatActivity {
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private Uri uri;
     private FirebaseFirestore firestore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Register);
@@ -76,6 +77,31 @@ public class Profile extends AppCompatActivity {
         initListeners();
         setData();
         initActivityResult();
+    }
+
+
+
+    private void controls() {
+        toolbar=findViewById(R.id.toolbar);
+        userName = findViewById(R.id.name);
+        tabLayout=findViewById(R.id.tabLayout);
+        profile=findViewById(R.id.imagen_perfil);
+        fab_updateImage=findViewById(R.id.fab_camera);
+        editProfile=findViewById(R.id.buttonEditProfile);
+        progressLevel=findViewById(R.id.progress_lvl);
+        viewPager2=findViewById(R.id.viewPager);
+        followers=findViewById(R.id.followers);
+        following=findViewById(R.id.following);
+        opinions=findViewById(R.id.opinions);
+        setSupportActionBar(toolbar);
+        firestore=FirebaseFirestore.getInstance();
+
+        /** AÑADIMOS ADAPTADOR AL TABLAYOUT*/
+
+        AdapterTabsProfile adapter=new AdapterTabsProfile(this);
+        viewPager2.setAdapter(adapter);
+        new TabLayoutMediator(tabLayout,viewPager2,
+                (tab,postion)->tab.setText(adapter.getTabTitle(postion))).attach();
     }
 
     private void initActivityResult() {
@@ -196,30 +222,12 @@ public class Profile extends AppCompatActivity {
                 abrirGaleria();
             }
         });
+        
     }
 
-   private void controls() {
-        toolbar=findViewById(R.id.toolbar);
-        userName = findViewById(R.id.name);
-        tabLayout=findViewById(R.id.tabLayout);
-        profile=findViewById(R.id.imagen_perfil);
-        fab_updateImage=findViewById(R.id.fab_camera);
-        editProfile=findViewById(R.id.buttonEditProfile);
-        progressLevel=findViewById(R.id.progress_lvl);
-        viewPager2=findViewById(R.id.viewPager);
-        followers=findViewById(R.id.followers);
-        following=findViewById(R.id.following);
-        opinions=findViewById(R.id.opinions);
-        setSupportActionBar(toolbar);
-        firestore=FirebaseFirestore.getInstance();
+    
+    
 
-        /** AÑADIMOS ADAPTADOR AL TABLAYOUT*/
-
-        AdapterTabsProfile adapter=new AdapterTabsProfile(this);
-        viewPager2.setAdapter(adapter);
-        new TabLayoutMediator(tabLayout,viewPager2,
-                (tab,postion)->tab.setText(adapter.getTabTitle(postion))).attach();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
