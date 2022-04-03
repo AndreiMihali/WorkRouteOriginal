@@ -134,9 +134,13 @@ class MessagesActivity : AppCompatActivity() {
 
             val chatRef=FirebaseDatabase.getInstance().getReference("ChatList").child(firebaseUser.uid).child(receiverId)
             chatRef.child("chat_id").setValue(receiverId)
+            chatRef.child("message").setValue(message)
+            chatRef.child("time").setValue(time.toString())
 
             val chatRef2=FirebaseDatabase.getInstance().getReference("ChatList").child(receiverId).child(firebaseUser.uid)
             chatRef2.child("chat_id").setValue(firebaseUser.uid)
+            chatRef2.child("message").setValue(message)
+            chatRef2.child("time").setValue(time.toString())
         }.run()
     }
 

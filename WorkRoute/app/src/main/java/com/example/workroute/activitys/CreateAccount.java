@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.workroute.R;
 import com.example.workroute.model.User;
+import com.example.workroute.model.UserDatabase;
 import com.example.workroute.model.Viaje;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,8 +32,11 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.lang.ref.Reference;
 import java.util.ArrayList;
 
 public class CreateAccount extends AppCompatActivity {
@@ -45,6 +49,7 @@ public class CreateAccount extends AppCompatActivity {
     private TextInputLayout layout_mail,layout_name,layout_pass,layout_passConfirm;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
+    private DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Register);
@@ -73,6 +78,7 @@ public class CreateAccount extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         progressDialog=new ProgressDialog(this);
         ed_name.requestFocus();
+        reference= FirebaseDatabase.getInstance().getReference();
         setColorsFocus(card_name,ed_name,layout_name);
         initListeners();
     }
@@ -194,7 +200,8 @@ public class CreateAccount extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     showSnackbar("Account created successfully",v);
-                    setDataFirebase();
+                    setDataFirebaseFirestore();
+                    setDataFirebaseDatabase();
                 }else{
                     progressDialog.dismiss();
                     showSnackbar("The email is already in use",v);
@@ -216,8 +223,26 @@ public class CreateAccount extends AppCompatActivity {
         setResult(RESULT_CANCELED,null);
     }
 
+    private void setDataFirebaseDatabase(){
+        UserDatabase user=new UserDatabase(
+                0,
+                true,
+                true,
+                "",
+                0,
+                0,
+                0,
+                firebaseAuth.getUid()
+        );
+        reference.child("Users").push().setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                setDataFirebaseFirestore();
+            }
+        });
 
-    private void setDataFirebase(){
+    }
+    private void setDataFirebaseFirestore(){
         User user=new User(
                 firebaseAuth.getUid(),
                 ed_name.getText().toString().trim(),

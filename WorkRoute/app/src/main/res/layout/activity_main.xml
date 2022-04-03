@@ -140,11 +140,11 @@
                     android:layout_marginBottom="20dp"
                     android:orientation="vertical">
 
-                    <com.google.android.material.appbar.MaterialToolbar
+                    <RelativeLayout
                         android:id="@+id/toolbar_bottom_sheet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:menu="@menu/manu_toolbar_sheet">
+                        android:layout_marginHorizontal="10dp">
 
                         <com.google.android.material.card.MaterialCardView
                             android:layout_width="55dp"
@@ -159,7 +159,17 @@
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/default_user_login" />
                         </com.google.android.material.card.MaterialCardView>
-                    </com.google.android.material.appbar.MaterialToolbar>
+
+                        <ImageButton
+                            android:id="@+id/button_message"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_outline_chat_24"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            android:background="@android:color/transparent"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/information_user"
@@ -167,7 +177,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/toolbar_bottom_sheet"
                         android:layout_marginHorizontal="10dp"
-                        android:layout_marginTop="5dp">
+                        android:layout_marginTop="10dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"

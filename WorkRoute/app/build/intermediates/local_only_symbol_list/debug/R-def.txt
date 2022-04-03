@@ -74,7 +74,6 @@ drawable round_bottom_sheet
 drawable steven_binotto_9vduc_sgrsi_unsplash
 drawable workroute2icono
 id appbar
-id blockUser
 id boton_drag
 id btn_send
 id buttonEditProfile
@@ -89,6 +88,7 @@ id button_continue
 id button_create
 id button_google
 id button_login
+id button_message
 id button_notifications
 id button_signin
 id button_signup
@@ -102,7 +102,6 @@ id card_photo
 id card_profile_photo_chat_list
 id card_spiiner
 id cared_foto
-id chatTOUser
 id city
 id country
 id divider
@@ -155,6 +154,7 @@ id profile_image_toolbar
 id profile_photo_chat_list
 id profile_photo_messages
 id profile_photo_sheet
+id progress_circular
 id progress_lvl
 id recycler_chats
 id recycler_mensajes
@@ -183,6 +183,7 @@ id txt_lastMessage_chat_list
 id txt_last_message_time_chat_list
 id txt_message
 id txt_name
+id txt_null
 id txt_user_name_chat_list
 id user_name
 id user_name_messages
@@ -208,7 +209,6 @@ layout item_chat_left
 layout item_chat_right
 layout layout_suscripciones
 layout network_lose
-menu manu_toolbar_sheet
 menu menu_toolbar_profile
 menu menur_bottom_navigation
 mipmap ic_launcher

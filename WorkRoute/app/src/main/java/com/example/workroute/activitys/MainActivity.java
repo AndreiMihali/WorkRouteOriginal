@@ -31,12 +31,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +48,7 @@ import com.bumptech.glide.Glide;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.kotlin.activities.ChatsActivity;
+import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.model.User;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -430,11 +434,24 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             public void run() {
                 ImageView perfilPhoto=findViewById(R.id.profile_photo_sheet);
                 TextView txt_name=findViewById(R.id.txt_name);
+                ImageButton btn_message=findViewById(R.id.button_message);
                 if(Companion.user.getFotoPerfil().equals("")){
                     perfilPhoto.setImageDrawable(getDrawable(R.drawable.default_user_login));
                 }else{
                     Glide.with(MainActivity.this).load(Companion.user.getFotoPerfil()).into(perfilPhoto);
                 }
+
+                btn_message.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(MainActivity.this, MessagesActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            .putExtra("userId",Companion.user.getUid())
+                            .putExtra("userName",Companion.user.getNombre())
+                            .putExtra("userPhoto",Companion.user.getFotoPerfil());
+                        startActivity(intent);
+                    }
+                });
                 txt_name.setText(Companion.user.getNombre());
                 bottomSheetBehavior.setPeekHeight(200);
                 bottomSheetBehavior.setState(state);

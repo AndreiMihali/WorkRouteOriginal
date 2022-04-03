@@ -3146,7 +3146,6 @@ id baseline
 id beginOnFirstDraw
 id beginning
 id bestChoice
-id blockUser
 id blocking
 id body_scroll
 id boton_drag
@@ -3175,6 +3174,7 @@ id button_continue
 id button_create
 id button_google
 id button_login
+id button_message
 id button_notifications
 id button_signin
 id button_signup
@@ -3201,7 +3201,6 @@ id center_vertical
 id chain
 id chain2
 id chains
-id chatTOUser
 id checkbox
 id checked
 id chip
@@ -3662,6 +3661,7 @@ id txt_lastMessage_chat_list
 id txt_last_message_time_chat_list
 id txt_message
 id txt_name
+id txt_null
 id txt_user_name_chat_list
 id unchecked
 id uniform
@@ -3911,7 +3911,6 @@ layout text_view_with_theme_line_height
 layout text_view_without_line_height
 menu example_menu
 menu example_menu2
-menu manu_toolbar_sheet
 menu menu_toolbar_profile
 menu menur_bottom_navigation
 mipmap ic_launcher

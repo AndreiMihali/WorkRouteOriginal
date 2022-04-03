@@ -3,6 +3,7 @@ package com.example.workroute.kotlin.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Message
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -20,6 +21,7 @@ import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class ChatsActivity : AppCompatActivity() {
     private lateinit var toolbar:MaterialToolbar
@@ -29,7 +31,7 @@ class ChatsActivity : AppCompatActivity() {
     private lateinit var firestore:FirebaseFirestore
     private lateinit var firebaseUser:FirebaseUser
     private lateinit var reference:DatabaseReference
-    private lateinit var allUsers:ArrayList<String>
+    private lateinit var allUsers:ArrayList<UserList>
     private lateinit var progressCircular:ProgressBar
     private lateinit var txtNull:TextView
 
@@ -51,7 +53,6 @@ class ChatsActivity : AppCompatActivity() {
         firebaseUser= FirebaseAuth.getInstance().currentUser!!
         reference= FirebaseDatabase.getInstance().reference
         data= ArrayList()
-        data.reverse()
         allUsers= ArrayList()
         initListeners()
         if(firebaseUser!=null){
@@ -69,7 +70,9 @@ class ChatsActivity : AppCompatActivity() {
                 allUsers.clear()
                 for(snapshot in dataSnapshot.children){
                     val userId= Objects.requireNonNull(snapshot.child("chat_id").value.toString())
-                    allUsers.add(userId)
+                    val lastMessage=snapshot.child("message").value.toString()
+                    val time=snapshot.child("time").value.toString()
+                    allUsers.add(UserList(userId,lastMessage,time))
                 }
                 progressCircular.visibility=View.GONE
                 if(allUsers.isEmpty()){
@@ -89,13 +92,13 @@ class ChatsActivity : AppCompatActivity() {
 
     private fun getUserData() {
         Handler().post {
-            for(userId in allUsers){
-                firestore.collection("Usuarios").document(userId).get().addOnSuccessListener {
+            for(user in allUsers){
+                firestore.collection("Usuarios").document(user.userId).get().addOnSuccessListener {
                     val userId=it.get("uid").toString()
                     val userPhoto=it.get("fotoPerfil").toString()
                     val userName=it.get("nombre").toString()
 
-                    data.add(UserChatModel(userName,userPhoto,userId,"Imbecil","20:40"))
+                    data.add(UserChatModel(userName,userPhoto,userId,user.lastMessage,user.time))
 
                     if(adapter!=null){
                         adapter?.notifyItemInserted(0)
@@ -116,4 +119,6 @@ class ChatsActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    private data class UserList(val userId:String,val lastMessage: String,val time:String)
 }
