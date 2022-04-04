@@ -58,21 +58,26 @@ class ChatsActivity : AppCompatActivity() {
         if(firebaseUser!=null){
             getData()
         }
+    }
 
-
+    override fun onRestart() {
+        super.onRestart()
+        getData()
     }
 
     private fun getData() {
         progressCircular.visibility=View.VISIBLE
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                data.clear()
                 allUsers.clear()
+                data.clear()
                 for(snapshot in dataSnapshot.children){
                     val userId= Objects.requireNonNull(snapshot.child("chat_id").value.toString())
                     val lastMessage=snapshot.child("message").value.toString()
                     val time=snapshot.child("time").value.toString()
+
                     allUsers.add(UserList(userId,lastMessage,time))
+
                 }
                 progressCircular.visibility=View.GONE
                 if(allUsers.isEmpty()){
@@ -101,7 +106,7 @@ class ChatsActivity : AppCompatActivity() {
                     data.add(UserChatModel(userName,userPhoto,userId,user.lastMessage,user.time))
 
                     if(adapter!=null){
-                        adapter?.notifyItemInserted(0)
+                        adapter?.notifyItemInserted(data.size-1)
                         adapter?.notifyDataSetChanged()
                     }else{
                         adapter= AdapterChatsList(applicationContext,data)

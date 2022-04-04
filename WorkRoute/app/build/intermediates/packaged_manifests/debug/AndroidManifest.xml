@@ -46,7 +46,8 @@
         android:roundIcon="@mipmap/work_icon_round"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/Theme.WorkRoute" >
+        android:theme="@style/Theme.WorkRoute"
+        android:usesCleartextTraffic="true" >
         <activity
             android:name="com.example.workroute.activitys.PayMethod"
             android:exported="false" />

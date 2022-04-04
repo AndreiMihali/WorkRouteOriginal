@@ -69,6 +69,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private String bestProvider;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestore;
+    private DatabaseReference reference;
     private ProgressDialog progressDialog;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private BottomSheetBehavior bottomSheetBehavior;
@@ -107,8 +110,27 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
+        getToken();
         init();
     }
+
+    private void getToken() {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        saveToken(token);
+                    }
+                });
+    }
+
+    private void saveToken(String token) {
+        reference= FirebaseDatabase.getInstance().getReference().child("Token");
+        reference.child(FirebaseAuth.getInstance().getUid()).setValue(token);
+    }
+
     private void init(){
         addActivityResultLauncher();
         button_menu = findViewById(R.id.buttonMenu);
@@ -446,7 +468,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                     public void onClick(View v) {
                         Intent intent=new Intent(MainActivity.this, MessagesActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            .putExtra("userId",Companion.user.getUid())
+                            .putExtra("userId","xdsAnD55O7YkjZABTkjIObGIJNo2")
                             .putExtra("userName",Companion.user.getNombre())
                             .putExtra("userPhoto",Companion.user.getFotoPerfil());
                         startActivity(intent);
