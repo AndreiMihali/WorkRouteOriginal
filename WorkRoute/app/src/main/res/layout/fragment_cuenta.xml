@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:paddingHorizontal="50dp"
-        android:paddingVertical="5dp"
+        android:gravity="center_vertical"
         android:textSize="16sp"
         android:textColor="@color/secondary"
         android:text="Add or view my driving license"
@@ -82,8 +82,8 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:paddingHorizontal="50dp"
-        android:paddingVertical="5dp"
         android:textSize="16sp"
+        android:gravity="center_vertical"
         android:textColor="@color/secondary"
         android:text="Add or view my pay method"
         tools:layout_editor_absoluteX="137dp" />
