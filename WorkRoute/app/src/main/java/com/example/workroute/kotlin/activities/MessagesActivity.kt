@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -49,12 +50,27 @@ class MessagesActivity : AppCompatActivity() {
     private lateinit var nameUserString:String
     private lateinit var bundlePhoto:String
     private lateinit var data:ArrayList<MessageModel>
+    private var isInTeChat=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Register)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_messages)
         init()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        FirebaseDatabase.getInstance().getReference("ChatList").child(receiverId).child(firebaseUser.uid)
+            .child("isInChat").setValue("true")
+        FirebaseDatabase.getInstance().getReference("ChatList").child(firebaseUser.uid).child(receiverId)
+            .child("read").setValue("true")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        FirebaseDatabase.getInstance().getReference("ChatList").child(receiverId).child(firebaseUser.uid)
+            .child("isInChat").setValue("false")
     }
 
     private fun init(){
@@ -78,6 +94,7 @@ class MessagesActivity : AppCompatActivity() {
         setData()
         initListeners()
         readChatList()
+        isInTheChat()
     }
 
     /***************************************************************************************************************
@@ -148,7 +165,7 @@ class MessagesActivity : AppCompatActivity() {
             chatRef2.child("message").setValue(message)
             chatRef2.child("time").setValue(time.toString())
 
-            getSenderName(firebaseUser.uid,receiverId,message,"You have received a new message")
+            getSenderName(firebaseUser.uid,receiverId,message,nameUserString)
         }.run()
     }
 
@@ -173,44 +190,64 @@ class MessagesActivity : AppCompatActivity() {
         }
     }
 
-    private fun sendNotification(token: String, message: String, title: String, user: String) {
-        Runnable {
-            var myRequest=Volley.newRequestQueue(applicationContext)
-            var json=JSONObject()
-
-            json.put("to",token)
-            val notification=JSONObject()
-
-            notification.put("titulo",title)
-            notification.put("detalle","$user: $message")
-
-            json.put("data",notification)
-
-            val url="https://fcm.googleapis.com/fcm/send"
-
-            val jsonRequest: JsonObjectRequest = object :
-                JsonObjectRequest(Method.POST, url, json, object : Response.Listener<JSONObject?> {
-                    override fun onResponse(response: JSONObject?) {
-
-                        //now handle the response
-                    }
-                }, object : Response.ErrorListener {
-                    override fun onErrorResponse(error: VolleyError) {
-                        error.printStackTrace()
-                    }
-                }) {
-                //this is the part, that adds the header to the request
-                override fun getHeaders(): Map<String, String> {
-                    val map=HashMap<String,String>()
-                    map["content-type"] = "application/json"
-                    map["authorization"]="key=AAAAt-8FdV8:APA91bEmHhrJazEV2AB7LWBxhcRib1wMtuAGsobZydq6OUOCXYmaKpkuhnyHFFLdb3Eg5h2VqE134NChAJGNTWracREdIiLDIxPpHvnNAxxbw-MUw6_C-WHRspmbu1GEeUp5p418RPyp"
-                    return map
+    private fun isInTheChat(){
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for(snapshot in dataSnapshot.children){
+                    isInTeChat=dataSnapshot.child("isInChat").value.toString()
                 }
             }
 
-            myRequest.add(jsonRequest)
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        }
 
-        }.run()
+        reference.child("ChatList").child(firebaseUser.uid).child(receiverId).addValueEventListener(postListener)
+    }
+
+    private fun sendNotification(token: String, message: String, title: String, user: String) {
+
+        if(isInTeChat=="false"){
+            Runnable {
+                FirebaseDatabase.getInstance().getReference("ChatList").child(receiverId).child(firebaseUser.uid)
+                    .child("read").setValue("false")
+                var myRequest=Volley.newRequestQueue(applicationContext)
+                var json=JSONObject()
+
+                json.put("to",token)
+                val notification=JSONObject()
+
+                notification.put("titulo",title)
+                notification.put("detalle","$user: $message")
+
+                json.put("data",notification)
+
+                val url="https://fcm.googleapis.com/fcm/send"
+
+                val jsonRequest: JsonObjectRequest = object :
+                    JsonObjectRequest(Method.POST, url, json, object : Response.Listener<JSONObject?> {
+                        override fun onResponse(response: JSONObject?) {
+
+                            //now handle the response
+                        }
+                    }, object : Response.ErrorListener {
+                        override fun onErrorResponse(error: VolleyError) {
+                            error.printStackTrace()
+                        }
+                    }) {
+                    //this is the part, that adds the header to the request
+                    override fun getHeaders(): Map<String, String> {
+                        val map=HashMap<String,String>()
+                        map["content-type"] = "application/json"
+                        map["authorization"]="key=AAAAt-8FdV8:APA91bEmHhrJazEV2AB7LWBxhcRib1wMtuAGsobZydq6OUOCXYmaKpkuhnyHFFLdb3Eg5h2VqE134NChAJGNTWracREdIiLDIxPpHvnNAxxbw-MUw6_C-WHRspmbu1GEeUp5p418RPyp"
+                        return map
+                    }
+                }
+
+                myRequest.add(jsonRequest)
+
+            }.run()
+        }
     }
 
     /***************************************************************************************************************

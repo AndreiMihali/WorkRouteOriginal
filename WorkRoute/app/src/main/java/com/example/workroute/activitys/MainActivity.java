@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private ProgressDialog progressDialog;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private BottomSheetBehavior bottomSheetBehavior;
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         bottomSheetBehavior=BottomSheetBehavior.from(findViewById(R.id.sheet));
         bottomSheetBehavior.setHideable(true);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        sp=getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE);
         iniciarMapa();
         getUserData();
         initListeners();
@@ -332,11 +334,16 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     @SuppressLint("MissingPermission")
     private void getCurrentLocation() {
-        progressDialog.show();
         if(isLocationEnabled()){
-            criteria = new Criteria();
-            bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true));
-            locationManager.requestLocationUpdates(bestProvider,1000,0, (LocationListener) this);
+            if (sp.getFloat("latitude",0)==0&&sp.getFloat("longitude",0)==0) {
+                progressDialog.show();
+                criteria = new Criteria();
+                bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true));
+                locationManager.requestLocationUpdates(bestProvider,1000,0, (LocationListener) this);
+            }else{
+                ubiActual=new LatLng(sp.getFloat("latitude",0),sp.getFloat("longitude",0));
+                moveToLocation();
+            }
         }else{
             showDialogMessageGpsEnable();
         }
@@ -386,6 +393,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         ubiActual=new LatLng(location.getLatitude(),location.getLongitude());
         progressDialog.dismiss();
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubiActual,15f),2000,null);
+        sp.edit().putFloat("latitude",(float) location.getLatitude())
+                .putFloat("longitude",(float) location.getLongitude())
+                .commit();
     }
 
     @Override

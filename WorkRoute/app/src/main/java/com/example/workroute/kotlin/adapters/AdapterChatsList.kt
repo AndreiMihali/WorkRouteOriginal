@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.workroute.R
 import com.example.workroute.kotlin.activities.MessagesActivity
 import com.example.workroute.kotlin.model.UserChatModel
+import com.google.android.material.card.MaterialCardView
 
 class AdapterChatsList(val context: Context,val data:ArrayList<UserChatModel>): RecyclerView.Adapter<AdapterChatsList.ViewHolder>() {
 
@@ -20,12 +21,14 @@ class AdapterChatsList(val context: Context,val data:ArrayList<UserChatModel>): 
         val txtName:TextView
         val txtLastMessage:TextView
         val txtLastMessageHour:TextView
+        val card_general:MaterialCardView
 
         init {
             profilePhoto=itemView.findViewById(R.id.profile_photo_chat_list)
             txtName=itemView.findViewById(R.id.txt_user_name_chat_list)
             txtLastMessage=itemView.findViewById(R.id.txt_lastMessage_chat_list)
             txtLastMessageHour=itemView.findViewById(R.id.txt_last_message_time_chat_list)
+            card_general=itemView.findViewById(R.id.card_general)
         }
     }
 
@@ -53,6 +56,14 @@ class AdapterChatsList(val context: Context,val data:ArrayList<UserChatModel>): 
         }else{
             holder.txtLastMessageHour.text=data[position].lastMessageHour
         }
+
+        if(data[position].read=="false"){
+            holder.card_general.strokeColor=context.getColor(R.color.secondary)
+            holder.card_general.strokeWidth=2
+        }else{
+            holder.card_general.strokeWidth=0
+        }
+
         val user=data[position]
         holder.itemView.setOnClickListener{
             context.startActivity(Intent(context, MessagesActivity::class.java).apply {

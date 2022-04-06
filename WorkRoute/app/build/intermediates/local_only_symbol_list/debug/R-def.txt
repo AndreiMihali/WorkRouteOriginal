@@ -95,6 +95,7 @@ id button_signup
 id button_suscribe
 id card_birthday
 id card_email
+id card_general
 id card_name
 id card_password
 id card_password_confirm

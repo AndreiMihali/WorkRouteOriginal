@@ -3186,6 +3186,7 @@ id cancel_button
 id card_birthday
 id card_content_root
 id card_email
+id card_general
 id card_name
 id card_password
 id card_password_confirm

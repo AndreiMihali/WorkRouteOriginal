@@ -62,6 +62,7 @@ class ChatsActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
+        recycler.removeAllViewsInLayout()
         getData()
     }
 
@@ -71,19 +72,20 @@ class ChatsActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 allUsers.clear()
                 data.clear()
+                adapter?.notifyDataSetChanged()
                 for(snapshot in dataSnapshot.children){
                     val userId= Objects.requireNonNull(snapshot.child("chat_id").value.toString())
                     val lastMessage=snapshot.child("message").value.toString()
                     val time=snapshot.child("time").value.toString()
-
-                    allUsers.add(UserList(userId,lastMessage,time))
-
+                    val read=snapshot.child("read").value.toString()
+                    allUsers.add(UserList(userId,lastMessage,time,read))
                 }
                 progressCircular.visibility=View.GONE
                 if(allUsers.isEmpty()){
                     txtNull.visibility=View.VISIBLE
                 }else{
                     txtNull.visibility=View.GONE
+                    recycler.removeAllViewsInLayout()
                     getUserData()
                 }
             }
@@ -102,11 +104,8 @@ class ChatsActivity : AppCompatActivity() {
                     val userId=it.get("uid").toString()
                     val userPhoto=it.get("fotoPerfil").toString()
                     val userName=it.get("nombre").toString()
-
-                    data.add(UserChatModel(userName,userPhoto,userId,user.lastMessage,user.time))
-
+                    data.add(UserChatModel(userName,userPhoto,userId,user.lastMessage,user.time,user.read))
                     if(adapter!=null){
-                        adapter?.notifyItemInserted(data.size-1)
                         adapter?.notifyDataSetChanged()
                     }else{
                         adapter= AdapterChatsList(applicationContext,data)
@@ -125,5 +124,5 @@ class ChatsActivity : AppCompatActivity() {
         }
     }
 
-    private data class UserList(val userId:String,val lastMessage: String,val time:String)
+    private data class UserList(val userId:String,val lastMessage: String,val time:String,val read:String)
 }
