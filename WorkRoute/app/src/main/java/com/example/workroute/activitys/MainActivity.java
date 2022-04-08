@@ -81,7 +81,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LocationListener, GoogleMap.OnMarkerClickListener {
 
-    private static final int CODE_UBI = 100;
     private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_settings, button_close, button_ubi;
     private Animation open, close, rotateForward, rotateBackWard;
     private GoogleMap map;
@@ -97,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private ProgressDialog progressDialog;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private BottomSheetBehavior bottomSheetBehavior;
+    private BottomSheetBehavior bottomSheetBehaviorSearch;
     private SharedPreferences sp;
 
     @Override
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         setContentView(R.layout.activity_main);
         new NetworkCallback().enable(this);
         View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
         decorView.setSystemUiVisibility(uiOptions);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         button_profile = findViewById(R.id.buttonProfile);
         button_notifications = findViewById(R.id.button_notifications);
         //button_settings = findViewById(R.id.buttonSettings);
-        button_close = findViewById(R.id.buttonSignOut);
+        button_close = findViewById(R.id.buttonSearch);
         button_ubi=findViewById(R.id.buttonUbi);
         open = AnimationUtils.loadAnimation(this,R.anim.open_menu);
         close = AnimationUtils.loadAnimation(this,R.anim.close_menu);
@@ -153,6 +153,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         bottomSheetBehavior=BottomSheetBehavior.from(findViewById(R.id.sheet));
         bottomSheetBehavior.setHideable(true);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        bottomSheetBehaviorSearch=BottomSheetBehavior.from(findViewById(R.id.sheet_search));
+        bottomSheetBehaviorSearch.setHideable(true);
+        bottomSheetBehaviorSearch.setState(BottomSheetBehavior.STATE_HIDDEN);
         sp=getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE);
         iniciarMapa();
         getUserData();
@@ -215,10 +218,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         button_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainActivity.this,LoginActivity.class));
-                finish();
-                Toast.makeText(getApplicationContext(),"Saludos del menu 333", Toast.LENGTH_SHORT).show();
+                bottomSheetBehaviorSearch.setPeekHeight(400);
+                bottomSheetBehaviorSearch.setState(BottomSheetBehavior.STATE_EXPANDED);
+                bottomSheetBehaviorSearch.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
+                animateMenu();
             }
         });
     }

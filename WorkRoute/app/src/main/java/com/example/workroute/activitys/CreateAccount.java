@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -276,6 +277,8 @@ public class CreateAccount extends AppCompatActivity {
                 intent.putExtra("Email",ed_email.getText().toString().trim());
                 intent.putExtra("Password",ed_password.getText().toString().trim());
                 intent.putExtra("Name",ed_name.getText().toString().trim());
+                getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit()
+                        .putString("Password",ed_password.getText().toString()).commit();
                 setResult(RESULT_OK,intent);
                 finish();
             }

@@ -2891,6 +2891,7 @@ drawable adaptive_icon_background
 drawable adaptive_icon_foreground
 drawable avd_hide_password
 drawable avd_show_password
+drawable back_img_icons_search
 drawable back_second_sheet
 drawable background_login
 drawable background_susc
@@ -2909,6 +2910,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable bx_id_card
 drawable bxl_google
 drawable card_cvv
 drawable collapse
@@ -2944,7 +2946,9 @@ drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_baseline_add_location_24
 drawable ic_baseline_arrow_back_24
+drawable ic_baseline_arrow_back_ios_new_24
 drawable ic_baseline_calendar_month_24
+drawable ic_baseline_calendar_today_24
 drawable ic_baseline_camera_alt_24
 drawable ic_baseline_card_membership_24
 drawable ic_baseline_chat_24
@@ -2971,6 +2975,7 @@ drawable ic_baseline_person_24
 drawable ic_baseline_person_outline_24
 drawable ic_baseline_photo_library_24
 drawable ic_baseline_remove_24
+drawable ic_baseline_search_24
 drawable ic_baseline_send_24
 drawable ic_baseline_settings_24
 drawable ic_baseline_share_24
@@ -2986,11 +2991,17 @@ drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable ic_outline_arrow_forward_24
 drawable ic_outline_chat_24
+drawable ic_outline_delete_forever_24
+drawable ic_outline_email_24
 drawable ic_outline_home_24
+drawable ic_outline_logout_24
 drawable ic_outline_navigation_24
 drawable ic_outline_notifications_24
+drawable ic_outline_person_24
 drawable ic_outline_settings_24
+drawable ic_outline_work_outline_24
 drawable icon_with_gradient
 drawable image_placeholder
 drawable login_pesonas
@@ -3134,7 +3145,6 @@ id animateToEnd
 id animateToStart
 id antiClockwise
 id anticipate
-id appbar
 id arc
 id asConfigured
 id async
@@ -3167,14 +3177,12 @@ id browser_actions_menu_items
 id browser_actions_menu_view
 id btn_send
 id button
-id buttonEditProfile
-id buttonLogOut
 id buttonMenu
 id buttonMessages
 id buttonPanel
 id buttonProfile
 id buttonSave
-id buttonSignOut
+id buttonSearch
 id buttonUbi
 id button_card
 id button_continue
@@ -3192,6 +3200,7 @@ id cancel_action
 id cancel_button
 id card_birthday
 id card_content_root
+id card_ed_search_place
 id card_email
 id card_general
 id card_name
@@ -3202,7 +3211,6 @@ id card_profile_photo_chat_list
 id card_root
 id card_spiiner
 id cardsImage
-id cared_foto
 id carryVelocity
 id center
 id center_horizontal
@@ -3249,6 +3257,7 @@ id decelerate
 id decelerateAndComplete
 id decor_content_parent
 id default_activity_button
+id deleteAccount
 id deltaRelative
 id dependency_ordering
 id design_bottom_sheet
@@ -3273,6 +3282,7 @@ id dragLeft
 id dragRight
 id dragStart
 id dragUp
+id driveLicense
 id dropdown_menu
 id easeIn
 id easeInOut
@@ -3284,6 +3294,7 @@ id ed_email_register
 id ed_message
 id ed_pass
 id ed_pass_register
+id ed_search_place
 id ed_username_register
 id edit_query
 id elastic
@@ -3305,8 +3316,6 @@ id fitToContents
 id fixed
 id flip
 id floating
-id followers
-id following
 id forever
 id fragment_container_view_tag
 id frameLayout
@@ -3322,7 +3331,6 @@ id grouping
 id groups
 id guideline
 id header_title
-id helpButton
 id hideable
 id home
 id homeAsUp
@@ -3339,7 +3347,6 @@ id image
 id image_content_root
 id image_root
 id image_view
-id imagen_perfil
 id immediateStop
 id included
 id info
@@ -3363,7 +3370,6 @@ id jumpToStart
 id labeled
 id layout
 id layout_confirm_pass
-id layout_content
 id layout_ed_alias
 id layout_email
 id layout_name
@@ -3371,7 +3377,6 @@ id layout_pass
 id left
 id leftToRight
 id legacy
-id level
 id light
 id line1
 id line3
@@ -3379,13 +3384,12 @@ id linear
 id linears_datos
 id listMode
 id list_item
+id ln_desc
 id ln_escribir
 id location_icon
 id logoWork
-id lvl_actual
-id lvl_next
+id logout
 id map
-id mapStyleButton
 id masked
 id match_constraint
 id match_parent
@@ -3448,9 +3452,6 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
-id myDrivingLicenseButton
-id myPayMethodButton
-id name
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
 id navigation_bar_item_icon_view
@@ -3469,11 +3470,9 @@ id north
 id notification_background
 id notification_main_column
 id notification_main_column_container
-id notificationsButton
 id off
 id on
 id onInterceptTouchReturnSwipe
-id opinions
 id or
 id outline
 id outward
@@ -3488,6 +3487,7 @@ id password_forgot
 id password_toggle
 id path
 id pathRelative
+id payMethod
 id peekHeight
 id percent
 id pin
@@ -3521,7 +3521,6 @@ id profile_photo_messages
 id profile_photo_sheet
 id progress_circular
 id progress_horizontal
-id progress_lvl
 id radio
 id ratio
 id rectangles
@@ -3559,14 +3558,17 @@ id search_plate
 id search_src_text
 id search_voice_btn
 id second_sheet
+id second_sheet_search
 id secondary_button
 id select_dialog_listview
 id selected
 id selection_type
+id settings
 id share
 id sharedValueSet
 id sharedValueUnset
 id sheet
+id sheet_search
 id shortcut
 id showCustom
 id showHome
@@ -3604,7 +3606,6 @@ id stretch
 id submenuarrow
 id submit_area
 id supportScrollUp
-id tabLayout
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -3668,10 +3669,6 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
-id tvAbout
-id tvDrivingLicense
-id tvPayMethod
-id tvPreferences
 id txt_ciudad
 id txt_cumple
 id txt_hora
@@ -3681,6 +3678,7 @@ id txt_message
 id txt_name
 id txt_null
 id txt_user_name_chat_list
+id txt_view_asDriver
 id unchecked
 id uniform
 id unlabeled
@@ -3688,8 +3686,8 @@ id up
 id useLogo
 id user_name
 id user_name_messages
+id username
 id vertical_only
-id viewPager
 id view_offset_helper
 id view_transition
 id view_tree_lifecycle_owner
@@ -3832,8 +3830,6 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
-layout fragment_cuenta
-layout fragment_detalles
 layout image
 layout item_chat_left
 layout item_chat_right
