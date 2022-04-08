@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workroute.R
+import com.example.workroute.activitys.MainActivity.Destroy
 import com.example.workroute.kotlin.adapters.AdapterChatsList
 import com.example.workroute.kotlin.model.UserChatModel
 import com.example.workroute.network.callback.NetworkCallback
@@ -37,6 +38,12 @@ class ChatsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chats)
         NetworkCallback().enable(this)
         init()
+    }
+
+
+    override fun onDestroy() {
+        Destroy(this).start()
+        super.onDestroy()
     }
 
     private fun init(){

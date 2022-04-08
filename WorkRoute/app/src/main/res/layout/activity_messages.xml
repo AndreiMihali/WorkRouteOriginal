@@ -52,6 +52,16 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Online"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
                     android:id="@+id/txt_isTyping"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

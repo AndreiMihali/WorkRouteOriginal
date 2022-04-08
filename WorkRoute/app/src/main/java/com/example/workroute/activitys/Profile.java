@@ -36,6 +36,13 @@ public class Profile extends AppCompatActivity {
         init();
     }
 
+    @Override
+    protected void onDestroy() {
+        new MainActivity.Destroy(Profile.this).start();
+        super.onDestroy();
+    }
+
+
     private void init(){
         toolbar=findViewById(R.id.toolbar);
         txt_viewAsDriver=findViewById(R.id.txt_view_asDriver);

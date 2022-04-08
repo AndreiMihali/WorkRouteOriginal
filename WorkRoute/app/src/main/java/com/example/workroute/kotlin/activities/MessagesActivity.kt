@@ -21,6 +21,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.example.workroute.R
+import com.example.workroute.activitys.MainActivity
 import com.example.workroute.kotlin.adapters.AdapterMessages
 import com.example.workroute.kotlin.model.MessageModel
 import com.google.android.material.appbar.MaterialToolbar
@@ -52,12 +53,14 @@ class MessagesActivity : AppCompatActivity() {
     private lateinit var data:ArrayList<MessageModel>
     private var isInTeChat=""
     private lateinit var txtIstyping:TextView
+    private lateinit var status:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Register)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_messages)
         init()
+        isOnline()
     }
 
     override fun onStart() {
@@ -66,12 +69,31 @@ class MessagesActivity : AppCompatActivity() {
             .child("isInChat").setValue("true")
         FirebaseDatabase.getInstance().getReference("ChatList").child(firebaseUser.uid).child(receiverId)
             .child("read").setValue("true")
+
     }
 
     override fun onStop() {
         super.onStop()
         FirebaseDatabase.getInstance().getReference("ChatList").child(receiverId).child(firebaseUser.uid)
             .child("isInChat").setValue("false")
+    }
+
+
+    private fun isOnline(){
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if(dataSnapshot.value.toString()=="true"){
+                    status.text="Online"
+                }else{
+                    status.text="Offline"
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        }
+        FirebaseDatabase.getInstance().getReference("Usuarios").child(receiverId).child("online").addValueEventListener(postListener)
     }
 
     private fun init(){
@@ -92,12 +114,19 @@ class MessagesActivity : AppCompatActivity() {
         lm.stackFromEnd = true
         recyclerMessages.layoutManager=lm
         txtIstyping=findViewById(R.id.txt_isTyping)
+        status=findViewById(R.id.status)
         setData()
         initListeners()
         readChatList()
         isInTheChat()
         isTyping()
     }
+
+    override fun onDestroy() {
+        MainActivity.Destroy(this).start()
+        super.onDestroy()
+    }
+
 
     /***************************************************************************************************************
      *              AQUI EMPIEZAN LOS MÉTODOS QUE TIENEN QUE VER CON LOS MENSAJES
@@ -304,9 +333,11 @@ class MessagesActivity : AppCompatActivity() {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                     if(dataSnapshot.value.toString()=="true"){
+                        status.visibility=View.GONE
                         txtIstyping.visibility=View.VISIBLE
                     }else{
                         txtIstyping.visibility=View.GONE
+                        status.visibility=View.VISIBLE
                     }
             }
 

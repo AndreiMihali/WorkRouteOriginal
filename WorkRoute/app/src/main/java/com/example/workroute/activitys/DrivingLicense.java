@@ -42,4 +42,11 @@ public class DrivingLicense extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        new MainActivity.Destroy(DrivingLicense.this).start();
+        super.onDestroy();
+    }
+
+
 }

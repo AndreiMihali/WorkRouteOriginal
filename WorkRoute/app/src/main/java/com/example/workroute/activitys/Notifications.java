@@ -14,4 +14,10 @@ public class Notifications extends AppCompatActivity {
         setContentView(R.layout.activity_notifications);
         new NetworkCallback().enable(this);
     }
+
+    @Override
+    protected void onDestroy() {
+        new MainActivity.Destroy(Notifications.this).start();
+        super.onDestroy();
+    }
 }

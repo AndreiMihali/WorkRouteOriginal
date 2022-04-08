@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -51,6 +52,7 @@ import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.model.User;
 import com.example.workroute.network.callback.NetworkCallback;
+import com.example.workroute.service.ServicioOnline;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -113,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         }
         getToken();
         init();
+        startService(new Intent(this, ServicioOnline.class));
     }
 
     private void getToken() {
@@ -224,6 +227,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                 animateMenu();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        new Destroy(MainActivity.this).start();
+        super.onDestroy();
     }
 
     private void animateMenu() {
@@ -493,6 +502,20 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                 bottomSheetBehavior.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
             }
         });
+    }
+
+   public static class Destroy extends Thread{
+
+        private Activity activity;
+
+        public Destroy(Activity activity){
+            this.activity=activity;
+        }
+
+        @Override
+        public void run() {
+            activity.stopService(new Intent(activity,ServicioOnline.class));
+        }
     }
 
 }

@@ -26,7 +26,11 @@ public class PayMethod extends AppCompatActivity {
         listeners();
     }
 
-
+    @Override
+    protected void onDestroy() {
+        new MainActivity.Destroy(PayMethod.this).start();
+        super.onDestroy();
+    }
 
     private void controls() {
         toolbarPayMethods = findViewById(R.id.toolbarPay);

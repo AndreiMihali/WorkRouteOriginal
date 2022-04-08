@@ -178,6 +178,7 @@ id settings
 id share
 id sheet
 id sheet_search
+id status
 id textLayoutCVV
 id textLayoutCardNumber
 id textLayoutMonth
