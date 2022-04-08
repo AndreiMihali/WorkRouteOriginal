@@ -50,6 +50,16 @@
                     android:textColor="@color/secondary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_isTyping"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Typing..."
+                    android:textColor="#0B8025"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.appbar.MaterialToolbar>

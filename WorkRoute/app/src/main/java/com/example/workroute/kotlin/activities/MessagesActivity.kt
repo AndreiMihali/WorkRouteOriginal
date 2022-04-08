@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -50,6 +51,7 @@ class MessagesActivity : AppCompatActivity() {
     private lateinit var bundlePhoto:String
     private lateinit var data:ArrayList<MessageModel>
     private var isInTeChat=""
+    private lateinit var txtIstyping:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Register)
@@ -89,10 +91,12 @@ class MessagesActivity : AppCompatActivity() {
         val lm = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
         lm.stackFromEnd = true
         recyclerMessages.layoutManager=lm
+        txtIstyping=findViewById(R.id.txt_isTyping)
         setData()
         initListeners()
         readChatList()
         isInTheChat()
+        isTyping()
     }
 
     /***************************************************************************************************************
@@ -157,11 +161,13 @@ class MessagesActivity : AppCompatActivity() {
             chatRef.child("chat_id").setValue(receiverId)
             chatRef.child("message").setValue(message)
             chatRef.child("time").setValue(time.toString())
+            chatRef.child("typing").setValue("false")
 
             val chatRef2=FirebaseDatabase.getInstance().getReference("ChatList").child(receiverId).child(firebaseUser.uid)
             chatRef2.child("chat_id").setValue(firebaseUser.uid)
             chatRef2.child("message").setValue(message)
             chatRef2.child("time").setValue(time.toString())
+            chatRef2.child("typing").setValue("false")
 
             getSenderName(firebaseUser.uid,receiverId,message,nameUserString)
         }.run()
@@ -274,9 +280,12 @@ class MessagesActivity : AppCompatActivity() {
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
                 if (TextUtils.isEmpty(edText.text.toString())) {
                     fabButton.setImageDrawable(getDrawable(R.drawable.ic_baseline_mic_none_24))
+                    reference.child("ChatList").child(receiverId).child(firebaseUser.uid)
+                        .child("typing").setValue("false")
                 } else {
-
                     fabButton.setImageDrawable(getDrawable(R.drawable.ic_baseline_send_24))
+                    reference.child("ChatList").child(receiverId).child(firebaseUser.uid)
+                        .child("typing").setValue("true")
                 }
             }
 
@@ -289,5 +298,21 @@ class MessagesActivity : AppCompatActivity() {
                 edText.setText("")
             }
         }
+    }
+
+    private fun isTyping(){
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if(dataSnapshot.value.toString()=="true"){
+                        txtIstyping.visibility=View.VISIBLE
+                    }else{
+                        txtIstyping.visibility=View.GONE
+                    }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        }
+        reference.child("ChatList").child(firebaseUser.uid).child(receiverId).child("typing").addValueEventListener(postListener)
     }
 }

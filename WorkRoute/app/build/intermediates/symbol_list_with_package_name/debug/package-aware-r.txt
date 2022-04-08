@@ -3672,6 +3672,7 @@ id triangle
 id txt_ciudad
 id txt_cumple
 id txt_hora
+id txt_isTyping
 id txt_lastMessage_chat_list
 id txt_last_message_time_chat_list
 id txt_message
