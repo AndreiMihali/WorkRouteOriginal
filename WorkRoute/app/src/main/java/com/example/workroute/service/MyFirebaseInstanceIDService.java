@@ -1,4 +1,4 @@
-package com.example.workroute;
+package com.example.workroute.service;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import com.example.workroute.R;
 import com.example.workroute.activitys.MainActivity;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;

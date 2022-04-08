@@ -38,7 +38,6 @@ class MessagesActivity : AppCompatActivity() {
     private lateinit var toolbar:MaterialToolbar
     private lateinit var profilePhoto:ImageView
     private lateinit var txtUserName:TextView
-    private lateinit var txtLastSeen:TextView
     private lateinit var recyclerMessages:RecyclerView
     private lateinit var edText:EditText
     private lateinit var fabButton:FloatingActionButton
@@ -77,7 +76,6 @@ class MessagesActivity : AppCompatActivity() {
         toolbar=findViewById(R.id.toolbar_messages)
         profilePhoto=findViewById(R.id.profile_photo_messages)
         txtUserName=findViewById(R.id.user_name_messages)
-        txtLastSeen=findViewById(R.id.last_seen_messages)
         recyclerMessages=findViewById(R.id.recycler_mensajes)
         edText=findViewById(R.id.ed_message)
         fabButton=findViewById(R.id.btn_send)
@@ -218,7 +216,7 @@ class MessagesActivity : AppCompatActivity() {
                 val notification=JSONObject()
 
                 notification.put("titulo",title)
-                notification.put("detalle","$user: $message")
+                notification.put("detalle","$message")
 
                 json.put("data",notification)
 
@@ -257,7 +255,6 @@ class MessagesActivity : AppCompatActivity() {
     private fun setData() {
         receiverId.let {
             txtUserName.text=nameUserString
-            txtLastSeen.text="Online"
             if(bundlePhoto.isNullOrEmpty()){
                 profilePhoto.setImageDrawable(getDrawable(R.drawable.default_user_login))
             }else{
@@ -278,6 +275,7 @@ class MessagesActivity : AppCompatActivity() {
                 if (TextUtils.isEmpty(edText.text.toString())) {
                     fabButton.setImageDrawable(getDrawable(R.drawable.ic_baseline_mic_none_24))
                 } else {
+
                     fabButton.setImageDrawable(getDrawable(R.drawable.ic_baseline_send_24))
                 }
             }

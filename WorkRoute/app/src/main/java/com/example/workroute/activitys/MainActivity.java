@@ -478,7 +478,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                     public void onClick(View v) {
                         Intent intent=new Intent(MainActivity.this, MessagesActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            .putExtra("userId","xdsAnD55O7YkjZABTkjIObGIJNo2")
+                            .putExtra("userId","kdavIUKvewfcRlb9nXH1SpCsBtG2")
                             .putExtra("userName",Companion.user.getNombre())
                             .putExtra("userPhoto",Companion.user.getFotoPerfil());
                         startActivity(intent);

@@ -87,6 +87,7 @@ id buttonLogOut
 id buttonMenu
 id buttonMessages
 id buttonProfile
+id buttonSave
 id buttonSignOut
 id buttonUbi
 id button_card
@@ -135,7 +136,6 @@ id inputMonth
 id inputYear
 id inputs
 id journeys
-id last_seen_messages
 id layout_confirm_pass
 id layout_content
 id layout_ed_alias
@@ -177,7 +177,7 @@ id second_sheet
 id share
 id sheet
 id tabLayout
-id textLayout4
+id textLayoutCVV
 id textLayoutCardNumber
 id textLayoutMonth
 id textLayoutName
@@ -238,7 +238,6 @@ mipmap work_icon_foreground
 mipmap work_icon_round
 string app_name
 string default_web_client_id
-string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id

@@ -62,12 +62,14 @@ class ChatsActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        recycler.removeAllViewsInLayout()
         getData()
     }
 
     private fun getData() {
         progressCircular.visibility=View.VISIBLE
+        allUsers.clear()
+        data.clear()
+        adapter?.notifyDataSetChanged()
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 allUsers.clear()
