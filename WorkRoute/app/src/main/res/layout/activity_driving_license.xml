@@ -20,6 +20,68 @@
         android:theme="?attr/actionBarTheme"
         />
 
+    <View
+        android:id="@+id/divider"
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <ImageView
+        android:id="@+id/imageCarnetFrente"
+        android:layout_width="235dp"
+        android:layout_height="145dp"
+        android:layout_below="@id/toolbar"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="70dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/carnetfrente" />
+
+    <Button
+        android:id="@+id/buttonFront"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageCarnetFrente"
+        android:layout_centerInParent="true"
+        android:layout_marginVertical="20dp"
+        android:backgroundTint="@color/secondary"
+        android:text="FRONT"
+        android:textColor="@color/white"
+        app:cornerRadius="100dp" />
+
+    <ImageView
+        android:id="@+id/imageCarnetReverso"
+        android:layout_width="235dp"
+        android:layout_height="145dp"
+        android:layout_below="@id/buttonFront"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/reversocarnet" />
+
+    <Button
+        android:id="@+id/buttonReverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageCarnetReverso"
+        android:layout_centerInParent="true"
+        android:layout_marginVertical="20dp"
+        android:backgroundTint="@color/secondary"
+        android:text="REVERSE"
+        android:textColor="@color/white"
+        app:cornerRadius="100dp" />
+
+    <Button
+        android:id="@+id/buttonSaveLicense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonReverse"
+        android:layout_centerInParent="true"
+        android:layout_marginVertical="20dp"
+        android:backgroundTint="@color/quantum_googgreen"
+        android:text="SAVE MY DRIVE LICENSE"
+        android:textColor="@color/white"
+        app:cornerRadius="100dp" />
 
 
 </RelativeLayout>

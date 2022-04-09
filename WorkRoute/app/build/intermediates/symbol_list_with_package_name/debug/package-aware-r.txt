@@ -2913,6 +2913,7 @@ drawable btn_radio_on_to_off_mtrl_animation
 drawable bx_id_card
 drawable bxl_google
 drawable card_cvv
+drawable carnetfrente
 drawable collapse
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
@@ -3054,6 +3055,7 @@ drawable quantum_ic_arrow_back_grey600_24
 drawable quantum_ic_clear_grey600_24
 drawable quantum_ic_cloud_off_vd_theme_24
 drawable quantum_ic_search_grey600_24
+drawable reversocarnet
 drawable round_bottom_sheet
 drawable rounded_layout
 drawable steven_binotto_9vduc_sgrsi_unsplash
@@ -3177,11 +3179,14 @@ id browser_actions_menu_items
 id browser_actions_menu_view
 id btn_send
 id button
+id buttonFront
 id buttonMenu
 id buttonMessages
 id buttonPanel
 id buttonProfile
+id buttonReverse
 id buttonSave
+id buttonSaveLicense
 id buttonSearch
 id buttonUbi
 id button_card
@@ -3344,6 +3349,8 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id imageCarnetFrente
+id imageCarnetReverso
 id image_content_root
 id image_root
 id image_view
@@ -3351,6 +3358,7 @@ id immediateStop
 id included
 id info
 id information_user
+id inputCVV
 id inputCardNumber
 id inputFullName
 id inputMonth
@@ -4003,6 +4011,7 @@ string fab_transformation_sheet_behavior
 string fcm_2_args
 string fcm_fallback_notification_channel_label
 string fcm_no_args
+string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id

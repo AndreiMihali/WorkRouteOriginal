@@ -34,6 +34,7 @@ drawable bottom_user_selector
 drawable bx_id_card
 drawable bxl_google
 drawable card_cvv
+drawable carnetfrente
 drawable creditcards
 drawable default_user_login
 drawable ic_baseline_add_location_24
@@ -87,15 +88,19 @@ drawable ic_outline_settings_24
 drawable ic_outline_work_outline_24
 drawable login_pesonas
 drawable payments
+drawable reversocarnet
 drawable round_bottom_sheet
 drawable steven_binotto_9vduc_sgrsi_unsplash
 drawable workroute2icono
 id boton_drag
 id btn_send
+id buttonFront
 id buttonMenu
 id buttonMessages
 id buttonProfile
+id buttonReverse
 id buttonSave
+id buttonSaveLicense
 id buttonSearch
 id buttonUbi
 id button_card
@@ -136,7 +141,10 @@ id fab_camera
 id frameLayout
 id home
 id image
+id imageCarnetFrente
+id imageCarnetReverso
 id information_user
+id inputCVV
 id inputCardNumber
 id inputFullName
 id inputMonth
@@ -236,6 +244,7 @@ mipmap work_icon_foreground
 mipmap work_icon_round
 string app_name
 string default_web_client_id
+string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id
