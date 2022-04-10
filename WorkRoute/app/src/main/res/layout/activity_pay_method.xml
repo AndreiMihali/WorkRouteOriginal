@@ -232,6 +232,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inputCVV"
                     android:layout_width="match_parent"
+                    android:inputType="number"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"></com.google.android.material.textfield.TextInputEditText>
 
