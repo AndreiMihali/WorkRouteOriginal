@@ -18,11 +18,14 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.workroute.R;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 public class DrivingLicense extends AppCompatActivity {
 
@@ -32,10 +35,11 @@ public class DrivingLicense extends AppCompatActivity {
     private Button selectFront;
     private Button selectReverse;
     private Button saveLicense;
+    RelativeLayout layout;
 
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
-    public int lugarFoto=1;
+    public int lugarFoto=0;
     ActivityResultLauncher <Intent> activityResultLauncher;
     private static final int PERMISSION_CODE_GALLERY = 100;
     
@@ -67,7 +71,7 @@ public class DrivingLicense extends AppCompatActivity {
                         imgReverse.setImageURI(imageUri);
                     }
                 } else if (result.getResultCode()==RESULT_CANCELED) {
-                    Toast.makeText(getApplicationContext(),"Cancelled", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"No image selected", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -82,6 +86,7 @@ public class DrivingLicense extends AppCompatActivity {
         selectFront = findViewById(R.id.buttonFront);
         selectReverse = findViewById(R.id.buttonReverse);
         saveLicense = findViewById(R.id.buttonSaveLicense);
+        layout = findViewById(R.id.relativeLayout);
     }
 
 
@@ -107,6 +112,19 @@ public class DrivingLicense extends AppCompatActivity {
             public void onClick(View view) {
                 lugarFoto = 2;
                 abrirGaleria();
+            }
+        });
+
+        saveLicense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               Snackbar.make(
+                       layout,
+                       "DATA SENT, PENDING REVIEW",
+                       Snackbar.LENGTH_LONG
+               ).show();
+
             }
         });
 
