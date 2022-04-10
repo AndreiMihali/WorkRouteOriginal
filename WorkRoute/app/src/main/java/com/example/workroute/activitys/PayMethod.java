@@ -233,6 +233,7 @@ public class PayMethod extends AppCompatActivity {
                         progressDialog.dismiss();
                         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                         bottomSheetBehavior.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
+                        clearFields();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override

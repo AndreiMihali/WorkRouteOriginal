@@ -70,7 +70,7 @@
         android:id="@+id/bottom_sheet_payMethod"
         android:layout_width="match_parent"
         android:background="@drawable/back_second_sheet"
-        android:backgroundTint="#D1E4E4"
+        android:backgroundTint="#DAF8F8"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         android:layout_height="wrap_content">
 
