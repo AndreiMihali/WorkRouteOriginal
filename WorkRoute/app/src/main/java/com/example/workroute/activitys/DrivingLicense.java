@@ -35,7 +35,7 @@ public class DrivingLicense extends AppCompatActivity {
 
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
-    private int numFotos = 0;
+    public int lugarFoto=1;
     ActivityResultLauncher <Intent> activityResultLauncher;
     private static final int PERMISSION_CODE_GALLERY = 100;
     
@@ -60,11 +60,10 @@ public class DrivingLicense extends AppCompatActivity {
 
                 if (result.getResultCode()==RESULT_OK) {
                     Intent foto=result.getData();
-                    int resultadoFoto = foto.getIntExtra("foto",0);
-                    imageUri=(Uri)foto.getData();
-                    if (resultadoFoto==1) {
+                    imageUri = (Uri) foto.getData();
+                    if (lugarFoto==1) {
                         imgFront.setImageURI(imageUri);
-                    } else if (resultadoFoto==2){
+                    } else if (lugarFoto==2) {
                         imgReverse.setImageURI(imageUri);
                     }
                 } else if (result.getResultCode()==RESULT_CANCELED) {
@@ -98,32 +97,33 @@ public class DrivingLicense extends AppCompatActivity {
         selectFront.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                abrirGaleria(1);
+                lugarFoto = 1;
+                abrirGaleria();
             }
         });
 
         selectReverse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                abrirGaleria(2);
+                lugarFoto = 2;
+                abrirGaleria();
             }
         });
 
     }
 
-    private void abrirGaleria(int num) {
+    private void abrirGaleria( ) {
         int  permissionCheck= ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_EXTERNAL_STORAGE);
 
         if(permissionCheck!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},PERMISSION_CODE_GALLERY);
         }else{
-            llamarGaleria(num);
+            llamarGaleria();
         }
     }
 
-    private void llamarGaleria(int num) {
+    private void llamarGaleria( ) {
         Intent gallery=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        gallery.putExtra("foto",num);
         activityResultLauncher.launch(gallery);
     }
 
@@ -133,7 +133,7 @@ public class DrivingLicense extends AppCompatActivity {
         switch (requestCode) {
             case PERMISSION_CODE_GALLERY: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    llamarGaleria(0);
+                    llamarGaleria();
                 }
             }
             break;
