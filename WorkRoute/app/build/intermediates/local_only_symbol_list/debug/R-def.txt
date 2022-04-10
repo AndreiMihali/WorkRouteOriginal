@@ -31,8 +31,13 @@ drawable bottom_chat_selector
 drawable bottom_home_selector
 drawable bottom_navigation_selector
 drawable bottom_user_selector
+drawable bx_check
 drawable bx_id_card
+drawable bx_x
 drawable bxl_google
+drawable bxl_mastercard
+drawable bxl_paypal
+drawable bxl_visa
 drawable card_cvv
 drawable carnetfrente
 drawable creditcards
@@ -45,6 +50,7 @@ drawable ic_baseline_calendar_today_24
 drawable ic_baseline_camera_alt_24
 drawable ic_baseline_card_membership_24
 drawable ic_baseline_chat_24
+drawable ic_baseline_close_24
 drawable ic_baseline_credit_card_24
 drawable ic_baseline_date_range_24
 drawable ic_baseline_edit_24
@@ -93,6 +99,8 @@ drawable round_bottom_sheet
 drawable steven_binotto_9vduc_sgrsi_unsplash
 drawable workroute2icono
 id boton_drag
+id bottom_sheet_payMethod
+id btn_addPayMethod
 id btn_send
 id buttonFront
 id buttonMenu
@@ -118,11 +126,14 @@ id card_ed_search_place
 id card_email
 id card_general
 id card_name
+id card_number
 id card_password
 id card_password_confirm
 id card_photo
 id card_profile_photo_chat_list
 id card_spiiner
+id card_status
+id card_type
 id cardsImage
 id city
 id country
@@ -159,6 +170,7 @@ id layout_pass
 id linears_datos
 id ln_desc
 id ln_escribir
+id loadContent
 id location_icon
 id logoWork
 id logout
@@ -178,7 +190,9 @@ id progress_circular
 id recycler_chats
 id recycler_mensajes
 id recycler_notifications
+id recycler_payMethods
 id rela
+id relativeLayout
 id rl
 id second_sheet
 id second_sheet_search
@@ -235,6 +249,7 @@ layout item_chat_left
 layout item_chat_right
 layout layout_suscripciones
 layout network_lose
+layout tarjeta_metodo_pago_layout
 menu menu_toolbar_profile
 menu menur_bottom_navigation
 mipmap ic_launcher
@@ -244,7 +259,6 @@ mipmap work_icon_foreground
 mipmap work_icon_round
 string app_name
 string default_web_client_id
-string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id
@@ -262,3 +276,4 @@ style Register
 style Splash
 style Subscribe
 style Theme.WorkRoute
+style dialogFullAniamtion

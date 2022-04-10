@@ -90,7 +90,6 @@ class ChatsActivity : AppCompatActivity() {
                     txtNull.visibility=View.VISIBLE
                 }else{
                     txtNull.visibility=View.GONE
-                    recycler.removeAllViewsInLayout()
                     getUserData()
                 }
             }
@@ -128,33 +127,6 @@ class ChatsActivity : AppCompatActivity() {
             finish()
         }
     }
-
-    /*private void startAutocompleteIntent(){
-        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
-
-        Intent intent = new Autocomplete.IntentBuilder(
-                AutocompleteActivityMode.OVERLAY, fields)
-                .setTypeFilter(TypeFilter.CITIES)
-                .build(this);
-        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
-    }*/
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                Place place = Autocomplete.getPlaceFromIntent(data);
-                Toast.makeText(getApplicationContext(),place.getName(),Toast.LENGTH_LONG).show();
-                locality.setText(place.getAddress());
-            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-                // TODO: Handle the error.
-                Status status = Autocomplete.getStatusFromIntent(data);
-            } else if (resultCode == RESULT_CANCELED) {
-                // The user canceled the operation.
-            }
-            return;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }*/
 
     private data class UserList(val userId:String,val lastMessage: String,val time:String,val read:String)
 }

@@ -78,6 +78,7 @@ public class CreateAccount extends AppCompatActivity {
         layout_passConfirm=findViewById(R.id.layout_confirm_pass);
         firebaseAuth=FirebaseAuth.getInstance();
         progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Please wait...");
         ed_name.requestFocus();
         reference= FirebaseDatabase.getInstance().getReference();
         setColorsFocus(card_name,ed_name,layout_name);

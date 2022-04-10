@@ -2910,8 +2910,13 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable bx_check
 drawable bx_id_card
+drawable bx_x
 drawable bxl_google
+drawable bxl_mastercard
+drawable bxl_paypal
+drawable bxl_visa
 drawable card_cvv
 drawable carnetfrente
 drawable collapse
@@ -2953,6 +2958,7 @@ drawable ic_baseline_calendar_today_24
 drawable ic_baseline_camera_alt_24
 drawable ic_baseline_card_membership_24
 drawable ic_baseline_chat_24
+drawable ic_baseline_close_24
 drawable ic_baseline_credit_card_24
 drawable ic_baseline_date_range_24
 drawable ic_baseline_edit_24
@@ -3168,6 +3174,7 @@ id blocking
 id body_scroll
 id boton_drag
 id bottom
+id bottom_sheet_payMethod
 id bounce
 id bounceBoth
 id bounceEnd
@@ -3177,6 +3184,7 @@ id browser_actions_menu_item_icon
 id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
+id btn_addPayMethod
 id btn_send
 id button
 id buttonFront
@@ -3209,12 +3217,15 @@ id card_ed_search_place
 id card_email
 id card_general
 id card_name
+id card_number
 id card_password
 id card_password_confirm
 id card_photo
 id card_profile_photo_chat_list
 id card_root
 id card_spiiner
+id card_status
+id card_type
 id cardsImage
 id carryVelocity
 id center
@@ -3394,6 +3405,7 @@ id listMode
 id list_item
 id ln_desc
 id ln_escribir
+id loadContent
 id location_icon
 id logoWork
 id logout
@@ -3535,7 +3547,9 @@ id rectangles
 id recycler_chats
 id recycler_mensajes
 id recycler_notifications
+id recycler_payMethods
 id rela
+id relativeLayout
 id reverseSawtooth
 id right
 id rightToLeft
@@ -3920,6 +3934,7 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
+layout tarjeta_metodo_pago_layout
 layout test_action_chip
 layout test_chip_zero_corner_radius
 layout test_design_checkbox
@@ -4011,7 +4026,6 @@ string fab_transformation_sheet_behavior
 string fcm_2_args
 string fcm_fallback_notification_channel_label
 string fcm_no_args
-string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id
@@ -5173,6 +5187,7 @@ style Widget_MaterialComponents_Toolbar_PrimarySurface
 style Widget_MaterialComponents_Toolbar_Surface
 style Widget_MaterialComponents_Tooltip
 style Widget_Support_CoordinatorLayout
+style dialogFullAniamtion
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth
