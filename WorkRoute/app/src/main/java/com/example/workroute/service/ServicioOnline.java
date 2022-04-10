@@ -33,6 +33,7 @@ public class ServicioOnline extends Service{
 
     @Override
     public void onDestroy() {
+        reference= FirebaseDatabase.getInstance().getReference();
         reference.child("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("online").setValue("false");
         super.onDestroy();
     }
