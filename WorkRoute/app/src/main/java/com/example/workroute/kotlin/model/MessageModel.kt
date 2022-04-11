@@ -13,7 +13,7 @@ class MessageModel {
         textMessage: String?,
         sender: String?,
         receiver: String?,
-        time:String?
+        time:String?,
     ) {
         this.dateTime = dateTime
         this.textMessage = textMessage

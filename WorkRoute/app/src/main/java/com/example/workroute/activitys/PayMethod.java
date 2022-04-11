@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,6 +24,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,7 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PayMethod extends AppCompatActivity {
+public class PayMethod extends AppCompatActivity implements CardItemAdapter.ItemClickListener {
 
     private MaterialToolbar toolbar;
     private RecyclerView recyclerView;
@@ -44,7 +46,8 @@ public class PayMethod extends AppCompatActivity {
     private ArrayList<CardItem> data;
     private Button addNewPayMethod;
     private FirebaseAuth firebaseAuth;
-    private BottomSheetBehavior bottomSheetBehavior;private TextInputEditText inputName;
+    private BottomSheetBehavior bottomSheetBehavior;
+    private TextInputEditText inputName;
     private TextInputEditText inputCardNumber;
     private TextInputEditText inputCardMonth;
     private TextInputEditText inputCardYear;
@@ -72,6 +75,8 @@ public class PayMethod extends AppCompatActivity {
         bottomSheetBehavior.setHideable(true);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         data=new ArrayList<>();
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Please wait...");
         initListeners();
         if(firebaseAuth.getCurrentUser()!=null){
             getCardData();
@@ -120,6 +125,7 @@ public class PayMethod extends AppCompatActivity {
 
         cardItemAdapter=new CardItemAdapter(getApplicationContext(),data);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        cardItemAdapter.setClickListener(this);
         recyclerView.setAdapter(cardItemAdapter);
         cardItemAdapter.notifyDataSetChanged();
     }
@@ -156,8 +162,6 @@ public class PayMethod extends AppCompatActivity {
         inputCardYear = findViewById(R.id.inputYear);
         inputCardCVV = findViewById(R.id.inputCVV);
         savePayMethod = findViewById(R.id.buttonSave);
-        progressDialog=new ProgressDialog(this);
-        progressDialog.setMessage("Please wait...");
         TextInputLayout cardNumber=findViewById(R.id.textLayoutCardNumber);
 
         savePayMethod.setOnClickListener(new View.OnClickListener() {
@@ -226,9 +230,8 @@ public class PayMethod extends AppCompatActivity {
         map.put("cardActive","true");
         map.put("cardType",(inputCardNumber.getText().toString().startsWith("5"))?"mastercard":"visa");
 
-        FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("payMethods").child(inputCardNumber.getText().toString()).setValue(map)
+        FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("payMethods").child(inputCardNumber.getText().toString().replaceFirst("[0-9]{12}","XXXX XXXX XXXX ")).setValue(map)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
                     public void onSuccess(Void unused) {
                         progressDialog.dismiss();
                         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
@@ -245,4 +248,35 @@ public class PayMethod extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onItemClick(View view) {
+        new MaterialAlertDialogBuilder(this,R.style.DialogAlert)
+              .setTitle("CAUTION")
+                .setMessage("Are you sure do you want to delete this payment method?")
+                .setIcon(getDrawable(R.drawable.ic_outline_delete_forever_24))
+                .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        progressDialog.show();
+                        deletePayMethod(data.get(cardItemAdapter.itemIndexSelected));
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+    }
+
+    private void deletePayMethod(CardItem cardItem){
+        FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("payMethods")
+                .child(cardItem.getNumberCard()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                progressDialog.dismiss();
+                data.remove(cardItem);
+            }
+        });
+    }
 }

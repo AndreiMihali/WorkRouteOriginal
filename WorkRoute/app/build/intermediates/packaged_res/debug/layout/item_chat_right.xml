@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_marginVertical="5dp"
     android:gravity="end"
@@ -7,7 +8,20 @@
     android:layout_marginEnd="5dp"
     android:layout_height="wrap_content">
 
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:id="@+id/btn_delete"
+        android:theme="@style/Theme.MaterialComponents.DayNight"
+        android:text="DELETE"
+        app:icon="@drawable/ic_outline_delete_forever_24"
+        app:iconTint="@color/secondary"
+        app:cornerRadius="50dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"/>
+
     <LinearLayout
+        android:layout_below="@id/btn_delete"
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:background="@drawable/bg_text_chat_right"
         android:orientation="horizontal"
@@ -22,14 +36,22 @@
             android:maxWidth="200dp"
             android:text="this is a text message asa as asas as" />
 
-        <TextView
-            android:id="@+id/txt_hora"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="10:20"
-            android:textSize="14sp"
+            android:orientation="horizontal"
             android:layout_gravity="bottom"
-            android:textColor="@color/white"
-            android:layout_height="wrap_content"/>
+            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_hora"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="10:20"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

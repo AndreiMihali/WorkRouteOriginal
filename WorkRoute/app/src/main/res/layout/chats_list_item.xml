@@ -55,6 +55,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="I wiil be there in 15 min"
+                android:maxWidth="150dp"
+                android:maxLines="1"
                 android:textColor="#575757"
                 android:textSize="14sp" />
         </LinearLayout>

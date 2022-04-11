@@ -2911,6 +2911,7 @@ drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable bx_check
+drawable bx_check_double
 drawable bx_id_card
 drawable bx_x
 drawable bxl_google
@@ -3185,6 +3186,8 @@ id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
 id btn_addPayMethod
+id btn_delete
+id btn_otherMethods
 id btn_send
 id button
 id buttonFront

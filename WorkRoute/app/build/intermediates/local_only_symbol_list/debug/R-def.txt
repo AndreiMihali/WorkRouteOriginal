@@ -32,6 +32,7 @@ drawable bottom_home_selector
 drawable bottom_navigation_selector
 drawable bottom_user_selector
 drawable bx_check
+drawable bx_check_double
 drawable bx_id_card
 drawable bx_x
 drawable bxl_google
@@ -101,6 +102,8 @@ drawable workroute2icono
 id boton_drag
 id bottom_sheet_payMethod
 id btn_addPayMethod
+id btn_delete
+id btn_otherMethods
 id btn_send
 id buttonFront
 id buttonMenu

@@ -63,11 +63,6 @@ class ChatsActivity : AppCompatActivity() {
         }
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        getData()
-    }
-
     private fun getData() {
         progressCircular.visibility=View.VISIBLE
         allUsers.clear()

@@ -11,7 +11,6 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,7 +35,7 @@ import java.util.*
 import kotlin.collections.HashMap
 
 
-class MessagesActivity : AppCompatActivity() {
+class MessagesActivity : AppCompatActivity(){
     private lateinit var toolbar:MaterialToolbar
     private lateinit var profilePhoto:ImageView
     private lateinit var txtUserName:TextView
@@ -346,4 +345,5 @@ class MessagesActivity : AppCompatActivity() {
         }
         reference.child("ChatList").child(firebaseUser.uid).child(receiverId).child("typing").addValueEventListener(postListener)
     }
+
 }

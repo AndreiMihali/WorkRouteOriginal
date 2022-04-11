@@ -4,20 +4,28 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workroute.R
 import com.example.workroute.kotlin.model.MessageModel
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
-class AdapterMessages(val context:Context,val data:ArrayList<MessageModel>): RecyclerView.Adapter<AdapterMessages.ViewHolder>() {
+class AdapterMessages(val context: Context, val data: ArrayList<MessageModel>): RecyclerView.Adapter<AdapterMessages.ViewHolder>() {
     private lateinit var firebaseUser: FirebaseUser
+
     companion object{
         val MSG_TYPE_LEFTT=0
         val MSG_TYPE_RIGHT=1
     }
+
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var message:TextView
@@ -31,6 +39,7 @@ class AdapterMessages(val context:Context,val data:ArrayList<MessageModel>): Rec
             message.text=messageModel.textMessage
             time.text=messageModel.time
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

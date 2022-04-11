@@ -58,7 +58,7 @@
             app:icon="@drawable/ic_baseline_credit_card_24"
             android:text="Add a pay method"
             app:cornerRadius="10dp"
-            app:backgroundTint="#CDD8D7"
+            app:backgroundTint="#DEF6F4"
             android:textStyle="bold"
             app:iconTint="@color/secondary"
             android:padding="20dp"
@@ -70,7 +70,7 @@
         android:id="@+id/bottom_sheet_payMethod"
         android:layout_width="match_parent"
         android:background="@drawable/back_second_sheet"
-        android:backgroundTint="#D1E4E4"
+        android:backgroundTint="#DAF8F8"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         android:layout_height="wrap_content">
 
@@ -93,10 +93,10 @@
 
 
             <ImageView
-                android:layout_below="@id/boton_drag"
                 android:id="@+id/cardsImage"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
+                android:layout_below="@id/boton_drag"
                 android:layout_marginHorizontal="40dp"
                 android:layout_marginVertical="40dp"
                 app:srcCompat="@drawable/payments" />
@@ -245,11 +245,33 @@
                 android:layout_below="@id/textLayoutCVV"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1"
                 android:backgroundTint="@color/secondary"
                 android:text="SAVE METHOD"
                 android:textColor="@color/white"
-                app:cornerRadius="100dp" />
+                app:cornerRadius="50dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_below="@id/buttonSave"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:text="or pay with"
+                android:id="@+id/or"
+                android:textSize="18sp"
+                android:textColor="#706E6E"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_otherMethods"
+                android:layout_width="wrap_content"
+                android:layout_below="@id/or"
+                android:text="OTHER METHODS"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                app:cornerRadius="50dp"
+                app:backgroundTint="@color/secondary"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
 
         </RelativeLayout>
     </FrameLayout>
