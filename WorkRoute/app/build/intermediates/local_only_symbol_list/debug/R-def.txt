@@ -138,6 +138,7 @@ id card_spiiner
 id card_status
 id card_type
 id cardsImage
+id checkBoxEmailNotifications
 id city
 id country
 id deleteAccount
@@ -151,6 +152,8 @@ id ed_pass
 id ed_pass_register
 id ed_search_place
 id ed_username_register
+id emailNotifications
+id emailNotifications2
 id fab_camera
 id frameLayout
 id home
@@ -220,6 +223,7 @@ id toolbar_bottom_sheet
 id toolbar_messages
 id tvAboutUs
 id tvHelp
+id tvNotifications
 id txt_ciudad
 id txt_cumple
 id txt_hora

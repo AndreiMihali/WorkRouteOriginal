@@ -3237,6 +3237,7 @@ id center_vertical
 id chain
 id chain2
 id chains
+id checkBoxEmailNotifications
 id checkbox
 id checked
 id chip
@@ -3317,6 +3318,8 @@ id ed_search_place
 id ed_username_register
 id edit_query
 id elastic
+id emailNotifications
+id emailNotifications2
 id end
 id endToStart
 id end_padder
@@ -3698,6 +3701,7 @@ id transition_transform
 id triangle
 id tvAboutUs
 id tvHelp
+id tvNotifications
 id txt_ciudad
 id txt_cumple
 id txt_hora

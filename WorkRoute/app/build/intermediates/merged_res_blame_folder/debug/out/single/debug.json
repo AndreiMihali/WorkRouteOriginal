@@ -12,16 +12,16 @@
         "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\bx_check.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_work_icon.png.flat",
-        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-xhdpi\\work_icon.png"
+        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_photo_library_24.xml.flat",
+        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_photo_library_24.xml"
     },
     {
         "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_outline_arrow_forward_24.xml.flat",
         "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_outline_arrow_forward_24.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_photo_library_24.xml.flat",
-        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_photo_library_24.xml"
+        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_work_icon.png.flat",
+        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-xhdpi\\work_icon.png"
     },
     {
         "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_settings_24.xml.flat",
@@ -52,12 +52,12 @@
         "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_edit_calendar_24.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_remove_24.xml.flat",
-        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_remove_24.xml"
-    },
-    {
         "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_remove_24.xml.flat",
+        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_remove_24.xml"
     },
     {
         "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_payments.png.flat",
@@ -92,12 +92,12 @@
         "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\network_lose.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_bottom_home_selector.xml.flat",
-        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\bottom_home_selector.xml"
-    },
-    {
         "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_bxl_visa.xml.flat",
         "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\bxl_visa.xml"
+    },
+    {
+        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_bottom_home_selector.xml.flat",
+        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\bottom_home_selector.xml"
     },
     {
         "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
@@ -116,12 +116,12 @@
         "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\background_login.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_menu_24.xml.flat",
-        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_menu_24.xml"
-    },
-    {
         "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_keyboard_arrow_right_24.xml.flat",
         "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_keyboard_arrow_right_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_menu_24.xml.flat",
+        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_menu_24.xml"
     },
     {
         "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_bottom_chat_selector.xml.flat",
