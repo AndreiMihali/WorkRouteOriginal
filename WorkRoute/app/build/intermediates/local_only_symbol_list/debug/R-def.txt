@@ -195,6 +195,7 @@ id profile_photo_chat_list
 id profile_photo_messages
 id profile_photo_sheet
 id progress_circular
+id radioGroupMapViews
 id radioMapView1
 id radioMapView2
 id recycler_chats

@@ -3550,6 +3550,7 @@ id profile_photo_sheet
 id progress_circular
 id progress_horizontal
 id radio
+id radioGroupMapViews
 id radioMapView1
 id radioMapView2
 id ratio

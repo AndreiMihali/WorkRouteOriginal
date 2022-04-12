@@ -3549,6 +3549,7 @@ int id profile_photo_sheet 0x7f0801d5
 int id progress_circular 0x7f0801d6
 int id progress_horizontal 0x7f0801d7
 int id radio 0x7f0801d8
+int id radioGroupMapViews 0x7f0802a7
 int id radioMapView1 0x7f0802a4
 int id radioMapView2 0x7f0802a5
 int id ratio 0x7f0801d9
