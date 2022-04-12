@@ -57,6 +57,7 @@ drawable ic_baseline_date_range_24
 drawable ic_baseline_edit_24
 drawable ic_baseline_edit_calendar_24
 drawable ic_baseline_email_24
+drawable ic_baseline_fmd_good_24
 drawable ic_baseline_group_work_24
 drawable ic_baseline_help_24
 drawable ic_baseline_home_24
@@ -100,6 +101,7 @@ drawable reversocarnet
 drawable round_bottom_sheet
 drawable steven_binotto_9vduc_sgrsi_unsplash
 drawable workroute2icono
+id appNotifications
 id boton_drag
 id bottom_sheet_payMethod
 id btn_addPayMethod
@@ -138,6 +140,7 @@ id card_spiiner
 id card_status
 id card_type
 id cardsImage
+id checkBoxAppNotifications
 id checkBoxEmailNotifications
 id city
 id country
@@ -153,7 +156,6 @@ id ed_pass_register
 id ed_search_place
 id ed_username_register
 id emailNotifications
-id emailNotifications2
 id fab_camera
 id frameLayout
 id home
@@ -193,6 +195,8 @@ id profile_photo_chat_list
 id profile_photo_messages
 id profile_photo_sheet
 id progress_circular
+id radioMapView1
+id radioMapView2
 id recycler_chats
 id recycler_mensajes
 id recycler_notifications
@@ -222,7 +226,8 @@ id toolbarSettings
 id toolbar_bottom_sheet
 id toolbar_messages
 id tvAboutUs
-id tvHelp
+id tvNotificationPreferences
+id tvNotificationPreferences2
 id tvNotifications
 id txt_ciudad
 id txt_cumple

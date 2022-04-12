@@ -2964,6 +2964,7 @@ int drawable ic_baseline_date_range_24 0x7f0700a3
 int drawable ic_baseline_edit_24 0x7f0700a4
 int drawable ic_baseline_edit_calendar_24 0x7f0700a5
 int drawable ic_baseline_email_24 0x7f0700a6
+int drawable ic_baseline_fmd_good_24 0x7f070112
 int drawable ic_baseline_group_work_24 0x7f0700a7
 int drawable ic_baseline_help_24 0x7f0700a8
 int drawable ic_baseline_home_24 0x7f0700a9
@@ -3154,6 +3155,7 @@ int id animateToEnd 0x7f08004f
 int id animateToStart 0x7f080050
 int id antiClockwise 0x7f080051
 int id anticipate 0x7f080052
+int id appNotifications 0x7f08029c
 int id arc 0x7f080053
 int id asConfigured 0x7f080054
 int id async 0x7f080055
@@ -3236,6 +3238,7 @@ int id center_vertical 0x7f0800a1
 int id chain 0x7f0800a2
 int id chain2 0x7f0800a3
 int id chains 0x7f0800a4
+int id checkBoxAppNotifications 0x7f08029d
 int id checkBoxEmailNotifications 0x7f080298
 int id checkbox 0x7f0800a5
 int id checked 0x7f0800a6
@@ -3318,7 +3321,6 @@ int id ed_username_register 0x7f0800f2
 int id edit_query 0x7f0800f3
 int id elastic 0x7f0800f4
 int id emailNotifications 0x7f080299
-int id emailNotifications2 0x7f08029a
 int id end 0x7f0800f5
 int id endToStart 0x7f0800f6
 int id end_padder 0x7f0800f7
@@ -3547,6 +3549,8 @@ int id profile_photo_sheet 0x7f0801d5
 int id progress_circular 0x7f0801d6
 int id progress_horizontal 0x7f0801d7
 int id radio 0x7f0801d8
+int id radioMapView1 0x7f0802a4
+int id radioMapView2 0x7f0802a5
 int id ratio 0x7f0801d9
 int id rectangles 0x7f0801da
 int id recycler_chats 0x7f0801db
@@ -3699,7 +3703,8 @@ int id transition_scene_layoutid_cache 0x7f08026c
 int id transition_transform 0x7f08026d
 int id triangle 0x7f08026e
 int id tvAboutUs 0x7f080296
-int id tvHelp 0x7f080297
+int id tvNotificationPreferences 0x7f0802a3
+int id tvNotificationPreferences2 0x7f0802a6
 int id tvNotifications 0x7f08029b
 int id txt_ciudad 0x7f08026f
 int id txt_cumple 0x7f080270

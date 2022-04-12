@@ -51,8 +51,7 @@
         <CheckBox
             android:id="@+id/checkBoxEmailNotifications"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
@@ -82,66 +81,42 @@
     </LinearLayout>
 
 
-
     <TextView
-        android:id="@+id/tvGoogleMapsView"
-        android:textSize="18sp"
+        android:id="@+id/tvNotificationPreferences2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_baseline_fmd_good_24"
         android:drawableTint="@color/secondary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:padding="20dp"
-        android:text="  Google Maps View" />
+        android:text="  Google Map View"
+        android:textSize="18sp" />
 
-    <LinearLayout
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:checkedButton="@id/radioMapView1">
 
-        <TextView
-            android:id="@+id/googleMapsView1"
-            android:textSize="18sp"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+
+       <RadioButton
+           android:id="@+id/radioMapView1"
+           android:layout_marginStart="60dp"
+           android:padding="20dp"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:textSize="18sp"
+           android:text="View 1"/>
+
+        <RadioButton
+            android:id="@+id/radioMapView2"
             android:layout_marginStart="60dp"
             android:padding="20dp"
-            android:text="VISTA 1??" />
-
-        <CheckBox
-            android:id="@+id/mapView1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
-
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/googleMapsView2"
             android:textSize="18sp"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:padding="20dp"
-            android:text="VISTA 2??" />
+            android:text="View 2"/>
 
-        <CheckBox
-            android:id="@+id/mapView2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-
-            />
-
-    </LinearLayout>
-
-
-
+    </RadioGroup>
 
     <TextView
         android:id="@+id/tvNotifications"

@@ -2965,6 +2965,7 @@ drawable ic_baseline_date_range_24
 drawable ic_baseline_edit_24
 drawable ic_baseline_edit_calendar_24
 drawable ic_baseline_email_24
+drawable ic_baseline_fmd_good_24
 drawable ic_baseline_group_work_24
 drawable ic_baseline_help_24
 drawable ic_baseline_home_24
@@ -3155,6 +3156,7 @@ id animateToEnd
 id animateToStart
 id antiClockwise
 id anticipate
+id appNotifications
 id arc
 id asConfigured
 id async
@@ -3237,6 +3239,7 @@ id center_vertical
 id chain
 id chain2
 id chains
+id checkBoxAppNotifications
 id checkBoxEmailNotifications
 id checkbox
 id checked
@@ -3319,7 +3322,6 @@ id ed_username_register
 id edit_query
 id elastic
 id emailNotifications
-id emailNotifications2
 id end
 id endToStart
 id end_padder
@@ -3548,6 +3550,8 @@ id profile_photo_sheet
 id progress_circular
 id progress_horizontal
 id radio
+id radioMapView1
+id radioMapView2
 id ratio
 id rectangles
 id recycler_chats
@@ -3700,7 +3704,8 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tvAboutUs
-id tvHelp
+id tvNotificationPreferences
+id tvNotificationPreferences2
 id tvNotifications
 id txt_ciudad
 id txt_cumple
