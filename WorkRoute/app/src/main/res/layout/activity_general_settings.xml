@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activitys.GeneralSettingsActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarSettings"
+        android:layout_width="match_parent"
+        app:title="Settings"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/Theme.MaterialComponents.DayNight"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:navigationIconTint="@color/secondary"
+        app:titleTextColor="@color/secondary" />
+
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.google.android.material.divider.MaterialDivider>
+
+    <TextView
+        android:id="@+id/tvHelp"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp"
+        android:drawableStart="@drawable/ic_baseline_help_24"
+        android:drawableTint="@color/secondary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="  How to use WorkRoute" />
+
+    <TextView
+        android:id="@+id/tvAboutUs"
+        android:textSize="18sp"
+        android:drawableStart="@drawable/ic_baseline_people_24"
+        android:drawableTint="@color/secondary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="  About WorkRoute Developers" />
+
+</LinearLayout>

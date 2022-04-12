@@ -94,6 +94,13 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        ln_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Profile.this,GeneralSettingsActivity.class));
+            }
+        });
+
         ln_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

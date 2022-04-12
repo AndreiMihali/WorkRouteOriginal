@@ -2979,6 +2979,7 @@ drawable ic_baseline_mic_none_24
 drawable ic_baseline_navigation_24
 drawable ic_baseline_notifications_24
 drawable ic_baseline_notifications_none_24
+drawable ic_baseline_people_24
 drawable ic_baseline_person_24
 drawable ic_baseline_person_outline_24
 drawable ic_baseline_photo_library_24
@@ -3186,7 +3187,6 @@ id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
 id btn_addPayMethod
-id btn_delete
 id btn_otherMethods
 id btn_send
 id button
@@ -3682,6 +3682,7 @@ id titles
 id toggle
 id toolbar
 id toolbarPay
+id toolbarSettings
 id toolbar_bottom_sheet
 id toolbar_messages
 id top
@@ -3695,6 +3696,8 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tvAboutUs
+id tvHelp
 id txt_ciudad
 id txt_cumple
 id txt_hora
@@ -3824,13 +3827,13 @@ layout activity_confirm_login
 layout activity_create_account
 layout activity_driving_license
 layout activity_first_time
+layout activity_general_settings
 layout activity_login
 layout activity_main
 layout activity_messages
 layout activity_notifications
 layout activity_pay_method
 layout activity_profile
-layout activity_settings
 layout activity_splash_screen
 layout appbar_main
 layout banner
@@ -4029,6 +4032,7 @@ string fab_transformation_sheet_behavior
 string fcm_2_args
 string fcm_fallback_notification_channel_label
 string fcm_no_args
+string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id

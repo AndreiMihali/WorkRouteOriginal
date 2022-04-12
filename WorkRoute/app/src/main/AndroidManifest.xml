@@ -33,7 +33,7 @@
             android:name=".kotlin.activities.ChatsActivity"
             android:exported="false" />
         <activity
-            android:name=".activitys.SettingsActivity"
+            android:name=".activitys.GeneralSettingsActivity"
             android:exported="false" />
         <activity
             android:name=".activitys.Notifications"

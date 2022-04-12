@@ -71,6 +71,7 @@ drawable ic_baseline_mic_none_24
 drawable ic_baseline_navigation_24
 drawable ic_baseline_notifications_24
 drawable ic_baseline_notifications_none_24
+drawable ic_baseline_people_24
 drawable ic_baseline_person_24
 drawable ic_baseline_person_outline_24
 drawable ic_baseline_photo_library_24
@@ -102,7 +103,6 @@ drawable workroute2icono
 id boton_drag
 id bottom_sheet_payMethod
 id btn_addPayMethod
-id btn_delete
 id btn_otherMethods
 id btn_send
 id buttonFront
@@ -215,8 +215,11 @@ id title
 id titles
 id toolbar
 id toolbarPay
+id toolbarSettings
 id toolbar_bottom_sheet
 id toolbar_messages
+id tvAboutUs
+id tvHelp
 id txt_ciudad
 id txt_cumple
 id txt_hora
@@ -237,13 +240,13 @@ layout activity_confirm_login
 layout activity_create_account
 layout activity_driving_license
 layout activity_first_time
+layout activity_general_settings
 layout activity_login
 layout activity_main
 layout activity_messages
 layout activity_notifications
 layout activity_pay_method
 layout activity_profile
-layout activity_settings
 layout activity_splash_screen
 layout appbar_main
 layout chats_list_item
@@ -262,6 +265,7 @@ mipmap work_icon_foreground
 mipmap work_icon_round
 string app_name
 string default_web_client_id
+string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id

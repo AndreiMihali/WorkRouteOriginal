@@ -8,19 +8,7 @@
     android:layout_marginEnd="5dp"
     android:layout_height="wrap_content">
 
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="wrap_content"
-        android:id="@+id/btn_delete"
-        android:theme="@style/Theme.MaterialComponents.DayNight"
-        android:text="DELETE"
-        app:icon="@drawable/ic_outline_delete_forever_24"
-        app:iconTint="@color/secondary"
-        app:cornerRadius="50dp"
-        android:visibility="gone"
-        android:layout_height="wrap_content"/>
-
     <LinearLayout
-        android:layout_below="@id/btn_delete"
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:background="@drawable/bg_text_chat_right"

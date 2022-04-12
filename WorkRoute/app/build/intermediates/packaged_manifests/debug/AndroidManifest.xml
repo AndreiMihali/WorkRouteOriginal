@@ -61,7 +61,7 @@
             android:name="com.example.workroute.kotlin.activities.ChatsActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.activitys.SettingsActivity"
+            android:name="com.example.workroute.activitys.GeneralSettingsActivity"
             android:exported="false" />
         <activity
             android:name="com.example.workroute.activitys.Notifications"
