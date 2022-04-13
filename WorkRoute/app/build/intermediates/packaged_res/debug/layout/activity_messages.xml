@@ -71,6 +71,18 @@
                     android:textStyle="bold"
                     android:visibility="gone" />
             </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:background="@android:color/transparent"
+                android:text="delete"
+                android:textColor="@color/secondary"
+                android:visibility="gone"
+                app:icon="@drawable/ic_outline_delete_forever_24"
+                app:iconTint="@color/secondary" />
         </LinearLayout>
     </com.google.android.material.appbar.MaterialToolbar>
 

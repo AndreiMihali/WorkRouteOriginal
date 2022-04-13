@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginVertical="5dp"
     android:layout_marginBottom="5dp"
     android:layout_marginStart="5dp"
     android:orientation="horizontal"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_chat"
+        app:cardBackgroundColor="@color/black"
         android:layout_width="wrap_content"
-        android:background="@drawable/bg_text_chat_left"
+        android:layout_marginTop="5dp"
+        android:theme="@style/Theme.MaterialComponents.DayNight"
+        android:checkable="true"
+        app:cardCornerRadius="15dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:checkedIcon="@drawable/ic_outline_delete_forever_24"
+        app:checkedIconTint="@color/white"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/layout_content"
+        android:layout_width="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
         android:layout_height="wrap_content">
@@ -32,4 +47,6 @@
             android:layout_marginStart="8dp"
             android:layout_height="wrap_content"/>
     </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

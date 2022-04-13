@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.workroute.R;
 import com.example.workroute.model.CardItem;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 
@@ -60,12 +61,14 @@ public class CardItemAdapter extends RecyclerView.Adapter<CardItemAdapter.ViewHo
         private TextView cardNumber;
         private TextView cardName;
         private ImageView cardType;
+        private MaterialCardView cardTarjeta;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             cardStatus=itemView.findViewById(R.id.card_status);
             cardNumber=itemView.findViewById(R.id.card_number);
             cardName=itemView.findViewById(R.id.card_name);
             cardType=itemView.findViewById(R.id.card_type);
+            cardTarjeta=itemView.findViewById(R.id.card_tarjeta);
             itemView.setOnLongClickListener(this);
         }
 
