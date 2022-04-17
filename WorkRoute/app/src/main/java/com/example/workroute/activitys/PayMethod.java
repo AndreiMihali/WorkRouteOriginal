@@ -96,10 +96,34 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                new MaterialAlertDialogBuilder(PayMethod.this,R.style.DialogAlert)
+                        .setTitle("CAUTION")
+                        .setCancelable(false)
+                        .setMessage("Are you sure do you want to delete this payment method?")
+                        .setIcon(getDrawable(R.drawable.ic_outline_delete_forever_24))
+                        .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deletePayMethod(data.get(myAdapter.itemIndexSelected).getNumberCard());
+                                data.remove(viewHolder.getAdapterPosition());
+                                myAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
 
+                            }
+                        })
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getApplicationContext(),"Action cancelled",Toast.LENGTH_SHORT).show();
+                                getCardData();
+                            }
+                        }).show();
+
+
+                /*
                 deletePayMethod(data.get(myAdapter.itemIndexSelected).getNumberCard());
                 data.remove(viewHolder.getAdapterPosition());
                 myAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                 */
 
             }
         };
