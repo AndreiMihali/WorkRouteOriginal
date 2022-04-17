@@ -2,6 +2,7 @@ package com.example.workroute.activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,13 +39,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PayMethod extends AppCompatActivity implements CardItemAdapter.ItemClickListener {
+public class PayMethod extends AppCompatActivity implements CardItemAdapter.ItemClickListener{
 
     private MaterialToolbar toolbar;
     private RecyclerView recyclerView;
     private TextView nullMessage;
     private ProgressBar progressBar;
-    private CardItemAdapter cardItemAdapter=null;
+    private CardItemAdapter myAdapter=null;
     private ArrayList<CardItem> data;
     private Button addNewPayMethod;
     private FirebaseAuth firebaseAuth;
@@ -86,6 +87,26 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
         if(firebaseAuth.getCurrentUser()!=null){
             getCardData();
         }
+
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+                deletePayMethod(data.get(myAdapter.itemIndexSelected).getNumberCard());
+                data.remove(viewHolder.getAdapterPosition());
+                myAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+
+            }
+        };
+
+        ItemTouchHelper myItemTouchHelper = new ItemTouchHelper(simpleCallback);
+        myItemTouchHelper.attachToRecyclerView(recyclerView);
+
     }
 
     private void getCardData() {
@@ -97,7 +118,7 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 progressBar.setVisibility(View.VISIBLE);
                 data.clear();
-                cardItemAdapter.notifyDataSetChanged();
+                myAdapter.notifyDataSetChanged();
                 for(DataSnapshot snap:snapshot.getChildren()){
                     String cardNumber=snap.child("cardNumber").getValue().toString();
                     String cardName=snap.child("cardName").getValue().toString();
@@ -112,11 +133,11 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
                     nullMessage.setVisibility(View.GONE);
                 }
 
-                if(cardItemAdapter!=null){
-                    cardItemAdapter.notifyDataSetChanged();
+                if(myAdapter!=null){
+                    myAdapter.notifyDataSetChanged();
                 }else{
-                    cardItemAdapter=new CardItemAdapter(getApplicationContext(),data);
-                    recyclerView.setAdapter(cardItemAdapter);
+                    myAdapter=new CardItemAdapter(getApplicationContext(),data);
+                    recyclerView.setAdapter(myAdapter);
                 }
             }
 
@@ -128,11 +149,10 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
 
         FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("payMethods").addValueEventListener(postListener);
 
-        cardItemAdapter=new CardItemAdapter(getApplicationContext(),data);
+        myAdapter=new CardItemAdapter(getApplicationContext(),data);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        cardItemAdapter.setClickListener(this);
-        recyclerView.setAdapter(cardItemAdapter);
-        cardItemAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(myAdapter);
+        myAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -253,56 +273,21 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
         });
     }
 
-    @Override
-    public void onItemClick(View view) {
-        cardsForDelete=new ArrayList<>();
-        MaterialCardView card=view.findViewById(R.id.card_tarjeta);
-        card.setChecked(!card.isChecked());
+    private void deletePayMethod(String number){
 
-        if(card.isChecked()){
-            btn_deletePayMethods.setVisibility(View.VISIBLE);
-            addNewPayMethod.setVisibility(View.GONE);
-        }else{
-            btn_deletePayMethods.setVisibility(View.GONE);
-            addNewPayMethod.setVisibility(View.VISIBLE);
-        }
-
-        btn_deletePayMethods.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new MaterialAlertDialogBuilder(PayMethod.this,R.style.DialogAlert)
-                        .setTitle("CAUTION")
-                        .setMessage("Are you sure do you want to delete this payment method?")
-                        .setIcon(getDrawable(R.drawable.ic_outline_delete_forever_24))
-                        .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                progressDialog.show();
-                                deletePayMethod(data.get(cardItemAdapter.itemIndexSelected));
-                            }
-                        })
-                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).show();
-            }
-        });
-
-    }
-
-    private void deletePayMethod(CardItem card){
-        for(String x:cardsForDelete){
             FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("payMethods")
-                    .child(x).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    .child(number).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     progressDialog.dismiss();
-                    data.remove(card);
-                    cardItemAdapter.notifyItemRemoved(cardItemAdapter.itemIndexSelected);
+                    data.remove(number);
                 }
             });
-        }
+
+    }
+
+    @Override
+    public void onItemClick(View view) {
+
     }
 }

@@ -23,6 +23,7 @@ public class CardItemAdapter extends RecyclerView.Adapter<CardItemAdapter.ViewHo
     private ItemClickListener itemClickListener;
     public int itemIndexSelected=0;
 
+
     public CardItemAdapter(Context context,ArrayList<CardItem> data){
         this.context=context;
         this.data=data;
@@ -56,7 +57,7 @@ public class CardItemAdapter extends RecyclerView.Adapter<CardItemAdapter.ViewHo
         return data.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView cardStatus;
         private TextView cardNumber;
         private TextView cardName;
@@ -69,16 +70,15 @@ public class CardItemAdapter extends RecyclerView.Adapter<CardItemAdapter.ViewHo
             cardName=itemView.findViewById(R.id.card_name);
             cardType=itemView.findViewById(R.id.card_type);
             cardTarjeta=itemView.findViewById(R.id.card_tarjeta);
-            itemView.setOnLongClickListener(this);
         }
 
+
         @Override
-        public boolean onLongClick(View v) {
+        public void onClick(View v) {
             if(itemClickListener!=null){
                 itemClickListener.onItemClick(v);
                 itemIndexSelected=getAdapterPosition();
             }
-            return true;
         }
     }
 }
