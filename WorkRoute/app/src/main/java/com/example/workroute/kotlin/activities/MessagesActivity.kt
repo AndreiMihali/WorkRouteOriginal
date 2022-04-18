@@ -1,6 +1,7 @@
 package com.example.workroute.kotlin.activities
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -8,9 +9,7 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +23,8 @@ import com.example.workroute.activitys.MainActivity
 import com.example.workroute.kotlin.adapters.AdapterMessages
 import com.example.workroute.kotlin.model.MessageModel
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -32,6 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 
@@ -44,7 +46,7 @@ class MessagesActivity : AppCompatActivity(){
     private lateinit var fabButton:FloatingActionButton
     private lateinit var firebaseUser:FirebaseUser
     private lateinit var reference:DatabaseReference
-    private var adapterMessages:AdapterMessages?=null
+    private var adapterMessages:AdapterMessages?= null
     private lateinit var receiverId:String
     private lateinit var bundle:Intent
     private lateinit var nameUserString:String
@@ -121,41 +123,36 @@ class MessagesActivity : AppCompatActivity(){
         isTyping()
     }
 
-    override fun onDestroy() {
-        MainActivity.Destroy(this).start()
-        super.onDestroy()
-    }
-
-
     /***************************************************************************************************************
      *              AQUI EMPIEZAN LOS MÉTODOS QUE TIENEN QUE VER CON LOS MENSAJES
      ***************************************************************************************************************/
 
     private fun readChatList() {
-        Runnable {
-            reference.child("Chats").addValueEventListener(object:ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    data.clear()
-                    for(snap in snapshot.children){
-                        val message=snap.getValue(MessageModel::class.java)
-                        if((message?.sender==firebaseUser.uid && message?.receiver==receiverId)
-                            ||(message?.sender==receiverId && message?.receiver==firebaseUser.uid)){
-                            data.add(message)
-                        }
-                    }
-                    if(adapterMessages!=null){
-                        adapterMessages?.notifyItemInserted(data.size-1)
-                        recyclerMessages.layoutManager?.scrollToPosition(data.size-1)
-                    }else{
-                        adapterMessages= AdapterMessages(applicationContext,data)
-                        recyclerMessages.adapter=adapterMessages
+        reference.child("Chats").addValueEventListener(object:ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                data.clear()
+                for(snap in snapshot.children){
+                    val message=snap.getValue(MessageModel::class.java)
+                    if((message?.sender==firebaseUser.uid && message?.receiver==receiverId)
+                        ||(message?.sender==receiverId && message?.receiver==firebaseUser.uid)){
+                        data.add(message)
                     }
                 }
+                if(adapterMessages!=null){
+                    adapterMessages?.notifyItemInserted(data.size-1)
+                    recyclerMessages.layoutManager?.scrollToPosition(data.size-1)
+                }else{
+                    adapterMessages= AdapterMessages(applicationContext,data)
+                    recyclerMessages.adapter=adapterMessages
+                }
 
-                override fun onCancelled(error: DatabaseError) {}
+            }
 
-            })
-        }.run()
+
+            override fun onCancelled(error: DatabaseError) {}
+
+        })
+
     }
 
     private fun sendTextMessage(message:String){
@@ -326,18 +323,19 @@ class MessagesActivity : AppCompatActivity(){
                 edText.setText("")
             }
         }
+
     }
 
     private fun isTyping(){
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if(dataSnapshot.value.toString()=="true"){
-                        status.visibility=View.GONE
-                        txtIstyping.visibility=View.VISIBLE
-                    }else{
-                        txtIstyping.visibility=View.GONE
-                        status.visibility=View.VISIBLE
-                    }
+                if(dataSnapshot.value.toString()=="true"){
+                    status.visibility=View.GONE
+                    txtIstyping.visibility=View.VISIBLE
+                }else{
+                    txtIstyping.visibility=View.GONE
+                    status.visibility=View.VISIBLE
+                }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

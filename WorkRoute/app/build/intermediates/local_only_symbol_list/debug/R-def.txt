@@ -122,7 +122,6 @@ id buttonUbi
 id button_card
 id button_continue
 id button_create
-id button_delete
 id button_google
 id button_login
 id button_message
@@ -282,7 +281,6 @@ mipmap work_icon_foreground
 mipmap work_icon_round
 string app_name
 string default_web_client_id
-string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id

@@ -22,13 +22,14 @@ import com.google.firebase.database.ValueEventListener
 
 class AdapterMessages(val context: Context, val data: ArrayList<MessageModel>): RecyclerView.Adapter<AdapterMessages.ViewHolder>() {
     private lateinit var firebaseUser: FirebaseUser
+
     companion object{
         val MSG_TYPE_LEFTT=0
         val MSG_TYPE_RIGHT=1
     }
 
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private var message:TextView
         private var time:TextView
         private var card_chat:MaterialCardView
@@ -43,22 +44,8 @@ class AdapterMessages(val context: Context, val data: ArrayList<MessageModel>): 
         fun bind(messageModel: MessageModel){
             message.text=messageModel.textMessage
             time.text=messageModel.time
-            card_chat.setOnLongClickListener{
-                card_chat.isChecked = !card_chat.isChecked
-                if(card_chat.isChecked){
-                    layout_content.setPadding(transformInPx(10),transformInPx(10),transformInPx(60),transformInPx(10))
-                }else{
-                    layout_content.setPadding(transformInPx(10),transformInPx(10),transformInPx(10),transformInPx(10))
-                }
-                return@setOnLongClickListener true
-            }
         }
 
-    }
-
-    private fun transformInPx(dp:Int): Int {
-        val density = context.resources.displayMetrics.density
-        return (dp*density).toInt()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -25,8 +25,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -57,10 +55,6 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
     private TextInputEditText inputCardCVV;
     private Button savePayMethod;
     private ProgressDialog progressDialog;
-    private MaterialButton btn_deletePayMethods;
-    private ArrayList<String> cardsForDelete;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Register);
@@ -82,7 +76,6 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
         data=new ArrayList<>();
         progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
-        btn_deletePayMethods=findViewById(R.id.btn_deletePayMethods);
         initListeners();
         if(firebaseAuth.getCurrentUser()!=null){
             getCardData();
