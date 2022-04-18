@@ -24,6 +24,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="project_id" translatable="false">workroute-6f6c4</string>
     <string name="sharedPreferences"/>
+    <string name="title_activity_customer_map">CustomerMap</string>
     <style name="CalendarPicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
         <item name="colorPrimary">@color/secondary</item>
         <item name="colorOnPrimary">#B0CAE7</item>

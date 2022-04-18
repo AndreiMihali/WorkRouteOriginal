@@ -7,11 +7,13 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -39,6 +41,7 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -53,8 +56,17 @@ import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.model.User;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.example.workroute.service.ServicioOnline;
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
+import com.firebase.geofire.GeoQuery;
+import com.firebase.geofire.GeoQueryEventListener;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -66,13 +78,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -80,26 +96,12 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import java.security.Provider;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements LocationListener, GoogleMap.OnMarkerClickListener {
+public class MainActivity extends AppCompatActivity {
 
-    private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_settings, button_close, button_ubi;
-    private Animation open, close, rotateForward, rotateBackWard;
-    private GoogleMap map;
-    private LatLng ubiActual;
-    private SupportMapFragment mapFragment;
-    private LocationManager locationManager;
-    private boolean isOpen = false;
-    private Criteria criteria;
-    private String bestProvider;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseFirestore firestore;
     private DatabaseReference reference;
-    private ProgressDialog progressDialog;
-    private ActivityResultLauncher<Intent> activityResultLauncher;
-    private BottomSheetBehavior bottomSheetBehavior;
-    private BottomSheetBehavior bottomSheetBehaviorSearch;
-    private SharedPreferences sp;
+    private Button button_customer,button_driver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,16 +109,36 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         new NetworkCallback().enable(this);
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-        decorView.setSystemUiVisibility(uiOptions);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
         getToken();
         init();
         startService(new Intent(this, ServicioOnline.class));
     }
+
+    private void init(){
+        button_customer=findViewById(R.id.btn_customer);
+        button_driver=findViewById(R.id.btn_driver);
+
+        initListeners();
+    }
+
+    private void initListeners() {
+        button_driver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,DriverMap.class));
+                finish();
+            }
+        });
+
+        button_customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,CustomerMap.class));
+                finish();
+            }
+        });
+    }
+
 
     private void getToken() {
         FirebaseMessaging.getInstance().getToken()
@@ -131,380 +153,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     }
 
     private void saveToken(String token) {
-        reference= FirebaseDatabase.getInstance().getReference().child("Token");
+        reference = FirebaseDatabase.getInstance().getReference().child("Token");
         reference.child(FirebaseAuth.getInstance().getUid()).setValue(token);
     }
 
-    private void init(){
-        addActivityResultLauncher();
-        button_menu = findViewById(R.id.buttonMenu);
-        button_chats = findViewById(R.id.buttonMessages);
-        button_profile = findViewById(R.id.buttonProfile);
-        button_notifications = findViewById(R.id.button_notifications);
-        //button_settings = findViewById(R.id.buttonSettings);
-        button_close = findViewById(R.id.buttonSearch);
-        button_ubi=findViewById(R.id.buttonUbi);
-        open = AnimationUtils.loadAnimation(this,R.anim.open_menu);
-        close = AnimationUtils.loadAnimation(this,R.anim.close_menu);
-        firebaseAuth=FirebaseAuth.getInstance();
-        firestore=FirebaseFirestore.getInstance();
-        progressDialog=new ProgressDialog(this,R.style.ProgressDialog);
-        rotateForward = AnimationUtils.loadAnimation(this,R.anim.rotate_forward);
-        rotateBackWard = AnimationUtils.loadAnimation(this,R.anim.rotate_backward);
-        progressDialog.setMessage("Checking your location. This can take a while...");
-        progressDialog.setCanceledOnTouchOutside(false);
-        bottomSheetBehavior=BottomSheetBehavior.from(findViewById(R.id.sheet));
-        bottomSheetBehavior.setHideable(true);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        bottomSheetBehaviorSearch=BottomSheetBehavior.from(findViewById(R.id.sheet_search));
-        bottomSheetBehaviorSearch.setHideable(true);
-        bottomSheetBehaviorSearch.setState(BottomSheetBehavior.STATE_HIDDEN);
-        sp=getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE);
-        iniciarMapa();
-        getUserData();
-        initListeners();
-    }
 
-    private void initListeners() {
-        /** MÉTODO PARA AÑADIR ICONOS DE NOTIFICACIÓN A LOS BOTONES*/
-        button_notifications.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @SuppressLint("UnsafeOptInUsageError")
-            @Override
-            public void onGlobalLayout() {
-                BadgeDrawable badgeDrawable = BadgeDrawable.create(MainActivity.this);
-                badgeDrawable.setNumber(2);
-                //Important to change the position of the Badge
-                badgeDrawable.setHorizontalOffset(30);
-                badgeDrawable.setVerticalOffset(20);
-
-                BadgeUtils.attachBadgeDrawable(badgeDrawable, button_notifications, null);
-
-                button_notifications.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-            }
-        });
-
-        button_menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animateMenu();
-            }
-        });
-
-        button_chats.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, ChatsActivity.class);
-                startActivity(i);
-                animateMenu();
-            }
-        });
-
-        button_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, Profile.class);
-                startActivity(i);
-                animateMenu();
-            }
-        });
-
-        button_ubi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moveToLocation();
-            }
-        });
-
-        //TODO : FALTAN LOS LISTENERS DEL RESTO DE BOTONES
-
-
-        button_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                bottomSheetBehaviorSearch.setPeekHeight(400);
-                bottomSheetBehaviorSearch.setState(BottomSheetBehavior.STATE_EXPANDED);
-                bottomSheetBehaviorSearch.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
-                animateMenu();
-            }
-        });
-    }
-
-    @Override
-    protected void onDestroy() {
-        new Destroy(MainActivity.this).start();
-        super.onDestroy();
-    }
-
-    private void animateMenu() {
-        if (isOpen) {
-            button_menu.startAnimation(rotateForward);
-            button_menu.setImageResource(R.drawable.ic_baseline_menu_24);
-
-
-            button_chats.startAnimation(close);
-            button_profile.startAnimation(close);
-            button_notifications.startAnimation(close);
-            //button_settings.startAnimation(close);
-            button_close.startAnimation(close);
-
-            button_chats.setVisibility(View.INVISIBLE);
-            button_profile.setVisibility(View.INVISIBLE);
-            button_notifications.setVisibility(View.INVISIBLE);
-            //button_settings.setVisibility(View.INVISIBLE);
-            button_close.setVisibility(View.INVISIBLE);
-
-            button_chats.setClickable(false);
-            button_profile.setClickable(false);
-            button_notifications.setClickable(false);
-            //button_settings.setClickable(false);
-            button_close.setClickable(false);
-
-            isOpen=false;
-        } else {
-            button_menu.startAnimation(rotateBackWard);
-            button_menu.setImageResource(R.drawable.ic_baseline_menu_open_24);
-            button_chats.startAnimation(open);
-            button_profile.startAnimation(open);
-            button_notifications.startAnimation(open);
-            //button_settings.startAnimation(open);
-            button_close.startAnimation(open);
-
-
-            button_chats.setVisibility(View.VISIBLE);
-            button_profile.setVisibility(View.VISIBLE);
-            button_notifications.setVisibility(View.VISIBLE);
-            //button_settings.setVisibility(View.VISIBLE);
-            button_close.setVisibility(View.VISIBLE);
-
-            button_chats.setClickable(true);
-            button_profile.setClickable(true);
-            button_notifications.setClickable(true);
-            //button_settings.setClickable(true);
-            button_close.setClickable(true);
-            isOpen=true;
-        }
-    }
-
-    /**
-     * *********************************************************************************************************************************
-     * *********************************************************************************************************************************
-     * *********************************************************************************************************************************
-     *
-     *                             AQUI EMPIEZAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA DE LOS COJONES
-     *
-     * *********************************************************************************************************************************
-     * *********************************************************************************************************************************
-     ***********************************************************************************************************************************/
-
-    private void addActivityResultLauncher() {
-        activityResultLauncher=registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if(result.getResultCode()==RESULT_CANCELED){
-                            getCurrentLocation();
-                        }
-                    }
-                }
-        );
-    }
-
-    private void iniciarMapa(){
-        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("mapFragment");
-        mapFragment.getMapAsync(this::onMapReady);
-    }
-
-    @SuppressLint("MissingPermission")
-    private void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
-        map.setMyLocationEnabled(true);
-        map.getUiSettings().setMyLocationButtonEnabled(false);
-        map.getUiSettings().setCompassEnabled(false);
-        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        map.setTrafficEnabled(true);
-        map.addMarker(new MarkerOptions().position(new LatLng(40.430552799563735, -3.698083403368748)));
-        map.setOnMarkerClickListener(this::onMarkerClick);
-        getCurrentLocation();
-    }
-
-    @Override
-    public boolean onMarkerClick(@NonNull Marker marker) {
-        showBottomSheet(BottomSheetBehavior.STATE_EXPANDED);
-        return false;
-    }
-
-
-    private boolean isLocationEnabled(){
-        locationManager=(LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)||locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    private void getCurrentLocation() {
-        if(isLocationEnabled()){
-            if (sp.getFloat("latitude",0)==0&&sp.getFloat("longitude",0)==0) {
-                progressDialog.show();
-                criteria = new Criteria();
-                bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true));
-                locationManager.requestLocationUpdates(bestProvider,1000,0, (LocationListener) this);
-            }else{
-                ubiActual=new LatLng(sp.getFloat("latitude",0),sp.getFloat("longitude",0));
-                moveToLocation();
-            }
-        }else{
-            showDialogMessageGpsEnable();
-        }
-    }
-
-    private void showDialogMessageGpsEnable(){
-        progressDialog.dismiss();
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this,R.style.DialogAlert);
-        builder.setMessage("To get your current location, you need to enable the GPS. Do you want enable it?");
-        builder.setTitle("GPS DISABLED");
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                enableGps();
-            }
-        });
-        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                progressDialog.dismiss();
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-
-    private void enableGps() {
-        Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        activityResultLauncher.launch(settingsIntent);
-    }
-
-    private void moveToLocation() {
-        if(isLocationEnabled()){
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubiActual,15f),2000,null);
-        }else{
-            showDialogMessageGpsEnable();
-        }
-    }
-
-
-    @Override
-    public void onLocationChanged(@NonNull Location location) {
-        locationManager.removeUpdates(this);
-        ubiActual=new LatLng(location.getLatitude(),location.getLongitude());
-        progressDialog.dismiss();
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubiActual,15f),2000,null);
-        sp.edit().putFloat("latitude",(float) location.getLatitude())
-                .putFloat("longitude",(float) location.getLongitude())
-                .commit();
-    }
-
-    @Override
-    public void onLocationChanged(@NonNull List<Location> locations) {
-        LocationListener.super.onLocationChanged(locations);
-    }
-
-    @Override
-    public void onProviderEnabled(@NonNull String provider) {
-        LocationListener.super.onProviderEnabled(provider);
-    }
-
-    @Override
-    public void onProviderDisabled(@NonNull String provider) {
-        LocationListener.super.onProviderDisabled(provider);
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if(locationManager!=null){
-            locationManager.removeUpdates(this);
-        }
-    }
-
-    /**
-     * *********************************************************************************************************************************
-     * *********************************************************************************************************************************
-     * *********************************************************************************************************************************
-     *
-     *                             AQUI TERMINAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA DE LOS COJONES
-     *
-     * *********************************************************************************************************************************
-     * *********************************************************************************************************************************
-     ***********************************************************************************************************************************/
-
-    private void getUserData(){
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                firestore.collection("Usuarios").document(firebaseAuth.getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Companion.user = documentSnapshot.toObject(User.class);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("ERROR AL OBTENER LOS DATOS DEL USUARIO","ERROR AL OBTENER LOS DATOS DEL USUARIO "+e);
-                    }
-                });
-            }
-        });
-    }
-
-    /**
-     * MÉTODO PARA MOSTAR LA INFORMACIÓN DEL USUARIO
-     */
-
-    private void showBottomSheet(int state){
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                ImageView perfilPhoto=findViewById(R.id.profile_photo_sheet);
-                TextView txt_name=findViewById(R.id.txt_name);
-                ImageButton btn_message=findViewById(R.id.button_message);
-                if(Companion.user.getFotoPerfil().equals("")){
-                    perfilPhoto.setImageDrawable(getDrawable(R.drawable.default_user_login));
-                }else{
-                    Glide.with(MainActivity.this).load(Companion.user.getFotoPerfil()).into(perfilPhoto);
-                }
-
-                btn_message.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent=new Intent(MainActivity.this, MessagesActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            .putExtra("userId","kdavIUKvewfcRlb9nXH1SpCsBtG2")
-                            .putExtra("userName",Companion.user.getNombre())
-                            .putExtra("userPhoto",Companion.user.getFotoPerfil());
-                        startActivity(intent);
-                    }
-                });
-                txt_name.setText(Companion.user.getNombre());
-                bottomSheetBehavior.setPeekHeight(200);
-                bottomSheetBehavior.setState(state);
-                bottomSheetBehavior.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
-            }
-        });
-    }
-
-   public static class Destroy extends Thread{
+    public static class Destroy extends Thread{
 
         private Activity activity;
 

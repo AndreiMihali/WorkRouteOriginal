@@ -2959,10 +2959,12 @@ drawable ic_baseline_calendar_month_24
 drawable ic_baseline_calendar_today_24
 drawable ic_baseline_camera_alt_24
 drawable ic_baseline_card_membership_24
+drawable ic_baseline_change_circle_24
 drawable ic_baseline_chat_24
 drawable ic_baseline_close_24
 drawable ic_baseline_credit_card_24
 drawable ic_baseline_date_range_24
+drawable ic_baseline_drive_eta_24
 drawable ic_baseline_edit_24
 drawable ic_baseline_edit_calendar_24
 drawable ic_baseline_email_24
@@ -3191,10 +3193,14 @@ id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
 id btn_addPayMethod
+id btn_customer
 id btn_deletePayMethods
+id btn_driver
 id btn_otherMethods
 id btn_send
 id button
+id buttonCustomer
+id buttonDriver
 id buttonFront
 id buttonMenu
 id buttonMessages
@@ -3301,6 +3307,7 @@ id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
 id disjoint
+id distance
 id divider
 id dragAnticlockwise
 id dragClockwise
@@ -3423,7 +3430,8 @@ id loadContent
 id location_icon
 id logoWork
 id logout
-id map
+id mapCustomer
+id mapDriver
 id masked
 id match_constraint
 id match_parent
@@ -3567,6 +3575,7 @@ id recycler_notifications
 id recycler_payMethods
 id rela
 id relativeLayout
+id requestTravel
 id reverseSawtooth
 id right
 id rightToLeft
@@ -3841,6 +3850,8 @@ layout abc_tooltip
 layout activity_chats
 layout activity_confirm_login
 layout activity_create_account
+layout activity_customer_map
+layout activity_driver_map
 layout activity_driving_license
 layout activity_first_time
 layout activity_general_settings
@@ -4158,6 +4169,7 @@ string project_id
 string search_menu_title
 string sharedPreferences
 string status_bar_notification_info_overflow
+string title_activity_customer_map
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style AndroidThemeColorAccentYellow

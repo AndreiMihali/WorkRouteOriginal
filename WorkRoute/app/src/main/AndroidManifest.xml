@@ -16,10 +16,21 @@
         android:allowBackup="true"
         android:icon="@mipmap/work_icon"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/work_icon_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WorkRoute">
+        android:theme="@style/Theme.WorkRoute"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activitys.CustomerMap"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.DriverMap"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity
             android:name=".activitys.PayMethod"
             android:exported="false" />
@@ -41,11 +52,6 @@
         <activity
             android:name=".activitys.Profile"
             android:exported="false" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
         <activity
             android:name=".activitys.suscripcionesActivity"
             android:exported="false" />
@@ -69,6 +75,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -80,11 +87,9 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <service android:name=".service.ServicioOnline"
-            android:exported="false">
-        </service>
-
+        <service
+            android:name=".service.ServicioOnline"
+            android:exported="false" />
     </application>
 
 </manifest>

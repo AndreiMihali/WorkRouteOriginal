@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Gradle: com.firebase:geofire-android-common:3.1.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6b8fa5179c6edc909bc8cf1aad7669d1/transformed/geofire-android-common-3.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d0b2e08c17e5119769c02e616a3121ae/transformed/geofire-android-common-3.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/78328995c21e141f867d7e8df37a4bd8/transformed/geofire-android-common-3.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/78328995c21e141f867d7e8df37a4bd8/transformed/geofire-android-common-3.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/78328995c21e141f867d7e8df37a4bd8/transformed/geofire-android-common-3.1.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.firebase/geofire-android-common/3.1.0/e6167220273775adf5b7265c0785e81b14664aae/geofire-android-common-3.1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.firebase/geofire-android-common/3.1.0/1c07d2f6212272e407c965081afc2ead763d439e/geofire-android-common-3.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
