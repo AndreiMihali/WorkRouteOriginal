@@ -167,11 +167,11 @@ id ed_pass
 id ed_pass_register
 id ed_search_place
 id ed_username_register
+id editProfile
 id emailNotifications
 id fab_camera
 id frameLayout
 id helpMenu
-id home
 id image
 id imageCarnetFrente
 id imageCarnetReverso
@@ -182,7 +182,6 @@ id inputFullName
 id inputMonth
 id inputYear
 id inputs
-id journeys
 id layout_confirm_pass
 id layout_content
 id layout_ed_alias
@@ -198,12 +197,10 @@ id logoWork
 id logout
 id mapCustomer
 id mapDriver
-id messages
 id or
 id password_forgot
 id payMethod
 id prices
-id profile
 id profileImage
 id profile_image_toolbar
 id profile_photo_chat_list
@@ -283,8 +280,8 @@ layout item_chat_right
 layout layout_suscripciones
 layout network_lose
 layout tarjeta_metodo_pago_layout
+menu menu_toolbar_paymethods
 menu menu_toolbar_profile
-menu menur_bottom_navigation
 mipmap ic_launcher
 mipmap ic_launcher_round
 mipmap work_icon

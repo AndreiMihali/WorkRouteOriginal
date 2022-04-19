@@ -1,14 +1,18 @@
 package com.example.workroute.activitys;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.example.workroute.R;
 import com.example.workroute.R.menu;
@@ -39,6 +43,21 @@ public class Profile extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar_profile,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.editProfile :
+                Toast.makeText(getApplicationContext(),"VAINA PENDIENTE",Toast.LENGTH_LONG).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onDestroy() {
         new MainActivity.Destroy(Profile.this).start();
         super.onDestroy();
@@ -47,9 +66,10 @@ public class Profile extends AppCompatActivity {
 
     private void init(){
         toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         txt_viewAsDriver=findViewById(R.id.txt_view_asDriver);
         firebaseAuth=FirebaseAuth.getInstance();
-        ln_profile=findViewById(R.id.profile);
+        //ln_profile=findViewById(R.id.profile);
         ln_pay=findViewById(R.id.payMethod);
         ln_license=findViewById(R.id.driveLicense);
         ln_settings=findViewById(R.id.settings);

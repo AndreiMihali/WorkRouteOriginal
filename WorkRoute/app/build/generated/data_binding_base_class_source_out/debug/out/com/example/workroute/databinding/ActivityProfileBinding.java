@@ -35,9 +35,6 @@ public final class ActivityProfileBinding implements ViewBinding {
   public final LinearLayout payMethod;
 
   @NonNull
-  public final LinearLayout profile;
-
-  @NonNull
   public final ImageView profileImage;
 
   @NonNull
@@ -54,7 +51,7 @@ public final class ActivityProfileBinding implements ViewBinding {
 
   private ActivityProfileBinding(@NonNull CoordinatorLayout rootView,
       @NonNull LinearLayout deleteAccount, @NonNull LinearLayout driveLicense,
-      @NonNull LinearLayout logout, @NonNull LinearLayout payMethod, @NonNull LinearLayout profile,
+      @NonNull LinearLayout logout, @NonNull LinearLayout payMethod,
       @NonNull ImageView profileImage, @NonNull LinearLayout settings,
       @NonNull MaterialToolbar toolbar, @NonNull TextView txtViewAsDriver,
       @NonNull TextView username) {
@@ -63,7 +60,6 @@ public final class ActivityProfileBinding implements ViewBinding {
     this.driveLicense = driveLicense;
     this.logout = logout;
     this.payMethod = payMethod;
-    this.profile = profile;
     this.profileImage = profileImage;
     this.settings = settings;
     this.toolbar = toolbar;
@@ -122,12 +118,6 @@ public final class ActivityProfileBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.profile;
-      LinearLayout profile = ViewBindings.findChildViewById(rootView, id);
-      if (profile == null) {
-        break missingId;
-      }
-
       id = R.id.profileImage;
       ImageView profileImage = ViewBindings.findChildViewById(rootView, id);
       if (profileImage == null) {
@@ -159,7 +149,7 @@ public final class ActivityProfileBinding implements ViewBinding {
       }
 
       return new ActivityProfileBinding((CoordinatorLayout) rootView, deleteAccount, driveLicense,
-          logout, payMethod, profile, profileImage, settings, toolbar, txtViewAsDriver, username);
+          logout, payMethod, profileImage, settings, toolbar, txtViewAsDriver, username);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -133,7 +133,7 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_toolbar_profile,menu);
+        getMenuInflater().inflate(R.menu.menu_toolbar_paymethods,menu);
         return true;
     }
 

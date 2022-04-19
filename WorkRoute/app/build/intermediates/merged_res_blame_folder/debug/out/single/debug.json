@@ -72,10 +72,6 @@
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_location_city_24.xml"
     },
     {
-        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\menu_menur_bottom_navigation.xml.flat",
-        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\menu\\menur_bottom_navigation.xml"
-    },
-    {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\anim_rotate_backward.xml.flat",
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\anim\\rotate_backward.xml"
     },
@@ -454,6 +450,10 @@
     {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_group_work_24.xml.flat",
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_group_work_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\menu_menu_toolbar_paymethods.xml.flat",
+        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\menu\\menu_toolbar_paymethods.xml"
     },
     {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_location_on_24.xml.flat",

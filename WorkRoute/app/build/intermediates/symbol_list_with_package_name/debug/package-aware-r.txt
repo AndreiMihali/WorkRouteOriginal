@@ -3331,6 +3331,7 @@ id ed_pass
 id ed_pass_register
 id ed_search_place
 id ed_username_register
+id editProfile
 id edit_query
 id elastic
 id emailNotifications
@@ -3404,7 +3405,6 @@ id item2
 id item3
 id item4
 id item_touch_helper_previous_elevation
-id journeys
 id jumpToEnd
 id jumpToStart
 id labeled
@@ -3459,7 +3459,6 @@ id media_actions
 id message
 id message_body
 id message_title
-id messages
 id middle
 id mini
 id modal_content_root
@@ -3556,7 +3555,6 @@ id position
 id postLayout
 id prices
 id primary_button
-id profile
 id profileImage
 id profile_image_toolbar
 id profile_photo_chat_list
@@ -3985,8 +3983,8 @@ layout text_view_with_theme_line_height
 layout text_view_without_line_height
 menu example_menu
 menu example_menu2
+menu menu_toolbar_paymethods
 menu menu_toolbar_profile
-menu menur_bottom_navigation
 mipmap ic_launcher
 mipmap ic_launcher_round
 mipmap work_icon
