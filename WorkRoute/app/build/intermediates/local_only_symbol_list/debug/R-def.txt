@@ -9,7 +9,9 @@ anim slide_up_out
 color back_login
 color black
 color bottom_navigation_view
+color car_map_background
 color gray
+color location_pin_map_background
 color primary
 color purple_200
 color purple_500
@@ -285,8 +287,15 @@ layout network_lose
 layout tarjeta_metodo_pago_layout
 menu menu_toolbar_profile
 menu menur_bottom_navigation
+mipmap car_map
+mipmap car_map_background
+mipmap car_map_foreground
+mipmap car_map_round
 mipmap ic_launcher
 mipmap ic_launcher_round
+mipmap location_pin_map
+mipmap location_pin_map_foreground
+mipmap location_pin_map_round
 mipmap work_icon
 mipmap work_icon_foreground
 mipmap work_icon_round
