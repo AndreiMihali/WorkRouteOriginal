@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rela"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="20dp"
+    tools:context=".activitys.MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:text="Select how you want to entry"
+        android:textSize="25sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/secondary"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_below="@id/title"
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_driver"
+        android:text="AS DRIVER"
+        android:textSize="18sp"
+        android:backgroundTint="@color/secondary"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_customer"
+        android:layout_width="match_parent"
+        android:layout_below="@id/btn_driver"
+        android:layout_marginTop="20dp"
+        android:text="AS CUSTOMER"
+        android:textSize="18sp"
+        android:backgroundTint="@color/secondary"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

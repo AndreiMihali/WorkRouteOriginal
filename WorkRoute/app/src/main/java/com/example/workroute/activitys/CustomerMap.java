@@ -92,6 +92,8 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
     private BottomSheetBehavior bottomSheetBehaviorSearch;
     private String customerId="";
     private MaterialButton requestTravel;
+    private boolean requestBol=false;
+    private Marker pickupMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -229,18 +231,46 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
         requestTravel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userId=firebaseAuth.getUid();
+                if(requestBol){
+                    requestBol=false;
+                    geoQuery.removeAllListeners();
+                    driverLocationRef.removeEventListener(driverLocationRefListener);
 
-                DatabaseReference reference=FirebaseDatabase.getInstance().getReference("customerRequest");
-                GeoFire geoFire=new GeoFire(reference);
-                geoFire.setLocation(userId,new GeoLocation(myLastLocation.getLatitude(),myLastLocation.getLongitude()));
+                    if(driverFoundId!=null){
+                        DatabaseReference driverRef=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverFoundId);
+                        driverRef.setValue("true");
+                        driverFoundId=null;
+                    }
 
-                pickUpLocation=new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(pickUpLocation).title("Pickup Here"));
-                requestTravel.setText("Searching for drivers...");
+                    driverFound=false;
+                    radius=1;
+                    String userId=firebaseAuth.getUid();
+                    DatabaseReference reference=FirebaseDatabase.getInstance().getReference("customerRequest");
+                    GeoFire geoFire=new GeoFire(reference);
+                    geoFire.removeLocation(userId);
+
+                    if(pickupMarker!=null){
+                        pickupMarker.remove();
+                    }
+
+                    requestTravel.setText("Cancel drive");
+
+                }else{
+                    requestBol=true;
+
+                    String userId=firebaseAuth.getUid();
+
+                    DatabaseReference reference=FirebaseDatabase.getInstance().getReference("customerRequest");
+                    GeoFire geoFire=new GeoFire(reference);
+                    geoFire.setLocation(userId,new GeoLocation(myLastLocation.getLatitude(),myLastLocation.getLongitude()));
+
+                    pickUpLocation=new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude());
+                    pickupMarker=mMap.addMarker(new MarkerOptions().position(pickUpLocation).title("Pickup Here"));
+                    requestTravel.setText("Searching for drivers...");
 
 
-                getClosestDrivers();
+                    getClosestDrivers();
+                }
             }
         });
 
@@ -250,16 +280,18 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
     private Boolean driverFound=false;
     private String driverFoundId;
 
+    GeoQuery geoQuery;
+
     private void getClosestDrivers() {
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("driverAvailable");
         GeoFire geoFire=new GeoFire(reference);
-        GeoQuery geoQuery=geoFire.queryAtLocation(new GeoLocation(pickUpLocation.latitude,pickUpLocation.longitude),radius);
+        geoQuery=geoFire.queryAtLocation(new GeoLocation(pickUpLocation.latitude,pickUpLocation.longitude),radius);
         geoQuery.removeAllListeners();
 
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
-                if(!driverFound){
+                if(!driverFound && requestBol){
                     driverFound=true;
                     driverFoundId=key;
 
@@ -301,12 +333,14 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
 
 
     private Marker mDriverMarker;
+    private DatabaseReference driverLocationRef;
+    private ValueEventListener driverLocationRefListener;
     private void getDriverLocation(){
-        DatabaseReference driverLocationRef=FirebaseDatabase.getInstance().getReference().child("driverWorking").child(driverFoundId).child("l");
-        driverLocationRef.addValueEventListener(new ValueEventListener() {
+        driverLocationRef=FirebaseDatabase.getInstance().getReference().child("driverWorking").child(driverFoundId).child("l");
+        driverLocationRefListener=driverLocationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+                if(snapshot.exists() && requestBol){
                     List<Object> map=(List<Object>) snapshot.getValue();
                     double locationLat=0;
                     double locationLong=0;
