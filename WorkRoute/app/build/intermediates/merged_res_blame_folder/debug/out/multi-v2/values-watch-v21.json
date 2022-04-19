@@ -4,7 +4,11 @@
             "outputFile": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v21\\values-watch-v21.xml",
             "map": [
                 {
+<<<<<<< HEAD
                     "source": "C:\\Users\\Ruben\\.gradle\\caches\\transforms-3\\9e11e11928bbcf839e73e09395fcc02a\\transformed\\appcompat-1.4.1\\res\\values-watch-v21\\values-watch-v21.xml",
+=======
+                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\a688ca3ac3a2c77e6c6c9d069755f47a\\transformed\\appcompat-1.4.1\\res\\values-watch-v21\\values-watch-v21.xml",
+>>>>>>> feature/AndreiMihali_SEGUIR_MAPS
                     "from": {
                         "startLines": "2,6,10",
                         "startColumns": "4,4,4",

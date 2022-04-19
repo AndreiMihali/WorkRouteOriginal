@@ -1265,6 +1265,7 @@ color browser_actions_text_color
 color browser_actions_title_color
 color button_material_dark
 color button_material_light
+color car_map_background
 color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
@@ -1331,6 +1332,7 @@ color foreground_material_light
 color gray
 color highlighted_text_material_dark
 color highlighted_text_material_light
+color location_pin_map_background
 color m3_appbar_overlay_color
 color m3_assist_chip_icon_tint_color
 color m3_assist_chip_stroke_color
@@ -3985,8 +3987,19 @@ menu example_menu
 menu example_menu2
 menu menu_toolbar_paymethods
 menu menu_toolbar_profile
+<<<<<<< HEAD
+=======
+menu menur_bottom_navigation
+mipmap car_map
+mipmap car_map_background
+mipmap car_map_foreground
+mipmap car_map_round
+>>>>>>> feature/AndreiMihali_SEGUIR_MAPS
 mipmap ic_launcher
 mipmap ic_launcher_round
+mipmap location_pin_map
+mipmap location_pin_map_foreground
+mipmap location_pin_map_round
 mipmap work_icon
 mipmap work_icon_foreground
 mipmap work_icon_round

@@ -4,15 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,6 +45,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -109,7 +116,14 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                 if(snapshot.exists()){
                     customerId=snapshot.getValue().toString();
                     getAssignedCustomerLocation();
-
+                }else{
+                    customerId="";
+                    if(pickupMarker!=null){
+                        pickupMarker.remove();
+                    }
+                    if(assignedCustomerPickUpLocationRefListener!=null){
+                        assignedCustomerPickUpLocationRef.removeEventListener(assignedCustomerPickUpLocationRefListener);
+                    }
                 }
             }
 
@@ -120,12 +134,15 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         });
     }
 
+    Marker pickupMarker;
+    private DatabaseReference assignedCustomerPickUpLocationRef;
+    private ValueEventListener assignedCustomerPickUpLocationRefListener;
     private void getAssignedCustomerLocation() {
-        DatabaseReference assignedCustomerPickUpLocationRef=FirebaseDatabase.getInstance().getReference().child("customerRequest").child(customerId).child("l");
-        assignedCustomerPickUpLocationRef.addValueEventListener(new ValueEventListener() {
+        assignedCustomerPickUpLocationRef=FirebaseDatabase.getInstance().getReference().child("customerRequest").child(customerId).child("l");
+        assignedCustomerPickUpLocationRefListener=assignedCustomerPickUpLocationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+                if(snapshot.exists() && !customerId.equals("")){
                     List<Object> map=(List<Object>) snapshot.getValue();
                     double locationLat=0;
                     double locationLong=0;
@@ -136,7 +153,8 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                         locationLong=Double.parseDouble(map.get(1).toString());
                     }
                     LatLng driverLatLng=new LatLng(locationLat,locationLong);
-                    mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Pickup location"));
+                    pickupMarker=mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Pickup location")
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.location_pin_map_foreground)));
                 }
             }
 
@@ -146,7 +164,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
             }
         });
     }
-
 
     private void getToken() {
         FirebaseMessaging.getInstance().getToken()
@@ -346,7 +363,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.getUiSettings().setCompassEnabled(false);
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        mMap.setTrafficEnabled(true);
         buildGoogleApiClient();
     }
 

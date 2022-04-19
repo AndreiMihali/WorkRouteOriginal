@@ -5,8 +5,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b00896eb45082f83ef2a5d25268bdea0/transformed/firebase-inappmessaging-20.1.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/93428fe7209f6efcdfc90f22465d8806/transformed/firebase-inappmessaging-20.1.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9b314128a2e58b731df9dee54879a163/transformed/firebase-inappmessaging-20.1.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9b314128a2e58b731df9dee54879a163/transformed/firebase-inappmessaging-20.1.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9b314128a2e58b731df9dee54879a163/transformed/firebase-inappmessaging-20.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ea1e278d7261a4c0c87ebf7b137fff61/transformed/firebase-inappmessaging-20.1.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ea1e278d7261a4c0c87ebf7b137fff61/transformed/firebase-inappmessaging-20.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ea1e278d7261a4c0c87ebf7b137fff61/transformed/firebase-inappmessaging-20.1.1/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-inappmessaging/20.1.1/6ca61c21ff98c9b26e779471dcfd1fb38919472a/firebase-inappmessaging-20.1.1-javadoc.jar!/" />

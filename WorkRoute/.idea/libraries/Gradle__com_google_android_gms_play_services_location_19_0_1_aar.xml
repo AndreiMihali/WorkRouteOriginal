@@ -1,11 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.gms:play-services-location:19.0.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e62f333caf34fd06d8173922620588be/transformed/play-services-location-19.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0056bbc13414c56c6c35f47822b3007b/transformed/play-services-location-19.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d3ff8fdfcf0aa327e3b794568a7d9ef3/transformed/play-services-location-19.0.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d3ff8fdfcf0aa327e3b794568a7d9ef3/transformed/play-services-location-19.0.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/d3ff8fdfcf0aa327e3b794568a7d9ef3/transformed/play-services-location-19.0.1/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8baa9e41d519bf0236298620fee0d7fe/transformed/play-services-location-19.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8baa9e41d519bf0236298620fee0d7fe/transformed/play-services-location-19.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8baa9e41d519bf0236298620fee0d7fe/transformed/play-services-location-19.0.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-location/19.0.1/21c0fe95fc8d679c87e65c85129c1191a8ca8625/play-services-location-19.0.1-javadoc.jar!/" />

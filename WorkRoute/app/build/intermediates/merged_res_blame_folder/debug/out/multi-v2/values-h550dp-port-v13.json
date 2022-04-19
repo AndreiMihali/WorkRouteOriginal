@@ -4,7 +4,11 @@
             "outputFile": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-h550dp-port-v13\\values-h550dp-port-v13.xml",
             "map": [
                 {
+<<<<<<< HEAD
                     "source": "C:\\Users\\Ruben\\.gradle\\caches\\transforms-3\\ba009953125228a99d9555bb206e5e9a\\transformed\\material-1.5.0\\res\\values-h550dp-port-v13\\values-h550dp-port-v13.xml",
+=======
+                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\f6a734a78edcd8806c13a173f4b18023\\transformed\\material-1.5.0\\res\\values-h550dp-port-v13\\values-h550dp-port-v13.xml",
+>>>>>>> feature/AndreiMihali_SEGUIR_MAPS
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
