@@ -1,37 +1,20 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+            "outputFile": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
             "map": [
                 {
-<<<<<<< HEAD
-                    "source": "C:\\Users\\Ruben\\.gradle\\caches\\transforms-3\\ba009953125228a99d9555bb206e5e9a\\transformed\\material-1.5.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
-=======
                     "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\a688ca3ac3a2c77e6c6c9d069755f47a\\transformed\\appcompat-1.4.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
->>>>>>> feature/AndreiMihali_SEGUIR_MAPS
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,10,11,12,13,14",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,115,185,256,328,386,444,553,617,673,732,795",
-                        "endLines": "2,3,4,5,6,7,9,10,11,12,13,17",
-                        "endColumns": "59,69,70,71,57,57,10,63,55,58,62,10",
-                        "endOffsets": "110,180,251,323,381,439,548,612,668,727,790,962"
-                    },
-                    "to": {
-                        "startLines": "10,11,12,13,14,15,16,18,21,22,23,24",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "611,671,741,812,884,942,1000,1109,1318,1374,1433,1496",
-                        "endLines": "10,11,12,13,14,15,17,18,21,22,23,27",
-                        "endColumns": "59,69,70,71,57,57,10,63,55,58,62,10",
-                        "endOffsets": "666,736,807,879,937,995,1104,1168,1369,1428,1491,1663"
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,124,193,263,337,413,472,543",
+                        "endColumns": "68,68,69,73,75,58,70,67",
+                        "endOffsets": "119,188,258,332,408,467,538,606"
                     }
                 },
                 {
-<<<<<<< HEAD
-                    "source": "C:\\Users\\Ruben\\.gradle\\caches\\transforms-3\\cf15d5a8145ccc1362442f0c8ec287a4\\transformed\\firebase-inappmessaging-display-20.1.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
-=======
                     "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\5086f1f80cff0732af13f06a99808af5\\transformed\\firebase-inappmessaging-display-20.1.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
->>>>>>> feature/AndreiMihali_SEGUIR_MAPS
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -48,17 +31,22 @@
                     }
                 },
                 {
-<<<<<<< HEAD
-                    "source": "C:\\Users\\Ruben\\.gradle\\caches\\transforms-3\\9e11e11928bbcf839e73e09395fcc02a\\transformed\\appcompat-1.4.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
-=======
                     "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\f6a734a78edcd8806c13a173f4b18023\\transformed\\material-1.5.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
->>>>>>> feature/AndreiMihali_SEGUIR_MAPS
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,124,193,263,337,413,472,543",
-                        "endColumns": "68,68,69,73,75,58,70,67",
-                        "endOffsets": "119,188,258,332,408,467,538,606"
+                        "startLines": "2,3,4,5,6,7,8,10,11,12,13,14",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,115,185,256,328,386,444,553,617,673,732,795",
+                        "endLines": "2,3,4,5,6,7,9,10,11,12,13,17",
+                        "endColumns": "59,69,70,71,57,57,10,63,55,58,62,10",
+                        "endOffsets": "110,180,251,323,381,439,548,612,668,727,790,962"
+                    },
+                    "to": {
+                        "startLines": "10,11,12,13,14,15,16,18,21,22,23,24",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "611,671,741,812,884,942,1000,1109,1318,1374,1433,1496",
+                        "endLines": "10,11,12,13,14,15,17,18,21,22,23,27",
+                        "endColumns": "59,69,70,71,57,57,10,63,55,58,62,10",
+                        "endOffsets": "666,736,807,879,937,995,1104,1168,1369,1428,1491,1663"
                     }
                 }
             ]

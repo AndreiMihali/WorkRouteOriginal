@@ -284,14 +284,10 @@ layout network_lose
 layout tarjeta_metodo_pago_layout
 menu menu_toolbar_paymethods
 menu menu_toolbar_profile
-<<<<<<< HEAD
-=======
-menu menur_bottom_navigation
 mipmap car_map
 mipmap car_map_background
 mipmap car_map_foreground
 mipmap car_map_round
->>>>>>> feature/AndreiMihali_SEGUIR_MAPS
 mipmap ic_launcher
 mipmap ic_launcher_round
 mipmap location_pin_map
@@ -302,7 +298,6 @@ mipmap work_icon_foreground
 mipmap work_icon_round
 string app_name
 string default_web_client_id
-string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id

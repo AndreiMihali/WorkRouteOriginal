@@ -3987,14 +3987,10 @@ menu example_menu
 menu example_menu2
 menu menu_toolbar_paymethods
 menu menu_toolbar_profile
-<<<<<<< HEAD
-=======
-menu menur_bottom_navigation
 mipmap car_map
 mipmap car_map_background
 mipmap car_map_foreground
 mipmap car_map_round
->>>>>>> feature/AndreiMihali_SEGUIR_MAPS
 mipmap ic_launcher
 mipmap ic_launcher_round
 mipmap location_pin_map
@@ -4070,7 +4066,6 @@ string fab_transformation_sheet_behavior
 string fcm_2_args
 string fcm_fallback_notification_channel_label
 string fcm_no_args
-string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id
