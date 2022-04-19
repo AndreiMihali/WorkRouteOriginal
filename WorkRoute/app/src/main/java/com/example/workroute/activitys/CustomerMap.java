@@ -1,5 +1,7 @@
 package com.example.workroute.activitys;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,6 +48,7 @@ import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -61,6 +64,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -77,6 +84,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -102,6 +110,7 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
     private MaterialButton requestTravel;
     private boolean requestBol=false;
     private Marker pickupMarker;
+    private String destination;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +176,7 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
         iniciarMapa();
         getUserData();
         initListeners();
+
     }
 
     private void initListeners() {
@@ -232,6 +242,7 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
                 bottomSheetBehaviorSearch.setPeekHeight(400);
                 bottomSheetBehaviorSearch.setState(BottomSheetBehavior.STATE_EXPANDED);
                 bottomSheetBehaviorSearch.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
+                initAllItemsInBotthom();
                 animateMenu();
             }
         });
@@ -246,7 +257,7 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
 
                     if(driverFoundId!=null){
                         DatabaseReference driverRef=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverFoundId);
-                        driverRef.setValue("true");
+                        driverRef.setValue(true);
                         driverFoundId=null;
                     }
 
@@ -283,6 +294,37 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
             }
         });
 
+
+
+    }
+
+
+
+    private TextView txt_distance;
+    private ImageView imageProfile;
+    private TextView txt_name;
+
+    private void initAllItemsInBotthom(){
+        txt_distance=findViewById(R.id.txt_distance);
+        imageProfile=findViewById(R.id.profile_photo_sheet);
+        txt_name=findViewById(R.id.txt_name);
+
+        Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                destination=place.getName();
+            }
+
+            @Override
+            public void onError(@NonNull Status status) {
+            }
+        });
     }
 
 
@@ -305,14 +347,17 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
                     driverFound=true;
                     driverFoundId=key;
 
-                    DatabaseReference driverRef=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverFoundId);
+                    DatabaseReference driverRef=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverFoundId).child("customerRequest");
                     String customerId= firebaseAuth.getUid();
                     HashMap map=new HashMap();
                     map.put("customerRideId",customerId);
+                    map.put("destination",destination);
                     driverRef.updateChildren(map);
 
                     getDriverLocation();
                     requestTravel.setText("Getting driver location...");
+
+
                 }
             }
 
@@ -392,61 +437,6 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
             }
         });
     }
-
-    /**private void showBottomSheet(int state,String uid,float distancee){
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                bottomSheetBehaviorSearch.setState(BottomSheetBehavior.STATE_HIDDEN);
-                User user=showUserInformation(uid);
-                ImageView perfilPhoto=findViewById(R.id.profile_photo_sheet);
-                TextView txt_name=findViewById(R.id.txt_name);
-                ImageButton btn_message=findViewById(R.id.button_message);
-                TextView distance=findViewById(R.id.distance);
-                if(user.getFotoPerfil().equals("")){
-                    perfilPhoto.setImageDrawable(getDrawable(R.drawable.default_user_login));
-                }else{
-                    Glide.with(CustomerMap.this).load(user.getFotoPerfil()).into(perfilPhoto);
-                }
-                btn_message.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent=new Intent(CustomerMap.this, MessagesActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                .putExtra("userId",user.getUid())
-                                .putExtra("userName",user.getNombre())
-                                .putExtra("userPhoto",user.getFotoPerfil());
-                        startActivity(intent);
-                    }
-                });
-                if ((distancee < 100)) {
-                    distance.setText(user.getNombre() + " is here");
-                } else {
-                    distance.setText(user.getNombre() + " is " + String.valueOf(distancee) + " away");
-                }
-                txt_name.setText(user.getNombre());
-                bottomSheetBehavior.setPeekHeight(200);
-                bottomSheetBehavior.setState(state);
-                bottomSheetBehavior.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
-            }
-        });
-    }*/
-
-    /*private User showUserInformation(String uid){
-        final User[] user = {new User()};
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-              firestore.collection("Usuarios").document(uid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                  @Override
-                  public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        user[0] =documentSnapshot.toObject(User.class);
-                  }
-              });
-            }
-        });
-        return user[0];
-    }*/
 
 
     @Override

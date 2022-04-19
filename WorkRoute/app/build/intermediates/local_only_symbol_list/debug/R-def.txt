@@ -108,6 +108,7 @@ drawable round_bottom_sheet
 drawable steven_binotto_9vduc_sgrsi_unsplash
 drawable workroute2icono
 id appNotifications
+id autocomplete_fragment
 id boton_drag
 id bottom_sheet_payMethod
 id btn_addPayMethod
@@ -167,7 +168,6 @@ id ed_email_register
 id ed_message
 id ed_pass
 id ed_pass_register
-id ed_search_place
 id ed_username_register
 id editProfile
 id emailNotifications
@@ -246,6 +246,8 @@ id tvNotificationPreferences2
 id tvNotifications
 id txt_ciudad
 id txt_cumple
+id txt_destination
+id txt_distance
 id txt_hora
 id txt_isTyping
 id txt_lastMessage_chat_list

@@ -41,6 +41,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -259,13 +261,46 @@ public class ConfirmLogin extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            setDataInFirebase(name);
+                            setDataFirebaseDatabase(name);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "signInWithCredential:failure", task.getException());
                         }
                     }
                 });
+    }
+
+    private void setDataFirebaseDatabase(String name){
+        User user=new User(
+                auth.getUid(),
+                name,
+                0,
+                "",
+                "",
+                "",
+                0,
+                true,
+                false,
+                false,
+                0,
+                "",
+                false,
+                new ArrayList<Viaje>(),
+                0,
+                0,
+                0,
+                0,
+                new ArrayList<User>(),
+                new ArrayList<User>()
+        );
+
+        FirebaseDatabase.getInstance().getReference().child("Usuarios").child(auth.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                setDataInFirebase(name);
+            }
+        });
+
     }
 
     private void setDataInFirebase(String name){

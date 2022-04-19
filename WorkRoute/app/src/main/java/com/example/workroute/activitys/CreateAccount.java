@@ -10,17 +10,13 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.workroute.R;
 import com.example.workroute.model.User;
-import com.example.workroute.model.UserDatabase;
 import com.example.workroute.model.Viaje;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,7 +33,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.lang.ref.Reference;
 import java.util.ArrayList;
 
 public class CreateAccount extends AppCompatActivity {
@@ -226,17 +221,30 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     private void setDataFirebaseDatabase(){
-        UserDatabase user=new UserDatabase(
+        User user=new User(
+                firebaseAuth.getUid(),
+                ed_name.getText().toString().trim(),
                 0,
-                true,
-                true,
+                "",
+                "",
                 "",
                 0,
+                true,
+                false,
+                false,
+                0,
+                "",
+                false,
+                new ArrayList<Viaje>(),
                 0,
                 0,
-                firebaseAuth.getUid()
+                0,
+                0,
+                new ArrayList<User>(),
+                new ArrayList<User>()
         );
-        reference.child("Users").push().setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+        reference.child("Usuarios").child(firebaseAuth.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 setDataFirebaseFirestore();
@@ -244,6 +252,7 @@ public class CreateAccount extends AppCompatActivity {
         });
 
     }
+
     private void setDataFirebaseFirestore(){
         User user=new User(
                 firebaseAuth.getUid(),

@@ -53,6 +53,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -265,6 +266,13 @@ public class FirstTimeActivity extends AppCompatActivity {
 
                                     }
                                 });
+
+                            FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getUid()).updateChildren(hasMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+
+                                }
+                            });
                         }
                     });
                 }
@@ -342,8 +350,14 @@ public class FirstTimeActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                     }
                 });
+
+                FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+                    }
+                });
             }
         });
     }
-
-}
+    }

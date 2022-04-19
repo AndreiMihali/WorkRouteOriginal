@@ -3170,6 +3170,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id autocomplete_fragment
 id banner_body
 id banner_content_root
 id banner_image
@@ -3331,7 +3332,6 @@ id ed_email_register
 id ed_message
 id ed_pass
 id ed_pass_register
-id ed_search_place
 id ed_username_register
 id editProfile
 id edit_query
@@ -3725,6 +3725,8 @@ id tvNotificationPreferences2
 id tvNotifications
 id txt_ciudad
 id txt_cumple
+id txt_destination
+id txt_distance
 id txt_hora
 id txt_isTyping
 id txt_lastMessage_chat_list
