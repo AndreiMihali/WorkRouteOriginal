@@ -3367,6 +3367,7 @@ id grouping
 id groups
 id guideline
 id header_title
+id helpMenu
 id hideable
 id home
 id homeAsUp
@@ -3612,7 +3613,6 @@ id select_dialog_listview
 id selected
 id selection_type
 id settings
-id share
 id sharedValueSet
 id sharedValueUnset
 id sheet
@@ -4059,6 +4059,7 @@ string fab_transformation_sheet_behavior
 string fcm_2_args
 string fcm_fallback_notification_channel_label
 string fcm_no_args
+string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id

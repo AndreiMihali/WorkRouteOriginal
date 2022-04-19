@@ -4,13 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.workroute.R;
+import com.example.workroute.R.menu;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -34,6 +35,7 @@ public class Profile extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
         decorView.setSystemUiVisibility(uiOptions);
         init();
+
     }
 
     @Override
@@ -58,6 +60,8 @@ public class Profile extends AppCompatActivity {
         initListeners();
         setData();
     }
+
+
 
     private void setData() {
         if(Companion.user!=null){

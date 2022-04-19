@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -64,7 +66,9 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
     }
 
     private void init(){
+
         toolbar=findViewById(R.id.toolbarPay);
+        setSupportActionBar(toolbar);
         recyclerView=findViewById(R.id.recycler_payMethods);
         nullMessage=findViewById(R.id.txt_null);
         progressBar=findViewById(R.id.loadContent);
@@ -124,6 +128,22 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
         ItemTouchHelper myItemTouchHelper = new ItemTouchHelper(simpleCallback);
         myItemTouchHelper.attachToRecyclerView(recyclerView);
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar_profile,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.helpMenu :
+                Toast.makeText(getApplicationContext(),"To delete a payment method, swipe it to the left",Toast.LENGTH_LONG).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void getCardData() {

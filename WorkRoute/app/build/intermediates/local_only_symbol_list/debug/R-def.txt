@@ -170,6 +170,7 @@ id ed_username_register
 id emailNotifications
 id fab_camera
 id frameLayout
+id helpMenu
 id home
 id image
 id imageCarnetFrente
@@ -223,7 +224,6 @@ id rl
 id second_sheet
 id second_sheet_search
 id settings
-id share
 id sheet
 id sheet_search
 id status
@@ -292,6 +292,7 @@ mipmap work_icon_foreground
 mipmap work_icon_round
 string app_name
 string default_web_client_id
+string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id
