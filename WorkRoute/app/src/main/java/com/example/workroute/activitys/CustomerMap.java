@@ -23,6 +23,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -36,6 +37,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.directions.route.AbstractRouting;
+import com.directions.route.Route;
+import com.directions.route.RouteException;
+import com.directions.route.Routing;
+import com.directions.route.RoutingListener;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.kotlin.activities.ChatsActivity;
@@ -50,8 +56,13 @@ import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -61,6 +72,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -86,12 +99,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CustomerMap extends FragmentActivity implements com.google.android.gms.location.LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+public class CustomerMap extends FragmentActivity implements RoutingListener,com.google.android.gms.location.LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_close, button_ubi,button_customer,button_driver;
     private Animation open, close, rotateForward, rotateBackWard;
@@ -123,6 +137,8 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
     private TextView txt_startLocation;
     private TextView txt_destination;
     private MaterialButton btn_cancel;
+    private List<Polyline> polylines;
+    private static final int[] COLORS = new int[]{R.color.secondary};
 
 
     @Override
@@ -198,6 +214,7 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
         ed_destination=findViewById(R.id.ed_search_place);
         btn_cancel=findViewById(R.id.button_cancel);
         btn_message=findViewById(R.id.button_message_cost);
+        polylines=new ArrayList<>();
         iniciarMapa();
         getUserData();
         initListeners();
@@ -329,6 +346,7 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
 
             Toast.makeText(getApplicationContext(),"You just canceled the travel",Toast.LENGTH_LONG).show();
             displayInformationDriver(BottomSheetBehavior.STATE_HIDDEN);
+            erasePolylines();
 
         }else{
             requestBol=true;
@@ -551,6 +569,7 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
                     mDriverMarker=mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Your driver")
                             .icon(BitmapDescriptorFactory.fromResource(R.mipmap.car_map_foreground)));
                     getDriverInfo();
+                    getRouteToMarker(driverLatLng);
                 }
             }
 
@@ -560,6 +579,20 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
             }
         });
     }
+
+    private void getRouteToMarker(LatLng pickupMarker) {
+        Routing routing = new Routing.Builder()
+                .travelMode(AbstractRouting.TravelMode.DRIVING)
+                .withListener(this)
+                .alternativeRoutes(false)
+                .waypoints(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()), pickupMarker)
+                .key(getString(R.string.google_maps_key))
+                .build();
+        routing.execute();
+        LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+    }
+
 
 
     @Override
@@ -672,6 +705,7 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
 
     }
 
+    private LocationCallback locationCallback;
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         locationRequest = new LocationRequest();
@@ -679,11 +713,28 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
         locationRequest.setFastestInterval(1000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(locationRequest);
+        LocationSettingsRequest locationSettingsRequest = builder.build();
+
+        SettingsClient settingsClient = LocationServices.getSettingsClient(this);
+        settingsClient.checkLocationSettings(locationSettingsRequest);
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                onLocationChanged(locationResult.getLastLocation());
+            }
+        };
+
+        LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
+
     }
+
 
     @Override
     public void onConnectionSuspended(int i) {
@@ -743,4 +794,56 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
         return false;
     }
 
+    @Override
+    public void onRoutingFailure(RouteException e) {
+
+    }
+
+    @Override
+    public void onRoutingStart() {
+
+    }
+
+    @Override
+    public void onRoutingSuccess(ArrayList<Route> route, int fastestRoute) {
+        if(polylines.size()>0) {
+            for (Polyline poly : polylines) {
+                poly.remove();
+            }
+        }
+
+        polylines = new ArrayList<>();
+        //add route(s) to the map.
+        for (int i = 0; i <route.size(); i++) {
+            //In case of more than 5 alternative routes
+            int colorIndex = i % COLORS.length;
+
+            PolylineOptions polyOptions = new PolylineOptions();
+            polyOptions.color(getResources().getColor(COLORS[colorIndex]));
+            polyOptions.width(10 + i * 6);
+            polyOptions.addAll(route.get(i).getPoints());
+            Polyline polyline = mMap.addPolyline(polyOptions);
+            polylines.add(polyline);
+
+        }
+
+    }
+
+    @Override
+    public void onRoutingCancelled() {
+
+    }
+
+    private void erasePolylines(){
+        for(Polyline line:polylines){
+            line.remove();
+        }
+        polylines.clear();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        if(locationCallback!=null){
+            LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
+        }
+    }
 }

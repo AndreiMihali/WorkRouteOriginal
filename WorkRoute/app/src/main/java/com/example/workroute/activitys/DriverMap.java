@@ -9,6 +9,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -26,6 +27,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.Glide;
+import com.directions.route.AbstractRouting;
+import com.directions.route.Route;
+import com.directions.route.RouteException;
+import com.directions.route.Routing;
+import com.directions.route.RoutingListener;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.kotlin.activities.ChatsActivity;
@@ -37,8 +43,12 @@ import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -47,6 +57,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -65,17 +77,19 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
-public class DriverMap extends FragmentActivity implements com.google.android.gms.location.LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+public class DriverMap extends FragmentActivity implements com.google.android.gms.location.LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, RoutingListener {
 
-    private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_ubi,button_customer,button_driver;
+    private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_ubi, button_customer, button_driver;
     private Animation open, close, rotateForward, rotateBackWard;
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
     private boolean isOpen = false;
-    private boolean isOpen2=false;
+    private boolean isOpen2 = false;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestore;
     private DatabaseReference reference;
@@ -84,7 +98,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     private Location myLastLocation;
     private LocationRequest locationRequest;
     private BottomSheetBehavior bottomSheetBehavior;
-    private String customerId="";
+    private String customerId = "";
     private TextView txt_distance;
     private ImageView customer_photo;
     private TextView txt_name;
@@ -93,6 +107,8 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     private TextView txt_total_pay_travel;
     private TextView txt_startLocation;
     private TextView txt_destination;
+    private List<Polyline> polylines;
+    private static final int[] COLORS = new int[]{R.color.secondary};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,21 +130,22 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     }
 
     private void getAssignedCustomer() {
-        String driverId=firebaseAuth.getUid();
-        DatabaseReference assignedCustomerId=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverId).child("customerRequest").child("customerRideId");
+        String driverId = firebaseAuth.getUid();
+        DatabaseReference assignedCustomerId = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverId).child("customerRequest").child("customerRideId");
         assignedCustomerId.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    customerId=snapshot.getValue().toString();
+                if (snapshot.exists()) {
+                    customerId = snapshot.getValue().toString();
                     getAssignedCustomerLocation();
                     getAssignedCustomerDestination();
-                }else{
-                    customerId="";
-                    if(pickupMarker!=null){
+                } else {
+                    erasePolylines();
+                    customerId = "";
+                    if (pickupMarker != null) {
                         pickupMarker.remove();
                     }
-                    if(assignedCustomerPickUpLocationRefListener!=null){
+                    if (assignedCustomerPickUpLocationRefListener != null) {
                         assignedCustomerPickUpLocationRef.removeEventListener(assignedCustomerPickUpLocationRefListener);
                     }
                     displayInformationCustomer(BottomSheetBehavior.STATE_HIDDEN);
@@ -144,15 +161,15 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     }
 
     private void getAssignedCustomerDestination() {
-        String driverId=firebaseAuth.getUid();
-        DatabaseReference assignedCustomerId=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverId).child("customerRequest").child("destination");
+        String driverId = firebaseAuth.getUid();
+        DatabaseReference assignedCustomerId = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverId).child("customerRequest").child("destination");
         assignedCustomerId.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                   String destination=snapshot.getValue().toString();
-                   txt_destination.setText(destination);
-                }else{
+                if (snapshot.exists()) {
+                    String destination = snapshot.getValue().toString();
+                    txt_destination.setText(destination);
+                } else {
                     txt_destination.setText("--");
                 }
 
@@ -168,33 +185,33 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
     private void getAssignedCustomerInfo() {
         displayInformationCustomer(BottomSheetBehavior.STATE_EXPANDED);
-        DatabaseReference mCustomerDatabase=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(customerId);
+        DatabaseReference mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(customerId);
         mCustomerDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists() && snapshot.getChildrenCount()>0){
-                    Map<String,Object> map=(Map<String, Object>) snapshot.getValue();
-                    if(map.get("nombre")!=null){
-                        if(myLastLocation!=null && driverLatLng!=null){
-                            Location loc1=new Location("");
+                if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                    Map<String, Object> map = (Map<String, Object>) snapshot.getValue();
+                    if (map.get("nombre") != null) {
+                        if (myLastLocation != null && driverLatLng != null) {
+                            Location loc1 = new Location("");
                             loc1.setLatitude(myLastLocation.getLatitude());
                             loc1.setLongitude(myLastLocation.getLongitude());
 
-                            Location loc2=new Location("");
+                            Location loc2 = new Location("");
                             loc2.setLatitude(driverLatLng.latitude);
                             loc2.setLongitude(driverLatLng.longitude);
 
-                            float distance=loc1.distanceTo(loc2);
+                            float distance = loc1.distanceTo(loc2);
 
-                            txt_distance.setText("You are "+String.valueOf(distance)+" meters away from "+map.get("nombre").toString());
-                            txt_name.setText("Your customer is "+map.get("nombre").toString());
+                            txt_distance.setText("You are " + String.valueOf(distance) + " meters away from " + map.get("nombre").toString());
+                            txt_name.setText("Your customer is " + map.get("nombre").toString());
                         }
                     }
 
-                    if(map.get("fotoPerfil")!=null){
-                        if(map.get("fotoPerfil").toString().equals("")){
+                    if (map.get("fotoPerfil") != null) {
+                        if (map.get("fotoPerfil").toString().equals("")) {
                             customer_photo.setImageResource(R.drawable.default_user_login);
-                        }else{
+                        } else {
                             Glide.with(getApplicationContext()).load(map.get("fotoPerfil").toString()).into(customer_photo);
                         }
                     }
@@ -202,11 +219,11 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                     btn_message.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent=new Intent(DriverMap.this,MessagesActivity.class);
+                            Intent intent = new Intent(DriverMap.this, MessagesActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                    .putExtra("userId",customerId)
-                                    .putExtra("userName",map.get("nombre").toString())
-                                    .putExtra("userPhoto",map.get("fotoPerfil").toString());
+                                    .putExtra("userId", customerId)
+                                    .putExtra("userName", map.get("nombre").toString())
+                                    .putExtra("userPhoto", map.get("fotoPerfil").toString());
                             startActivity(intent);
                         }
                     });
@@ -220,21 +237,21 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         });
     }
 
-    private void displayInformationCustomer(int state){
-        txt_distance=findViewById(R.id.txt_distance);
-        customer_photo=findViewById(R.id.profile_photo_sheet);
-        txt_name=findViewById(R.id.txt_name);
-        txt_travelInformation=findViewById(R.id.txt_travel_information);
-        txt_total_pay_travel=findViewById(R.id.txt_total_pay_travel);
-        txt_startLocation=findViewById(R.id.txt_startLocation);
-        txt_destination=findViewById(R.id.txt_destination);
+    private void displayInformationCustomer(int state) {
+        txt_distance = findViewById(R.id.txt_distance);
+        customer_photo = findViewById(R.id.profile_photo_sheet);
+        txt_name = findViewById(R.id.txt_name);
+        txt_travelInformation = findViewById(R.id.txt_travel_information);
+        txt_total_pay_travel = findViewById(R.id.txt_total_pay_travel);
+        txt_startLocation = findViewById(R.id.txt_startLocation);
+        txt_destination = findViewById(R.id.txt_destination);
 
         bottomSheetBehavior.setPeekHeight(200);
         bottomSheetBehavior.setState(state);
         bottomSheetBehavior.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
     }
 
-    private void clearAllCustomerInformation(){
+    private void clearAllCustomerInformation() {
         txt_distance.setText("");
         customer_photo.setImageResource(R.drawable.default_user_login);
         txt_name.setText("");
@@ -248,25 +265,27 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     private DatabaseReference assignedCustomerPickUpLocationRef;
     private ValueEventListener assignedCustomerPickUpLocationRefListener;
     private LatLng driverLatLng;
+
     private void getAssignedCustomerLocation() {
-        assignedCustomerPickUpLocationRef=FirebaseDatabase.getInstance().getReference().child("customerRequest").child(customerId).child("l");
-        assignedCustomerPickUpLocationRefListener=assignedCustomerPickUpLocationRef.addValueEventListener(new ValueEventListener() {
+        assignedCustomerPickUpLocationRef = FirebaseDatabase.getInstance().getReference().child("customerRequest").child(customerId).child("l");
+        assignedCustomerPickUpLocationRefListener = assignedCustomerPickUpLocationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists() && !customerId.equals("")){
-                    List<Object> map=(List<Object>) snapshot.getValue();
-                    double locationLat=0;
-                    double locationLong=0;
-                    if(map.get(0)!=null){
-                        locationLat=Double.parseDouble(map.get(0).toString());
+                if (snapshot.exists() && !customerId.equals("")) {
+                    List<Object> map = (List<Object>) snapshot.getValue();
+                    double locationLat = 0;
+                    double locationLong = 0;
+                    if (map.get(0) != null) {
+                        locationLat = Double.parseDouble(map.get(0).toString());
                     }
-                    if(map.get(1)!=null){
-                        locationLong=Double.parseDouble(map.get(1).toString());
+                    if (map.get(1) != null) {
+                        locationLong = Double.parseDouble(map.get(1).toString());
                     }
-                    driverLatLng=new LatLng(locationLat,locationLong);
-                    pickupMarker=mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Pickup location")
-                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.location_pin_map_foreground)));
+                    driverLatLng = new LatLng(locationLat, locationLong);
+                    pickupMarker = mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Pickup location")
+                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.location_pin_map_foreground)));
                     getAssignedCustomerInfo();
+                    getRouteToMarker(driverLatLng);
                 }
             }
 
@@ -275,6 +294,19 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
             }
         });
+    }
+
+    private void getRouteToMarker(LatLng pickupMarker) {
+        Routing routing = new Routing.Builder()
+                .travelMode(AbstractRouting.TravelMode.DRIVING)
+                .withListener(this)
+                .alternativeRoutes(false)
+                .waypoints(new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude()), pickupMarker)
+                .key(getString(R.string.google_maps_key))
+                .build();
+        routing.execute();
+        LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
     }
 
     private void getToken() {
@@ -301,8 +333,8 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         button_notifications = findViewById(R.id.button_notifications);
         //button_settings = findViewById(R.id.buttonSettings);
         button_ubi = findViewById(R.id.buttonUbi);
-        button_customer=findViewById(R.id.buttonCustomer);
-        button_driver=findViewById(R.id.buttonDriver);
+        button_customer = findViewById(R.id.buttonCustomer);
+        button_driver = findViewById(R.id.buttonDriver);
         open = AnimationUtils.loadAnimation(this, R.anim.open_menu);
         close = AnimationUtils.loadAnimation(this, R.anim.close_menu);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -315,7 +347,8 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.sheet));
         bottomSheetBehavior.setHideable(true);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        btn_message=findViewById(R.id.button_message);
+        btn_message = findViewById(R.id.button_message);
+        polylines = new ArrayList<>();
         iniciarMapa();
         getUserData();
         initListeners();
@@ -430,7 +463,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         }
     }
 
-    private void animateMenu2(){
+    private void animateMenu2() {
         if (isOpen2) {
             button_driver.setVisibility(View.INVISIBLE);
             button_customer.setVisibility(View.INVISIBLE);
@@ -476,7 +509,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     }
 
     protected synchronized void buildGoogleApiClient() {
-        googleApiClient=new GoogleApiClient.Builder(this)
+        googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
@@ -486,33 +519,35 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        if (getApplicationContext()!=null) {
+        if (getApplicationContext() != null) {
 
-            myLastLocation=location;
-            LatLng latLng=new LatLng(location.getLatitude(),location.getLongitude());
+            myLastLocation = location;
+            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
 
-            String userId=firebaseAuth.getUid();
-            DatabaseReference referenceAvailable=FirebaseDatabase.getInstance().getReference("driverAvailable");
-            DatabaseReference refWorking=FirebaseDatabase.getInstance().getReference("driverWorking");
-            GeoFire geofireReference=new GeoFire(referenceAvailable);
-            GeoFire geofireWorking=new GeoFire(refWorking);
+            String userId = firebaseAuth.getUid();
+            DatabaseReference referenceAvailable = FirebaseDatabase.getInstance().getReference("driverAvailable");
+            DatabaseReference refWorking = FirebaseDatabase.getInstance().getReference("driverWorking");
+            GeoFire geofireReference = new GeoFire(referenceAvailable);
+            GeoFire geofireWorking = new GeoFire(refWorking);
 
-            switch (customerId){
+            switch (customerId) {
                 case "":
                     geofireWorking.removeLocation(userId);
-                    geofireReference.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
+                    geofireReference.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
                     break;
                 default:
                     geofireReference.removeLocation(userId);
-                    geofireWorking.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
+                    geofireWorking.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
                     break;
             }
 
         }
 
     }
+
+    private LocationCallback locationCallback;
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -521,10 +556,25 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         locationRequest.setFastestInterval(1000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(locationRequest);
+        LocationSettingsRequest locationSettingsRequest = builder.build();
+
+        SettingsClient settingsClient = LocationServices.getSettingsClient(this);
+        settingsClient.checkLocationSettings(locationSettingsRequest);
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                onLocationChanged(locationResult.getLastLocation());
+            }
+        };
+
+        LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
     }
 
     @Override
@@ -541,10 +591,10 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     protected void onStop() {
         super.onStop();
 
-        String userId=firebaseAuth.getUid();
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("driverAvailable");
+        String userId = firebaseAuth.getUid();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("driverAvailable");
 
-        GeoFire geofire=new GeoFire(reference);
+        GeoFire geofire = new GeoFire(reference);
         geofire.removeLocation(userId);
 
     }
@@ -561,7 +611,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
      * *********************************************************************************************************************************
      ***********************************************************************************************************************************/
 
-    private void getUserData(){
+    private void getUserData() {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
@@ -573,7 +623,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d("ERROR AL OBTENER LOS DATOS DEL USUARIO","ERROR AL OBTENER LOS DATOS DEL USUARIO "+e);
+                        Log.d("ERROR AL OBTENER LOS DATOS DEL USUARIO", "ERROR AL OBTENER LOS DATOS DEL USUARIO " + e);
                     }
                 });
             }
@@ -585,4 +635,62 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         return false;
     }
 
+    @Override
+    public void onRoutingFailure(RouteException e) {
+        if (e != null) {
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Something went wrong, Try again", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRoutingStart() {
+
+    }
+
+    @Override
+    public void onRoutingSuccess(ArrayList<Route> route, int fastestRoute) {
+        if (polylines.size() > 0) {
+            for (Polyline poly : polylines) {
+                poly.remove();
+            }
+        }
+
+        polylines = new ArrayList<>();
+        //add route(s) to the map.
+        for (int i = 0; i < route.size(); i++) {
+            //In case of more than 5 alternative routes
+            int colorIndex = i % COLORS.length;
+
+            PolylineOptions polyOptions = new PolylineOptions();
+            polyOptions.color(getResources().getColor(COLORS[colorIndex]));
+            polyOptions.width(10 + i * 6);
+            polyOptions.addAll(route.get(i).getPoints());
+            Polyline polyline = mMap.addPolyline(polyOptions);
+            polylines.add(polyline);
+
+            txt_travelInformation.setText("You will arrive in " + route.get(i).getDurationValue() + " seconds");
+
+        }
+
+    }
+
+    @Override
+    public void onRoutingCancelled() {
+
+    }
+
+    private void erasePolylines() {
+        for (Polyline line : polylines) {
+            line.remove();
+        }
+        polylines.clear();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        if(locationCallback!=null){
+            LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
+        }
+    }
 }
