@@ -4,7 +4,6 @@ package com.example.workroute.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -69,9 +68,6 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
   public final MaterialDivider divider;
 
   @NonNull
-  public final EditText edSearchPlace;
-
-  @NonNull
   public final RelativeLayout informationUser;
 
   @NonNull
@@ -117,7 +113,7 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
       @NonNull FloatingActionButton buttonNotifications,
       @NonNull FloatingActionButton buttonProfile, @NonNull FloatingActionButton buttonSearch,
       @NonNull FloatingActionButton buttonUbi, @NonNull MaterialCardView cardEdSearchPlace,
-      @NonNull TextView distance, @NonNull MaterialDivider divider, @NonNull EditText edSearchPlace,
+      @NonNull TextView distance, @NonNull MaterialDivider divider,
       @NonNull RelativeLayout informationUser, @NonNull LinearLayout lnDesc,
       @NonNull ImageButton locationIcon, @NonNull ImageButton locationIcon1,
       @NonNull ImageView profilePhotoSheet, @NonNull CoordinatorLayout rela,
@@ -139,7 +135,6 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
     this.cardEdSearchPlace = cardEdSearchPlace;
     this.distance = distance;
     this.divider = divider;
-    this.edSearchPlace = edSearchPlace;
     this.informationUser = informationUser;
     this.lnDesc = lnDesc;
     this.locationIcon = locationIcon;
@@ -260,12 +255,6 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.ed_search_place;
-      EditText edSearchPlace = ViewBindings.findChildViewById(rootView, id);
-      if (edSearchPlace == null) {
-        break missingId;
-      }
-
       id = R.id.information_user;
       RelativeLayout informationUser = ViewBindings.findChildViewById(rootView, id);
       if (informationUser == null) {
@@ -343,9 +332,9 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
       return new ActivityCustomerMapBinding((CoordinatorLayout) rootView, botonDrag, buttonCustomer,
           buttonDriver, buttonMenu, buttonMessage, buttonMessages, buttonNotifications,
           buttonProfile, buttonSearch, buttonUbi, cardEdSearchPlace, distance, divider,
-          edSearchPlace, informationUser, lnDesc, locationIcon, locationIcon1, profilePhotoSheet,
-          rela, requestTravel, secondSheet, secondSheetSearch, sheet, sheetSearch,
-          toolbarBottomSheet, txtName);
+          informationUser, lnDesc, locationIcon, locationIcon1, profilePhotoSheet, rela,
+          requestTravel, secondSheet, secondSheetSearch, sheet, sheetSearch, toolbarBottomSheet,
+          txtName);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

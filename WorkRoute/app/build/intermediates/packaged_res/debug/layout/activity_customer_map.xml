@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <fragment
             android:id="@+id/mapCustomer"
@@ -121,6 +121,7 @@
             android:src="@drawable/ic_baseline_person_24"
             app:tint="@color/white"
             tools:ignore="SpeakableTextPresentCheck" />
+
     </RelativeLayout>
 
     <FrameLayout
@@ -442,16 +443,11 @@
                         app:cardUseCompatPadding="true"
                         app:contentPadding="2dp">
 
-                        <EditText
-                            android:id="@+id/ed_search_place"
+                        <fragment android:id="@+id/autocomplete_fragment"
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:background="@android:color/transparent"
-                            android:drawableEnd="@drawable/ic_baseline_calendar_today_24"
-                            android:drawableTint="@color/secondary"
-                            android:hint="Where are you going?"
-                            android:paddingHorizontal="10dp"
-                            android:textColorHint="@color/black" />
+                            android:layout_height="wrap_content"
+                            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                            />
                     </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
