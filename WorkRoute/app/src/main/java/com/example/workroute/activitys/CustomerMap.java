@@ -142,6 +142,10 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
         startService(new Intent(this, ServicioOnline.class));
     }
 
+    /**
+     * OBTENEMOS EL TOKEN DE USUARIO PARA PODER GESTIONAR LAS NOTIFICACIONES
+     */
+
 
     private void getToken() {
         FirebaseMessaging.getInstance().getToken()
@@ -154,6 +158,11 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
                     }
                 });
     }
+
+    /**
+     * GUARDAMOS EL TOKEN PARA PODER RECUPERARLO Y MANDAR LAS NOTIFICIONES A LOS USUARIOS
+     * @param token
+     */
 
     private void saveToken(String token) {
         reference = FirebaseDatabase.getInstance().getReference().child("Token");
@@ -280,6 +289,21 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
 
     }
 
+    /**
+     * *********************************************************************************************************************************
+     * *********************************************************************************************************************************
+     * *********************************************************************************************************************************
+     *
+     *                             AQUI EMPIEZAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA DE LOS COJONES
+     *
+     * *********************************************************************************************************************************
+     * *********************************************************************************************************************************
+     ***********************************************************************************************************************************/
+
+    /**
+     * METODO PARA PEDIR UN VIAJE A UN CONDUCTOR
+     */
+
     private void requireARide(){
         if(requestBol){
             requestBol=false;
@@ -325,6 +349,7 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
         }
     }
 
+    //Método para resetear los campos de informacion del conducotr en el sheet
     private void clearAllCustomerInformation(){
         txt_distance.setText("");
         customer_photo.setImageResource(R.drawable.default_user_login);
@@ -334,6 +359,11 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
         txt_startLocation.setText("");
         txt_destination.setText("--");
     }
+
+    /**
+     * INICIO METODOS PARA DESPLEGAR LOS BOTTOM SHEETS
+     * @param state
+     */
 
     private void displaySearchSheet(int state){
         bottomSheetBehaviorSearch.setPeekHeight(200);
@@ -356,11 +386,23 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
 
     }
 
+    /**
+     * FIN METODOS PARA DESPLEGAR LOS BOTTOM SHEETS
+     * @param state
+     */
+
     private int radius=1;
     private Boolean driverFound=false;
     private String driverFoundId;
 
     GeoQuery geoQuery;
+
+    /**
+     * CON ESTE MÉTODO OBTENEMOS LO CONDUCTORES MÁS CERCANOS A NOSOTROS
+     * EN CASO DE NO ENCONTRAR EN EL RADIO INICIAL DE 1 AUMENTAREMOS DICHO RADIO PARA
+     * ABARCAR MAS MAPA Y BUSCAR MAS LEJOS
+     *
+     */
 
     private void getClosestDrivers() {
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("driverAvailable");
@@ -383,7 +425,6 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
                     driverRef.updateChildren(map);
 
                     getDriverLocation();
-                    getDriverInfo();
                     requestTravel.setText("Getting driver location...");
                 }
             }
@@ -398,6 +439,7 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
 
             }
 
+            //Aqui aumentamos el campo de búsqueda en el mapa
             @Override
             public void onGeoQueryReady() {
                 if(!driverFound){
@@ -412,6 +454,10 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
             }
         });
     }
+
+    /**
+     * UNA VEZ ENCONTRADO EL CONDUCTOR RECOGEMOS SUS DATOS PARA MOSTRARLO
+     */
 
     private void getDriverInfo() {
         displayInformationDriver(BottomSheetBehavior.STATE_EXPANDED);
@@ -461,6 +507,8 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
                             startActivity(intent);
                         }
                     });
+                }else{
+                    Toast.makeText(getApplicationContext(), "No existe", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -471,6 +519,9 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
         });
     }
 
+    /**
+     * OBTENEMOS LA UBICACION DEL CONDUCOTR PARA PINTARLA EN EL MAPA
+     */
 
     private Marker mDriverMarker;
     private DatabaseReference driverLocationRef;
@@ -499,6 +550,7 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
                     displaySearchSheet(BottomSheetBehavior.STATE_HIDDEN);
                     mDriverMarker=mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Your driver")
                             .icon(BitmapDescriptorFactory.fromResource(R.mipmap.car_map_foreground)));
+                    getDriverInfo();
                 }
             }
 
@@ -581,17 +633,6 @@ public class CustomerMap extends FragmentActivity implements com.google.android.
             isOpen2 = true;
         }
     }
-
-    /**
-     * *********************************************************************************************************************************
-     * *********************************************************************************************************************************
-     * *********************************************************************************************************************************
-     *
-     *                             AQUI EMPIEZAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA DE LOS COJONES
-     *
-     * *********************************************************************************************************************************
-     * *********************************************************************************************************************************
-     ***********************************************************************************************************************************/
 
 
     private void iniciarMapa() {

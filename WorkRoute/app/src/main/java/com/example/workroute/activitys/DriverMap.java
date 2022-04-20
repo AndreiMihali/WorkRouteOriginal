@@ -122,7 +122,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                 if(snapshot.exists()){
                     customerId=snapshot.getValue().toString();
                     getAssignedCustomerLocation();
-                    getAssignedCustomerInfo();
                     getAssignedCustomerDestination();
                 }else{
                     customerId="";
@@ -267,6 +266,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                     driverLatLng=new LatLng(locationLat,locationLong);
                     pickupMarker=mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Pickup location")
                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.location_pin_map_foreground)));
+                    getAssignedCustomerInfo();
                 }
             }
 
