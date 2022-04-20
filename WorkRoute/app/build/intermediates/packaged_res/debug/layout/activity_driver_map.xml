@@ -72,19 +72,6 @@
             app:tint="@color/white" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/buttonSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/button_notifications"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:backgroundTint="@color/secondary"
-            android:src="@drawable/ic_baseline_search_24"
-            android:visibility="invisible"
-            app:tint="@color/white" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/buttonUbi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,27 +86,27 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/buttonDriver"
-            android:layout_below="@id/buttonUbi"
             android:layout_width="wrap_content"
-            android:visibility="gone"
             android:layout_height="wrap_content"
+            android:layout_below="@id/buttonUbi"
             android:layout_alignEnd="@id/buttonUbi"
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/secondary"
             android:src="@drawable/ic_baseline_drive_eta_24"
+            android:visibility="invisible"
             app:tint="@color/white"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/buttonCustomer"
-            android:layout_below="@id/buttonDriver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/buttonDriver"
             android:layout_alignEnd="@id/buttonUbi"
             android:layout_marginTop="30dp"
-            android:visibility="gone"
             android:backgroundTint="@color/secondary"
             android:src="@drawable/ic_baseline_person_24"
+            android:visibility="invisible"
             app:tint="@color/white"
             tools:ignore="SpeakableTextPresentCheck" />
     </RelativeLayout>
@@ -218,26 +205,20 @@
                                 android:id="@+id/txt_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Andrei mihali is on te way"
+                                android:text="Andrei mihali is your customer"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/txt_travel_information"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
-                                android:text="12:43 PM Drop-off"
+                                android:text="The total travel is 20 km"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3dp"
-                                android:text="Affordable rides, all to your self"
-                                android:textColor="#838181"
-                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -248,10 +229,11 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/txt_total_pay_travel"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="end"
-                                android:text="XY23X5"
+                                android:text="20$"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -260,7 +242,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
-                                android:text="License Plate No."
+                                android:text="Total payout with this travel"
                                 android:textColor="#838181"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -311,6 +293,7 @@
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/txt_startLocation"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"

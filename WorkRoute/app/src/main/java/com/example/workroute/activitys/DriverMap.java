@@ -15,6 +15,7 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import com.bumptech.glide.Glide;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.kotlin.activities.ChatsActivity;
+import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.model.User;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.example.workroute.service.ServicioOnline;
@@ -68,7 +70,7 @@ import java.util.Map;
 
 public class DriverMap extends FragmentActivity implements com.google.android.gms.location.LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
-    private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_close, button_ubi,button_customer,button_driver;
+    private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_ubi,button_customer,button_driver;
     private Animation open, close, rotateForward, rotateBackWard;
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
@@ -81,9 +83,16 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     private GoogleApiClient googleApiClient;
     private Location myLastLocation;
     private LocationRequest locationRequest;
-
     private BottomSheetBehavior bottomSheetBehavior;
     private String customerId="";
+    private TextView txt_distance;
+    private ImageView customer_photo;
+    private TextView txt_name;
+    private TextView txt_travelInformation;
+    private ImageButton btn_message;
+    private TextView txt_total_pay_travel;
+    private TextView txt_startLocation;
+    private TextView txt_destination;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +115,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
     private void getAssignedCustomer() {
         String driverId=firebaseAuth.getUid();
-        DatabaseReference assignedCustomerId=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverId).child("costumerRequest").child("customerRideId");
+        DatabaseReference assignedCustomerId=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverId).child("customerRequest").child("customerRideId");
         assignedCustomerId.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -123,13 +132,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                     if(assignedCustomerPickUpLocationRefListener!=null){
                         assignedCustomerPickUpLocationRef.removeEventListener(assignedCustomerPickUpLocationRefListener);
                     }
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    bottomSheetBehavior.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
-                    initAllItemsInBotthom();
-                    txt_distance.setText("");
-                    txt_name.setText("");
-                    imageProfile.setImageResource(R.drawable.default_user_login);
-                    txt_destination.setText("--");
+                    displayInformationCustomer(BottomSheetBehavior.STATE_HIDDEN);
                 }
 
             }
@@ -142,9 +145,8 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     }
 
     private void getAssignedCustomerDestination() {
-        initAllItemsInBotthom();
         String driverId=firebaseAuth.getUid();
-        DatabaseReference assignedCustomerId=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverId).child("costumerRequest").child("destination");
+        DatabaseReference assignedCustomerId=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverId).child("customerRequest").child("destination");
         assignedCustomerId.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -164,16 +166,9 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         });
     }
 
-    private TextView txt_distance;
-    private ImageView imageProfile;
-    private TextView txt_name,txt_destination;
 
     private void getAssignedCustomerInfo() {
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        bottomSheetBehavior.setPeekHeight(200);
-        bottomSheetBehavior.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
-        initAllItemsInBotthom();
-
+        displayInformationCustomer(BottomSheetBehavior.STATE_EXPANDED);
         DatabaseReference mCustomerDatabase=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(customerId);
         mCustomerDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -193,17 +188,29 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                             float distance=loc1.distanceTo(loc2);
 
                             txt_distance.setText("You are "+String.valueOf(distance)+" meters away from "+map.get("nombre").toString());
-                            txt_name.setText(map.get("nombre").toString());
+                            txt_name.setText("Your customer is "+map.get("nombre").toString());
                         }
                     }
 
                     if(map.get("fotoPerfil")!=null){
                         if(map.get("fotoPerfil").toString().equals("")){
-                            imageProfile.setImageResource(R.drawable.default_user_login);
+                            customer_photo.setImageResource(R.drawable.default_user_login);
                         }else{
-                            Glide.with(getApplicationContext()).load(map.get("fotoPerfil").toString()).into(imageProfile);
+                            Glide.with(getApplicationContext()).load(map.get("fotoPerfil").toString()).into(customer_photo);
                         }
                     }
+
+                    btn_message.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent(DriverMap.this,MessagesActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    .putExtra("userId",customerId)
+                                    .putExtra("userName",map.get("nombre").toString())
+                                    .putExtra("userPhoto",map.get("fotoPerfil").toString());
+                            startActivity(intent);
+                        }
+                    });
                 }
             }
 
@@ -214,13 +221,29 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         });
     }
 
-    private void initAllItemsInBotthom(){
+    private void displayInformationCustomer(int state){
         txt_distance=findViewById(R.id.txt_distance);
-        imageProfile=findViewById(R.id.profile_photo_sheet);
+        customer_photo=findViewById(R.id.profile_photo_sheet);
         txt_name=findViewById(R.id.txt_name);
+        txt_travelInformation=findViewById(R.id.txt_travel_information);
+        txt_total_pay_travel=findViewById(R.id.txt_total_pay_travel);
+        txt_startLocation=findViewById(R.id.txt_startLocation);
         txt_destination=findViewById(R.id.txt_destination);
+
+        bottomSheetBehavior.setPeekHeight(200);
+        bottomSheetBehavior.setState(state);
+        bottomSheetBehavior.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
     }
 
+    private void clearAllCustomerInformation(){
+        txt_distance.setText("");
+        customer_photo.setImageResource(R.drawable.default_user_login);
+        txt_name.setText("");
+        txt_travelInformation.setText("");
+        txt_total_pay_travel.setText("");
+        txt_startLocation.setText("");
+        txt_destination.setText("--");
+    }
 
     private Marker pickupMarker;
     private DatabaseReference assignedCustomerPickUpLocationRef;
@@ -277,7 +300,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         button_profile = findViewById(R.id.buttonProfile);
         button_notifications = findViewById(R.id.button_notifications);
         //button_settings = findViewById(R.id.buttonSettings);
-        button_close = findViewById(R.id.buttonSearch);
         button_ubi = findViewById(R.id.buttonUbi);
         button_customer=findViewById(R.id.buttonCustomer);
         button_driver=findViewById(R.id.buttonDriver);
@@ -293,6 +315,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.sheet));
         bottomSheetBehavior.setHideable(true);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        btn_message=findViewById(R.id.button_message);
         iniciarMapa();
         getUserData();
         initListeners();
@@ -373,19 +396,16 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
             button_profile.startAnimation(close);
             button_notifications.startAnimation(close);
             //button_settings.startAnimation(close);
-            button_close.startAnimation(close);
 
             button_chats.setVisibility(View.INVISIBLE);
             button_profile.setVisibility(View.INVISIBLE);
             button_notifications.setVisibility(View.INVISIBLE);
             //button_settings.setVisibility(View.INVISIBLE);
-            button_close.setVisibility(View.INVISIBLE);
 
             button_chats.setClickable(false);
             button_profile.setClickable(false);
             button_notifications.setClickable(false);
             //button_settings.setClickable(false);
-            button_close.setClickable(false);
 
             isOpen = false;
         } else {
@@ -395,20 +415,17 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
             button_profile.startAnimation(open);
             button_notifications.startAnimation(open);
             //button_settings.startAnimation(open);
-            button_close.startAnimation(open);
 
 
             button_chats.setVisibility(View.VISIBLE);
             button_profile.setVisibility(View.VISIBLE);
             button_notifications.setVisibility(View.VISIBLE);
             //button_settings.setVisibility(View.VISIBLE);
-            button_close.setVisibility(View.VISIBLE);
 
             button_chats.setClickable(true);
             button_profile.setClickable(true);
             button_notifications.setClickable(true);
             //button_settings.setClickable(true);
-            button_close.setClickable(true);
             isOpen = true;
         }
     }

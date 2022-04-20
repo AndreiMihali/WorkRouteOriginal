@@ -144,12 +144,13 @@
                 android:src="@drawable/ic_baseline_remove_24" />
 
             <TextView
-                android:id="@+id/distance"
+                android:id="@+id/txt_distance_cost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/boton_drag"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="10dp"
+                android:text="Estimated time arrival is: 10:30 PM"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
@@ -181,15 +182,27 @@
                             app:cardCornerRadius="100dp">
 
                             <ImageView
-                                android:id="@+id/profile_photo_sheet"
+                                android:id="@+id/profile_photo_sheet_cost"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/default_user_login" />
                         </com.google.android.material.card.MaterialCardView>
 
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/button_cancel"
+                            android:layout_width="wrap_content"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            app:strokeColor="#CC1204"
+                            android:text="Cancel ride"
+                            android:textColor="@color/secondary"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:layout_centerInParent="true"
+                            android:layout_height="wrap_content"/>
+
                         <ImageButton
-                            android:id="@+id/button_message"
+                            android:id="@+id/button_message_cost"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -200,7 +213,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/information_user"
+                        android:id="@+id/information_user_cost"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/toolbar_bottom_sheet"
@@ -214,29 +227,23 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/txt_name"
+                                android:id="@+id/txt_name_cost"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Andrei mihali is on te way"
+                                android:text="Andrei mihali is your customer"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/txt_travel_information_cost"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
-                                android:text="12:43 PM Drop-off"
+                                android:text="The total travel is 20 km"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3dp"
-                                android:text="Affordable rides, all to your self"
-                                android:textColor="#838181"
-                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -247,10 +254,11 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/txt_total_pay_travel_cost"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="end"
-                                android:text="XY23X5"
+                                android:text="X122 VCN"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -269,7 +277,7 @@
                         android:id="@+id/divider"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/information_user"
+                        android:layout_below="@id/information_user_cost"
                         android:layout_marginHorizontal="15dp"
                         android:layout_marginTop="10dp"
                         app:dividerColor="@color/gray" />
@@ -310,6 +318,7 @@
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/txt_startLocation_cost"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
@@ -349,6 +358,7 @@
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/txt_destination_cost"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
@@ -360,9 +370,13 @@
                         </RelativeLayout>
                     </LinearLayout>
                 </RelativeLayout>
+
             </FrameLayout>
+
         </RelativeLayout>
+
     </FrameLayout>
+
     <FrameLayout
         android:id="@+id/sheet_search"
         android:layout_width="match_parent"
@@ -443,11 +457,16 @@
                         app:cardUseCompatPadding="true"
                         app:contentPadding="2dp">
 
-                        <fragment android:id="@+id/autocomplete_fragment"
+                        <EditText
+                            android:id="@+id/ed_search_place"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-                            />
+                            android:layout_height="50dp"
+                            android:background="@android:color/transparent"
+                            android:drawableEnd="@drawable/ic_baseline_calendar_today_24"
+                            android:drawableTint="@color/secondary"
+                            android:hint="Where are you going?"
+                            android:paddingHorizontal="10dp"
+                            android:textColorHint="@color/black" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout

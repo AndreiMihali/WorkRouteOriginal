@@ -4,6 +4,7 @@ package com.example.workroute.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -32,6 +33,9 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
   public final ImageView botonDrag;
 
   @NonNull
+  public final MaterialButton buttonCancel;
+
+  @NonNull
   public final FloatingActionButton buttonCustomer;
 
   @NonNull
@@ -41,7 +45,7 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
   public final FloatingActionButton buttonMenu;
 
   @NonNull
-  public final ImageButton buttonMessage;
+  public final ImageButton buttonMessageCost;
 
   @NonNull
   public final FloatingActionButton buttonMessages;
@@ -62,13 +66,13 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
   public final MaterialCardView cardEdSearchPlace;
 
   @NonNull
-  public final TextView distance;
-
-  @NonNull
   public final MaterialDivider divider;
 
   @NonNull
-  public final RelativeLayout informationUser;
+  public final EditText edSearchPlace;
+
+  @NonNull
+  public final RelativeLayout informationUserCost;
 
   @NonNull
   public final LinearLayout lnDesc;
@@ -80,7 +84,7 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
   public final ImageButton locationIcon1;
 
   @NonNull
-  public final ImageView profilePhotoSheet;
+  public final ImageView profilePhotoSheetCost;
 
   @NonNull
   public final CoordinatorLayout rela;
@@ -104,42 +108,61 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
   public final RelativeLayout toolbarBottomSheet;
 
   @NonNull
-  public final TextView txtName;
+  public final TextView txtDestinationCost;
+
+  @NonNull
+  public final TextView txtDistanceCost;
+
+  @NonNull
+  public final TextView txtNameCost;
+
+  @NonNull
+  public final TextView txtStartLocationCost;
+
+  @NonNull
+  public final TextView txtTotalPayTravelCost;
+
+  @NonNull
+  public final TextView txtTravelInformationCost;
 
   private ActivityCustomerMapBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull ImageView botonDrag, @NonNull FloatingActionButton buttonCustomer,
-      @NonNull FloatingActionButton buttonDriver, @NonNull FloatingActionButton buttonMenu,
-      @NonNull ImageButton buttonMessage, @NonNull FloatingActionButton buttonMessages,
+      @NonNull ImageView botonDrag, @NonNull MaterialButton buttonCancel,
+      @NonNull FloatingActionButton buttonCustomer, @NonNull FloatingActionButton buttonDriver,
+      @NonNull FloatingActionButton buttonMenu, @NonNull ImageButton buttonMessageCost,
+      @NonNull FloatingActionButton buttonMessages,
       @NonNull FloatingActionButton buttonNotifications,
       @NonNull FloatingActionButton buttonProfile, @NonNull FloatingActionButton buttonSearch,
       @NonNull FloatingActionButton buttonUbi, @NonNull MaterialCardView cardEdSearchPlace,
-      @NonNull TextView distance, @NonNull MaterialDivider divider,
-      @NonNull RelativeLayout informationUser, @NonNull LinearLayout lnDesc,
+      @NonNull MaterialDivider divider, @NonNull EditText edSearchPlace,
+      @NonNull RelativeLayout informationUserCost, @NonNull LinearLayout lnDesc,
       @NonNull ImageButton locationIcon, @NonNull ImageButton locationIcon1,
-      @NonNull ImageView profilePhotoSheet, @NonNull CoordinatorLayout rela,
+      @NonNull ImageView profilePhotoSheetCost, @NonNull CoordinatorLayout rela,
       @NonNull MaterialButton requestTravel, @NonNull FrameLayout secondSheet,
       @NonNull FrameLayout secondSheetSearch, @NonNull FrameLayout sheet,
       @NonNull FrameLayout sheetSearch, @NonNull RelativeLayout toolbarBottomSheet,
-      @NonNull TextView txtName) {
+      @NonNull TextView txtDestinationCost, @NonNull TextView txtDistanceCost,
+      @NonNull TextView txtNameCost, @NonNull TextView txtStartLocationCost,
+      @NonNull TextView txtTotalPayTravelCost, @NonNull TextView txtTravelInformationCost) {
     this.rootView = rootView;
     this.botonDrag = botonDrag;
+    this.buttonCancel = buttonCancel;
     this.buttonCustomer = buttonCustomer;
     this.buttonDriver = buttonDriver;
     this.buttonMenu = buttonMenu;
-    this.buttonMessage = buttonMessage;
+    this.buttonMessageCost = buttonMessageCost;
     this.buttonMessages = buttonMessages;
     this.buttonNotifications = buttonNotifications;
     this.buttonProfile = buttonProfile;
     this.buttonSearch = buttonSearch;
     this.buttonUbi = buttonUbi;
     this.cardEdSearchPlace = cardEdSearchPlace;
-    this.distance = distance;
     this.divider = divider;
-    this.informationUser = informationUser;
+    this.edSearchPlace = edSearchPlace;
+    this.informationUserCost = informationUserCost;
     this.lnDesc = lnDesc;
     this.locationIcon = locationIcon;
     this.locationIcon1 = locationIcon1;
-    this.profilePhotoSheet = profilePhotoSheet;
+    this.profilePhotoSheetCost = profilePhotoSheetCost;
     this.rela = rela;
     this.requestTravel = requestTravel;
     this.secondSheet = secondSheet;
@@ -147,7 +170,12 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
     this.sheet = sheet;
     this.sheetSearch = sheetSearch;
     this.toolbarBottomSheet = toolbarBottomSheet;
-    this.txtName = txtName;
+    this.txtDestinationCost = txtDestinationCost;
+    this.txtDistanceCost = txtDistanceCost;
+    this.txtNameCost = txtNameCost;
+    this.txtStartLocationCost = txtStartLocationCost;
+    this.txtTotalPayTravelCost = txtTotalPayTravelCost;
+    this.txtTravelInformationCost = txtTravelInformationCost;
   }
 
   @Override
@@ -183,6 +211,12 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.button_cancel;
+      MaterialButton buttonCancel = ViewBindings.findChildViewById(rootView, id);
+      if (buttonCancel == null) {
+        break missingId;
+      }
+
       id = R.id.buttonCustomer;
       FloatingActionButton buttonCustomer = ViewBindings.findChildViewById(rootView, id);
       if (buttonCustomer == null) {
@@ -201,9 +235,9 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.button_message;
-      ImageButton buttonMessage = ViewBindings.findChildViewById(rootView, id);
-      if (buttonMessage == null) {
+      id = R.id.button_message_cost;
+      ImageButton buttonMessageCost = ViewBindings.findChildViewById(rootView, id);
+      if (buttonMessageCost == null) {
         break missingId;
       }
 
@@ -243,21 +277,21 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.distance;
-      TextView distance = ViewBindings.findChildViewById(rootView, id);
-      if (distance == null) {
-        break missingId;
-      }
-
       id = R.id.divider;
       MaterialDivider divider = ViewBindings.findChildViewById(rootView, id);
       if (divider == null) {
         break missingId;
       }
 
-      id = R.id.information_user;
-      RelativeLayout informationUser = ViewBindings.findChildViewById(rootView, id);
-      if (informationUser == null) {
+      id = R.id.ed_search_place;
+      EditText edSearchPlace = ViewBindings.findChildViewById(rootView, id);
+      if (edSearchPlace == null) {
+        break missingId;
+      }
+
+      id = R.id.information_user_cost;
+      RelativeLayout informationUserCost = ViewBindings.findChildViewById(rootView, id);
+      if (informationUserCost == null) {
         break missingId;
       }
 
@@ -279,9 +313,9 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.profile_photo_sheet;
-      ImageView profilePhotoSheet = ViewBindings.findChildViewById(rootView, id);
-      if (profilePhotoSheet == null) {
+      id = R.id.profile_photo_sheet_cost;
+      ImageView profilePhotoSheetCost = ViewBindings.findChildViewById(rootView, id);
+      if (profilePhotoSheetCost == null) {
         break missingId;
       }
 
@@ -323,18 +357,49 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.txt_name;
-      TextView txtName = ViewBindings.findChildViewById(rootView, id);
-      if (txtName == null) {
+      id = R.id.txt_destination_cost;
+      TextView txtDestinationCost = ViewBindings.findChildViewById(rootView, id);
+      if (txtDestinationCost == null) {
         break missingId;
       }
 
-      return new ActivityCustomerMapBinding((CoordinatorLayout) rootView, botonDrag, buttonCustomer,
-          buttonDriver, buttonMenu, buttonMessage, buttonMessages, buttonNotifications,
-          buttonProfile, buttonSearch, buttonUbi, cardEdSearchPlace, distance, divider,
-          informationUser, lnDesc, locationIcon, locationIcon1, profilePhotoSheet, rela,
-          requestTravel, secondSheet, secondSheetSearch, sheet, sheetSearch, toolbarBottomSheet,
-          txtName);
+      id = R.id.txt_distance_cost;
+      TextView txtDistanceCost = ViewBindings.findChildViewById(rootView, id);
+      if (txtDistanceCost == null) {
+        break missingId;
+      }
+
+      id = R.id.txt_name_cost;
+      TextView txtNameCost = ViewBindings.findChildViewById(rootView, id);
+      if (txtNameCost == null) {
+        break missingId;
+      }
+
+      id = R.id.txt_startLocation_cost;
+      TextView txtStartLocationCost = ViewBindings.findChildViewById(rootView, id);
+      if (txtStartLocationCost == null) {
+        break missingId;
+      }
+
+      id = R.id.txt_total_pay_travel_cost;
+      TextView txtTotalPayTravelCost = ViewBindings.findChildViewById(rootView, id);
+      if (txtTotalPayTravelCost == null) {
+        break missingId;
+      }
+
+      id = R.id.txt_travel_information_cost;
+      TextView txtTravelInformationCost = ViewBindings.findChildViewById(rootView, id);
+      if (txtTravelInformationCost == null) {
+        break missingId;
+      }
+
+      return new ActivityCustomerMapBinding((CoordinatorLayout) rootView, botonDrag, buttonCancel,
+          buttonCustomer, buttonDriver, buttonMenu, buttonMessageCost, buttonMessages,
+          buttonNotifications, buttonProfile, buttonSearch, buttonUbi, cardEdSearchPlace, divider,
+          edSearchPlace, informationUserCost, lnDesc, locationIcon, locationIcon1,
+          profilePhotoSheetCost, rela, requestTravel, secondSheet, secondSheetSearch, sheet,
+          sheetSearch, toolbarBottomSheet, txtDestinationCost, txtDistanceCost, txtNameCost,
+          txtStartLocationCost, txtTotalPayTravelCost, txtTravelInformationCost);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

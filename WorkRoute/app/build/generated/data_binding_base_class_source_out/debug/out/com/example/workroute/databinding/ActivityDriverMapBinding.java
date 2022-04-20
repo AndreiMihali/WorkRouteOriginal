@@ -50,9 +50,6 @@ public final class ActivityDriverMapBinding implements ViewBinding {
   public final FloatingActionButton buttonProfile;
 
   @NonNull
-  public final FloatingActionButton buttonSearch;
-
-  @NonNull
   public final FloatingActionButton buttonUbi;
 
   @NonNull
@@ -91,18 +88,28 @@ public final class ActivityDriverMapBinding implements ViewBinding {
   @NonNull
   public final TextView txtName;
 
+  @NonNull
+  public final TextView txtStartLocation;
+
+  @NonNull
+  public final TextView txtTotalPayTravel;
+
+  @NonNull
+  public final TextView txtTravelInformation;
+
   private ActivityDriverMapBinding(@NonNull CoordinatorLayout rootView,
       @NonNull ImageView botonDrag, @NonNull FloatingActionButton buttonCustomer,
       @NonNull FloatingActionButton buttonDriver, @NonNull FloatingActionButton buttonMenu,
       @NonNull ImageButton buttonMessage, @NonNull FloatingActionButton buttonMessages,
       @NonNull FloatingActionButton buttonNotifications,
-      @NonNull FloatingActionButton buttonProfile, @NonNull FloatingActionButton buttonSearch,
-      @NonNull FloatingActionButton buttonUbi, @NonNull MaterialDivider divider,
-      @NonNull RelativeLayout informationUser, @NonNull ImageButton locationIcon,
-      @NonNull ImageButton locationIcon1, @NonNull ImageView profilePhotoSheet,
-      @NonNull CoordinatorLayout rela, @NonNull FrameLayout secondSheet, @NonNull FrameLayout sheet,
+      @NonNull FloatingActionButton buttonProfile, @NonNull FloatingActionButton buttonUbi,
+      @NonNull MaterialDivider divider, @NonNull RelativeLayout informationUser,
+      @NonNull ImageButton locationIcon, @NonNull ImageButton locationIcon1,
+      @NonNull ImageView profilePhotoSheet, @NonNull CoordinatorLayout rela,
+      @NonNull FrameLayout secondSheet, @NonNull FrameLayout sheet,
       @NonNull RelativeLayout toolbarBottomSheet, @NonNull TextView txtDestination,
-      @NonNull TextView txtDistance, @NonNull TextView txtName) {
+      @NonNull TextView txtDistance, @NonNull TextView txtName, @NonNull TextView txtStartLocation,
+      @NonNull TextView txtTotalPayTravel, @NonNull TextView txtTravelInformation) {
     this.rootView = rootView;
     this.botonDrag = botonDrag;
     this.buttonCustomer = buttonCustomer;
@@ -112,7 +119,6 @@ public final class ActivityDriverMapBinding implements ViewBinding {
     this.buttonMessages = buttonMessages;
     this.buttonNotifications = buttonNotifications;
     this.buttonProfile = buttonProfile;
-    this.buttonSearch = buttonSearch;
     this.buttonUbi = buttonUbi;
     this.divider = divider;
     this.informationUser = informationUser;
@@ -126,6 +132,9 @@ public final class ActivityDriverMapBinding implements ViewBinding {
     this.txtDestination = txtDestination;
     this.txtDistance = txtDistance;
     this.txtName = txtName;
+    this.txtStartLocation = txtStartLocation;
+    this.txtTotalPayTravel = txtTotalPayTravel;
+    this.txtTravelInformation = txtTravelInformation;
   }
 
   @Override
@@ -203,12 +212,6 @@ public final class ActivityDriverMapBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.buttonSearch;
-      FloatingActionButton buttonSearch = ViewBindings.findChildViewById(rootView, id);
-      if (buttonSearch == null) {
-        break missingId;
-      }
-
       id = R.id.buttonUbi;
       FloatingActionButton buttonUbi = ViewBindings.findChildViewById(rootView, id);
       if (buttonUbi == null) {
@@ -283,11 +286,29 @@ public final class ActivityDriverMapBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.txt_startLocation;
+      TextView txtStartLocation = ViewBindings.findChildViewById(rootView, id);
+      if (txtStartLocation == null) {
+        break missingId;
+      }
+
+      id = R.id.txt_total_pay_travel;
+      TextView txtTotalPayTravel = ViewBindings.findChildViewById(rootView, id);
+      if (txtTotalPayTravel == null) {
+        break missingId;
+      }
+
+      id = R.id.txt_travel_information;
+      TextView txtTravelInformation = ViewBindings.findChildViewById(rootView, id);
+      if (txtTravelInformation == null) {
+        break missingId;
+      }
+
       return new ActivityDriverMapBinding((CoordinatorLayout) rootView, botonDrag, buttonCustomer,
           buttonDriver, buttonMenu, buttonMessage, buttonMessages, buttonNotifications,
-          buttonProfile, buttonSearch, buttonUbi, divider, informationUser, locationIcon,
-          locationIcon1, profilePhotoSheet, rela, secondSheet, sheet, toolbarBottomSheet,
-          txtDestination, txtDistance, txtName);
+          buttonProfile, buttonUbi, divider, informationUser, locationIcon, locationIcon1,
+          profilePhotoSheet, rela, secondSheet, sheet, toolbarBottomSheet, txtDestination,
+          txtDistance, txtName, txtStartLocation, txtTotalPayTravel, txtTravelInformation);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

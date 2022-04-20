@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
@@ -34,6 +35,9 @@ public final class ActivityDrivingLicenseBinding implements ViewBinding {
   public final View divider;
 
   @NonNull
+  public final View divider2;
+
+  @NonNull
   public final ImageView imageCarnetFrente;
 
   @NonNull
@@ -45,20 +49,29 @@ public final class ActivityDrivingLicenseBinding implements ViewBinding {
   @NonNull
   public final MaterialToolbar toolbar;
 
+  @NonNull
+  public final TextView tvFront;
+
+  @NonNull
+  public final TextView tvReverse;
+
   private ActivityDrivingLicenseBinding(@NonNull RelativeLayout rootView,
       @NonNull Button buttonFront, @NonNull Button buttonReverse, @NonNull Button buttonSaveLicense,
-      @NonNull View divider, @NonNull ImageView imageCarnetFrente,
+      @NonNull View divider, @NonNull View divider2, @NonNull ImageView imageCarnetFrente,
       @NonNull ImageView imageCarnetReverso, @NonNull RelativeLayout relativeLayout,
-      @NonNull MaterialToolbar toolbar) {
+      @NonNull MaterialToolbar toolbar, @NonNull TextView tvFront, @NonNull TextView tvReverse) {
     this.rootView = rootView;
     this.buttonFront = buttonFront;
     this.buttonReverse = buttonReverse;
     this.buttonSaveLicense = buttonSaveLicense;
     this.divider = divider;
+    this.divider2 = divider2;
     this.imageCarnetFrente = imageCarnetFrente;
     this.imageCarnetReverso = imageCarnetReverso;
     this.relativeLayout = relativeLayout;
     this.toolbar = toolbar;
+    this.tvFront = tvFront;
+    this.tvReverse = tvReverse;
   }
 
   @Override
@@ -112,6 +125,12 @@ public final class ActivityDrivingLicenseBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.divider2;
+      View divider2 = ViewBindings.findChildViewById(rootView, id);
+      if (divider2 == null) {
+        break missingId;
+      }
+
       id = R.id.imageCarnetFrente;
       ImageView imageCarnetFrente = ViewBindings.findChildViewById(rootView, id);
       if (imageCarnetFrente == null) {
@@ -132,9 +151,21 @@ public final class ActivityDrivingLicenseBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvFront;
+      TextView tvFront = ViewBindings.findChildViewById(rootView, id);
+      if (tvFront == null) {
+        break missingId;
+      }
+
+      id = R.id.tvReverse;
+      TextView tvReverse = ViewBindings.findChildViewById(rootView, id);
+      if (tvReverse == null) {
+        break missingId;
+      }
+
       return new ActivityDrivingLicenseBinding((RelativeLayout) rootView, buttonFront,
-          buttonReverse, buttonSaveLicense, divider, imageCarnetFrente, imageCarnetReverso,
-          relativeLayout, toolbar);
+          buttonReverse, buttonSaveLicense, divider, divider2, imageCarnetFrente,
+          imageCarnetReverso, relativeLayout, toolbar, tvFront, tvReverse);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
