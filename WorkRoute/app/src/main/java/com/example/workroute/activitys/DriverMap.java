@@ -305,8 +305,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                 .key(getString(R.string.google_maps_key))
                 .build();
         routing.execute();
-        LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
     }
 
     private void getToken() {
@@ -686,11 +684,5 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
             line.remove();
         }
         polylines.clear();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        if(locationCallback!=null){
-            LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
-        }
     }
 }
