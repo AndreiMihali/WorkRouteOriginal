@@ -192,19 +192,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                 if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
                     Map<String, Object> map = (Map<String, Object>) snapshot.getValue();
                     if (map.get("nombre") != null) {
-                        if (myLastLocation != null && driverLatLng != null) {
-                            Location loc1 = new Location("");
-                            loc1.setLatitude(myLastLocation.getLatitude());
-                            loc1.setLongitude(myLastLocation.getLongitude());
-
-                            Location loc2 = new Location("");
-                            loc2.setLatitude(driverLatLng.latitude);
-                            loc2.setLongitude(driverLatLng.longitude);
-
-                            float distance = loc1.distanceTo(loc2);
-
-                            txt_name.setText("Your customer is " + map.get("nombre").toString());
-                        }
+                        txt_name.setText("Your customer is " + map.get("nombre").toString());
                     }
 
                     if (map.get("fotoPerfil") != null) {
@@ -520,7 +508,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     @Override
     public void onLocationChanged(@NonNull Location location) {
         if (getApplicationContext() != null) {
-
             myLastLocation = location;
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
