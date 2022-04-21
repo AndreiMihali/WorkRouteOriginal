@@ -203,7 +203,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
                             float distance = loc1.distanceTo(loc2);
 
-                            txt_distance.setText("You are " + String.valueOf(distance) + " meters away from " + map.get("nombre").toString());
                             txt_name.setText("Your customer is " + map.get("nombre").toString());
                         }
                     }
@@ -305,6 +304,9 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                 .key(getString(R.string.google_maps_key))
                 .build();
         routing.execute();
+        LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        setAvailable(myLastLocation);
     }
 
     private void getToken() {
@@ -523,26 +525,27 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
-
-            String userId = firebaseAuth.getUid();
-            DatabaseReference referenceAvailable = FirebaseDatabase.getInstance().getReference("driverAvailable");
-            DatabaseReference refWorking = FirebaseDatabase.getInstance().getReference("driverWorking");
-            GeoFire geofireReference = new GeoFire(referenceAvailable);
-            GeoFire geofireWorking = new GeoFire(refWorking);
-
-            switch (customerId) {
-                case "":
-                    geofireWorking.removeLocation(userId);
-                    geofireReference.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
-                    break;
-                default:
-                    geofireReference.removeLocation(userId);
-                    geofireWorking.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
-                    break;
-            }
-
+            setAvailable(location);
         }
+    }
 
+    private void setAvailable(Location location) {
+        String userId = firebaseAuth.getUid();
+        DatabaseReference referenceAvailable = FirebaseDatabase.getInstance().getReference("driverAvailable");
+        DatabaseReference refWorking = FirebaseDatabase.getInstance().getReference("driverWorking");
+        GeoFire geofireReference = new GeoFire(referenceAvailable);
+        GeoFire geofireWorking = new GeoFire(refWorking);
+
+        switch (customerId) {
+            case "":
+                geofireWorking.removeLocation(userId);
+                geofireReference.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
+                break;
+            default:
+                geofireReference.removeLocation(userId);
+                geofireWorking.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
+                break;
+        }
     }
 
     private LocationCallback locationCallback;
@@ -663,13 +666,13 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
             PolylineOptions polyOptions = new PolylineOptions();
             polyOptions.color(getResources().getColor(COLORS[colorIndex]));
-            polyOptions.width(10 + i * 6);
+            polyOptions.width(25 + i * 20);
             polyOptions.addAll(route.get(i).getPoints());
             Polyline polyline = mMap.addPolyline(polyOptions);
             polylines.add(polyline);
 
-            txt_travelInformation.setText("You will arrive in " + route.get(i).getDurationValue() + " seconds");
-
+            txt_travelInformation.setText("You will arrive in " + route.get(i).getDurationText());
+            txt_distance.setText("You are " + route.get(i).getDistanceText() + " away");
         }
 
     }
@@ -684,5 +687,13 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
             line.remove();
         }
         polylines.clear();
+
+        if (locationCallback != null) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+
+            LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
+        }
     }
 }

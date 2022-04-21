@@ -486,24 +486,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
                 if(snapshot.exists() && snapshot.getChildrenCount()>0){
                     Map<String,Object> map=(Map<String, Object>) snapshot.getValue();
                     if(map.get("nombre")!=null){
-                        if(myLastLocation!=null && driverLatLng!=null){
-                            Location loc1=new Location("");
-                            loc1.setLatitude(myLastLocation.getLatitude());
-                            loc1.setLongitude(myLastLocation.getLongitude());
-
-                            Location loc2=new Location("");
-                            loc2.setLatitude(driverLatLng.latitude);
-                            loc2.setLongitude(driverLatLng.longitude);
-
-                            float distance=loc1.distanceTo(loc2);
-
-                            if (distance<100) {
-                                txt_distance.setText(map.get("nombre").toString()+" is here");
-                            }else{
-                                txt_distance.setText(map.get("nombre").toString()+" is "+ String.valueOf(distance)+" meters away from you");
-                            }
-                            txt_name.setText(map.get("nombre").toString()+" is in the way");
-                        }
+                        txt_name.setText(map.get("nombre").toString()+" is in the way");
                     }
 
                     if(map.get("fotoPerfil")!=null){
@@ -585,7 +568,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
                 .travelMode(AbstractRouting.TravelMode.DRIVING)
                 .withListener(this)
                 .alternativeRoutes(false)
-                .waypoints(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()), pickupMarker)
+                .waypoints(pickupMarker,new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()))
                 .key(getString(R.string.google_maps_key))
                 .build();
         routing.execute();
@@ -820,10 +803,14 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
 
             PolylineOptions polyOptions = new PolylineOptions();
             polyOptions.color(getResources().getColor(COLORS[colorIndex]));
-            polyOptions.width(10 + i * 6);
+            polyOptions.width(25 + i * 20);
             polyOptions.addAll(route.get(i).getPoints());
             Polyline polyline = mMap.addPolyline(polyOptions);
             polylines.add(polyline);
+
+            txt_travelInformation.setText("Your driver will arrive in " + route.get(i).getDurationText());
+            txt_distance.setText("Your driver is "+route.get(i).getDistanceText()+" away");
+
 
         }
 
