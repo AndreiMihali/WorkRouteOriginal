@@ -15,6 +15,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.divider.MaterialDivider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.NullPointerException;
@@ -27,6 +28,9 @@ public final class ActivityDriverMapBinding implements ViewBinding {
 
   @NonNull
   public final ImageView botonDrag;
+
+  @NonNull
+  public final MaterialButton btnRideStatus;
 
   @NonNull
   public final FloatingActionButton buttonCustomer;
@@ -98,9 +102,10 @@ public final class ActivityDriverMapBinding implements ViewBinding {
   public final TextView txtTravelInformation;
 
   private ActivityDriverMapBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull ImageView botonDrag, @NonNull FloatingActionButton buttonCustomer,
-      @NonNull FloatingActionButton buttonDriver, @NonNull FloatingActionButton buttonMenu,
-      @NonNull ImageButton buttonMessage, @NonNull FloatingActionButton buttonMessages,
+      @NonNull ImageView botonDrag, @NonNull MaterialButton btnRideStatus,
+      @NonNull FloatingActionButton buttonCustomer, @NonNull FloatingActionButton buttonDriver,
+      @NonNull FloatingActionButton buttonMenu, @NonNull ImageButton buttonMessage,
+      @NonNull FloatingActionButton buttonMessages,
       @NonNull FloatingActionButton buttonNotifications,
       @NonNull FloatingActionButton buttonProfile, @NonNull FloatingActionButton buttonUbi,
       @NonNull MaterialDivider divider, @NonNull RelativeLayout informationUser,
@@ -112,6 +117,7 @@ public final class ActivityDriverMapBinding implements ViewBinding {
       @NonNull TextView txtTotalPayTravel, @NonNull TextView txtTravelInformation) {
     this.rootView = rootView;
     this.botonDrag = botonDrag;
+    this.btnRideStatus = btnRideStatus;
     this.buttonCustomer = buttonCustomer;
     this.buttonDriver = buttonDriver;
     this.buttonMenu = buttonMenu;
@@ -167,6 +173,12 @@ public final class ActivityDriverMapBinding implements ViewBinding {
       id = R.id.boton_drag;
       ImageView botonDrag = ViewBindings.findChildViewById(rootView, id);
       if (botonDrag == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_rideStatus;
+      MaterialButton btnRideStatus = ViewBindings.findChildViewById(rootView, id);
+      if (btnRideStatus == null) {
         break missingId;
       }
 
@@ -304,11 +316,12 @@ public final class ActivityDriverMapBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityDriverMapBinding((CoordinatorLayout) rootView, botonDrag, buttonCustomer,
-          buttonDriver, buttonMenu, buttonMessage, buttonMessages, buttonNotifications,
-          buttonProfile, buttonUbi, divider, informationUser, locationIcon, locationIcon1,
-          profilePhotoSheet, rela, secondSheet, sheet, toolbarBottomSheet, txtDestination,
-          txtDistance, txtName, txtStartLocation, txtTotalPayTravel, txtTravelInformation);
+      return new ActivityDriverMapBinding((CoordinatorLayout) rootView, botonDrag, btnRideStatus,
+          buttonCustomer, buttonDriver, buttonMenu, buttonMessage, buttonMessages,
+          buttonNotifications, buttonProfile, buttonUbi, divider, informationUser, locationIcon,
+          locationIcon1, profilePhotoSheet, rela, secondSheet, sheet, toolbarBottomSheet,
+          txtDestination, txtDistance, txtName, txtStartLocation, txtTotalPayTravel,
+          txtTravelInformation);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -4,7 +4,6 @@ package com.example.workroute.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -69,9 +68,6 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
   public final MaterialDivider divider;
 
   @NonNull
-  public final EditText edSearchPlace;
-
-  @NonNull
   public final RelativeLayout informationUserCost;
 
   @NonNull
@@ -133,16 +129,16 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
       @NonNull FloatingActionButton buttonNotifications,
       @NonNull FloatingActionButton buttonProfile, @NonNull FloatingActionButton buttonSearch,
       @NonNull FloatingActionButton buttonUbi, @NonNull MaterialCardView cardEdSearchPlace,
-      @NonNull MaterialDivider divider, @NonNull EditText edSearchPlace,
-      @NonNull RelativeLayout informationUserCost, @NonNull LinearLayout lnDesc,
-      @NonNull ImageButton locationIcon, @NonNull ImageButton locationIcon1,
-      @NonNull ImageView profilePhotoSheetCost, @NonNull CoordinatorLayout rela,
-      @NonNull MaterialButton requestTravel, @NonNull FrameLayout secondSheet,
-      @NonNull FrameLayout secondSheetSearch, @NonNull FrameLayout sheet,
-      @NonNull FrameLayout sheetSearch, @NonNull RelativeLayout toolbarBottomSheet,
-      @NonNull TextView txtDestinationCost, @NonNull TextView txtDistanceCost,
-      @NonNull TextView txtNameCost, @NonNull TextView txtStartLocationCost,
-      @NonNull TextView txtTotalPayTravelCost, @NonNull TextView txtTravelInformationCost) {
+      @NonNull MaterialDivider divider, @NonNull RelativeLayout informationUserCost,
+      @NonNull LinearLayout lnDesc, @NonNull ImageButton locationIcon,
+      @NonNull ImageButton locationIcon1, @NonNull ImageView profilePhotoSheetCost,
+      @NonNull CoordinatorLayout rela, @NonNull MaterialButton requestTravel,
+      @NonNull FrameLayout secondSheet, @NonNull FrameLayout secondSheetSearch,
+      @NonNull FrameLayout sheet, @NonNull FrameLayout sheetSearch,
+      @NonNull RelativeLayout toolbarBottomSheet, @NonNull TextView txtDestinationCost,
+      @NonNull TextView txtDistanceCost, @NonNull TextView txtNameCost,
+      @NonNull TextView txtStartLocationCost, @NonNull TextView txtTotalPayTravelCost,
+      @NonNull TextView txtTravelInformationCost) {
     this.rootView = rootView;
     this.botonDrag = botonDrag;
     this.buttonCancel = buttonCancel;
@@ -157,7 +153,6 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
     this.buttonUbi = buttonUbi;
     this.cardEdSearchPlace = cardEdSearchPlace;
     this.divider = divider;
-    this.edSearchPlace = edSearchPlace;
     this.informationUserCost = informationUserCost;
     this.lnDesc = lnDesc;
     this.locationIcon = locationIcon;
@@ -283,12 +278,6 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.ed_search_place;
-      EditText edSearchPlace = ViewBindings.findChildViewById(rootView, id);
-      if (edSearchPlace == null) {
-        break missingId;
-      }
-
       id = R.id.information_user_cost;
       RelativeLayout informationUserCost = ViewBindings.findChildViewById(rootView, id);
       if (informationUserCost == null) {
@@ -396,10 +385,10 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
       return new ActivityCustomerMapBinding((CoordinatorLayout) rootView, botonDrag, buttonCancel,
           buttonCustomer, buttonDriver, buttonMenu, buttonMessageCost, buttonMessages,
           buttonNotifications, buttonProfile, buttonSearch, buttonUbi, cardEdSearchPlace, divider,
-          edSearchPlace, informationUserCost, lnDesc, locationIcon, locationIcon1,
-          profilePhotoSheetCost, rela, requestTravel, secondSheet, secondSheetSearch, sheet,
-          sheetSearch, toolbarBottomSheet, txtDestinationCost, txtDistanceCost, txtNameCost,
-          txtStartLocationCost, txtTotalPayTravelCost, txtTravelInformationCost);
+          informationUserCost, lnDesc, locationIcon, locationIcon1, profilePhotoSheetCost, rela,
+          requestTravel, secondSheet, secondSheetSearch, sheet, sheetSearch, toolbarBottomSheet,
+          txtDestinationCost, txtDistanceCost, txtNameCost, txtStartLocationCost,
+          txtTotalPayTravelCost, txtTravelInformationCost);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

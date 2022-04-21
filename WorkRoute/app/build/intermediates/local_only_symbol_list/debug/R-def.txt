@@ -109,6 +109,7 @@ drawable round_bottom_sheet
 drawable steven_binotto_9vduc_sgrsi_unsplash
 drawable workroute2icono
 id appNotifications
+id autocomplete_fragment
 id boton_drag
 id bottom_sheet_payMethod
 id btn_addPayMethod
@@ -116,6 +117,7 @@ id btn_customer
 id btn_deletePayMethods
 id btn_driver
 id btn_otherMethods
+id btn_rideStatus
 id btn_send
 id buttonCustomer
 id buttonDriver
@@ -170,7 +172,6 @@ id ed_email_register
 id ed_message
 id ed_pass
 id ed_pass_register
-id ed_search_place
 id ed_username_register
 id editProfile
 id emailNotifications

@@ -19,6 +19,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -80,8 +82,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.TypeFilter;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -99,14 +105,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class CustomerMap extends FragmentActivity implements RoutingListener,com.google.android.gms.location.LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
+    private static final int AUTOCOMPLETE_REQUEST_CODE = 101;
     private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_close, button_ubi,button_customer,button_driver;
     private Animation open, close, rotateForward, rotateBackWard;
     private GoogleMap mMap;
@@ -127,7 +136,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
     private boolean requestBol=false;
     private Marker pickupMarker;
     private String destination;
-    private EditText ed_destination;
     private TextView txt_distance;
     private ImageView customer_photo;
     private TextView txt_name;
@@ -139,6 +147,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
     private MaterialButton btn_cancel;
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.secondary};
+    private LatLng destinationLatLng;
 
 
     @Override
@@ -202,7 +211,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         progressDialog = new ProgressDialog(this, R.style.ProgressDialog);
         rotateForward = AnimationUtils.loadAnimation(this, R.anim.rotate_forward);
         rotateBackWard = AnimationUtils.loadAnimation(this, R.anim.rotate_backward);
-        progressDialog.setMessage("Checking your location. This can take a while...");
         progressDialog.setCanceledOnTouchOutside(false);
         bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.sheet));
         bottomSheetBehavior.setHideable(true);
@@ -211,10 +219,11 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         bottomSheetBehaviorSearch.setHideable(true);
         bottomSheetBehaviorSearch.setState(BottomSheetBehavior.STATE_HIDDEN);
         requestTravel=findViewById(R.id.requestTravel);
-        ed_destination=findViewById(R.id.ed_search_place);
         btn_cancel=findViewById(R.id.button_cancel);
         btn_message=findViewById(R.id.button_message_cost);
         polylines=new ArrayList<>();
+        destinationLatLng=new LatLng(0.0,0.0);
+        Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         iniciarMapa();
         getUserData();
         initListeners();
@@ -296,11 +305,26 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         requestTravel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(!ed_destination.getText().toString().isEmpty()){
-                    destination=ed_destination.getText().toString();
-                }
                 requireARide();
+            }
+        });
+
+
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                destination=place.getName().toString();
+                destinationLatLng=place.getLatLng();
+            }
+
+
+            @Override
+            public void onError(@NonNull Status status) {
             }
         });
 
@@ -323,31 +347,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
 
     private void requireARide(){
         if(requestBol){
-            requestBol=false;
-            geoQuery.removeAllListeners();
-            driverLocationRef.removeEventListener(driverLocationRefListener);
-
-            if(driverFoundId!=null){
-                DatabaseReference driverRef=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverFoundId).child("customerRequest");
-                driverRef.removeValue();
-                driverFoundId=null;
-            }
-
-            driverFound=false;
-            radius=1;
-            String userId=firebaseAuth.getUid();
-            DatabaseReference reference=FirebaseDatabase.getInstance().getReference("customerRequest");
-            GeoFire geoFire=new GeoFire(reference);
-            geoFire.removeLocation(userId);
-
-            if(pickupMarker!=null){
-                pickupMarker.remove();
-            }
-
-            Toast.makeText(getApplicationContext(),"You just canceled the travel",Toast.LENGTH_LONG).show();
-            displayInformationDriver(BottomSheetBehavior.STATE_HIDDEN);
-            erasePolylines();
-
+            endRide();
         }else{
             requestBol=true;
 
@@ -360,7 +360,8 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
             pickUpLocation=new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude());
             pickupMarker=mMap.addMarker(new MarkerOptions().position(pickUpLocation).title("Pickup Here")
                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.location_pin_map_foreground)));
-            requestTravel.setText("Searching for drivers...");
+            progressDialog.setMessage("Searching for drivers...");
+            progressDialog.show();
 
 
             getClosestDrivers();
@@ -440,10 +441,12 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
                     HashMap map=new HashMap();
                     map.put("customerRideId",customerId);
                     map.put("destination",destination);
+                    map.put("destinationLat",destinationLatLng.latitude);
+                    map.put("destinationLong",destinationLatLng.longitude);
                     driverRef.updateChildren(map);
 
                     getDriverLocation();
-                    requestTravel.setText("Getting driver location...");
+                    progressDialog.setMessage("Getting driver location...");
                 }
             }
 
@@ -497,6 +500,9 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
                         }
                     }
 
+                    txt_destination.setText(destination);
+                    txt_startLocation.setText(getGeocoderAddress());
+
                     btn_message.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -508,8 +514,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
                             startActivity(intent);
                         }
                     });
-                }else{
-                    Toast.makeText(getApplicationContext(), "No existe", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -518,6 +522,20 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
 
             }
         });
+    }
+
+    private String getGeocoderAddress(){
+        Geocoder geocoder=new Geocoder(CustomerMap.this, Locale.getDefault());
+        String address="";
+        try{
+            List<Address> listAddress=geocoder.getFromLocation(myLastLocation.getLatitude(),myLastLocation.getLongitude(),1);
+            if(listAddress.size()>0){
+                address=listAddress.get(0).getAddressLine(0);
+            }
+        }catch (IOException e){
+            Log.e("Error",e.toString());
+        }
+        return address;
     }
 
     /**
@@ -547,11 +565,12 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
                     if(mDriverMarker != null){
                         mDriverMarker.remove();
                     }
-
+                    progressDialog.dismiss();
                     displaySearchSheet(BottomSheetBehavior.STATE_HIDDEN);
                     mDriverMarker=mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Your driver")
                             .icon(BitmapDescriptorFactory.fromResource(R.mipmap.car_map_foreground)));
                     getDriverInfo();
+                    getHasRideEnded();
                     getRouteToMarker(driverLatLng);
                 }
             }
@@ -576,6 +595,60 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
     }
 
+    private DatabaseReference driverHasEndedRef;
+    private ValueEventListener driverHasEndedRefListener;
+    private void getHasRideEnded() {
+        driverHasEndedRef = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverFoundId).child("customerRequest").child("customerRideId");
+        driverLocationRefListener=driverHasEndedRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+
+                } else {
+                    endRide();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void endRide() {
+        requestBol=false;
+        geoQuery.removeAllListeners();
+        if(driverLocationRefListener!=null){
+            driverLocationRef.removeEventListener(driverLocationRefListener);
+        }
+
+        if(driverHasEndedRefListener!=null){
+            driverHasEndedRef.removeEventListener(driverHasEndedRefListener);
+        }
+
+        if(driverFoundId!=null){
+            DatabaseReference driverRef=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverFoundId).child("customerRequest");
+            driverRef.removeValue();
+            driverFoundId=null;
+        }
+
+        driverFound=false;
+        radius=1;
+        String userId=firebaseAuth.getUid();
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("customerRequest");
+        GeoFire geoFire=new GeoFire(reference);
+        geoFire.removeLocation(userId);
+
+        if(pickupMarker!=null){
+            pickupMarker.remove();
+        }
+
+        Toast.makeText(getApplicationContext(),"You just canceled the travel",Toast.LENGTH_LONG).show();
+        displayInformationDriver(BottomSheetBehavior.STATE_HIDDEN);
+        erasePolylines();
+    }
 
 
     @Override

@@ -3171,6 +3171,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id autocomplete_fragment
 id banner_body
 id banner_content_root
 id banner_image
@@ -3200,6 +3201,7 @@ id btn_customer
 id btn_deletePayMethods
 id btn_driver
 id btn_otherMethods
+id btn_rideStatus
 id btn_send
 id button
 id buttonCustomer
@@ -3334,7 +3336,6 @@ id ed_email_register
 id ed_message
 id ed_pass
 id ed_pass_register
-id ed_search_place
 id ed_username_register
 id editProfile
 id edit_query
