@@ -79,6 +79,7 @@ import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -101,7 +102,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference reference;
-    private Button button_customer,button_driver;
+    private MaterialCardView button_customer,button_driver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
