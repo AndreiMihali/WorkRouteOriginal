@@ -4,7 +4,6 @@ package com.example.workroute.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -12,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
+import com.google.android.material.card.MaterialCardView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -21,10 +21,10 @@ public final class ActivityMainBinding implements ViewBinding {
   private final RelativeLayout rootView;
 
   @NonNull
-  public final Button btnCustomer;
+  public final MaterialCardView btnCustomer;
 
   @NonNull
-  public final Button btnDriver;
+  public final MaterialCardView btnDriver;
 
   @NonNull
   public final RelativeLayout rela;
@@ -32,8 +32,9 @@ public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   public final TextView title;
 
-  private ActivityMainBinding(@NonNull RelativeLayout rootView, @NonNull Button btnCustomer,
-      @NonNull Button btnDriver, @NonNull RelativeLayout rela, @NonNull TextView title) {
+  private ActivityMainBinding(@NonNull RelativeLayout rootView,
+      @NonNull MaterialCardView btnCustomer, @NonNull MaterialCardView btnDriver,
+      @NonNull RelativeLayout rela, @NonNull TextView title) {
     this.rootView = rootView;
     this.btnCustomer = btnCustomer;
     this.btnDriver = btnDriver;
@@ -69,13 +70,13 @@ public final class ActivityMainBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.btn_customer;
-      Button btnCustomer = ViewBindings.findChildViewById(rootView, id);
+      MaterialCardView btnCustomer = ViewBindings.findChildViewById(rootView, id);
       if (btnCustomer == null) {
         break missingId;
       }
 
       id = R.id.btn_driver;
-      Button btnDriver = ViewBindings.findChildViewById(rootView, id);
+      MaterialCardView btnDriver = ViewBindings.findChildViewById(rootView, id);
       if (btnDriver == null) {
         break missingId;
       }

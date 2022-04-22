@@ -6,6 +6,10 @@ anim rotate_backward
 anim rotate_forward
 anim slide_up_in
 anim slide_up_out
+array com_google_android_gms_fonts_certs
+array com_google_android_gms_fonts_certs_dev
+array com_google_android_gms_fonts_certs_prod
+array preloaded_fonts
 color back_login
 color black
 color bottom_navigation_view
@@ -44,7 +48,9 @@ drawable bxl_visa
 drawable card_cvv
 drawable carnetfrente
 drawable creditcards
+drawable customer
 drawable default_user_login
+drawable driver
 drawable gallery
 drawable ic_baseline_add_24
 drawable ic_baseline_add_location_24
@@ -109,6 +115,7 @@ drawable reversocarnet
 drawable round_bottom_sheet
 drawable steven_binotto_9vduc_sgrsi_unsplash
 drawable workroute2icono
+font bigshot_one
 id appNotifications
 id autocomplete_fragment
 id boton_drag
