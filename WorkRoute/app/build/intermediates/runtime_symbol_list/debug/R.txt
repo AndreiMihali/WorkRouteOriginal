@@ -3242,6 +3242,10 @@ int id cancel_button 0x7f080097
 int id card_birthday 0x7f080098
 int id card_chat 0x7f080099
 int id card_content_root 0x7f08009a
+int id card_customer 0x7f0802bc
+int id card_customer_general 0x7f0802bd
+int id card_driver 0x7f0802be
+int id card_driver_general 0x7f0802bf
 int id card_ed_search_place 0x7f08009b
 int id card_email 0x7f08009c
 int id card_general 0x7f08009d

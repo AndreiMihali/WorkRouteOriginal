@@ -5,12 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -21,25 +21,38 @@ public final class ActivityMainBinding implements ViewBinding {
   private final RelativeLayout rootView;
 
   @NonNull
-  public final MaterialCardView btnCustomer;
+  public final MaterialButton btnCustomer;
 
   @NonNull
-  public final MaterialCardView btnDriver;
+  public final MaterialButton btnDriver;
+
+  @NonNull
+  public final MaterialCardView cardCustomer;
+
+  @NonNull
+  public final MaterialCardView cardCustomerGeneral;
+
+  @NonNull
+  public final MaterialCardView cardDriver;
+
+  @NonNull
+  public final MaterialCardView cardDriverGeneral;
 
   @NonNull
   public final RelativeLayout rela;
 
-  @NonNull
-  public final TextView title;
-
-  private ActivityMainBinding(@NonNull RelativeLayout rootView,
-      @NonNull MaterialCardView btnCustomer, @NonNull MaterialCardView btnDriver,
-      @NonNull RelativeLayout rela, @NonNull TextView title) {
+  private ActivityMainBinding(@NonNull RelativeLayout rootView, @NonNull MaterialButton btnCustomer,
+      @NonNull MaterialButton btnDriver, @NonNull MaterialCardView cardCustomer,
+      @NonNull MaterialCardView cardCustomerGeneral, @NonNull MaterialCardView cardDriver,
+      @NonNull MaterialCardView cardDriverGeneral, @NonNull RelativeLayout rela) {
     this.rootView = rootView;
     this.btnCustomer = btnCustomer;
     this.btnDriver = btnDriver;
+    this.cardCustomer = cardCustomer;
+    this.cardCustomerGeneral = cardCustomerGeneral;
+    this.cardDriver = cardDriver;
+    this.cardDriverGeneral = cardDriverGeneral;
     this.rela = rela;
-    this.title = title;
   }
 
   @Override
@@ -70,27 +83,45 @@ public final class ActivityMainBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.btn_customer;
-      MaterialCardView btnCustomer = ViewBindings.findChildViewById(rootView, id);
+      MaterialButton btnCustomer = ViewBindings.findChildViewById(rootView, id);
       if (btnCustomer == null) {
         break missingId;
       }
 
       id = R.id.btn_driver;
-      MaterialCardView btnDriver = ViewBindings.findChildViewById(rootView, id);
+      MaterialButton btnDriver = ViewBindings.findChildViewById(rootView, id);
       if (btnDriver == null) {
+        break missingId;
+      }
+
+      id = R.id.card_customer;
+      MaterialCardView cardCustomer = ViewBindings.findChildViewById(rootView, id);
+      if (cardCustomer == null) {
+        break missingId;
+      }
+
+      id = R.id.card_customer_general;
+      MaterialCardView cardCustomerGeneral = ViewBindings.findChildViewById(rootView, id);
+      if (cardCustomerGeneral == null) {
+        break missingId;
+      }
+
+      id = R.id.card_driver;
+      MaterialCardView cardDriver = ViewBindings.findChildViewById(rootView, id);
+      if (cardDriver == null) {
+        break missingId;
+      }
+
+      id = R.id.card_driver_general;
+      MaterialCardView cardDriverGeneral = ViewBindings.findChildViewById(rootView, id);
+      if (cardDriverGeneral == null) {
         break missingId;
       }
 
       RelativeLayout rela = (RelativeLayout) rootView;
 
-      id = R.id.title;
-      TextView title = ViewBindings.findChildViewById(rootView, id);
-      if (title == null) {
-        break missingId;
-      }
-
-      return new ActivityMainBinding((RelativeLayout) rootView, btnCustomer, btnDriver, rela,
-          title);
+      return new ActivityMainBinding((RelativeLayout) rootView, btnCustomer, btnDriver,
+          cardCustomer, cardCustomerGeneral, cardDriver, cardDriverGeneral, rela);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

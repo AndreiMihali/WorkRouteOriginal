@@ -152,6 +152,10 @@ id button_signup
 id button_suscribe
 id card_birthday
 id card_chat
+id card_customer
+id card_customer_general
+id card_driver
+id card_driver_general
 id card_ed_search_place
 id card_email
 id card_general

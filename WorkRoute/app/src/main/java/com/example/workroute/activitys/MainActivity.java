@@ -102,7 +102,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference reference;
-    private MaterialCardView button_customer,button_driver;
+    private MaterialButton button_customer,button_driver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
