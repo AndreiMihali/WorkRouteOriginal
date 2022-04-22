@@ -156,7 +156,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
     private static final int[] COLORS = new int[]{R.color.secondary};
     private LatLng destinationLatLng;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_WorkRoute);
@@ -874,13 +873,14 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
     @Override
     protected void onStop() {
         super.onStop();
-        LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
-        String userId=firebaseAuth.getUid();
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("driverAvailable");
+        if(locationCallback!=null){
+            LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
+            String userId=firebaseAuth.getUid();
+            DatabaseReference reference=FirebaseDatabase.getInstance().getReference("driverAvailable");
 
-        GeoFire geofire=new GeoFire(reference);
-        geofire.removeLocation(userId);
-
+            GeoFire geofire=new GeoFire(reference);
+            geofire.removeLocation(userId);
+        }
     }
 
 

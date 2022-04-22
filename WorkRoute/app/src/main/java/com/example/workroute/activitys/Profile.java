@@ -81,8 +81,6 @@ public class Profile extends AppCompatActivity {
         setData();
     }
 
-
-
     private void setData() {
         if(Companion.user!=null){
             txt_username.setText(Companion.user.getNombre());
