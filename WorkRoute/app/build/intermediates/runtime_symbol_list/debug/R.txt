@@ -2971,6 +2971,7 @@ int drawable ic_baseline_edit_24 0x7f0700a8
 int drawable ic_baseline_edit_calendar_24 0x7f0700a9
 int drawable ic_baseline_email_24 0x7f0700aa
 int drawable ic_baseline_fmd_good_24 0x7f0700ab
+int drawable ic_baseline_gps_off_24 0x7f070118
 int drawable ic_baseline_group_work_24 0x7f0700ac
 int drawable ic_baseline_help_24 0x7f0700ad
 int drawable ic_baseline_home_24 0x7f0700ae

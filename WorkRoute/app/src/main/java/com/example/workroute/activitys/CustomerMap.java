@@ -2,6 +2,10 @@ package com.example.workroute.activitys;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +18,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -22,10 +27,12 @@ import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -92,6 +99,7 @@ import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -195,6 +203,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
     }
 
     private void init() {
+        addActivityResultLauncher();
         button_menu = findViewById(R.id.buttonMenu);
         button_chats = findViewById(R.id.buttonMessages);
         button_profile = findViewById(R.id.buttonProfile);
@@ -741,13 +750,74 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         buildGoogleApiClient();
     }
 
+    private LocationManager locationManager;
+
+    private boolean isLocationEnabled(){
+        locationManager=(LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)||locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private void showDialogMessageGpsEnable(){
+
+        new MaterialAlertDialogBuilder(this,R.style.DialogAlert)
+                .setTitle("GPS DISABLED")
+                .setIcon(R.drawable.ic_baseline_gps_off_24)
+                .setMessage("In order to continue, please activate the gps")
+                .setCancelable(false)
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(CustomerMap.this,MainActivity.class));
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("ACTIVATE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        enableGps();
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+
+    }
+
+    private void enableGps() {
+        Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        activityResultLauncher.launch(settingsIntent);
+    }
+
+    private ActivityResultLauncher<Intent> activityResultLauncher;
+    private void addActivityResultLauncher() {
+        activityResultLauncher=registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if(result.getResultCode()==RESULT_CANCELED){
+                           buildGoogleApiClient();
+                        }
+                    }
+                }
+        );
+    }
+
+
     protected synchronized void buildGoogleApiClient() {
-        googleApiClient=new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-        googleApiClient.connect();
+        if(isLocationEnabled()){
+            googleApiClient=new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+            googleApiClient.connect();
+        }else{
+            showDialogMessageGpsEnable();
+        }
     }
 
     @Override

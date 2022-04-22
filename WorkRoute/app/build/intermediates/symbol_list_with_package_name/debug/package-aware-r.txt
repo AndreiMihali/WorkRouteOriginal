@@ -2972,6 +2972,7 @@ drawable ic_baseline_edit_24
 drawable ic_baseline_edit_calendar_24
 drawable ic_baseline_email_24
 drawable ic_baseline_fmd_good_24
+drawable ic_baseline_gps_off_24
 drawable ic_baseline_group_work_24
 drawable ic_baseline_help_24
 drawable ic_baseline_home_24
