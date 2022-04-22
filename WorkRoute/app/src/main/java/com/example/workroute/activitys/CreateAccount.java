@@ -72,7 +72,7 @@ public class CreateAccount extends AppCompatActivity {
         layout_pass=findViewById(R.id.layout_pass);
         layout_passConfirm=findViewById(R.id.layout_confirm_pass);
         firebaseAuth=FirebaseAuth.getInstance();
-        progressDialog=new ProgressDialog(this);
+        progressDialog=new ProgressDialog(this,R.style.ProgressDialog);
         progressDialog.setMessage("Please wait...");
         ed_name.requestFocus();
         reference= FirebaseDatabase.getInstance().getReference();

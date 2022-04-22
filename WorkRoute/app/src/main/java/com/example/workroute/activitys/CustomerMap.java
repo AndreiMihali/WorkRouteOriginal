@@ -123,7 +123,6 @@ import java.util.Map;
 
 public class CustomerMap extends FragmentActivity implements RoutingListener,com.google.android.gms.location.LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
-    private static final int AUTOCOMPLETE_REQUEST_CODE = 101;
     private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_close, button_ubi,button_customer,button_driver;
     private Animation open, close, rotateForward, rotateBackWard;
     private GoogleMap mMap;

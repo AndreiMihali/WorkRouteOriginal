@@ -12,32 +12,85 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:text="Select how you want to entry"
-        android:textSize="25sp"
+        android:textSize="28sp"
+        android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:fontFamily="@font/bigshot_one"
         android:textColor="@color/secondary"
         android:layout_height="wrap_content"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_below="@id/title"
-        android:layout_marginTop="20dp"
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/btn_driver"
-        android:text="AS DRIVER"
-        android:textSize="18sp"
-        android:backgroundTint="@color/secondary"
-        android:textColor="@color/white"
-        android:layout_height="wrap_content"/>
+        android:layout_below="@id/title"
+        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        app:cardCornerRadius="20dp"
+        style="@style/Widget.Material3.CardView.Outlined"
+        app:strokeColor="@color/secondary"
+        app:strokeWidth="1dp"
+        android:theme="@style/Theme.MaterialComponents.DayNight"
+        android:layout_height="160dp">
 
-    <Button
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.45"
+                android:scaleType="centerCrop"
+                android:src="@drawable/driver" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/bigshot_one"
+                android:text="BE THE DRIVER"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/btn_customer"
-        android:layout_width="match_parent"
         android:layout_below="@id/btn_driver"
-        android:layout_marginTop="20dp"
-        android:text="AS CUSTOMER"
-        android:textSize="18sp"
-        android:backgroundTint="@color/secondary"
-        android:textColor="@color/white"
-        android:layout_height="wrap_content"/>
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        app:cardCornerRadius="20dp"
+        style="@style/Widget.Material3.CardView.Outlined"
+        app:strokeColor="@color/secondary"
+        app:strokeWidth="1dp"
+        android:theme="@style/Theme.MaterialComponents.DayNight"
+        android:layout_height="160dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.45"
+                android:scaleType="centerCrop"
+                android:src="@drawable/customer" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="120dp"
+                android:fontFamily="@font/bigshot_one"
+                android:text="BE THE CUSTOMER"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </RelativeLayout>
