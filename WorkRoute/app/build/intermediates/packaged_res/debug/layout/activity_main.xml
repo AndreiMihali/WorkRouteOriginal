@@ -4,16 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/back_login"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="20dp"
     tools:context=".activitys.MainActivity">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
-        android:text="Select how you want to entry"
-        android:textSize="28sp"
-        android:layout_marginTop="40dp"
+        android:text="Select what you want to be"
+        android:textSize="30sp"
+        android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/bigshot_one"
         android:textColor="@color/secondary"
@@ -21,15 +21,18 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/btn_driver"
-        android:layout_below="@id/title"
-        android:layout_marginTop="40dp"
-        android:layout_width="wrap_content"
-        app:cardCornerRadius="20dp"
         style="@style/Widget.Material3.CardView.Outlined"
-        app:strokeColor="@color/secondary"
-        app:strokeWidth="1dp"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_below="@id/title"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="40dp"
         android:theme="@style/Theme.MaterialComponents.DayNight"
-        android:layout_height="160dp">
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:cardPreventCornerOverlap="true"
+        app:strokeColor="@color/secondary"
+        app:strokeWidth="1dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -38,18 +41,17 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:alpha="0.45"
+                android:alpha="0.3"
                 android:scaleType="centerCrop"
                 android:src="@drawable/driver" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
+                android:layout_centerInParent="true"
                 android:fontFamily="@font/bigshot_one"
                 android:text="BE THE DRIVER"
-                android:textColor="@color/black"
+                android:textColor="#504E4E"
                 android:textSize="30sp"
                 android:textStyle="bold" />
         </RelativeLayout>
@@ -58,15 +60,19 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/btn_customer"
-        android:layout_below="@id/btn_driver"
-        android:layout_marginTop="50dp"
-        android:layout_width="wrap_content"
-        app:cardCornerRadius="20dp"
         style="@style/Widget.Material3.CardView.Outlined"
-        app:strokeColor="@color/secondary"
-        app:strokeWidth="1dp"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_below="@id/btn_driver"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="50dp"
         android:theme="@style/Theme.MaterialComponents.DayNight"
-        android:layout_height="160dp">
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="false"
+        app:strokeColor="@color/secondary"
+        app:strokeWidth="1dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -75,18 +81,18 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:alpha="0.45"
+                android:alpha="0.3"
                 android:scaleType="centerCrop"
                 android:src="@drawable/customer" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="120dp"
                 android:fontFamily="@font/bigshot_one"
                 android:text="BE THE CUSTOMER"
-                android:textColor="@color/black"
+                android:textColor="#504E4E"
                 android:textSize="30sp"
                 android:textStyle="bold" />
         </RelativeLayout>
