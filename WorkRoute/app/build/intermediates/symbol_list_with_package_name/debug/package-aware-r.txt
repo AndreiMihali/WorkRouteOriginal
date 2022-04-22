@@ -2982,6 +2982,7 @@ drawable ic_baseline_gps_off_24
 drawable ic_baseline_group_work_24
 drawable ic_baseline_help_24
 drawable ic_baseline_home_24
+drawable ic_baseline_home_work_24
 drawable ic_baseline_keyboard_arrow_right_24
 drawable ic_baseline_keyboard_backspace_24
 drawable ic_baseline_location_city_24

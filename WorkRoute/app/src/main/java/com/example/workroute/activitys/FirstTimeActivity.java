@@ -108,6 +108,7 @@ public class FirstTimeActivity extends AppCompatActivity {
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         Bundle bundle=getIntent().getExtras();
         username.setText(bundle.getString("Name","Username"));
+        Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         initActivityResultLauncher();
         initListeners();
     }
@@ -146,7 +147,7 @@ public class FirstTimeActivity extends AppCompatActivity {
         card_spinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startAutocompleteIntent();
+                startAutocompleteIntent();
             }
         });
 
@@ -167,12 +168,13 @@ public class FirstTimeActivity extends AppCompatActivity {
     }
 
     private void checkData(View v) {
-        if(birth.getText().toString().trim().equals("Choose your day of birth")){
+        if(birth.getText().toString().trim().equals("Choose your day of birth")
+            || locality.getText().toString().trim().equals("Enter your home direction")){
             Snackbar.make(v,"You need to fill all fields",Snackbar.LENGTH_SHORT).show();
         }else{
             progressDialog.setMessage("Please wait...");
             progressDialog.show();
-            actualizarDatos("Madrid","localidad");
+            actualizarDatos(locality.getText().toString().trim(),"localidad");
             actualizarDatos(1,"vecesConectadas");
             actualizarDatos(calcularEdad(fechaNac), "edad");
             actualizarDatos(fechaNac,"fecha_naci");
@@ -286,23 +288,22 @@ public class FirstTimeActivity extends AppCompatActivity {
         return mimeType.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    /*private void startAutocompleteIntent(){
+    private void startAutocompleteIntent(){
         List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
 
         Intent intent = new Autocomplete.IntentBuilder(
                 AutocompleteActivityMode.OVERLAY, fields)
-                .setTypeFilter(TypeFilter.CITIES)
+                .setTypeFilter(TypeFilter.ADDRESS)
                 .build(this);
         startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
-    }*/
+    }
 
-    /*@Override
+
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
-                Toast.makeText(getApplicationContext(),place.getName(),Toast.LENGTH_LONG).show();
-                locality.setText(place.getAddress());
+                locality.setText(place.getName());
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 // TODO: Handle the error.
                 Status status = Autocomplete.getStatusFromIntent(data);
@@ -312,7 +313,7 @@ public class FirstTimeActivity extends AppCompatActivity {
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }*/
+    }
 
     private int calcularEdad(String fecha){
         Date fechaNac=null;

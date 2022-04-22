@@ -107,11 +107,11 @@
             <TextView
                 android:id="@+id/txt_ciudad"
                 android:layout_width="match_parent"
-                android:text="Enter your location"
+                android:text="Enter your home direction"
                 android:gravity="center"
                 android:textSize="18sp"
                 android:textColor="#9C9A9A"
-                android:drawableStart="@drawable/ic_baseline_location_city_24"
+                android:drawableStart="@drawable/ic_baseline_home_work_24"
                 android:drawableTint="#BABABA"
                 android:layout_height="30dp" />
 

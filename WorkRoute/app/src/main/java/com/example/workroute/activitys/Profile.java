@@ -129,8 +129,8 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 firebaseAuth.signOut();
-                startActivity(new Intent(Profile.this,LoginActivity.class));
                 new MainActivity.Destroy(Profile.this);
+                startActivity(new Intent(Profile.this,LoginActivity.class));
                 finish();
             }
         });
