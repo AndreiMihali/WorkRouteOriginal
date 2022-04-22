@@ -725,7 +725,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     @Override
     protected void onStop() {
         super.onStop();
-
+        LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
         String userId = firebaseAuth.getUid();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("driverAvailable");
 

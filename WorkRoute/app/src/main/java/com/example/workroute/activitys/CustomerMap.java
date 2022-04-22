@@ -874,7 +874,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
     @Override
     protected void onStop() {
         super.onStop();
-
+        LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
         String userId=firebaseAuth.getUid();
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("driverAvailable");
 

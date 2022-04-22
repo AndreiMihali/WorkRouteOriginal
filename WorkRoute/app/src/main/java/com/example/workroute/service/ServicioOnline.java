@@ -6,6 +6,7 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
+import com.example.workroute.companion.Companion;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -34,7 +35,7 @@ public class ServicioOnline extends Service{
     @Override
     public void onDestroy() {
         reference= FirebaseDatabase.getInstance().getReference();
-        reference.child("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("online").setValue("false");
+        reference.child("Usuarios").child(Companion.user.getUid()).child("online").setValue("false");
         super.onDestroy();
     }
 
