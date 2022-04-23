@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -14,6 +13,7 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.card.MaterialCardView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -38,10 +38,10 @@ public final class ActivityDrivingLicenseBinding implements ViewBinding {
   public final View divider2;
 
   @NonNull
-  public final ImageView imageCarnetFrente;
+  public final MaterialCardView imageCarnetFrente;
 
   @NonNull
-  public final ImageView imageCarnetReverso;
+  public final MaterialCardView imageCarnetReverso;
 
   @NonNull
   public final RelativeLayout relativeLayout;
@@ -57,8 +57,8 @@ public final class ActivityDrivingLicenseBinding implements ViewBinding {
 
   private ActivityDrivingLicenseBinding(@NonNull RelativeLayout rootView,
       @NonNull Button buttonFront, @NonNull Button buttonReverse, @NonNull Button buttonSaveLicense,
-      @NonNull View divider, @NonNull View divider2, @NonNull ImageView imageCarnetFrente,
-      @NonNull ImageView imageCarnetReverso, @NonNull RelativeLayout relativeLayout,
+      @NonNull View divider, @NonNull View divider2, @NonNull MaterialCardView imageCarnetFrente,
+      @NonNull MaterialCardView imageCarnetReverso, @NonNull RelativeLayout relativeLayout,
       @NonNull MaterialToolbar toolbar, @NonNull TextView tvFront, @NonNull TextView tvReverse) {
     this.rootView = rootView;
     this.buttonFront = buttonFront;
@@ -132,13 +132,13 @@ public final class ActivityDrivingLicenseBinding implements ViewBinding {
       }
 
       id = R.id.imageCarnetFrente;
-      ImageView imageCarnetFrente = ViewBindings.findChildViewById(rootView, id);
+      MaterialCardView imageCarnetFrente = ViewBindings.findChildViewById(rootView, id);
       if (imageCarnetFrente == null) {
         break missingId;
       }
 
       id = R.id.imageCarnetReverso;
-      ImageView imageCarnetReverso = ViewBindings.findChildViewById(rootView, id);
+      MaterialCardView imageCarnetReverso = ViewBindings.findChildViewById(rootView, id);
       if (imageCarnetReverso == null) {
         break missingId;
       }

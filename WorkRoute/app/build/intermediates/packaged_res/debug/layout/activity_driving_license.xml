@@ -29,15 +29,23 @@
         android:background="?android:attr/listDivider" />
 
 
-    <ImageView
+    <com.google.android.material.card.MaterialCardView
+        android:layout_below="@id/divider"
         android:id="@+id/imageCarnetFrente"
-        android:layout_width="235dp"
-        android:layout_height="145dp"
-        android:layout_below="@id/toolbar"
-        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:theme="@style/Theme.MaterialComponents.DayNight"
+        app:cardCornerRadius="20dp"
         android:layout_marginTop="30dp"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/carnetfrente" />
+        android:layout_centerHorizontal="true"
+        android:layout_height="145dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/carnetfrente" />
+
+    </com.google.android.material.card.MaterialCardView>
 
 
     <TextView
@@ -73,15 +81,23 @@
         android:layout_marginBottom="20dp"
         android:background="?android:attr/listDivider" />
 
-    <ImageView
-        android:id="@+id/imageCarnetReverso"
-        android:layout_width="235dp"
-        android:layout_height="145dp"
+    <com.google.android.material.card.MaterialCardView
         android:layout_below="@id/divider2"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="0dp"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/reversocarnet" />
+        android:id="@+id/imageCarnetReverso"
+        android:layout_width="wrap_content"
+        android:theme="@style/Theme.MaterialComponents.DayNight"
+        app:cardCornerRadius="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="145dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/reversocarnet" />
+
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/tvReverse"

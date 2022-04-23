@@ -384,8 +384,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_home_work_24" />
-                            <entry key="sourceFile" value="C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_mobile_login_amico" />
+                            <entry key="sourceFile" value="C:\Users\andre\Downloads\Mobile login-amico.svg" />
                           </map>
                         </option>
                       </PersistentState>

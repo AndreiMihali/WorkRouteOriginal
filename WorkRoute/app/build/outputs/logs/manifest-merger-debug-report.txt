@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-98:12
-INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-98:12
-INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-98:12
-INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-98:12
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-104:12
+INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-104:12
+INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-104:12
+INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-104:12
 MERGED from [androidx.databinding:viewbinding:7.1.3] C:\Users\andre\.gradle\caches\transforms-3\ec25065687f1a96423150691cf09e68e\transformed\viewbinding-7.1.3\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.material:material:1.5.0] C:\Users\andre\.gradle\caches\transforms-3\f6a734a78edcd8806c13a173f4b18023\transformed\material-1.5.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-inappmessaging-display:20.1.1] C:\Users\andre\.gradle\caches\transforms-3\5086f1f80cff0732af13f06a99808af5\transformed\firebase-inappmessaging-display-20.1.1\AndroidManifest.xml:2:1-32:12
@@ -99,20 +99,20 @@ MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] C:\Users\and
 MERGED from [io.grpc:grpc-android:1.41.0] C:\Users\andre\.gradle\caches\transforms-3\d57f451b1a053fa0f4add78b2c7c8fe1\transformed\grpc-android-1.41.0\AndroidManifest.xml:2:1-13:12
 MERGED from [com.android.volley:volley:1.2.1] C:\Users\andre\.gradle\caches\transforms-3\3e91123375207fdcf229816c88b42db6\transformed\volley-1.2.1\AndroidManifest.xml:2:1-7:12
 MERGED from [io.reactivex.rxjava2:rxandroid:2.0.2] C:\Users\andre\.gradle\caches\transforms-3\89ef453ea7e1ff36cce2edd8cb54e1eb\transformed\rxandroid-2.0.2\AndroidManifest.xml:15:1-21:12
-INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-98:12
-INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-98:12
-INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-98:12
+INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-104:12
+INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-104:12
+INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-104:12
 	package
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:3:5-36
 		INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-98:12
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-104:12
 		INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-98:12
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-104:12
 		INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:11-69
@@ -201,7 +201,7 @@ ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\
 	android:name
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:13:19-61
 application
-ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:15:5-96:19
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:15:5-102:19
 MERGED from [com.google.android.material:material:1.5.0] C:\Users\andre\.gradle\caches\transforms-3\f6a734a78edcd8806c13a173f4b18023\transformed\material-1.5.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.5.0] C:\Users\andre\.gradle\caches\transforms-3\f6a734a78edcd8806c13a173f4b18023\transformed\material-1.5.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.firebase:firebase-inappmessaging-display:20.1.1] C:\Users\andre\.gradle\caches\transforms-3\5086f1f80cff0732af13f06a99808af5\transformed\firebase-inappmessaging-display-20.1.1\AndroidManifest.xml:22:5-30:19
@@ -298,142 +298,154 @@ MERGED from [com.google.android.datatransport:transport-runtime:3.1.2] C:\Users\
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:21:9-47
 	android:usesCleartextTraffic
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:22:9-44
-activity#com.example.workroute.activitys.CustomerMap
+activity#com.example.workroute.driverActivities.AddDriverInformation
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:23:9-25:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:25:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:24:13-50
-activity#com.example.workroute.activitys.DriverMap
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:24:13-66
+activity#com.example.workroute.configureProfileDriving.ConfigureDrivingProfile
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:26:9-28:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:28:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:27:13-48
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:27:13-76
+activity#com.example.workroute.activitys.CustomerMap
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:29:9-31:40
+	android:exported
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:31:13-37
+	android:name
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:30:13-50
+activity#com.example.workroute.activitys.DriverMap
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:32:9-34:40
+	android:exported
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:34:13-37
+	android:name
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:33:13-48
 meta-data#com.google.android.geo.API_KEY
-ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:30:9-32:55
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:36:9-38:55
 	android:value
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:32:13-52
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:38:13-52
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:31:13-58
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:37:13-58
 meta-data#preloaded_fonts
-ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:33:9-35:57
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:39:9-41:57
 	android:resource
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:35:13-54
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:41:13-54
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:34:13-43
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:40:13-43
 activity#com.example.workroute.activitys.PayMethod
-ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:37:9-39:40
-	android:exported
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:39:13-37
-	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:38:13-48
-activity#com.example.workroute.activitys.DrivingLicense
-ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:40:9-42:40
-	android:exported
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:42:13-37
-	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:41:13-53
-activity#com.example.workroute.kotlin.activities.MessagesActivity
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:43:9-45:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:45:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:44:13-63
-activity#com.example.workroute.kotlin.activities.ChatsActivity
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:44:13-48
+activity#com.example.workroute.activitys.DrivingLicense
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:46:9-48:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:48:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:47:13-60
-activity#com.example.workroute.activitys.GeneralSettingsActivity
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:47:13-53
+activity#com.example.workroute.kotlin.activities.MessagesActivity
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:49:9-51:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:51:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:50:13-62
-activity#com.example.workroute.activitys.Notifications
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:50:13-63
+activity#com.example.workroute.kotlin.activities.ChatsActivity
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:52:9-54:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:54:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:53:13-52
-activity#com.example.workroute.activitys.Profile
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:53:13-60
+activity#com.example.workroute.activitys.GeneralSettingsActivity
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:55:9-57:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:57:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:56:13-46
-activity#com.example.workroute.activitys.suscripcionesActivity
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:56:13-62
+activity#com.example.workroute.activitys.Notifications
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:58:9-60:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:60:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:59:13-60
-activity#com.example.workroute.activitys.FirstTimeActivity
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:59:13-52
+activity#com.example.workroute.activitys.Profile
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:61:9-63:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:63:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:62:13-56
-activity#com.example.workroute.activitys.CreateAccount
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:62:13-46
+activity#com.example.workroute.activitys.suscripcionesActivity
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:64:9-66:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:66:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:65:13-52
-activity#com.example.workroute.activitys.ConfirmLogin
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:65:13-60
+activity#com.example.workroute.activitys.FirstTimeActivity
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:67:9-69:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:69:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:68:13-51
-activity#com.example.workroute.activitys.LoginActivity
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:68:13-56
+activity#com.example.workroute.activitys.CreateAccount
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:70:9-72:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:72:13-37
 	android:name
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:71:13-52
-activity#com.example.workroute.activitys.MainActivity
+activity#com.example.workroute.activitys.ConfirmLogin
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:73:9-75:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:75:13-37
 	android:name
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:74:13-51
+activity#com.example.workroute.activitys.LoginActivity
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:76:9-78:40
+	android:exported
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:78:13-37
+	android:name
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:77:13-52
+activity#com.example.workroute.activitys.MainActivity
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:79:9-81:40
+	android:exported
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:81:13-37
+	android:name
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:80:13-51
 activity#com.example.workroute.activitys.SplashScreen
-ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:76:9-84:20
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:82:9-90:20
 	android:exported
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:78:13-36
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:84:13-36
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:77:13-51
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:83:13-51
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:79:13-83:29
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:85:13-89:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:80:17-69
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:86:17-69
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:80:25-66
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:86:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:82:17-77
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:88:17-77
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:82:27-74
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:88:27-74
 service#com.example.workroute.service.MyFirebaseInstanceIDService
-ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:86:9-92:19
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:92:9-98:19
 	android:exported
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:88:13-37
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:94:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:87:13-64
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:93:13-64
 intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
-ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:89:13-91:29
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:95:13-97:29
 action#com.google.firebase.MESSAGING_EVENT
-ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:90:17-78
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:96:17-78
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:90:25-75
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:96:25-75
 service#com.example.workroute.service.ServicioOnline
-ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:93:9-95:40
+ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:99:9-101:40
 	android:exported
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:95:13-37
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:101:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:94:13-51
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:100:13-51
 uses-sdk
 INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml

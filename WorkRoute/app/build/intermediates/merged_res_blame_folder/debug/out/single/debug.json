@@ -128,6 +128,10 @@
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_outline_arrow_forward_24.xml"
     },
     {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_add_driver_information.xml.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_add_driver_information.xml"
+    },
+    {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_outline_person_24.xml.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_outline_person_24.xml"
     },
@@ -384,6 +388,10 @@
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_settings_24.xml"
     },
     {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_back_driver_information.xml.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\back_driver_information.xml"
+    },
+    {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_location_pin_map_round.png.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-xxhdpi\\location_pin_map_round.png"
     },
@@ -520,6 +528,10 @@
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-xhdpi\\car_map_round.png"
     },
     {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\font_allerta.xml.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\font\\allerta.xml"
+    },
+    {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_confirm_login.xml.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_confirm_login.xml"
     },
@@ -582,6 +594,10 @@
     {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_work_icon.xml.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-anydpi-v26\\work_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\font_andada.xml.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\font\\andada.xml"
     },
     {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_person_24.xml.flat",
@@ -734,5 +750,9 @@
     {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_notifications_none_24.xml.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_notifications_none_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_mobile_login_amico.xml.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_mobile_login_amico.xml"
     }
 ]

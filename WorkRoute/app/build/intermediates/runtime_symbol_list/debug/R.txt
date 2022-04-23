@@ -2896,6 +2896,7 @@ int drawable adaptive_icon_background 0x7f080059
 int drawable adaptive_icon_foreground 0x7f08005a
 int drawable avd_hide_password 0x7f08005b
 int drawable avd_show_password 0x7f08005c
+int drawable back_driver_information 0x7f08011c
 int drawable back_img_icons_search 0x7f08005d
 int drawable back_second_sheet 0x7f08005e
 int drawable background_login 0x7f08005f
@@ -3011,6 +3012,7 @@ int drawable ic_launcher_foreground 0x7f0800cc
 int drawable ic_m3_chip_check 0x7f0800cd
 int drawable ic_m3_chip_checked_circle 0x7f0800ce
 int drawable ic_m3_chip_close 0x7f0800cf
+int drawable ic_mobile_login_amico 0x7f08011d
 int drawable ic_mtrl_checked_circle 0x7f0800d0
 int drawable ic_mtrl_chip_checked_black 0x7f0800d1
 int drawable ic_mtrl_chip_checked_circle 0x7f0800d2
@@ -3087,6 +3089,8 @@ int drawable test_level_drawable 0x7f080118
 int drawable tooltip_frame_dark 0x7f080119
 int drawable tooltip_frame_light 0x7f08011a
 int drawable workroute2icono 0x7f08011b
+int font allerta 0x7f090001
+int font andada 0x7f090002
 int font bigshot_one 0x7f090000
 int id ALT 0x7f0a0000
 int id BOTTOM_END 0x7f0a0001
@@ -3402,6 +3406,7 @@ int id imageCarnetReverso 0x7f0a0137
 int id image_content_root 0x7f0a0138
 int id image_root 0x7f0a0139
 int id image_view 0x7f0a013a
+int id img 0x7f0a02c5
 int id immediateStop 0x7f0a013b
 int id included 0x7f0a013c
 int id info 0x7f0a013d
@@ -3755,6 +3760,7 @@ int id txt_name_cost 0x7f0a029a
 int id txt_null 0x7f0a029b
 int id txt_startLocation 0x7f0a029c
 int id txt_startLocation_cost 0x7f0a029d
+int id txt_title 0x7f0a02c6
 int id txt_total_pay_travel 0x7f0a029e
 int id txt_total_pay_travel_cost 0x7f0a029f
 int id txt_travel_information 0x7f0a02a0
@@ -3874,6 +3880,7 @@ int layout abc_search_dropdown_item_icons_2line 0x7f0d0018
 int layout abc_search_view 0x7f0d0019
 int layout abc_select_dialog_material 0x7f0d001a
 int layout abc_tooltip 0x7f0d001b
+int layout activity_add_driver_information 0x7f0d00aa
 int layout activity_chats 0x7f0d001c
 int layout activity_confirm_login 0x7f0d001e
 int layout activity_create_account 0x7f0d001f
@@ -4497,6 +4504,7 @@ int style FiamUI_ResizableImageView 0x7f130123
 int style FiamUI_Text_BannerTitle 0x7f130124
 int style FiamUI_Text_Title 0x7f130125
 int style Login 0x7f130126
+int style MaterialAlertDialog_App_Title_Icon 0x7f130421
 int style MaterialAlertDialog_App_Title_Text 0x7f13041c
 int style MaterialAlertDialog_Material3 0x7f130127
 int style MaterialAlertDialog_Material3_Body_Text 0x7f130128
@@ -5256,6 +5264,7 @@ int style Widget_MaterialComponents_Toolbar_PrimarySurface 0x7f130417
 int style Widget_MaterialComponents_Toolbar_Surface 0x7f130418
 int style Widget_MaterialComponents_Tooltip 0x7f130419
 int style Widget_Support_CoordinatorLayout 0x7f13041a
+int style backDriverInformation 0x7f130422
 int style dialogFullAniamtion 0x7f13041b
 int[] styleable ActionBar { 0x7f040041, 0x7f040048, 0x7f040049, 0x7f040114, 0x7f040115, 0x7f040116, 0x7f040117, 0x7f040118, 0x7f040119, 0x7f04013f, 0x7f040150, 0x7f040151, 0x7f040170, 0x7f0401d8, 0x7f0401df, 0x7f0401e5, 0x7f0401e6, 0x7f0401ea, 0x7f0401fd, 0x7f040212, 0x7f040290, 0x7f0402f5, 0x7f040325, 0x7f04032c, 0x7f04032d, 0x7f040390, 0x7f040394, 0x7f040412, 0x7f04041f }
 int styleable ActionBar_background 0

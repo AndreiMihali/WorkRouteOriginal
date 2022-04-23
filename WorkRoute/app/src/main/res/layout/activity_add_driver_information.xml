@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/back_driver_information"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".activitys.DrivingLicense">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:src="@drawable/ic_mobile_login_amico" />
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/andada"
+        android:text="Complete the information"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_below="@id/txt_title"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="#E1E0E0"
+        android:theme="@style/Theme.MaterialComponents.DayNight"
+        app:contentPadding="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:hint="DNI/NIE"
+                android:textColorHint="@color/secondary"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="Select car type"
+                android:textColorHint="@color/secondary"
+                app:hintAnimationEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:hint="Plate number"
+                app:endIconTint="@color/secondary"
+                android:textColorHint="@color/secondary"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:hint="Select car color"
+                app:endIconTint="@color/secondary"
+                android:textColorHint="@color/secondary"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Continue"
+                android:textSize="18sp"
+                app:cornerRadius="100dp"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="10dp"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/secondary"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

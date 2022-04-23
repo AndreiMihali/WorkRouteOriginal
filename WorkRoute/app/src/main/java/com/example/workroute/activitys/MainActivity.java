@@ -51,6 +51,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
+import com.example.workroute.driverActivities.AddDriverInformation;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.model.User;
@@ -135,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     startActivity(new Intent(MainActivity.this,DriverMap.class)
                             .putExtra("isDriver",isDriver()));
-                    finish();
                 }
             }
         });
@@ -145,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,CustomerMap.class)
                 .putExtra("isSubscribed",isSubscribed()));
-                finish();
             }
         });
     }
@@ -158,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                        startActivity(new Intent(MainActivity.this, AddDriverInformation.class));
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.workroute">
+    package="com.example.workroute" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -19,7 +19,13 @@
         android:roundIcon="@mipmap/work_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkRoute"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".driverActivities.AddDriverInformation"
+            android:exported="false" />
+        <activity
+            android:name=".configureProfileDriving.ConfigureDrivingProfile"
+            android:exported="false" />
         <activity
             android:name=".activitys.CustomerMap"
             android:exported="false" />
@@ -75,7 +81,7 @@
             android:exported="false" />
         <activity
             android:name=".activitys.SplashScreen"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -85,7 +91,7 @@
 
         <service
             android:name=".service.MyFirebaseInstanceIDService"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

@@ -2897,6 +2897,7 @@ drawable adaptive_icon_background
 drawable adaptive_icon_foreground
 drawable avd_hide_password
 drawable avd_show_password
+drawable back_driver_information
 drawable back_img_icons_search
 drawable back_second_sheet
 drawable background_login
@@ -3012,6 +3013,7 @@ drawable ic_launcher_foreground
 drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
 drawable ic_m3_chip_close
+drawable ic_mobile_login_amico
 drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
@@ -3088,6 +3090,8 @@ drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 drawable workroute2icono
+font allerta
+font andada
 font bigshot_one
 id ALT
 id BOTTOM_END
@@ -3403,6 +3407,7 @@ id imageCarnetReverso
 id image_content_root
 id image_root
 id image_view
+id img
 id immediateStop
 id included
 id info
@@ -3756,6 +3761,7 @@ id txt_name_cost
 id txt_null
 id txt_startLocation
 id txt_startLocation_cost
+id txt_title
 id txt_total_pay_travel
 id txt_total_pay_travel_cost
 id txt_travel_information
@@ -3875,6 +3881,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_add_driver_information
 layout activity_chats
 layout activity_confirm_login
 layout activity_create_account
@@ -4498,6 +4505,7 @@ style FiamUI_ResizableImageView
 style FiamUI_Text_BannerTitle
 style FiamUI_Text_Title
 style Login
+style MaterialAlertDialog_App_Title_Icon
 style MaterialAlertDialog_App_Title_Text
 style MaterialAlertDialog_Material3
 style MaterialAlertDialog_Material3_Body_Text
@@ -5257,6 +5265,7 @@ style Widget_MaterialComponents_Toolbar_PrimarySurface
 style Widget_MaterialComponents_Toolbar_Surface
 style Widget_MaterialComponents_Tooltip
 style Widget_Support_CoordinatorLayout
+style backDriverInformation
 style dialogFullAniamtion
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity

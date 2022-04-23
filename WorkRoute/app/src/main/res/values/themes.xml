@@ -23,6 +23,14 @@
         <item name="android:windowExitAnimation">@anim/slide_up_out</item>
     </style>
 
+    <style name="backDriverInformation" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+            <item name="colorPrimary">@color/secondary</item>
+            <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
+            <item name="android:windowTranslucentStatus">true</item>
+            <item name="android:windowTranslucentNavigation">true</item>
+            <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+    </style>
+
     <style name="Login" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
@@ -101,7 +109,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog.Centered">
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="MaterialAlertDialog.Material3">
         <item name="colorContainer">#9EC4EF</item>
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>

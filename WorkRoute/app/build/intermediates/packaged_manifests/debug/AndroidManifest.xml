@@ -49,6 +49,12 @@
         android:theme="@style/Theme.WorkRoute"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name="com.example.workroute.driverActivities.AddDriverInformation"
+            android:exported="false" />
+        <activity
+            android:name="com.example.workroute.configureProfileDriving.ConfigureDrivingProfile"
+            android:exported="false" />
+        <activity
             android:name="com.example.workroute.activitys.CustomerMap"
             android:exported="false" />
         <activity
