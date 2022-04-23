@@ -6,20 +6,20 @@
                 {
                     "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\values-v27\\themes.xml",
                     "from": {
-                        "startLines": "3",
-                        "startColumns": "4",
-                        "startOffsets": "59",
-                        "endLines": "17",
-                        "endColumns": "12",
-                        "endOffsets": "922"
+                        "startLines": "3,19",
+                        "startColumns": "4,4",
+                        "startOffsets": "106,977",
+                        "endLines": "17,25",
+                        "endColumns": "12,12",
+                        "endOffsets": "969,1443"
                     },
                     "to": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "16",
-                        "endColumns": "12",
-                        "endOffsets": "904"
+                        "startLines": "2,17",
+                        "startColumns": "4,4",
+                        "startOffsets": "100,954",
+                        "endLines": "16,23",
+                        "endColumns": "12,12",
+                        "endOffsets": "949,1412"
                     }
                 }
             ]
