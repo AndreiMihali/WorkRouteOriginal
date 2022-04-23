@@ -173,8 +173,6 @@ id card_type
 id cardsImage
 id checkBoxAppNotifications
 id checkBoxEmailNotifications
-id city
-id country
 id deleteAccount
 id divider
 id divider2
@@ -189,7 +187,6 @@ id ed_username_register
 id editProfile
 id emailNotifications
 id fab_camera
-id frameLayout
 id helpMenu
 id image
 id imageCarnetFrente
@@ -222,7 +219,6 @@ id password_forgot
 id payMethod
 id prices
 id profileImage
-id profile_image_toolbar
 id profile_photo_chat_list
 id profile_photo_messages
 id profile_photo_sheet
@@ -306,9 +302,7 @@ layout activity_notifications
 layout activity_pay_method
 layout activity_profile
 layout activity_splash_screen
-layout appbar_main
 layout chats_list_item
-layout content_main
 layout item_chat_left
 layout item_chat_right
 layout layout_suscripciones
@@ -343,9 +337,13 @@ string title_activity_customer_map
 style CalendarPicker
 style DialogAlert
 style Login
+style MaterialAlertDialog.App.Title.Text
+style MaterialAlertDialog.Material3.Title.Icon.CenterStacked
 style ProgressDialog
 style Register
 style Splash
 style Subscribe
+style ThemeOverlay.App.MaterialAlertDialog
 style Theme.WorkRoute
+style Widget.App.Button
 style dialogFullAniamtion

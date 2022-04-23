@@ -383,7 +383,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         polylines = new ArrayList<>();
         btnRideStatus=findViewById(R.id.btn_rideStatus);
         iniciarMapa();
-        getUserData();
         initListeners();
     }
 
@@ -596,7 +595,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
     private void showDialogMessageGpsEnable(){
 
-        new MaterialAlertDialogBuilder(this,R.style.DialogAlert)
+        new MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_App_MaterialAlertDialog)
                 .setTitle("GPS DISABLED")
                 .setIcon(R.drawable.ic_baseline_gps_off_24)
                 .setMessage("In order to continue, please activate the gps")
@@ -747,25 +746,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
      ***********************************************************************************************************************************/
-
-    private void getUserData() {
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                firestore.collection("Usuarios").document(firebaseAuth.getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Companion.user = documentSnapshot.toObject(User.class);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("ERROR AL OBTENER LOS DATOS DEL USUARIO", "ERROR AL OBTENER LOS DATOS DEL USUARIO " + e);
-                    }
-                });
-            }
-        });
-    }
 
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {

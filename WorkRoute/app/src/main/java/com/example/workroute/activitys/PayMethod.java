@@ -93,7 +93,7 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                new MaterialAlertDialogBuilder(PayMethod.this,R.style.DialogAlert)
+                new MaterialAlertDialogBuilder(PayMethod.this,R.style.ThemeOverlay_App_MaterialAlertDialog)
                         .setTitle("CAUTION")
                         .setCancelable(false)
                         .setMessage("Are you sure do you want to delete this payment method?")

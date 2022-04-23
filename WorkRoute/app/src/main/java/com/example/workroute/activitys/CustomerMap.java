@@ -232,7 +232,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         destinationLatLng=new LatLng(0.0,0.0);
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         iniciarMapa();
-        getUserData();
         initListeners();
 
     }
@@ -761,7 +760,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
 
     private void showDialogMessageGpsEnable(){
 
-        new MaterialAlertDialogBuilder(this,R.style.DialogAlert)
+        new MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_App_MaterialAlertDialog)
                 .setTitle("GPS DISABLED")
                 .setIcon(R.drawable.ic_baseline_gps_off_24)
                 .setMessage("In order to continue, please activate the gps")
@@ -895,24 +894,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
      * *********************************************************************************************************************************
      ***********************************************************************************************************************************/
 
-    private void getUserData(){
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                firestore.collection("Usuarios").document(firebaseAuth.getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Companion.user = documentSnapshot.toObject(User.class);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("ERROR AL OBTENER LOS DATOS DEL USUARIO","ERROR AL OBTENER LOS DATOS DEL USUARIO "+e);
-                    }
-                });
-            }
-        });
-    }
 
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
