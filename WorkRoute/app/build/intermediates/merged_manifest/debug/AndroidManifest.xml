@@ -49,6 +49,9 @@
         android:theme="@style/Theme.WorkRoute"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name="com.example.workroute.profile.EditProfile"
+            android:exported="false" />
+        <activity
             android:name="com.example.workroute.driverActivities.AddDriverInformation"
             android:exported="false" />
         <activity
@@ -87,7 +90,7 @@
             android:name="com.example.workroute.activitys.Notifications"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.activitys.Profile"
+            android:name="com.example.workroute.profile.Profile"
             android:exported="false" />
         <activity
             android:name="com.example.workroute.suscribtion.SubscribesActivity"

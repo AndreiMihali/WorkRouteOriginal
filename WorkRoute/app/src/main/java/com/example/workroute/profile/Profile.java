@@ -1,4 +1,4 @@
-package com.example.workroute.activitys;
+package com.example.workroute.profile;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +15,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.workroute.R;
-import com.example.workroute.R.menu;
+import com.example.workroute.activitys.DrivingLicense;
+import com.example.workroute.activitys.GeneralSettingsActivity;
+import com.example.workroute.activitys.LoginActivity;
+import com.example.workroute.activitys.MainActivity;
+import com.example.workroute.activitys.PayMethod;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -52,7 +56,6 @@ public class Profile extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.editProfile :
-                Toast.makeText(getApplicationContext(),"VAINA PENDIENTE",Toast.LENGTH_LONG).show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -105,21 +108,21 @@ public class Profile extends AppCompatActivity {
         ln_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this,PayMethod.class));
+                startActivity(new Intent(Profile.this, PayMethod.class));
             }
         });
 
         ln_license.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this,DrivingLicense.class));
+                startActivity(new Intent(Profile.this, DrivingLicense.class));
             }
         });
 
         ln_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this,GeneralSettingsActivity.class));
+                startActivity(new Intent(Profile.this, GeneralSettingsActivity.class));
             }
         });
 
@@ -128,7 +131,7 @@ public class Profile extends AppCompatActivity {
             public void onClick(View v) {
                 firebaseAuth.signOut();
                 new MainActivity.Destroy(Profile.this);
-                startActivity(new Intent(Profile.this,LoginActivity.class));
+                startActivity(new Intent(Profile.this, LoginActivity.class));
                 finish();
             }
         });

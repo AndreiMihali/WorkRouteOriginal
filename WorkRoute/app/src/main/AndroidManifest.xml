@@ -21,6 +21,9 @@
         android:theme="@style/Theme.WorkRoute"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name=".profile.EditProfile"
+            android:exported="false" />
+        <activity
             android:name=".driverActivities.AddDriverInformation"
             android:exported="false" />
         <activity
@@ -59,7 +62,7 @@
             android:name=".activitys.Notifications"
             android:exported="false" />
         <activity
-            android:name=".activitys.Profile"
+            android:name=".profile.Profile"
             android:exported="false" />
         <activity
             android:name=".suscribtion.SubscribesActivity"
