@@ -157,7 +157,6 @@ id button_message_cost
 id button_notifications
 id button_signin
 id button_signup
-id button_suscribe
 id card_birthday
 id card_chat
 id card_customer
@@ -167,6 +166,7 @@ id card_driver_general
 id card_ed_search_place
 id card_email
 id card_general
+id card_global
 id card_name
 id card_number
 id card_password
@@ -227,7 +227,6 @@ id mapDriver
 id or
 id password_forgot
 id payMethod
-id prices
 id profileImage
 id profile_photo_chat_list
 id profile_photo_messages
@@ -241,6 +240,7 @@ id recycler_chats
 id recycler_mensajes
 id recycler_notifications
 id recycler_payMethods
+id recycler_subs
 id rela
 id relativeLayout
 id requestTravel
@@ -273,6 +273,7 @@ id tvNotifications
 id tvReverse
 id txt_ciudad
 id txt_cumple
+id txt_description
 id txt_destination
 id txt_destination_cost
 id txt_distance
@@ -285,6 +286,7 @@ id txt_message
 id txt_name
 id txt_name_cost
 id txt_null
+id txt_price
 id txt_startLocation
 id txt_startLocation_cost
 id txt_title
@@ -320,6 +322,7 @@ layout item_chat_right
 layout layout_suscripciones
 layout list_item
 layout network_lose
+layout subscription_item
 layout tarjeta_metodo_pago_layout
 menu menu_toolbar_paymethods
 menu menu_toolbar_profile

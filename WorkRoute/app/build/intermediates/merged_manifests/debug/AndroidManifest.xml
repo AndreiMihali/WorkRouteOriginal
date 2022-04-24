@@ -90,7 +90,7 @@
             android:name="com.example.workroute.activitys.Profile"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.activitys.suscripcionesActivity"
+            android:name="com.example.workroute.suscribtion.SubscribesActivity"
             android:exported="false" />
         <activity
             android:name="com.example.workroute.activitys.FirstTimeActivity"

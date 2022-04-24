@@ -174,8 +174,8 @@
 91-->C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:63:13-37
 92        <activity
 92-->C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:64:9-66:40
-93            android:name="com.example.workroute.activitys.suscripcionesActivity"
-93-->C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:65:13-60
+93            android:name="com.example.workroute.suscribtion.SubscribesActivity"
+93-->C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:65:13-59
 94            android:exported="false" />
 94-->C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:66:13-37
 95        <activity

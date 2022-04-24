@@ -10,10 +10,10 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
-import com.google.android.material.button.MaterialButton;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -26,10 +26,7 @@ public final class LayoutSuscripcionesBinding implements ViewBinding {
   public final ImageButton buttonCard;
 
   @NonNull
-  public final MaterialButton buttonSuscribe;
-
-  @NonNull
-  public final LinearLayout prices;
+  public final RecyclerView recyclerSubs;
 
   @NonNull
   public final LinearLayout titles;
@@ -38,12 +35,11 @@ public final class LayoutSuscripcionesBinding implements ViewBinding {
   public final Toolbar toolbar;
 
   private LayoutSuscripcionesBinding(@NonNull RelativeLayout rootView,
-      @NonNull ImageButton buttonCard, @NonNull MaterialButton buttonSuscribe,
-      @NonNull LinearLayout prices, @NonNull LinearLayout titles, @NonNull Toolbar toolbar) {
+      @NonNull ImageButton buttonCard, @NonNull RecyclerView recyclerSubs,
+      @NonNull LinearLayout titles, @NonNull Toolbar toolbar) {
     this.rootView = rootView;
     this.buttonCard = buttonCard;
-    this.buttonSuscribe = buttonSuscribe;
-    this.prices = prices;
+    this.recyclerSubs = recyclerSubs;
     this.titles = titles;
     this.toolbar = toolbar;
   }
@@ -81,15 +77,9 @@ public final class LayoutSuscripcionesBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.button_suscribe;
-      MaterialButton buttonSuscribe = ViewBindings.findChildViewById(rootView, id);
-      if (buttonSuscribe == null) {
-        break missingId;
-      }
-
-      id = R.id.prices;
-      LinearLayout prices = ViewBindings.findChildViewById(rootView, id);
-      if (prices == null) {
+      id = R.id.recycler_subs;
+      RecyclerView recyclerSubs = ViewBindings.findChildViewById(rootView, id);
+      if (recyclerSubs == null) {
         break missingId;
       }
 
@@ -105,8 +95,8 @@ public final class LayoutSuscripcionesBinding implements ViewBinding {
         break missingId;
       }
 
-      return new LayoutSuscripcionesBinding((RelativeLayout) rootView, buttonCard, buttonSuscribe,
-          prices, titles, toolbar);
+      return new LayoutSuscripcionesBinding((RelativeLayout) rootView, buttonCard, recyclerSubs,
+          titles, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

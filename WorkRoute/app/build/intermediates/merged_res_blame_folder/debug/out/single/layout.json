@@ -52,6 +52,10 @@
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\view_1_add_driving_license.xml"
     },
     {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\subscription_item.xml",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\subscription_item.xml"
+    },
+    {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\add_license_driving.xml",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\add_license_driving.xml"
     },

@@ -62,7 +62,7 @@
             android:name=".activitys.Profile"
             android:exported="false" />
         <activity
-            android:name=".activitys.suscripcionesActivity"
+            android:name=".suscribtion.SubscribesActivity"
             android:exported="false" />
         <activity
             android:name=".activitys.FirstTimeActivity"

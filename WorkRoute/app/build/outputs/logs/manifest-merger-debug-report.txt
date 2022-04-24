@@ -376,12 +376,12 @@ ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:63:13-37
 	android:name
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:62:13-46
-activity#com.example.workroute.activitys.suscripcionesActivity
+activity#com.example.workroute.suscribtion.SubscribesActivity
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:64:9-66:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:66:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:65:13-60
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:65:13-59
 activity#com.example.workroute.activitys.FirstTimeActivity
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:67:9-69:40
 	android:exported

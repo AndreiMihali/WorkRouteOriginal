@@ -3243,7 +3243,6 @@ id button_message_cost
 id button_notifications
 id button_signin
 id button_signup
-id button_suscribe
 id cache_measures
 id callMeasure
 id cancel_action
@@ -3258,6 +3257,7 @@ id card_driver_general
 id card_ed_search_place
 id card_email
 id card_general
+id card_global
 id card_name
 id card_number
 id card_password
@@ -3580,7 +3580,6 @@ id places_autocomplete_try_again
 id places_autocomplete_try_again_progress
 id position
 id postLayout
-id prices
 id primary_button
 id profileImage
 id profile_photo_chat_list
@@ -3599,6 +3598,7 @@ id recycler_chats
 id recycler_mensajes
 id recycler_notifications
 id recycler_payMethods
+id recycler_subs
 id rela
 id relativeLayout
 id requestTravel
@@ -3752,6 +3752,7 @@ id tvNotifications
 id tvReverse
 id txt_ciudad
 id txt_cumple
+id txt_description
 id txt_destination
 id txt_destination_cost
 id txt_distance
@@ -3764,6 +3765,7 @@ id txt_message
 id txt_name
 id txt_name_cost
 id txt_null
+id txt_price
 id txt_startLocation
 id txt_startLocation_cost
 id txt_title
@@ -4005,6 +4007,7 @@ layout places_autocomplete_prediction
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
+layout subscription_item
 layout support_simple_spinner_dropdown_item
 layout tarjeta_metodo_pago_layout
 layout test_action_chip

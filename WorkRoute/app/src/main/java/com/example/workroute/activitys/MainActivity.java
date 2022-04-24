@@ -57,6 +57,7 @@ import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.model.User;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.example.workroute.service.ServicioOnline;
+import com.example.workroute.suscribtion.SubscribesActivity;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
@@ -95,6 +96,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import org.reactivestreams.Subscription;
+
 import java.security.Provider;
 import java.util.HashMap;
 import java.util.List;
@@ -132,10 +135,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!isDriver()){
-                    showDialog();
+                    showDialog("Configure driver profile","Before you can continue, set up your driver profile",new Intent(MainActivity.this, AddDriverInformation.class));
                 }else{
-                    startActivity(new Intent(MainActivity.this,DriverMap.class)
-                            .putExtra("isDriver",isDriver()));
+                    startActivity(new Intent(MainActivity.this,DriverMap.class));
                 }
             }
         });
@@ -143,21 +145,24 @@ public class MainActivity extends AppCompatActivity {
         button_customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,CustomerMap.class)
-                .putExtra("isSubscribed",isSubscribed()));
+                if(!isSubscribed()){
+                    showDialog("You must subscribe","Before you continue, you must subscribe if you want to use or service",new Intent(MainActivity.this, SubscribesActivity.class));
+                }else{
+                    startActivity(new Intent(MainActivity.this,CustomerMap.class));
+                }
             }
         });
     }
 
-    private void showDialog(){
+    private void showDialog(String title,String message,Intent intent){
         new MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_App_MaterialAlertDialog)
                 .setCancelable(false)
-                .setTitle("Configure driver profile")
-                .setMessage("Before you can continue, set up your driver profile")
+                .setTitle(title)
+                .setMessage(message)
                 .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(MainActivity.this, AddDriverInformation.class));
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

@@ -640,6 +640,10 @@
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\steven_binotto_9vduc_sgrsi_unsplash.jpg"
     },
     {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_subscription_item.xml.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\subscription_item.xml"
+    },
+    {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_car_map_round.png.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-xxhdpi\\car_map_round.png"
     },
