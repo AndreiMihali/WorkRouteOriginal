@@ -122,10 +122,13 @@ font allerta
 font andada
 font bigshot_one
 id appNotifications
+id autocompleteColors
+id autocompleteTypes
 id autocomplete_fragment
 id boton_drag
 id bottom_sheet_payMethod
 id btn_addPayMethod
+id btn_continue
 id btn_customer
 id btn_deletePayMethods
 id btn_driver
@@ -184,9 +187,11 @@ id driveLicense
 id ed_confirmpass_register
 id ed_email
 id ed_email_register
+id ed_idNumber
 id ed_message
 id ed_pass
 id ed_pass_register
+id ed_plate
 id ed_username_register
 id editProfile
 id emailNotifications
@@ -313,6 +318,7 @@ layout chats_list_item
 layout item_chat_left
 layout item_chat_right
 layout layout_suscripciones
+layout list_item
 layout network_lose
 layout tarjeta_metodo_pago_layout
 menu menu_toolbar_paymethods

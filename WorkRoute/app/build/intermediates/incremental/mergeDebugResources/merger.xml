@@ -10357,7 +10357,7 @@
 
         
     </style><style name="ThemeOverlay.App.MaterialAlertDialog" parent="MaterialAlertDialog.Material3">
-        <item name="colorContainer">#9EC4EF</item>
+        <item name="colorSurface">#C4DDE8</item>
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>
         <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>

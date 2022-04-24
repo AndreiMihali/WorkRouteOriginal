@@ -48,9 +48,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="DNI/NIE"
+                app:hintTextColor="@color/secondary"
+                app:boxStrokeColor="@color/secondary"
                 android:textColorHint="@color/secondary">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_idNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent" />
@@ -61,7 +64,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                app:boxStrokeColor="@color/secondary"
                 android:hint="Select your car type"
+                app:hintTextColor="@color/secondary"
                 android:textColorHint="@color/secondary"
                 app:endIconTint="@color/secondary">
 
@@ -77,11 +82,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                app:hintTextColor="@color/secondary"
                 android:hint="Plate number"
+                app:boxStrokeColor="@color/secondary"
                 android:textColorHint="@color/secondary"
                 app:endIconTint="@color/secondary">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_plate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent" />
@@ -93,6 +101,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:hint="Select your car color"
+                app:hintTextColor="@color/secondary"
+                app:boxStrokeColor="@color/secondary"
                 android:textColorHint="@color/secondary"
                 app:endIconTint="@color/secondary">
 
@@ -105,6 +115,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_continue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
