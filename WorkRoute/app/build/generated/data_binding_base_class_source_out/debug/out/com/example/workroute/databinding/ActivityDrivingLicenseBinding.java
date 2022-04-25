@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -32,16 +33,22 @@ public final class ActivityDrivingLicenseBinding implements ViewBinding {
   public final Button buttonSaveLicense;
 
   @NonNull
+  public final MaterialCardView cardImageFrente;
+
+  @NonNull
+  public final MaterialCardView cardImageReverse;
+
+  @NonNull
   public final View divider;
 
   @NonNull
   public final View divider2;
 
   @NonNull
-  public final MaterialCardView imageCarnetFrente;
+  public final ImageView imageCarnetFrente;
 
   @NonNull
-  public final MaterialCardView imageCarnetReverso;
+  public final ImageView imageCarnetReverso;
 
   @NonNull
   public final RelativeLayout relativeLayout;
@@ -57,13 +64,16 @@ public final class ActivityDrivingLicenseBinding implements ViewBinding {
 
   private ActivityDrivingLicenseBinding(@NonNull RelativeLayout rootView,
       @NonNull Button buttonFront, @NonNull Button buttonReverse, @NonNull Button buttonSaveLicense,
-      @NonNull View divider, @NonNull View divider2, @NonNull MaterialCardView imageCarnetFrente,
-      @NonNull MaterialCardView imageCarnetReverso, @NonNull RelativeLayout relativeLayout,
+      @NonNull MaterialCardView cardImageFrente, @NonNull MaterialCardView cardImageReverse,
+      @NonNull View divider, @NonNull View divider2, @NonNull ImageView imageCarnetFrente,
+      @NonNull ImageView imageCarnetReverso, @NonNull RelativeLayout relativeLayout,
       @NonNull MaterialToolbar toolbar, @NonNull TextView tvFront, @NonNull TextView tvReverse) {
     this.rootView = rootView;
     this.buttonFront = buttonFront;
     this.buttonReverse = buttonReverse;
     this.buttonSaveLicense = buttonSaveLicense;
+    this.cardImageFrente = cardImageFrente;
+    this.cardImageReverse = cardImageReverse;
     this.divider = divider;
     this.divider2 = divider2;
     this.imageCarnetFrente = imageCarnetFrente;
@@ -119,6 +129,18 @@ public final class ActivityDrivingLicenseBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.cardImageFrente;
+      MaterialCardView cardImageFrente = ViewBindings.findChildViewById(rootView, id);
+      if (cardImageFrente == null) {
+        break missingId;
+      }
+
+      id = R.id.cardImageReverse;
+      MaterialCardView cardImageReverse = ViewBindings.findChildViewById(rootView, id);
+      if (cardImageReverse == null) {
+        break missingId;
+      }
+
       id = R.id.divider;
       View divider = ViewBindings.findChildViewById(rootView, id);
       if (divider == null) {
@@ -132,13 +154,13 @@ public final class ActivityDrivingLicenseBinding implements ViewBinding {
       }
 
       id = R.id.imageCarnetFrente;
-      MaterialCardView imageCarnetFrente = ViewBindings.findChildViewById(rootView, id);
+      ImageView imageCarnetFrente = ViewBindings.findChildViewById(rootView, id);
       if (imageCarnetFrente == null) {
         break missingId;
       }
 
       id = R.id.imageCarnetReverso;
-      MaterialCardView imageCarnetReverso = ViewBindings.findChildViewById(rootView, id);
+      ImageView imageCarnetReverso = ViewBindings.findChildViewById(rootView, id);
       if (imageCarnetReverso == null) {
         break missingId;
       }
@@ -164,8 +186,8 @@ public final class ActivityDrivingLicenseBinding implements ViewBinding {
       }
 
       return new ActivityDrivingLicenseBinding((RelativeLayout) rootView, buttonFront,
-          buttonReverse, buttonSaveLicense, divider, divider2, imageCarnetFrente,
-          imageCarnetReverso, relativeLayout, toolbar, tvFront, tvReverse);
+          buttonReverse, buttonSaveLicense, cardImageFrente, cardImageReverse, divider, divider2,
+          imageCarnetFrente, imageCarnetReverso, relativeLayout, toolbar, tvFront, tvReverse);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
