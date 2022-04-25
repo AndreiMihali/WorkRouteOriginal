@@ -13,7 +13,9 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +23,8 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -117,10 +121,11 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     private TextView txt_destination;
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.secondary};
-    private int status=0;
+    private int status = 0;
     private String destination;
     private LatLng destinationLatLng;
     private MaterialButton btnRideStatus;
+    private Marker myPositionMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,7 +154,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    status=1;
+                    status = 1;
                     customerId = snapshot.getValue().toString();
                     getAssignedCustomerLocation();
                     getAssignedCustomerDestination();
@@ -173,24 +178,24 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    Map<String,Object> map=(Map<String,Object>)snapshot.getValue();
-                    if(map.get("destination")!=null){
-                        destination=map.get("destination").toString();
+                    Map<String, Object> map = (Map<String, Object>) snapshot.getValue();
+                    if (map.get("destination") != null) {
+                        destination = map.get("destination").toString();
                         txt_destination.setText(destination);
-                    }else{
+                    } else {
                         txt_destination.setText("--");
                     }
 
-                    Double destinationLat=0.0;
-                    Double destinationLong=0.0;
+                    Double destinationLat = 0.0;
+                    Double destinationLong = 0.0;
 
-                    if(map.get("destinationLat")!=null){
-                        destinationLat=Double.valueOf(map.get("destinationLat").toString());
+                    if (map.get("destinationLat") != null) {
+                        destinationLat = Double.valueOf(map.get("destinationLat").toString());
                     }
 
-                    if(map.get("destinationLong")!=null){
-                        destinationLong=Double.valueOf(map.get("destinationLong").toString());
-                        destinationLatLng=new LatLng(destinationLat,destinationLong);
+                    if (map.get("destinationLong") != null) {
+                        destinationLong = Double.valueOf(map.get("destinationLong").toString());
+                        destinationLatLng = new LatLng(destinationLat, destinationLong);
                     }
                 }
 
@@ -247,16 +252,16 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         });
     }
 
-    private String getGeocoderAddress(){
-        Geocoder geocoder=new Geocoder(DriverMap.this, Locale.getDefault());
-        String address="";
-        try{
-            List<Address> listAddress=geocoder.getFromLocation(driverLatLng.latitude,driverLatLng.longitude,1);
-            if(listAddress.size()>0){
-                address=listAddress.get(0).getAddressLine(0);
+    private String getGeocoderAddress() {
+        Geocoder geocoder = new Geocoder(DriverMap.this, Locale.getDefault());
+        String address = "";
+        try {
+            List<Address> listAddress = geocoder.getFromLocation(driverLatLng.latitude, driverLatLng.longitude, 1);
+            if (listAddress.size() > 0) {
+                address = listAddress.get(0).getAddressLine(0);
             }
-        }catch (IOException e){
-            Log.e("Error",e.toString());
+        } catch (IOException e) {
+            Log.e("Error", e.toString());
         }
         return address;
     }
@@ -307,9 +312,11 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                     }
                     driverLatLng = new LatLng(locationLat, locationLong);
                     pickupMarker = mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Pickup location")
-                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.location_pin_map_foreground)));
+                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.location_pin_map_foreground))
+                            .flat(true)
+                            .anchor(0.5f,0.5f));
                     getAssignedCustomerInfo();
-                    getRouteToMarker(driverLatLng,new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()));
+                    getRouteToMarker(driverLatLng, new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude()));
                 }
             }
 
@@ -320,7 +327,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         });
     }
 
-    private void getRouteToMarker(LatLng pickupMarker,LatLng startDestination) {
+    private void getRouteToMarker(LatLng pickupMarker, LatLng startDestination) {
         Routing routing = new Routing.Builder()
                 .travelMode(AbstractRouting.TravelMode.DRIVING)
                 .withListener(this)
@@ -375,7 +382,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         btn_message = findViewById(R.id.button_message);
         polylines = new ArrayList<>();
-        btnRideStatus=findViewById(R.id.btn_rideStatus);
+        btnRideStatus = findViewById(R.id.btn_rideStatus);
         iniciarMapa();
         initListeners();
     }
@@ -440,12 +447,12 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         btnRideStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (status){
+                switch (status) {
                     case 1:
-                        status=0;
+                        status = 0;
                         erasePolylines();
-                        if(destinationLatLng.latitude!=0.0 && destinationLatLng.longitude!=0.0){
-                            getRouteToMarker(destinationLatLng,driverLatLng);
+                        if (destinationLatLng.latitude != 0.0 && destinationLatLng.longitude != 0.0) {
+                            getRouteToMarker(destinationLatLng, driverLatLng);
                         }
                         btnRideStatus.setText("Drive completed");
                         break;
@@ -462,16 +469,16 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         btnRideStatus.setText("Picked customer");
         erasePolylines();
 
-        String userId=firebaseAuth.getUid();
-        DatabaseReference driverRef=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(userId).child("customerRequest");
+        String userId = firebaseAuth.getUid();
+        DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(userId).child("customerRequest");
         driverRef.removeValue();
 
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("customerRequest");
-        GeoFire geoFire=new GeoFire(reference);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("customerRequest");
+        GeoFire geoFire = new GeoFire(reference);
         geoFire.removeLocation(customerId);
-        customerId="";
+        customerId = "";
 
-        if(pickupMarker!=null){
+        if (pickupMarker != null) {
             pickupMarker.remove();
         }
 
@@ -569,7 +576,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.getUiSettings().setCompassEnabled(false);
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -578,18 +584,18 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
     private LocationManager locationManager;
 
-    private boolean isLocationEnabled(){
-        locationManager=(LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)||locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+    private boolean isLocationEnabled() {
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    private void showDialogMessageGpsEnable(){
+    private void showDialogMessageGpsEnable() {
 
-        new MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_App_MaterialAlertDialog)
+        new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
                 .setTitle("GPS DISABLED")
                 .setIcon(R.drawable.ic_baseline_gps_off_24)
                 .setMessage("In order to continue, please activate the gps")
@@ -597,7 +603,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(DriverMap.this,MainActivity.class));
+                        startActivity(new Intent(DriverMap.this, MainActivity.class));
                         dialog.dismiss();
                     }
                 })
@@ -618,13 +624,14 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     }
 
     private ActivityResultLauncher<Intent> activityResultLauncher;
+
     private void addActivityResultLauncher() {
-        activityResultLauncher=registerForActivityResult(
+        activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        if(result.getResultCode()==RESULT_CANCELED){
+                        if (result.getResultCode() == RESULT_CANCELED) {
                             buildGoogleApiClient();
                         }
                     }
@@ -633,14 +640,14 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     }
 
     protected synchronized void buildGoogleApiClient() {
-        if(isLocationEnabled()){
-            googleApiClient=new GoogleApiClient.Builder(this)
+        if (isLocationEnabled()) {
+            googleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
                     .build();
             googleApiClient.connect();
-        }else{
+        } else {
             showDialogMessageGpsEnable();
         }
     }
@@ -650,10 +657,52 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         if (getApplicationContext() != null) {
             myLastLocation = location;
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
+            if (myPositionMarker == null) {
+                myPositionMarker=mMap.addMarker(new MarkerOptions()
+                .flat(true)
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.arrow_my_location_foreground))
+                .anchor(0.5f,0.5f)
+                .position(latLng));
+            }
+            animateMarker(myPositionMarker, location);
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,20f));
             setAvailable(location);
         }
+    }
+
+    private void animateMarker(final Marker marker, final Location location) {
+        final Handler handler = new Handler();
+        final long start = SystemClock.uptimeMillis();
+        final LatLng startLatLng = marker.getPosition();
+        final double startRotation = marker.getRotation();
+        final long duration = 500;
+
+        final Interpolator interpolator = new LinearInterpolator();
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                long elapsed = SystemClock.uptimeMillis() - start;
+                float t = interpolator.getInterpolation((float) elapsed
+                        / duration);
+
+                double lng = t * location.getLongitude() + (1 - t)
+                        * startLatLng.longitude;
+                double lat = t * location.getLatitude() + (1 - t)
+                        * startLatLng.latitude;
+
+                float rotation = (float) (t * location.getBearing() + (1 - t)
+                        * startRotation);
+
+                marker.setPosition(new LatLng(lat, lng));
+                marker.setRotation(rotation);
+
+                if (t < 1.0) {
+                    // Post again 16ms later.
+                    handler.postDelayed(this, 16);
+                }
+            }
+        });
     }
 
     private void setAvailable(Location location) {

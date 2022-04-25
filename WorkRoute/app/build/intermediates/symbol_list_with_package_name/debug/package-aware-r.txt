@@ -4032,6 +4032,10 @@ menu example_menu
 menu example_menu2
 menu menu_toolbar_paymethods
 menu menu_toolbar_profile
+mipmap arrow_my_location
+mipmap arrow_my_location_background
+mipmap arrow_my_location_foreground
+mipmap arrow_my_location_round
 mipmap car_map
 mipmap car_map_background
 mipmap car_map_foreground

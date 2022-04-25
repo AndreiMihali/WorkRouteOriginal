@@ -22,7 +22,9 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +32,8 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -347,7 +351,9 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
 
             pickUpLocation=new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude());
             pickupMarker=mMap.addMarker(new MarkerOptions().position(pickUpLocation).title("Pickup Here")
-                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.location_pin_map_foreground)));
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.location_pin_map_foreground))
+                    .flat(true)
+                    .anchor(0.5f,0.5f));
             progressDialog.setMessage("Searching for drivers...");
             progressDialog.show();
 
@@ -502,6 +508,9 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
                             startActivity(intent);
                         }
                     });
+
+                    Map<String,Object> driverMap=(Map<String, Object>)snapshot.child("DriverInformation").getValue();
+                    txt_total_pay_travel.setText(driverMap.get("PlateNumber").toString());
                 }
             }
 
@@ -556,10 +565,16 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
                     progressDialog.dismiss();
                     displaySearchSheet(BottomSheetBehavior.STATE_HIDDEN);
                     mDriverMarker=mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Your driver")
-                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.car_map_foreground)));
+                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.car_map_foreground))
+                            .flat(true)
+                            .anchor(0.5f,0.5f));
                     getDriverInfo();
                     getHasRideEnded();
                     getRouteToMarker(driverLatLng);
+                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                    mMap.setMyLocationEnabled(false);
                 }
             }
 
@@ -633,8 +648,16 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
             pickupMarker.remove();
         }
 
+        if(mDriverMarker!=null){
+            mDriverMarker.remove();
+        }
+
         Toast.makeText(getApplicationContext(),"You just canceled the travel",Toast.LENGTH_LONG).show();
         displayInformationDriver(BottomSheetBehavior.STATE_HIDDEN);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
         erasePolylines();
     }
 
@@ -804,8 +827,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         if (getApplicationContext()!=null) {
             myLastLocation = location;
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,20f));
         }
 
     }

@@ -92,8 +92,8 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="imagePath" value="C:\Users\andre\Downloads\auto.png" />
-                                                <entry key="scalingPercent" value="54" />
+                                                <entry key="imagePath" value="C:\Users\andre\Downloads\mark.png" />
+                                                <entry key="scalingPercent" value="0" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -119,7 +119,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\andre\Downloads\pin.png" />
+                                                <entry key="imagePath" value="C:\Users\andre\Downloads\mark.png" />
                                                 <entry key="scalingPercent" value="70" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
@@ -155,8 +155,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="outputName" value="location_pin_map" />
+                                      <entry key="backgroundColor" value="b1ccff" />
+                                      <entry key="outputName" value="arrow_my_location" />
                                     </map>
                                   </option>
                                 </PersistentState>
