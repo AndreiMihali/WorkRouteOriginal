@@ -82,6 +82,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -132,6 +133,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
     private MaterialButton btn_cancel;
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.secondary};
+    private AutocompleteSupportFragment autocompleteFragment;
     private LatLng destinationLatLng;
 
     @Override
@@ -208,7 +210,9 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         btn_message=findViewById(R.id.button_message_cost);
         polylines=new ArrayList<>();
         destinationLatLng=new LatLng(0.0,0.0);
+        destination="";
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
+        autocompleteFragment = (AutocompleteSupportFragment)getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
         iniciarMapa();
         initListeners();
 
@@ -289,13 +293,13 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         requestTravel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requireARide();
+                if(destination.equals("")){
+                    Snackbar.make(v,"You must select a destination",Snackbar.LENGTH_SHORT).show();
+                }else{
+                    requireARide();
+                }
             }
         });
-
-
-        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
 
         autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
 
