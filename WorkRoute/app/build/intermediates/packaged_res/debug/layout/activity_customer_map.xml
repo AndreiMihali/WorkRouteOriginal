@@ -415,7 +415,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:lineSpacingExtra="2dp"
-                        android:text="Get a faster, hassle free pick-up\nat your precise location"
+                        android:text="Just select a destination and go to your work."
                         android:textColor="#DCDCDC"
                         android:textSize="14sp" />
 
@@ -425,7 +425,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Share Location"
+                        android:text="Send Request"
                         android:textColor="@color/secondary"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -481,8 +481,7 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/back_img_icons_search"
                                 android:padding="10dp"
-                                android:src="@drawable/ic_outline_work_outline_24"
-                                app:tint="@color/secondary" />
+                                android:src="@drawable/ic_outline_work_outline_24" />
 
                             <LinearLayout
                                 android:layout_width="0dp"
