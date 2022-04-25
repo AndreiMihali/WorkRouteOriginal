@@ -3253,6 +3253,7 @@ id cancel_action
 id cancel_button
 id cardImageFrente
 id cardImageReverse
+id cardViewImage
 id card_birthday
 id card_chat
 id card_content_root
@@ -3564,6 +3565,7 @@ id pathRelative
 id payMethod
 id peekHeight
 id percent
+id personal_information
 id pin
 id places_autocomplete_back_button
 id places_autocomplete_clear_button
@@ -3734,6 +3736,7 @@ id title_template
 id titles
 id toggle
 id toolbar
+id toolbarInformation
 id toolbarPay
 id toolbarSettings
 id toolbar_bottom_sheet
@@ -3779,7 +3782,6 @@ id txt_total_pay_travel_cost
 id txt_travel_information
 id txt_travel_information_cost
 id txt_user_name_chat_list
-id txt_view_asDriver
 id unchecked
 id uniform
 id unlabeled
@@ -3787,7 +3789,6 @@ id up
 id useLogo
 id user_name
 id user_name_messages
-id username
 id vertical_only
 id view_offset_helper
 id view_transition
@@ -3907,6 +3908,7 @@ layout activity_main
 layout activity_messages
 layout activity_notifications
 layout activity_pay_method
+layout activity_personal_information
 layout activity_profile
 layout activity_splash_screen
 layout banner

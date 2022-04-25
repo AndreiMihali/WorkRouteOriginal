@@ -163,6 +163,7 @@ id button_skip
 id button_subscribe
 id cardImageFrente
 id cardImageReverse
+id cardViewImage
 id card_birthday
 id card_chat
 id card_customer
@@ -232,6 +233,7 @@ id mapDriver
 id or
 id password_forgot
 id payMethod
+id personal_information
 id profileImage
 id profile_photo_chat_list
 id profile_photo_messages
@@ -266,6 +268,7 @@ id texts
 id title
 id titles
 id toolbar
+id toolbarInformation
 id toolbarPay
 id toolbarSettings
 id toolbar_bottom_sheet
@@ -300,10 +303,8 @@ id txt_total_pay_travel_cost
 id txt_travel_information
 id txt_travel_information_cost
 id txt_user_name_chat_list
-id txt_view_asDriver
 id user_name
 id user_name_messages
-id username
 id wifi_signal
 layout activity_add_driver_information
 layout activity_chats
@@ -319,6 +320,7 @@ layout activity_main
 layout activity_messages
 layout activity_notifications
 layout activity_pay_method
+layout activity_personal_information
 layout activity_profile
 layout activity_splash_screen
 layout chats_list_item

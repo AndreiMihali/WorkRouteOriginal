@@ -49,6 +49,9 @@
         android:theme="@style/Theme.WorkRoute"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name="com.example.workroute.activitys.Personal_information"
+            android:exported="false" />
+        <activity
             android:name="com.example.workroute.profile.EditProfile"
             android:exported="false" />
         <activity

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activitys.Personal_information">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarInformation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Personal Information"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:navigationIconTint="@color/secondary"
+        app:titleTextColor="@color/secondary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        />
+
+    <!--falta meterle el background degradado o algo guapo -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardBackgroundColor"
+        android:layout_below="@id/toolbarInformation"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewImage"
+        android:layout_marginTop="25dp"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@id/toolbarInformation"
+        android:layout_centerInParent="true"
+        android:theme="@style/Theme.MaterialComponents.DayNight"
+        app:cardCornerRadius="100dp">
+
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/steven_binotto_9vduc_sgrsi_unsplash" />
+    </com.google.android.material.card.MaterialCardView>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</RelativeLayout>

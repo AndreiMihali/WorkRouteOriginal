@@ -20,13 +20,13 @@ import com.example.workroute.activitys.GeneralSettingsActivity;
 import com.example.workroute.activitys.LoginActivity;
 import com.example.workroute.activitys.MainActivity;
 import com.example.workroute.activitys.PayMethod;
+import com.example.workroute.activitys.Personal_information;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Profile extends AppCompatActivity {
-    private TextView txt_viewAsDriver;
     private MaterialToolbar toolbar;
     private FirebaseAuth firebaseAuth;
     private LinearLayout ln_profile,ln_pay,ln_license,ln_settings,ln_delete,ln_logout;
@@ -36,6 +36,7 @@ public class Profile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Register);
+        setTitle(null);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         new NetworkCallback().enable(this);
@@ -45,7 +46,7 @@ public class Profile extends AppCompatActivity {
         init();
 
     }
-
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toolbar_profile,menu);
@@ -59,6 +60,7 @@ public class Profile extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+     */
 
     @Override
     protected void onDestroy() {
@@ -70,15 +72,13 @@ public class Profile extends AppCompatActivity {
     private void init(){
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        txt_viewAsDriver=findViewById(R.id.txt_view_asDriver);
         firebaseAuth=FirebaseAuth.getInstance();
-        //ln_profile=findViewById(R.id.profile);
+        ln_profile=findViewById(R.id.personal_information);
         ln_pay=findViewById(R.id.payMethod);
         ln_license=findViewById(R.id.driveLicense);
         ln_settings=findViewById(R.id.settings);
         ln_delete=findViewById(R.id.deleteAccount);
         ln_logout=findViewById(R.id.logout);
-        txt_username=findViewById(R.id.username);
         profileImage=findViewById(R.id.profileImage);
         initListeners();
         setData();
@@ -86,7 +86,7 @@ public class Profile extends AppCompatActivity {
 
     private void setData() {
         if(Companion.user!=null){
-            txt_username.setText(Companion.user.getNombre());
+            //txt_username.setText(Companion.user.getNombre());
 
             if(Companion.user.getFotoPerfil().equals("")){
                 profileImage.setImageDrawable(getDrawable(R.drawable.default_user_login));
@@ -102,6 +102,13 @@ public class Profile extends AppCompatActivity {
             public void onClick(View v) {
                 onBackPressed();
                 finish();
+            }
+        });
+
+        ln_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Profile.this, Personal_information.class));
             }
         });
 
