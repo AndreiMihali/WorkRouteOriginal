@@ -27,7 +27,9 @@ color teal_700
 color textOnPrimary
 color white
 color work_icon_background
+drawable back_arrow_back
 drawable back_driver_information
+drawable back_extended_button
 drawable back_img_icons_search
 drawable back_second_sheet
 drawable background_login
@@ -98,6 +100,7 @@ drawable ic_baseline_send_24
 drawable ic_baseline_settings_24
 drawable ic_baseline_share_24
 drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24
+drawable ic_bxs_left_arrow_circle
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_mobile_login_amico
@@ -172,7 +175,6 @@ id card_number
 id card_password
 id card_password_confirm
 id card_photo
-id card_profile_photo_chat_list
 id card_spiiner
 id card_status
 id card_tarjeta
@@ -360,6 +362,7 @@ style Register
 style Splash
 style Subscribe
 style ThemeOverlay.App.MaterialAlertDialog
+style Theme.EditProfile
 style Theme.WorkRoute
 style Widget.App.Button
 style backDriverInformation

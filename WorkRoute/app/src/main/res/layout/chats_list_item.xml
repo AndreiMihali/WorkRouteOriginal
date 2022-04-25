@@ -4,40 +4,41 @@
     android:id="@+id/card_general"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="10dp"
+    android:layout_marginHorizontal="15dp"
     android:layout_marginVertical="10dp"
     android:background="@color/back_login"
     android:theme="@style/Theme.MaterialComponents.DayNight"
-    app:cardCornerRadius="30dp"
-    app:cardElevation="4dp"
-    app:contentPadding="10dp">
+    app:cardCornerRadius="10dp"
+    app:cardBackgroundColor="#F8DEDE"
+    app:cardElevation="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:orientation="horizontal"
         android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_profile_photo_chat_list"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerVertical="true"
-            android:theme="@style/Theme.MaterialComponents.DayNight"
-            app:cardCornerRadius="100dp">
+            android:id="@+id/card_photo"
+            android:layout_width="70dp"
+            app:cardCornerRadius="10dp"
+            android:layout_height="70dp">
 
             <ImageView
                 android:id="@+id/profile_photo_chat_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:src="@drawable/steven_binotto_9vduc_sgrsi_unsplash"
                 android:scaleType="centerCrop"
-                android:src="@drawable/default_user_login" />
+                android:layout_height="match_parent"/>
         </com.google.android.material.card.MaterialCardView>
 
+
         <LinearLayout
+            android:layout_toEndOf="@id/card_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
-            android:layout_toEndOf="@id/card_profile_photo_chat_list"
             android:orientation="vertical">
 
             <TextView
@@ -45,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Andrei Mihali"
-                android:textColor="@color/secondary"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -62,6 +63,7 @@
         </LinearLayout>
 
         <TextView
+            android:layout_gravity="center"
             android:id="@+id/txt_last_message_time_chat_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,6 +73,7 @@
             android:text="10:20"
             android:textColor="#575757"
             android:textSize="14sp" />
+
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

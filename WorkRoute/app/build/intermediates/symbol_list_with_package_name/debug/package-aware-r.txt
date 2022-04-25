@@ -2897,7 +2897,9 @@ drawable adaptive_icon_background
 drawable adaptive_icon_foreground
 drawable avd_hide_password
 drawable avd_show_password
+drawable back_arrow_back
 drawable back_driver_information
+drawable back_extended_button
 drawable back_img_icons_search
 drawable back_second_sheet
 drawable background_login
@@ -3006,6 +3008,7 @@ drawable ic_baseline_send_24
 drawable ic_baseline_settings_24
 drawable ic_baseline_share_24
 drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24
+drawable ic_bxs_left_arrow_circle
 drawable ic_clock_black_24dp
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_background
@@ -3263,7 +3266,6 @@ id card_number
 id card_password
 id card_password_confirm
 id card_photo
-id card_profile_photo_chat_list
 id card_root
 id card_spiiner
 id card_status
@@ -4753,6 +4755,7 @@ style Theme_Design_Light
 style Theme_Design_Light_BottomSheetDialog
 style Theme_Design_Light_NoActionBar
 style Theme_Design_NoActionBar
+style Theme_EditProfile
 style Theme_Material3_Dark
 style Theme_Material3_Dark_BottomSheetDialog
 style Theme_Material3_Dark_Dialog
