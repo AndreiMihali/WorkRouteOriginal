@@ -4,7 +4,6 @@ package com.example.workroute.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
@@ -14,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
+import com.google.android.material.button.MaterialButton;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -23,7 +23,10 @@ public final class LayoutSuscripcionesBinding implements ViewBinding {
   private final RelativeLayout rootView;
 
   @NonNull
-  public final ImageButton buttonCard;
+  public final MaterialButton buttonSkip;
+
+  @NonNull
+  public final MaterialButton buttonSubscribe;
 
   @NonNull
   public final RecyclerView recyclerSubs;
@@ -35,10 +38,11 @@ public final class LayoutSuscripcionesBinding implements ViewBinding {
   public final Toolbar toolbar;
 
   private LayoutSuscripcionesBinding(@NonNull RelativeLayout rootView,
-      @NonNull ImageButton buttonCard, @NonNull RecyclerView recyclerSubs,
-      @NonNull LinearLayout titles, @NonNull Toolbar toolbar) {
+      @NonNull MaterialButton buttonSkip, @NonNull MaterialButton buttonSubscribe,
+      @NonNull RecyclerView recyclerSubs, @NonNull LinearLayout titles, @NonNull Toolbar toolbar) {
     this.rootView = rootView;
-    this.buttonCard = buttonCard;
+    this.buttonSkip = buttonSkip;
+    this.buttonSubscribe = buttonSubscribe;
     this.recyclerSubs = recyclerSubs;
     this.titles = titles;
     this.toolbar = toolbar;
@@ -71,9 +75,15 @@ public final class LayoutSuscripcionesBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.button_card;
-      ImageButton buttonCard = ViewBindings.findChildViewById(rootView, id);
-      if (buttonCard == null) {
+      id = R.id.button_skip;
+      MaterialButton buttonSkip = ViewBindings.findChildViewById(rootView, id);
+      if (buttonSkip == null) {
+        break missingId;
+      }
+
+      id = R.id.button_subscribe;
+      MaterialButton buttonSubscribe = ViewBindings.findChildViewById(rootView, id);
+      if (buttonSubscribe == null) {
         break missingId;
       }
 
@@ -95,8 +105,8 @@ public final class LayoutSuscripcionesBinding implements ViewBinding {
         break missingId;
       }
 
-      return new LayoutSuscripcionesBinding((RelativeLayout) rootView, buttonCard, recyclerSubs,
-          titles, toolbar);
+      return new LayoutSuscripcionesBinding((RelativeLayout) rootView, buttonSkip, buttonSubscribe,
+          recyclerSubs, titles, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

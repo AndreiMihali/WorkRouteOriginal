@@ -24,7 +24,7 @@ public final class ChatsListItemBinding implements ViewBinding {
   public final MaterialCardView cardGeneral;
 
   @NonNull
-  public final MaterialCardView cardProfilePhotoChatList;
+  public final MaterialCardView cardPhoto;
 
   @NonNull
   public final ImageView profilePhotoChatList;
@@ -39,12 +39,12 @@ public final class ChatsListItemBinding implements ViewBinding {
   public final TextView txtUserNameChatList;
 
   private ChatsListItemBinding(@NonNull MaterialCardView rootView,
-      @NonNull MaterialCardView cardGeneral, @NonNull MaterialCardView cardProfilePhotoChatList,
+      @NonNull MaterialCardView cardGeneral, @NonNull MaterialCardView cardPhoto,
       @NonNull ImageView profilePhotoChatList, @NonNull TextView txtLastMessageChatList,
       @NonNull TextView txtLastMessageTimeChatList, @NonNull TextView txtUserNameChatList) {
     this.rootView = rootView;
     this.cardGeneral = cardGeneral;
-    this.cardProfilePhotoChatList = cardProfilePhotoChatList;
+    this.cardPhoto = cardPhoto;
     this.profilePhotoChatList = profilePhotoChatList;
     this.txtLastMessageChatList = txtLastMessageChatList;
     this.txtLastMessageTimeChatList = txtLastMessageTimeChatList;
@@ -80,9 +80,9 @@ public final class ChatsListItemBinding implements ViewBinding {
     missingId: {
       MaterialCardView cardGeneral = (MaterialCardView) rootView;
 
-      id = R.id.card_profile_photo_chat_list;
-      MaterialCardView cardProfilePhotoChatList = ViewBindings.findChildViewById(rootView, id);
-      if (cardProfilePhotoChatList == null) {
+      id = R.id.card_photo;
+      MaterialCardView cardPhoto = ViewBindings.findChildViewById(rootView, id);
+      if (cardPhoto == null) {
         break missingId;
       }
 
@@ -110,9 +110,9 @@ public final class ChatsListItemBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ChatsListItemBinding((MaterialCardView) rootView, cardGeneral,
-          cardProfilePhotoChatList, profilePhotoChatList, txtLastMessageChatList,
-          txtLastMessageTimeChatList, txtUserNameChatList);
+      return new ChatsListItemBinding((MaterialCardView) rootView, cardGeneral, cardPhoto,
+          profilePhotoChatList, txtLastMessageChatList, txtLastMessageTimeChatList,
+          txtUserNameChatList);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -3235,7 +3235,6 @@ int id buttonSaveLicense 0x7f0a0088
 int id buttonSearch 0x7f0a0089
 int id buttonUbi 0x7f0a008a
 int id button_cancel 0x7f0a008b
-int id button_card 0x7f0a008c
 int id button_continue 0x7f0a008d
 int id button_create 0x7f0a008e
 int id button_google 0x7f0a008f
@@ -3245,6 +3244,8 @@ int id button_message_cost 0x7f0a0092
 int id button_notifications 0x7f0a0093
 int id button_signin 0x7f0a0094
 int id button_signup 0x7f0a0095
+int id button_skip 0x7f0a02c8
+int id button_subscribe 0x7f0a02c9
 int id cache_measures 0x7f0a0096
 int id callMeasure 0x7f0a0097
 int id cancel_action 0x7f0a0098

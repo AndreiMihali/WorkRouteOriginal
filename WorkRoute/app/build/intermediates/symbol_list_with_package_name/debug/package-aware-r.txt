@@ -3236,7 +3236,6 @@ id buttonSaveLicense
 id buttonSearch
 id buttonUbi
 id button_cancel
-id button_card
 id button_continue
 id button_create
 id button_google
@@ -3246,6 +3245,8 @@ id button_message_cost
 id button_notifications
 id button_signin
 id button_signup
+id button_skip
+id button_subscribe
 id cache_measures
 id callMeasure
 id cancel_action
