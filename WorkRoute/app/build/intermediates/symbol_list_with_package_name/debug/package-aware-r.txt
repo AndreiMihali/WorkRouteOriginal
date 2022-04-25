@@ -3251,6 +3251,8 @@ id cache_measures
 id callMeasure
 id cancel_action
 id cancel_button
+id cardImageFrente
+id cardImageReverse
 id card_birthday
 id card_chat
 id card_content_root
@@ -4111,6 +4113,7 @@ string fab_transformation_sheet_behavior
 string fcm_2_args
 string fcm_fallback_notification_channel_label
 string fcm_no_args
+string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id
