@@ -52,19 +52,13 @@
             android:name="com.example.workroute.activitys.Personal_information"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.profile.EditProfile"
-            android:exported="false" />
-        <activity
             android:name="com.example.workroute.driverActivities.AddDriverInformation"
-            android:exported="false" />
-        <activity
-            android:name="com.example.workroute.configureProfileDriving.ConfigureDrivingProfile"
             android:exported="false" />
         <activity
             android:name="com.example.workroute.activitys.CustomerMap"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.activitys.DriverMap"
+            android:name="com.example.workroute.driverActivities.DriverMap"
             android:exported="false" />
 
         <meta-data
@@ -78,7 +72,7 @@
             android:name="com.example.workroute.activitys.PayMethod"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.activitys.DrivingLicense"
+            android:name="com.example.workroute.driverActivities.DrivingLicense"
             android:exported="false" />
         <activity
             android:name="com.example.workroute.kotlin.activities.MessagesActivity"

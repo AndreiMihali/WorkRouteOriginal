@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.workroute">
+    package="com.example.workroute" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -19,18 +19,15 @@
         android:roundIcon="@mipmap/work_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkRoute"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".initActivities.ForgotPasswordActivity"
+            android:exported="false" />
         <activity
             android:name=".activitys.Personal_information"
             android:exported="false" />
         <activity
-            android:name=".profile.EditProfile"
-            android:exported="false" />
-        <activity
             android:name=".driverActivities.AddDriverInformation"
-            android:exported="false" />
-        <activity
-            android:name=".configureProfileDriving.ConfigureDrivingProfile"
             android:exported="false" />
         <activity
             android:name=".activitys.CustomerMap"
@@ -71,23 +68,23 @@
             android:name=".suscribtion.SubscribesActivity"
             android:exported="false" />
         <activity
-            android:name=".activitys.FirstTimeActivity"
+            android:name=".initActivities.FirstTimeActivity"
             android:exported="false" />
         <activity
-            android:name=".activitys.CreateAccount"
+            android:name=".initActivities.CreateAccount"
             android:exported="false" />
         <activity
-            android:name=".activitys.ConfirmLogin"
+            android:name=".initActivities.ConfirmLogin"
             android:exported="false" />
         <activity
-            android:name=".activitys.LoginActivity"
+            android:name=".initActivities.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".activitys.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".activitys.SplashScreen"
-            android:exported="true">
+            android:name=".initActivities.SplashScreen"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -97,7 +94,7 @@
 
         <service
             android:name=".service.MyFirebaseInstanceIDService"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

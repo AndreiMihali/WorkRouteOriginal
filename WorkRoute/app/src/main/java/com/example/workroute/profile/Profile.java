@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.workroute.R;
 import com.example.workroute.driverActivities.DrivingLicense;
 import com.example.workroute.activitys.GeneralSettingsActivity;
-import com.example.workroute.activitys.LoginActivity;
+import com.example.workroute.initActivities.LoginActivity;
 import com.example.workroute.activitys.MainActivity;
 import com.example.workroute.activitys.PayMethod;
 import com.example.workroute.activitys.Personal_information;
