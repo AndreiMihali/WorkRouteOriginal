@@ -2,13 +2,17 @@ package com.example.workroute.initActivities
 
 import android.app.ProgressDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
+import android.view.View.OnFocusChangeListener
+import androidx.appcompat.app.AppCompatActivity
 import com.example.workroute.R
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -21,6 +25,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
     private lateinit var btnSend:MaterialButton
     private lateinit var toolbar:MaterialToolbar
     private lateinit var progressDialog:ProgressDialog
+    private lateinit var cardEmail:MaterialCardView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Register)
@@ -38,6 +43,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
         progressDialog.setMessage("Please wait...")
         progressDialog.setTitle("Sending email")
         progressDialog.setCancelable(false)
+        cardEmail=findViewById(R.id.card_email)
         initListeners()
     }
 
@@ -46,6 +52,16 @@ class ForgotPasswordActivity : AppCompatActivity() {
             onBackPressed()
             finish()
         }
+
+        edEmail.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                setColorsFocus(cardEmail, edEmail, layoutEmail)
+            } else {
+                removeColorsFocus(cardEmail, edEmail, layoutEmail)
+            }
+        }
+
+
 
         btnSend.setOnClickListener {
             if(edEmail.text.toString().trim().isEmpty()){
@@ -59,6 +75,31 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 sendEmail(it)
             }
         }
+    }
+
+    private fun setColorsFocus(
+        card: MaterialCardView,
+        ed: TextInputEditText,
+        txt: TextInputLayout
+    ) {
+        card.strokeColor = Color.parseColor("#0391FF")
+        card.strokeWidth = 3
+        txt.hintTextColor = ColorStateList.valueOf(getColor(R.color.secondary))
+        txt.setStartIconTintList(ColorStateList.valueOf(getColor(R.color.secondary)))
+        ed.setTextColor(getColor(R.color.secondary))
+        txt.setEndIconTintList(ColorStateList.valueOf(getColor(R.color.secondary)))
+    }
+
+    private fun removeColorsFocus(
+        card: MaterialCardView,
+        ed: TextInputEditText,
+        txt: TextInputLayout
+    ) {
+        card.strokeWidth = 0
+        ed.setTextColor(Color.parseColor("#BABABA"))
+        txt.hintTextColor = ColorStateList.valueOf(Color.parseColor("#D5D5D5"))
+        txt.setStartIconTintList(ColorStateList.valueOf(Color.parseColor("#D5D5D5")))
+        txt.setEndIconTintList(ColorStateList.valueOf(Color.parseColor("#D5D5D5")))
     }
 
     private fun sendEmail(view:View){
