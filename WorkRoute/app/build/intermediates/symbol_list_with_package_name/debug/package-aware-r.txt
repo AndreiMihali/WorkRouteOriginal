@@ -2892,6 +2892,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable account_amico
 drawable adaptive_icon
 drawable adaptive_icon_background
 drawable adaptive_icon_foreground
@@ -3222,6 +3223,7 @@ id btn_driver
 id btn_otherMethods
 id btn_rideStatus
 id btn_send
+id btn_send_email
 id button
 id buttonCustomer
 id buttonDriver
@@ -3310,6 +3312,7 @@ id contentPanel
 id contiguous
 id continuousVelocity
 id coordinator
+id cord_layout
 id cos
 id counterclockwise
 id currentState
@@ -3356,6 +3359,7 @@ id easeOut
 id east
 id ed_confirmpass_register
 id ed_email
+id ed_email_recover_password
 id ed_email_register
 id ed_idNumber
 id ed_message
@@ -3446,6 +3450,7 @@ id layout_confirm_pass
 id layout_content
 id layout_ed_alias
 id layout_email
+id layout_email_recover_password
 id layout_name
 id layout_pass
 id left
@@ -3606,6 +3611,7 @@ id recycler_mensajes
 id recycler_notifications
 id recycler_payMethods
 id recycler_subs
+id rel_layout
 id rela
 id relativeLayout
 id requestTravel
@@ -3741,6 +3747,7 @@ id toolbarPay
 id toolbarSettings
 id toolbar_bottom_sheet
 id toolbar_messages
+id toolbar_recovery_password
 id top
 id topPanel
 id touch_outside
@@ -3902,6 +3909,7 @@ layout activity_customer_map
 layout activity_driver_map
 layout activity_driving_license
 layout activity_first_time
+layout activity_forgot_password
 layout activity_general_settings
 layout activity_login
 layout activity_main
