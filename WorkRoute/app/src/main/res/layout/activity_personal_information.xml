@@ -48,6 +48,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
+                android:id="@+id/tv_userMail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -64,33 +65,37 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="60dp"
             android:theme="@style/Theme.MaterialComponents.DayNight"
-            app:layout_anchor="@id/rel_layout"
             app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="50dp"
+            app:layout_anchor="@id/rel_layout"
             app:layout_anchorGravity="bottom">
 
             <RelativeLayout
-                android:paddingHorizontal="15dp"
-                android:paddingVertical="10dp"
-                android:background="@drawable/back_extended_button"
+                android:id="@+id/relativeChangingColorOnClick"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:background="#DC1C1C"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="10dp">
 
-                <ImageButton
+                <ImageView
+                    android:id="@+id/imageLock"
                     android:layout_width="wrap_content"
-                    android:src="@drawable/ic_baseline_arrow_back_24"
-                    android:background="@drawable/back_arrow_back"
-                    android:padding="5dp"
                     android:layout_height="wrap_content"
-                    app:tint="@color/black" />
+                    android:background="@android:color/transparent"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_baseline_lock_24"
+                    app:tint="@color/white" />
 
                 <TextView
+                    android:id="@+id/textUnlock_Save"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Back to Home"
-                    android:textSize="18sp"
+                    android:text="UNLOCK FIELDS"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
             </RelativeLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -113,138 +118,141 @@
             android:textSize="22sp"
             android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            android:outlineProvider="none"
+            android:theme="@style/Theme.MaterialComponents.DayNight"
+            app:cardCornerRadius="100dp">
 
-            <ImageView
-                android:id="@+id/imageView"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_name"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_baseline_person_24" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:hint="Name"
+                android:textColorHint="#BABABA"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:startIconDrawable="@drawable/ic_baseline_person_24"
+                app:startIconTint="#BABABA">
 
-                <TextView
-                    android:id="@+id/textView9"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Name"
+                    android:background="@android:color/transparent"
+                    android:enabled="false"
+                    android:text="NombreUsuario"
+                    android:textColor="@color/secondary"
                     android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/editTextTextPersonName3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:textSize="16sp"
-                    android:inputType="textPersonName"
-                    android:text="GET_NAME" />
+        </com.google.android.material.card.MaterialCardView>
 
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_password"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:outlineProvider="none"
+            android:theme="@style/Theme.MaterialComponents.DayNight"
+            app:cardCornerRadius="100dp">
 
-            <ImageView
-                android:id="@+id/imageView"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_pass"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_baseline_attach_money_24" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:hint="Password"
+                android:textColorHint="#BABABA"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:endIconMode="password_toggle"
+                app:endIconTint="#BABABA"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                app:startIconTint="#BABABA">
 
-                <TextView
-                    android:id="@+id/textView10"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_pass"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Subscription Level"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/editTextTextPersonName3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="GET_LEVEL"
-                    android:textSize="16sp" />
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_bx_lock_alt" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Password"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/editTextPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:enabled="false"
                     android:inputType="textPassword"
-                    android:text="GET_PASS"
+                    android:text="Password"
+                    android:textColor="@color/secondary"
                     android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:id="@+id/layout_subscriptionLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                android:src="@drawable/ic_baseline_attach_money_24"
+                app:tint="#BABABA" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_weight="1"
+                android:text="Subscription Level"
+                android:textColor="#BABABA"
+                android:textSize="16sp" />
+
+            <ImageButton
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                app:tint="#737272"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </LinearLayout>
 
 
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewActualLVL"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="62dp"
+                android:text="Actual subscription level : "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_variableActualSubscription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|clip_horizontal"
+                android:text="4"
+                android:textSize="16sp" />
 
 
         </LinearLayout>
-
 
     </LinearLayout>
-
-
 
 </RelativeLayout>

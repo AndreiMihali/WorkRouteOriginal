@@ -385,8 +385,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_bx_lock_alt" />
-                            <entry key="sourceFile" value="C:\Users\Ruben\Downloads\bx-lock-alt.svg" />
+                            <entry key="outputName" value="ic_bx_lock_open" />
+                            <entry key="sourceFile" value="C:\Users\valin\Downloads\bx-lock-open.svg" />
                           </map>
                         </option>
                       </PersistentState>

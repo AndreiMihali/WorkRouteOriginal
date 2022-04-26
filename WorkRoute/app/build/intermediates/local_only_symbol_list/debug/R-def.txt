@@ -25,12 +25,14 @@ color tablayout_style
 color teal_200
 color teal_700
 color textOnPrimary
+color verde_flojo
 color white
 color work_icon_background
 drawable account_amico
 drawable back_arrow_back
 drawable back_driver_information
 drawable back_extended_button
+drawable back_extended_button_green
 drawable back_img_icons_search
 drawable back_second_sheet
 drawable background_login
@@ -60,6 +62,7 @@ drawable ic_baseline_add_24
 drawable ic_baseline_add_location_24
 drawable ic_baseline_arrow_back_24
 drawable ic_baseline_arrow_back_ios_new_24
+drawable ic_baseline_attach_money_24
 drawable ic_baseline_calendar_month_24
 drawable ic_baseline_calendar_today_24
 drawable ic_baseline_camera_alt_24
@@ -101,6 +104,8 @@ drawable ic_baseline_send_24
 drawable ic_baseline_settings_24
 drawable ic_baseline_share_24
 drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24
+drawable ic_bx_lock_alt
+drawable ic_bx_lock_open
 drawable ic_bxs_left_arrow_circle
 drawable ic_launcher_background
 drawable ic_launcher_foreground
@@ -202,6 +207,7 @@ id ed_message
 id ed_pass
 id ed_pass_register
 id ed_plate
+id ed_username
 id ed_username_register
 id editProfile
 id emailNotifications
@@ -210,6 +216,7 @@ id helpMenu
 id image
 id imageCarnetFrente
 id imageCarnetReverso
+id imageLock
 id img
 id information_user
 id information_user_cost
@@ -226,6 +233,7 @@ id layout_email
 id layout_email_recover_password
 id layout_name
 id layout_pass
+id layout_subscriptionLevel
 id linears_datos
 id ln_desc
 id ln_escribir
@@ -255,6 +263,7 @@ id recycler_payMethods
 id recycler_subs
 id rel_layout
 id rela
+id relativeChangingColorOnClick
 id relativeLayout
 id requestTravel
 id rl
@@ -269,6 +278,9 @@ id textLayoutCardNumber
 id textLayoutMonth
 id textLayoutName
 id textLayoutYear
+id textUnlock_Save
+id textView3
+id textViewActualLVL
 id texto_bienvenida
 id texts
 id title
@@ -286,6 +298,8 @@ id tvNotificationPreferences
 id tvNotificationPreferences2
 id tvNotifications
 id tvReverse
+id tv_userMail
+id tv_variableActualSubscription
 id txt_ciudad
 id txt_cumple
 id txt_description

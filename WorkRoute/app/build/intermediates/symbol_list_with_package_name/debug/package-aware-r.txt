@@ -2201,6 +2201,7 @@ color test_mtrl_calendar_day_selected
 color textOnPrimary
 color tooltip_background_dark
 color tooltip_background_light
+color verde_flojo
 color white
 color work_icon_background
 dimen abc_action_bar_content_inset_material
@@ -2901,6 +2902,7 @@ drawable avd_show_password
 drawable back_arrow_back
 drawable back_driver_information
 drawable back_extended_button
+drawable back_extended_button_green
 drawable back_img_icons_search
 drawable back_second_sheet
 drawable background_login
@@ -2968,6 +2970,7 @@ drawable ic_baseline_add_24
 drawable ic_baseline_add_location_24
 drawable ic_baseline_arrow_back_24
 drawable ic_baseline_arrow_back_ios_new_24
+drawable ic_baseline_attach_money_24
 drawable ic_baseline_calendar_month_24
 drawable ic_baseline_calendar_today_24
 drawable ic_baseline_camera_alt_24
@@ -3009,6 +3012,8 @@ drawable ic_baseline_send_24
 drawable ic_baseline_settings_24
 drawable ic_baseline_share_24
 drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24
+drawable ic_bx_lock_alt
+drawable ic_bx_lock_open
 drawable ic_bxs_left_arrow_circle
 drawable ic_clock_black_24dp
 drawable ic_keyboard_black_24dp
@@ -3366,6 +3371,7 @@ id ed_message
 id ed_pass
 id ed_pass_register
 id ed_plate
+id ed_username
 id ed_username_register
 id editProfile
 id edit_query
@@ -3419,6 +3425,7 @@ id ignoreRequest
 id image
 id imageCarnetFrente
 id imageCarnetReverso
+id imageLock
 id image_content_root
 id image_root
 id image_view
@@ -3453,6 +3460,7 @@ id layout_email
 id layout_email_recover_password
 id layout_name
 id layout_pass
+id layout_subscriptionLevel
 id left
 id leftToRight
 id legacy
@@ -3613,6 +3621,7 @@ id recycler_payMethods
 id recycler_subs
 id rel_layout
 id rela
+id relativeChangingColorOnClick
 id relativeLayout
 id requestTravel
 id reverseSawtooth
@@ -3724,6 +3733,9 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textUnlock_Save
+id textView3
+id textViewActualLVL
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3765,6 +3777,8 @@ id tvNotificationPreferences
 id tvNotificationPreferences2
 id tvNotifications
 id tvReverse
+id tv_userMail
+id tv_variableActualSubscription
 id txt_ciudad
 id txt_cumple
 id txt_description
