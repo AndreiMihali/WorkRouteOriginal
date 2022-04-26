@@ -36,7 +36,7 @@
             android:name=".activitys.CustomerMap"
             android:exported="false" />
         <activity
-            android:name=".activitys.DriverMap"
+            android:name=".driverActivities.DriverMap"
             android:exported="false" />
 
         <meta-data
@@ -50,7 +50,7 @@
             android:name=".activitys.PayMethod"
             android:exported="false" />
         <activity
-            android:name=".activitys.DrivingLicense"
+            android:name=".driverActivities.DrivingLicense"
             android:exported="false" />
         <activity
             android:name=".kotlin.activities.MessagesActivity"
