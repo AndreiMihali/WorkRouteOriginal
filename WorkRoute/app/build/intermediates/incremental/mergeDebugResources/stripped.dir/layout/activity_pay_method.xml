@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/back_login"
+    android:layout_height="match_parent"
+    tools:context=".activitys.PayMethod">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbarPay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            app:navigationIconTint="@color/secondary"
+            app:title="Pay Methods"
+            app:titleTextColor="@color/secondary" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_payMethods"
+            android:layout_width="match_parent"
+            android:layout_height="525dp"
+            android:layout_below="@id/toolbarPay"
+            android:layout_marginTop="20dp" />
+
+        <ProgressBar
+            android:id="@+id/loadContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:indeterminateTint="@color/secondary" />
+
+        <TextView
+            android:id="@+id/txt_null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="You don't have any pay methods yet"
+            android:textColor="@color/secondary"
+            android:textSize="20sp"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_addPayMethod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recycler_payMethods"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="40dp"
+            android:padding="20dp"
+            android:text="Add a pay method"
+            android:textStyle="bold"
+            app:backgroundTint="#DEF6F4"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/ic_baseline_credit_card_24"
+            app:iconTint="@color/secondary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_deletePayMethods"
+            android:layout_width="wrap_content"
+            android:visibility="invisible"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recycler_payMethods"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="40dp"
+            android:padding="20dp"
+            android:text="Delete pay METHODS"
+            android:textStyle="bold"
+            app:backgroundTint="#DEF6F4"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/ic_outline_delete_forever_24"
+            app:iconTint="@color/secondary" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/bottom_sheet_payMethod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_second_sheet"
+        android:backgroundTint="#DAF8F8"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:id="@+id/boton_drag"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_baseline_remove_24"
+                app:tint="@color/secondary" />
+
+
+            <ImageView
+                android:id="@+id/cardsImage"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_below="@id/boton_drag"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginVertical="40dp"
+                app:srcCompat="@drawable/payments" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textLayoutName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cardsImage"
+                android:layout_marginHorizontal="20dp"
+                android:hint="FULL NAME"
+                app:boxStrokeColor="@color/secondary"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/black"
+                app:startIconDrawable="@drawable/ic_baseline_person_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textSize="18sp"></com.google.android.material.textfield.TextInputEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textLayoutCardNumber"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textLayoutName"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:hint="CARD NUMBER"
+                app:boxStrokeColor="@color/secondary"
+                app:counterEnabled="true"
+                app:counterMaxLength="16"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/black"
+                app:startIconDrawable="@drawable/ic_baseline_credit_card_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputCardNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="18sp"
+                    tools:ignore="DuplicateClickableBoundsCheck"></com.google.android.material.textfield.TextInputEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textLayoutMonth"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textLayoutCardNumber"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:hint="MM"
+                app:boxStrokeColor="@color/secondary"
+                app:counterEnabled="true"
+                app:counterMaxLength="2"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/black"
+                app:startIconDrawable="@drawable/ic_baseline_date_range_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputMonth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="18sp">
+
+                </com.google.android.material.textfield.TextInputEditText>
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textLayoutYear"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textLayoutCardNumber"
+                android:layout_alignParentRight="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:hint="YY"
+                app:boxStrokeColor="@color/secondary"
+                app:counterEnabled="true"
+                app:counterMaxLength="2"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/black"
+                app:startIconDrawable="@drawable/ic_baseline_date_range_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputYear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="18sp">
+
+                </com.google.android.material.textfield.TextInputEditText>
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textLayoutCVV"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textLayoutMonth"
+                android:layout_centerInParent="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:hint="CVV"
+                app:boxStrokeColor="@color/secondary"
+                app:counterEnabled="true"
+                app:counterMaxLength="3"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/black"
+                app:startIconDrawable="@drawable/ic_baseline_credit_card_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputCVV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="18sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textLayoutCVV"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/secondary"
+                android:text="SAVE METHOD"
+                android:textColor="@color/white"
+                app:cornerRadius="50dp" />
+
+            <TextView
+                android:id="@+id/or"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buttonSave"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:text="or pay with"
+                android:textColor="#706E6E"
+                android:textSize="18sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_otherMethods"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/or"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:text="OTHER METHODS"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/secondary"
+                app:cornerRadius="50dp" />
+
+        </RelativeLayout>
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
