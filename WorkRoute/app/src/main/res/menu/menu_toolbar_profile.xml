@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/editProfile"
         android:enabled="true"
+        android:titleCondensed="@string/bottom_sheet_behavior"
         android:icon="@drawable/ic_baseline_edit_24"
         app:showAsAction="always"
         android:title="Edit Profile"/>
-
 </menu>

@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     android:background="@color/black"
     android:layout_height="match_parent"
-    tools:context=".activitys.LoginActivity">
+    tools:context=".initActivities.LoginActivity">
 
     <ImageView
         android:layout_width="wrap_content"

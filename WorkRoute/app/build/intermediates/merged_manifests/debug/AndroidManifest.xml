@@ -49,19 +49,19 @@
         android:theme="@style/Theme.WorkRoute"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name="com.example.workroute.profile.EditProfile"
+            android:name="com.example.workroute.initActivities.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.workroute.activitys.Personal_information"
             android:exported="false" />
         <activity
             android:name="com.example.workroute.driverActivities.AddDriverInformation"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.configureProfileDriving.ConfigureDrivingProfile"
-            android:exported="false" />
-        <activity
             android:name="com.example.workroute.activitys.CustomerMap"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.activitys.DriverMap"
+            android:name="com.example.workroute.driverActivities.DriverMap"
             android:exported="false" />
 
         <meta-data
@@ -75,7 +75,7 @@
             android:name="com.example.workroute.activitys.PayMethod"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.activitys.DrivingLicense"
+            android:name="com.example.workroute.driverActivities.DrivingLicense"
             android:exported="false" />
         <activity
             android:name="com.example.workroute.kotlin.activities.MessagesActivity"
@@ -96,22 +96,22 @@
             android:name="com.example.workroute.suscribtion.SubscribesActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.activitys.FirstTimeActivity"
+            android:name="com.example.workroute.initActivities.FirstTimeActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.activitys.CreateAccount"
+            android:name="com.example.workroute.initActivities.CreateAccount"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.activitys.ConfirmLogin"
+            android:name="com.example.workroute.initActivities.ConfirmLogin"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.activitys.LoginActivity"
+            android:name="com.example.workroute.initActivities.LoginActivity"
             android:exported="false" />
         <activity
             android:name="com.example.workroute.activitys.MainActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.activitys.SplashScreen"
+            android:name="com.example.workroute.initActivities.SplashScreen"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

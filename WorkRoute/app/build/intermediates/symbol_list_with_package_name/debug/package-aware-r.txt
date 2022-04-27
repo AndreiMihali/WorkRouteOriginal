@@ -2201,6 +2201,7 @@ color test_mtrl_calendar_day_selected
 color textOnPrimary
 color tooltip_background_dark
 color tooltip_background_light
+color verde_flojo
 color white
 color work_icon_background
 dimen abc_action_bar_content_inset_material
@@ -2892,6 +2893,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable account_amico
 drawable adaptive_icon
 drawable adaptive_icon_background
 drawable adaptive_icon_foreground
@@ -2900,6 +2902,7 @@ drawable avd_show_password
 drawable back_arrow_back
 drawable back_driver_information
 drawable back_extended_button
+drawable back_extended_button_green
 drawable back_img_icons_search
 drawable back_second_sheet
 drawable background_login
@@ -2967,6 +2970,7 @@ drawable ic_baseline_add_24
 drawable ic_baseline_add_location_24
 drawable ic_baseline_arrow_back_24
 drawable ic_baseline_arrow_back_ios_new_24
+drawable ic_baseline_attach_money_24
 drawable ic_baseline_calendar_month_24
 drawable ic_baseline_calendar_today_24
 drawable ic_baseline_camera_alt_24
@@ -3008,6 +3012,8 @@ drawable ic_baseline_send_24
 drawable ic_baseline_settings_24
 drawable ic_baseline_share_24
 drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24
+drawable ic_bx_lock_alt
+drawable ic_bx_lock_open
 drawable ic_bxs_left_arrow_circle
 drawable ic_clock_black_24dp
 drawable ic_keyboard_black_24dp
@@ -3222,6 +3228,7 @@ id btn_driver
 id btn_otherMethods
 id btn_rideStatus
 id btn_send
+id btn_send_email
 id button
 id buttonCustomer
 id buttonDriver
@@ -3253,6 +3260,7 @@ id cancel_action
 id cancel_button
 id cardImageFrente
 id cardImageReverse
+id cardViewImage
 id card_birthday
 id card_chat
 id card_content_root
@@ -3309,6 +3317,7 @@ id contentPanel
 id contiguous
 id continuousVelocity
 id coordinator
+id cord_layout
 id cos
 id counterclockwise
 id currentState
@@ -3355,12 +3364,14 @@ id easeOut
 id east
 id ed_confirmpass_register
 id ed_email
+id ed_email_recover_password
 id ed_email_register
 id ed_idNumber
 id ed_message
 id ed_pass
 id ed_pass_register
 id ed_plate
+id ed_username
 id ed_username_register
 id editProfile
 id edit_query
@@ -3414,6 +3425,7 @@ id ignoreRequest
 id image
 id imageCarnetFrente
 id imageCarnetReverso
+id imageLock
 id image_content_root
 id image_root
 id image_view
@@ -3445,8 +3457,10 @@ id layout_confirm_pass
 id layout_content
 id layout_ed_alias
 id layout_email
+id layout_email_recover_password
 id layout_name
 id layout_pass
+id layout_subscriptionLevel
 id left
 id leftToRight
 id legacy
@@ -3564,6 +3578,7 @@ id pathRelative
 id payMethod
 id peekHeight
 id percent
+id personal_information
 id pin
 id places_autocomplete_back_button
 id places_autocomplete_clear_button
@@ -3604,7 +3619,10 @@ id recycler_mensajes
 id recycler_notifications
 id recycler_payMethods
 id recycler_subs
+id rel_layout
+id rel_layout_general
 id rela
+id relativeChangingColorOnClick
 id relativeLayout
 id requestTravel
 id reverseSawtooth
@@ -3716,6 +3734,9 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textUnlock_Save
+id textView3
+id textViewActualLVL
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3734,10 +3755,12 @@ id title_template
 id titles
 id toggle
 id toolbar
+id toolbarInformation
 id toolbarPay
 id toolbarSettings
 id toolbar_bottom_sheet
 id toolbar_messages
+id toolbar_recovery_password
 id top
 id topPanel
 id touch_outside
@@ -3755,6 +3778,8 @@ id tvNotificationPreferences
 id tvNotificationPreferences2
 id tvNotifications
 id tvReverse
+id tv_userMail
+id tv_variableActualSubscription
 id txt_ciudad
 id txt_cumple
 id txt_description
@@ -3779,7 +3804,6 @@ id txt_total_pay_travel_cost
 id txt_travel_information
 id txt_travel_information_cost
 id txt_user_name_chat_list
-id txt_view_asDriver
 id unchecked
 id uniform
 id unlabeled
@@ -3787,7 +3811,6 @@ id up
 id useLogo
 id user_name
 id user_name_messages
-id username
 id vertical_only
 id view_offset_helper
 id view_transition
@@ -3901,12 +3924,14 @@ layout activity_customer_map
 layout activity_driver_map
 layout activity_driving_license
 layout activity_first_time
+layout activity_forgot_password
 layout activity_general_settings
 layout activity_login
 layout activity_main
 layout activity_messages
 layout activity_notifications
 layout activity_pay_method
+layout activity_personal_information
 layout activity_profile
 layout activity_splash_screen
 layout banner
@@ -4117,7 +4142,6 @@ string fab_transformation_sheet_behavior
 string fcm_2_args
 string fcm_fallback_notification_channel_label
 string fcm_no_args
-string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id

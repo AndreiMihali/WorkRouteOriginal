@@ -21,19 +21,19 @@
         android:theme="@style/Theme.WorkRoute"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name=".profile.EditProfile"
+            android:name=".initActivities.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.Personal_information"
             android:exported="false" />
         <activity
             android:name=".driverActivities.AddDriverInformation"
             android:exported="false" />
         <activity
-            android:name=".configureProfileDriving.ConfigureDrivingProfile"
-            android:exported="false" />
-        <activity
             android:name=".activitys.CustomerMap"
             android:exported="false" />
         <activity
-            android:name=".activitys.DriverMap"
+            android:name=".driverActivities.DriverMap"
             android:exported="false" />
 
         <meta-data
@@ -47,7 +47,7 @@
             android:name=".activitys.PayMethod"
             android:exported="false" />
         <activity
-            android:name=".activitys.DrivingLicense"
+            android:name=".driverActivities.DrivingLicense"
             android:exported="false" />
         <activity
             android:name=".kotlin.activities.MessagesActivity"
@@ -68,22 +68,22 @@
             android:name=".suscribtion.SubscribesActivity"
             android:exported="false" />
         <activity
-            android:name=".activitys.FirstTimeActivity"
+            android:name=".initActivities.FirstTimeActivity"
             android:exported="false" />
         <activity
-            android:name=".activitys.CreateAccount"
+            android:name=".initActivities.CreateAccount"
             android:exported="false" />
         <activity
-            android:name=".activitys.ConfirmLogin"
+            android:name=".initActivities.ConfirmLogin"
             android:exported="false" />
         <activity
-            android:name=".activitys.LoginActivity"
+            android:name=".initActivities.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".activitys.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".activitys.SplashScreen"
+            android:name=".initActivities.SplashScreen"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

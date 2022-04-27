@@ -6,21 +6,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.card.MaterialCardView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
 
 public final class ActivityProfileBinding implements ViewBinding {
   @NonNull
-  private final CoordinatorLayout rootView;
+  private final RelativeLayout rootView;
+
+  @NonNull
+  public final MaterialCardView cardViewImage;
 
   @NonNull
   public final LinearLayout deleteAccount;
@@ -35,6 +38,9 @@ public final class ActivityProfileBinding implements ViewBinding {
   public final LinearLayout payMethod;
 
   @NonNull
+  public final LinearLayout personalInformation;
+
+  @NonNull
   public final ImageView profileImage;
 
   @NonNull
@@ -43,33 +49,27 @@ public final class ActivityProfileBinding implements ViewBinding {
   @NonNull
   public final MaterialToolbar toolbar;
 
-  @NonNull
-  public final TextView txtViewAsDriver;
-
-  @NonNull
-  public final TextView username;
-
-  private ActivityProfileBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull LinearLayout deleteAccount, @NonNull LinearLayout driveLicense,
-      @NonNull LinearLayout logout, @NonNull LinearLayout payMethod,
+  private ActivityProfileBinding(@NonNull RelativeLayout rootView,
+      @NonNull MaterialCardView cardViewImage, @NonNull LinearLayout deleteAccount,
+      @NonNull LinearLayout driveLicense, @NonNull LinearLayout logout,
+      @NonNull LinearLayout payMethod, @NonNull LinearLayout personalInformation,
       @NonNull ImageView profileImage, @NonNull LinearLayout settings,
-      @NonNull MaterialToolbar toolbar, @NonNull TextView txtViewAsDriver,
-      @NonNull TextView username) {
+      @NonNull MaterialToolbar toolbar) {
     this.rootView = rootView;
+    this.cardViewImage = cardViewImage;
     this.deleteAccount = deleteAccount;
     this.driveLicense = driveLicense;
     this.logout = logout;
     this.payMethod = payMethod;
+    this.personalInformation = personalInformation;
     this.profileImage = profileImage;
     this.settings = settings;
     this.toolbar = toolbar;
-    this.txtViewAsDriver = txtViewAsDriver;
-    this.username = username;
   }
 
   @Override
   @NonNull
-  public CoordinatorLayout getRoot() {
+  public RelativeLayout getRoot() {
     return rootView;
   }
 
@@ -94,6 +94,12 @@ public final class ActivityProfileBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.cardViewImage;
+      MaterialCardView cardViewImage = ViewBindings.findChildViewById(rootView, id);
+      if (cardViewImage == null) {
+        break missingId;
+      }
+
       id = R.id.deleteAccount;
       LinearLayout deleteAccount = ViewBindings.findChildViewById(rootView, id);
       if (deleteAccount == null) {
@@ -118,6 +124,12 @@ public final class ActivityProfileBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.personal_information;
+      LinearLayout personalInformation = ViewBindings.findChildViewById(rootView, id);
+      if (personalInformation == null) {
+        break missingId;
+      }
+
       id = R.id.profileImage;
       ImageView profileImage = ViewBindings.findChildViewById(rootView, id);
       if (profileImage == null) {
@@ -136,20 +148,8 @@ public final class ActivityProfileBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.txt_view_asDriver;
-      TextView txtViewAsDriver = ViewBindings.findChildViewById(rootView, id);
-      if (txtViewAsDriver == null) {
-        break missingId;
-      }
-
-      id = R.id.username;
-      TextView username = ViewBindings.findChildViewById(rootView, id);
-      if (username == null) {
-        break missingId;
-      }
-
-      return new ActivityProfileBinding((CoordinatorLayout) rootView, deleteAccount, driveLicense,
-          logout, payMethod, profileImage, settings, toolbar, txtViewAsDriver, username);
+      return new ActivityProfileBinding((RelativeLayout) rootView, cardViewImage, deleteAccount,
+          driveLicense, logout, payMethod, personalInformation, profileImage, settings, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
