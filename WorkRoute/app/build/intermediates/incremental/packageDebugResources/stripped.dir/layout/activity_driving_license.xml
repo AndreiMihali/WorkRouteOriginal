@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/back_login"
+    android:layout_height="match_parent"
+    tools:context=".driverActivities.DrivingLicense">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Driving License"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:navigationIconTint="@color/secondary"
+        app:titleTextColor="@color/secondary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardImageFrente"
+        android:layout_below="@id/divider"
+        android:layout_width="wrap_content"
+        android:theme="@style/Theme.MaterialComponents.DayNight"
+        app:cardCornerRadius="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="145dp">
+
+        <ImageView
+            android:id="@+id/imageCarnetFrente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/carnetfrente" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <TextView
+        android:id="@+id/tvFront"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardImageFrente"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:text="Insert here a front photo of your driving license" />
+
+    <Button
+        android:id="@+id/buttonFront"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvFront"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/secondary"
+        android:text="OPEN GALLERY"
+        android:textColor="@color/white"
+        app:cornerRadius="100dp" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@id/buttonFront"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="?android:attr/listDivider" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardImageReverse"
+        android:layout_below="@id/divider2"
+        android:layout_width="wrap_content"
+        android:theme="@style/Theme.MaterialComponents.DayNight"
+        app:cardCornerRadius="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="145dp">
+
+        <ImageView
+            android:id="@+id/imageCarnetReverso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/reversocarnet" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvReverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardImageReverse"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:text="Insert here a reverse photo of your driving license" />
+
+
+    <Button
+        android:id="@+id/buttonReverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvReverse"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/secondary"
+        android:text="OPEN GALLERY"
+        android:textColor="@color/white"
+        app:cornerRadius="100dp" />
+
+    <Button
+        android:id="@+id/buttonSaveLicense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonReverse"
+        android:layout_centerInParent="true"
+        android:layout_marginVertical="20dp"
+        android:backgroundTint="@color/quantum_googgreen"
+        android:text="SEND IMAGES"
+        android:textColor="@color/white"
+        app:cornerRadius="100dp" />
+
+
+</RelativeLayout>
