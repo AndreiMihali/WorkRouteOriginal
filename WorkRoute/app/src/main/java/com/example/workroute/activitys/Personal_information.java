@@ -37,7 +37,6 @@ import com.bumptech.glide.Glide;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.profile.Profile;
-import com.example.workroute.suscribtion.SubscribesActivity;
 import com.google.android.gms.auth.api.credentials.Credential;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -302,7 +301,6 @@ public class Personal_information extends AppCompatActivity {
         ln_subscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    startActivity(new Intent(Personal_information.this, SubscribesActivity.class));
             }
         });
         

@@ -65,9 +65,6 @@
             android:name=".profile.Profile"
             android:exported="false" />
         <activity
-            android:name=".suscribtion.SubscribesActivity"
-            android:exported="false" />
-        <activity
             android:name=".initActivities.FirstTimeActivity"
             android:exported="false" />
         <activity

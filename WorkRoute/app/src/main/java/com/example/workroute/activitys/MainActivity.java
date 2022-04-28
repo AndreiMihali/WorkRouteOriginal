@@ -18,7 +18,6 @@ import com.example.workroute.driverActivities.DriverMap;
 import com.example.workroute.model.User;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.example.workroute.service.ServicioOnline;
-import com.example.workroute.suscribtion.SubscribesActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -74,11 +73,7 @@ public class MainActivity extends AppCompatActivity {
         button_customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isSubscribed()){
-                    showDialog("You must subscribe","Before you continue, you must subscribe if you want to use or service",new Intent(MainActivity.this, SubscribesActivity.class));
-                }else{
-                    startActivity(new Intent(MainActivity.this,CustomerMap.class));
-                }
+                startActivity(new Intent(MainActivity.this,CustomerMap.class));
             }
         });
     }
