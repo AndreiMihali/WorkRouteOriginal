@@ -64,7 +64,7 @@ public class Personal_information extends AppCompatActivity {
 
     private MaterialToolbar toolbar;
     private RelativeLayout relativeChangeColors;
-    private ImageView img_lockChange,imageProfile;
+    private ImageView img_lockChange,imageProfile,img_editProfilePhoto;
     private TextView tv_unlock_save,tv_user_mail,tv_actualSubscription;
     private boolean sw = false;
     private TextInputEditText ed_name,ed_password;
@@ -181,7 +181,7 @@ public class Personal_information extends AppCompatActivity {
                 }
         );
     }
-    
+
 
     private void updateImage() {
         new Handler().post(new Runnable() {
@@ -236,6 +236,7 @@ public class Personal_information extends AppCompatActivity {
         tv_user_mail = findViewById(R.id.tv_userMail);
         firebaseAuth=FirebaseAuth.getInstance();
         imageProfile=findViewById(R.id.profileImage);
+        img_editProfilePhoto = findViewById(R.id.editProfilePhoto);
         tv_actualSubscription=findViewById(R.id.tv_variableActualSubscription);
         sp=getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE);
         progressDialog=new ProgressDialog(this,R.style.ProgressDialog);
@@ -301,10 +302,11 @@ public class Personal_information extends AppCompatActivity {
         ln_subscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //startActivity(new Intent(Personal_information.this, SubscribesActivity.class));
             }
         });
-        
-        imageProfile.setOnClickListener(new View.OnClickListener() {
+
+        img_editProfilePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openGallery();

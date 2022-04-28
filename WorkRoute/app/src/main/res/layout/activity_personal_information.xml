@@ -31,22 +31,43 @@
                 app:title=""
                 app:titleTextColor="@color/secondary" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardViewImage"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:theme="@style/Theme.MaterialComponents.DayNight"
-                app:cardCornerRadius="100dp">
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardViewImage"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center_vertical"
+                    android:theme="@style/Theme.MaterialComponents.DayNight"
+                    app:cardCornerRadius="100dp">
+
+
+                    <ImageView
+                        android:id="@+id/profileImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/steven_binotto_9vduc_sgrsi_unsplash" />
+
+                </com.google.android.material.card.MaterialCardView>
+
 
                 <ImageView
-                    android:id="@+id/profileImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/steven_binotto_9vduc_sgrsi_unsplash" />
-            </com.google.android.material.card.MaterialCardView>
+                    android:id="@+id/editProfilePhoto"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="30dp"
+                    app:tint="@color/white"
+                    app:srcCompat="@drawable/gallery" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_userMail"
