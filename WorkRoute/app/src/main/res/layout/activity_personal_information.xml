@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     android:id="@+id/rel_layout_general"
     android:layout_height="match_parent"
-    tools:context=".activitys.Personal_information">
+    tools:context=".profile.Personal_information">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/cord_layout"

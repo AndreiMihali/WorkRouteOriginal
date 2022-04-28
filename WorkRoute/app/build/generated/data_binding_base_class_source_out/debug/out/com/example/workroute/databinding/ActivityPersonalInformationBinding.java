@@ -45,6 +45,9 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
   public final TextInputEditText edUsername;
 
   @NonNull
+  public final ImageView editProfilePhoto;
+
+  @NonNull
   public final ImageView imageLock;
 
   @NonNull
@@ -90,10 +93,10 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
       @NonNull MaterialCardView cardName, @NonNull MaterialCardView cardPassword,
       @NonNull MaterialCardView cardViewImage, @NonNull CoordinatorLayout cordLayout,
       @NonNull TextInputEditText edPass, @NonNull TextInputEditText edUsername,
-      @NonNull ImageView imageLock, @NonNull TextInputLayout layoutName,
-      @NonNull TextInputLayout layoutPass, @NonNull LinearLayout layoutSubscriptionLevel,
-      @NonNull ImageView profileImage, @NonNull LinearLayout relLayout,
-      @NonNull RelativeLayout relLayoutGeneral,
+      @NonNull ImageView editProfilePhoto, @NonNull ImageView imageLock,
+      @NonNull TextInputLayout layoutName, @NonNull TextInputLayout layoutPass,
+      @NonNull LinearLayout layoutSubscriptionLevel, @NonNull ImageView profileImage,
+      @NonNull LinearLayout relLayout, @NonNull RelativeLayout relLayoutGeneral,
       @NonNull RelativeLayout relativeChangingColorOnClick, @NonNull TextView textUnlockSave,
       @NonNull TextView textView3, @NonNull TextView textViewActualLVL,
       @NonNull MaterialToolbar toolbarInformation, @NonNull TextView tvUserMail,
@@ -105,6 +108,7 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
     this.cordLayout = cordLayout;
     this.edPass = edPass;
     this.edUsername = edUsername;
+    this.editProfilePhoto = editProfilePhoto;
     this.imageLock = imageLock;
     this.layoutName = layoutName;
     this.layoutPass = layoutPass;
@@ -181,6 +185,12 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
       id = R.id.ed_username;
       TextInputEditText edUsername = ViewBindings.findChildViewById(rootView, id);
       if (edUsername == null) {
+        break missingId;
+      }
+
+      id = R.id.editProfilePhoto;
+      ImageView editProfilePhoto = ViewBindings.findChildViewById(rootView, id);
+      if (editProfilePhoto == null) {
         break missingId;
       }
 
@@ -265,10 +275,10 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
       }
 
       return new ActivityPersonalInformationBinding((RelativeLayout) rootView, cardName,
-          cardPassword, cardViewImage, cordLayout, edPass, edUsername, imageLock, layoutName,
-          layoutPass, layoutSubscriptionLevel, profileImage, relLayout, relLayoutGeneral,
-          relativeChangingColorOnClick, textUnlockSave, textView3, textViewActualLVL,
-          toolbarInformation, tvUserMail, tvVariableActualSubscription);
+          cardPassword, cardViewImage, cordLayout, edPass, edUsername, editProfilePhoto, imageLock,
+          layoutName, layoutPass, layoutSubscriptionLevel, profileImage, relLayout,
+          relLayoutGeneral, relativeChangingColorOnClick, textUnlockSave, textView3,
+          textViewActualLVL, toolbarInformation, tvUserMail, tvVariableActualSubscription);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

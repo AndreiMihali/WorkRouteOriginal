@@ -69,9 +69,14 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
+array assume_strong_biometrics_models
 array com_google_android_gms_fonts_certs
 array com_google_android_gms_fonts_certs_dev
 array com_google_android_gms_fonts_certs_prod
+array crypto_fingerprint_fallback_prefixes
+array crypto_fingerprint_fallback_vendors
+array delay_showing_prompt_models
+array hide_fingerprint_instantly_prefixes
 array preloaded_fonts
 attr SharedValue
 attr SharedValueId
@@ -1255,6 +1260,7 @@ color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
 color background_material_light
+color biometric_error_color
 color black
 color bottom_navigation_view
 color bright_foreground_disabled_material_dark
@@ -2359,6 +2365,7 @@ dimen disabled_alpha_material_light
 dimen fastscroll_default_thickness
 dimen fastscroll_margin
 dimen fastscroll_minimum_range
+dimen fingerprint_icon_size
 dimen highlight_alpha_material_colored
 dimen highlight_alpha_material_dark
 dimen highlight_alpha_material_light
@@ -2961,6 +2968,8 @@ drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
 drawable driver
+drawable fingerprint_dialog_error
+drawable fingerprint_dialog_fp_icon
 drawable gallery
 drawable gcm_icon
 drawable gcm_icon2
@@ -3195,7 +3204,6 @@ id autoCompleteToEnd
 id autoCompleteToStart
 id autocompleteColors
 id autocompleteTypes
-id autocomplete_fragment
 id banner_body
 id banner_content_root
 id banner_image
@@ -3238,7 +3246,6 @@ id buttonProfile
 id buttonReverse
 id buttonSave
 id buttonSaveLicense
-id buttonSearch
 id buttonUbi
 id button_cancel
 id button_continue
@@ -3266,7 +3273,6 @@ id card_customer
 id card_customer_general
 id card_driver
 id card_driver_general
-id card_ed_search_place
 id card_email
 id card_general
 id card_global
@@ -3373,6 +3379,7 @@ id ed_plate
 id ed_username
 id ed_username_register
 id editProfile
+id editProfilePhoto
 id edit_query
 id elastic
 id emailNotifications
@@ -3390,6 +3397,10 @@ id fill
 id fill_horizontal
 id fill_vertical
 id filled
+id fingerprint_description
+id fingerprint_error
+id fingerprint_icon
+id fingerprint_subtitle
 id fitToContents
 id fixed
 id flip
@@ -3470,7 +3481,6 @@ id linear
 id linears_datos
 id listMode
 id list_item
-id ln_desc
 id ln_escribir
 id loadContent
 id location_icon
@@ -3623,7 +3633,6 @@ id rel_layout_general
 id rela
 id relativeChangingColorOnClick
 id relativeLayout
-id requestTravel
 id reverseSawtooth
 id right
 id rightToLeft
@@ -3654,7 +3663,6 @@ id search_plate
 id search_src_text
 id search_voice_btn
 id second_sheet
-id second_sheet_search
 id secondary_button
 id select_dialog_listview
 id selected
@@ -3663,7 +3671,6 @@ id settings
 id sharedValueSet
 id sharedValueUnset
 id sheet
-id sheet_search
 id shortcut
 id showCustom
 id showHome
@@ -3957,6 +3964,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout fingerprint_dialog_layout
 layout image
 layout item_chat_left
 layout item_chat_right
@@ -4134,6 +4142,8 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string confirm_device_credential_password
+string default_error_msg
 string default_web_client_id
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
@@ -4142,7 +4152,17 @@ string fab_transformation_sheet_behavior
 string fcm_2_args
 string fcm_fallback_notification_channel_label
 string fcm_no_args
+string fingerprint_dialog_touch_sensor
+string fingerprint_error_hw_not_available
+string fingerprint_error_hw_not_present
+string fingerprint_error_lockout
+string fingerprint_error_no_fingerprints
+string fingerprint_error_user_canceled
+string fingerprint_not_recognized
 string gcm_defaultSenderId
+string generic_error_no_device_credential
+string generic_error_no_keyguard
+string generic_error_user_canceled
 string google_api_key
 string google_app_id
 string google_crash_reporting_api_key

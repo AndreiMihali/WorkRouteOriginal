@@ -133,7 +133,6 @@ font bigshot_one
 id appNotifications
 id autocompleteColors
 id autocompleteTypes
-id autocomplete_fragment
 id boton_drag
 id bottom_sheet_payMethod
 id btn_addPayMethod
@@ -152,7 +151,6 @@ id buttonProfile
 id buttonReverse
 id buttonSave
 id buttonSaveLicense
-id buttonSearch
 id buttonUbi
 id button_cancel
 id button_continue
@@ -175,7 +173,6 @@ id card_customer
 id card_customer_general
 id card_driver
 id card_driver_general
-id card_ed_search_place
 id card_email
 id card_general
 id card_global
@@ -209,6 +206,7 @@ id ed_plate
 id ed_username
 id ed_username_register
 id editProfile
+id editProfilePhoto
 id emailNotifications
 id fab_camera
 id helpMenu
@@ -234,7 +232,6 @@ id layout_name
 id layout_pass
 id layout_subscriptionLevel
 id linears_datos
-id ln_desc
 id ln_escribir
 id loadContent
 id location_icon
@@ -265,13 +262,10 @@ id rel_layout_general
 id rela
 id relativeChangingColorOnClick
 id relativeLayout
-id requestTravel
 id rl
 id second_sheet
-id second_sheet_search
 id settings
 id sheet
-id sheet_search
 id status
 id textLayoutCVV
 id textLayoutCardNumber

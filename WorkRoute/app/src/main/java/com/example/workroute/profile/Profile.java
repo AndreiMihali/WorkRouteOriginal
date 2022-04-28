@@ -16,7 +16,6 @@ import com.example.workroute.activitys.GeneralSettingsActivity;
 import com.example.workroute.initActivities.LoginActivity;
 import com.example.workroute.activitys.MainActivity;
 import com.example.workroute.activitys.PayMethod;
-import com.example.workroute.activitys.Personal_information;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.material.appbar.MaterialToolbar;

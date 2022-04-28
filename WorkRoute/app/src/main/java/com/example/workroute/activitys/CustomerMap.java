@@ -6,8 +6,12 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -46,10 +50,12 @@ import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.workroute.R;
+import com.example.workroute.adapters.CardItemAdapter;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.driverActivities.DriverMap;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
+import com.example.workroute.model.CardItem;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.example.workroute.profile.Profile;
 import com.example.workroute.service.ServicioOnline;
@@ -113,7 +119,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
     private boolean isOpen = false;
-    private boolean isOpen2=false;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestore;
     private DatabaseReference reference;
@@ -142,6 +147,9 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
     private LatLng destinationDriverLatLng;
     private Marker myPositionMarker;
     private LatLng driverLatLng;
+    private boolean canAuthenticate;
+    private BiometricPrompt.PromptInfo biometricPrompt;
+    private BiometricPrompt biometricPromptExecuter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,10 +218,30 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         polylines=new ArrayList<>();
         destinationLatLng=new LatLng(0.0,0.0);
         destination="";
+        setBiometricBuilder();
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         iniciarMapa();
         initListeners();
+    }
 
+    private void setBiometricBuilder() {
+        if(BiometricManager.from(this).canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG
+                | BiometricManager.Authenticators.DEVICE_CREDENTIAL)==BiometricManager.BIOMETRIC_SUCCESS){
+
+            biometricPromptExecuter=new BiometricPrompt(CustomerMap.this, ContextCompat.getMainExecutor(this), new BiometricPrompt.AuthenticationCallback(){
+                @Override
+                public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                    super.onAuthenticationSucceeded(result);
+                    Toast.makeText(getApplicationContext(),"You just subscribed to the driver",Toast.LENGTH_LONG).show();
+                }
+            });
+
+            biometricPrompt=new androidx.biometric.BiometricPrompt.PromptInfo.Builder()
+                    .setTitle("Biometric authentication")
+                    .setSubtitle("Authenticate to complete the payment")
+                    .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG | BiometricManager.Authenticators.DEVICE_CREDENTIAL)
+                    .build();
+        }
     }
 
     private boolean getDriversStarted=false;
@@ -431,10 +459,49 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showDialog();
             }
         });
 
+    }
+
+    private void showDialog(){
+        new MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_App_MaterialAlertDialog)
+                .setCancelable(false)
+                .setTitle("Confirm")
+                .setMessage("Are you sure you want to subscribe to this driver?")
+                .setPositiveButton("SUBSCRIBE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        havePayMethod();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+    }
+
+
+    private void havePayMethod(){
+            ValueEventListener postListener=new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.getChildrenCount()>0){
+                        biometricPromptExecuter.authenticate(biometricPrompt);
+                    }else{
+                        startActivity(new Intent(CustomerMap.this,PayMethod.class));
+                    }
+
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            };
+
+            FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("payMethods").addListenerForSingleValueEvent(postListener);
     }
 
     /**
