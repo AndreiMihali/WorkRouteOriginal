@@ -283,7 +283,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
     }
 
     private void getDriverDestination(String driverId){
-        DatabaseReference driverDestinationRef=FirebaseDatabase.getInstance().getReference().child("Drivers").child(driverId);
+        DatabaseReference driverDestinationRef=FirebaseDatabase.getInstance().getReference().child("Drivers").child(driverId).child("destinations");
         driverDestinationRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -735,17 +735,13 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         DatabaseReference customerReference=FirebaseDatabase.getInstance().getReference("Customers");
         GeoFire geoFire=new GeoFire(customerReference);
         geoFire.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
-        setDestination();
-    }
-
-    private void setDestination(){
-        DatabaseReference customerReference=FirebaseDatabase.getInstance().getReference("Customers");
         Map<String,Object> map=new HashMap<>();
         map.put("destination", Companion.user.getWorkAddress());
         map.put("destinationLat",getDestination(Companion.user.getWorkAddress(),"latitude"));
         map.put("destinationLong",getDestination(Companion.user.getWorkAddress(),"longitude"));
-        customerReference.child(firebaseAuth.getUid()).updateChildren(map);
+        customerReference.child(firebaseAuth.getUid()).child("destinations").updateChildren(map);
     }
+
 
     private Double getDestination(String destination,String field){
         Geocoder geocoder = new Geocoder(CustomerMap.this, Locale.getDefault());

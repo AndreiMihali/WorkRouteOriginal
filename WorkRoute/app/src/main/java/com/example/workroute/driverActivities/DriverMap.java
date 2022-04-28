@@ -205,7 +205,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     }
 
     private void getCustomerDestination(String customerId){
-        DatabaseReference customerDestinationRef=FirebaseDatabase.getInstance().getReference().child("Customers").child(customerId);
+        DatabaseReference customerDestinationRef=FirebaseDatabase.getInstance().getReference().child("Customers").child(customerId).child("destinations");
         customerDestinationRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -630,21 +630,15 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
        }
     }
 
-    private void setDestination(){
-        DatabaseReference driverReference=FirebaseDatabase.getInstance().getReference("Drivers");
-        Map<String,Object> map=new HashMap<>();
-        map.put("destination", Companion.user.getWorkAddress());
-        map.put("destinationLat",getDestination(Companion.user.getWorkAddress(),"latitude"));
-        map.put("destinationLong",getDestination(Companion.user.getWorkAddress(),"longitude"));
-        driverReference.child(firebaseAuth.getUid()).updateChildren(map);
-    }
-
     private void setMyLocationInDatabase(Location location){
         String userId=firebaseAuth.getUid();
         DatabaseReference driverReference=FirebaseDatabase.getInstance().getReference("Drivers");
         GeoFire geofireRef=new GeoFire(driverReference);
         geofireRef.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
-        setDestination();
+        Map<String,Object> map=new HashMap<>();
+        map.put("destinationLat",getDestination(Companion.user.getWorkAddress(),"latitude"));
+        map.put("destinationLong",getDestination(Companion.user.getWorkAddress(),"longitude"));
+        driverReference.child(firebaseAuth.getUid()).child("destinations").updateChildren(map);
     }
 
     private Double getDestination(String destination,String field){
