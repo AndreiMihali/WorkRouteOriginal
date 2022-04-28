@@ -204,6 +204,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         //button_settings = findViewById(R.id.buttonSettings);
         button_ubi = findViewById(R.id.buttonUbi);
         open = AnimationUtils.loadAnimation(this, R.anim.open_menu);
+        close = AnimationUtils.loadAnimation(this, R.anim.close_menu);
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         progressDialog = new ProgressDialog(this, R.style.ProgressDialog);
@@ -490,7 +491,12 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.getChildrenCount()>0){
-                        biometricPromptExecuter.authenticate(biometricPrompt);
+                        if (biometricPrompt==null) {
+                            //TODO : TOAST PERSONALIZADO PARA METER EL CVV PARA ACEPTAR EL PAGO
+                            Toast.makeText(getApplicationContext(),"Añade vaina prrro",Toast.LENGTH_SHORT).show();
+                        }else {
+                            biometricPromptExecuter.authenticate(biometricPrompt);
+                        }
                     }else{
                         startActivity(new Intent(CustomerMap.this,PayMethod.class));
                     }
