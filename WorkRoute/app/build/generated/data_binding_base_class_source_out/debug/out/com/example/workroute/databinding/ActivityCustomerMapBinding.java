@@ -35,12 +35,6 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
   public final MaterialButton buttonCancel;
 
   @NonNull
-  public final FloatingActionButton buttonCustomer;
-
-  @NonNull
-  public final FloatingActionButton buttonDriver;
-
-  @NonNull
   public final FloatingActionButton buttonMenu;
 
   @NonNull
@@ -123,7 +117,6 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
 
   private ActivityCustomerMapBinding(@NonNull CoordinatorLayout rootView,
       @NonNull ImageView botonDrag, @NonNull MaterialButton buttonCancel,
-      @NonNull FloatingActionButton buttonCustomer, @NonNull FloatingActionButton buttonDriver,
       @NonNull FloatingActionButton buttonMenu, @NonNull ImageButton buttonMessageCost,
       @NonNull FloatingActionButton buttonMessages,
       @NonNull FloatingActionButton buttonNotifications,
@@ -142,8 +135,6 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
     this.rootView = rootView;
     this.botonDrag = botonDrag;
     this.buttonCancel = buttonCancel;
-    this.buttonCustomer = buttonCustomer;
-    this.buttonDriver = buttonDriver;
     this.buttonMenu = buttonMenu;
     this.buttonMessageCost = buttonMessageCost;
     this.buttonMessages = buttonMessages;
@@ -209,18 +200,6 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
       id = R.id.button_cancel;
       MaterialButton buttonCancel = ViewBindings.findChildViewById(rootView, id);
       if (buttonCancel == null) {
-        break missingId;
-      }
-
-      id = R.id.buttonCustomer;
-      FloatingActionButton buttonCustomer = ViewBindings.findChildViewById(rootView, id);
-      if (buttonCustomer == null) {
-        break missingId;
-      }
-
-      id = R.id.buttonDriver;
-      FloatingActionButton buttonDriver = ViewBindings.findChildViewById(rootView, id);
-      if (buttonDriver == null) {
         break missingId;
       }
 
@@ -383,12 +362,12 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
       }
 
       return new ActivityCustomerMapBinding((CoordinatorLayout) rootView, botonDrag, buttonCancel,
-          buttonCustomer, buttonDriver, buttonMenu, buttonMessageCost, buttonMessages,
-          buttonNotifications, buttonProfile, buttonSearch, buttonUbi, cardEdSearchPlace, divider,
-          informationUserCost, lnDesc, locationIcon, locationIcon1, profilePhotoSheetCost, rela,
-          requestTravel, secondSheet, secondSheetSearch, sheet, sheetSearch, toolbarBottomSheet,
-          txtDestinationCost, txtDistanceCost, txtNameCost, txtStartLocationCost,
-          txtTotalPayTravelCost, txtTravelInformationCost);
+          buttonMenu, buttonMessageCost, buttonMessages, buttonNotifications, buttonProfile,
+          buttonSearch, buttonUbi, cardEdSearchPlace, divider, informationUserCost, lnDesc,
+          locationIcon, locationIcon1, profilePhotoSheetCost, rela, requestTravel, secondSheet,
+          secondSheetSearch, sheet, sheetSearch, toolbarBottomSheet, txtDestinationCost,
+          txtDistanceCost, txtNameCost, txtStartLocationCost, txtTotalPayTravelCost,
+          txtTravelInformationCost);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

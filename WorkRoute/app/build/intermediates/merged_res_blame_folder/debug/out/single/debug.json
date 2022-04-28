@@ -4,12 +4,12 @@
         "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\bxl_visa.xml"
     },
     {
-        "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_photo_library_24.xml.flat",
-        "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_photo_library_24.xml"
-    },
-    {
         "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_photo_library_24.xml.flat",
+        "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_photo_library_24.xml"
     },
     {
         "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_back_img_icons_search.xml.flat",
@@ -76,12 +76,12 @@
         "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_search_24.xml"
     },
     {
-        "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_arrow_my_location_foreground.png.flat",
-        "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-mdpi\\arrow_my_location_foreground.png"
-    },
-    {
         "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_arrow_my_location_round.png.flat",
         "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-hdpi\\arrow_my_location_round.png"
+    },
+    {
+        "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_arrow_my_location_foreground.png.flat",
+        "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-mdpi\\arrow_my_location_foreground.png"
     },
     {
         "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_round.webp.flat",
@@ -132,12 +132,12 @@
         "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\card_cvv.png"
     },
     {
-        "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_work_icon_round.xml.flat",
-        "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-anydpi-v26\\work_icon_round.xml"
-    },
-    {
         "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_location_pin_map_round.xml.flat",
         "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-anydpi-v26\\location_pin_map_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_work_icon_round.xml.flat",
+        "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-anydpi-v26\\work_icon_round.xml"
     },
     {
         "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_round_bottom_sheet.xml.flat",
@@ -168,12 +168,12 @@
         "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-mdpi\\work_icon.png"
     },
     {
-        "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_drive_eta_24.xml.flat",
-        "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_drive_eta_24.xml"
-    },
-    {
         "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\anim_slide_up_out.xml.flat",
         "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\anim\\slide_up_out.xml"
+    },
+    {
+        "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_drive_eta_24.xml.flat",
+        "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_drive_eta_24.xml"
     },
     {
         "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_outline_notifications_24.xml.flat",
@@ -268,12 +268,12 @@
         "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\back_extended_button_green.xml"
     },
     {
-        "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_bg_text_chat_left.xml.flat",
-        "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\bg_text_chat_left.xml"
-    },
-    {
         "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_background_login.xml.flat",
         "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\background_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_bg_text_chat_left.xml.flat",
+        "source": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\bg_text_chat_left.xml"
     },
     {
         "merged": "C:\\Users\\amihali\\repositorio_android\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_bg_text_chat_right.xml.flat",

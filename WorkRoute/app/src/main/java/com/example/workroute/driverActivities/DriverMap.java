@@ -101,7 +101,7 @@ import java.util.Map;
 
 public class DriverMap extends FragmentActivity implements com.google.android.gms.location.LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, RoutingListener {
 
-    private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_ubi, button_customer, button_driver;
+    private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_ubi;
     private Animation open, close, rotateForward, rotateBackWard;
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
@@ -356,8 +356,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         button_notifications = findViewById(R.id.button_notifications);
         //button_settings = findViewById(R.id.buttonSettings);
         button_ubi = findViewById(R.id.buttonUbi);
-        button_customer = findViewById(R.id.buttonCustomer);
-        button_driver = findViewById(R.id.buttonDriver);
         open = AnimationUtils.loadAnimation(this, R.anim.open_menu);
         close = AnimationUtils.loadAnimation(this, R.anim.close_menu);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -404,7 +402,9 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         button_ubi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                animateMenu2();
+                if(myLastLocation!=null){
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()),12f));
+                }
             }
         });
 
@@ -423,13 +423,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                 Intent i = new Intent(DriverMap.this, Profile.class);
                 startActivity(i);
                 animateMenu();
-            }
-        });
-
-        button_customer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
 
@@ -492,22 +485,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         }
     }
 
-    private void animateMenu2() {
-        if (isOpen2) {
-            button_driver.setVisibility(View.INVISIBLE);
-            button_customer.setVisibility(View.INVISIBLE);
-            button_driver.setClickable(false);
-            button_customer.setClickable(false);
-            isOpen2 = false;
-        } else {
-            button_driver.setVisibility(View.VISIBLE);
-            button_customer.setVisibility(View.VISIBLE);
-            button_driver.setClickable(true);
-            button_customer.setClickable(true);
-            isOpen2 = true;
-        }
-    }
-
     /**
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
@@ -532,7 +509,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         }
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.getUiSettings().setCompassEnabled(false);
-        mMap.setMyLocationEnabled(true);
+        mMap.setMyLocationEnabled(false);
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.setOnMarkerClickListener(this);
         buildGoogleApiClient();
@@ -623,11 +600,22 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
            }
            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng,12f));
            setMyLocationInDatabase(location);
-
+           setDestination();
            if(!getCustomersAroundStarted){
                getAllCustomers();
            }
+           LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
+           button_ubi.setVisibility(View.VISIBLE);
        }
+    }
+
+    private void setDestination(){
+        DatabaseReference driverReference=FirebaseDatabase.getInstance().getReference("Drivers");
+        Map<String,Object> map=new HashMap<>();
+        map.put("destination", Companion.user.getWorkAddress());
+        map.put("destinationLat",getDestination(Companion.user.getWorkAddress(),"latitude"));
+        map.put("destinationLong",getDestination(Companion.user.getWorkAddress(),"longitude"));
+        driverReference.child(firebaseAuth.getUid()).child("destinations").updateChildren(map);
     }
 
     private void setMyLocationInDatabase(Location location){
@@ -635,10 +623,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         DatabaseReference driverReference=FirebaseDatabase.getInstance().getReference("Drivers");
         GeoFire geofireRef=new GeoFire(driverReference);
         geofireRef.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
-        Map<String,Object> map=new HashMap<>();
-        map.put("destinationLat",getDestination(Companion.user.getWorkAddress(),"latitude"));
-        map.put("destinationLong",getDestination(Companion.user.getWorkAddress(),"longitude"));
-        driverReference.child(firebaseAuth.getUid()).child("destinations").updateChildren(map);
     }
 
     private Double getDestination(String destination,String field){
@@ -719,9 +703,11 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-        String customerUid=marker.getTag().toString();
-        customerLatLng= marker.getPosition();
-        getCustomerDestination(customerUid);
+        if(!marker.getTag().toString().equals(firebaseAuth.getUid())){
+            String customerUid=marker.getTag().toString();
+            customerLatLng= marker.getPosition();
+            getCustomerDestination(customerUid);
+        }
         return false;
     }
 

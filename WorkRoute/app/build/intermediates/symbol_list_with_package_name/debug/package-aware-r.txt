@@ -3230,8 +3230,6 @@ id btn_rideStatus
 id btn_send
 id btn_send_email
 id button
-id buttonCustomer
-id buttonDriver
 id buttonFront
 id buttonMenu
 id buttonMessages

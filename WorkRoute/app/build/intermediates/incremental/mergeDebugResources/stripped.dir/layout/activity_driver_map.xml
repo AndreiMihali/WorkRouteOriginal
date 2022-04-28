@@ -73,6 +73,7 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/buttonUbi"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -80,35 +81,10 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="20dp"
             android:backgroundTint="@color/secondary"
-            android:src="@drawable/ic_baseline_change_circle_24"
+            android:src="@drawable/ic_baseline_location_on_24"
             app:tint="@color/white"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/buttonDriver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/buttonUbi"
-            android:layout_alignEnd="@id/buttonUbi"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="@color/secondary"
-            android:src="@drawable/ic_baseline_drive_eta_24"
-            android:visibility="invisible"
-            app:tint="@color/white"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/buttonCustomer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/buttonDriver"
-            android:layout_alignEnd="@id/buttonUbi"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="@color/secondary"
-            android:src="@drawable/ic_baseline_person_24"
-            android:visibility="invisible"
-            app:tint="@color/white"
-            tools:ignore="SpeakableTextPresentCheck" />
     </RelativeLayout>
 
     <FrameLayout

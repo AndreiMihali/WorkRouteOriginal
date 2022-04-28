@@ -33,12 +33,6 @@ public final class ActivityDriverMapBinding implements ViewBinding {
   public final MaterialButton btnRideStatus;
 
   @NonNull
-  public final FloatingActionButton buttonCustomer;
-
-  @NonNull
-  public final FloatingActionButton buttonDriver;
-
-  @NonNull
   public final FloatingActionButton buttonMenu;
 
   @NonNull
@@ -103,7 +97,6 @@ public final class ActivityDriverMapBinding implements ViewBinding {
 
   private ActivityDriverMapBinding(@NonNull CoordinatorLayout rootView,
       @NonNull ImageView botonDrag, @NonNull MaterialButton btnRideStatus,
-      @NonNull FloatingActionButton buttonCustomer, @NonNull FloatingActionButton buttonDriver,
       @NonNull FloatingActionButton buttonMenu, @NonNull ImageButton buttonMessage,
       @NonNull FloatingActionButton buttonMessages,
       @NonNull FloatingActionButton buttonNotifications,
@@ -118,8 +111,6 @@ public final class ActivityDriverMapBinding implements ViewBinding {
     this.rootView = rootView;
     this.botonDrag = botonDrag;
     this.btnRideStatus = btnRideStatus;
-    this.buttonCustomer = buttonCustomer;
-    this.buttonDriver = buttonDriver;
     this.buttonMenu = buttonMenu;
     this.buttonMessage = buttonMessage;
     this.buttonMessages = buttonMessages;
@@ -179,18 +170,6 @@ public final class ActivityDriverMapBinding implements ViewBinding {
       id = R.id.btn_rideStatus;
       MaterialButton btnRideStatus = ViewBindings.findChildViewById(rootView, id);
       if (btnRideStatus == null) {
-        break missingId;
-      }
-
-      id = R.id.buttonCustomer;
-      FloatingActionButton buttonCustomer = ViewBindings.findChildViewById(rootView, id);
-      if (buttonCustomer == null) {
-        break missingId;
-      }
-
-      id = R.id.buttonDriver;
-      FloatingActionButton buttonDriver = ViewBindings.findChildViewById(rootView, id);
-      if (buttonDriver == null) {
         break missingId;
       }
 
@@ -317,11 +296,10 @@ public final class ActivityDriverMapBinding implements ViewBinding {
       }
 
       return new ActivityDriverMapBinding((CoordinatorLayout) rootView, botonDrag, btnRideStatus,
-          buttonCustomer, buttonDriver, buttonMenu, buttonMessage, buttonMessages,
-          buttonNotifications, buttonProfile, buttonUbi, divider, informationUser, locationIcon,
-          locationIcon1, profilePhotoSheet, rela, secondSheet, sheet, toolbarBottomSheet,
-          txtDestination, txtDistance, txtName, txtStartLocation, txtTotalPayTravel,
-          txtTravelInformation);
+          buttonMenu, buttonMessage, buttonMessages, buttonNotifications, buttonProfile, buttonUbi,
+          divider, informationUser, locationIcon, locationIcon1, profilePhotoSheet, rela,
+          secondSheet, sheet, toolbarBottomSheet, txtDestination, txtDistance, txtName,
+          txtStartLocation, txtTotalPayTravel, txtTravelInformation);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -145,8 +145,6 @@ id btn_otherMethods
 id btn_rideStatus
 id btn_send
 id btn_send_email
-id buttonCustomer
-id buttonDriver
 id buttonFront
 id buttonMenu
 id buttonMessages
