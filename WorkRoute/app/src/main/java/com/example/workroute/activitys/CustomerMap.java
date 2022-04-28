@@ -46,6 +46,7 @@ import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.workroute.R;
+import com.example.workroute.driverActivities.DriverMap;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.network.callback.NetworkCallback;
@@ -139,6 +140,10 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
     private static final int[] COLORS = new int[]{R.color.secondary};
     private AutocompleteSupportFragment autocompleteFragment;
     private LatLng destinationLatLng;
+    private String driverDestination;
+    private LatLng destinationDriverLatLng;
+    private Marker myPositionMarker;
+    private LatLng driverLatLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,6 +227,147 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
 
     }
 
+    private boolean getDriversStarted=false;
+    private List<Marker> markerList=new ArrayList<Marker>();
+    private void getAllDrivers(){
+        getDriversStarted=true;
+        DatabaseReference driversReference=FirebaseDatabase.getInstance().getReference().child("Drivers");
+        GeoFire geoFire=new GeoFire(driversReference);
+        GeoQuery geoQuery=geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(),myLastLocation.getLongitude()),300000);
+        geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
+            @Override
+            public void onKeyEntered(String key, GeoLocation location) {
+                for(Marker markerIt:markerList){
+                    if(markerIt.getTag().equals(key)){
+                        return;
+                    }
+                }
+                LatLng driverLocation=new LatLng(location.latitude,location.longitude);
+
+                Marker mDriverMarker=mMap.addMarker(new MarkerOptions().position(driverLocation));
+                mDriverMarker.setTag(key);
+                markerList.add(mDriverMarker);
+            }
+
+            @Override
+            public void onKeyExited(String key) {
+                for(Marker markerIt:markerList){
+                    if (markerIt.getTag().equals(key)) {
+                        markerIt.remove();
+                        markerList.remove(markerIt);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void onKeyMoved(String key, GeoLocation location) {
+                for(Marker markerIt:markerList){
+                    if(markerIt.getTag().equals(key)){
+                        markerIt.setPosition(new LatLng(location.latitude,location.longitude));
+                    }
+                }
+            }
+
+            @Override
+            public void onGeoQueryReady() {
+
+            }
+
+            @Override
+            public void onGeoQueryError(DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void getDriverDestination(String driverId){
+        DatabaseReference driverDestinationRef=FirebaseDatabase.getInstance().getReference().child("Drivers").child(driverId);
+        driverDestinationRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Map<String,Object> map=(Map<String, Object>) snapshot.getValue();
+                    if(map.get("destination")!=null){
+                        driverDestination=map.get("destination").toString();
+                    }else{
+                        driverDestination="--";
+                    }
+                    Double destinationLat=0.0;
+                    Double destinationLong=0.0;
+
+                    if(map.get("destinationLat")!=null){
+                        destinationLat=Double.valueOf(map.get("destinationLat").toString());
+                    }
+
+                    if(map.get("destinationLong")!=null){
+                        destinationLong=Double.valueOf(map.get("destinationLong").toString());
+                        destinationDriverLatLng=new LatLng(destinationLat,destinationLong);
+                    }
+
+                    getRouteToMarker(driverLatLng,new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()));
+                    getDriverInfo(driverId);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void getDriverInfo(String driverId) {
+        displayInformationDriver(BottomSheetBehavior.STATE_EXPANDED);
+        DatabaseReference customerInfoRef=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverId);
+        customerInfoRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists() && snapshot.getChildrenCount()>0){
+                    Map<String,Object> map=(Map<String, Object>) snapshot.getValue();
+                    if(map.get("nombre")!=null){
+                        txt_name.setText(map.get("nombre").toString());
+                    }
+                    if(map.get("fotoPerfil")!=null){
+                        if(map.get("fotoPerfil").toString().equals("")){
+                            customer_photo.setImageResource(R.drawable.default_user_login);
+                        }else{
+                            Glide.with(getApplicationContext()).load(map.get("fotoPerfil").toString()).into(customer_photo);
+                        }
+                    }
+                    txt_startLocation.setText(getGeocoderAddress());
+                    btn_message.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(CustomerMap.this, MessagesActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    .putExtra("userId", driverId)
+                                    .putExtra("userName", map.get("nombre").toString())
+                                    .putExtra("userPhoto", map.get("fotoPerfil").toString());
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void getRouteToMarker(LatLng pickUpMarker,LatLng startDestination){
+        Routing routing=new Routing.Builder()
+                .travelMode(AbstractRouting.TravelMode.DRIVING)
+                .withListener(this)
+                .alternativeRoutes(false)
+                .waypoints(startDestination,pickUpMarker)
+                .key(getString(R.string.google_maps_key))
+                .build();
+        routing.execute();
+    }
+
     private void initListeners() {
         /** MÉTODO PARA AÑADIR ICONOS DE NOTIFICACIÓN A LOS BOTONES*/
         button_notifications.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -290,7 +436,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requireARide();
+
             }
         });
 
@@ -300,7 +446,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
                 if(destination.equals("")){
                     Snackbar.make(v,"You must select a destination",Snackbar.LENGTH_SHORT).show();
                 }else{
-                    requireARide();
+
                 }
             }
         });
@@ -337,30 +483,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
      * METODO PARA PEDIR UN VIAJE A UN CONDUCTOR
      */
 
-    private void requireARide(){
-        if(requestBol){
-            endRide();
-        }else{
-            requestBol=true;
-
-            String userId=firebaseAuth.getUid();
-
-            DatabaseReference reference=FirebaseDatabase.getInstance().getReference("customerRequest");
-            GeoFire geoFire=new GeoFire(reference);
-            geoFire.setLocation(userId,new GeoLocation(myLastLocation.getLatitude(),myLastLocation.getLongitude()));
-
-            pickUpLocation=new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude());
-            pickupMarker=mMap.addMarker(new MarkerOptions().position(pickUpLocation).title("Pickup Here")
-                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.location_pin_map_foreground))
-                    .flat(true)
-                    .anchor(0.5f,0.5f));
-            progressDialog.setMessage("Searching for drivers...");
-            progressDialog.show();
-
-
-            getClosestDrivers();
-        }
-    }
 
     //Método para resetear los campos de informacion del conducotr en el sheet
     private void clearAllCustomerInformation(){
@@ -404,122 +526,11 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
      * @param state
      */
 
-    private int radius=1;
-    private Boolean driverFound=false;
-    private String driverFoundId;
-
-    GeoQuery geoQuery;
-
-    /**
-     * CON ESTE MÉTODO OBTENEMOS LO CONDUCTORES MÁS CERCANOS A NOSOTROS
-     * EN CASO DE NO ENCONTRAR EN EL RADIO INICIAL DE 1 AUMENTAREMOS DICHO RADIO PARA
-     * ABARCAR MAS MAPA Y BUSCAR MAS LEJOS
-     *
-     */
-
-    private void getClosestDrivers() {
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("driverAvailable");
-        GeoFire geoFire=new GeoFire(reference);
-        geoQuery=geoFire.queryAtLocation(new GeoLocation(pickUpLocation.latitude,pickUpLocation.longitude),radius);
-        geoQuery.removeAllListeners();
-
-        geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
-            @Override
-            public void onKeyEntered(String key, GeoLocation location) {
-                if(!driverFound && requestBol){
-                    driverFound=true;
-                    driverFoundId=key;
-
-                    DatabaseReference driverRef=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverFoundId).child("customerRequest");
-                    String customerId= firebaseAuth.getUid();
-                    HashMap map=new HashMap();
-                    map.put("customerRideId",customerId);
-                    map.put("destination",destination);
-                    map.put("destinationLat",destinationLatLng.latitude);
-                    map.put("destinationLong",destinationLatLng.longitude);
-                    driverRef.updateChildren(map);
-
-                    getDriverLocation();
-                    progressDialog.setMessage("Getting driver location...");
-                }
-            }
-
-            @Override
-            public void onKeyExited(String key) {
-
-            }
-
-            @Override
-            public void onKeyMoved(String key, GeoLocation location) {
-
-            }
-
-            //Aqui aumentamos el campo de búsqueda en el mapa
-            @Override
-            public void onGeoQueryReady() {
-                if(!driverFound){
-                    radius++;
-                    getClosestDrivers();
-                }
-            }
-
-            @Override
-            public void onGeoQueryError(DatabaseError error) {
-
-            }
-        });
-    }
 
     /**
      * UNA VEZ ENCONTRADO EL CONDUCTOR RECOGEMOS SUS DATOS PARA MOSTRARLO
      */
 
-    private void getDriverInfo() {
-        displayInformationDriver(BottomSheetBehavior.STATE_EXPANDED);
-        DatabaseReference mCustomerDatabase=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverFoundId);
-        mCustomerDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists() && snapshot.getChildrenCount()>0){
-                    Map<String,Object> map=(Map<String, Object>) snapshot.getValue();
-                    if(map.get("nombre")!=null){
-                        txt_name.setText(map.get("nombre").toString()+" is in the way");
-                    }
-
-                    if(map.get("fotoPerfil")!=null){
-                        if(map.get("fotoPerfil").toString().equals("")){
-                            customer_photo.setImageResource(R.drawable.default_user_login);
-                        }else{
-                            Glide.with(getApplicationContext()).load(map.get("fotoPerfil").toString()).into(customer_photo);
-                        }
-                    }
-
-                    txt_destination.setText(destination);
-                    txt_startLocation.setText(getGeocoderAddress());
-
-                    btn_message.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent=new Intent(CustomerMap.this,MessagesActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                    .putExtra("userId",driverFoundId)
-                                    .putExtra("userName",map.get("nombre").toString())
-                                    .putExtra("userPhoto",map.get("fotoPerfil").toString());
-                            startActivity(intent);
-                        }
-                    });
-
-                    Map<String,Object> driverMap=(Map<String, Object>)snapshot.child("DriverInformation").getValue();
-                    txt_total_pay_travel.setText(driverMap.get("PlateNumber").toString());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
     private String getGeocoderAddress(){
         Geocoder geocoder=new Geocoder(CustomerMap.this, Locale.getDefault());
@@ -534,134 +545,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         }
         return address;
     }
-
-    /**
-     * OBTENEMOS LA UBICACION DEL CONDUCOTR PARA PINTARLA EN EL MAPA
-     */
-
-    private Marker mDriverMarker;
-    private DatabaseReference driverLocationRef;
-    private ValueEventListener driverLocationRefListener;
-    private LatLng driverLatLng;
-    private void getDriverLocation(){
-        driverLocationRef=FirebaseDatabase.getInstance().getReference().child("driverWorking").child(driverFoundId).child("l");
-        driverLocationRefListener=driverLocationRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists() && requestBol){
-                    List<Object> map=(List<Object>) snapshot.getValue();
-                    double locationLat=0;
-                    double locationLong=0;
-                    if(map.get(0)!=null){
-                        locationLat=Double.parseDouble(map.get(0).toString());
-                    }
-                    if(map.get(1)!=null){
-                        locationLong=Double.parseDouble(map.get(1).toString());
-                    }
-                    driverLatLng=new LatLng(locationLat,locationLong);
-                    if(mDriverMarker != null){
-                        mDriverMarker.remove();
-                    }
-                    progressDialog.dismiss();
-                    displaySearchSheet(BottomSheetBehavior.STATE_HIDDEN);
-                    mDriverMarker=mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Your driver")
-                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.car_map_foreground))
-                            .flat(true)
-                            .anchor(0.5f,0.5f));
-                    getDriverInfo();
-                    getHasRideEnded();
-                    getRouteToMarker(driverLatLng);
-                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        return;
-                    }
-                    mMap.setMyLocationEnabled(false);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void getRouteToMarker(LatLng pickupMarker) {
-        Routing routing = new Routing.Builder()
-                .travelMode(AbstractRouting.TravelMode.DRIVING)
-                .withListener(this)
-                .alternativeRoutes(false)
-                .waypoints(pickupMarker,new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()))
-                .key(getString(R.string.google_maps_key))
-                .build();
-        routing.execute();
-        LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-    }
-
-    private DatabaseReference driverHasEndedRef;
-    private ValueEventListener driverHasEndedRefListener;
-    private void getHasRideEnded() {
-        driverHasEndedRef = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverFoundId).child("customerRequest").child("customerRideId");
-        driverLocationRefListener=driverHasEndedRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-
-                } else {
-                    endRide();
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void endRide() {
-        requestBol=false;
-        geoQuery.removeAllListeners();
-        if(driverLocationRefListener!=null){
-            driverLocationRef.removeEventListener(driverLocationRefListener);
-        }
-
-        if(driverHasEndedRefListener!=null){
-            driverHasEndedRef.removeEventListener(driverHasEndedRefListener);
-        }
-
-        if(driverFoundId!=null){
-            DatabaseReference driverRef=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverFoundId).child("customerRequest");
-            driverRef.removeValue();
-            driverFoundId=null;
-        }
-
-        driverFound=false;
-        radius=1;
-        String userId=firebaseAuth.getUid();
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("customerRequest");
-        GeoFire geoFire=new GeoFire(reference);
-        geoFire.removeLocation(userId);
-
-        if(pickupMarker!=null){
-            pickupMarker.remove();
-        }
-
-        if(mDriverMarker!=null){
-            mDriverMarker.remove();
-        }
-
-        Toast.makeText(getApplicationContext(),"You just canceled the travel",Toast.LENGTH_LONG).show();
-        displayInformationDriver(BottomSheetBehavior.STATE_HIDDEN);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        mMap.setMyLocationEnabled(true);
-        erasePolylines();
-    }
-
-
     @Override
     protected void onDestroy() {
         new MainActivity.Destroy(CustomerMap.this).start();
@@ -824,12 +707,31 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        if (getApplicationContext()!=null) {
-            myLastLocation = location;
-            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,20f));
-        }
+        if(getApplicationContext()!=null){
+            myLastLocation=location;
+            LatLng latlng=new LatLng(location.getLatitude(),location.getLongitude());
+            if(myPositionMarker==null){
+                myPositionMarker=mMap.addMarker(new MarkerOptions()
+                        .flat(true)
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.arrow_my_location_foreground))
+                        .anchor(0.5f,05.f)
+                        .position(latlng)
+                );
+            }
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng,12f));
+            setMyLocationInDatabase(location);
 
+            if(!getDriversStarted){
+                getAllDrivers();
+            }
+        }
+    }
+
+    private void setMyLocationInDatabase(Location location){
+        String userId=firebaseAuth.getUid();
+        DatabaseReference customerReference=FirebaseDatabase.getInstance().getReference("Customers");
+        GeoFire geoFire=new GeoFire(customerReference);
+        geoFire.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
     }
 
     private LocationCallback locationCallback;
@@ -876,14 +778,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
     @Override
     protected void onStop() {
         super.onStop();
-        if(locationCallback!=null){
-            LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
-            String userId=firebaseAuth.getUid();
-            DatabaseReference reference=FirebaseDatabase.getInstance().getReference("driverAvailable");
-
-            GeoFire geofire=new GeoFire(reference);
-            geofire.removeLocation(userId);
-        }
     }
 
 
@@ -901,7 +795,10 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
 
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-        return false;
+        String driverId=marker.getTag().toString();
+        driverLatLng= marker.getPosition();
+        getDriverDestination(driverId);
+        return true;
     }
 
     @Override

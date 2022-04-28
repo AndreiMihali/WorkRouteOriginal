@@ -149,7 +149,7 @@
                     android:background="@android:color/transparent"
                     android:enabled="false"
                     android:text="NombreUsuario"
-                    android:textColor="@color/secondary"
+                    android:textColor="#BABABA"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -187,7 +187,7 @@
                     android:enabled="false"
                     android:inputType="textPassword"
                     android:text="Password"
-                    android:textColor="@color/secondary"
+                    android:textColor="#BABABA"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/white"
+    app:contentPadding="10dp"
+    app:cardCornerRadius="10dp"
+    android:theme="@style/Theme.MaterialComponents.DayNight"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:letterSpacing="0.085"
+            android:text="NETWORK PROBLEM"
+            android:textStyle="bold"
+            android:textColor="#D81C0E"
+            android:layout_centerHorizontal="true"
+            android:lineSpacingExtra="5dp"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/wifi_signal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24"
+            app:tint="@color/secondary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_below="@id/wifi_signal"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:letterSpacing="0.085"
+            android:textColor="@color/black"
+            android:text="You are losing your network signal\nCheck the status of your network"
+            android:lineSpacingExtra="5dp"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
