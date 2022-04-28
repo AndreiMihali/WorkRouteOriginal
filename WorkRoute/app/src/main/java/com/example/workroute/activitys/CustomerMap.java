@@ -108,7 +108,7 @@ import java.util.Map;
 
 public class CustomerMap extends FragmentActivity implements RoutingListener,com.google.android.gms.location.LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
-    private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_close, button_ubi;
+    private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_ubi;
     private Animation open, close, rotateForward, rotateBackWard;
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
@@ -121,10 +121,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
     private GoogleApiClient googleApiClient;
     private Location myLastLocation;
     private LocationRequest locationRequest;
-    private LatLng pickUpLocation;
     private BottomSheetBehavior bottomSheetBehavior;
-    private BottomSheetBehavior bottomSheetBehaviorSearch;
-    private MaterialButton requestTravel;
     private boolean requestBol=false;
     private Marker pickupMarker;
     private String destination;
@@ -197,10 +194,8 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         button_profile = findViewById(R.id.buttonProfile);
         button_notifications = findViewById(R.id.button_notifications);
         //button_settings = findViewById(R.id.buttonSettings);
-        button_close = findViewById(R.id.buttonSearch);
         button_ubi = findViewById(R.id.buttonUbi);
         open = AnimationUtils.loadAnimation(this, R.anim.open_menu);
-        close = AnimationUtils.loadAnimation(this, R.anim.close_menu);
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         progressDialog = new ProgressDialog(this, R.style.ProgressDialog);
@@ -210,17 +205,12 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.sheet));
         bottomSheetBehavior.setHideable(true);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        bottomSheetBehaviorSearch = BottomSheetBehavior.from(findViewById(R.id.sheet_search));
-        bottomSheetBehaviorSearch.setHideable(true);
-        bottomSheetBehaviorSearch.setState(BottomSheetBehavior.STATE_HIDDEN);
-        requestTravel=findViewById(R.id.requestTravel);
         btn_cancel=findViewById(R.id.button_cancel);
         btn_message=findViewById(R.id.button_message_cost);
         polylines=new ArrayList<>();
         destinationLatLng=new LatLng(0.0,0.0);
         destination="";
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
-        autocompleteFragment = (AutocompleteSupportFragment)getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
         iniciarMapa();
         initListeners();
 
@@ -435,47 +425,16 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         });
 
 
-        button_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                displaySearchSheet(BottomSheetBehavior.STATE_EXPANDED);
-                animateMenu();
-            }
-        });
-
+        /**
+         * BOTÓN SUBSCRIBE
+         */
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
-
-        requestTravel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(destination.equals("")){
-                    Snackbar.make(v,"You must select a destination",Snackbar.LENGTH_SHORT).show();
-                }else{
-
-                }
-            }
-        });
-
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
-
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(@NonNull Place place) {
-                destination=place.getName().toString();
-                destinationLatLng=place.getLatLng();
-            }
-
-
-            @Override
-            public void onError(@NonNull Status status) {
-            }
-        });
-
+        
     }
 
     /**
@@ -510,11 +469,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
      * @param state
      */
 
-    private void displaySearchSheet(int state){
-        bottomSheetBehaviorSearch.setPeekHeight(200);
-        bottomSheetBehaviorSearch.setState(state);
-        bottomSheetBehaviorSearch.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
-    }
 
     private void displayInformationDriver(int state){
         txt_distance=findViewById(R.id.txt_distance_cost);
@@ -571,19 +525,19 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
             button_profile.startAnimation(close);
             button_notifications.startAnimation(close);
             //button_settings.startAnimation(close);
-            button_close.startAnimation(close);
+
 
             button_chats.setVisibility(View.INVISIBLE);
             button_profile.setVisibility(View.INVISIBLE);
             button_notifications.setVisibility(View.INVISIBLE);
             //button_settings.setVisibility(View.INVISIBLE);
-            button_close.setVisibility(View.INVISIBLE);
+
 
             button_chats.setClickable(false);
             button_profile.setClickable(false);
             button_notifications.setClickable(false);
             //button_settings.setClickable(false);
-            button_close.setClickable(false);
+
 
             isOpen = false;
         } else {
@@ -593,20 +547,20 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
             button_profile.startAnimation(open);
             button_notifications.startAnimation(open);
             //button_settings.startAnimation(open);
-            button_close.startAnimation(open);
+
 
 
             button_chats.setVisibility(View.VISIBLE);
             button_profile.setVisibility(View.VISIBLE);
             button_notifications.setVisibility(View.VISIBLE);
             //button_settings.setVisibility(View.VISIBLE);
-            button_close.setVisibility(View.VISIBLE);
+
 
             button_chats.setClickable(true);
             button_profile.setClickable(true);
             button_notifications.setClickable(true);
             //button_settings.setClickable(true);
-            button_close.setClickable(true);
+
             isOpen = true;
         }
     }
