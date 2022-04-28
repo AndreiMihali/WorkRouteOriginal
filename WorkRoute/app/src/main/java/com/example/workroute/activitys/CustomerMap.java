@@ -237,7 +237,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
                 for(Marker markerIt:markerList){
-                    if(markerIt.getTag().equals(key)){
+                    if(markerIt.getTag().toString().equals(key)){
                         return;
                     }
                 }
@@ -390,6 +390,20 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
             @Override
             public void onClick(View view) {
                 animateMenu();
+            }
+        });
+
+        bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if(newState==BottomSheetBehavior.STATE_HIDDEN){
+                    erasePolylines();
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
             }
         });
 
@@ -608,7 +622,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        mMap.setMyLocationEnabled(false);
+        mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.getUiSettings().setCompassEnabled(false);
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -691,14 +705,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         if(getApplicationContext()!=null){
             myLastLocation=location;
             LatLng latlng=new LatLng(location.getLatitude(),location.getLongitude());
-            if(myPositionMarker==null){
-                myPositionMarker=mMap.addMarker(new MarkerOptions()
-                        .flat(true)
-                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.location_pin_map_foreground))
-                        .anchor(0.5f,0.5f)
-                        .position(latlng)
-                );
-            }
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng,12f));
             setMyLocationInDatabase(location);
             setDestination();

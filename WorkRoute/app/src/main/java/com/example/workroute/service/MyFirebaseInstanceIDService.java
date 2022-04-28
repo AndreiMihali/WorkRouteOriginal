@@ -38,7 +38,9 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
 
     private void saveToken(String token) {
         reference= FirebaseDatabase.getInstance().getReference().child("Token");
-        reference.child(FirebaseAuth.getInstance().getUid()).setValue(token);
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+            reference.child(FirebaseAuth.getInstance().getUid()).setValue(token);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
