@@ -296,7 +296,8 @@ public class ConfirmLogin extends AppCompatActivity {
                 0,
                 0,
                 new ArrayList<User>(),
-                new ArrayList<User>()
+                new ArrayList<User>(),
+                ""
         );
 
         FirebaseDatabase.getInstance().getReference().child("Usuarios").child(auth.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -329,7 +330,8 @@ public class ConfirmLogin extends AppCompatActivity {
                 0,
                 0,
                 new ArrayList<User>(),
-                new ArrayList<User>()
+                new ArrayList<User>(),
+                ""
         );
 
         FirebaseFirestore firestore=FirebaseFirestore.getInstance();

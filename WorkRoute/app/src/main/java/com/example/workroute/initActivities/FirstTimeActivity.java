@@ -68,8 +68,8 @@ public class FirstTimeActivity extends AppCompatActivity {
     private static final int PERMISSION_CODE_GALLERY = 100;
     private FloatingActionButton button_profile_photo;
     private ImageView profilePhoto;
-    private MaterialCardView card_spinner,card_birthday;
-    private TextView locality,birth;
+    private MaterialCardView card_spinner,card_birthday,card_work_address;
+    private TextView locality,birth,workAddress;
     private MaterialButton button_continue;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private Uri uri;
@@ -78,6 +78,7 @@ public class FirstTimeActivity extends AppCompatActivity {
     private int AUTOCOMPLETE_REQUEST_CODE=1;
     private String fechaNac;
     private ProgressDialog progressDialog;
+    private int variableBandera=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Register);
@@ -98,6 +99,8 @@ public class FirstTimeActivity extends AppCompatActivity {
         firestore=FirebaseFirestore.getInstance();
         username=findViewById(R.id.user_name);
         progressDialog=new ProgressDialog(this);
+        card_work_address=findViewById(R.id.card_work_direction);
+        workAddress=findViewById(R.id.txt_work_direction);
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         Bundle bundle=getIntent().getExtras();
         username.setText(bundle.getString("Name","Username"));
@@ -140,6 +143,7 @@ public class FirstTimeActivity extends AppCompatActivity {
         card_spinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                variableBandera=1;
                 startAutocompleteIntent();
             }
         });
@@ -148,6 +152,14 @@ public class FirstTimeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openDatePicker();
+            }
+        });
+
+        card_work_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                variableBandera=2;
+                startAutocompleteIntent();
             }
         });
 
@@ -162,12 +174,14 @@ public class FirstTimeActivity extends AppCompatActivity {
 
     private void checkData(View v) {
         if(birth.getText().toString().trim().equals("Choose your day of birth")
-            || locality.getText().toString().trim().equals("Enter your home direction")){
+            || locality.getText().toString().trim().equals("Enter your home address")
+            || workAddress.getText().toString().trim().equals("Enter your work address")){
             Snackbar.make(v,"You need to fill all fields",Snackbar.LENGTH_SHORT).show();
         }else{
             progressDialog.setMessage("Please wait...");
             progressDialog.show();
             actualizarDatos(locality.getText().toString().trim(),"localidad");
+            actualizarDatos(workAddress.getText().toString().trim(),"workAddress");
             actualizarDatos(1,"vecesConectadas");
             actualizarDatos(calcularEdad(fechaNac), "edad");
             actualizarDatos(fechaNac,"fecha_naci");
@@ -296,7 +310,12 @@ public class FirstTimeActivity extends AppCompatActivity {
         if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
-                locality.setText(place.getName());
+                if(variableBandera==1){
+                    locality.setText(place.getName());
+                }else if(variableBandera==2){
+                    workAddress.setText(place.getName());
+                }
+
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 // TODO: Handle the error.
                 Status status = Autocomplete.getStatusFromIntent(data);

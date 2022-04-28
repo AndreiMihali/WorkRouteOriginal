@@ -241,7 +241,8 @@ public class CreateAccount extends AppCompatActivity {
                 0,
                 0,
                 new ArrayList<User>(),
-                new ArrayList<User>()
+                new ArrayList<User>(),
+                ""
         );
 
         reference.child("Usuarios").child(firebaseAuth.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -274,7 +275,8 @@ public class CreateAccount extends AppCompatActivity {
                 0,
                 0,
                 new ArrayList<User>(),
-                new ArrayList<User>()
+                new ArrayList<User>(),
+                ""
         );
 
         FirebaseFirestore firestore=FirebaseFirestore.getInstance();

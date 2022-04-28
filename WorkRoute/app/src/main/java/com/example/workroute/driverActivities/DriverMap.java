@@ -47,6 +47,7 @@ import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.workroute.R;
 import com.example.workroute.activitys.MainActivity;
+import com.example.workroute.companion.Companion;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.network.callback.NetworkCallback;
@@ -93,6 +94,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -268,6 +270,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                         }
                     }
                     txt_startLocation.setText(getGeocoderAddress());
+                    txt_destination.setText(customerDestination);
                     btn_message.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -529,7 +532,9 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         }
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.getUiSettings().setCompassEnabled(false);
+        mMap.setMyLocationEnabled(true);
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mMap.setOnMarkerClickListener(this);
         buildGoogleApiClient();
     }
 
@@ -611,8 +616,8 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
            if(myPositionMarker==null){
                myPositionMarker=mMap.addMarker(new MarkerOptions()
                        .flat(true)
-                       .icon(BitmapDescriptorFactory.fromResource(R.mipmap.arrow_my_location_foreground))
-                       .anchor(0.5f,05.f)
+                       .icon(BitmapDescriptorFactory.fromResource(R.mipmap.location_pin_map_foreground))
+                       .anchor(0.5f,0.5f)
                        .position(latlng)
                );
            }
@@ -625,11 +630,40 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
        }
     }
 
+    private void setDestination(){
+        DatabaseReference driverReference=FirebaseDatabase.getInstance().getReference("Drivers");
+        Map<String,Object> map=new HashMap<>();
+        map.put("destination", Companion.user.getWorkAddress());
+        map.put("destinationLat",getDestination(Companion.user.getWorkAddress(),"latitude"));
+        map.put("destinationLong",getDestination(Companion.user.getWorkAddress(),"longitude"));
+        driverReference.child(firebaseAuth.getUid()).updateChildren(map);
+    }
+
     private void setMyLocationInDatabase(Location location){
         String userId=firebaseAuth.getUid();
         DatabaseReference driverReference=FirebaseDatabase.getInstance().getReference("Drivers");
         GeoFire geofireRef=new GeoFire(driverReference);
         geofireRef.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
+        setDestination();
+    }
+
+    private Double getDestination(String destination,String field){
+        Geocoder geocoder = new Geocoder(DriverMap.this, Locale.getDefault());
+        Double address = 0.0;
+        try {
+            List<Address> listAddress = geocoder.getFromLocationName(destination,1);
+            if (listAddress.size() > 0) {
+                if(field.equals("latitude")){
+                    address = listAddress.get(0).getLatitude();
+                }else if(field.equals("longitude")){
+                    address=listAddress.get(0).getLongitude();
+                }
+
+            }
+        } catch (IOException e) {
+            Log.e("Error", e.toString());
+        }
+        return address;
     }
 
 
@@ -694,7 +728,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         String customerUid=marker.getTag().toString();
         customerLatLng= marker.getPosition();
         getCustomerDestination(customerUid);
-        return true;
+        return false;
     }
 
     @Override

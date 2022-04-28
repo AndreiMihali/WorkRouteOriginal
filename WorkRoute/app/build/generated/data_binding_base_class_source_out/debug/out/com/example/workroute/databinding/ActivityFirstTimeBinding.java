@@ -37,6 +37,9 @@ public final class ActivityFirstTimeBinding implements ViewBinding {
   public final MaterialCardView cardSpiiner;
 
   @NonNull
+  public final MaterialCardView cardWorkDirection;
+
+  @NonNull
   public final FloatingActionButton fabCamera;
 
   @NonNull
@@ -58,20 +61,24 @@ public final class ActivityFirstTimeBinding implements ViewBinding {
   public final TextView txtCumple;
 
   @NonNull
+  public final TextView txtWorkDirection;
+
+  @NonNull
   public final TextView userName;
 
   private ActivityFirstTimeBinding(@NonNull RelativeLayout rootView,
       @NonNull MaterialButton buttonContinue, @NonNull MaterialCardView cardBirthday,
       @NonNull MaterialCardView cardPhoto, @NonNull MaterialCardView cardSpiiner,
-      @NonNull FloatingActionButton fabCamera, @NonNull LinearLayout layoutEdAlias,
-      @NonNull LinearLayout linearsDatos, @NonNull ImageView profileImage,
-      @NonNull LinearLayout texts, @NonNull TextView txtCiudad, @NonNull TextView txtCumple,
-      @NonNull TextView userName) {
+      @NonNull MaterialCardView cardWorkDirection, @NonNull FloatingActionButton fabCamera,
+      @NonNull LinearLayout layoutEdAlias, @NonNull LinearLayout linearsDatos,
+      @NonNull ImageView profileImage, @NonNull LinearLayout texts, @NonNull TextView txtCiudad,
+      @NonNull TextView txtCumple, @NonNull TextView txtWorkDirection, @NonNull TextView userName) {
     this.rootView = rootView;
     this.buttonContinue = buttonContinue;
     this.cardBirthday = cardBirthday;
     this.cardPhoto = cardPhoto;
     this.cardSpiiner = cardSpiiner;
+    this.cardWorkDirection = cardWorkDirection;
     this.fabCamera = fabCamera;
     this.layoutEdAlias = layoutEdAlias;
     this.linearsDatos = linearsDatos;
@@ -79,6 +86,7 @@ public final class ActivityFirstTimeBinding implements ViewBinding {
     this.texts = texts;
     this.txtCiudad = txtCiudad;
     this.txtCumple = txtCumple;
+    this.txtWorkDirection = txtWorkDirection;
     this.userName = userName;
   }
 
@@ -133,6 +141,12 @@ public final class ActivityFirstTimeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.card_work_direction;
+      MaterialCardView cardWorkDirection = ViewBindings.findChildViewById(rootView, id);
+      if (cardWorkDirection == null) {
+        break missingId;
+      }
+
       id = R.id.fab_camera;
       FloatingActionButton fabCamera = ViewBindings.findChildViewById(rootView, id);
       if (fabCamera == null) {
@@ -175,6 +189,12 @@ public final class ActivityFirstTimeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.txt_work_direction;
+      TextView txtWorkDirection = ViewBindings.findChildViewById(rootView, id);
+      if (txtWorkDirection == null) {
+        break missingId;
+      }
+
       id = R.id.user_name;
       TextView userName = ViewBindings.findChildViewById(rootView, id);
       if (userName == null) {
@@ -182,8 +202,8 @@ public final class ActivityFirstTimeBinding implements ViewBinding {
       }
 
       return new ActivityFirstTimeBinding((RelativeLayout) rootView, buttonContinue, cardBirthday,
-          cardPhoto, cardSpiiner, fabCamera, layoutEdAlias, linearsDatos, profileImage, texts,
-          txtCiudad, txtCumple, userName);
+          cardPhoto, cardSpiiner, cardWorkDirection, fabCamera, layoutEdAlias, linearsDatos,
+          profileImage, texts, txtCiudad, txtCumple, txtWorkDirection, userName);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

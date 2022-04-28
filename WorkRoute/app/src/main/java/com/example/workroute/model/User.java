@@ -19,6 +19,7 @@ public class User {
     private boolean conductor;
     private ArrayList<Viaje> viajes;
     private int vecesConectadas;
+    private String workAddress;
 
     public ArrayList<User> getFollowersProfile() {
         return followersProfile;
@@ -72,7 +73,7 @@ public class User {
 
     public User(String uid, String nombre, int edad, String fecha_naci, String localidad, String direccion, int nivel, boolean activo,
                 boolean suscrito, boolean online, int nivelSuscripcion, String fotoPerfil, boolean conductor,
-                ArrayList<Viaje> viajes, int vecesConectadas,int followers,int following,int opinions,ArrayList<User> followersProfile,ArrayList<User> followingProfile) {
+                ArrayList<Viaje> viajes, int vecesConectadas,int followers,int following,int opinions,ArrayList<User> followersProfile,ArrayList<User> followingProfile,String workAddress) {
         this.uid = uid;
         this.nombre = nombre;
         this.edad = edad;
@@ -93,6 +94,15 @@ public class User {
         this.opinions=opinions;
         this.followingProfile=followingProfile;
         this.followersProfile=followersProfile;
+        this.workAddress=workAddress;
+    }
+
+    public String getWorkAddress() {
+        return workAddress;
+    }
+
+    public void setWorkAddress(String workAddress) {
+        this.workAddress = workAddress;
     }
 
     public String getUid() {

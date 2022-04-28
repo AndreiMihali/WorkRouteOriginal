@@ -46,6 +46,7 @@ import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.workroute.R;
+import com.example.workroute.companion.Companion;
 import com.example.workroute.driverActivities.DriverMap;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
@@ -336,6 +337,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
                         }
                     }
                     txt_startLocation.setText(getGeocoderAddress());
+                    txt_destination.setText(driverDestination);
                     btn_message.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -632,6 +634,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.getUiSettings().setCompassEnabled(false);
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mMap.setOnMarkerClickListener(this);
         buildGoogleApiClient();
     }
 
@@ -713,8 +716,8 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
             if(myPositionMarker==null){
                 myPositionMarker=mMap.addMarker(new MarkerOptions()
                         .flat(true)
-                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.arrow_my_location_foreground))
-                        .anchor(0.5f,05.f)
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.location_pin_map_foreground))
+                        .anchor(0.5f,0.5f)
                         .position(latlng)
                 );
             }
@@ -732,6 +735,35 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         DatabaseReference customerReference=FirebaseDatabase.getInstance().getReference("Customers");
         GeoFire geoFire=new GeoFire(customerReference);
         geoFire.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
+        setDestination();
+    }
+
+    private void setDestination(){
+        DatabaseReference customerReference=FirebaseDatabase.getInstance().getReference("Customers");
+        Map<String,Object> map=new HashMap<>();
+        map.put("destination", Companion.user.getWorkAddress());
+        map.put("destinationLat",getDestination(Companion.user.getWorkAddress(),"latitude"));
+        map.put("destinationLong",getDestination(Companion.user.getWorkAddress(),"longitude"));
+        customerReference.child(firebaseAuth.getUid()).updateChildren(map);
+    }
+
+    private Double getDestination(String destination,String field){
+        Geocoder geocoder = new Geocoder(CustomerMap.this, Locale.getDefault());
+        Double address = 0.0;
+        try {
+            List<Address> listAddress = geocoder.getFromLocationName(destination,1);
+            if (listAddress.size() > 0) {
+                if(field.equals("latitude")){
+                    address = listAddress.get(0).getLatitude();
+                }else if(field.equals("longitude")){
+                    address=listAddress.get(0).getLongitude();
+                }
+
+            }
+        } catch (IOException e) {
+            Log.e("Error", e.toString());
+        }
+        return address;
     }
 
     private LocationCallback locationCallback;
@@ -761,7 +793,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         };
 
         LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
-
     }
 
 
@@ -798,7 +829,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         String driverId=marker.getTag().toString();
         driverLatLng= marker.getPosition();
         getDriverDestination(driverId);
-        return true;
+        return false;
     }
 
     @Override

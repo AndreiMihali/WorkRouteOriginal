@@ -3282,6 +3282,7 @@ id card_spiiner
 id card_status
 id card_tarjeta
 id card_type
+id card_work_direction
 id cardsImage
 id carryVelocity
 id center
@@ -3804,6 +3805,7 @@ id txt_total_pay_travel_cost
 id txt_travel_information
 id txt_travel_information_cost
 id txt_user_name_chat_list
+id txt_work_direction
 id unchecked
 id uniform
 id unlabeled
@@ -4142,6 +4144,7 @@ string fab_transformation_sheet_behavior
 string fcm_2_args
 string fcm_fallback_notification_channel_label
 string fcm_no_args
+string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id

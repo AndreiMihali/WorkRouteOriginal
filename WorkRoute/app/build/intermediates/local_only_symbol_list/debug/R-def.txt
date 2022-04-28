@@ -190,6 +190,7 @@ id card_spiiner
 id card_status
 id card_tarjeta
 id card_type
+id card_work_direction
 id cardsImage
 id checkBoxAppNotifications
 id checkBoxEmailNotifications
@@ -325,6 +326,7 @@ id txt_total_pay_travel_cost
 id txt_travel_information
 id txt_travel_information_cost
 id txt_user_name_chat_list
+id txt_work_direction
 id user_name
 id user_name_messages
 id wifi_signal
