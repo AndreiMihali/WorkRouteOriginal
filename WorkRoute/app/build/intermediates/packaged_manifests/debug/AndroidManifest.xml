@@ -55,7 +55,8 @@
             android:exported="false" />
         <activity
             android:name="com.example.workroute.profile.Personal_information"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/CustomTheme" />
         <activity
             android:name="com.example.workroute.driverActivities.AddDriverInformation"
             android:exported="false" />

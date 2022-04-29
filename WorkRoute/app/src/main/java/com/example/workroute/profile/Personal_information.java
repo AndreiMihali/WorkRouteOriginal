@@ -6,9 +6,15 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Person;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -26,6 +32,8 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
@@ -79,16 +87,24 @@ public class Personal_information extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.Theme_EditProfile);
+        Window window=getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        window.setStatusBarColor(Color.TRANSPARENT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_information);
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-        decorView.setSystemUiVisibility(uiOptions);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
-
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rel_layout_general),(v, windowInsets) -> {
+            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+            Toolbar tool=findViewById(R.id.toolbarInformation);
+            ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) tool.getLayoutParams();
+            mlp.leftMargin = insets.left;
+            mlp.bottomMargin = insets.bottom;
+            mlp.rightMargin = insets.right;
+            mlp.topMargin=insets.top;
+            tool.setLayoutParams(mlp);
+            return WindowInsetsCompat.CONSUMED;
+        });
         main();
         setData();
     }
@@ -317,10 +333,10 @@ public class Personal_information extends AppCompatActivity {
     }
 
     private void openGallery() {
-        int  permissionCheck= ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_EXTERNAL_STORAGE);
+        int  permissionCheck= ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
 
         if(permissionCheck!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},CODE_GALLERY);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},CODE_GALLERY);
         }else{
             callGallery();
         }
