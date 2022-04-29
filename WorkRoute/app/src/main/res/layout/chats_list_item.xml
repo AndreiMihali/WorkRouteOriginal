@@ -9,7 +9,7 @@
     android:background="@color/back_login"
     android:theme="@style/Theme.MaterialComponents.DayNight"
     app:cardCornerRadius="10dp"
-    app:cardBackgroundColor="#F8DEDE"
+    app:cardBackgroundColor="#7EADC3"
     app:cardElevation="4dp">
 
     <RelativeLayout
@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Andrei Mihali"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -58,7 +58,7 @@
                 android:text="I wiil be there in 15 min"
                 android:maxWidth="150dp"
                 android:maxLines="1"
-                android:textColor="#575757"
+                android:textColor="#F4F0F0"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -71,7 +71,7 @@
             android:layout_centerInParent="true"
             android:layout_marginEnd="10dp"
             android:text="10:20"
-            android:textColor="#575757"
+            android:textColor="#F4F0F0"
             android:textSize="14sp" />
 
     </RelativeLayout>
