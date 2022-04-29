@@ -95,7 +95,7 @@ public class Personal_information extends AppCompatActivity {
 
     private void setData() {
         tv_user_mail.setText(firebaseAuth.getCurrentUser().getEmail().toString());
-        if(Companion.user.getFotoPerfil().equals(" ")){
+        if(Companion.user.getFotoPerfil().equals("")){
             imageProfile.setImageResource(R.drawable.default_user_login);
         }else{
             Glide.with(this).load(Companion.user.getFotoPerfil()).into(imageProfile);

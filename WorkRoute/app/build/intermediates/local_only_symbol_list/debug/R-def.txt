@@ -36,6 +36,7 @@ drawable back_extended_button_green
 drawable back_img_icons_search
 drawable back_second_sheet
 drawable background_login
+drawable background_messages
 drawable background_susc
 drawable bg_text_chat_left
 drawable bg_text_chat_right
@@ -162,8 +163,6 @@ id button_message_cost
 id button_notifications
 id button_signin
 id button_signup
-id button_skip
-id button_subscribe
 id cardImageFrente
 id cardImageReverse
 id cardViewImage
@@ -226,6 +225,7 @@ id inputs
 id layout_confirm_pass
 id layout_content
 id layout_ed_alias
+id layout_ed_cvv
 id layout_email
 id layout_email_recover_password
 id layout_name
@@ -256,7 +256,6 @@ id recycler_chats
 id recycler_mensajes
 id recycler_notifications
 id recycler_payMethods
-id recycler_subs
 id rel_layout
 id rel_layout_general
 id rela
@@ -278,7 +277,6 @@ id textViewActualLVL
 id texto_bienvenida
 id texts
 id title
-id titles
 id toolbar
 id toolbarInformation
 id toolbarPay
@@ -343,8 +341,8 @@ layout activity_splash_screen
 layout chats_list_item
 layout item_chat_left
 layout item_chat_right
-layout layout_suscripciones
 layout list_item
+layout message_toast_type_cvv
 layout network_lose
 layout subscription_item
 layout tarjeta_metodo_pago_layout

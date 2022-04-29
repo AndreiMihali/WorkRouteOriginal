@@ -2913,6 +2913,7 @@ drawable back_extended_button_green
 drawable back_img_icons_search
 drawable back_second_sheet
 drawable background_login
+drawable background_messages
 drawable background_susc
 drawable bg_text_chat_left
 drawable bg_text_chat_right
@@ -3257,8 +3258,6 @@ id button_message_cost
 id button_notifications
 id button_signin
 id button_signup
-id button_skip
-id button_subscribe
 id cache_measures
 id callMeasure
 id cancel_action
@@ -3466,6 +3465,7 @@ id layout
 id layout_confirm_pass
 id layout_content
 id layout_ed_alias
+id layout_ed_cvv
 id layout_email
 id layout_email_recover_password
 id layout_name
@@ -3627,7 +3627,6 @@ id recycler_chats
 id recycler_mensajes
 id recycler_notifications
 id recycler_payMethods
-id recycler_subs
 id rel_layout
 id rel_layout_general
 id rela
@@ -3758,7 +3757,6 @@ id time
 id title
 id titleDividerNoCustom
 id title_template
-id titles
 id toggle
 id toolbar
 id toolbarInformation
@@ -3968,7 +3966,6 @@ layout fingerprint_dialog_layout
 layout image
 layout item_chat_left
 layout item_chat_right
-layout layout_suscripciones
 layout list_item
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
@@ -3987,6 +3984,7 @@ layout material_time_input
 layout material_timepicker
 layout material_timepicker_dialog
 layout material_timepicker_textinput_display
+layout message_toast_type_cvv
 layout modal
 layout modal_portrait_inner
 layout mtrl_alert_dialog

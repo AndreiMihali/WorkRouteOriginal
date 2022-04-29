@@ -22,8 +22,6 @@
         <entry key="..\:/Users/amihali/repositorio_android/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_customer_map.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/amihali/repositorio_android/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_driver_map.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/amihali/repositorio_android/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_first_time.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/amihali/repositorio_android/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/chats_list_item.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/amihali/repositorio_android/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/layout_suscripciones.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/back_arrow_back.xml" value="0.3675" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/back_driver_information.xml" value="0.193" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/back_extended_button.xml" value="0.3675" />
@@ -32,6 +30,7 @@
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/back_second_sheet.xml" value="0.3675" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/back_spinner.xml" value="0.35" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/background_login.xml" value="0.35" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/background_messages.xml" value="0.365" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/background_susc.xml" value="0.2465" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/bottom_chat_selector.xml" value="0.3675" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.3675" />
@@ -101,6 +100,7 @@
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/item_profile_click.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/layout_suscripciones.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/list_item.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/message_toast_type_cvv.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/network_lose.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/prueba.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/prueba_perfil.xml" value="0.36666666666666664" />

@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
@@ -32,6 +33,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.app.ActivityCompat;
@@ -228,6 +230,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
                     .setSubtitle("Authenticate to complete the payment")
                     .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG | BiometricManager.Authenticators.DEVICE_CREDENTIAL)
                     .build();
+
         }
     }
 
@@ -479,7 +482,23 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
                     if(snapshot.getChildrenCount()>0){
                         if (biometricPrompt==null) {
                             //TODO : TOAST PERSONALIZADO PARA METER EL CVV PARA ACEPTAR EL PAGO
-                            Toast.makeText(getApplicationContext(),"Añade vaina prrro",Toast.LENGTH_SHORT).show();
+                            View view=getLayoutInflater().inflate(R.layout.message_toast_type_cvv,null);
+                            AlertDialog.Builder MyAlert = new AlertDialog.Builder(getApplicationContext(),R.style.DialogAlert);
+                            MyAlert.setPositiveButton("CONTINUE", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                            MyAlert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            MyAlert.setView(view);
+                            AlertDialog dialog = MyAlert.create();
+                            dialog.show();
                         }else {
                             biometricPromptExecuter.authenticate(biometricPrompt);
                         }
