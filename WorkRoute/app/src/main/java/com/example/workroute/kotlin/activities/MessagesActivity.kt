@@ -43,7 +43,7 @@ class MessagesActivity : AppCompatActivity(){
     private lateinit var txtUserName:TextView
     private lateinit var recyclerMessages:RecyclerView
     private lateinit var edText:EditText
-    private lateinit var fabButton:FloatingActionButton
+    private lateinit var fabButton:ImageButton
     private lateinit var firebaseUser:FirebaseUser
     private lateinit var reference:DatabaseReference
     private var adapterMessages:AdapterMessages?= null
@@ -304,11 +304,11 @@ class MessagesActivity : AppCompatActivity(){
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
                 if (TextUtils.isEmpty(edText.text.toString())) {
-                    fabButton.setImageDrawable(getDrawable(R.drawable.ic_baseline_mic_none_24))
+                    fabButton.visibility=View.GONE
                     reference.child("ChatList").child(receiverId).child(firebaseUser.uid)
                         .child("typing").setValue("false")
                 } else {
-                    fabButton.setImageDrawable(getDrawable(R.drawable.ic_baseline_send_24))
+                    fabButton.visibility=View.VISIBLE
                     reference.child("ChatList").child(receiverId).child(firebaseUser.uid)
                         .child("typing").setValue("true")
                 }

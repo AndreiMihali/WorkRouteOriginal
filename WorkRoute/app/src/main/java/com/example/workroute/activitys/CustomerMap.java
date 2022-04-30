@@ -221,7 +221,23 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
                 @Override
                 public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                     super.onAuthenticationSucceeded(result);
-                    Toast.makeText(getApplicationContext(),"You just subscribed to the driver",Toast.LENGTH_LONG).show();
+                    View view=getLayoutInflater().inflate(R.layout.layout_confirmations,null);
+                    Toast toast=new Toast(getApplicationContext());
+                    toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.setView(view);
+                    TextView message=view.findViewById(R.id.txt_description);
+                    message.setText("You just subscribed to "+txt_name.getText().toString());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        toast.addCallback(new Toast.Callback() {
+                            @Override
+                            public void onToastHidden() {
+                                super.onToastHidden();
+                                btn_cancel.setText("Subscribed");
+                            }
+                        });
+                    }
+                    toast.show();
                 }
             });
 

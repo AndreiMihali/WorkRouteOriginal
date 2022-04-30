@@ -4,10 +4,15 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Patterns
+import android.view.Gravity
 import android.view.View
 import android.view.View.OnFocusChangeListener
+import android.widget.TextView
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.workroute.R
 import com.google.android.material.appbar.MaterialToolbar
@@ -111,18 +116,24 @@ class ForgotPasswordActivity : AppCompatActivity() {
             if(it.isSuccessful){
                 progressDialog.dismiss()
                 val intent=Intent(this,ConfirmLogin::class.java)
-                Snackbar.make(view,"Email sent",Snackbar.LENGTH_SHORT)
-                    .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
-
-                    override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                        super.onDismissed(transientBottomBar, event)
-                        if(event==Snackbar.Callback.DISMISS_EVENT_TIMEOUT){
+                val view=layoutInflater.inflate(R.layout.layout_confirmations,null)
+                val toast=Toast(applicationContext)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    toast.apply {
+                        setGravity(Gravity.CENTER_VERTICAL,0,0)
+                        duration=Toast.LENGTH_LONG
+                        setView(view)
+                        view.findViewById<TextView>(R.id.txt_description).text="The email was send successfully"
+                    }.addCallback(@RequiresApi(Build.VERSION_CODES.R)
+                    object:Toast.Callback(){
+                        override fun onToastHidden() {
+                            super.onToastHidden()
                             startActivity(intent)
                             finish()
                         }
-                    }
-                }).show()
-
+                    })
+                    toast.show()
+                }
             }else{
                 progressDialog.dismiss()
                 Snackbar.make(view,"The email is incorrect",Snackbar.LENGTH_SHORT).show()

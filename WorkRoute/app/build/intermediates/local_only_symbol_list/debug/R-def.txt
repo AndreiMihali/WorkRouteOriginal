@@ -341,6 +341,7 @@ layout activity_splash_screen
 layout chats_list_item
 layout item_chat_left
 layout item_chat_right
+layout layout_confirmations
 layout list_item
 layout message_toast_type_cvv
 layout network_lose
@@ -377,6 +378,7 @@ string project_id
 string sharedPreferences
 string title_activity_customer_map
 style CalendarPicker
+style CustomTheme
 style DialogAlert
 style Login
 style MaterialAlertDialog.App.Title.Icon

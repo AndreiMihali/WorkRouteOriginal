@@ -51,6 +51,7 @@
         <item name="colorPrimary">@color/secondary</item>
         <item name="colorOnPrimary">#B0CAE7</item>
     </style>
+    <style name="CustomTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
     <style name="DialogAlert" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
         <item name="colorPrimary">@color/secondary</item>
         <item name="colorOnPrimary">#B0CAE7</item>

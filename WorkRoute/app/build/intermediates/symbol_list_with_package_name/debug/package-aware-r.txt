@@ -3966,6 +3966,7 @@ layout fingerprint_dialog_layout
 layout image
 layout item_chat_left
 layout item_chat_right
+layout layout_confirmations
 layout list_item
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
@@ -4548,6 +4549,7 @@ style CalendarPicker
 style CardView
 style CardView_Dark
 style CardView_Light
+style CustomTheme
 style DialogAlert
 style EmptyTheme
 style FiamUI

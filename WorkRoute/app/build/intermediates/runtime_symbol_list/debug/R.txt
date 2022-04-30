@@ -3965,6 +3965,7 @@ int layout fingerprint_dialog_layout 0x7f0d0045
 int layout image 0x7f0d0046
 int layout item_chat_left 0x7f0d0047
 int layout item_chat_right 0x7f0d0048
+int layout layout_confirmations 0x7f0d00a8
 int layout list_item 0x7f0d0049
 int layout m3_alert_dialog 0x7f0d004a
 int layout m3_alert_dialog_actions 0x7f0d004b
@@ -4547,6 +4548,7 @@ int style CalendarPicker 0x7f130111
 int style CardView 0x7f130112
 int style CardView_Dark 0x7f130113
 int style CardView_Light 0x7f130114
+int style CustomTheme 0x7f130422
 int style DialogAlert 0x7f130115
 int style EmptyTheme 0x7f130116
 int style FiamUI 0x7f130117

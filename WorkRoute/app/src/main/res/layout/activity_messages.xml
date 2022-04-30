@@ -89,6 +89,7 @@
         android:layout_width="match_parent"
         android:background="@android:color/transparent"
         android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content">
 
@@ -124,20 +125,17 @@
                     android:padding="8dp"
                     tools:ignore="TouchTargetSizeCheck" />
 
+                <ImageButton
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/btn_send"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_baseline_send_24"
+                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="5dp"
-            android:src="@drawable/ic_baseline_mic_none_24"
-            app:backgroundTint="@color/secondary"
-            app:tint="@color/white"
-            tools:ignore="SpeakableTextPresentCheck" />
 
     </LinearLayout>
 
