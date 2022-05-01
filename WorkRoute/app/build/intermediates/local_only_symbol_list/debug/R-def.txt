@@ -21,6 +21,7 @@ color purple_200
 color purple_500
 color purple_700
 color secondary
+color secondaryLine
 color tablayout_style
 color teal_200
 color teal_700
@@ -52,6 +53,7 @@ drawable bxl_google
 drawable bxl_mastercard
 drawable bxl_paypal
 drawable bxl_visa
+drawable bxs_flag_checkered
 drawable card_cvv
 drawable carnetfrente
 drawable creditcards

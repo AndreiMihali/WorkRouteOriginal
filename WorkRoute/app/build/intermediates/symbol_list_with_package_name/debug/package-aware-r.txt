@@ -2188,6 +2188,7 @@ color radiobutton_themeable_attribute_color
 color ripple_material_dark
 color ripple_material_light
 color secondary
+color secondaryLine
 color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
@@ -2938,6 +2939,7 @@ drawable bxl_google
 drawable bxl_mastercard
 drawable bxl_paypal
 drawable bxl_visa
+drawable bxs_flag_checkered
 drawable card_cvv
 drawable carnetfrente
 drawable collapse

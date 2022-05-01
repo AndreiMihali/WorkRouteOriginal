@@ -7,12 +7,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
@@ -60,6 +67,7 @@ import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
@@ -69,6 +77,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -100,7 +110,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class CustomerMap extends FragmentActivity implements RoutingListener,com.google.android.gms.location.LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+public class CustomerMap extends FragmentActivity implements RoutingListener, LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_ubi;
     private Animation open, close, rotateForward, rotateBackWard;
@@ -128,7 +138,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
     private TextView txt_destination;
     private MaterialButton btn_cancel;
     private List<Polyline> polylines;
-    private static final int[] COLORS = new int[]{R.color.secondary};
+    private List<Polyline> polylines2;
     private AutocompleteSupportFragment autocompleteFragment;
     private LatLng destinationLatLng;
     private String driverDestination;
@@ -205,6 +215,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         btn_cancel=findViewById(R.id.button_cancel);
         btn_message=findViewById(R.id.button_message_cost);
         polylines=new ArrayList<>();
+        polylines2=new ArrayList<>();
         destinationLatLng=new LatLng(0.0,0.0);
         destination="";
         setBiometricBuilder();
@@ -358,7 +369,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
                             Glide.with(getApplicationContext()).load(map.get("fotoPerfil").toString()).into(customer_photo);
                         }
                     }
-                    txt_startLocation.setText(getGeocoderAddress());
+                    txt_startLocation.setText(getGeocoderAddress(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude())));
                     txt_destination.setText(driverDestination);
                     btn_message.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -381,12 +392,68 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
         });
     }
 
-    private void getRouteToMarker(LatLng pickUpMarker,LatLng startDestination){
+    private void getRouteToMarker(LatLng startDestination,LatLng myPosition){
         Routing routing=new Routing.Builder()
                 .travelMode(AbstractRouting.TravelMode.DRIVING)
                 .withListener(this)
                 .alternativeRoutes(false)
-                .waypoints(startDestination,pickUpMarker)
+                .waypoints(startDestination,myPosition)
+                .key(getString(R.string.google_maps_key))
+                .build();
+        routing.execute();
+        getRouteToDestination(startDestination);
+    }
+
+    private Marker markerFinal;
+    private void getRouteToDestination(LatLng startDestination){
+        Routing routing=new Routing.Builder()
+                .travelMode(AbstractRouting.TravelMode.DRIVING)
+                .withListener(new RoutingListener() {
+                    @Override
+                    public void onRoutingFailure(RouteException e) {
+
+                    }
+
+                    @Override
+                    public void onRoutingStart() {
+
+                    }
+
+                    @Override
+                    public void onRoutingSuccess(ArrayList<Route> route, int lastPositionIndex) {
+                        new Handler().post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(polylines2.size()>0) {
+                                    for (Polyline poly : polylines2) {
+                                        poly.remove();
+                                    }
+                                }
+
+                                polylines2 = new ArrayList<>();
+                                //add route(s) to the map.
+                                for (int i = 0; i <route.size(); i++) {
+                                    //In case of more than 5 alternative routes
+                                    PolylineOptions polyOptions = new PolylineOptions();
+                                    polyOptions.color(getColor(R.color.secondaryLine));
+                                    polyOptions.width(15 + i * 10);
+                                    polyOptions.addAll(route.get(i).getPoints());
+                                    Polyline polyline = mMap.addPolyline(polyOptions);
+                                    polylines2.add(polyline);
+                                }
+                                markerFinal= mMap.addMarker(new MarkerOptions().position(destinationDriverLatLng).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.ic_baseline_location_on_24))))
+                                .flat(true).anchor(0.5f,0.5f));
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onRoutingCancelled() {
+
+                    }
+                })
+                .alternativeRoutes(false)
+                .waypoints(startDestination,destinationDriverLatLng)
                 .key(getString(R.string.google_maps_key))
                 .build();
         routing.execute();
@@ -590,11 +657,11 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
      */
 
 
-    private String getGeocoderAddress(){
+    private String getGeocoderAddress(LatLng location){
         Geocoder geocoder=new Geocoder(CustomerMap.this, Locale.getDefault());
         String address="";
         try{
-            List<Address> listAddress=geocoder.getFromLocation(myLastLocation.getLatitude(),myLastLocation.getLongitude(),1);
+            List<Address> listAddress=geocoder.getFromLocation(location.latitude,location.longitude,1);
             if(listAddress.size()>0){
                 address=listAddress.get(0).getAddressLine(0);
             }
@@ -861,7 +928,8 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
 
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-        if(!marker.getTag().toString().equals(firebaseAuth.getUid())){
+        erasePolylines();
+        if(!marker.getTag().toString().equals(firebaseAuth.getUid())&&(marker.getTag()!=null||marker.getTag().toString().equals(""))){
             String driverId=marker.getTag().toString();
             driverLatLng= marker.getPosition();
             getDriverDestination(driverId);
@@ -881,31 +949,30 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
 
     @Override
     public void onRoutingSuccess(ArrayList<Route> route, int fastestRoute) {
-        if(polylines.size()>0) {
-            for (Polyline poly : polylines) {
-                poly.remove();
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                if(polylines.size()>0) {
+                    for (Polyline poly : polylines) {
+                        poly.remove();
+                    }
+                }
+
+                polylines = new ArrayList<>();
+                //add route(s) to the map.
+                for (int i = 0; i <route.size(); i++) {
+                    //In case of more than 5 alternative routes
+                    PolylineOptions polyOptions = new PolylineOptions();
+                    polyOptions.color(getColor(R.color.secondary));
+                    polyOptions.width(15 + i * 10);
+                    polyOptions.addAll(route.get(i).getPoints());
+                    Polyline polyline = mMap.addPolyline(polyOptions);
+                    polylines.add(polyline);
+                    txt_travelInformation.setText("Your driver will arrive in " + route.get(i).getDurationText());
+                    txt_distance.setText("Your driver is "+route.get(i).getDistanceText()+" away");
+                }
             }
-        }
-
-        polylines = new ArrayList<>();
-        //add route(s) to the map.
-        for (int i = 0; i <route.size(); i++) {
-            //In case of more than 5 alternative routes
-            int colorIndex = i % COLORS.length;
-
-            PolylineOptions polyOptions = new PolylineOptions();
-            polyOptions.color(getResources().getColor(COLORS[colorIndex]));
-            polyOptions.width(25 + i * 20);
-            polyOptions.addAll(route.get(i).getPoints());
-            Polyline polyline = mMap.addPolyline(polyOptions);
-            polylines.add(polyline);
-
-            txt_travelInformation.setText("Your driver will arrive in " + route.get(i).getDurationText());
-            txt_distance.setText("Your driver is "+route.get(i).getDistanceText()+" away");
-
-
-        }
-
+        });
     }
 
     @Override
@@ -914,10 +981,19 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
     }
 
     private void erasePolylines(){
+        if(markerFinal!=null){
+            markerFinal.remove();
+        }
         for(Polyline line:polylines){
             line.remove();
         }
         polylines.clear();
+
+        for(Polyline line:polylines2){
+            line.remove();
+        }
+        polylines2.clear();
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
@@ -925,5 +1001,19 @@ public class CustomerMap extends FragmentActivity implements RoutingListener,com
             LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
         }
     }
+
+    private Bitmap drawableToBitmap (Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
+    }
+
 }
 

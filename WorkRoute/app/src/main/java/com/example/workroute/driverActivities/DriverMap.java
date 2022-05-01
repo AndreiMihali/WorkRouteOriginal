@@ -7,6 +7,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -124,7 +128,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     private TextView txt_startLocation;
     private TextView txt_destination;
     private List<Polyline> polylines;
-    private static final int[] COLORS = new int[]{R.color.secondary};
+    private List<Polyline> polylines2;
     private LocationCallback locationCallback;
     private MaterialButton btnRideStatus;
     private Marker myPositionMarker;
@@ -240,15 +244,85 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         });
     }
 
-    private void getRouteToMarker(LatLng pickUpMarker,LatLng startDestination){
+    private void getRouteToMarker(LatLng customerPosition,LatLng myPosition){
         Routing routing=new Routing.Builder()
                 .travelMode(AbstractRouting.TravelMode.DRIVING)
                 .withListener(this)
                 .alternativeRoutes(false)
-                .waypoints(startDestination,pickUpMarker)
+                .waypoints(myPosition,customerPosition)
                 .key(getString(R.string.google_maps_key))
                 .build();
         routing.execute();
+        getRouteToDestination(customerPosition);
+    }
+
+    private Marker markerFinal;
+    private void getRouteToDestination(LatLng startDestination){
+        Routing routing=new Routing.Builder()
+                .travelMode(AbstractRouting.TravelMode.DRIVING)
+                .withListener(new RoutingListener() {
+                    @Override
+                    public void onRoutingFailure(RouteException e) {
+
+                    }
+
+                    @Override
+                    public void onRoutingStart() {
+
+                    }
+
+                    @Override
+                    public void onRoutingSuccess(ArrayList<Route> route, int lstPositionIndex) {
+                        new Handler().post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(polylines2.size()>0) {
+                                    for (Polyline poly : polylines2) {
+                                        poly.remove();
+                                    }
+                                }
+
+                                polylines2 = new ArrayList<>();
+                                //add route(s) to the map.
+                                for (int i = 0; i <route.size(); i++) {
+                                    //In case of more than 5 alternative routes
+                                    PolylineOptions polyOptions = new PolylineOptions();
+                                    polyOptions.color(getColor(R.color.secondaryLine));
+                                    polyOptions.width(15 + i * 10);
+                                    polyOptions.addAll(route.get(i).getPoints());
+                                    Polyline polyline = mMap.addPolyline(polyOptions);
+                                    polylines2.add(polyline);
+                                }
+                                markerFinal=mMap.addMarker(new MarkerOptions().position(destinationCustomerLatLng).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.ic_baseline_location_on_24))))
+                                        .flat(true).anchor(0.5f,0.5f));
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onRoutingCancelled() {
+
+                    }
+                })
+                .alternativeRoutes(false)
+                .waypoints(startDestination,destinationCustomerLatLng)
+                .key(getString(R.string.google_maps_key))
+                .build();
+        routing.execute();
+    }
+
+
+    private Bitmap drawableToBitmap (Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
     }
 
     private void getCustomerInfo(String customerId){
@@ -369,6 +443,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         btn_message = findViewById(R.id.button_message);
         polylines = new ArrayList<>();
+        polylines2=new ArrayList<>();
         btnRideStatus = findViewById(R.id.btn_rideStatus);
         iniciarMapa();
         initListeners();
@@ -709,7 +784,8 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-        if(!marker.getTag().toString().equals(firebaseAuth.getUid())){
+        erasePolylines();
+        if(!marker.getTag().toString().equals(firebaseAuth.getUid())&&(marker.getTag()!=null||marker.getTag().toString().equals(""))){
             String customerUid=marker.getTag().toString();
             customerLatLng= marker.getPosition();
             getCustomerDestination(customerUid);
@@ -733,28 +809,30 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
     @Override
     public void onRoutingSuccess(ArrayList<Route> route, int fastestRoute) {
-        if (polylines.size() > 0) {
-            for (Polyline poly : polylines) {
-                poly.remove();
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                if(polylines.size()>0) {
+                    for (Polyline poly : polylines) {
+                        poly.remove();
+                    }
+                }
+
+                polylines = new ArrayList<>();
+                //add route(s) to the map.
+                for (int i = 0; i <route.size(); i++) {
+                    //In case of more than 5 alternative routes
+                    PolylineOptions polyOptions = new PolylineOptions();
+                    polyOptions.color(getColor(R.color.secondary));
+                    polyOptions.width(15 + i * 10);
+                    polyOptions.addAll(route.get(i).getPoints());
+                    Polyline polyline = mMap.addPolyline(polyOptions);
+                    polylines.add(polyline);
+                    txt_travelInformation.setText("You will arrive in " + route.get(i).getDurationText());
+                    txt_distance.setText("You are " + route.get(i).getDistanceText() + " away");
+                }
             }
-        }
-
-        polylines = new ArrayList<>();
-        //add route(s) to the map.
-        for (int i = 0; i < route.size(); i++) {
-            //In case of more than 5 alternative routes
-            int colorIndex = i % COLORS.length;
-
-            PolylineOptions polyOptions = new PolylineOptions();
-            polyOptions.color(getResources().getColor(COLORS[colorIndex]));
-            polyOptions.width(25 + i * 20);
-            polyOptions.addAll(route.get(i).getPoints());
-            Polyline polyline = mMap.addPolyline(polyOptions);
-            polylines.add(polyline);
-
-            txt_travelInformation.setText("You will arrive in " + route.get(i).getDurationText());
-            txt_distance.setText("You are " + route.get(i).getDistanceText() + " away");
-        }
+        });
 
     }
 
@@ -764,10 +842,18 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     }
 
     private void erasePolylines() {
+        if(markerFinal!=null){
+            markerFinal.remove();
+        }
         for (Polyline line : polylines) {
             line.remove();
         }
         polylines.clear();
+
+        for(Polyline line:polylines2){
+            line.remove();
+        }
+        polylines2.clear();
 
         if (locationCallback != null) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

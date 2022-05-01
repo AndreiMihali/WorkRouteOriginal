@@ -92,7 +92,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="imagePath" value="C:\Users\andre\Downloads\mark.png" />
+                                                <entry key="imagePath" value="C:\Users\andre\Downloads\bxs-flag-checkered.svg" />
                                                 <entry key="scalingPercent" value="0" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
@@ -119,7 +119,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\andre\Downloads\mark.png" />
+                                                <entry key="imagePath" value="C:\Users\andre\Downloads\golf.png" />
                                                 <entry key="scalingPercent" value="70" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
@@ -155,8 +155,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundColor" value="b1ccff" />
-                                      <entry key="outputName" value="arrow_my_location" />
+                                      <entry key="outputName" value="end_location_icon" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -374,7 +373,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/attach_money/baseline_attach_money_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/location_on/baseline_location_on_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -384,8 +383,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_bx_lock_open" />
+                            <entry key="color" value="340fff" />
+                            <entry key="outputName" value="ic_baseline_location_on_24" />
                             <entry key="sourceFile" value="C:\Users\valin\Downloads\bx-lock-open.svg" />
                           </map>
                         </option>

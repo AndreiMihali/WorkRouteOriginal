@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -16,7 +17,6 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -26,7 +26,7 @@ public final class ActivityMessagesBinding implements ViewBinding {
   private final RelativeLayout rootView;
 
   @NonNull
-  public final FloatingActionButton btnSend;
+  public final ImageButton btnSend;
 
   @NonNull
   public final EditText edMessage;
@@ -52,12 +52,11 @@ public final class ActivityMessagesBinding implements ViewBinding {
   @NonNull
   public final TextView userNameMessages;
 
-  private ActivityMessagesBinding(@NonNull RelativeLayout rootView,
-      @NonNull FloatingActionButton btnSend, @NonNull EditText edMessage,
-      @NonNull LinearLayout lnEscribir, @NonNull ImageView profilePhotoMessages,
-      @NonNull RecyclerView recyclerMensajes, @NonNull TextView status,
-      @NonNull MaterialToolbar toolbarMessages, @NonNull TextView txtIsTyping,
-      @NonNull TextView userNameMessages) {
+  private ActivityMessagesBinding(@NonNull RelativeLayout rootView, @NonNull ImageButton btnSend,
+      @NonNull EditText edMessage, @NonNull LinearLayout lnEscribir,
+      @NonNull ImageView profilePhotoMessages, @NonNull RecyclerView recyclerMensajes,
+      @NonNull TextView status, @NonNull MaterialToolbar toolbarMessages,
+      @NonNull TextView txtIsTyping, @NonNull TextView userNameMessages) {
     this.rootView = rootView;
     this.btnSend = btnSend;
     this.edMessage = edMessage;
@@ -98,7 +97,7 @@ public final class ActivityMessagesBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.btn_send;
-      FloatingActionButton btnSend = ViewBindings.findChildViewById(rootView, id);
+      ImageButton btnSend = ViewBindings.findChildViewById(rootView, id);
       if (btnSend == null) {
         break missingId;
       }
