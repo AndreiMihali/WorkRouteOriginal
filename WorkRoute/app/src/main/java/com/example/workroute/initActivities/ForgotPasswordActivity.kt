@@ -10,6 +10,7 @@ import android.util.Patterns
 import android.view.Gravity
 import android.view.View
 import android.view.View.OnFocusChangeListener
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -18,7 +19,6 @@ import com.example.workroute.R
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -124,6 +124,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
                         duration=Toast.LENGTH_LONG
                         setView(view)
                         view.findViewById<TextView>(R.id.txt_description).text="The email was send successfully"
+                        val img = view.findViewById<ImageView>(R.id.image_confirmation)
+                        img.setImageDrawable(getDrawable(R.drawable.bx_check))
+                        img.imageTintList = ColorStateList.valueOf(Color.WHITE)
                     }.addCallback(@RequiresApi(Build.VERSION_CODES.R)
                     object:Toast.Callback(){
                         override fun onToastHidden() {

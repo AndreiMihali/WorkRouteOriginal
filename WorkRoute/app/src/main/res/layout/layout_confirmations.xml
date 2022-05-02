@@ -26,6 +26,7 @@
             android:layout_height="40dp">
 
             <ImageView
+                android:id="@+id/image_confirmation"
                 android:layout_width="match_parent"
                 android:src="@drawable/bx_check"
                 android:layout_height="match_parent"

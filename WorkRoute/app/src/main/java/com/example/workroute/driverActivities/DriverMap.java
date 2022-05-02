@@ -157,7 +157,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     private List<Marker> markerList=new ArrayList<Marker>();
     private void getAllCustomers(){
         getCustomersAroundStarted=true;
-        DatabaseReference customersReference=FirebaseDatabase.getInstance().getReference().child("Customers");
+        DatabaseReference customersReference=FirebaseDatabase.getInstance().getReference().child("locationUpdates").child("Customers");
         GeoFire geoFire=new GeoFire(customersReference);
         GeoQuery geoQuery=geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(),myLastLocation.getLongitude()),300000);
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
@@ -701,7 +701,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
     private void setMyLocationInDatabase(Location location){
         String userId=firebaseAuth.getUid();
-        DatabaseReference driverReference=FirebaseDatabase.getInstance().getReference("Drivers");
+        DatabaseReference driverReference=FirebaseDatabase.getInstance().getReference("locationUpdates").child("Drivers");
         GeoFire geofireRef=new GeoFire(driverReference);
         geofireRef.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
     }

@@ -265,7 +265,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     private List<Marker> markerList=new ArrayList<Marker>();
     private void getAllDrivers(){
         getDriversStarted=true;
-        DatabaseReference driversReference=FirebaseDatabase.getInstance().getReference().child("Drivers");
+        DatabaseReference driversReference=FirebaseDatabase.getInstance().getReference().child("locationUpdates").child("Drivers");
         GeoFire geoFire=new GeoFire(driversReference);
         GeoQuery geoQuery=geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(),myLastLocation.getLongitude()),300000);
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
@@ -843,7 +843,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
     private void setMyLocationInDatabase(Location location){
         String userId=firebaseAuth.getUid();
-        DatabaseReference customerReference=FirebaseDatabase.getInstance().getReference("Customers");
+        DatabaseReference customerReference=FirebaseDatabase.getInstance().getReference("locationUpdates").child("Customers");
         GeoFire geoFire=new GeoFire(customerReference);
         geoFire.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
     }

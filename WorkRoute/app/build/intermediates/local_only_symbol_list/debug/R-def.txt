@@ -94,6 +94,7 @@ drawable ic_baseline_menu_24
 drawable ic_baseline_menu_open_24
 drawable ic_baseline_mic_none_24
 drawable ic_baseline_navigation_24
+drawable ic_baseline_not_listed_location_24
 drawable ic_baseline_notifications_24
 drawable ic_baseline_notifications_none_24
 drawable ic_baseline_people_24
@@ -215,6 +216,7 @@ id image
 id imageCarnetFrente
 id imageCarnetReverso
 id imageLock
+id image_confirmation
 id img
 id information_user
 id information_user_cost
