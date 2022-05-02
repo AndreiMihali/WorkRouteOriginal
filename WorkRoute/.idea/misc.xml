@@ -130,14 +130,21 @@
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/ic_baseline_camera_alt_24.xml" value="0.1625" />
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1625" />
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/ic_baseline_navigation_24.xml" value="0.1625" />
+        <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.3475" />
+        <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/ic_baseline_person_outline_24.xml" value="0.3475" />
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/drawable/ic_outline_home_24.xml" value="0.1625" />
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_confirm_login.xml" value="0.2657407407407407" />
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_create_account.xml" value="0.30625" />
+        <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_driving_license.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_pay_method.xml" value="0.25555555555555554" />
+        <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_personal_information.xml" value="0.33" />
+        <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_profile.xml" value="0.33" />
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/activity_splash_screen.xml" value="0.2828125" />
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/antiguo_activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/layout_suscripciones.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/message_toast_type_cvv.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/valin/Desktop/WorkRouteOriginal/WorkRoute/app/src/main/res/layout/subscription_item.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
