@@ -47,6 +47,7 @@ drawable bottom_navigation_selector
 drawable bottom_user_selector
 drawable bx_check
 drawable bx_check_double
+drawable bx_hourglass
 drawable bx_id_card
 drawable bx_x
 drawable bxl_google
@@ -75,6 +76,7 @@ drawable ic_baseline_chat_24
 drawable ic_baseline_close_24
 drawable ic_baseline_credit_card_24
 drawable ic_baseline_date_range_24
+drawable ic_baseline_directions_car_24
 drawable ic_baseline_drive_eta_24
 drawable ic_baseline_edit_24
 drawable ic_baseline_edit_calendar_24
@@ -108,6 +110,7 @@ drawable ic_baseline_send_24
 drawable ic_baseline_settings_24
 drawable ic_baseline_share_24
 drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24
+drawable ic_baseline_star_24
 drawable ic_bx_lock_alt
 drawable ic_bx_lock_open
 drawable ic_bxs_left_arrow_circle
@@ -134,6 +137,7 @@ drawable workroute2icono
 font allerta
 font andada
 font bigshot_one
+id activeSubscriptions
 id appNotifications
 id autocompleteColors
 id autocompleteTypes
@@ -151,6 +155,7 @@ id btn_send_email
 id buttonFront
 id buttonMenu
 id buttonMessages
+id buttonOpenCarInformation
 id buttonProfile
 id buttonReverse
 id buttonSave
@@ -177,7 +182,6 @@ id card_driver
 id card_driver_general
 id card_email
 id card_general
-id card_global
 id card_name
 id card_number
 id card_password
@@ -195,7 +199,6 @@ id cord_layout
 id deleteAccount
 id divider
 id divider2
-id driveLicense
 id ed_confirmpass_register
 id ed_email
 id ed_email_recover_password
@@ -216,6 +219,7 @@ id image
 id imageCarnetFrente
 id imageCarnetReverso
 id imageLock
+id imageViewStar
 id image_confirmation
 id img
 id information_user
@@ -252,10 +256,12 @@ id profile_photo_chat_list
 id profile_photo_messages
 id profile_photo_sheet
 id profile_photo_sheet_cost
+id profile_photo_sub
 id progress_circular
 id radioGroupMapViews
 id radioMapView1
 id radioMapView2
+id recyclerSubs
 id recycler_chats
 id recycler_mensajes
 id recycler_notifications
@@ -277,7 +283,6 @@ id textLayoutName
 id textLayoutYear
 id textUnlock_Save
 id textView3
-id textViewActualLVL
 id texto_bienvenida
 id texts
 id title
@@ -288,6 +293,7 @@ id toolbarSettings
 id toolbar_bottom_sheet
 id toolbar_messages
 id toolbar_recovery_password
+id toolbar_subs
 id tvAboutUs
 id tvFront
 id tvNotificationPreferences
@@ -295,7 +301,7 @@ id tvNotificationPreferences2
 id tvNotifications
 id tvReverse
 id tv_userMail
-id tv_variableActualSubscription
+id tv_user_work_direction_sub
 id txt_ciudad
 id txt_cumple
 id txt_description
@@ -311,7 +317,6 @@ id txt_message
 id txt_name
 id txt_name_cost
 id txt_null
-id txt_price
 id txt_startLocation
 id txt_startLocation_cost
 id txt_title
@@ -320,10 +325,12 @@ id txt_total_pay_travel_cost
 id txt_travel_information
 id txt_travel_information_cost
 id txt_user_name_chat_list
+id txt_user_name_sub
 id txt_work_direction
 id user_name
 id user_name_messages
 id wifi_signal
+layout activity_active_subscriptions
 layout activity_add_driver_information
 layout activity_chats
 layout activity_confirm_login
@@ -345,11 +352,11 @@ layout activity_splash_screen
 layout chats_list_item
 layout item_chat_left
 layout item_chat_right
+layout item_people_subscribe
 layout layout_confirmations
 layout list_item
 layout message_toast_type_cvv
 layout network_lose
-layout subscription_item
 layout tarjeta_metodo_pago_layout
 menu menu_toolbar_paymethods
 menu menu_toolbar_profile

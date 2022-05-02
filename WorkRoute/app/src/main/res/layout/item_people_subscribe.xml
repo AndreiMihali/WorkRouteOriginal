@@ -67,12 +67,13 @@
 
         <ImageView
             android:id="@+id/imageViewStar"
-            android:layout_marginEnd="20dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            app:srcCompat="@drawable/ic_baseline_star_24" />
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            app:srcCompat="@drawable/ic_baseline_star_24"
+            app:tint="#FAAB37" />
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -2933,6 +2933,7 @@ drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable bx_check
 drawable bx_check_double
+drawable bx_hourglass
 drawable bx_id_card
 drawable bx_x
 drawable bxl_google
@@ -2992,6 +2993,7 @@ drawable ic_baseline_chat_24
 drawable ic_baseline_close_24
 drawable ic_baseline_credit_card_24
 drawable ic_baseline_date_range_24
+drawable ic_baseline_directions_car_24
 drawable ic_baseline_drive_eta_24
 drawable ic_baseline_edit_24
 drawable ic_baseline_edit_calendar_24
@@ -3025,6 +3027,7 @@ drawable ic_baseline_send_24
 drawable ic_baseline_settings_24
 drawable ic_baseline_share_24
 drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24
+drawable ic_baseline_star_24
 drawable ic_bx_lock_alt
 drawable ic_bx_lock_open
 drawable ic_bxs_left_arrow_circle
@@ -3185,6 +3188,7 @@ id action_mode_bar_stub
 id action_mode_close_button
 id action_text
 id actions
+id activeSubscriptions
 id activity_chooser_view_content
 id add
 id adjust_height
@@ -3245,6 +3249,7 @@ id button
 id buttonFront
 id buttonMenu
 id buttonMessages
+id buttonOpenCarInformation
 id buttonPanel
 id buttonProfile
 id buttonReverse
@@ -3277,7 +3282,6 @@ id card_driver
 id card_driver_general
 id card_email
 id card_general
-id card_global
 id card_name
 id card_number
 id card_password
@@ -3363,7 +3367,6 @@ id dragLeft
 id dragRight
 id dragStart
 id dragUp
-id driveLicense
 id dropdown_menu
 id easeIn
 id easeInOut
@@ -3438,6 +3441,7 @@ id image
 id imageCarnetFrente
 id imageCarnetReverso
 id imageLock
+id imageViewStar
 id image_confirmation
 id image_content_root
 id image_root
@@ -3619,6 +3623,7 @@ id profile_photo_chat_list
 id profile_photo_messages
 id profile_photo_sheet
 id profile_photo_sheet_cost
+id profile_photo_sub
 id progress_circular
 id progress_horizontal
 id radio
@@ -3627,6 +3632,7 @@ id radioMapView1
 id radioMapView2
 id ratio
 id rectangles
+id recyclerSubs
 id recycler_chats
 id recycler_mensajes
 id recycler_notifications
@@ -3745,7 +3751,6 @@ id textStart
 id textTop
 id textUnlock_Save
 id textView3
-id textViewActualLVL
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3769,6 +3774,7 @@ id toolbarSettings
 id toolbar_bottom_sheet
 id toolbar_messages
 id toolbar_recovery_password
+id toolbar_subs
 id top
 id topPanel
 id touch_outside
@@ -3787,7 +3793,7 @@ id tvNotificationPreferences2
 id tvNotifications
 id tvReverse
 id tv_userMail
-id tv_variableActualSubscription
+id tv_user_work_direction_sub
 id txt_ciudad
 id txt_cumple
 id txt_description
@@ -3803,7 +3809,6 @@ id txt_message
 id txt_name
 id txt_name_cost
 id txt_null
-id txt_price
 id txt_startLocation
 id txt_startLocation_cost
 id txt_title
@@ -3812,6 +3817,7 @@ id txt_total_pay_travel_cost
 id txt_travel_information
 id txt_travel_information_cost
 id txt_user_name_chat_list
+id txt_user_name_sub
 id txt_work_direction
 id unchecked
 id uniform
@@ -3925,6 +3931,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_active_subscriptions
 layout activity_add_driver_information
 layout activity_chats
 layout activity_confirm_login
@@ -3970,6 +3977,7 @@ layout fingerprint_dialog_layout
 layout image
 layout item_chat_left
 layout item_chat_right
+layout item_people_subscribe
 layout layout_confirmations
 layout list_item
 layout m3_alert_dialog
@@ -4048,7 +4056,6 @@ layout places_autocomplete_prediction
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
-layout subscription_item
 layout support_simple_spinner_dropdown_item
 layout tarjeta_metodo_pago_layout
 layout test_action_chip

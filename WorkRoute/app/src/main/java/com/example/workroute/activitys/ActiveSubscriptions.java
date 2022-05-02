@@ -1,26 +1,41 @@
 package com.example.workroute.activitys;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.workroute.R;
 import com.example.workroute.adapters.ActiveSubAdapter;
 import com.example.workroute.driverActivities.DrivingLicense;
 import com.example.workroute.model.SubscribedUser;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class ActiveSubscriptions extends AppCompatActivity {
 
     private MaterialToolbar toolbarSubs;
-    private ArrayList <SubscribedUser> elementsRecycler = new ArrayList<>();
-
-
+    private ArrayList <SubscribedUser> data;
+    private ActiveSubAdapter adapter=null;
+    private RecyclerView recyclerView;
+    private ArrayList<User> customersId;
+    private ProgressBar progressBar;
+    private TextView txt_null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,35 +47,77 @@ public class ActiveSubscriptions extends AppCompatActivity {
     }
 
     private void main() {
-         initRecycler();
          controls();
          listeners();
-         getData();
     }
 
 
 
     private void controls() {
         toolbarSubs = findViewById(R.id.toolbar_subs);
-
-
+        recyclerView=findViewById(R.id.recyclerSubs);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        data=new ArrayList<>();
+        txt_null=findViewById(R.id.txt_null);
+        progressBar=findViewById(R.id.progress_circular);
+        customersId=new ArrayList<>();
+        getData();
     }
 
-    private void initRecycler() {
+    private void getData(){
+        progressBar.setVisibility(View.VISIBLE);
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Drivers").child(FirebaseAuth.getInstance().getUid()).child("Requests");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                data.clear();
+                for(DataSnapshot snap:snapshot.getChildren()){
+                    String userId=  snap.child("userId").getValue().toString();
+                    String status=  snap.child("status").getValue().toString();
+                    customersId.add(new User(userId,status));
+                }
+                progressBar.setVisibility(View.GONE);
 
-        ActiveSubAdapter myAdapter = new ActiveSubAdapter(elementsRecycler,this);
-        RecyclerView recycler = findViewById(R.id.recyclerSubs);
-        recycler.setHasFixedSize(true);
-        recycler.setLayoutManager(new LinearLayoutManager(this));
-        recycler.setAdapter(myAdapter);
+                if(customersId.isEmpty()){
+                    txt_null.setVisibility(View.VISIBLE);
+                }else{
+                    txt_null.setVisibility(View.GONE);
+                    getCustomerInformation();
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
-    private void getData() {
-
-        elementsRecycler.add(new SubscribedUser(R.drawable.reversocarnet,"Ruben","Via Lusitana 56",R.drawable.carnetfrente));
-
+    private void getCustomerInformation(){
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                for(User customer:customersId){
+                    FirebaseDatabase.getInstance().getReference().child("Usuarios").child(customer.getUi()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                        @Override
+                        public void onSuccess(DataSnapshot dataSnapshot) {
+                            String photo=dataSnapshot.child("fotoPerfil").getValue().toString();
+                            String name=dataSnapshot.child("nombre").getValue().toString();
+                            String direction=dataSnapshot.child("workAddress").getValue().toString();
+                            data.add(new SubscribedUser(photo,name,direction,customer.getStatus()));
+                            if(adapter!=null){
+                                adapter.notifyDataSetChanged();
+                            }else{
+                                adapter= new ActiveSubAdapter(data,getApplicationContext());
+                                recyclerView.setAdapter(adapter);
+                            }
+                        }
+                    });
+                }
+            }
+        });
     }
+
 
         private void listeners() {
 
@@ -79,5 +136,35 @@ public class ActiveSubscriptions extends AppCompatActivity {
     protected void onDestroy() {
         new MainActivity.Destroy(ActiveSubscriptions.this).start();
         super.onDestroy();
+    }
+
+}
+class User{
+    private String ui;
+    private String status;
+
+    public User(){
+
+    }
+
+    public String getUi() {
+        return ui;
+    }
+
+    public void setUi(String ui) {
+        this.ui = ui;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public User(String ui, String status) {
+        this.ui = ui;
+        this.status = status;
     }
 }

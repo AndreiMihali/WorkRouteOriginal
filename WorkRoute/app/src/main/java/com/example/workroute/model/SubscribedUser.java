@@ -4,24 +4,32 @@ import android.widget.ImageView;
 
 public class SubscribedUser {
 
-    private int profilePhoto;
+    private String profilePhoto;
     private String userName;
     private String userWorkDirection;
+    private String status;
 
 
-    public SubscribedUser(int profilePhoto, String userName, String userWorkDirection, int img) {
+    public SubscribedUser(String profilePhoto, String userName, String userWorkDirection,String status) {
         this.profilePhoto = profilePhoto;
         this.userName = userName;
         this.userWorkDirection = userWorkDirection;
-
+        this.status=status;
     }
 
+    public String getStatus() {
+        return status;
+    }
 
-    public int getProfilePhoto() {
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getProfilePhoto() {
         return profilePhoto;
     }
 
-    public void setProfilePhoto(int profilePhoto) {
+    public void setProfilePhoto(String profilePhoto) {
         this.profilePhoto = profilePhoto;
     }
 

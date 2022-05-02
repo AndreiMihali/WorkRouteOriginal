@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -85,6 +86,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
@@ -125,9 +127,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     private Location myLastLocation;
     private LocationRequest locationRequest;
     private BottomSheetBehavior bottomSheetBehavior;
-    private boolean requestBol=false;
-    private Marker pickupMarker;
-    private String destination;
     private TextView txt_distance;
     private ImageView customer_photo;
     private TextView txt_name;
@@ -139,13 +138,10 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     private MaterialButton btn_cancel;
     private List<Polyline> polylines;
     private List<Polyline> polylines2;
-    private AutocompleteSupportFragment autocompleteFragment;
-    private LatLng destinationLatLng;
+    private String driverId;
     private String driverDestination;
     private LatLng destinationDriverLatLng;
-    private Marker myPositionMarker;
     private LatLng driverLatLng;
-    private boolean canAuthenticate;
     private BiometricPrompt.PromptInfo biometricPrompt;
     private BiometricPrompt biometricPromptExecuter;
 
@@ -216,8 +212,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         btn_message=findViewById(R.id.button_message_cost);
         polylines=new ArrayList<>();
         polylines2=new ArrayList<>();
-        destinationLatLng=new LatLng(0.0,0.0);
-        destination="";
+        driverId="";
         setBiometricBuilder();
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         iniciarMapa();
@@ -232,23 +227,9 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                 @Override
                 public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                     super.onAuthenticationSucceeded(result);
-                    View view=getLayoutInflater().inflate(R.layout.layout_confirmations,null);
-                    Toast toast=new Toast(getApplicationContext());
-                    toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
-                    toast.setDuration(Toast.LENGTH_SHORT);
-                    toast.setView(view);
-                    TextView message=view.findViewById(R.id.txt_description);
-                    message.setText("You just subscribed to "+txt_name.getText().toString());
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                        toast.addCallback(new Toast.Callback() {
-                            @Override
-                            public void onToastHidden() {
-                                super.onToastHidden();
-                                btn_cancel.setText("Subscribed");
-                            }
-                        });
-                    }
-                    toast.show();
+                    progressDialog.setTitle("Sending request");
+                    progressDialog.setMessage("We are sending the request subscription to the driver...");
+                    setPendingSubscription();
                 }
             });
 
@@ -259,6 +240,62 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                     .build();
 
         }
+    }
+
+    private void setPendingSubscription() {
+        progressDialog.show();
+        DatabaseReference referenceDriverRequest=FirebaseDatabase.getInstance().getReference("Drivers").child(driverId).child("Requests").child(firebaseAuth.getUid());
+        DatabaseReference referenceCustomerRequest=FirebaseDatabase.getInstance().getReference("Customers").child(firebaseAuth.getUid()).child("Requests").child(firebaseAuth.getUid());
+        HashMap<String,Object> map=new HashMap<>();
+        map.put("userId",firebaseAuth.getUid());
+        map.put("status","pending");
+        referenceDriverRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    HashMap<String,Object> map=new HashMap<>();
+                    map.put("userId",firebaseAuth.getUid());
+                    map.put("status","pending");
+                    referenceCustomerRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                progressDialog.dismiss();
+                                View view=getLayoutInflater().inflate(R.layout.layout_confirmations,null);
+                                Toast toast=new Toast(getApplicationContext());
+                                toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setView(view);
+                                TextView message=view.findViewById(R.id.txt_description);
+                                message.setText("We sent the request to the driver "+txt_name.getText().toString());
+                                ImageView img=view.findViewById(R.id.image_confirmation);
+                                img.setImageTintList(ColorStateList.valueOf(Color.WHITE));
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                                    toast.addCallback(new Toast.Callback() {
+                                        @Override
+                                        public void onToastHidden() {
+                                            super.onToastHidden();
+                                            btn_cancel.setText("Pending");
+                                        }
+                                    });
+                                }
+                                toast.show();
+                            }else{
+                                progressDialog.dismiss();
+                            }
+                        }
+                    });
+                }else{
+                    progressDialog.dismiss();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
+                Log.e("ERROR EN EL ENVIO DE PETICION",e.toString());
+            }
+        });
     }
 
     private boolean getDriversStarted=false;
@@ -930,7 +967,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     public boolean onMarkerClick(@NonNull Marker marker) {
         erasePolylines();
         if(!marker.getTag().toString().equals(firebaseAuth.getUid())&&(marker.getTag()!=null||marker.getTag().toString().equals(""))){
-            String driverId=marker.getTag().toString();
+            driverId=marker.getTag().toString();
             driverLatLng= marker.getPosition();
             getDriverDestination(driverId);
         }
