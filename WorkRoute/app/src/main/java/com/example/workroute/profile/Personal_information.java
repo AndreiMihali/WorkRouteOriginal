@@ -73,7 +73,7 @@ public class Personal_information extends AppCompatActivity {
     private MaterialToolbar toolbar;
     private RelativeLayout relativeChangeColors;
     private ImageView img_lockChange,imageProfile,img_editProfilePhoto;
-    private TextView tv_unlock_save,tv_user_mail,tv_actualSubscription;
+    private TextView tv_unlock_save,tv_user_mail;
     private boolean sw = false;
     private TextInputEditText ed_name,ed_password;
     private TextInputLayout layout_ed_name,layout_ed_pass;
@@ -117,8 +117,6 @@ public class Personal_information extends AppCompatActivity {
             Glide.with(this).load(Companion.user.getFotoPerfil()).into(imageProfile);
         }
         ed_name.setText(Companion.user.getNombre());
-
-        tv_actualSubscription.setText(String.valueOf(Companion.user.getNivelSuscripcion()));
 
         /**
          * HAY QUE AVISAR QUE LA CONTRA DE GOOGLE NO PUEDE CAMBIARSE
@@ -253,7 +251,6 @@ public class Personal_information extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         imageProfile=findViewById(R.id.profileImage);
         img_editProfilePhoto = findViewById(R.id.editProfilePhoto);
-        tv_actualSubscription=findViewById(R.id.tv_variableActualSubscription);
         sp=getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE);
         progressDialog=new ProgressDialog(this,R.style.ProgressDialog);
         layout_ed_name=findViewById(R.id.layout_name);

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_general"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="15dp"
+    android:layout_marginVertical="10dp"
+    android:background="@color/back_login"
+    android:theme="@style/Theme.MaterialComponents.DayNight"
+    app:cardCornerRadius="10dp"
+    app:cardBackgroundColor="#7EADC3"
+    app:cardElevation="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_photo"
+            android:layout_width="70dp"
+            app:cardCornerRadius="10dp"
+            android:layout_height="70dp">
+
+            <ImageView
+                android:id="@+id/profile_photo_sub"
+                android:layout_width="match_parent"
+                android:src="@drawable/steven_binotto_9vduc_sgrsi_unsplash"
+                android:scaleType="centerCrop"
+                android:layout_height="match_parent"/>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <LinearLayout
+            android:layout_toEndOf="@id/card_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_user_name_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="USER_NAME"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/tv_user_work_direction_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="WORK_USER_DIRECTION"
+                android:maxWidth="170dp"
+                android:maxLines="1"
+                android:textColor="#F4F0F0"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageViewStar"
+            android:layout_marginEnd="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/ic_baseline_star_24" />
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

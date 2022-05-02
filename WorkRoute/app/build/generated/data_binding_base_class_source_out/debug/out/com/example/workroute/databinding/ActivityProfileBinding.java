@@ -23,13 +23,13 @@ public final class ActivityProfileBinding implements ViewBinding {
   private final RelativeLayout rootView;
 
   @NonNull
+  public final LinearLayout activeSubscriptions;
+
+  @NonNull
   public final MaterialCardView cardViewImage;
 
   @NonNull
   public final LinearLayout deleteAccount;
-
-  @NonNull
-  public final LinearLayout driveLicense;
 
   @NonNull
   public final LinearLayout logout;
@@ -50,15 +50,15 @@ public final class ActivityProfileBinding implements ViewBinding {
   public final MaterialToolbar toolbar;
 
   private ActivityProfileBinding(@NonNull RelativeLayout rootView,
-      @NonNull MaterialCardView cardViewImage, @NonNull LinearLayout deleteAccount,
-      @NonNull LinearLayout driveLicense, @NonNull LinearLayout logout,
+      @NonNull LinearLayout activeSubscriptions, @NonNull MaterialCardView cardViewImage,
+      @NonNull LinearLayout deleteAccount, @NonNull LinearLayout logout,
       @NonNull LinearLayout payMethod, @NonNull LinearLayout personalInformation,
       @NonNull ImageView profileImage, @NonNull LinearLayout settings,
       @NonNull MaterialToolbar toolbar) {
     this.rootView = rootView;
+    this.activeSubscriptions = activeSubscriptions;
     this.cardViewImage = cardViewImage;
     this.deleteAccount = deleteAccount;
-    this.driveLicense = driveLicense;
     this.logout = logout;
     this.payMethod = payMethod;
     this.personalInformation = personalInformation;
@@ -94,6 +94,12 @@ public final class ActivityProfileBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.activeSubscriptions;
+      LinearLayout activeSubscriptions = ViewBindings.findChildViewById(rootView, id);
+      if (activeSubscriptions == null) {
+        break missingId;
+      }
+
       id = R.id.cardViewImage;
       MaterialCardView cardViewImage = ViewBindings.findChildViewById(rootView, id);
       if (cardViewImage == null) {
@@ -103,12 +109,6 @@ public final class ActivityProfileBinding implements ViewBinding {
       id = R.id.deleteAccount;
       LinearLayout deleteAccount = ViewBindings.findChildViewById(rootView, id);
       if (deleteAccount == null) {
-        break missingId;
-      }
-
-      id = R.id.driveLicense;
-      LinearLayout driveLicense = ViewBindings.findChildViewById(rootView, id);
-      if (driveLicense == null) {
         break missingId;
       }
 
@@ -148,8 +148,9 @@ public final class ActivityProfileBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityProfileBinding((RelativeLayout) rootView, cardViewImage, deleteAccount,
-          driveLicense, logout, payMethod, personalInformation, profileImage, settings, toolbar);
+      return new ActivityProfileBinding((RelativeLayout) rootView, activeSubscriptions,
+          cardViewImage, deleteAccount, logout, payMethod, personalInformation, profileImage,
+          settings, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

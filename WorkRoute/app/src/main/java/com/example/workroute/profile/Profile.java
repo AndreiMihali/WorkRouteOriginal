@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.workroute.R;
+import com.example.workroute.activitys.ActiveSubscriptions;
 import com.example.workroute.driverActivities.DrivingLicense;
 import com.example.workroute.activitys.GeneralSettingsActivity;
 import com.example.workroute.initActivities.LoginActivity;
@@ -24,7 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Profile extends AppCompatActivity {
     private MaterialToolbar toolbar;
     private FirebaseAuth firebaseAuth;
-    private LinearLayout ln_profile,ln_pay,ln_license,ln_settings,ln_delete,ln_logout;
+    private LinearLayout ln_profile,ln_pay,ln_activeSubs,ln_settings,ln_delete,ln_logout;
     private TextView txt_username;
     private ImageView profileImage;
 
@@ -70,7 +71,7 @@ public class Profile extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         ln_profile=findViewById(R.id.personal_information);
         ln_pay=findViewById(R.id.payMethod);
-        ln_license=findViewById(R.id.driveLicense);
+        ln_activeSubs=findViewById(R.id.activeSubscriptions);
         ln_settings=findViewById(R.id.settings);
         ln_delete=findViewById(R.id.deleteAccount);
         ln_logout=findViewById(R.id.logout);
@@ -114,10 +115,10 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        ln_license.setOnClickListener(new View.OnClickListener() {
+        ln_activeSubs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, DrivingLicense.class));
+                startActivity(new Intent(Profile.this, ActiveSubscriptions.class));
             }
         });
 

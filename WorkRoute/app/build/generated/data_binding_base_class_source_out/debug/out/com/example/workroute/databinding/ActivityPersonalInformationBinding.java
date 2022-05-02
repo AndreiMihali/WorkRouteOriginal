@@ -4,6 +4,7 @@ package com.example.workroute.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -25,6 +26,9 @@ import java.lang.String;
 public final class ActivityPersonalInformationBinding implements ViewBinding {
   @NonNull
   private final RelativeLayout rootView;
+
+  @NonNull
+  public final ImageButton buttonOpenCarInformation;
 
   @NonNull
   public final MaterialCardView cardName;
@@ -78,30 +82,25 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
   public final TextView textView3;
 
   @NonNull
-  public final TextView textViewActualLVL;
-
-  @NonNull
   public final MaterialToolbar toolbarInformation;
 
   @NonNull
   public final TextView tvUserMail;
 
-  @NonNull
-  public final TextView tvVariableActualSubscription;
-
   private ActivityPersonalInformationBinding(@NonNull RelativeLayout rootView,
-      @NonNull MaterialCardView cardName, @NonNull MaterialCardView cardPassword,
-      @NonNull MaterialCardView cardViewImage, @NonNull CoordinatorLayout cordLayout,
-      @NonNull TextInputEditText edPass, @NonNull TextInputEditText edUsername,
-      @NonNull ImageView editProfilePhoto, @NonNull ImageView imageLock,
-      @NonNull TextInputLayout layoutName, @NonNull TextInputLayout layoutPass,
-      @NonNull LinearLayout layoutSubscriptionLevel, @NonNull ImageView profileImage,
-      @NonNull LinearLayout relLayout, @NonNull RelativeLayout relLayoutGeneral,
+      @NonNull ImageButton buttonOpenCarInformation, @NonNull MaterialCardView cardName,
+      @NonNull MaterialCardView cardPassword, @NonNull MaterialCardView cardViewImage,
+      @NonNull CoordinatorLayout cordLayout, @NonNull TextInputEditText edPass,
+      @NonNull TextInputEditText edUsername, @NonNull ImageView editProfilePhoto,
+      @NonNull ImageView imageLock, @NonNull TextInputLayout layoutName,
+      @NonNull TextInputLayout layoutPass, @NonNull LinearLayout layoutSubscriptionLevel,
+      @NonNull ImageView profileImage, @NonNull LinearLayout relLayout,
+      @NonNull RelativeLayout relLayoutGeneral,
       @NonNull RelativeLayout relativeChangingColorOnClick, @NonNull TextView textUnlockSave,
-      @NonNull TextView textView3, @NonNull TextView textViewActualLVL,
-      @NonNull MaterialToolbar toolbarInformation, @NonNull TextView tvUserMail,
-      @NonNull TextView tvVariableActualSubscription) {
+      @NonNull TextView textView3, @NonNull MaterialToolbar toolbarInformation,
+      @NonNull TextView tvUserMail) {
     this.rootView = rootView;
+    this.buttonOpenCarInformation = buttonOpenCarInformation;
     this.cardName = cardName;
     this.cardPassword = cardPassword;
     this.cardViewImage = cardViewImage;
@@ -119,10 +118,8 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
     this.relativeChangingColorOnClick = relativeChangingColorOnClick;
     this.textUnlockSave = textUnlockSave;
     this.textView3 = textView3;
-    this.textViewActualLVL = textViewActualLVL;
     this.toolbarInformation = toolbarInformation;
     this.tvUserMail = tvUserMail;
-    this.tvVariableActualSubscription = tvVariableActualSubscription;
   }
 
   @Override
@@ -152,6 +149,12 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.buttonOpenCarInformation;
+      ImageButton buttonOpenCarInformation = ViewBindings.findChildViewById(rootView, id);
+      if (buttonOpenCarInformation == null) {
+        break missingId;
+      }
+
       id = R.id.card_name;
       MaterialCardView cardName = ViewBindings.findChildViewById(rootView, id);
       if (cardName == null) {
@@ -250,12 +253,6 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.textViewActualLVL;
-      TextView textViewActualLVL = ViewBindings.findChildViewById(rootView, id);
-      if (textViewActualLVL == null) {
-        break missingId;
-      }
-
       id = R.id.toolbarInformation;
       MaterialToolbar toolbarInformation = ViewBindings.findChildViewById(rootView, id);
       if (toolbarInformation == null) {
@@ -268,17 +265,11 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.tv_variableActualSubscription;
-      TextView tvVariableActualSubscription = ViewBindings.findChildViewById(rootView, id);
-      if (tvVariableActualSubscription == null) {
-        break missingId;
-      }
-
-      return new ActivityPersonalInformationBinding((RelativeLayout) rootView, cardName,
-          cardPassword, cardViewImage, cordLayout, edPass, edUsername, editProfilePhoto, imageLock,
-          layoutName, layoutPass, layoutSubscriptionLevel, profileImage, relLayout,
-          relLayoutGeneral, relativeChangingColorOnClick, textUnlockSave, textView3,
-          textViewActualLVL, toolbarInformation, tvUserMail, tvVariableActualSubscription);
+      return new ActivityPersonalInformationBinding((RelativeLayout) rootView,
+          buttonOpenCarInformation, cardName, cardPassword, cardViewImage, cordLayout, edPass,
+          edUsername, editProfilePhoto, imageLock, layoutName, layoutPass, layoutSubscriptionLevel,
+          profileImage, relLayout, relLayoutGeneral, relativeChangingColorOnClick, textUnlockSave,
+          textView3, toolbarInformation, tvUserMail);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

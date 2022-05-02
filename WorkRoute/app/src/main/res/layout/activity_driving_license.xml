@@ -13,13 +13,12 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Driving License"
-        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-        app:navigationIconTint="@color/secondary"
-        app:titleTextColor="@color/secondary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        />
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:navigationIconTint="@color/secondary"
+        app:title="Driving License"
+        app:titleTextColor="@color/secondary" />
 
     <View
         android:id="@+id/divider"

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.workroute" >
+    package="com.example.workroute">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -20,14 +20,17 @@
         android:roundIcon="@mipmap/work_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkRoute"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activitys.ActiveSubscriptions"
+            android:exported="false" />
         <activity
             android:name=".initActivities.ForgotPasswordActivity"
             android:exported="false" />
         <activity
             android:name=".profile.Personal_information"
-            android:theme="@style/CustomTheme"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/CustomTheme" />
         <activity
             android:name=".driverActivities.AddDriverInformation"
             android:exported="false" />
@@ -83,7 +86,7 @@
             android:exported="false" />
         <activity
             android:name=".initActivities.SplashScreen"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -93,7 +96,7 @@
 
         <service
             android:name=".service.MyFirebaseInstanceIDService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
