@@ -2991,6 +2991,7 @@ int drawable ic_baseline_chat_24 0x7f0800af
 int drawable ic_baseline_close_24 0x7f0800b0
 int drawable ic_baseline_credit_card_24 0x7f0800b1
 int drawable ic_baseline_date_range_24 0x7f0800b2
+int drawable ic_baseline_directions_car_24 0x7f08012a
 int drawable ic_baseline_drive_eta_24 0x7f0800b3
 int drawable ic_baseline_edit_24 0x7f0800b4
 int drawable ic_baseline_edit_calendar_24 0x7f0800b5
@@ -3183,6 +3184,7 @@ int id action_mode_bar_stub 0x7f0a0042
 int id action_mode_close_button 0x7f0a0043
 int id action_text 0x7f0a0044
 int id actions 0x7f0a0045
+int id activeSubscriptions 0x7f0a02d4
 int id activity_chooser_view_content 0x7f0a0046
 int id add 0x7f0a0047
 int id adjust_height 0x7f0a0048
@@ -3243,6 +3245,7 @@ int id button 0x7f0a007e
 int id buttonFront 0x7f0a007f
 int id buttonMenu 0x7f0a0080
 int id buttonMessages 0x7f0a0081
+int id buttonOpenCarInformation 0x7f0a02d3
 int id buttonPanel 0x7f0a0082
 int id buttonProfile 0x7f0a0083
 int id buttonReverse 0x7f0a0084
@@ -3361,7 +3364,6 @@ int id dragLeft 0x7f0a00f4
 int id dragRight 0x7f0a00f5
 int id dragStart 0x7f0a00f6
 int id dragUp 0x7f0a00f7
-int id driveLicense 0x7f0a00f8
 int id dropdown_menu 0x7f0a00f9
 int id easeIn 0x7f0a00fa
 int id easeInOut 0x7f0a00fb
@@ -3742,7 +3744,6 @@ int id textStart 0x7f0a0271
 int id textTop 0x7f0a0272
 int id textUnlock_Save 0x7f0a0273
 int id textView3 0x7f0a0274
-int id textViewActualLVL 0x7f0a0275
 int id text_input_end_icon 0x7f0a0276
 int id text_input_error_icon 0x7f0a0277
 int id text_input_start_icon 0x7f0a0278
@@ -3766,6 +3767,7 @@ int id toolbarSettings 0x7f0a0289
 int id toolbar_bottom_sheet 0x7f0a028a
 int id toolbar_messages 0x7f0a028b
 int id toolbar_recovery_password 0x7f0a028c
+int id toolbar_subs 0x7f0a02d5
 int id top 0x7f0a028d
 int id topPanel 0x7f0a028e
 int id touch_outside 0x7f0a028f
@@ -3784,7 +3786,6 @@ int id tvNotificationPreferences2 0x7f0a029b
 int id tvNotifications 0x7f0a029c
 int id tvReverse 0x7f0a029d
 int id tv_userMail 0x7f0a029e
-int id tv_variableActualSubscription 0x7f0a029f
 int id txt_ciudad 0x7f0a02a0
 int id txt_cumple 0x7f0a02a1
 int id txt_description 0x7f0a02a2
@@ -3922,6 +3923,7 @@ int layout abc_search_dropdown_item_icons_2line 0x7f0d0018
 int layout abc_search_view 0x7f0d0019
 int layout abc_select_dialog_material 0x7f0d001a
 int layout abc_tooltip 0x7f0d001b
+int layout activity_active_subscriptions 0x7f0d00a9
 int layout activity_add_driver_information 0x7f0d001c
 int layout activity_chats 0x7f0d001d
 int layout activity_confirm_login 0x7f0d001e

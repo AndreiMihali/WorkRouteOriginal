@@ -2992,6 +2992,7 @@ drawable ic_baseline_chat_24
 drawable ic_baseline_close_24
 drawable ic_baseline_credit_card_24
 drawable ic_baseline_date_range_24
+drawable ic_baseline_directions_car_24
 drawable ic_baseline_drive_eta_24
 drawable ic_baseline_edit_24
 drawable ic_baseline_edit_calendar_24
@@ -3184,6 +3185,7 @@ id action_mode_bar_stub
 id action_mode_close_button
 id action_text
 id actions
+id activeSubscriptions
 id activity_chooser_view_content
 id add
 id adjust_height
@@ -3244,6 +3246,7 @@ id button
 id buttonFront
 id buttonMenu
 id buttonMessages
+id buttonOpenCarInformation
 id buttonPanel
 id buttonProfile
 id buttonReverse
@@ -3362,7 +3365,6 @@ id dragLeft
 id dragRight
 id dragStart
 id dragUp
-id driveLicense
 id dropdown_menu
 id easeIn
 id easeInOut
@@ -3743,7 +3745,6 @@ id textStart
 id textTop
 id textUnlock_Save
 id textView3
-id textViewActualLVL
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3767,6 +3768,7 @@ id toolbarSettings
 id toolbar_bottom_sheet
 id toolbar_messages
 id toolbar_recovery_password
+id toolbar_subs
 id top
 id topPanel
 id touch_outside
@@ -3785,7 +3787,6 @@ id tvNotificationPreferences2
 id tvNotifications
 id tvReverse
 id tv_userMail
-id tv_variableActualSubscription
 id txt_ciudad
 id txt_cumple
 id txt_description
@@ -3923,6 +3924,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_active_subscriptions
 layout activity_add_driver_information
 layout activity_chats
 layout activity_confirm_login

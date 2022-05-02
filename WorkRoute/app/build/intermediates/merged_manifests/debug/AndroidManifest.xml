@@ -51,6 +51,9 @@
         android:theme="@style/Theme.WorkRoute"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name="com.example.workroute.activitys.ActiveSubscriptions"
+            android:exported="false" />
+        <activity
             android:name="com.example.workroute.initActivities.ForgotPasswordActivity"
             android:exported="false" />
         <activity

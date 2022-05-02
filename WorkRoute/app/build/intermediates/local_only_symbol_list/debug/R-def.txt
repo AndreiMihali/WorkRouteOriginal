@@ -75,6 +75,7 @@ drawable ic_baseline_chat_24
 drawable ic_baseline_close_24
 drawable ic_baseline_credit_card_24
 drawable ic_baseline_date_range_24
+drawable ic_baseline_directions_car_24
 drawable ic_baseline_drive_eta_24
 drawable ic_baseline_edit_24
 drawable ic_baseline_edit_calendar_24
@@ -133,6 +134,7 @@ drawable workroute2icono
 font allerta
 font andada
 font bigshot_one
+id activeSubscriptions
 id appNotifications
 id autocompleteColors
 id autocompleteTypes
@@ -150,6 +152,7 @@ id btn_send_email
 id buttonFront
 id buttonMenu
 id buttonMessages
+id buttonOpenCarInformation
 id buttonProfile
 id buttonReverse
 id buttonSave
@@ -194,7 +197,6 @@ id cord_layout
 id deleteAccount
 id divider
 id divider2
-id driveLicense
 id ed_confirmpass_register
 id ed_email
 id ed_email_recover_password
@@ -275,7 +277,6 @@ id textLayoutName
 id textLayoutYear
 id textUnlock_Save
 id textView3
-id textViewActualLVL
 id texto_bienvenida
 id texts
 id title
@@ -286,6 +287,7 @@ id toolbarSettings
 id toolbar_bottom_sheet
 id toolbar_messages
 id toolbar_recovery_password
+id toolbar_subs
 id tvAboutUs
 id tvFront
 id tvNotificationPreferences
@@ -293,7 +295,6 @@ id tvNotificationPreferences2
 id tvNotifications
 id tvReverse
 id tv_userMail
-id tv_variableActualSubscription
 id txt_ciudad
 id txt_cumple
 id txt_description
@@ -322,6 +323,7 @@ id txt_work_direction
 id user_name
 id user_name_messages
 id wifi_signal
+layout activity_active_subscriptions
 layout activity_add_driver_information
 layout activity_chats
 layout activity_confirm_login

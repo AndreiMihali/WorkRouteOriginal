@@ -32,16 +32,20 @@
         "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\list_item.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_splash_screen.xml",
-        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_splash_screen.xml"
-    },
-    {
         "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\subscription_item.xml",
         "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\subscription_item.xml"
     },
     {
+        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_splash_screen.xml",
+        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_splash_screen.xml"
+    },
+    {
         "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_driver_map.xml",
         "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_driver_map.xml"
+    },
+    {
+        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_active_subscriptions.xml",
+        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_active_subscriptions.xml"
     },
     {
         "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\network_lose.xml",
