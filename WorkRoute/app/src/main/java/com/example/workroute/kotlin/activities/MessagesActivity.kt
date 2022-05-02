@@ -187,6 +187,7 @@ class MessagesActivity : AppCompatActivity(){
             chatRef.child("message").setValue(message)
             chatRef.child("time").setValue(time.toString())
             chatRef.child("typing").setValue("false")
+            chatRef.child("isInChat").setValue("false")
 
             val chatRef2=FirebaseDatabase.getInstance().getReference("ChatList").child(receiverId).child(firebaseUser.uid)
             chatRef2.child("chat_id").setValue(firebaseUser.uid)
@@ -236,7 +237,7 @@ class MessagesActivity : AppCompatActivity(){
 
     private fun sendNotification(token: String, message: String, title: String, user: String) {
 
-        if(isInTeChat=="false"){
+        if(isInTeChat=="false"||isInTeChat==""){
             Runnable {
                 FirebaseDatabase.getInstance().getReference("ChatList").child(receiverId).child(firebaseUser.uid)
                     .child("read").setValue("false")
@@ -248,6 +249,7 @@ class MessagesActivity : AppCompatActivity(){
 
                 notification.put("titulo",title)
                 notification.put("detalle","$message")
+                notification.put("activityOpen","MessagesActivity");
 
                 json.put("data",notification)
 
@@ -286,7 +288,7 @@ class MessagesActivity : AppCompatActivity(){
     private fun setData() {
         receiverId.let {
             txtUserName.text=nameUserString
-            if(bundlePhoto.isNullOrEmpty()){
+            if(bundlePhoto==""){
                 profilePhoto.setImageDrawable(getDrawable(R.drawable.default_user_login))
             }else{
                 Glide.with(applicationContext).load(bundlePhoto).into(profilePhoto)

@@ -19,6 +19,7 @@ import com.example.workroute.R;
 import com.example.workroute.activitys.MainActivity;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
+import com.google.android.material.chip.Chip;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -59,12 +60,13 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
         if(message.getData().size()>0){
             String titulo=message.getData().get("titulo");
             String detalle=message.getData().get("detalle");
-            mayorQueOreo(titulo,detalle);
+            String activityOpen=message.getData().get("activityOpen");
+            mayorQueOreo(titulo,detalle,activityOpen);
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void mayorQueOreo(String titulo, String detalle){
+    private void mayorQueOreo(String titulo, String detalle,String activityOpen){
         String id="mensaje";
         NotificationManager nm=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder=new NotificationCompat.Builder(this,id);
@@ -74,13 +76,17 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
         assert nm!=null;
         nm.createNotificationChannel(channel);
 
-        builder.setAutoCancel(true)
-                .setWhen(System.currentTimeMillis())
-                .setContentTitle(titulo)
-                .setSmallIcon(R.mipmap.work_icon)
-                .setContentText(detalle)
-                .setContentIntent(clickNotify())
-                .setContentInfo("Nuevo");
+        try {
+            builder.setAutoCancel(true)
+                    .setWhen(System.currentTimeMillis())
+                    .setContentTitle(titulo)
+                    .setSmallIcon(R.mipmap.work_icon)
+                    .setContentText(detalle)
+                    .setContentIntent(clickNotify())
+                    .setContentInfo("Nuevo");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         Random random=new Random();
         int idNotify=random.nextInt(80000);
 
@@ -88,7 +94,7 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
         nm.notify(idNotify,builder.build());
     }
 
-    public PendingIntent clickNotify(){
+    public PendingIntent clickNotify() throws ClassNotFoundException {
         Intent nf=new Intent(getApplicationContext(), ChatsActivity.class);
         nf.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         return PendingIntent.getActivity(this,0,nf,0);

@@ -48,6 +48,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
@@ -87,6 +94,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
@@ -102,10 +110,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.protobuf.Method;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -276,6 +290,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                                         public void onToastHidden() {
                                             super.onToastHidden();
                                             btn_cancel.setText("Pending");
+                                            getSenderName(firebaseAuth.getUid(),driverId);
                                         }
                                     });
                                 }
@@ -294,6 +309,100 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
             public void onFailure(@NonNull Exception e) {
                 progressDialog.dismiss();
                 Log.e("ERROR EN EL ENVIO DE PETICION",e.toString());
+            }
+        });
+    }
+
+
+    private void getSenderName(String sender,String receiverId){
+        FirebaseFirestore.getInstance().collection("Usuarios").document(sender).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String name=documentSnapshot.get("nombre").toString();
+                getToken(name,receiverId,"Yo have a new request from "+name,"NEW REQUEST");
+            }
+        });
+    }
+
+    private void getToken(String sender,String receiver,String message, String title){
+        FirebaseDatabase.getInstance().getReference().child("Token").child(receiver).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String tokenUser=snapshot.getValue().toString();
+                sendNotification(tokenUser,message,title,sender);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void sendNotification(String token,String receiver,String message, String title) {
+
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                RequestQueue myRequest=Volley.newRequestQueue(getApplicationContext());
+                JSONObject json= new JSONObject();
+                try {
+                    json.put("to",token);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JSONObject notification=new JSONObject();
+
+                try {
+                    notification.put("titulo",title);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    notification.put("detalle",message);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    notification.put("activityOpen","ActiveSubscriptions");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                try {
+                    json.put("data",notification);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                String url="https://fcm.googleapis.com/fcm/send";
+
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                        (Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
+
+                            @Override
+                            public void onResponse(JSONObject response) {
+                            }
+                        }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                               error.printStackTrace();
+                            }
+                        }){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String,String> map=new HashMap<>();
+                        map.put("content-type","application/json");
+                        map.put("authorization","key=AAAAt-8FdV8:APA91bEmHhrJazEV2AB7LWBxhcRib1wMtuAGsobZydq6OUOCXYmaKpkuhnyHFFLdb3Eg5h2VqE134NChAJGNTWracREdIiLDIxPpHvnNAxxbw-MUw6_C-WHRspmbu1GEeUp5p418RPyp");
+                        return map;
+                    }
+                };
+
+                myRequest.add(jsonObjectRequest);
             }
         });
     }
