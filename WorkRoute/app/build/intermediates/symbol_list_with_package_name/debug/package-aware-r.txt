@@ -3025,6 +3025,7 @@ drawable ic_baseline_send_24
 drawable ic_baseline_settings_24
 drawable ic_baseline_share_24
 drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24
+drawable ic_baseline_star_24
 drawable ic_bx_lock_alt
 drawable ic_bx_lock_open
 drawable ic_bxs_left_arrow_circle
@@ -3439,6 +3440,7 @@ id image
 id imageCarnetFrente
 id imageCarnetReverso
 id imageLock
+id imageViewStar
 id image_content_root
 id image_root
 id image_view
@@ -3619,6 +3621,7 @@ id profile_photo_chat_list
 id profile_photo_messages
 id profile_photo_sheet
 id profile_photo_sheet_cost
+id profile_photo_sub
 id progress_circular
 id progress_horizontal
 id radio
@@ -3627,6 +3630,7 @@ id radioMapView1
 id radioMapView2
 id ratio
 id rectangles
+id recyclerSubs
 id recycler_chats
 id recycler_mensajes
 id recycler_notifications
@@ -3787,6 +3791,7 @@ id tvNotificationPreferences2
 id tvNotifications
 id tvReverse
 id tv_userMail
+id tv_user_work_direction_sub
 id txt_ciudad
 id txt_cumple
 id txt_description
@@ -3811,6 +3816,7 @@ id txt_total_pay_travel_cost
 id txt_travel_information
 id txt_travel_information_cost
 id txt_user_name_chat_list
+id txt_user_name_sub
 id txt_work_direction
 id unchecked
 id uniform
@@ -3970,6 +3976,7 @@ layout fingerprint_dialog_layout
 layout image
 layout item_chat_left
 layout item_chat_right
+layout item_people_subscribe
 layout layout_confirmations
 layout list_item
 layout m3_alert_dialog

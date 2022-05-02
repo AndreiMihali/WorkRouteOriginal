@@ -18,5 +18,11 @@
         app:title="Active Subscriptions"
         app:titleTextColor="@color/secondary" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerSubs"
+        android:layout_below="@id/toolbar_subs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 
 </RelativeLayout>

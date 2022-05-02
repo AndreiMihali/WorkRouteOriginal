@@ -3024,6 +3024,7 @@ int drawable ic_baseline_send_24 0x7f0800cf
 int drawable ic_baseline_settings_24 0x7f0800d0
 int drawable ic_baseline_share_24 0x7f0800d1
 int drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24 0x7f0800d2
+int drawable ic_baseline_star_24 0x7f08012b
 int drawable ic_bx_lock_alt 0x7f0800d3
 int drawable ic_bx_lock_open 0x7f0800d4
 int drawable ic_bxs_left_arrow_circle 0x7f0800d5
@@ -3438,6 +3439,7 @@ int id image 0x7f0a013f
 int id imageCarnetFrente 0x7f0a0140
 int id imageCarnetReverso 0x7f0a0141
 int id imageLock 0x7f0a0142
+int id imageViewStar 0x7f0a02d6
 int id image_content_root 0x7f0a0143
 int id image_root 0x7f0a0144
 int id image_view 0x7f0a0145
@@ -3618,6 +3620,7 @@ int id profile_photo_chat_list 0x7f0a01f3
 int id profile_photo_messages 0x7f0a01f4
 int id profile_photo_sheet 0x7f0a01f5
 int id profile_photo_sheet_cost 0x7f0a01f6
+int id profile_photo_sub 0x7f0a02d7
 int id progress_circular 0x7f0a01f7
 int id progress_horizontal 0x7f0a01f8
 int id radio 0x7f0a01f9
@@ -3626,6 +3629,7 @@ int id radioMapView1 0x7f0a01fb
 int id radioMapView2 0x7f0a01fc
 int id ratio 0x7f0a01fd
 int id rectangles 0x7f0a01fe
+int id recyclerSubs 0x7f0a02d8
 int id recycler_chats 0x7f0a01ff
 int id recycler_mensajes 0x7f0a0200
 int id recycler_notifications 0x7f0a0201
@@ -3786,6 +3790,7 @@ int id tvNotificationPreferences2 0x7f0a029b
 int id tvNotifications 0x7f0a029c
 int id tvReverse 0x7f0a029d
 int id tv_userMail 0x7f0a029e
+int id tv_user_work_direction_sub 0x7f0a02d9
 int id txt_ciudad 0x7f0a02a0
 int id txt_cumple 0x7f0a02a1
 int id txt_description 0x7f0a02a2
@@ -3810,6 +3815,7 @@ int id txt_total_pay_travel_cost 0x7f0a02b4
 int id txt_travel_information 0x7f0a02b5
 int id txt_travel_information_cost 0x7f0a02b6
 int id txt_user_name_chat_list 0x7f0a02b7
+int id txt_user_name_sub 0x7f0a02da
 int id txt_work_direction 0x7f0a02b8
 int id unchecked 0x7f0a02b9
 int id uniform 0x7f0a02ba
@@ -3969,6 +3975,7 @@ int layout fingerprint_dialog_layout 0x7f0d0045
 int layout image 0x7f0d0046
 int layout item_chat_left 0x7f0d0047
 int layout item_chat_right 0x7f0d0048
+int layout item_people_subscribe 0x7f0d00aa
 int layout layout_confirmations 0x7f0d0049
 int layout list_item 0x7f0d004a
 int layout m3_alert_dialog 0x7f0d004b

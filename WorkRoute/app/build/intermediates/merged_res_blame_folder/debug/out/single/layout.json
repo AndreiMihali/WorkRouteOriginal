@@ -8,6 +8,10 @@
         "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\item_chat_right.xml"
     },
     {
+        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\item_people_subscribe.xml",
+        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\item_people_subscribe.xml"
+    },
+    {
         "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_pay_method.xml",
         "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_pay_method.xml"
     },
@@ -32,12 +36,12 @@
         "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\list_item.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\subscription_item.xml",
-        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\subscription_item.xml"
-    },
-    {
         "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_splash_screen.xml",
         "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_splash_screen.xml"
+    },
+    {
+        "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\subscription_item.xml",
+        "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\subscription_item.xml"
     },
     {
         "merged": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_driver_map.xml",
