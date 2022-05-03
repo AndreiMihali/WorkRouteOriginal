@@ -67,6 +67,7 @@ import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.example.workroute.profile.Profile;
+import com.example.workroute.service.NotificationService;
 import com.example.workroute.service.ServicioOnline;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -339,72 +340,8 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         });
     }
 
-    private void sendNotification(String token,String receiver,String message, String title) {
-
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                RequestQueue myRequest=Volley.newRequestQueue(getApplicationContext());
-                JSONObject json= new JSONObject();
-                try {
-                    json.put("to",token);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                JSONObject notification=new JSONObject();
-
-                try {
-                    notification.put("titulo",title);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    notification.put("detalle",message);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    notification.put("activityOpen","ActiveSubscriptions");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-                try {
-                    json.put("data",notification);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                String url="https://fcm.googleapis.com/fcm/send";
-
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                        (Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
-
-                            @Override
-                            public void onResponse(JSONObject response) {
-                            }
-                        }, new Response.ErrorListener() {
-
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                               error.printStackTrace();
-                            }
-                        }){
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        HashMap<String,String> map=new HashMap<>();
-                        map.put("content-type","application/json");
-                        map.put("authorization","key=AAAAt-8FdV8:APA91bEmHhrJazEV2AB7LWBxhcRib1wMtuAGsobZydq6OUOCXYmaKpkuhnyHFFLdb3Eg5h2VqE134NChAJGNTWracREdIiLDIxPpHvnNAxxbw-MUw6_C-WHRspmbu1GEeUp5p418RPyp");
-                        return map;
-                    }
-                };
-
-                myRequest.add(jsonObjectRequest);
-            }
-        });
+    private void sendNotification(String token,String message, String title,String receiver) {
+        new NotificationService(getApplicationContext(),token,message,title,receiver,"ActiveSubscriptions").start();
     }
 
     private boolean getDriversStarted=false;

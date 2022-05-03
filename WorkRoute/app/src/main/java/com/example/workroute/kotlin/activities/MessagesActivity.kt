@@ -1,6 +1,7 @@
 package com.example.workroute.kotlin.activities
 
 import android.annotation.SuppressLint
+import android.app.Notification
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
@@ -22,6 +23,7 @@ import com.example.workroute.R
 import com.example.workroute.activitys.MainActivity
 import com.example.workroute.kotlin.adapters.AdapterMessages
 import com.example.workroute.kotlin.model.MessageModel
+import com.example.workroute.service.NotificationService
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
@@ -238,46 +240,9 @@ class MessagesActivity : AppCompatActivity(){
     private fun sendNotification(token: String, message: String, title: String, user: String) {
 
         if(isInTeChat=="false"||isInTeChat==""){
-            Runnable {
-                FirebaseDatabase.getInstance().getReference("ChatList").child(receiverId).child(firebaseUser.uid)
-                    .child("read").setValue("false")
-                var myRequest=Volley.newRequestQueue(applicationContext)
-                var json=JSONObject()
-
-                json.put("to",token)
-                val notification=JSONObject()
-
-                notification.put("titulo",title)
-                notification.put("detalle","$message")
-                notification.put("activityOpen","MessagesActivity");
-
-                json.put("data",notification)
-
-                val url="https://fcm.googleapis.com/fcm/send"
-
-                val jsonRequest: JsonObjectRequest = object :
-                    JsonObjectRequest(Method.POST, url, json, object : Response.Listener<JSONObject?> {
-                        override fun onResponse(response: JSONObject?) {
-
-                            //now handle the response
-                        }
-                    }, object : Response.ErrorListener {
-                        override fun onErrorResponse(error: VolleyError) {
-                            error.printStackTrace()
-                        }
-                    }) {
-                    //this is the part, that adds the header to the request
-                    override fun getHeaders(): Map<String, String> {
-                        val map=HashMap<String,String>()
-                        map["content-type"] = "application/json"
-                        map["authorization"]="key=AAAAt-8FdV8:APA91bEmHhrJazEV2AB7LWBxhcRib1wMtuAGsobZydq6OUOCXYmaKpkuhnyHFFLdb3Eg5h2VqE134NChAJGNTWracREdIiLDIxPpHvnNAxxbw-MUw6_C-WHRspmbu1GEeUp5p418RPyp"
-                        return map
-                    }
-                }
-
-                myRequest.add(jsonRequest)
-
-            }.run()
+            FirebaseDatabase.getInstance().getReference("ChatList").child(receiverId).child(firebaseUser.uid)
+                .child("read").setValue("false")
+            NotificationService(applicationContext,token,message,title,user,"MessagesActivity").start()
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.workroute.service;
 
+import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -16,6 +17,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.example.workroute.R;
+import com.example.workroute.activitys.ActiveSubscriptions;
 import com.example.workroute.activitys.MainActivity;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
@@ -82,7 +84,7 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
                     .setContentTitle(titulo)
                     .setSmallIcon(R.mipmap.work_icon)
                     .setContentText(detalle)
-                    .setContentIntent(clickNotify())
+                    .setContentIntent(clickNotify(activityOpen))
                     .setContentInfo("Nuevo");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -94,9 +96,24 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
         nm.notify(idNotify,builder.build());
     }
 
-    public PendingIntent clickNotify() throws ClassNotFoundException {
-        Intent nf=new Intent(getApplicationContext(), ChatsActivity.class);
-        nf.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        return PendingIntent.getActivity(this,0,nf,0);
+    public PendingIntent clickNotify(String activity) throws ClassNotFoundException {
+        Intent nf;
+        switch (activity){
+            case "MessagesActivity":{
+                nf=new Intent(getApplicationContext(),MessagesActivity.class);
+                nf.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                return PendingIntent.getActivity(this,0,nf,0);
+            }
+            case "ActiveSubscriptions":{
+                nf=new Intent(getApplicationContext(), ActiveSubscriptions.class);
+                nf.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                return PendingIntent.getActivity(this,0,nf,0);
+            }
+            default:{
+                nf=new Intent(getApplicationContext(),MainActivity.class);
+                nf.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                return PendingIntent.getActivity(this,0,nf,0);
+            }
+        }
     }
 }
