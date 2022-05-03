@@ -58,8 +58,8 @@ class AdapterChatsList(val context: Context,val data:ArrayList<UserChatModel>): 
         }
 
         if(data[position].read=="false"){
-            holder.card_general.strokeColor=context.getColor(R.color.secondary)
-            holder.card_general.strokeWidth=2
+            holder.card_general.strokeColor=context.getColor(android.R.color.holo_red_dark)
+            holder.card_general.strokeWidth=5
         }else{
             holder.card_general.strokeWidth=0
         }
