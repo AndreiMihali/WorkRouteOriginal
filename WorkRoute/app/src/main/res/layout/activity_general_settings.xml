@@ -84,45 +84,8 @@
 
 
     <TextView
-        android:id="@+id/tvNotificationPreferences2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_baseline_fmd_good_24"
-        android:drawableTint="@color/secondary"
-        android:padding="20dp"
-        android:text="  Google Map View"
-        android:textSize="18sp" />
-
-    <RadioGroup
-        android:id="@+id/radioGroupMapViews"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:checkedButton="@id/radioMapView1">
-
-
-       <RadioButton
-           android:id="@+id/radioMapView1"
-           android:layout_marginStart="60dp"
-           android:padding="20dp"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:textSize="18sp"
-           android:text="View 1"/>
-
-        <RadioButton
-            android:id="@+id/radioMapView2"
-            android:layout_marginStart="60dp"
-            android:padding="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="18sp"
-            android:text="View 2"/>
-
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/tvNotifications"
+        android:id="@+id/tvHowToUseWorkRoute"
+        android:layout_marginTop="30dp"
         android:textSize="18sp"
         android:drawableStart="@drawable/ic_baseline_help_24"
         android:drawableTint="@color/secondary"
@@ -133,6 +96,7 @@
 
     <TextView
         android:id="@+id/tvAboutUs"
+        android:layout_marginTop="10dp"
         android:textSize="18sp"
         android:drawableStart="@drawable/ic_baseline_people_24"
         android:drawableTint="@color/secondary"

@@ -6,8 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,49 +34,31 @@ public final class ActivityGeneralSettingsBinding implements ViewBinding {
   public final TextView emailNotifications;
 
   @NonNull
-  public final RadioGroup radioGroupMapViews;
-
-  @NonNull
-  public final RadioButton radioMapView1;
-
-  @NonNull
-  public final RadioButton radioMapView2;
-
-  @NonNull
   public final MaterialToolbar toolbarSettings;
 
   @NonNull
   public final TextView tvAboutUs;
 
   @NonNull
+  public final TextView tvHowToUseWorkRoute;
+
+  @NonNull
   public final TextView tvNotificationPreferences;
-
-  @NonNull
-  public final TextView tvNotificationPreferences2;
-
-  @NonNull
-  public final TextView tvNotifications;
 
   private ActivityGeneralSettingsBinding(@NonNull LinearLayout rootView,
       @NonNull TextView appNotifications, @NonNull CheckBox checkBoxAppNotifications,
       @NonNull CheckBox checkBoxEmailNotifications, @NonNull TextView emailNotifications,
-      @NonNull RadioGroup radioGroupMapViews, @NonNull RadioButton radioMapView1,
-      @NonNull RadioButton radioMapView2, @NonNull MaterialToolbar toolbarSettings,
-      @NonNull TextView tvAboutUs, @NonNull TextView tvNotificationPreferences,
-      @NonNull TextView tvNotificationPreferences2, @NonNull TextView tvNotifications) {
+      @NonNull MaterialToolbar toolbarSettings, @NonNull TextView tvAboutUs,
+      @NonNull TextView tvHowToUseWorkRoute, @NonNull TextView tvNotificationPreferences) {
     this.rootView = rootView;
     this.appNotifications = appNotifications;
     this.checkBoxAppNotifications = checkBoxAppNotifications;
     this.checkBoxEmailNotifications = checkBoxEmailNotifications;
     this.emailNotifications = emailNotifications;
-    this.radioGroupMapViews = radioGroupMapViews;
-    this.radioMapView1 = radioMapView1;
-    this.radioMapView2 = radioMapView2;
     this.toolbarSettings = toolbarSettings;
     this.tvAboutUs = tvAboutUs;
+    this.tvHowToUseWorkRoute = tvHowToUseWorkRoute;
     this.tvNotificationPreferences = tvNotificationPreferences;
-    this.tvNotificationPreferences2 = tvNotificationPreferences2;
-    this.tvNotifications = tvNotifications;
   }
 
   @Override
@@ -132,24 +112,6 @@ public final class ActivityGeneralSettingsBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.radioGroupMapViews;
-      RadioGroup radioGroupMapViews = ViewBindings.findChildViewById(rootView, id);
-      if (radioGroupMapViews == null) {
-        break missingId;
-      }
-
-      id = R.id.radioMapView1;
-      RadioButton radioMapView1 = ViewBindings.findChildViewById(rootView, id);
-      if (radioMapView1 == null) {
-        break missingId;
-      }
-
-      id = R.id.radioMapView2;
-      RadioButton radioMapView2 = ViewBindings.findChildViewById(rootView, id);
-      if (radioMapView2 == null) {
-        break missingId;
-      }
-
       id = R.id.toolbarSettings;
       MaterialToolbar toolbarSettings = ViewBindings.findChildViewById(rootView, id);
       if (toolbarSettings == null) {
@@ -162,28 +124,21 @@ public final class ActivityGeneralSettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvHowToUseWorkRoute;
+      TextView tvHowToUseWorkRoute = ViewBindings.findChildViewById(rootView, id);
+      if (tvHowToUseWorkRoute == null) {
+        break missingId;
+      }
+
       id = R.id.tvNotificationPreferences;
       TextView tvNotificationPreferences = ViewBindings.findChildViewById(rootView, id);
       if (tvNotificationPreferences == null) {
         break missingId;
       }
 
-      id = R.id.tvNotificationPreferences2;
-      TextView tvNotificationPreferences2 = ViewBindings.findChildViewById(rootView, id);
-      if (tvNotificationPreferences2 == null) {
-        break missingId;
-      }
-
-      id = R.id.tvNotifications;
-      TextView tvNotifications = ViewBindings.findChildViewById(rootView, id);
-      if (tvNotifications == null) {
-        break missingId;
-      }
-
       return new ActivityGeneralSettingsBinding((LinearLayout) rootView, appNotifications,
-          checkBoxAppNotifications, checkBoxEmailNotifications, emailNotifications,
-          radioGroupMapViews, radioMapView1, radioMapView2, toolbarSettings, tvAboutUs,
-          tvNotificationPreferences, tvNotificationPreferences2, tvNotifications);
+          checkBoxAppNotifications, checkBoxEmailNotifications, emailNotifications, toolbarSettings,
+          tvAboutUs, tvHowToUseWorkRoute, tvNotificationPreferences);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

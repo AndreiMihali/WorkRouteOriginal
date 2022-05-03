@@ -262,9 +262,6 @@ id profile_photo_sheet_cost
 id profile_photo_sub
 id progress_circular
 id progress_circular_notifications
-id radioGroupMapViews
-id radioMapView1
-id radioMapView2
 id recyclerSubs
 id recycler_chats
 id recycler_mensajes
@@ -300,9 +297,8 @@ id toolbar_recovery_password
 id toolbar_subs
 id tvAboutUs
 id tvFront
+id tvHowToUseWorkRoute
 id tvNotificationPreferences
-id tvNotificationPreferences2
-id tvNotifications
 id tvReverse
 id tv_userMail
 id tv_user_work_direction_sub
@@ -384,6 +380,7 @@ mipmap work_icon_foreground
 mipmap work_icon_round
 string app_name
 string default_web_client_id
+string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id

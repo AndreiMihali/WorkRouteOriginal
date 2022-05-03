@@ -3631,9 +3631,6 @@ id progress_circular
 id progress_circular_notifications
 id progress_horizontal
 id radio
-id radioGroupMapViews
-id radioMapView1
-id radioMapView2
 id ratio
 id rectangles
 id recyclerSubs
@@ -3792,9 +3789,8 @@ id transition_transform
 id triangle
 id tvAboutUs
 id tvFront
+id tvHowToUseWorkRoute
 id tvNotificationPreferences
-id tvNotificationPreferences2
-id tvNotifications
 id tvReverse
 id tv_userMail
 id tv_user_work_direction_sub
@@ -4175,6 +4171,7 @@ string fingerprint_error_lockout
 string fingerprint_error_no_fingerprints
 string fingerprint_error_user_canceled
 string fingerprint_not_recognized
+string firebase_database_url
 string gcm_defaultSenderId
 string generic_error_no_device_credential
 string generic_error_no_keyguard
