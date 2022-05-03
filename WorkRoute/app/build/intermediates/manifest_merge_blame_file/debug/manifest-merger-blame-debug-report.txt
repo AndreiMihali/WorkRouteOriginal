@@ -100,8 +100,8 @@
 52-->C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:23:9-44
 53        <activity
 53-->C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:24:9-26:40
-54            android:name="com.example.workroute.activitys.ActiveSubscriptions"
-54-->C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:25:13-58
+54            android:name="com.example.workroute.profile.ActiveSubscriptions"
+54-->C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:25:13-56
 55            android:exported="false" />
 55-->C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:26:13-37
 56        <activity
@@ -182,8 +182,8 @@
 94-->C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:65:13-37
 95        <activity
 95-->C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:66:9-68:40
-96            android:name="com.example.workroute.activitys.Notifications"
-96-->C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:67:13-52
+96            android:name="com.example.workroute.notifications.Notifications"
+96-->C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:67:13-56
 97            android:exported="false" />
 97-->C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:68:13-37
 98        <activity

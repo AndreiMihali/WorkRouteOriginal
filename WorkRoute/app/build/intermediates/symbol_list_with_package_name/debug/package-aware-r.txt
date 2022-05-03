@@ -2933,6 +2933,7 @@ drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable bx_check
 drawable bx_check_double
+drawable bx_error_alt
 drawable bx_hourglass
 drawable bx_id_card
 drawable bx_x
@@ -3416,6 +3417,7 @@ id frost
 id ghost_view
 id ghost_view_holder
 id glide_custom_view_target_tag
+id global_card
 id gone
 id graph
 id graph_wrap
@@ -3447,6 +3449,7 @@ id image_content_root
 id image_root
 id image_view
 id img
+id img_icon_notification
 id immediateStop
 id included
 id info
@@ -3625,6 +3628,7 @@ id profile_photo_sheet
 id profile_photo_sheet_cost
 id profile_photo_sub
 id progress_circular
+id progress_circular_notifications
 id progress_horizontal
 id radio
 id radioGroupMapViews
@@ -3809,6 +3813,7 @@ id txt_message
 id txt_name
 id txt_name_cost
 id txt_null
+id txt_null_notifications
 id txt_startLocation
 id txt_startLocation_cost
 id txt_title
@@ -3977,6 +3982,7 @@ layout fingerprint_dialog_layout
 layout image
 layout item_chat_left
 layout item_chat_right
+layout item_notification
 layout item_people_subscribe
 layout layout_confirmations
 layout list_item

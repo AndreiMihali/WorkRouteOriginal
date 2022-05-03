@@ -51,7 +51,7 @@
         android:theme="@style/Theme.WorkRoute"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name="com.example.workroute.activitys.ActiveSubscriptions"
+            android:name="com.example.workroute.profile.ActiveSubscriptions"
             android:exported="false" />
         <activity
             android:name="com.example.workroute.initActivities.ForgotPasswordActivity"
@@ -93,7 +93,7 @@
             android:name="com.example.workroute.activitys.GeneralSettingsActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.activitys.Notifications"
+            android:name="com.example.workroute.notifications.Notifications"
             android:exported="false" />
         <activity
             android:name="com.example.workroute.profile.Profile"

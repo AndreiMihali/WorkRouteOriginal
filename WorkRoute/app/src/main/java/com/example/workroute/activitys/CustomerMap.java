@@ -2,6 +2,7 @@ package com.example.workroute.activitys;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -66,8 +67,10 @@ import com.example.workroute.companion.Companion;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.network.callback.NetworkCallback;
+import com.example.workroute.notifications.Notifications;
 import com.example.workroute.profile.Profile;
 import com.example.workroute.service.NotificationService;
+import com.example.workroute.service.NotificationsInDatabase;
 import com.example.workroute.service.ServicioOnline;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -342,6 +345,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
     private void sendNotification(String token,String message, String title,String receiver) {
         new NotificationService(getApplicationContext(),token,message,title,receiver,"ActiveSubscriptions").start();
+        new NotificationsInDatabase("You have a new subscription request","false","Subscription",driverId).start();
     }
 
     private boolean getDriversStarted=false;
@@ -593,18 +597,27 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         button_chats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                animateMenu();
                 Intent i = new Intent(CustomerMap.this, ChatsActivity.class);
                 startActivity(i);
-                animateMenu();
             }
         });
 
         button_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                animateMenu();
                 Intent i = new Intent(CustomerMap.this, Profile.class);
                 startActivity(i);
+            }
+        });
+
+        button_notifications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 animateMenu();
+                Intent i=new Intent(CustomerMap.this, Notifications.class);
+                startActivity(i);
             }
         });
 

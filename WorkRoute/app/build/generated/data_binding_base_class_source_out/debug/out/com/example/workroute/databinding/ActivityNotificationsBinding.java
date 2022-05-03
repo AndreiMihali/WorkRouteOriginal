@@ -4,7 +4,9 @@ package com.example.workroute.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,16 +23,26 @@ public final class ActivityNotificationsBinding implements ViewBinding {
   private final RelativeLayout rootView;
 
   @NonNull
+  public final ProgressBar progressCircularNotifications;
+
+  @NonNull
   public final RecyclerView recyclerNotifications;
 
   @NonNull
   public final MaterialToolbar toolbar;
 
+  @NonNull
+  public final TextView txtNullNotifications;
+
   private ActivityNotificationsBinding(@NonNull RelativeLayout rootView,
-      @NonNull RecyclerView recyclerNotifications, @NonNull MaterialToolbar toolbar) {
+      @NonNull ProgressBar progressCircularNotifications,
+      @NonNull RecyclerView recyclerNotifications, @NonNull MaterialToolbar toolbar,
+      @NonNull TextView txtNullNotifications) {
     this.rootView = rootView;
+    this.progressCircularNotifications = progressCircularNotifications;
     this.recyclerNotifications = recyclerNotifications;
     this.toolbar = toolbar;
+    this.txtNullNotifications = txtNullNotifications;
   }
 
   @Override
@@ -60,6 +72,12 @@ public final class ActivityNotificationsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.progress_circular_notifications;
+      ProgressBar progressCircularNotifications = ViewBindings.findChildViewById(rootView, id);
+      if (progressCircularNotifications == null) {
+        break missingId;
+      }
+
       id = R.id.recycler_notifications;
       RecyclerView recyclerNotifications = ViewBindings.findChildViewById(rootView, id);
       if (recyclerNotifications == null) {
@@ -72,8 +90,14 @@ public final class ActivityNotificationsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityNotificationsBinding((RelativeLayout) rootView, recyclerNotifications,
-          toolbar);
+      id = R.id.txt_null_notifications;
+      TextView txtNullNotifications = ViewBindings.findChildViewById(rootView, id);
+      if (txtNullNotifications == null) {
+        break missingId;
+      }
+
+      return new ActivityNotificationsBinding((RelativeLayout) rootView,
+          progressCircularNotifications, recyclerNotifications, toolbar, txtNullNotifications);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

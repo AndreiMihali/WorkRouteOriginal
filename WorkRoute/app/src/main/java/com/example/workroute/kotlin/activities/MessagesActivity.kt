@@ -24,6 +24,7 @@ import com.example.workroute.activitys.MainActivity
 import com.example.workroute.kotlin.adapters.AdapterMessages
 import com.example.workroute.kotlin.model.MessageModel
 import com.example.workroute.service.NotificationService
+import com.example.workroute.service.NotificationsInDatabase
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
@@ -243,6 +244,7 @@ class MessagesActivity : AppCompatActivity(){
             FirebaseDatabase.getInstance().getReference("ChatList").child(receiverId).child(firebaseUser.uid)
                 .child("read").setValue("false")
             NotificationService(applicationContext,token,message,title,user,"MessagesActivity").start()
+            NotificationsInDatabase("You receive a new message from $user","false","Message",receiverId).start()
         }
     }
 

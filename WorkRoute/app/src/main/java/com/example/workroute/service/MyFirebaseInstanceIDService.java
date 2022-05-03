@@ -1,27 +1,21 @@
 package com.example.workroute.service;
 
-import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.os.IBinder;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.example.workroute.R;
-import com.example.workroute.activitys.ActiveSubscriptions;
+import com.example.workroute.profile.ActiveSubscriptions;
 import com.example.workroute.activitys.MainActivity;
-import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
-import com.google.android.material.chip.Chip;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

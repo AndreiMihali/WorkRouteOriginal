@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.workroute.R;
-import com.example.workroute.activitys.ActiveSubscriptions;
-import com.example.workroute.driverActivities.DrivingLicense;
 import com.example.workroute.activitys.GeneralSettingsActivity;
 import com.example.workroute.initActivities.LoginActivity;
 import com.example.workroute.activitys.MainActivity;

@@ -2,6 +2,7 @@ package com.example.workroute.driverActivities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -50,11 +51,13 @@ import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.workroute.R;
+import com.example.workroute.activitys.CustomerMap;
 import com.example.workroute.activitys.MainActivity;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.network.callback.NetworkCallback;
+import com.example.workroute.notifications.Notifications;
 import com.example.workroute.profile.Profile;
 import com.example.workroute.service.ServicioOnline;
 import com.firebase.geofire.GeoFire;
@@ -512,6 +515,15 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                 Intent i = new Intent(DriverMap.this, Profile.class);
                 startActivity(i);
                 animateMenu();
+            }
+        });
+
+        button_notifications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animateMenu();
+                Intent i=new Intent(DriverMap.this, Notifications.class);
+                startActivity(i);
             }
         });
 

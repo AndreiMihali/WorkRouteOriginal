@@ -305,12 +305,12 @@ MERGED from [com.google.android.datatransport:transport-runtime:3.1.2] C:\Users\
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:22:9-47
 	android:usesCleartextTraffic
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:23:9-44
-activity#com.example.workroute.activitys.ActiveSubscriptions
+activity#com.example.workroute.profile.ActiveSubscriptions
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:24:9-26:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:26:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:25:13-58
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:25:13-56
 activity#com.example.workroute.initActivities.ForgotPasswordActivity
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:27:9-29:40
 	android:exported
@@ -385,12 +385,12 @@ ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:65:13-37
 	android:name
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:64:13-62
-activity#com.example.workroute.activitys.Notifications
+activity#com.example.workroute.notifications.Notifications
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:66:9-68:40
 	android:exported
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:68:13-37
 	android:name
-		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:67:13-52
+		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:67:13-56
 activity#com.example.workroute.profile.Profile
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:69:9-71:40
 	android:exported

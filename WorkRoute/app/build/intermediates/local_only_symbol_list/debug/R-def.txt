@@ -47,6 +47,7 @@ drawable bottom_navigation_selector
 drawable bottom_user_selector
 drawable bx_check
 drawable bx_check_double
+drawable bx_error_alt
 drawable bx_hourglass
 drawable bx_id_card
 drawable bx_x
@@ -214,6 +215,7 @@ id editProfile
 id editProfilePhoto
 id emailNotifications
 id fab_camera
+id global_card
 id helpMenu
 id image
 id imageCarnetFrente
@@ -222,6 +224,7 @@ id imageLock
 id imageViewStar
 id image_confirmation
 id img
+id img_icon_notification
 id information_user
 id information_user_cost
 id inputCVV
@@ -258,6 +261,7 @@ id profile_photo_sheet
 id profile_photo_sheet_cost
 id profile_photo_sub
 id progress_circular
+id progress_circular_notifications
 id radioGroupMapViews
 id radioMapView1
 id radioMapView2
@@ -317,6 +321,7 @@ id txt_message
 id txt_name
 id txt_name_cost
 id txt_null
+id txt_null_notifications
 id txt_startLocation
 id txt_startLocation_cost
 id txt_title
@@ -352,6 +357,7 @@ layout activity_splash_screen
 layout chats_list_item
 layout item_chat_left
 layout item_chat_right
+layout item_notification
 layout item_people_subscribe
 layout layout_confirmations
 layout list_item

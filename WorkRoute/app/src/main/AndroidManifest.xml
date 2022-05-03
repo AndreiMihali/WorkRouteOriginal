@@ -22,7 +22,7 @@
         android:theme="@style/Theme.WorkRoute"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activitys.ActiveSubscriptions"
+            android:name=".profile.ActiveSubscriptions"
             android:exported="false" />
         <activity
             android:name=".initActivities.ForgotPasswordActivity"
@@ -64,7 +64,7 @@
             android:name=".activitys.GeneralSettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".activitys.Notifications"
+            android:name=".notifications.Notifications"
             android:exported="false" />
         <activity
             android:name=".profile.Profile"
