@@ -937,10 +937,22 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     private void setDestination(){
         DatabaseReference customerReference=FirebaseDatabase.getInstance().getReference("Customers");
         Map<String,Object> map=new HashMap<>();
-        map.put("destination", Companion.user.getWorkAddress());
-        map.put("destinationLat",getDestination(Companion.user.getWorkAddress(),"latitude"));
-        map.put("destinationLong",getDestination(Companion.user.getWorkAddress(),"longitude"));
+        LatLng destination=new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(),"latitude")),Double.valueOf(getDestination(Companion.user.getWorkAddress(),"longitude")));
+        if(destination==new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude())){
+            map.put("destination", Companion.user.getLocalidad());
+            map.put("destinationLat",getDestination(Companion.user.getLocalidad(),"latitude"));
+            map.put("destinationLong",getDestination(Companion.user.getLocalidad(),"longitude"));
+        }else{
+            map.put("destination", Companion.user.getWorkAddress());
+            map.put("destinationLat",getDestination(Companion.user.getWorkAddress(),"latitude"));
+            map.put("destinationLong",getDestination(Companion.user.getWorkAddress(),"longitude"));
+        }
         customerReference.child(firebaseAuth.getUid()).child("destinations").updateChildren(map);
+        setMarkers();
+
+    }
+
+    private void setMarkers(){
         LatLng myDestination=new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(),"latitude")),Double.valueOf(getDestination(Companion.user.getWorkAddress(),"longitude")));
         CircleOptions circleOptions=new CircleOptions()
                 .center(myDestination)
