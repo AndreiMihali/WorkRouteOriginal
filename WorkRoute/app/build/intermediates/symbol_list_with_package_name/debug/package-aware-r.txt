@@ -2918,6 +2918,8 @@ drawable background_messages
 drawable background_susc
 drawable bg_text_chat_left
 drawable bg_text_chat_right
+drawable blue_wallp2
+drawable blue_wallpaper
 drawable bottom_chat_selector
 drawable bottom_home_selector
 drawable bottom_navigation_selector
@@ -3443,6 +3445,7 @@ id image
 id imageCarnetFrente
 id imageCarnetReverso
 id imageLock
+id imageView
 id imageViewStar
 id image_confirmation
 id image_content_root
@@ -3751,6 +3754,8 @@ id textSpacerNoTitle
 id textStart
 id textTop
 id textUnlock_Save
+id textView
+id textView2
 id textView3
 id text_input_end_icon
 id text_input_error_icon

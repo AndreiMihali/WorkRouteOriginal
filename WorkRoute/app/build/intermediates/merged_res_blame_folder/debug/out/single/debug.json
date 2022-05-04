@@ -40,12 +40,12 @@
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-hdpi\\car_map_round.png"
     },
     {
-        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_settings_24.xml.flat",
-        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_settings_24.xml"
-    },
-    {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_gallery.png.flat",
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\gallery.png"
+    },
+    {
+        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_settings_24.xml.flat",
+        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_settings_24.xml"
     },
     {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_payments.png.flat",
@@ -236,6 +236,10 @@
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_calendar_today_24.xml"
     },
     {
+        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_blue_wallpaper.jpg.flat",
+        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\blue_wallpaper.jpg"
+    },
+    {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_navigation_24.xml.flat",
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_navigation_24.xml"
     },
@@ -286,6 +290,10 @@
     {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_star_24.xml.flat",
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_star_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_blue_wallp2.jpg.flat",
+        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\blue_wallp2.jpg"
     },
     {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\anim_slide_up_out.xml.flat",
@@ -608,12 +616,12 @@
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\card_cvv.png"
     },
     {
-        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_add_driver_information.xml.flat",
-        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_add_driver_information.xml"
-    },
-    {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_app_information.xml.flat",
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_app_information.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_add_driver_information.xml.flat",
+        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_add_driver_information.xml"
     },
     {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
