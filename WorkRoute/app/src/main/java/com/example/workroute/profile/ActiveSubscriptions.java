@@ -70,6 +70,7 @@ public class ActiveSubscriptions extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 data.clear();
+                customersId.clear();
                 for(DataSnapshot snap:snapshot.getChildren()){
                     String userId=  snap.child("userId").getValue().toString();
                     String status=  snap.child("status").getValue().toString();
