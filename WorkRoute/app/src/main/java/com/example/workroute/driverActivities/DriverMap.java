@@ -159,6 +159,17 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         startService(new Intent(this, ServicioOnline.class));
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(circleMap!=null&&myWork!=null&&myHome!=null){
+            myWork.remove();
+            myHome.remove();
+            circleMap.remove();
+            setDestination();
+        }
+    }
+
     private boolean getCustomersAroundStarted=false;
     private List<Marker> markerList=new ArrayList<Marker>();
     private void getAllCustomers(){
@@ -710,6 +721,9 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
        }
     }
 
+    private Marker myWork;
+    private Marker myHome;
+
     private void setDestination(){
         DatabaseReference driverReference=FirebaseDatabase.getInstance().getReference("Drivers");
         Map<String,Object> map=new HashMap<>();
@@ -737,11 +751,11 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                 .clickable(false)
                 .strokeWidth(7);
         circleMap=mMap.addCircle(circleOptions);
-        mMap.addMarker(new MarkerOptions().position(myDestination).title("My work").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.work))))
+        myWork=mMap.addMarker(new MarkerOptions().position(myDestination).title("My work").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.work))))
                 .flat(true).anchor(0.5f,0.5f));
 
-        LatLng myHome=new LatLng(Double.valueOf(getDestination(Companion.user.getLocalidad(),"latitude")),Double.valueOf(getDestination(Companion.user.getLocalidad(),"longitude")));
-        mMap.addMarker(new MarkerOptions().position(myHome).title("My home").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.home))))
+        LatLng myHomeLatLng=new LatLng(Double.valueOf(getDestination(Companion.user.getLocalidad(),"latitude")),Double.valueOf(getDestination(Companion.user.getLocalidad(),"longitude")));
+        myHome=mMap.addMarker(new MarkerOptions().position(myHomeLatLng).title("My home").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.home))))
                 .flat(true).anchor(0.5f,0.5f));
     }
 

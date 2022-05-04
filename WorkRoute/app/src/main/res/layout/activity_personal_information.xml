@@ -113,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="UNLOCK FIELDS"
+                    android:text="UPDATE DATA"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -139,116 +139,169 @@
             android:textSize="22sp"
             android:textStyle="bold" />
 
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:outlineProvider="none"
-            android:theme="@style/Theme.MaterialComponents.DayNight"
-            app:cardCornerRadius="100dp">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layout_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:hint="Name"
-                android:textColorHint="#BABABA"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:startIconDrawable="@drawable/ic_baseline_person_24"
-                app:startIconTint="#BABABA">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:enabled="false"
-                    android:text="NombreUsuario"
-                    android:textColor="#BABABA"
-                    android:textSize="16sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:outlineProvider="none"
-            android:theme="@style/Theme.MaterialComponents.DayNight"
-            app:cardCornerRadius="100dp">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layout_pass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:hint="Password"
-                android:textColorHint="#BABABA"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:endIconMode="password_toggle"
-                app:endIconTint="#BABABA"
-                app:startIconDrawable="@drawable/ic_baseline_lock_24"
-                app:startIconTint="#BABABA">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_pass"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:enabled="false"
-                    android:inputType="textPassword"
-                    android:text="Password"
-                    android:textColor="#BABABA"
-                    android:textSize="16sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
         <LinearLayout
-            android:id="@+id/layout_subscriptionLevel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal"
-            android:paddingVertical="10dp">
+            android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="23dp"
-                android:src="@drawable/ic_baseline_directions_car_24"
-                app:tint="#BABABA" />
+                android:layout_width="35dp"
+                android:src="@drawable/ic_baseline_person_24"
+                android:layout_height="35dp"
+                app:tint="@color/secondary" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="15dp"
-                android:layout_weight="1"
-                android:text="Car Information"
-                android:textColor="#BABABA"
-                android:textSize="16sp" />
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_height="wrap_content">
 
-            <ImageButton
-                android:id="@+id/buttonOpenCarInformation"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                app:tint="#737272"
-                tools:ignore="SpeakableTextPresentCheck" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Name"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/txt_name"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="wrap_content"
+                    android:text="Andrei Mihali"
+                    android:textSize="16sp"
+                    android:textColor="@color/secondary"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
 
+            <ImageView
+                android:layout_width="35dp"
+                android:src="@drawable/ic_baseline_work_24"
+                android:layout_height="35dp"
+                app:tint="@color/secondary" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Work Address"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/txt_work_address"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="wrap_content"
+                    android:text="Marismas 9 Madrid"
+                    android:textSize="16sp"
+                    android:textColor="@color/secondary"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <ImageButton
+                android:background="@android:color/transparent"
+                android:id="@+id/btn_edit_work"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_baseline_edit_24"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:src="@drawable/ic_baseline_home_24"
+                android:layout_height="35dp"
+                app:tint="@color/secondary" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Home Address"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/txt_home_address"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="wrap_content"
+                    android:text="Marismas 9 Madrid"
+                    android:textSize="16sp"
+                    android:textColor="@color/secondary"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <ImageButton
+                android:background="@android:color/transparent"
+                android:id="@+id/btn_edit_home"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_baseline_edit_24"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_car_information"
+            android:layout_width="match_parent"
+            app:cardCornerRadius="100dp"
+            app:cardBackgroundColor="#E5E5E6"
+            android:layout_marginTop="40dp"
+            app:contentPadding="15dp"
+            app:cardPreventCornerOverlap="true"
+            android:theme="@style/Theme.MaterialComponents.DayNight"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_baseline_drive_eta_24"
+                    android:layout_height="35dp"
+                    app:tint="@color/secondary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Car information"
+                    android:textSize="18sp"
+                    android:textColor="@color/secondary"
+                    android:textStyle="bold"
+                    android:layout_centerInParent="true"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
 </RelativeLayout>

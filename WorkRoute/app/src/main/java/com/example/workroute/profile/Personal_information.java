@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -31,11 +32,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -46,11 +49,19 @@ import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.profile.Profile;
 import com.google.android.gms.auth.api.credentials.Credential;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.TypeFilter;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -66,24 +77,27 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class Personal_information extends AppCompatActivity {
 
     private MaterialToolbar toolbar;
     private RelativeLayout relativeChangeColors;
     private ImageView img_lockChange,imageProfile,img_editProfilePhoto;
-    private TextView tv_unlock_save,tv_user_mail;
+    private TextView tv_unlock_save,tv_user_mail,txt_name,txt_work,txt_home;
+    private MaterialCardView card_car;
+    private ImageButton btn_edit_work,btn_edit_home;
     private boolean sw = false;
-    private TextInputEditText ed_name,ed_password;
-    private TextInputLayout layout_ed_name,layout_ed_pass;
-    private LinearLayout ln_subscription;
     private FirebaseAuth firebaseAuth;
-    private SharedPreferences sp;
+    private String userData[]=new String[2];
     private ProgressDialog progressDialog;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private final int CODE_GALLERY=100;
+    private int AUTOCOMPLETE_REQUEST_CODE=1;
     private Uri uri;
+    private int variableBandera=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,55 +130,11 @@ public class Personal_information extends AppCompatActivity {
         }else{
             Glide.with(this).load(Companion.user.getFotoPerfil()).into(imageProfile);
         }
-        ed_name.setText(Companion.user.getNombre());
-
-        /**
-         * HAY QUE AVISAR QUE LA CONTRA DE GOOGLE NO PUEDE CAMBIARSE
-         * SI LO QUE HAY EN sp.getString("Password"," ") DEVUELVE UNA CONTRASEÑA NO ES GOOGLE,
-         * Tambien se puede pedir que introduzca la antigua contraseña.
-         * Pero en caso de que quiera recuperarla porque se le olvido mejor no pedirla xd
-         * EN CASO CONTRARIO ES DE GGOGLE
-         */
-        ed_password.setText(sp.getString("Password",""));
-
-    }
-
-    /**
-     * DEJO HECHO EL METODO DE CAMBIO DE CONTRASEÑA PARA QUE LO TENGAS
-     */
-
-    private void changePassword(){
-        progressDialog.show();
-        String password=sp.getString("Password","");
-        AuthCredential credential= EmailAuthProvider.getCredential(firebaseAuth.getCurrentUser().getEmail().toString(),password);
-        firebaseAuth.getCurrentUser().reauthenticate(credential).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                progressDialog.setTitle("Updating password");
-                progressDialog.setMessage("Please wait...");
-                //Aqui hay que meter la nueva contraseña que introduzca el usuario
-                firebaseAuth.getCurrentUser().updatePassword(ed_password.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Snackbar.make(findViewById(R.id.rel_layout_general),"The password was changed successfully",Snackbar.LENGTH_SHORT).show();
-                        sp.edit().putString("Password",ed_password.getText().toString()).commit();
-                        progressDialog.dismiss();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("PASSWORD UPDATE","ERROR WHILE CHANGING THE PASSWORD"+e);
-                        progressDialog.dismiss();
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e("REAUTHENTICATE ERROR","ERROR WHILE REAUTHENTICATE"+e);
-                progressDialog.dismiss();
-            }
-        });
+        txt_name.setText(Companion.user.getNombre());
+        txt_work.setText(Companion.user.getWorkAddress());
+        txt_home.setText(Companion.user.getLocalidad());
+        userData[0]=Companion.user.getWorkAddress();
+        userData[1]=Companion.user.getLocalidad();
     }
 
     private void main() {
@@ -244,17 +214,20 @@ public class Personal_information extends AppCompatActivity {
         relativeChangeColors = findViewById(R.id.relativeChangingColorOnClick);
         tv_unlock_save = findViewById(R.id.textUnlock_Save);
         img_lockChange = findViewById(R.id.imageLock);
-        ed_name = findViewById(R.id.ed_username);
-        ed_password = findViewById(R.id.ed_pass);
-        ln_subscription = findViewById(R.id.layout_subscriptionLevel);
         tv_user_mail = findViewById(R.id.tv_userMail);
         firebaseAuth=FirebaseAuth.getInstance();
         imageProfile=findViewById(R.id.profileImage);
         img_editProfilePhoto = findViewById(R.id.editProfilePhoto);
-        sp=getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE);
+        txt_name=findViewById(R.id.txt_name);
+        txt_home=findViewById(R.id.txt_home_address);
+        txt_work=findViewById(R.id.txt_work_address);
+        card_car=findViewById(R.id.card_car_information);
+        btn_edit_home=findViewById(R.id.btn_edit_home);
+        btn_edit_work=findViewById(R.id.btn_edit_work);
         progressDialog=new ProgressDialog(this,R.style.ProgressDialog);
-        layout_ed_name=findViewById(R.id.layout_name);
-        layout_ed_pass=findViewById(R.id.layout_pass);
+        progressDialog.setTitle("Updating data");
+        progressDialog.setMessage("We are updating your data, please wait...");
+        Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
     }
 
     private void initListeners() {
@@ -269,55 +242,14 @@ public class Personal_information extends AppCompatActivity {
         relativeChangeColors.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (sw==false) {
-                    sw=true;
-                    relativeChangeColors.setBackgroundColor(getColor(R.color.verde_flojo));
-                    img_lockChange.setImageResource(R.drawable.ic_bx_lock_open);
-                    tv_unlock_save.setText("SAVE CHANGES");
-                    ed_name.setEnabled(true);
-                    ed_password.setEnabled(true);
-                } else if(sw) {
-                    sw=false;
+                if (sw) {
+                    updateFields();
                     relativeChangeColors.setBackgroundColor(Color.parseColor("#DC1C1C"));
                     img_lockChange.setImageResource(R.drawable.ic_baseline_lock_24);
-                    tv_unlock_save.setText("UNLOCK FIELDS");
-                    ed_name.setEnabled(false);
-                    ed_password.setEnabled(false);
-                    //llamar a un metodo o algo de guardado de datos
-                }
-
-            }
-        });
-
-        ed_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    setColorsFocus(ed_password,layout_ed_pass);
-                }else{
-                    removeColorsFocus(ed_password,layout_ed_pass);
                 }
             }
         });
 
-        ed_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    setColorsFocus(ed_name,layout_ed_name);
-                }else{
-                    removeColorsFocus(ed_name,layout_ed_name);
-                }
-            }
-        });
-
-        ln_subscription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //startActivity(new Intent(Personal_information.this, SubscribesActivity.class));
-            }
-        });
 
         img_editProfilePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -326,7 +258,86 @@ public class Personal_information extends AppCompatActivity {
             }
         });
 
+        btn_edit_work.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                variableBandera=1;
+                startAutocompleteIntent();
+            }
+        });
 
+        btn_edit_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                variableBandera=2;
+                startAutocompleteIntent();
+            }
+        });
+
+
+    }
+
+    private void startAutocompleteIntent(){
+        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
+
+        Intent intent = new Autocomplete.IntentBuilder(
+                AutocompleteActivityMode.OVERLAY, fields)
+                .setTypeFilter(TypeFilter.ADDRESS)
+                .build(this);
+        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+    }
+
+
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                if(variableBandera==1){
+                    txt_work.setText(place.getName());
+                }else if(variableBandera==2){
+                    txt_home.setText(place.getName());
+                }
+                relativeChangeColors.setBackgroundColor(getColor(R.color.verde_flojo));
+                img_lockChange.setImageResource(R.drawable.ic_bx_lock_open);
+                sw=true;
+
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                Status status = Autocomplete.getStatusFromIntent(data);
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+                relativeChangeColors.setBackgroundColor(Color.parseColor("#DC1C1C"));
+                img_lockChange.setImageResource(R.drawable.ic_baseline_lock_24);
+                sw=false;
+            }
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void updateFields(){
+        progressDialog.show();
+        HashMap<String,Object> hashMap=new HashMap<>();
+        hashMap.put("workAddress",txt_work.getText().toString());
+        hashMap.put("localidad",txt_home.getText().toString());
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                FirebaseFirestore.getInstance().collection("Usuarios").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).update(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Companion.user.setWorkAddress(txt_work.getText().toString());
+                                Companion.user.setLocalidad(txt_home.getText().toString());
+                                progressDialog.dismiss();
+                            }
+                        });
+                    }
+                });
+
+            }
+        });
     }
 
     private void openGallery() {
@@ -356,20 +367,6 @@ public class Personal_information extends AppCompatActivity {
             break;
         }
         return;
-    }
-
-    private void setColorsFocus(TextInputEditText ed, TextInputLayout txt){
-        txt.setHintTextColor(ColorStateList.valueOf(getColor(R.color.secondary)));
-        txt.setStartIconTintList(ColorStateList.valueOf(getColor(R.color.secondary)));
-        ed.setTextColor(getColor(R.color.secondary));
-        txt.setEndIconTintList(ColorStateList.valueOf(getColor(R.color.secondary)));
-    }
-
-    private void removeColorsFocus(TextInputEditText ed,TextInputLayout txt){
-        ed.setTextColor(Color.parseColor("#BABABA"));
-        txt.setHintTextColor(ColorStateList.valueOf(Color.parseColor("#D5D5D5")));
-        txt.setStartIconTintList(ColorStateList.valueOf(Color.parseColor("#D5D5D5")));
-        txt.setEndIconTintList(ColorStateList.valueOf(Color.parseColor("#D5D5D5")));
     }
 
 }

@@ -17,8 +17,6 @@ import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -28,13 +26,13 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
   private final RelativeLayout rootView;
 
   @NonNull
-  public final ImageButton buttonOpenCarInformation;
+  public final ImageButton btnEditHome;
 
   @NonNull
-  public final MaterialCardView cardName;
+  public final ImageButton btnEditWork;
 
   @NonNull
-  public final MaterialCardView cardPassword;
+  public final MaterialCardView cardCarInformation;
 
   @NonNull
   public final MaterialCardView cardViewImage;
@@ -43,25 +41,10 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
   public final CoordinatorLayout cordLayout;
 
   @NonNull
-  public final TextInputEditText edPass;
-
-  @NonNull
-  public final TextInputEditText edUsername;
-
-  @NonNull
   public final ImageView editProfilePhoto;
 
   @NonNull
   public final ImageView imageLock;
-
-  @NonNull
-  public final TextInputLayout layoutName;
-
-  @NonNull
-  public final TextInputLayout layoutPass;
-
-  @NonNull
-  public final LinearLayout layoutSubscriptionLevel;
 
   @NonNull
   public final ImageView profileImage;
@@ -87,31 +70,33 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
   @NonNull
   public final TextView tvUserMail;
 
+  @NonNull
+  public final TextView txtHomeAddress;
+
+  @NonNull
+  public final TextView txtName;
+
+  @NonNull
+  public final TextView txtWorkAddress;
+
   private ActivityPersonalInformationBinding(@NonNull RelativeLayout rootView,
-      @NonNull ImageButton buttonOpenCarInformation, @NonNull MaterialCardView cardName,
-      @NonNull MaterialCardView cardPassword, @NonNull MaterialCardView cardViewImage,
-      @NonNull CoordinatorLayout cordLayout, @NonNull TextInputEditText edPass,
-      @NonNull TextInputEditText edUsername, @NonNull ImageView editProfilePhoto,
-      @NonNull ImageView imageLock, @NonNull TextInputLayout layoutName,
-      @NonNull TextInputLayout layoutPass, @NonNull LinearLayout layoutSubscriptionLevel,
-      @NonNull ImageView profileImage, @NonNull LinearLayout relLayout,
-      @NonNull RelativeLayout relLayoutGeneral,
+      @NonNull ImageButton btnEditHome, @NonNull ImageButton btnEditWork,
+      @NonNull MaterialCardView cardCarInformation, @NonNull MaterialCardView cardViewImage,
+      @NonNull CoordinatorLayout cordLayout, @NonNull ImageView editProfilePhoto,
+      @NonNull ImageView imageLock, @NonNull ImageView profileImage,
+      @NonNull LinearLayout relLayout, @NonNull RelativeLayout relLayoutGeneral,
       @NonNull RelativeLayout relativeChangingColorOnClick, @NonNull TextView textUnlockSave,
       @NonNull TextView textView3, @NonNull MaterialToolbar toolbarInformation,
-      @NonNull TextView tvUserMail) {
+      @NonNull TextView tvUserMail, @NonNull TextView txtHomeAddress, @NonNull TextView txtName,
+      @NonNull TextView txtWorkAddress) {
     this.rootView = rootView;
-    this.buttonOpenCarInformation = buttonOpenCarInformation;
-    this.cardName = cardName;
-    this.cardPassword = cardPassword;
+    this.btnEditHome = btnEditHome;
+    this.btnEditWork = btnEditWork;
+    this.cardCarInformation = cardCarInformation;
     this.cardViewImage = cardViewImage;
     this.cordLayout = cordLayout;
-    this.edPass = edPass;
-    this.edUsername = edUsername;
     this.editProfilePhoto = editProfilePhoto;
     this.imageLock = imageLock;
-    this.layoutName = layoutName;
-    this.layoutPass = layoutPass;
-    this.layoutSubscriptionLevel = layoutSubscriptionLevel;
     this.profileImage = profileImage;
     this.relLayout = relLayout;
     this.relLayoutGeneral = relLayoutGeneral;
@@ -120,6 +105,9 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
     this.textView3 = textView3;
     this.toolbarInformation = toolbarInformation;
     this.tvUserMail = tvUserMail;
+    this.txtHomeAddress = txtHomeAddress;
+    this.txtName = txtName;
+    this.txtWorkAddress = txtWorkAddress;
   }
 
   @Override
@@ -149,21 +137,21 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.buttonOpenCarInformation;
-      ImageButton buttonOpenCarInformation = ViewBindings.findChildViewById(rootView, id);
-      if (buttonOpenCarInformation == null) {
+      id = R.id.btn_edit_home;
+      ImageButton btnEditHome = ViewBindings.findChildViewById(rootView, id);
+      if (btnEditHome == null) {
         break missingId;
       }
 
-      id = R.id.card_name;
-      MaterialCardView cardName = ViewBindings.findChildViewById(rootView, id);
-      if (cardName == null) {
+      id = R.id.btn_edit_work;
+      ImageButton btnEditWork = ViewBindings.findChildViewById(rootView, id);
+      if (btnEditWork == null) {
         break missingId;
       }
 
-      id = R.id.card_password;
-      MaterialCardView cardPassword = ViewBindings.findChildViewById(rootView, id);
-      if (cardPassword == null) {
+      id = R.id.card_car_information;
+      MaterialCardView cardCarInformation = ViewBindings.findChildViewById(rootView, id);
+      if (cardCarInformation == null) {
         break missingId;
       }
 
@@ -179,18 +167,6 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.ed_pass;
-      TextInputEditText edPass = ViewBindings.findChildViewById(rootView, id);
-      if (edPass == null) {
-        break missingId;
-      }
-
-      id = R.id.ed_username;
-      TextInputEditText edUsername = ViewBindings.findChildViewById(rootView, id);
-      if (edUsername == null) {
-        break missingId;
-      }
-
       id = R.id.editProfilePhoto;
       ImageView editProfilePhoto = ViewBindings.findChildViewById(rootView, id);
       if (editProfilePhoto == null) {
@@ -200,24 +176,6 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
       id = R.id.imageLock;
       ImageView imageLock = ViewBindings.findChildViewById(rootView, id);
       if (imageLock == null) {
-        break missingId;
-      }
-
-      id = R.id.layout_name;
-      TextInputLayout layoutName = ViewBindings.findChildViewById(rootView, id);
-      if (layoutName == null) {
-        break missingId;
-      }
-
-      id = R.id.layout_pass;
-      TextInputLayout layoutPass = ViewBindings.findChildViewById(rootView, id);
-      if (layoutPass == null) {
-        break missingId;
-      }
-
-      id = R.id.layout_subscriptionLevel;
-      LinearLayout layoutSubscriptionLevel = ViewBindings.findChildViewById(rootView, id);
-      if (layoutSubscriptionLevel == null) {
         break missingId;
       }
 
@@ -265,11 +223,28 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityPersonalInformationBinding((RelativeLayout) rootView,
-          buttonOpenCarInformation, cardName, cardPassword, cardViewImage, cordLayout, edPass,
-          edUsername, editProfilePhoto, imageLock, layoutName, layoutPass, layoutSubscriptionLevel,
+      id = R.id.txt_home_address;
+      TextView txtHomeAddress = ViewBindings.findChildViewById(rootView, id);
+      if (txtHomeAddress == null) {
+        break missingId;
+      }
+
+      id = R.id.txt_name;
+      TextView txtName = ViewBindings.findChildViewById(rootView, id);
+      if (txtName == null) {
+        break missingId;
+      }
+
+      id = R.id.txt_work_address;
+      TextView txtWorkAddress = ViewBindings.findChildViewById(rootView, id);
+      if (txtWorkAddress == null) {
+        break missingId;
+      }
+
+      return new ActivityPersonalInformationBinding((RelativeLayout) rootView, btnEditHome,
+          btnEditWork, cardCarInformation, cardViewImage, cordLayout, editProfilePhoto, imageLock,
           profileImage, relLayout, relLayoutGeneral, relativeChangingColorOnClick, textUnlockSave,
-          textView3, toolbarInformation, tvUserMail);
+          textView3, toolbarInformation, tvUserMail, txtHomeAddress, txtName, txtWorkAddress);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

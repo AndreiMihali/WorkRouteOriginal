@@ -113,7 +113,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+<<<<<<< HEAD
                     android:text="UNLOCK FIELDS"
+=======
+                    android:text="UPDATE DATA"
+>>>>>>> adding_services_notifications
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -139,6 +143,7 @@
             android:textSize="22sp"
             android:textStyle="bold" />
 
+<<<<<<< HEAD
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_name"
@@ -249,6 +254,171 @@
         </LinearLayout>
 
 
+=======
+        <LinearLayout
+            android:gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:src="@drawable/ic_baseline_person_24"
+                android:layout_height="35dp"
+                app:tint="@color/secondary" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Name"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/txt_name"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="wrap_content"
+                    android:text="Andrei Mihali"
+                    android:textSize="16sp"
+                    android:textColor="@color/secondary"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:src="@drawable/ic_baseline_work_24"
+                android:layout_height="35dp"
+                app:tint="@color/secondary" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Work Address"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/txt_work_address"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="wrap_content"
+                    android:text="Marismas 9 Madrid"
+                    android:textSize="16sp"
+                    android:textColor="@color/secondary"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <ImageButton
+                android:background="@android:color/transparent"
+                android:id="@+id/btn_edit_work"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_baseline_edit_24"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:src="@drawable/ic_baseline_home_24"
+                android:layout_height="35dp"
+                app:tint="@color/secondary" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Home Address"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/txt_home_address"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="wrap_content"
+                    android:text="Marismas 9 Madrid"
+                    android:textSize="16sp"
+                    android:textColor="@color/secondary"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <ImageButton
+                android:background="@android:color/transparent"
+                android:id="@+id/btn_edit_home"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_baseline_edit_24"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_car_information"
+            android:layout_width="match_parent"
+            app:cardCornerRadius="100dp"
+            app:cardBackgroundColor="#E5E5E6"
+            android:layout_marginTop="40dp"
+            app:contentPadding="15dp"
+            app:cardPreventCornerOverlap="true"
+            android:theme="@style/Theme.MaterialComponents.DayNight"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_baseline_drive_eta_24"
+                    android:layout_height="35dp"
+                    app:tint="@color/secondary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Car information"
+                    android:textSize="18sp"
+                    android:textColor="@color/secondary"
+                    android:textStyle="bold"
+                    android:layout_centerInParent="true"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+>>>>>>> adding_services_notifications
     </LinearLayout>
 
 </RelativeLayout>

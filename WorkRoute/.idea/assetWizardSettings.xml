@@ -373,7 +373,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/location_city/baseline_location_city_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/work/baseline_work_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -383,8 +383,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="c41212" />
-                            <entry key="outputName" value="ic_baseline_location_city_24" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="ic_baseline_work_24" />
                             <entry key="sourceFile" value="C:\Users\valin\Downloads\bx-lock-open.svg" />
                           </map>
                         </option>
