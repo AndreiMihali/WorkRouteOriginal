@@ -379,6 +379,21 @@
             ]
         },
         {
+            "outputFile": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\values-h480dp-land-v13_values-h480dp-land-v13.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\159938b0043343ca6af37c3367f7a16d\\transformed\\material-1.5.0\\res\\values-h480dp-land-v13\\values-h480dp-land-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,114,170,226,293,358,413,478,547",
+                        "endColumns": "58,55,55,66,64,54,64,68,68",
+                        "endOffsets": "109,165,221,288,353,408,473,542,611"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\values-v16_values-v16.arsc.flat",
             "map": [
                 {
@@ -408,21 +423,6 @@
                         "startOffsets": "55",
                         "endColumns": "65",
                         "endOffsets": "116"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\values-h480dp-land-v13_values-h480dp-land-v13.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\159938b0043343ca6af37c3367f7a16d\\transformed\\material-1.5.0\\res\\values-h480dp-land-v13\\values-h480dp-land-v13.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,114,170,226,293,358,413,478,547",
-                        "endColumns": "58,55,55,66,64,54,64,68,68",
-                        "endOffsets": "109,165,221,288,353,408,473,542,611"
                     }
                 }
             ]
@@ -1014,16 +1014,17 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\values-xlarge-v4_values-xlarge-v4.arsc.flat",
+            "outputFile": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\values-v26_values-v26.arsc.flat",
             "map": [
                 {
-                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\0de75bd3d2751f4805668e1944368e22\\transformed\\appcompat-1.4.1\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
+                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\0de75bd3d2751f4805668e1944368e22\\transformed\\appcompat-1.4.1\\res\\values-v26\\values-v26.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7",
+                        "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,126,197,267,337,405",
-                        "endColumns": "70,70,69,69,67,67",
-                        "endOffsets": "121,192,262,332,400,468"
+                        "startOffsets": "55,130,217,431,657,896",
+                        "endLines": "2,3,7,11,15,16",
+                        "endColumns": "74,86,12,12,12,92",
+                        "endOffsets": "125,212,426,652,891,984"
                     }
                 }
             ]
@@ -1155,17 +1156,16 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\values-v26_values-v26.arsc.flat",
+            "outputFile": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\values-xlarge-v4_values-xlarge-v4.arsc.flat",
             "map": [
                 {
-                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\0de75bd3d2751f4805668e1944368e22\\transformed\\appcompat-1.4.1\\res\\values-v26\\values-v26.xml",
+                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\0de75bd3d2751f4805668e1944368e22\\transformed\\appcompat-1.4.1\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
                     "from": {
-                        "startLines": "2,3,4,8,12,16",
+                        "startLines": "2,3,4,5,6,7",
                         "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,130,217,431,657,896",
-                        "endLines": "2,3,7,11,15,16",
-                        "endColumns": "74,86,12,12,12,92",
-                        "endOffsets": "125,212,426,652,891,984"
+                        "startOffsets": "55,126,197,267,337,405",
+                        "endColumns": "70,70,69,69,67,67",
+                        "endOffsets": "121,192,262,332,400,468"
                     }
                 }
             ]

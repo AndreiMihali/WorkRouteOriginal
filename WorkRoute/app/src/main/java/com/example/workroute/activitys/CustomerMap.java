@@ -91,6 +91,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -365,9 +367,12 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                 }
                 LatLng driverLocation=new LatLng(location.latitude,location.longitude);
 
-                Marker mDriverMarker=mMap.addMarker(new MarkerOptions().position(driverLocation));
-                mDriverMarker.setTag(key);
-                markerList.add(mDriverMarker);
+                if (!key.equals(firebaseAuth.getUid())) {
+                    Marker mCustomerMarker=mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
+                    .flat(true).anchor(0.5f,0.5f));
+                    mCustomerMarker.setTag(key);
+                    markerList.add(mCustomerMarker);
+                }
             }
 
             @Override
@@ -492,13 +497,14 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     }
 
     private Marker markerFinal;
+    private Circle circleMap;
+    private Marker myWorkMarker;
     private void getRouteToDestination(LatLng startDestination){
         Routing routing=new Routing.Builder()
                 .travelMode(AbstractRouting.TravelMode.DRIVING)
                 .withListener(new RoutingListener() {
                     @Override
                     public void onRoutingFailure(RouteException e) {
-
                     }
 
                     @Override
@@ -528,7 +534,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                                     Polyline polyline = mMap.addPolyline(polyOptions);
                                     polylines2.add(polyline);
                                 }
-                                markerFinal= mMap.addMarker(new MarkerOptions().position(destinationDriverLatLng).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.ic_baseline_location_on_24))))
+                                markerFinal= mMap.addMarker(new MarkerOptions().position(destinationDriverLatLng).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.flag))))
                                 .flat(true).anchor(0.5f,0.5f));
                             }
                         });
@@ -935,6 +941,20 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         map.put("destinationLat",getDestination(Companion.user.getWorkAddress(),"latitude"));
         map.put("destinationLong",getDestination(Companion.user.getWorkAddress(),"longitude"));
         customerReference.child(firebaseAuth.getUid()).child("destinations").updateChildren(map);
+        LatLng myDestination=new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(),"latitude")),Double.valueOf(getDestination(Companion.user.getWorkAddress(),"longitude")));
+        CircleOptions circleOptions=new CircleOptions()
+                .center(myDestination)
+                .radius(1500)
+                .strokeColor(getColor(R.color.secondary))
+                .clickable(false)
+                .strokeWidth(7);
+        circleMap=mMap.addCircle(circleOptions);
+        myWorkMarker=mMap.addMarker(new MarkerOptions().position(myDestination).title("My work").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.work))))
+                .flat(true).anchor(0.5f,0.5f));
+
+        LatLng myHome=new LatLng(Double.valueOf(getDestination(Companion.user.getLocalidad(),"latitude")),Double.valueOf(getDestination(Companion.user.getLocalidad(),"longitude")));
+        mMap.addMarker(new MarkerOptions().position(myHome).title("My home").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.home))))
+                .flat(true).anchor(0.5f,0.5f));
     }
 
     private void setMyLocationInDatabase(Location location){
@@ -1024,11 +1044,13 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-        erasePolylines();
-        if(!marker.getTag().toString().equals(firebaseAuth.getUid())&&(marker.getTag()!=null||marker.getTag().toString().equals(""))){
-            driverId=marker.getTag().toString();
-            driverLatLng= marker.getPosition();
-            getDriverDestination(driverId);
+        if(marker!=null&&marker.getTag()!=null){
+            erasePolylines();
+            if(!marker.getTag().toString().equals(firebaseAuth.getUid())&&(marker.getTag()!=null||marker.getTag().toString().equals(""))){
+                driverId=marker.getTag().toString();
+                driverLatLng= marker.getPosition();
+                getDriverDestination(driverId);
+            }
         }
         return false;
     }
@@ -1077,6 +1099,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     }
 
     private void erasePolylines(){
+
         if(markerFinal!=null){
             markerFinal.remove();
         }

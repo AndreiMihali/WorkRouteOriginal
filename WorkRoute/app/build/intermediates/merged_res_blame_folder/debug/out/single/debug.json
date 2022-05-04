@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_location.png.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\location.png"
+    },
+    {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\menu_menu_toolbar_profile.xml.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\menu\\menu_toolbar_profile.xml"
     },
@@ -74,6 +78,10 @@
     {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_outline_arrow_forward_24.xml.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_outline_arrow_forward_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_work.png.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\work.png"
     },
     {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_arrow_my_location_background.png.flat",
@@ -196,6 +204,10 @@
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_home_24.xml"
     },
     {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_flag.png.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\flag.png"
+    },
+    {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_general_settings.xml.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_general_settings.xml"
     },
@@ -252,16 +264,20 @@
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_outline_email_24.xml"
     },
     {
-        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_launcher_background.xml.flat",
-        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
-    },
-    {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
+    },
+    {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_arrow_my_location.png.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-xxhdpi\\arrow_my_location.png"
+    },
+    {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_favorite.png.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\favorite.png"
     },
     {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\anim_open_menu.xml.flat",
@@ -742,6 +758,10 @@
     {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_carnetfrente.jpg.flat",
         "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\carnetfrente.jpg"
+    },
+    {
+        "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_home.png.flat",
+        "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\home.png"
     },
     {
         "merged": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_car_map_background.png.flat",
