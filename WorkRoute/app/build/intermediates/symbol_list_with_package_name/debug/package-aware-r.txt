@@ -3032,6 +3032,7 @@ drawable ic_baseline_settings_24
 drawable ic_baseline_share_24
 drawable ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24
 drawable ic_baseline_star_24
+drawable ic_baseline_work_24
 drawable ic_bx_lock_alt
 drawable ic_bx_lock_open
 drawable ic_bxs_left_arrow_circle
@@ -3247,6 +3248,8 @@ id btn_continue
 id btn_customer
 id btn_deletePayMethods
 id btn_driver
+id btn_edit_home
+id btn_edit_work
 id btn_otherMethods
 id btn_rideStatus
 id btn_send
@@ -3255,7 +3258,6 @@ id button
 id buttonFront
 id buttonMenu
 id buttonMessages
-id buttonOpenCarInformation
 id buttonPanel
 id buttonProfile
 id buttonReverse
@@ -3280,6 +3282,7 @@ id cardImageFrente
 id cardImageReverse
 id cardViewImage
 id card_birthday
+id card_car_information
 id card_chat
 id card_content_root
 id card_customer
@@ -3387,7 +3390,6 @@ id ed_message
 id ed_pass
 id ed_pass_register
 id ed_plate
-id ed_username
 id ed_username_register
 id editProfile
 id editProfilePhoto
@@ -3486,7 +3488,6 @@ id layout_email
 id layout_email_recover_password
 id layout_name
 id layout_pass
-id layout_subscriptionLevel
 id left
 id leftToRight
 id legacy
@@ -3810,6 +3811,7 @@ id txt_destination
 id txt_destination_cost
 id txt_distance
 id txt_distance_cost
+id txt_home_address
 id txt_hora
 id txt_isTyping
 id txt_lastMessage_chat_list
@@ -3828,6 +3830,7 @@ id txt_travel_information
 id txt_travel_information_cost
 id txt_user_name_chat_list
 id txt_user_name_sub
+id txt_work_address
 id txt_work_direction
 id unchecked
 id uniform

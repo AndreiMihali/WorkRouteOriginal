@@ -199,6 +199,17 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                 });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(circleMap!=null&&myWorkMarker!=null&&myHomeMarker!=null){
+            myWorkMarker.remove();
+            myHomeMarker.remove();
+            circleMap.remove();
+            setDestination();
+        }
+    }
+
     /**
      * GUARDAMOS EL TOKEN PARA PODER RECUPERARLO Y MANDAR LAS NOTIFICIONES A LOS USUARIOS
      * @param token
@@ -498,7 +509,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
     private Marker markerFinal;
     private Circle circleMap;
-    private Marker myWorkMarker;
     private void getRouteToDestination(LatLng startDestination){
         Routing routing=new Routing.Builder()
                 .travelMode(AbstractRouting.TravelMode.DRIVING)
@@ -934,6 +944,8 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         }
     }
 
+    private Marker myHomeMarker;
+    private Marker myWorkMarker;
     private void setDestination(){
         DatabaseReference customerReference=FirebaseDatabase.getInstance().getReference("Customers");
         Map<String,Object> map=new HashMap<>();
@@ -953,7 +965,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                 .flat(true).anchor(0.5f,0.5f));
 
         LatLng myHome=new LatLng(Double.valueOf(getDestination(Companion.user.getLocalidad(),"latitude")),Double.valueOf(getDestination(Companion.user.getLocalidad(),"longitude")));
-        mMap.addMarker(new MarkerOptions().position(myHome).title("My home").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.home))))
+       myHomeMarker=mMap.addMarker(new MarkerOptions().position(myHome).title("My home").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.home))))
                 .flat(true).anchor(0.5f,0.5f));
     }
 
