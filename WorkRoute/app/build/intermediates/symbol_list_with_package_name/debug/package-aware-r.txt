@@ -3769,9 +3769,11 @@ id titleDividerNoCustom
 id title_template
 id toggle
 id toolbar
+id toolbarAppInfo
 id toolbarInformation
 id toolbarPay
 id toolbarSettings
+id toolbarUseWorkRoute
 id toolbar_bottom_sheet
 id toolbar_messages
 id toolbar_recovery_password
@@ -3934,6 +3936,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_active_subscriptions
 layout activity_add_driver_information
+layout activity_app_information
 layout activity_chats
 layout activity_confirm_login
 layout activity_create_account
@@ -3943,6 +3946,7 @@ layout activity_driving_license
 layout activity_first_time
 layout activity_forgot_password
 layout activity_general_settings
+layout activity_how_to_use_work_route
 layout activity_login
 layout activity_main
 layout activity_messages

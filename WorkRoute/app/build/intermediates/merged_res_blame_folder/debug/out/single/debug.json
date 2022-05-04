@@ -12,12 +12,12 @@
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\bx_check.xml"
     },
     {
-        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_forgot_password.xml.flat",
-        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_forgot_password.xml"
-    },
-    {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_forgot_password.xml.flat",
+        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_forgot_password.xml"
     },
     {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_location_pin_map_foreground.png.flat",
@@ -40,12 +40,12 @@
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-hdpi\\car_map_round.png"
     },
     {
-        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_gallery.png.flat",
-        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\gallery.png"
-    },
-    {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_settings_24.xml.flat",
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_settings_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_gallery.png.flat",
+        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\gallery.png"
     },
     {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_payments.png.flat",
@@ -68,12 +68,12 @@
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_bx_lock_alt.xml"
     },
     {
-        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_pay_method.xml.flat",
-        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_pay_method.xml"
-    },
-    {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_background_susc.xml.flat",
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\background_susc.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_pay_method.xml.flat",
+        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_pay_method.xml"
     },
     {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_location_city_24.xml.flat",
@@ -96,12 +96,12 @@
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\bx_x.xml"
     },
     {
-        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_car_map_background.png.flat",
-        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-mdpi\\car_map_background.png"
-    },
-    {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_work_icon_round.png.flat",
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-xxxhdpi\\work_icon_round.png"
+    },
+    {
+        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_car_map_background.png.flat",
+        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-mdpi\\car_map_background.png"
     },
     {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_customer.jpg.flat",
@@ -124,12 +124,12 @@
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_drive_eta_24.xml"
     },
     {
-        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_layout_confirmations.xml.flat",
-        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\layout_confirmations.xml"
-    },
-    {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_remove_24.xml.flat",
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_remove_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_layout_confirmations.xml.flat",
+        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\layout_confirmations.xml"
     },
     {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
@@ -276,12 +276,12 @@
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_credit_card_24.xml.flat",
-        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_credit_card_24.xml"
-    },
-    {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_back_img_icons_search.xml.flat",
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\back_img_icons_search.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_credit_card_24.xml.flat",
+        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_credit_card_24.xml"
     },
     {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_star_24.xml.flat",
@@ -532,6 +532,10 @@
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\anim\\close_menu.xml"
     },
     {
+        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_how_to_use_work_route.xml.flat",
+        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_how_to_use_work_route.xml"
+    },
+    {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_directions_car_24.xml.flat",
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\drawable\\ic_baseline_directions_car_24.xml"
     },
@@ -606,6 +610,10 @@
     {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_add_driver_information.xml.flat",
         "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_add_driver_information.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_app_information.xml.flat",
+        "source": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\layout\\activity_app_information.xml"
     },
     {
         "merged": "C:\\Users\\Ruben\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round.webp.flat",

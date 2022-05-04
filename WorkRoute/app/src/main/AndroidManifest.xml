@@ -22,6 +22,12 @@
         android:theme="@style/Theme.WorkRoute"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activitys.AppInformation"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.HowToUseWorkRoute"
+            android:exported="false" />
+        <activity
             android:name=".profile.ActiveSubscriptions"
             android:exported="false" />
         <activity

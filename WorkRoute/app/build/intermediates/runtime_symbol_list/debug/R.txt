@@ -3768,9 +3768,11 @@ int id titleDividerNoCustom 0x7f0a0286
 int id title_template 0x7f0a0287
 int id toggle 0x7f0a0288
 int id toolbar 0x7f0a0289
+int id toolbarAppInfo 0x7f0a02d7
 int id toolbarInformation 0x7f0a028a
 int id toolbarPay 0x7f0a028b
 int id toolbarSettings 0x7f0a028c
+int id toolbarUseWorkRoute 0x7f0a02d8
 int id toolbar_bottom_sheet 0x7f0a028d
 int id toolbar_messages 0x7f0a028e
 int id toolbar_recovery_password 0x7f0a028f
@@ -3933,6 +3935,7 @@ int layout abc_select_dialog_material 0x7f0d001a
 int layout abc_tooltip 0x7f0d001b
 int layout activity_active_subscriptions 0x7f0d001c
 int layout activity_add_driver_information 0x7f0d001d
+int layout activity_app_information 0x7f0d00ab
 int layout activity_chats 0x7f0d001e
 int layout activity_confirm_login 0x7f0d001f
 int layout activity_create_account 0x7f0d0020
@@ -3942,6 +3945,7 @@ int layout activity_driving_license 0x7f0d0023
 int layout activity_first_time 0x7f0d0024
 int layout activity_forgot_password 0x7f0d0025
 int layout activity_general_settings 0x7f0d0026
+int layout activity_how_to_use_work_route 0x7f0d00ac
 int layout activity_login 0x7f0d0027
 int layout activity_main 0x7f0d0028
 int layout activity_messages 0x7f0d0029

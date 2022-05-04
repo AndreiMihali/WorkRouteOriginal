@@ -98,14 +98,14 @@ public class GeneralSettingsActivity extends AppCompatActivity {
         tv_HowToUseWorkRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GeneralSettingsActivity.this,PayMethod.class));
+                startActivity(new Intent(GeneralSettingsActivity.this,HowToUseWorkRoute.class));
             }
         });
 
         tv_AboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GeneralSettingsActivity.this,PayMethod.class));
+                startActivity(new Intent(GeneralSettingsActivity.this,AppInformation.class));
             }
         });
 
