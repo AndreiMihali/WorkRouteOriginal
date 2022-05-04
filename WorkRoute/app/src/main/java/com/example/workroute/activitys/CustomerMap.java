@@ -705,7 +705,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
      *
-     *                             AQUI EMPIEZAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA DE LOS COJONES
+     *                             AQUI EMPIEZAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA
      *
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
@@ -1047,7 +1047,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
      *
-     *                             AQUI TERMINAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA DE LOS COJONES
+     *                             AQUI TERMINAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA
      *
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
@@ -1098,8 +1098,8 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                     polyOptions.addAll(route.get(i).getPoints());
                     Polyline polyline = mMap.addPolyline(polyOptions);
                     polylines.add(polyline);
-                    txt_travelInformation.setText("Your driver will arrive in " + route.get(i).getDurationText());
-                    txt_distance.setText("Your driver is "+route.get(i).getDistanceText()+" away");
+                    txt_travelInformation.setText("The driver arrive in " + route.get(i).getDurationText());
+                    txt_distance.setText("The driver is "+route.get(i).getDistanceText()+" away");
                 }
             }
         });
