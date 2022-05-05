@@ -8,13 +8,23 @@ public class SubscribedUser {
     private String userName;
     private String userWorkDirection;
     private String status;
+    private String userUid;
 
 
-    public SubscribedUser(String profilePhoto, String userName, String userWorkDirection,String status) {
+    public SubscribedUser(String profilePhoto, String userName, String userWorkDirection,String status,String userUid) {
         this.profilePhoto = profilePhoto;
         this.userName = userName;
         this.userWorkDirection = userWorkDirection;
         this.status=status;
+        this.userUid=userUid;
+    }
+
+    public String getUserUid() {
+        return userUid;
+    }
+
+    public void setUserUid(String userUid) {
+        this.userUid = userUid;
     }
 
     public String getStatus() {

@@ -2944,6 +2944,8 @@ drawable bxl_mastercard
 drawable bxl_paypal
 drawable bxl_visa
 drawable bxs_flag_checkered
+drawable bxs_time_five
+drawable bxs_x_circle
 drawable card_cvv
 drawable carnetfrente
 drawable collapse
@@ -3247,9 +3249,11 @@ id browser_actions_menu_item_icon
 id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
+id btn_accept
 id btn_addPayMethod
 id btn_continue
 id btn_customer
+id btn_decline
 id btn_deletePayMethods
 id btn_driver
 id btn_edit_home
@@ -3821,6 +3825,7 @@ id txt_destination
 id txt_destination_cost
 id txt_distance
 id txt_distance_cost
+id txt_homeAddressCustomer
 id txt_home_address
 id txt_hora
 id txt_isTyping
@@ -3829,6 +3834,7 @@ id txt_last_message_time_chat_list
 id txt_message
 id txt_name
 id txt_name_cost
+id txt_name_subscriber
 id txt_null
 id txt_null_notifications
 id txt_plateNumber
@@ -3841,6 +3847,7 @@ id txt_travel_information
 id txt_travel_information_cost
 id txt_user_name_chat_list
 id txt_user_name_sub
+id txt_workAddressCustomer
 id txt_work_address
 id txt_work_direction
 id unchecked
