@@ -154,15 +154,15 @@
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_rideStatus"
-                            android:layout_width="wrap_content"
                             style="@style/Widget.Material3.Button.OutlinedButton"
-                            app:strokeColor="#CC1204"
-                            android:text="Picked customer"
-                            android:textColor="@color/secondary"
-                            android:textStyle="bold"
-                            android:textSize="18sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:layout_height="wrap_content"/>
+                            android:text="Go to customer"
+                            android:textColor="@color/secondary"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:strokeColor="#CC1204" />
 
                         <ImageButton
                             android:id="@+id/button_message"
@@ -222,7 +222,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="end"
-                                android:text="20$"
+                                android:text="20$/month"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />

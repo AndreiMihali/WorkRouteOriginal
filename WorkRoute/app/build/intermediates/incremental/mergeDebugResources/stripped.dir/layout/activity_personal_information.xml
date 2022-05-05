@@ -113,11 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-<<<<<<< HEAD
-                    android:text="UNLOCK FIELDS"
-=======
                     android:text="UPDATE DATA"
->>>>>>> adding_services_notifications
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -143,118 +139,6 @@
             android:textSize="22sp"
             android:textStyle="bold" />
 
-<<<<<<< HEAD
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:outlineProvider="none"
-            android:theme="@style/Theme.MaterialComponents.DayNight"
-            app:cardCornerRadius="100dp">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layout_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:hint="Name"
-                android:textColorHint="#BABABA"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:startIconDrawable="@drawable/ic_baseline_person_24"
-                app:startIconTint="#BABABA">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:enabled="false"
-                    android:text="NombreUsuario"
-                    android:textColor="#BABABA"
-                    android:textSize="16sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:outlineProvider="none"
-            android:theme="@style/Theme.MaterialComponents.DayNight"
-            app:cardCornerRadius="100dp">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layout_pass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:hint="Password"
-                android:textColorHint="#BABABA"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:endIconMode="password_toggle"
-                app:endIconTint="#BABABA"
-                app:startIconDrawable="@drawable/ic_baseline_lock_24"
-                app:startIconTint="#BABABA">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_pass"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:enabled="false"
-                    android:inputType="textPassword"
-                    android:text="Password"
-                    android:textColor="#BABABA"
-                    android:textSize="16sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <LinearLayout
-            android:id="@+id/layout_subscriptionLevel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingVertical="10dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="23dp"
-                android:src="@drawable/ic_baseline_directions_car_24"
-                app:tint="#BABABA" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="15dp"
-                android:layout_weight="1"
-                android:text="Car Information"
-                android:textColor="#BABABA"
-                android:textSize="16sp" />
-
-            <ImageButton
-                android:id="@+id/buttonOpenCarInformation"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                app:tint="#737272"
-                tools:ignore="SpeakableTextPresentCheck" />
-        </LinearLayout>
-
-
-=======
         <LinearLayout
             android:gravity="center"
             android:layout_marginStart="10dp"
@@ -418,7 +302,6 @@
             </RelativeLayout>
 
         </com.google.android.material.card.MaterialCardView>
->>>>>>> adding_services_notifications
     </LinearLayout>
 
 </RelativeLayout>
