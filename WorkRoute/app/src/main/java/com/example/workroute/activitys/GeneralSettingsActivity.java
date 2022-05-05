@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -98,7 +96,7 @@ public class GeneralSettingsActivity extends AppCompatActivity {
         tv_HowToUseWorkRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GeneralSettingsActivity.this,HowToUseWorkRoute.class));
+                startActivity(new Intent(GeneralSettingsActivity.this, HelpCenter.class));
             }
         });
 

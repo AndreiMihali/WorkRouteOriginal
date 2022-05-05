@@ -9,7 +9,27 @@ import com.example.workroute.R;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.material.appbar.MaterialToolbar;
 
-public class HowToUseWorkRoute extends AppCompatActivity {
+public class HelpCenter extends AppCompatActivity {
+
+    /*
+        floating button menu
+        ubication button
+        driver map
+        customer map
+        chat
+        profile
+        ----
+        personal information
+        pay method
+        active subscriptions
+        general settings
+        delete account
+        log out
+        ----
+        notifications
+
+     */
+
 
     private MaterialToolbar toolbar;
 
@@ -18,7 +38,7 @@ public class HowToUseWorkRoute extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Register);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_how_to_use_work_route);
+        setContentView(R.layout.activity_help_center);
         new NetworkCallback().enable(this);
         main();
     }
