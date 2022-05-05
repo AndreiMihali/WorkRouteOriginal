@@ -54,7 +54,7 @@
             android:name="com.example.workroute.activitys.AppInformation"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.activitys.HowToUseWorkRoute"
+            android:name="com.example.workroute.activitys.HelpCenter"
             android:exported="false" />
         <activity
             android:name="com.example.workroute.profile.ActiveSubscriptions"

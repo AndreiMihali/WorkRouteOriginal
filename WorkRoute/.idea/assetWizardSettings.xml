@@ -383,8 +383,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_baseline_keyboard_arrow_up_24" />
+                            <entry key="color" value="0f0f6b" />
+                            <entry key="outputName" value="bx_chevron_up" />
                             <entry key="sourceFile" value="C:\Users\valin\Downloads\bx-lock-open.svg" />
                           </map>
                         </option>

@@ -25,7 +25,7 @@
             android:name=".activitys.AppInformation"
             android:exported="false" />
         <activity
-            android:name=".activitys.HowToUseWorkRoute"
+            android:name=".activitys.HelpCenter"
             android:exported="false" />
         <activity
             android:name=".profile.ActiveSubscriptions"
