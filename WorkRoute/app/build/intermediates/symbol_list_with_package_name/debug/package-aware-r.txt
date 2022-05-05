@@ -2918,6 +2918,8 @@ drawable background_messages
 drawable background_susc
 drawable bg_text_chat_left
 drawable bg_text_chat_right
+drawable blue_wallp2
+drawable blue_wallpaper
 drawable bottom_chat_selector
 drawable bottom_home_selector
 drawable bottom_navigation_selector
@@ -3450,6 +3452,7 @@ id image
 id imageCarnetFrente
 id imageCarnetReverso
 id imageLock
+id imageView
 id imageViewStar
 id image_confirmation
 id image_content_root
@@ -3637,9 +3640,6 @@ id progress_circular
 id progress_circular_notifications
 id progress_horizontal
 id radio
-id radioGroupMapViews
-id radioMapView1
-id radioMapView2
 id ratio
 id rectangles
 id recyclerSubs
@@ -3760,6 +3760,8 @@ id textSpacerNoTitle
 id textStart
 id textTop
 id textUnlock_Save
+id textView
+id textView2
 id textView3
 id text_input_end_icon
 id text_input_error_icon
@@ -3778,9 +3780,11 @@ id titleDividerNoCustom
 id title_template
 id toggle
 id toolbar
+id toolbarAppInfo
 id toolbarInformation
 id toolbarPay
 id toolbarSettings
+id toolbarUseWorkRoute
 id toolbar_bottom_sheet
 id toolbar_messages
 id toolbar_recovery_password
@@ -3798,9 +3802,8 @@ id transition_transform
 id triangle
 id tvAboutUs
 id tvFront
+id tvHowToUseWorkRoute
 id tvNotificationPreferences
-id tvNotificationPreferences2
-id tvNotifications
 id tvReverse
 id tv_userMail
 id tv_user_work_direction_sub
@@ -3946,6 +3949,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_active_subscriptions
 layout activity_add_driver_information
+layout activity_app_information
 layout activity_chats
 layout activity_confirm_login
 layout activity_create_account
@@ -3955,6 +3959,7 @@ layout activity_driving_license
 layout activity_first_time
 layout activity_forgot_password
 layout activity_general_settings
+layout activity_how_to_use_work_route
 layout activity_login
 layout activity_main
 layout activity_messages
@@ -4183,6 +4188,7 @@ string fingerprint_error_lockout
 string fingerprint_error_no_fingerprints
 string fingerprint_error_user_canceled
 string fingerprint_not_recognized
+string firebase_database_url
 string gcm_defaultSenderId
 string generic_error_no_device_credential
 string generic_error_no_keyguard

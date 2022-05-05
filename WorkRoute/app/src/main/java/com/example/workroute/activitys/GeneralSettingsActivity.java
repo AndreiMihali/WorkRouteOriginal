@@ -2,12 +2,14 @@ package com.example.workroute.activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.workroute.R;
@@ -20,10 +22,9 @@ public class GeneralSettingsActivity extends AppCompatActivity {
 
     private CheckBox emailBox;
     private CheckBox appBox;
+    private TextView tv_HowToUseWorkRoute;
+    private TextView tv_AboutUs;
 
-    private RadioButton mapView1;
-    private RadioButton mapView2;
-    private RadioGroup myGroup;
 
 
 
@@ -45,9 +46,8 @@ public class GeneralSettingsActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbarSettings);
         emailBox = findViewById(R.id.checkBoxEmailNotifications);
         appBox = findViewById(R.id.checkBoxAppNotifications);
-        mapView1 = findViewById(R.id.radioMapView1);
-        mapView2 = findViewById(R.id.radioMapView2);
-        myGroup = findViewById(R.id.radioGroupMapViews);
+        tv_HowToUseWorkRoute = findViewById(R.id.tvHowToUseWorkRoute);
+        tv_AboutUs = findViewById(R.id.tvAboutUs);
 
 
     }
@@ -95,23 +95,19 @@ public class GeneralSettingsActivity extends AppCompatActivity {
             }
         });
 
-        myGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        tv_HowToUseWorkRoute.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-
-            if (mapView1.isChecked()) {
-                //TODO: CODIGO QUE SE QUIERA METER PARA EL CAMBIO DE MAPA O LO QUE SEA
-                Toast.makeText(getApplicationContext(),"view1",Toast.LENGTH_SHORT).show();
-            }
-
-            if (mapView2.isChecked()) {
-                //TODO: CODIGO QUE SE QUIERA METER PARA EL CAMBIO DE MAPA O LO QUE SEA
-                Toast.makeText(getApplicationContext(),"view2",Toast.LENGTH_SHORT).show();
-            }
-
+            public void onClick(View v) {
+                startActivity(new Intent(GeneralSettingsActivity.this,HowToUseWorkRoute.class));
             }
         });
 
+        tv_AboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GeneralSettingsActivity.this,AppInformation.class));
+            }
+        });
 
 
     }

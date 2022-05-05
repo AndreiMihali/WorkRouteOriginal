@@ -51,6 +51,12 @@
         android:theme="@style/Theme.WorkRoute"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name="com.example.workroute.activitys.AppInformation"
+            android:exported="false" />
+        <activity
+            android:name="com.example.workroute.activitys.HowToUseWorkRoute"
+            android:exported="false" />
+        <activity
             android:name="com.example.workroute.profile.ActiveSubscriptions"
             android:exported="false" />
         <activity
