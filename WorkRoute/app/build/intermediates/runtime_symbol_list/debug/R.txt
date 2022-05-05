@@ -2935,6 +2935,7 @@ int drawable btn_radio_on_to_off_mtrl_animation 0x7f080077
 int drawable bx_check 0x7f080078
 int drawable bx_check_double 0x7f080079
 int drawable bx_chevron_down 0x7f08013b
+int drawable bx_chevron_up 0x7f08013c
 int drawable bx_error_alt 0x7f08007a
 int drawable bx_hourglass 0x7f08007b
 int drawable bx_id_card 0x7f08007c
@@ -4000,7 +4001,7 @@ int layout activity_driving_license 0x7f0d0024
 int layout activity_first_time 0x7f0d0025
 int layout activity_forgot_password 0x7f0d0026
 int layout activity_general_settings 0x7f0d0027
-int layout activity_how_to_use_work_route 0x7f0d0028
+int layout activity_help_center 0x7f0d00ad
 int layout activity_login 0x7f0d0029
 int layout activity_main 0x7f0d002a
 int layout activity_messages 0x7f0d002b

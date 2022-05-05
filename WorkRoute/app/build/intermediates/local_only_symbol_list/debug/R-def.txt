@@ -50,6 +50,7 @@ drawable bottom_user_selector
 drawable bx_check
 drawable bx_check_double
 drawable bx_chevron_down
+drawable bx_chevron_up
 drawable bx_error_alt
 drawable bx_hourglass
 drawable bx_id_card
@@ -400,7 +401,7 @@ layout activity_driving_license
 layout activity_first_time
 layout activity_forgot_password
 layout activity_general_settings
-layout activity_how_to_use_work_route
+layout activity_help_center
 layout activity_login
 layout activity_main
 layout activity_messages

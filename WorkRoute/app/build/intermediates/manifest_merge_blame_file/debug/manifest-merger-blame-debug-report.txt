@@ -106,8 +106,8 @@
 55-->C:\Users\valin\Desktop\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:26:13-37
 56        <activity
 56-->C:\Users\valin\Desktop\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:27:9-29:40
-57            android:name="com.example.workroute.activitys.HowToUseWorkRoute"
-57-->C:\Users\valin\Desktop\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:28:13-56
+57            android:name="com.example.workroute.activitys.HelpCenter"
+57-->C:\Users\valin\Desktop\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:28:13-49
 58            android:exported="false" />
 58-->C:\Users\valin\Desktop\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:29:13-37
 59        <activity
