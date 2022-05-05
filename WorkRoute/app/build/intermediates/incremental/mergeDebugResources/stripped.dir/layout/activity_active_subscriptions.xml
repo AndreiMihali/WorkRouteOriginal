@@ -42,6 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:lineSpacingExtra="5dp"
             android:text="You don't have anyone subscribed yet"
             android:textColor="@color/secondary"
             android:textSize="20sp"
@@ -68,13 +69,16 @@
                     android:src="@drawable/ic_baseline_remove_24" />
 
                 <TextView
+                    android:layout_marginHorizontal="20dp"
                     android:id="@+id/txt_name_subscriber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/boton_drag"
+                    android:layout_marginVertical="5dp"
                     android:layout_centerInParent="true"
+                    android:lineSpacingExtra="5dp"
                     android:layout_marginTop="10dp"
-                    android:text="Andrei Mihali wants to subscribe to you"
+                    android:text="You declined or canceled this user. Ask the user to send you another request"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
@@ -83,7 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/boton_drag"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="60dp"
                     android:background="@drawable/back_second_sheet">
 
                     <RelativeLayout

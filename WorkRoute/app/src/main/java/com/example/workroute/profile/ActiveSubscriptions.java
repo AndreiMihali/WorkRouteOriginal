@@ -114,10 +114,12 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
             txt_subscriber.setText(data.get(adapter.itemSelected).getUserName()+" wants to subscribe to you");
             btn_cancel.setVisibility(View.GONE);
             lnUnsubscribed.setVisibility(View.VISIBLE);
+            totalPay.setText("20$/month");
         }else if(data.get(adapter.itemSelected).getStatus().equals("accepted")){
             txt_subscriber.setText(data.get(adapter.itemSelected).getUserName()+" is already subscribed to you");
             lnUnsubscribed.setVisibility(View.GONE);
             btn_cancel.setVisibility(View.VISIBLE);
+            totalPay.setText("20$/month");
         }else if(data.get(adapter.itemSelected).getStatus().equals("declined")||data.get(adapter.itemSelected).getStatus().equals("canceled")){
             txt_subscriber.setText("You declined or canceled this user. Ask the user to send you another request");
             lnUnsubscribed.setVisibility(View.GONE);
