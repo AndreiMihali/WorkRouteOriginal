@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,300 +8,403 @@
     android:layout_height="match_parent"
     tools:context=".profile.Personal_information">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/cord_layout"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="350dp">
+        android:id="@+id/nestedScroll"
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/rel_layout"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/back_driver_information"
-            android:orientation="vertical"
-            android:paddingBottom="70dp">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbarInformation"
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/cord_layout"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-                app:navigationIconTint="@color/white"
-                app:title=""
-                app:titleTextColor="@color/secondary" />
+                android:layout_height="350dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/rel_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/back_driver_information"
+                    android:orientation="vertical"
+                    android:paddingBottom="70dp">
+
+                    <com.google.android.material.appbar.MaterialToolbar
+                        android:id="@+id/toolbarInformation"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+                        app:navigationIconTint="@color/white"
+                        app:title=""
+                        app:titleTextColor="@color/secondary" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardViewImage"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_gravity="center_vertical"
+                            android:theme="@style/Theme.MaterialComponents.DayNight"
+                            app:cardCornerRadius="100dp">
+
+
+                            <ImageView
+                                android:id="@+id/profileImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/steven_binotto_9vduc_sgrsi_unsplash" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <ImageView
+                            android:id="@+id/editProfilePhoto"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_weight="1"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="30dp"
+                            app:tint="@color/white"
+                            app:srcCompat="@drawable/gallery" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_userMail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="userdefaukt@gmail.com"
+                        android:textColor="@color/white"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardViewImage"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="60dp"
                     android:theme="@style/Theme.MaterialComponents.DayNight"
-                    app:cardCornerRadius="100dp">
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="50dp"
+                    app:layout_anchor="@id/rel_layout"
+                    app:layout_anchorGravity="bottom">
 
-
-                    <ImageView
-                        android:id="@+id/profileImage"
+                    <RelativeLayout
+                        android:id="@+id/relativeChangingColorOnClick"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/steven_binotto_9vduc_sgrsi_unsplash" />
+                        android:layout_height="wrap_content"
+                        android:background="#DC1C1C"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="10dp">
+
+                        <ImageView
+                            android:id="@+id/imageLock"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:padding="5dp"
+                            android:src="@drawable/ic_baseline_lock_24"
+                            app:tint="@color/white" />
+
+                        <TextView
+                            android:id="@+id/textUnlock_Save"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="UPDATE DATA"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
 
                 </com.google.android.material.card.MaterialCardView>
 
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-                <ImageView
-                    android:id="@+id/editProfilePhoto"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="30dp"
-                    app:tint="@color/white"
-                    app:srcCompat="@drawable/gallery" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_userMail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="userdefaukt@gmail.com"
-                android:textColor="@color/white"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="60dp"
-            android:theme="@style/Theme.MaterialComponents.DayNight"
-            app:cardBackgroundColor="@android:color/transparent"
-            app:cardCornerRadius="50dp"
-            app:layout_anchor="@id/rel_layout"
-            app:layout_anchorGravity="bottom">
-
-            <RelativeLayout
-                android:id="@+id/relativeChangingColorOnClick"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#DC1C1C"
-                android:paddingHorizontal="15dp"
-                android:paddingVertical="10dp">
-
-                <ImageView
-                    android:id="@+id/imageLock"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_baseline_lock_24"
-                    app:tint="@color/white" />
+                android:layout_height="match_parent"
+                android:layout_below="@id/cord_layout"
+                android:layout_marginHorizontal="40dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textUnlock_Save"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="UPDATE DATA"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:layout_marginTop="20dp"
+                    android:text="Account Info"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
-            </RelativeLayout>
 
-        </com.google.android.material.card.MaterialCardView>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/cord_layout"
-        android:layout_marginHorizontal="40dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Account Info"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="35dp"
-                android:src="@drawable/ic_baseline_person_24"
-                android:layout_height="35dp"
-                app:tint="@color/secondary" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="20dp"
-                android:layout_height="wrap_content">
-
-                <TextView
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
-                    android:text="Name"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"
-                    android:layout_height="wrap_content"/>
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/txt_name"
-                    android:layout_marginTop="2dp"
-                    android:layout_width="wrap_content"
-                    android:text="Andrei Mihali"
-                    android:textSize="16sp"
-                    android:textColor="@color/secondary"
-                    android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:src="@drawable/ic_baseline_person_24"
+                        android:layout_height="35dp"
+                        app:tint="@color/secondary" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="20dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:text="Name"
+                            android:textSize="18sp"
+                            android:textColor="@color/black"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/txt_name"
+                            android:layout_marginTop="2dp"
+                            android:layout_width="wrap_content"
+                            android:text="Andrei Mihali"
+                            android:textSize="16sp"
+                            android:textColor="@color/secondary"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:src="@drawable/ic_baseline_work_24"
+                        android:layout_height="35dp"
+                        app:tint="@color/secondary" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="20dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:text="Work Address"
+                            android:textSize="18sp"
+                            android:textColor="@color/black"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/txt_work_address"
+                            android:layout_marginTop="2dp"
+                            android:layout_width="wrap_content"
+                            android:text="Marismas 9 Madrid"
+                            android:textSize="16sp"
+                            android:textColor="@color/secondary"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:background="@android:color/transparent"
+                        android:id="@+id/btn_edit_work"
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/ic_baseline_edit_24"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:src="@drawable/ic_baseline_home_24"
+                        android:layout_height="35dp"
+                        app:tint="@color/secondary" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="20dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:text="Home Address"
+                            android:textSize="18sp"
+                            android:textColor="@color/black"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/txt_home_address"
+                            android:layout_marginTop="2dp"
+                            android:layout_width="wrap_content"
+                            android:text="Marismas 9 Madrid"
+                            android:textSize="16sp"
+                            android:textColor="@color/secondary"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:background="@android:color/transparent"
+                        android:id="@+id/btn_edit_home"
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/ic_baseline_edit_24"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_car_information"
+                    android:layout_width="match_parent"
+                    app:cardCornerRadius="20dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardBackgroundColor="#E5E5E6"
+                    android:layout_marginTop="25dp"
+                    app:contentPadding="15dp"
+                    app:cardPreventCornerOverlap="true"
+                    android:theme="@style/Theme.MaterialComponents.DayNight"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="35dp"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_baseline_drive_eta_24"
+                                android:layout_height="35dp"
+                                app:tint="@color/secondary" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:text="Car information"
+                                android:textSize="18sp"
+                                android:textColor="@color/secondary"
+                                android:textStyle="bold"
+                                android:layout_centerInParent="true"
+                                android:layout_height="wrap_content"/>
+
+                            <ImageButton
+                                android:id="@+id/buttonUpDown"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                                android:background="@android:color/transparent"
+                                app:tint="@color/secondary" />
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:id="@+id/ln_information"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:text="Plate Number:"
+                                    android:textSize="18sp"
+                                    android:textColor="@color/black"
+                                    android:layout_height="wrap_content"/>
+
+                                <TextView
+                                    android:id="@+id/txt_plateNumber"
+                                    android:layout_width="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:text="ASDC 1223"
+                                    android:textColor="@color/secondary"
+                                    android:textSize="16sp"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:text="Car Type:"
+                                    android:textSize="18sp"
+                                    android:textColor="@color/black"
+                                    android:layout_height="wrap_content"/>
+
+                                <TextView
+                                    android:id="@+id/txt_car_type"
+                                    android:layout_width="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:text="Minivan"
+                                    android:textColor="@color/secondary"
+                                    android:textSize="16sp"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:text="Car color:"
+                                    android:textSize="18sp"
+                                    android:textColor="@color/black"
+                                    android:layout_height="wrap_content"/>
+
+                                <TextView
+                                    android:id="@+id/txt_car_color"
+                                    android:layout_width="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:text="Orange"
+                                    android:textColor="@color/secondary"
+                                    android:textSize="16sp"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_marginStart="10dp"
-            android:layout_width="match_parent"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="35dp"
-                android:src="@drawable/ic_baseline_work_24"
-                android:layout_height="35dp"
-                app:tint="@color/secondary" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="20dp"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="Work Address"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:id="@+id/txt_work_address"
-                    android:layout_marginTop="2dp"
-                    android:layout_width="wrap_content"
-                    android:text="Marismas 9 Madrid"
-                    android:textSize="16sp"
-                    android:textColor="@color/secondary"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-            <ImageButton
-                android:background="@android:color/transparent"
-                android:id="@+id/btn_edit_work"
-                android:layout_width="wrap_content"
-                android:src="@drawable/ic_baseline_edit_24"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_marginStart="10dp"
-            android:layout_width="match_parent"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="35dp"
-                android:src="@drawable/ic_baseline_home_24"
-                android:layout_height="35dp"
-                app:tint="@color/secondary" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="20dp"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="Home Address"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:id="@+id/txt_home_address"
-                    android:layout_marginTop="2dp"
-                    android:layout_width="wrap_content"
-                    android:text="Marismas 9 Madrid"
-                    android:textSize="16sp"
-                    android:textColor="@color/secondary"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-            <ImageButton
-                android:background="@android:color/transparent"
-                android:id="@+id/btn_edit_home"
-                android:layout_width="wrap_content"
-                android:src="@drawable/ic_baseline_edit_24"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_car_information"
-            android:layout_width="match_parent"
-            app:cardCornerRadius="100dp"
-            app:cardBackgroundColor="#E5E5E6"
-            android:layout_marginTop="40dp"
-            app:contentPadding="15dp"
-            app:cardPreventCornerOverlap="true"
-            android:theme="@style/Theme.MaterialComponents.DayNight"
-            android:layout_height="wrap_content">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_baseline_drive_eta_24"
-                    android:layout_height="35dp"
-                    app:tint="@color/secondary" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="Car information"
-                    android:textSize="18sp"
-                    android:textColor="@color/secondary"
-                    android:textStyle="bold"
-                    android:layout_centerInParent="true"
-                    android:layout_height="wrap_content"/>
-            </RelativeLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-    </LinearLayout>
-
-</RelativeLayout>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -3010,7 +3010,9 @@ drawable ic_baseline_group_work_24
 drawable ic_baseline_help_24
 drawable ic_baseline_home_24
 drawable ic_baseline_home_work_24
+drawable ic_baseline_keyboard_arrow_down_24
 drawable ic_baseline_keyboard_arrow_right_24
+drawable ic_baseline_keyboard_arrow_up_24
 drawable ic_baseline_keyboard_backspace_24
 drawable ic_baseline_location_city_24
 drawable ic_baseline_location_on_24
@@ -3266,6 +3268,7 @@ id buttonReverse
 id buttonSave
 id buttonSaveLicense
 id buttonUbi
+id buttonUpDown
 id button_cancel
 id button_continue
 id button_create
@@ -3502,6 +3505,7 @@ id linears_datos
 id listMode
 id list_item
 id ln_escribir
+id ln_information
 id loadContent
 id location_icon
 id logoWork
@@ -3576,6 +3580,7 @@ id navigation_bar_item_labels_group
 id navigation_bar_item_large_label_view
 id navigation_bar_item_small_label_view
 id navigation_header_container
+id nestedScroll
 id never
 id neverCompleteToEnd
 id neverCompleteToStart
@@ -3807,6 +3812,8 @@ id tvNotificationPreferences
 id tvReverse
 id tv_userMail
 id tv_user_work_direction_sub
+id txt_car_color
+id txt_car_type
 id txt_ciudad
 id txt_cumple
 id txt_description
@@ -3824,6 +3831,7 @@ id txt_name
 id txt_name_cost
 id txt_null
 id txt_null_notifications
+id txt_plateNumber
 id txt_startLocation
 id txt_startLocation_cost
 id txt_title

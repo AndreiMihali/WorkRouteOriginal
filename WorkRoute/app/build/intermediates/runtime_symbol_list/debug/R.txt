@@ -3009,7 +3009,9 @@ int drawable ic_baseline_group_work_24 0x7f0800c1
 int drawable ic_baseline_help_24 0x7f0800c2
 int drawable ic_baseline_home_24 0x7f0800c3
 int drawable ic_baseline_home_work_24 0x7f0800c4
+int drawable ic_baseline_keyboard_arrow_down_24 0x7f080137
 int drawable ic_baseline_keyboard_arrow_right_24 0x7f0800c5
+int drawable ic_baseline_keyboard_arrow_up_24 0x7f080138
 int drawable ic_baseline_keyboard_backspace_24 0x7f0800c6
 int drawable ic_baseline_location_city_24 0x7f0800c7
 int drawable ic_baseline_location_on_24 0x7f0800c8
@@ -3265,6 +3267,7 @@ int id buttonReverse 0x7f0a0087
 int id buttonSave 0x7f0a0088
 int id buttonSaveLicense 0x7f0a0089
 int id buttonUbi 0x7f0a008a
+int id buttonUpDown 0x7f0a02de
 int id button_cancel 0x7f0a008b
 int id button_continue 0x7f0a008c
 int id button_create 0x7f0a008d
@@ -3501,6 +3504,7 @@ int id linears_datos 0x7f0a0173
 int id listMode 0x7f0a0174
 int id list_item 0x7f0a0175
 int id ln_escribir 0x7f0a0176
+int id ln_information 0x7f0a02df
 int id loadContent 0x7f0a0177
 int id location_icon 0x7f0a0178
 int id logoWork 0x7f0a0179
@@ -3575,6 +3579,7 @@ int id navigation_bar_item_labels_group 0x7f0a01bd
 int id navigation_bar_item_large_label_view 0x7f0a01be
 int id navigation_bar_item_small_label_view 0x7f0a01bf
 int id navigation_header_container 0x7f0a01c0
+int id nestedScroll 0x7f0a02e3
 int id never 0x7f0a01c1
 int id neverCompleteToEnd 0x7f0a01c2
 int id neverCompleteToStart 0x7f0a01c3
@@ -3806,6 +3811,8 @@ int id tvNotificationPreferences 0x7f0a02a4
 int id tvReverse 0x7f0a02a5
 int id tv_userMail 0x7f0a02a6
 int id tv_user_work_direction_sub 0x7f0a02a7
+int id txt_car_color 0x7f0a02e0
+int id txt_car_type 0x7f0a02e1
 int id txt_ciudad 0x7f0a02a8
 int id txt_cumple 0x7f0a02a9
 int id txt_description 0x7f0a02aa
@@ -3823,6 +3830,7 @@ int id txt_name 0x7f0a02b5
 int id txt_name_cost 0x7f0a02b6
 int id txt_null 0x7f0a02b7
 int id txt_null_notifications 0x7f0a02b8
+int id txt_plateNumber 0x7f0a02e2
 int id txt_startLocation 0x7f0a02b9
 int id txt_startLocation_cost 0x7f0a02ba
 int id txt_title 0x7f0a02bb

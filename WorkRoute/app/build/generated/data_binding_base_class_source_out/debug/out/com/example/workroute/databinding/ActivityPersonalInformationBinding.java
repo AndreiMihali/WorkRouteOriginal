@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.widget.NestedScrollView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
@@ -23,13 +24,16 @@ import java.lang.String;
 
 public final class ActivityPersonalInformationBinding implements ViewBinding {
   @NonNull
-  private final RelativeLayout rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
   public final ImageButton btnEditHome;
 
   @NonNull
   public final ImageButton btnEditWork;
+
+  @NonNull
+  public final ImageButton buttonUpDown;
 
   @NonNull
   public final MaterialCardView cardCarInformation;
@@ -47,13 +51,19 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
   public final ImageView imageLock;
 
   @NonNull
+  public final LinearLayout lnInformation;
+
+  @NonNull
+  public final NestedScrollView nestedScroll;
+
+  @NonNull
   public final ImageView profileImage;
 
   @NonNull
   public final LinearLayout relLayout;
 
   @NonNull
-  public final RelativeLayout relLayoutGeneral;
+  public final CoordinatorLayout relLayoutGeneral;
 
   @NonNull
   public final RelativeLayout relativeChangingColorOnClick;
@@ -71,32 +81,47 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
   public final TextView tvUserMail;
 
   @NonNull
+  public final TextView txtCarColor;
+
+  @NonNull
+  public final TextView txtCarType;
+
+  @NonNull
   public final TextView txtHomeAddress;
 
   @NonNull
   public final TextView txtName;
 
   @NonNull
+  public final TextView txtPlateNumber;
+
+  @NonNull
   public final TextView txtWorkAddress;
 
-  private ActivityPersonalInformationBinding(@NonNull RelativeLayout rootView,
+  private ActivityPersonalInformationBinding(@NonNull CoordinatorLayout rootView,
       @NonNull ImageButton btnEditHome, @NonNull ImageButton btnEditWork,
-      @NonNull MaterialCardView cardCarInformation, @NonNull MaterialCardView cardViewImage,
-      @NonNull CoordinatorLayout cordLayout, @NonNull ImageView editProfilePhoto,
-      @NonNull ImageView imageLock, @NonNull ImageView profileImage,
-      @NonNull LinearLayout relLayout, @NonNull RelativeLayout relLayoutGeneral,
+      @NonNull ImageButton buttonUpDown, @NonNull MaterialCardView cardCarInformation,
+      @NonNull MaterialCardView cardViewImage, @NonNull CoordinatorLayout cordLayout,
+      @NonNull ImageView editProfilePhoto, @NonNull ImageView imageLock,
+      @NonNull LinearLayout lnInformation, @NonNull NestedScrollView nestedScroll,
+      @NonNull ImageView profileImage, @NonNull LinearLayout relLayout,
+      @NonNull CoordinatorLayout relLayoutGeneral,
       @NonNull RelativeLayout relativeChangingColorOnClick, @NonNull TextView textUnlockSave,
       @NonNull TextView textView3, @NonNull MaterialToolbar toolbarInformation,
-      @NonNull TextView tvUserMail, @NonNull TextView txtHomeAddress, @NonNull TextView txtName,
+      @NonNull TextView tvUserMail, @NonNull TextView txtCarColor, @NonNull TextView txtCarType,
+      @NonNull TextView txtHomeAddress, @NonNull TextView txtName, @NonNull TextView txtPlateNumber,
       @NonNull TextView txtWorkAddress) {
     this.rootView = rootView;
     this.btnEditHome = btnEditHome;
     this.btnEditWork = btnEditWork;
+    this.buttonUpDown = buttonUpDown;
     this.cardCarInformation = cardCarInformation;
     this.cardViewImage = cardViewImage;
     this.cordLayout = cordLayout;
     this.editProfilePhoto = editProfilePhoto;
     this.imageLock = imageLock;
+    this.lnInformation = lnInformation;
+    this.nestedScroll = nestedScroll;
     this.profileImage = profileImage;
     this.relLayout = relLayout;
     this.relLayoutGeneral = relLayoutGeneral;
@@ -105,14 +130,17 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
     this.textView3 = textView3;
     this.toolbarInformation = toolbarInformation;
     this.tvUserMail = tvUserMail;
+    this.txtCarColor = txtCarColor;
+    this.txtCarType = txtCarType;
     this.txtHomeAddress = txtHomeAddress;
     this.txtName = txtName;
+    this.txtPlateNumber = txtPlateNumber;
     this.txtWorkAddress = txtWorkAddress;
   }
 
   @Override
   @NonNull
-  public RelativeLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -149,6 +177,12 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.buttonUpDown;
+      ImageButton buttonUpDown = ViewBindings.findChildViewById(rootView, id);
+      if (buttonUpDown == null) {
+        break missingId;
+      }
+
       id = R.id.card_car_information;
       MaterialCardView cardCarInformation = ViewBindings.findChildViewById(rootView, id);
       if (cardCarInformation == null) {
@@ -179,6 +213,18 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.ln_information;
+      LinearLayout lnInformation = ViewBindings.findChildViewById(rootView, id);
+      if (lnInformation == null) {
+        break missingId;
+      }
+
+      id = R.id.nestedScroll;
+      NestedScrollView nestedScroll = ViewBindings.findChildViewById(rootView, id);
+      if (nestedScroll == null) {
+        break missingId;
+      }
+
       id = R.id.profileImage;
       ImageView profileImage = ViewBindings.findChildViewById(rootView, id);
       if (profileImage == null) {
@@ -191,7 +237,7 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
         break missingId;
       }
 
-      RelativeLayout relLayoutGeneral = (RelativeLayout) rootView;
+      CoordinatorLayout relLayoutGeneral = (CoordinatorLayout) rootView;
 
       id = R.id.relativeChangingColorOnClick;
       RelativeLayout relativeChangingColorOnClick = ViewBindings.findChildViewById(rootView, id);
@@ -223,6 +269,18 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.txt_car_color;
+      TextView txtCarColor = ViewBindings.findChildViewById(rootView, id);
+      if (txtCarColor == null) {
+        break missingId;
+      }
+
+      id = R.id.txt_car_type;
+      TextView txtCarType = ViewBindings.findChildViewById(rootView, id);
+      if (txtCarType == null) {
+        break missingId;
+      }
+
       id = R.id.txt_home_address;
       TextView txtHomeAddress = ViewBindings.findChildViewById(rootView, id);
       if (txtHomeAddress == null) {
@@ -235,16 +293,24 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.txt_plateNumber;
+      TextView txtPlateNumber = ViewBindings.findChildViewById(rootView, id);
+      if (txtPlateNumber == null) {
+        break missingId;
+      }
+
       id = R.id.txt_work_address;
       TextView txtWorkAddress = ViewBindings.findChildViewById(rootView, id);
       if (txtWorkAddress == null) {
         break missingId;
       }
 
-      return new ActivityPersonalInformationBinding((RelativeLayout) rootView, btnEditHome,
-          btnEditWork, cardCarInformation, cardViewImage, cordLayout, editProfilePhoto, imageLock,
-          profileImage, relLayout, relLayoutGeneral, relativeChangingColorOnClick, textUnlockSave,
-          textView3, toolbarInformation, tvUserMail, txtHomeAddress, txtName, txtWorkAddress);
+      return new ActivityPersonalInformationBinding((CoordinatorLayout) rootView, btnEditHome,
+          btnEditWork, buttonUpDown, cardCarInformation, cardViewImage, cordLayout,
+          editProfilePhoto, imageLock, lnInformation, nestedScroll, profileImage, relLayout,
+          relLayoutGeneral, relativeChangingColorOnClick, textUnlockSave, textView3,
+          toolbarInformation, tvUserMail, txtCarColor, txtCarType, txtHomeAddress, txtName,
+          txtPlateNumber, txtWorkAddress);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

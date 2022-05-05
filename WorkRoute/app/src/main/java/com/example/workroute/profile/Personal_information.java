@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.widget.NestedScrollView;
 
 import android.Manifest;
 import android.app.Activity;
@@ -37,6 +38,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -70,7 +72,11 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -86,12 +92,13 @@ public class Personal_information extends AppCompatActivity {
     private MaterialToolbar toolbar;
     private RelativeLayout relativeChangeColors;
     private ImageView img_lockChange,imageProfile,img_editProfilePhoto;
-    private TextView tv_unlock_save,tv_user_mail,txt_name,txt_work,txt_home;
+    private TextView tv_user_mail,txt_name,txt_work,txt_home;
     private MaterialCardView card_car;
-    private ImageButton btn_edit_work,btn_edit_home;
+    private TextView plateNumber,carType,carColor;
+    private LinearLayout lnCarContent;
+    private ImageButton btn_edit_work,btn_edit_home,btnUpDown;
     private boolean sw = false;
     private FirebaseAuth firebaseAuth;
-    private String userData[]=new String[2];
     private ProgressDialog progressDialog;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private final int CODE_GALLERY=100;
@@ -133,14 +140,13 @@ public class Personal_information extends AppCompatActivity {
         txt_name.setText(Companion.user.getNombre());
         txt_work.setText(Companion.user.getWorkAddress());
         txt_home.setText(Companion.user.getLocalidad());
-        userData[0]=Companion.user.getWorkAddress();
-        userData[1]=Companion.user.getLocalidad();
     }
 
     private void main() {
         controls();
         initListeners();
         initActivityResultLauncher();
+        getCarInformation();
     }
 
     private void initActivityResultLauncher() {
@@ -164,6 +170,30 @@ public class Personal_information extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    private void getCarInformation(){
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(firebaseAuth.getCurrentUser().getUid()).child("DriverInformation");
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            plateNumber.setText(snapshot.child("PlateNumber").getValue().toString());
+                            carColor.setText(snapshot.child("CarColor").getValue().toString());
+                            carType.setText(snapshot.child("CarType").getValue().toString());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
     }
 
 
@@ -212,7 +242,6 @@ public class Personal_information extends AppCompatActivity {
     private void controls() {
         toolbar = findViewById(R.id.toolbarInformation);
         relativeChangeColors = findViewById(R.id.relativeChangingColorOnClick);
-        tv_unlock_save = findViewById(R.id.textUnlock_Save);
         img_lockChange = findViewById(R.id.imageLock);
         tv_user_mail = findViewById(R.id.tv_userMail);
         firebaseAuth=FirebaseAuth.getInstance();
@@ -227,6 +256,11 @@ public class Personal_information extends AppCompatActivity {
         progressDialog=new ProgressDialog(this,R.style.ProgressDialog);
         progressDialog.setTitle("Updating data");
         progressDialog.setMessage("We are updating your data, please wait...");
+        btnUpDown=findViewById(R.id.buttonUpDown);
+        carColor=findViewById(R.id.txt_car_color);
+        carType=findViewById(R.id.txt_car_type);
+        plateNumber=findViewById(R.id.txt_plateNumber);
+        lnCarContent=findViewById(R.id.ln_information);
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
     }
 
@@ -236,6 +270,20 @@ public class Personal_information extends AppCompatActivity {
             public void onClick(View view) {
                 onBackPressed();
                 finish();
+            }
+        });
+
+        btnUpDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lnCarContent.getVisibility()==View.GONE){
+                    lnCarContent.setVisibility(View.VISIBLE);
+                    lnCarContent.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_up_in));
+                    btnUpDown.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_24);
+                }else if(lnCarContent.getVisibility()==View.VISIBLE){
+                    lnCarContent.setVisibility(View.GONE);
+                    btnUpDown.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_24);
+                }
             }
         });
 
@@ -331,6 +379,7 @@ public class Personal_information extends AppCompatActivity {
                                 Companion.user.setWorkAddress(txt_work.getText().toString());
                                 Companion.user.setLocalidad(txt_home.getText().toString());
                                 progressDialog.dismiss();
+                                Snackbar.make(findViewById(R.id.rel_layout_general),"The changes was saved succesfully",Snackbar.LENGTH_LONG).show();
                             }
                         });
                     }
