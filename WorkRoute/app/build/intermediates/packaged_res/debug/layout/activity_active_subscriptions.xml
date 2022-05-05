@@ -114,10 +114,12 @@
                             </com.google.android.material.card.MaterialCardView>
 
                             <LinearLayout
+                                android:id="@+id/ln_accept_or_decline"
+                                android:visibility="gone"
                                 android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
-                                android:orientation="horizontal"
-                                android:layout_height="wrap_content">
+                                android:orientation="horizontal">
 
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/btn_accept"
@@ -135,14 +137,27 @@
                                     style="@style/Widget.Material3.Button.OutlinedButton"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="DECLINE"
                                     android:layout_marginStart="20dp"
+                                    android:text="DECLINE"
                                     android:textColor="@color/secondary"
                                     android:textSize="18sp"
                                     android:textStyle="bold"
                                     app:strokeColor="#CC1204" />
 
                             </LinearLayout>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_cancel"
+                                style="@style/Widget.Material3.Button.OutlinedButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginStart="20dp"
+                                android:text="CANCEL"
+                                android:textColor="@color/secondary"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                app:strokeColor="#CC1204" />
 
                             <ImageButton
                                 android:id="@+id/button_message"

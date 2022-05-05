@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -17,6 +18,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +39,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -103,8 +106,25 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
         TextView txt_customerHome=findViewById(R.id.txt_homeAddressCustomer);
         TextView txt_customerWork=findViewById(R.id.txt_workAddressCustomer);
         ImageView userPhoto=findViewById(R.id.profile_photo_sheet);
+        LinearLayout lnUnsubscribed=findViewById(R.id.ln_accept_or_decline);
+        MaterialButton btn_cancel=findViewById(R.id.btn_cancel);
+        TextView totalPay=findViewById(R.id.txt_total_pay_travel);
 
-        txt_subscriber.setText(data.get(adapter.itemSelected).getUserName()+" wants to subscribe to you");
+        if(data.get(adapter.itemSelected).getStatus().equals("pending")){
+            txt_subscriber.setText(data.get(adapter.itemSelected).getUserName()+" wants to subscribe to you");
+            btn_cancel.setVisibility(View.GONE);
+            lnUnsubscribed.setVisibility(View.VISIBLE);
+        }else if(data.get(adapter.itemSelected).getStatus().equals("accepted")){
+            txt_subscriber.setText(data.get(adapter.itemSelected).getUserName()+" is already subscribed to you");
+            lnUnsubscribed.setVisibility(View.GONE);
+            btn_cancel.setVisibility(View.VISIBLE);
+        }else if(data.get(adapter.itemSelected).getStatus().equals("declined")||data.get(adapter.itemSelected).getStatus().equals("canceled")){
+            txt_subscriber.setText("You declined or canceled this user. Ask the user to send you another request");
+            lnUnsubscribed.setVisibility(View.GONE);
+            btn_cancel.setVisibility(View.GONE);
+            totalPay.setText("0$/month");
+        }
+
         if(data.get(adapter.itemSelected).getProfilePhoto().equals("")){
             userPhoto.setImageResource(R.drawable.default_user_login);
         }else{
@@ -158,9 +178,35 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
             }
         });
 
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogCancel();
+            }
+        });
+
         bottomSheetBehavior.setPeekHeight(200);
         bottomSheetBehavior.setState(state);
         bottomSheetBehavior.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
+    }
+
+    private void showDialogCancel(){
+        new MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_App_MaterialAlertDialog)
+                .setCancelable(false)
+                .setTitle("Confirm cancel")
+                .setMessage("If you cancel you will stop receiving payments from this user. Are you sure you want to continue?")
+                .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        updateStateSubscription("canceled");
+                    }
+                })
+                .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
     }
 
 
@@ -207,7 +253,11 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String name=documentSnapshot.get("nombre").toString();
-                getToken(name,receiverId,name+" "+status+" your request","REQUEST "+status);
+                if(status.equals("canceled")){
+                    getToken(name,receiverId,name+" "+status+" your subscription","REQUEST "+status);
+                }else{
+                    getToken(name,receiverId,name+" "+status+" your request","REQUEST "+status);
+                }
             }
         });
     }

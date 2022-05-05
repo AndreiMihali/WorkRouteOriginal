@@ -158,6 +158,7 @@ id boton_drag
 id bottom_sheet_payMethod
 id btn_accept
 id btn_addPayMethod
+id btn_cancel
 id btn_continue
 id btn_customer
 id btn_decline
@@ -259,6 +260,7 @@ id layout_email_recover_password
 id layout_name
 id layout_pass
 id linears_datos
+id ln_accept_or_decline
 id ln_escribir
 id ln_information
 id loadContent

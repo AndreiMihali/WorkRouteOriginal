@@ -57,8 +57,11 @@ public class ActiveSubAdapter extends RecyclerView.Adapter<ActiveSubAdapter.View
         }else if(mData.get(position).getStatus().equals("accepted")){
             holder.status.setImageResource(R.drawable.ic_baseline_star_24);
             holder.status.setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFE604")));
-        }else{
+        }else if(mData.get(position).getStatus().equals("declined")||mData.get(position).getStatus().equals("canceled")){
             holder.status.setImageResource(R.drawable.bxs_x_circle);
+            holder.status.setImageTintList(ColorStateList.valueOf(Color.parseColor("#C32115")));
+        }else{
+            holder.status.setImageResource(R.drawable.bx_error_alt);
             holder.status.setImageTintList(ColorStateList.valueOf(Color.parseColor("#C32115")));
         }
     }

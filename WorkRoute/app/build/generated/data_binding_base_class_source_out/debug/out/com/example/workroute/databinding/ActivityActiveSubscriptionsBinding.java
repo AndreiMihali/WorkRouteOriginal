@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,6 +36,9 @@ public final class ActivityActiveSubscriptionsBinding implements ViewBinding {
   public final MaterialButton btnAccept;
 
   @NonNull
+  public final MaterialButton btnCancel;
+
+  @NonNull
   public final MaterialButton btnDecline;
 
   @NonNull
@@ -45,6 +49,9 @@ public final class ActivityActiveSubscriptionsBinding implements ViewBinding {
 
   @NonNull
   public final RelativeLayout informationUser;
+
+  @NonNull
+  public final LinearLayout lnAcceptOrDecline;
 
   @NonNull
   public final ImageButton locationIcon;
@@ -90,8 +97,9 @@ public final class ActivityActiveSubscriptionsBinding implements ViewBinding {
 
   private ActivityActiveSubscriptionsBinding(@NonNull CoordinatorLayout rootView,
       @NonNull ImageView botonDrag, @NonNull MaterialButton btnAccept,
-      @NonNull MaterialButton btnDecline, @NonNull ImageButton buttonMessage,
-      @NonNull MaterialDivider divider, @NonNull RelativeLayout informationUser,
+      @NonNull MaterialButton btnCancel, @NonNull MaterialButton btnDecline,
+      @NonNull ImageButton buttonMessage, @NonNull MaterialDivider divider,
+      @NonNull RelativeLayout informationUser, @NonNull LinearLayout lnAcceptOrDecline,
       @NonNull ImageButton locationIcon, @NonNull ImageButton locationIcon1,
       @NonNull ImageView profilePhotoSheet, @NonNull ProgressBar progressCircular,
       @NonNull RecyclerView recyclerSubs, @NonNull FrameLayout secondSheet,
@@ -102,10 +110,12 @@ public final class ActivityActiveSubscriptionsBinding implements ViewBinding {
     this.rootView = rootView;
     this.botonDrag = botonDrag;
     this.btnAccept = btnAccept;
+    this.btnCancel = btnCancel;
     this.btnDecline = btnDecline;
     this.buttonMessage = buttonMessage;
     this.divider = divider;
     this.informationUser = informationUser;
+    this.lnAcceptOrDecline = lnAcceptOrDecline;
     this.locationIcon = locationIcon;
     this.locationIcon1 = locationIcon1;
     this.profilePhotoSheet = profilePhotoSheet;
@@ -161,6 +171,12 @@ public final class ActivityActiveSubscriptionsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btn_cancel;
+      MaterialButton btnCancel = ViewBindings.findChildViewById(rootView, id);
+      if (btnCancel == null) {
+        break missingId;
+      }
+
       id = R.id.btn_decline;
       MaterialButton btnDecline = ViewBindings.findChildViewById(rootView, id);
       if (btnDecline == null) {
@@ -182,6 +198,12 @@ public final class ActivityActiveSubscriptionsBinding implements ViewBinding {
       id = R.id.information_user;
       RelativeLayout informationUser = ViewBindings.findChildViewById(rootView, id);
       if (informationUser == null) {
+        break missingId;
+      }
+
+      id = R.id.ln_accept_or_decline;
+      LinearLayout lnAcceptOrDecline = ViewBindings.findChildViewById(rootView, id);
+      if (lnAcceptOrDecline == null) {
         break missingId;
       }
 
@@ -270,10 +292,10 @@ public final class ActivityActiveSubscriptionsBinding implements ViewBinding {
       }
 
       return new ActivityActiveSubscriptionsBinding((CoordinatorLayout) rootView, botonDrag,
-          btnAccept, btnDecline, buttonMessage, divider, informationUser, locationIcon,
-          locationIcon1, profilePhotoSheet, progressCircular, recyclerSubs, secondSheet, sheet,
-          toolbarBottomSheet, toolbarSubs, txtHomeAddressCustomer, txtNameSubscriber, txtNull,
-          txtTotalPayTravel, txtWorkAddressCustomer);
+          btnAccept, btnCancel, btnDecline, buttonMessage, divider, informationUser,
+          lnAcceptOrDecline, locationIcon, locationIcon1, profilePhotoSheet, progressCircular,
+          recyclerSubs, secondSheet, sheet, toolbarBottomSheet, toolbarSubs, txtHomeAddressCustomer,
+          txtNameSubscriber, txtNull, txtTotalPayTravel, txtWorkAddressCustomer);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

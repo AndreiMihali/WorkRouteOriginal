@@ -3251,6 +3251,7 @@ id browser_actions_menu_items
 id browser_actions_menu_view
 id btn_accept
 id btn_addPayMethod
+id btn_cancel
 id btn_continue
 id btn_customer
 id btn_decline
@@ -3508,6 +3509,7 @@ id linear
 id linears_datos
 id listMode
 id list_item
+id ln_accept_or_decline
 id ln_escribir
 id ln_information
 id loadContent
