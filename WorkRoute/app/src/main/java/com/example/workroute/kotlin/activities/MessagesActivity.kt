@@ -243,7 +243,7 @@ class MessagesActivity : AppCompatActivity(){
         if(isInTeChat=="false"||isInTeChat==""){
             FirebaseDatabase.getInstance().getReference("ChatList").child(receiverId).child(firebaseUser.uid)
                 .child("read").setValue("false")
-            NotificationService(applicationContext,token,message,title,user,"MessagesActivity").start()
+            NotificationService(applicationContext,token,message,user,user,"MessagesActivity").start()
             NotificationsInDatabase("You receive a new message from $user","false","Message",receiverId).start()
         }
     }

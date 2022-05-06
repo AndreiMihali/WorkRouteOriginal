@@ -341,10 +341,10 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                         @Override
                         public void callback(String data) {
                             Marker mDriverMarker=null;
+                            if (mDriverMarker!=null) {
+                                mDriverMarker.remove();
+                            }
                             if(data.equals("pending")||data.equals("accepted")){
-                                if (mDriverMarker!=null) {
-                                    mDriverMarker.remove();
-                                }
                                 mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
                                         .flat(true).anchor(0.5f, 0.5f));
                             }else{

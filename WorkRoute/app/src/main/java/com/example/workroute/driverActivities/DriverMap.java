@@ -195,16 +195,13 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                         @Override
                         public void callback(String data) {
                             Marker mCustomerMarker=null;
+                            if (mCustomerMarker!=null) {
+                                mCustomerMarker.remove();
+                            }
                             if(data.equals("pending")||data.equals("accepted")){
-                                if (mCustomerMarker!=null) {
-                                    mCustomerMarker.remove();
-                                }
                                 mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
                                         .flat(true).anchor(0.5f, 0.5f));
                             }else{
-                                if (mCustomerMarker!=null) {
-                                    mCustomerMarker.remove();
-                                }
                                 mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.user_marker))))
                                         .flat(true).anchor(0.5f, 0.5f));
                             }
