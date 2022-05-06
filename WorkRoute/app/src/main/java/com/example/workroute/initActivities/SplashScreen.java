@@ -58,7 +58,7 @@ public class SplashScreen extends AppCompatActivity {
                         @Override
                         public void run() {
                             if(user!=null){
-                                if(sp.getBoolean("created",false)==false){
+                                if(sp.getInt("faseConexion",0)==0){
                                     startActivity(new Intent(SplashScreen.this, FirstTimeActivity.class).putExtra("name",sp.getString("name","")));
                                 }else{
                                     startActivity(new Intent(SplashScreen.this, MainActivity.class));
@@ -154,7 +154,7 @@ public class SplashScreen extends AppCompatActivity {
                     @Override
                     public void run() {
                         if(user!=null){
-                            if(sp.getBoolean("created",false)==false){
+                            if(sp.getInt("faseConexion",0)==0){
                                 startActivity(new Intent(SplashScreen.this, FirstTimeActivity.class).putExtra("name",sp.getString("name","")));
                             }else{
                                 startActivity(new Intent(SplashScreen.this, MainActivity.class));

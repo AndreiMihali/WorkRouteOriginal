@@ -56,6 +56,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -63,6 +64,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class FirstTimeActivity extends AppCompatActivity {
 
@@ -186,7 +189,7 @@ public class FirstTimeActivity extends AppCompatActivity {
             actualizarDatos(1,"vecesConectadas");
             actualizarDatos(calcularEdad(fechaNac), "edad");
             actualizarDatos(fechaNac,"fecha_naci");
-            getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().putBoolean("created",true).commit();
+            getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().putInt("faseConexion",1).commit();
             startActivity(new Intent(FirstTimeActivity.this, MainActivity.class));
             this.finish();
         }
@@ -210,7 +213,11 @@ public class FirstTimeActivity extends AppCompatActivity {
             @Override
             public void onPositiveButtonClick(Object selection) {
                 birth.setText(picker.getHeaderText());
-                fechaNac=picker.getHeaderText();
+                TimeZone timeZoneUTC = TimeZone.getDefault();
+                int offsetFromUTC = timeZoneUTC.getOffset(new Date().getTime()) * -1;
+                Date date = new Date((Long)selection + offsetFromUTC);
+                DateFormat format =new SimpleDateFormat("dd/MM/yyyy",Locale.getDefault());
+                fechaNac=format.format(date);
                 picker.dismiss();
             }
         });
@@ -333,9 +340,8 @@ public class FirstTimeActivity extends AppCompatActivity {
     private int calcularEdad(String fecha){
         Date fechaNac=null;
         try {
-            fechaNac = new SimpleDateFormat("MMM dd, yyyy").parse(fecha);
+            fechaNac = new SimpleDateFormat("dd/MM/yyyy",Locale.getDefault()).parse(fecha);
         } catch (ParseException e) {
-            e.printStackTrace();
             Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
         }
         Calendar fechaNacimiento = Calendar.getInstance();
