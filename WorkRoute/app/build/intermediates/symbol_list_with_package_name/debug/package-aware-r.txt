@@ -3867,6 +3867,7 @@ id txt_name_cost
 id txt_name_subscriber
 id txt_null
 id txt_null_notifications
+id txt_pay_message
 id txt_plateNumber
 id txt_startLocation
 id txt_startLocation_cost
@@ -4233,7 +4234,6 @@ string fingerprint_error_lockout
 string fingerprint_error_no_fingerprints
 string fingerprint_error_user_canceled
 string fingerprint_not_recognized
-string firebase_database_url
 string gcm_defaultSenderId
 string generic_error_no_device_credential
 string generic_error_no_keyguard

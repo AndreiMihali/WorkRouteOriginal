@@ -49,6 +49,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
+import com.example.workroute.companion.UserType;
 import com.example.workroute.profile.Profile;
 import com.google.android.gms.auth.api.credentials.Credential;
 import com.google.android.gms.common.api.Status;
@@ -140,6 +141,11 @@ public class Personal_information extends AppCompatActivity {
         txt_name.setText(Companion.user.getNombre());
         txt_work.setText(Companion.user.getWorkAddress());
         txt_home.setText(Companion.user.getLocalidad());
+        if(!UserType.type.equals("driver")){
+            card_car.setVisibility(View.GONE);
+        }else{
+            card_car.setVisibility(View.VISIBLE);
+        }
     }
 
     private void main() {

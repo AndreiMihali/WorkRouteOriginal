@@ -90,6 +90,9 @@ public final class ActivityActiveSubscriptionsBinding implements ViewBinding {
   public final TextView txtNull;
 
   @NonNull
+  public final TextView txtPayMessage;
+
+  @NonNull
   public final TextView txtTotalPayTravel;
 
   @NonNull
@@ -106,7 +109,8 @@ public final class ActivityActiveSubscriptionsBinding implements ViewBinding {
       @NonNull FrameLayout sheet, @NonNull RelativeLayout toolbarBottomSheet,
       @NonNull MaterialToolbar toolbarSubs, @NonNull TextView txtHomeAddressCustomer,
       @NonNull TextView txtNameSubscriber, @NonNull TextView txtNull,
-      @NonNull TextView txtTotalPayTravel, @NonNull TextView txtWorkAddressCustomer) {
+      @NonNull TextView txtPayMessage, @NonNull TextView txtTotalPayTravel,
+      @NonNull TextView txtWorkAddressCustomer) {
     this.rootView = rootView;
     this.botonDrag = botonDrag;
     this.btnAccept = btnAccept;
@@ -128,6 +132,7 @@ public final class ActivityActiveSubscriptionsBinding implements ViewBinding {
     this.txtHomeAddressCustomer = txtHomeAddressCustomer;
     this.txtNameSubscriber = txtNameSubscriber;
     this.txtNull = txtNull;
+    this.txtPayMessage = txtPayMessage;
     this.txtTotalPayTravel = txtTotalPayTravel;
     this.txtWorkAddressCustomer = txtWorkAddressCustomer;
   }
@@ -279,6 +284,12 @@ public final class ActivityActiveSubscriptionsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.txt_pay_message;
+      TextView txtPayMessage = ViewBindings.findChildViewById(rootView, id);
+      if (txtPayMessage == null) {
+        break missingId;
+      }
+
       id = R.id.txt_total_pay_travel;
       TextView txtTotalPayTravel = ViewBindings.findChildViewById(rootView, id);
       if (txtTotalPayTravel == null) {
@@ -295,7 +306,7 @@ public final class ActivityActiveSubscriptionsBinding implements ViewBinding {
           btnAccept, btnCancel, btnDecline, buttonMessage, divider, informationUser,
           lnAcceptOrDecline, locationIcon, locationIcon1, profilePhotoSheet, progressCircular,
           recyclerSubs, secondSheet, sheet, toolbarBottomSheet, toolbarSubs, txtHomeAddressCustomer,
-          txtNameSubscriber, txtNull, txtTotalPayTravel, txtWorkAddressCustomer);
+          txtNameSubscriber, txtNull, txtPayMessage, txtTotalPayTravel, txtWorkAddressCustomer);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

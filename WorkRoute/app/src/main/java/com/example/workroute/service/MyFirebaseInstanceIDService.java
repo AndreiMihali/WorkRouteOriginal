@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.example.workroute.R;
+import com.example.workroute.companion.UserType;
 import com.example.workroute.profile.ActiveSubscriptions;
 import com.example.workroute.activitys.MainActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
@@ -94,11 +95,13 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
         Intent nf;
         switch (activity){
             case "MessagesActivity":{
+                UserType.type="customer";
                 nf=new Intent(getApplicationContext(),MessagesActivity.class);
                 nf.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 return PendingIntent.getActivity(this,0,nf,0);
             }
             case "ActiveSubscriptions":{
+                UserType.type="driver";
                 nf=new Intent(getApplicationContext(), ActiveSubscriptions.class);
                 nf.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 return PendingIntent.getActivity(this,0,nf,0);

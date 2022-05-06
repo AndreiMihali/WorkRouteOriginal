@@ -64,6 +64,7 @@ import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
+import com.example.workroute.companion.UserType;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.network.callback.NetworkCallback;
@@ -177,6 +178,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
+        UserType.type="customer";
         getToken();
         init();
         startService(new Intent(this, ServicioOnline.class));
@@ -276,7 +278,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     private void setPendingSubscription() {
         progressDialog.show();
         DatabaseReference referenceDriverRequest=FirebaseDatabase.getInstance().getReference("Drivers").child(driverId).child("Requests").child(firebaseAuth.getUid());
-        DatabaseReference referenceCustomerRequest=FirebaseDatabase.getInstance().getReference("Customers").child(firebaseAuth.getUid()).child("Requests").child(firebaseAuth.getUid());
+        DatabaseReference referenceCustomerRequest=FirebaseDatabase.getInstance().getReference("Customers").child(firebaseAuth.getUid()).child("Requests").child(driverId);
         HashMap<String,Object> map=new HashMap<>();
         map.put("userId",firebaseAuth.getUid());
         map.put("status","pending");

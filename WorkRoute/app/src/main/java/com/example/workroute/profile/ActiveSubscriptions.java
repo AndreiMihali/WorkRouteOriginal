@@ -1,6 +1,7 @@
 package com.example.workroute.profile;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,8 +26,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.workroute.R;
+import com.example.workroute.activitys.CustomerMap;
 import com.example.workroute.activitys.MainActivity;
+import com.example.workroute.activitys.PayMethod;
 import com.example.workroute.adapters.ActiveSubAdapter;
+import com.example.workroute.companion.UserType;
 import com.example.workroute.driverActivities.DriverMap;
 import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.model.SubscribedUser;
@@ -109,23 +113,52 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
         LinearLayout lnUnsubscribed=findViewById(R.id.ln_accept_or_decline);
         MaterialButton btn_cancel=findViewById(R.id.btn_cancel);
         TextView totalPay=findViewById(R.id.txt_total_pay_travel);
+        TextView txtMessage=findViewById(R.id.txt_pay_message);
 
-        if(data.get(adapter.itemSelected).getStatus().equals("pending")){
-            txt_subscriber.setText(data.get(adapter.itemSelected).getUserName()+" wants to subscribe to you");
-            btn_cancel.setVisibility(View.GONE);
-            lnUnsubscribed.setVisibility(View.VISIBLE);
-            totalPay.setText("20$/month");
-        }else if(data.get(adapter.itemSelected).getStatus().equals("accepted")){
-            txt_subscriber.setText(data.get(adapter.itemSelected).getUserName()+" is already subscribed to you");
-            lnUnsubscribed.setVisibility(View.GONE);
-            btn_cancel.setVisibility(View.VISIBLE);
-            totalPay.setText("20$/month");
-        }else if(data.get(adapter.itemSelected).getStatus().equals("declined")||data.get(adapter.itemSelected).getStatus().equals("canceled")){
-            txt_subscriber.setText("You declined or canceled this user. Ask the user to send you another request");
-            lnUnsubscribed.setVisibility(View.GONE);
-            btn_cancel.setVisibility(View.GONE);
-            totalPay.setText("0$/month");
+        if(UserType.type.equals("driver")){
+            if(data.get(adapter.itemSelected).getStatus().equals("pending")){
+                txt_subscriber.setText(data.get(adapter.itemSelected).getUserName()+" wants to subscribe to you");
+                btn_cancel.setVisibility(View.GONE);
+                lnUnsubscribed.setVisibility(View.VISIBLE);
+                txtMessage.setText("You will receive:");
+                totalPay.setText("20$/month");
+            }else if(data.get(adapter.itemSelected).getStatus().equals("accepted")){
+                txt_subscriber.setText(data.get(adapter.itemSelected).getUserName()+" is already subscribed to you");
+                lnUnsubscribed.setVisibility(View.GONE);
+                btn_cancel.setVisibility(View.VISIBLE);
+                txtMessage.setText("You will receive:");
+                totalPay.setText("20$/month");
+            }else if(data.get(adapter.itemSelected).getStatus().equals("declined")||data.get(adapter.itemSelected).getStatus().equals("canceled")){
+                txt_subscriber.setText("You declined or canceled this user. Ask the user to send you another request");
+                lnUnsubscribed.setVisibility(View.GONE);
+                btn_cancel.setVisibility(View.GONE);
+                txtMessage.setText("You will receive:");
+                totalPay.setText("0$/month");
+            }
+        }else{
+            if(data.get(adapter.itemSelected).getStatus().equals("pending")){
+                txt_subscriber.setText("Your request is pending acceptance");
+                btn_cancel.setVisibility(View.VISIBLE);
+                lnUnsubscribed.setVisibility(View.GONE);
+                txtMessage.setText("You will pay:");
+                totalPay.setText("20$/month");
+            }else if(data.get(adapter.itemSelected).getStatus().equals("accepted")){
+                txt_subscriber.setText("You already subscribed to "+data.get(adapter.itemSelected).getUserName());
+                lnUnsubscribed.setVisibility(View.GONE);
+                btn_cancel.setVisibility(View.VISIBLE);
+                txtMessage.setText("You will pay:");
+                totalPay.setText("20$/month");
+            }else if(data.get(adapter.itemSelected).getStatus().equals("declined")||data.get(adapter.itemSelected).getStatus().equals("canceled")){
+                txt_subscriber.setText("Your request was canceled or declined. Send another request");
+                lnUnsubscribed.setVisibility(View.VISIBLE);
+                btn_accept.setText("SUBSCRIBE");
+                btn_decline.setVisibility(View.GONE);
+                btn_cancel.setVisibility(View.GONE);
+                txtMessage.setText("You will pay:");
+                totalPay.setText("0$/month");
+            }
         }
+
 
         if(data.get(adapter.itemSelected).getProfilePhoto().equals("")){
             userPhoto.setImageResource(R.drawable.default_user_login);
@@ -176,14 +209,37 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
         btn_accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateStateSubscription("accepted");
+                if(havePayMethod()<=0){
+                    new MaterialAlertDialogBuilder(ActiveSubscriptions.this,R.style.ThemeOverlay_App_MaterialAlertDialog)
+                            .setCancelable(false)
+                            .setTitle("Payment method required")
+                            .setMessage("Before you accept you need tu have at least one pay method added. Do you want to add one?")
+                            .setPositiveButton("CONTINUE", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    startActivity(new Intent(ActiveSubscriptions.this, PayMethod.class));
+                                }
+                            })
+                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            }).show();
+                }else{
+                    updateStateSubscription("accepted");
+                }
             }
         });
 
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialogCancel();
+                if(UserType.type.equals("driver")){
+                    showDialogCancel("If you cancel you will stop receiving payments from this user. Are you sure you want to continue?");
+                }else{
+                    showDialogCancel("If you cancel you will stop paying this user. Are you sure you want to continue?");
+                }
             }
         });
 
@@ -192,11 +248,30 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
         bottomSheetBehavior.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
     }
 
-    private void showDialogCancel(){
+    private long cards=0;
+    private long havePayMethod(){
+        ValueEventListener postListener=new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getChildrenCount()>0){
+                    cards=snapshot.getChildrenCount();
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        };
+
+        FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("payMethods").addListenerForSingleValueEvent(postListener);
+        return cards;
+    }
+
+    private void showDialogCancel(String message){
         new MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_App_MaterialAlertDialog)
                 .setCancelable(false)
                 .setTitle("Confirm cancel")
-                .setMessage("If you cancel you will stop receiving payments from this user. Are you sure you want to continue?")
+                .setMessage(message)
                 .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -214,40 +289,77 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
 
     private void updateStateSubscription(String status){
         progressDialog.show();
-        DatabaseReference referenceDriverRequest=FirebaseDatabase.getInstance().getReference("Drivers").child(FirebaseAuth.getInstance().getUid()).child("Requests").child(data.get(adapter.itemSelected).getUserUid());
-        DatabaseReference referenceCustomerRequest=FirebaseDatabase.getInstance().getReference("Customers").child(data.get(adapter.itemSelected).getUserUid()).child("Requests").child(data.get(adapter.itemSelected).getUserUid());
-        HashMap<String,Object> map=new HashMap<>();
-        map.put("userId",data.get(adapter.itemSelected).getUserUid());
-        map.put("status",status);
-        referenceDriverRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    HashMap<String,Object> map=new HashMap<>();
-                    map.put("userId",data.get(adapter.itemSelected).getUserUid());
-                    map.put("status",status);
-                    referenceCustomerRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                progressDialog.dismiss();
-                                getSenderName(FirebaseAuth.getInstance().getUid(),data.get(adapter.itemSelected).getUserUid(),status);
-                            }else{
-                                progressDialog.dismiss();
+        if(UserType.type.equals("driver")){
+            DatabaseReference referenceDriverRequest=FirebaseDatabase.getInstance().getReference("Drivers").child(FirebaseAuth.getInstance().getUid()).child("Requests").child(data.get(adapter.itemSelected).getUserUid());
+            DatabaseReference referenceCustomerRequest=FirebaseDatabase.getInstance().getReference("Customers").child(data.get(adapter.itemSelected).getUserUid()).child("Requests").child(FirebaseAuth.getInstance().getUid());
+            HashMap<String,Object> map=new HashMap<>();
+            map.put("userId",data.get(adapter.itemSelected).getUserUid());
+            map.put("status",status);
+            referenceDriverRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        HashMap<String,Object> map=new HashMap<>();
+                        map.put("userId",data.get(adapter.itemSelected).getUserUid());
+                        map.put("status",status);
+                        referenceCustomerRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    progressDialog.dismiss();
+                                    getSenderName(FirebaseAuth.getInstance().getUid(),data.get(adapter.itemSelected).getUserUid(),status);
+                                }else{
+                                    progressDialog.dismiss();
+                                }
                             }
-                        }
-                    });
-                }else{
-                    progressDialog.dismiss();
+                        });
+                    }else{
+                        progressDialog.dismiss();
+                    }
                 }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                Log.e("ERROR EN EL ENVIO DE PETICION",e.toString());
-            }
-        });
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    progressDialog.dismiss();
+                    Log.e("ERROR EN EL ENVIO DE PETICION",e.toString());
+                }
+            });
+        }else{
+            DatabaseReference referenceDriverRequest=FirebaseDatabase.getInstance().getReference("Drivers").child(data.get(adapter.itemSelected).getUserUid()).child("Requests").child(FirebaseAuth.getInstance().getUid());
+            DatabaseReference referenceCustomerRequest=FirebaseDatabase.getInstance().getReference("Customers").child(FirebaseAuth.getInstance().getUid()).child("Requests").child(data.get(adapter.itemSelected).getUserUid());
+            HashMap<String,Object> map=new HashMap<>();
+            map.put("userId",FirebaseAuth.getInstance().getUid());
+            map.put("status",status);
+            referenceDriverRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        HashMap<String,Object> map=new HashMap<>();
+                        map.put("userId",FirebaseAuth.getInstance().getUid());
+                        map.put("status",status);
+                        referenceCustomerRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    progressDialog.dismiss();
+                                    getSenderName(FirebaseAuth.getInstance().getUid(),data.get(adapter.itemSelected).getUserUid(),status);
+                                }else{
+                                    progressDialog.dismiss();
+                                }
+                            }
+                        });
+                    }else{
+                        progressDialog.dismiss();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    progressDialog.dismiss();
+                    Log.e("ERROR EN EL ENVIO DE PETICION",e.toString());
+                }
+            });
+        }
     }
 
     private void getSenderName(String sender,String receiverId,String status){
@@ -287,32 +399,61 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
 
     private void getData(){
         progressBar.setVisibility(View.VISIBLE);
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Drivers").child(FirebaseAuth.getInstance().getUid()).child("Requests");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                data.clear();
-                customersId.clear();
-                for(DataSnapshot snap:snapshot.getChildren()){
-                    String userId=  snap.child("userId").getValue().toString();
-                    String status=  snap.child("status").getValue().toString();
-                    customersId.add(new User(userId,status));
+        if(UserType.type.equals("driver")){
+            DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Drivers").child(FirebaseAuth.getInstance().getUid()).child("Requests");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    data.clear();
+                    customersId.clear();
+                    for(DataSnapshot snap:snapshot.getChildren()){
+                        String userId=  snap.child("userId").getValue().toString();
+                        String status=  snap.child("status").getValue().toString();
+                        customersId.add(new User(userId,status));
+                    }
+                    progressBar.setVisibility(View.GONE);
+
+                    if(customersId.isEmpty()){
+                        txt_null.setVisibility(View.VISIBLE);
+                    }else{
+                        txt_null.setVisibility(View.GONE);
+                        getCustomerInformation();
+                    }
                 }
-                progressBar.setVisibility(View.GONE);
 
-                if(customersId.isEmpty()){
-                    txt_null.setVisibility(View.VISIBLE);
-                }else{
-                    txt_null.setVisibility(View.GONE);
-                    getCustomerInformation();
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
                 }
-            }
+            });
+        }else{
+            DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Customers").child(FirebaseAuth.getInstance().getUid()).child("Requests");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    data.clear();
+                    customersId.clear();
+                    for(DataSnapshot snap:snapshot.getChildren()){
+                        String userId=  snap.child("userId").getValue().toString();
+                        String status=  snap.child("status").getValue().toString();
+                        customersId.add(new User(userId,status));
+                    }
+                    progressBar.setVisibility(View.GONE);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                    if(customersId.isEmpty()){
+                        txt_null.setVisibility(View.VISIBLE);
+                    }else{
+                        txt_null.setVisibility(View.GONE);
+                        getCustomerInformation();
+                    }
+                }
 
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
     }
 
     private void getCustomerInformation(){
