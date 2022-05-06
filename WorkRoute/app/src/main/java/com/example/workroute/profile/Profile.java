@@ -2,6 +2,7 @@ package com.example.workroute.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -119,6 +120,7 @@ public class Profile extends AppCompatActivity {
                 firebaseAuth.signOut();
                 new MainActivity.Destroy(Profile.this);
                 startActivity(new Intent(Profile.this, LoginActivity.class));
+                getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().clear().commit();
                 finish();
             }
         });

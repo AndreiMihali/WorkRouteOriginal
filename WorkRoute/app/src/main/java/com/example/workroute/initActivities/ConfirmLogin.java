@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -349,6 +350,7 @@ public class ConfirmLogin extends AppCompatActivity {
                 progressDialog.dismiss();
                 if (existe){
                     isFirstTime(name);
+                    getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().putString("name",name).commit();
                 }else{
                     firestore.collection("Usuarios").document(auth.getCurrentUser().getUid()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

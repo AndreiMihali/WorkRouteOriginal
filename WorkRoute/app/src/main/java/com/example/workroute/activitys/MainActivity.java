@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         new NetworkCallback().enable(this);
+        getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().putBoolean("edited",true).commit();
         getToken();
         init();
         startService(new Intent(this, ServicioOnline.class));

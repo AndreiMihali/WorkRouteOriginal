@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -33,6 +34,7 @@ public class SplashScreen extends AppCompatActivity {
     private static final int CODE_UBI = 100;
     Handler iniciarApp;
     private ActivityResultLauncher<Intent> activityResultLauncher;
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         iniciarApp = new Handler();
+        sp=getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE);
         checkPermissions();
         addActivityResultLauncher();
     }
@@ -55,7 +58,11 @@ public class SplashScreen extends AppCompatActivity {
                         @Override
                         public void run() {
                             if(user!=null){
-                                startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                                if(sp.getBoolean("created",false)==false){
+                                    startActivity(new Intent(SplashScreen.this, FirstTimeActivity.class).putExtra("name",sp.getString("name","")));
+                                }else{
+                                    startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                                }
                             }else{
                                 startActivity(new Intent(SplashScreen.this, LoginActivity.class));
                             }
@@ -147,7 +154,11 @@ public class SplashScreen extends AppCompatActivity {
                     @Override
                     public void run() {
                         if(user!=null){
-                            startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                            if(sp.getBoolean("created",false)==false){
+                                startActivity(new Intent(SplashScreen.this, FirstTimeActivity.class).putExtra("name",sp.getString("name","")));
+                            }else{
+                                startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                            }
                         }else{
                             startActivity(new Intent(SplashScreen.this, LoginActivity.class));
                         }

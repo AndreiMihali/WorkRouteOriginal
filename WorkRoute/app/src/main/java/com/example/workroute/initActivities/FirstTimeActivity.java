@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -185,7 +186,9 @@ public class FirstTimeActivity extends AppCompatActivity {
             actualizarDatos(1,"vecesConectadas");
             actualizarDatos(calcularEdad(fechaNac), "edad");
             actualizarDatos(fechaNac,"fecha_naci");
+            getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().putBoolean("created",true).commit();
             startActivity(new Intent(FirstTimeActivity.this, MainActivity.class));
+            this.finish();
         }
     }
 
@@ -330,7 +333,7 @@ public class FirstTimeActivity extends AppCompatActivity {
     private int calcularEdad(String fecha){
         Date fechaNac=null;
         try {
-            fechaNac = new SimpleDateFormat("MMM d, yyyy").parse(fecha);
+            fechaNac = new SimpleDateFormat("MMM dd, yyyy").parse(fecha);
         } catch (ParseException e) {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
