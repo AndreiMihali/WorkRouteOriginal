@@ -28,7 +28,7 @@ public class ServicioOnline extends Service{
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         reference= FirebaseDatabase.getInstance().getReference();
-        reference.child("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("online").setValue("true");
+        reference.child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("online").setValue("true");
         return super.onStartCommand(intent, flags, startId);
     }
 

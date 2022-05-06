@@ -157,7 +157,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
         UserType.type="driver";
-        getToken();
         init();
         startService(new Intent(this, ServicioOnline.class));
     }
@@ -192,10 +191,27 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                 LatLng customerLocation=new LatLng(location.latitude,location.longitude);
 
                 if (!key.equals(firebaseAuth.getUid())) {
-                    Marker mCustomerMarker=mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
-                    .flat(true).anchor(0.5f,0.5f));
-                    mCustomerMarker.setTag(key);
-                    markerList.add(mCustomerMarker);
+                    isPendingSubscribed(key, new SimpleCallback<String>() {
+                        @Override
+                        public void callback(String data) {
+                            Marker mCustomerMarker=null;
+                            if(data.equals("pending")||data.equals("accepted")){
+                                if (mCustomerMarker!=null) {
+                                    mCustomerMarker.remove();
+                                }
+                                mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
+                                        .flat(true).anchor(0.5f, 0.5f));
+                            }else{
+                                if (mCustomerMarker!=null) {
+                                    mCustomerMarker.remove();
+                                }
+                                mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.user_marker))))
+                                        .flat(true).anchor(0.5f, 0.5f));
+                            }
+                            mCustomerMarker.setTag(key);
+                            markerList.add(mCustomerMarker);
+                        }
+                    });
                 }
             }
 
@@ -381,27 +397,33 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                             startActivity(intent);
                         }
                     });
-                    if(isPendingSubscribed(customerId).equals("pending")){
-                        txt_statusMessage.setVisibility(View.VISIBLE);
-                        txt_statusMessage.setText("You have to accept the user request");
-                        btnRideStatus.setVisibility(View.GONE);
-                        txt_total_pay_travel.setText("20$/month");
-                    }else if(isPendingSubscribed(customerId).equals("declined")||isPendingSubscribed(customerId).equals("canceled")){
-                        txt_statusMessage.setVisibility(View.VISIBLE);
-                        txt_statusMessage.setText("You canceled or declined the user request");
-                        btnRideStatus.setVisibility(View.GONE);
-                        txt_total_pay_travel.setText("0$/month");
-                    }else if(isPendingSubscribed(customerId).equals("accepted")){
-                        txt_statusMessage.setVisibility(View.GONE);
-                        btnRideStatus.setVisibility(View.VISIBLE);
-                        btnRideStatus.setText("PickUp customer");
-                        txt_total_pay_travel.setText("20$/month");
-                    }else{
-                        txt_statusMessage.setVisibility(View.VISIBLE);
-                        txt_statusMessage.setText("This user isn`t subscribed yet");
-                        btnRideStatus.setVisibility(View.GONE);
-                        txt_total_pay_travel.setText("0$/month");
-                    }
+
+                    isPendingSubscribed(customerId, new SimpleCallback<String>() {
+                        @Override
+                        public void callback(String data) {
+                            if(data.equals("pending")){
+                                txt_statusMessage.setVisibility(View.VISIBLE);
+                                txt_statusMessage.setText("You have to accept the user request");
+                                btnRideStatus.setVisibility(View.GONE);
+                                txt_total_pay_travel.setText("20$/month");
+                            }else if(data.equals("declined")||data.equals("canceled")){
+                                txt_statusMessage.setVisibility(View.VISIBLE);
+                                txt_statusMessage.setText("You canceled or declined the user request");
+                                btnRideStatus.setVisibility(View.GONE);
+                                txt_total_pay_travel.setText("0$/month");
+                            }else if(data.equals("accepted")){
+                                txt_statusMessage.setVisibility(View.GONE);
+                                btnRideStatus.setVisibility(View.VISIBLE);
+                                btnRideStatus.setText("PickUp customer");
+                                txt_total_pay_travel.setText("20$/month");
+                            }else{
+                                txt_statusMessage.setVisibility(View.VISIBLE);
+                                txt_statusMessage.setText("This user isn`t subscribed yet");
+                                btnRideStatus.setVisibility(View.GONE);
+                                txt_total_pay_travel.setText("0$/month");
+                            }
+                        }
+                    });
                 }
             }
 
@@ -412,29 +434,28 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         });
     }
 
-    private String status="";
-    private String isPendingSubscribed(String customerId){
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Drivers").child(FirebaseAuth.getInstance().getUid()).child("Requests");
-        reference.addValueEventListener(new ValueEventListener() {
+    private void isPendingSubscribed(String customerId,SimpleCallback<String> simpleCallback){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Drivers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Requests");
+        ValueEventListener listener=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     for(DataSnapshot snap:snapshot.getChildren()){
                         if(snap.child("userId").getValue().toString().equals(customerId)){
-                            status=  snap.child("status").getValue().toString();
-                            return;
+                            simpleCallback.callback(snap.child("status").getValue().toString());
+                            break;
                         }
                     }
+                }else{
+                    simpleCallback.callback("");
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
-
-        return status;
+        };
+        reference.addValueEventListener(listener);
     }
 
     private String getGeocoderAddress(){
@@ -477,22 +498,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     }
 
 
-    private void getToken() {
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        // Get new FCM registration token
-                        String token = task.getResult();
-                        saveToken(token);
-                    }
-                });
-    }
-
-    private void saveToken(String token) {
-        reference = FirebaseDatabase.getInstance().getReference().child("Token");
-        reference.child(FirebaseAuth.getInstance().getUid()).setValue(token);
-    }
 
     private void init() {
         addActivityResultLauncher();
@@ -897,9 +902,9 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         if(marker!=null&&marker.getTag()!=null){
             erasePolylines();
             if(!marker.getTag().toString().equals(firebaseAuth.getUid())&&(marker.getTag()!=null||marker.getTag().toString().equals(""))){
-                String customerUid=marker.getTag().toString();
+                customerId=marker.getTag().toString();
                 customerLatLng= marker.getPosition();
-                getCustomerDestination(customerUid);
+                getCustomerDestination(customerId);
             }
         }
         return false;
@@ -975,5 +980,9 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
             LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
         }
+    }
+
+    private interface SimpleCallback<T> {
+        void callback(T data);
     }
 }

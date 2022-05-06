@@ -40,21 +40,7 @@ public class Profile extends AppCompatActivity {
         init();
 
     }
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_toolbar_profile,menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.editProfile :
-        }
-        return super.onOptionsItemSelected(item);
-    }
-     */
 
     @Override
     protected void onDestroy() {

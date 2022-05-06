@@ -89,12 +89,12 @@ public class AddDriverInformation extends AppCompatActivity {
                 hashMap2.put("PlateNumber",plateNumber.getText().toString().trim());
                 hashMap2.put("CarType",autoCompleteCars.getText().toString().trim());
                 hashMap2.put("CarColor",autoCompleteColors.getText().toString().trim());
-                FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("DriverInformation").setValue(hashMap2).addOnSuccessListener(new OnSuccessListener<Void>() {
+                FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("DriverInformation").setValue(hashMap2).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         HashMap<String,Object> hashMap=new HashMap<>();
                         hashMap.put("conductor","true");
-                        FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
                                 HashMap<String,Object> hashMap=new HashMap<>();

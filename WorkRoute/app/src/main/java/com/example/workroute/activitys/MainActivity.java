@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void saveToken(String token) {
         reference = FirebaseDatabase.getInstance().getReference().child("Token");
-        reference.child(FirebaseAuth.getInstance().getUid()).setValue(token);
+        reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(token);
     }
 
 

@@ -269,14 +269,14 @@ public class FirstTimeActivity extends AppCompatActivity {
                                 HashMap<String,Object> hasMap=new HashMap<>();
                                 hasMap.put("fotoPerfil",downloadUrl);
 
-                                firestore.collection("Usuarios").document(FirebaseAuth.getInstance().getUid()).update(hasMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                firestore.collection("Usuarios").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).update(hasMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
 
                                     }
                                 });
 
-                            FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getUid()).updateChildren(hasMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(hasMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
 
@@ -364,7 +364,7 @@ public class FirstTimeActivity extends AppCompatActivity {
                     }
                 });
 
-                FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
 

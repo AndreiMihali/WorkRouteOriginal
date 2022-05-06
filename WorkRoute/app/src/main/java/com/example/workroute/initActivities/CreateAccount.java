@@ -222,7 +222,7 @@ public class CreateAccount extends AppCompatActivity {
 
     private void setDataFirebaseDatabase(){
         User user=new User(
-                firebaseAuth.getUid(),
+                firebaseAuth.getCurrentUser().getUid(),
                 ed_name.getText().toString().trim(),
                 0,
                 "",
@@ -245,7 +245,7 @@ public class CreateAccount extends AppCompatActivity {
                 ""
         );
 
-        reference.child("Usuarios").child(firebaseAuth.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+        reference.child("Usuarios").child(firebaseAuth.getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 setDataFirebaseFirestore();
@@ -256,7 +256,7 @@ public class CreateAccount extends AppCompatActivity {
 
     private void setDataFirebaseFirestore(){
         User user=new User(
-                firebaseAuth.getUid(),
+                firebaseAuth.getCurrentUser().getUid(),
                 ed_name.getText().toString().trim(),
                 0,
                 "",
@@ -281,7 +281,7 @@ public class CreateAccount extends AppCompatActivity {
 
         FirebaseFirestore firestore=FirebaseFirestore.getInstance();
 
-        firestore.collection("Usuarios").document(firebaseAuth.getUid()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+        firestore.collection("Usuarios").document(firebaseAuth.getCurrentUser().getUid()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 progressDialog.dismiss();

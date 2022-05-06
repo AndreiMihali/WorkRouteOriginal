@@ -184,7 +184,7 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
             }
         };
 
-        FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("payMethods").addValueEventListener(postListener);
+        FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("payMethods").addValueEventListener(postListener);
 
         myAdapter=new CardItemAdapter(getApplicationContext(),data);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -292,7 +292,7 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
         map.put("cardActive","true");
         map.put("cardType",(inputCardNumber.getText().toString().startsWith("5"))?"mastercard":"visa");
 
-        FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("payMethods").child(inputCardNumber.getText().toString().replaceFirst("[0-9]{12}","XXXX XXXX XXXX ")).setValue(map)
+        FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("payMethods").child(inputCardNumber.getText().toString().replaceFirst("[0-9]{12}","XXXX XXXX XXXX ")).setValue(map)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     public void onSuccess(Void unused) {
                         progressDialog.dismiss();
@@ -312,7 +312,7 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
 
     private void deletePayMethod(String number){
 
-            FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("payMethods")
+            FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("payMethods")
                     .child(number).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {

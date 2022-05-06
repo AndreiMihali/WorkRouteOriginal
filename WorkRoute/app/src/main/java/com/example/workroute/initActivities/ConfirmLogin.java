@@ -277,7 +277,7 @@ public class ConfirmLogin extends AppCompatActivity {
 
     private void setDataFirebaseDatabase(String name){
         User user=new User(
-                auth.getUid(),
+                auth.getCurrentUser().getUid(),
                 name,
                 0,
                 "",
@@ -300,7 +300,7 @@ public class ConfirmLogin extends AppCompatActivity {
                 ""
         );
 
-        FirebaseDatabase.getInstance().getReference().child("Usuarios").child(auth.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+        FirebaseDatabase.getInstance().getReference().child("Usuarios").child(auth.getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 setDataInFirebase(name);
@@ -311,7 +311,7 @@ public class ConfirmLogin extends AppCompatActivity {
 
     private void setDataInFirebase(String name){
         User user=new User(
-                auth.getUid(),
+                auth.getCurrentUser().getUid(),
                 name,
                 0,
                 "",
@@ -341,7 +341,7 @@ public class ConfirmLogin extends AppCompatActivity {
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 boolean existe=false;
                 for (QueryDocumentSnapshot x:queryDocumentSnapshots){
-                    if(x.getId().equals(auth.getUid())){
+                    if(x.getId().equals(auth.getCurrentUser().getUid())){
                         existe=true;
                         break;
                     }
@@ -350,7 +350,7 @@ public class ConfirmLogin extends AppCompatActivity {
                 if (existe){
                     isFirstTime(name);
                 }else{
-                    firestore.collection("Usuarios").document(auth.getUid()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    firestore.collection("Usuarios").document(auth.getCurrentUser().getUid()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             isFirstTime(name);
@@ -375,7 +375,7 @@ public class ConfirmLogin extends AppCompatActivity {
 
     private void isFirstTime(String name){
         FirebaseFirestore firestore=FirebaseFirestore.getInstance();
-        firestore.collection("Usuarios").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        firestore.collection("Usuarios").document(auth.getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 int veces =Integer.parseInt(documentSnapshot.get("vecesConectadas").toString());

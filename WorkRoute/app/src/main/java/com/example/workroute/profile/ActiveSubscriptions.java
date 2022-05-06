@@ -212,26 +212,31 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
                 if(btn_accept.getText().toString().equals("SUBSCRIBE")){
                     updateStateSubscription("pending");
                 }else{
-                    if(havePayMethod()<0){
-                        new MaterialAlertDialogBuilder(ActiveSubscriptions.this,R.style.ThemeOverlay_App_MaterialAlertDialog)
-                                .setCancelable(false)
-                                .setTitle("Payment method required")
-                                .setMessage("Before you accept you need tu have at least one pay method added. Do you want to add one?")
-                                .setPositiveButton("CONTINUE", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        startActivity(new Intent(ActiveSubscriptions.this, PayMethod.class));
-                                    }
-                                })
-                                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                }).show();
-                    }else{
-                        updateStateSubscription("accepted");
-                    }
+                    havePayMethod(new SimpleCallback<Long>() {
+                        @Override
+                        public void callback(Long data) {
+                            if(data<=0L){
+                                new MaterialAlertDialogBuilder(ActiveSubscriptions.this,R.style.ThemeOverlay_App_MaterialAlertDialog)
+                                    .setCancelable(false)
+                                    .setTitle("Payment method required")
+                                    .setMessage("Before you accept you need tu have at least one pay method added. Do you want to add one?")
+                                    .setPositiveButton("CONTINUE", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            startActivity(new Intent(ActiveSubscriptions.this, PayMethod.class));
+                                        }
+                                    })
+                                    .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    }).show();
+                            }else{
+                                updateStateSubscription("accepted");
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -252,13 +257,14 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
         bottomSheetBehavior.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
     }
 
-    private long cards=0;
-    private long havePayMethod(){
+    private void havePayMethod(SimpleCallback<Long> callback){
         ValueEventListener postListener=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getChildrenCount()>0){
-                    cards=snapshot.getChildrenCount();
+                if(snapshot.exists()){
+                    callback.callback(snapshot.getChildrenCount());
+                }else{
+                    callback.callback(0L);
                 }
 
             }
@@ -267,8 +273,7 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
             }
         };
 
-        FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("payMethods").addListenerForSingleValueEvent(postListener);
-        return cards;
+        FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("payMethods").addListenerForSingleValueEvent(postListener);
     }
 
     private void showDialogCancel(String message){
@@ -294,8 +299,8 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
     private void updateStateSubscription(String status){
         progressDialog.show();
         if(UserType.type.equals("driver")){
-            DatabaseReference referenceDriverRequest=FirebaseDatabase.getInstance().getReference("Drivers").child(FirebaseAuth.getInstance().getUid()).child("Requests").child(data.get(adapter.itemSelected).getUserUid());
-            DatabaseReference referenceCustomerRequest=FirebaseDatabase.getInstance().getReference("Customers").child(data.get(adapter.itemSelected).getUserUid()).child("Requests").child(FirebaseAuth.getInstance().getUid());
+            DatabaseReference referenceDriverRequest=FirebaseDatabase.getInstance().getReference("Drivers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Requests").child(data.get(adapter.itemSelected).getUserUid());
+            DatabaseReference referenceCustomerRequest=FirebaseDatabase.getInstance().getReference("Customers").child(data.get(adapter.itemSelected).getUserUid()).child("Requests").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
             HashMap<String,Object> map=new HashMap<>();
             map.put("userId",data.get(adapter.itemSelected).getUserUid());
             map.put("status",status);
@@ -304,14 +309,14 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
                         HashMap<String,Object> map=new HashMap<>();
-                        map.put("userId",FirebaseAuth.getInstance().getUid());
+                        map.put("userId",FirebaseAuth.getInstance().getCurrentUser().getUid());
                         map.put("status",status);
                         referenceCustomerRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
                                     progressDialog.dismiss();
-                                    getSenderName(FirebaseAuth.getInstance().getUid(),data.get(adapter.itemSelected).getUserUid(),status);
+                                    getSenderName(FirebaseAuth.getInstance().getCurrentUser().getUid(),data.get(adapter.itemSelected).getUserUid(),status);
                                 }else{
                                     progressDialog.dismiss();
                                 }
@@ -329,10 +334,10 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
                 }
             });
         }else{
-            DatabaseReference referenceDriverRequest=FirebaseDatabase.getInstance().getReference("Drivers").child(data.get(adapter.itemSelected).getUserUid()).child("Requests").child(FirebaseAuth.getInstance().getUid());
-            DatabaseReference referenceCustomerRequest=FirebaseDatabase.getInstance().getReference("Customers").child(FirebaseAuth.getInstance().getUid()).child("Requests").child(data.get(adapter.itemSelected).getUserUid());
+            DatabaseReference referenceDriverRequest=FirebaseDatabase.getInstance().getReference("Drivers").child(data.get(adapter.itemSelected).getUserUid()).child("Requests").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            DatabaseReference referenceCustomerRequest=FirebaseDatabase.getInstance().getReference("Customers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Requests").child(data.get(adapter.itemSelected).getUserUid());
             HashMap<String,Object> map=new HashMap<>();
-            map.put("userId",FirebaseAuth.getInstance().getUid());
+            map.put("userId",FirebaseAuth.getInstance().getCurrentUser().getUid());
             map.put("status",status);
             referenceDriverRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -346,7 +351,7 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
                                     progressDialog.dismiss();
-                                    getSenderName(FirebaseAuth.getInstance().getUid(),data.get(adapter.itemSelected).getUserUid(),status);
+                                    getSenderName(FirebaseAuth.getInstance().getCurrentUser().getUid(),data.get(adapter.itemSelected).getUserUid(),status);
                                 }else{
                                     progressDialog.dismiss();
                                 }
@@ -406,7 +411,7 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
     private void getData(){
         progressBar.setVisibility(View.VISIBLE);
         if(UserType.type.equals("driver")){
-            DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Drivers").child(FirebaseAuth.getInstance().getUid()).child("Requests");
+            DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Drivers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Requests");
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -433,7 +438,7 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
                 }
             });
         }else{
-            DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Customers").child(FirebaseAuth.getInstance().getUid()).child("Requests");
+            DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Customers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Requests");
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -515,6 +520,10 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
     @Override
     public void setOnItemClick(View view) {
         displayInformationCustomer(BottomSheetBehavior.STATE_EXPANDED);
+    }
+
+    private interface SimpleCallback<T>{
+        void callback(T data);
     }
 }
 

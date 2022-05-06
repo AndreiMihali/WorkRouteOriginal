@@ -55,6 +55,7 @@ import com.directions.route.RoutingListener;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.companion.UserType;
+import com.example.workroute.driverActivities.DriverMap;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.network.callback.NetworkCallback;
@@ -161,26 +162,8 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
         UserType.type="customer";
-        getToken();
         init();
         startService(new Intent(this, ServicioOnline.class));
-    }
-
-    /**
-     * OBTENEMOS EL TOKEN DE USUARIO PARA PODER GESTIONAR LAS NOTIFICACIONES
-     */
-
-
-    private void getToken() {
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        // Get new FCM registration token
-                        String token = task.getResult();
-                        saveToken(token);
-                    }
-                });
     }
 
     @Override
@@ -194,15 +177,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         }
     }
 
-    /**
-     * GUARDAMOS EL TOKEN PARA PODER RECUPERARLO Y MANDAR LAS NOTIFICIONES A LOS USUARIOS
-     * @param token
-     */
-
-    private void saveToken(String token) {
-        reference = FirebaseDatabase.getInstance().getReference().child("Token");
-        reference.child(FirebaseAuth.getInstance().getUid()).setValue(token);
-    }
 
     private void init() {
         addActivityResultLauncher();
@@ -363,10 +337,27 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                 LatLng driverLocation=new LatLng(location.latitude,location.longitude);
 
                 if (!key.equals(firebaseAuth.getUid())) {
-                    Marker mCustomerMarker=mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
-                    .flat(true).anchor(0.5f,0.5f));
-                    mCustomerMarker.setTag(key);
-                    markerList.add(mCustomerMarker);
+                    isPendingSubscribed(key, new SimpleCallback<String>() {
+                        @Override
+                        public void callback(String data) {
+                            Marker mDriverMarker=null;
+                            if(data.equals("pending")||data.equals("accepted")){
+                                if (mDriverMarker!=null) {
+                                    mDriverMarker.remove();
+                                }
+                                mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
+                                        .flat(true).anchor(0.5f, 0.5f));
+                            }else{
+                                if (mDriverMarker!=null) {
+                                    mDriverMarker.remove();
+                                }
+                                mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.user_marker))))
+                                        .flat(true).anchor(0.5f, 0.5f));
+                            }
+                            mDriverMarker.setTag(key);
+                            markerList.add(mDriverMarker);
+                        }
+                    });
                 }
             }
 
@@ -469,15 +460,20 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                             startActivity(intent);
                         }
                     });
-                    if(isPendingSubscribed(driverId).equals("pending")){
-                        btn_cancel.setText("Pending");
-                    }else if(isPendingSubscribed(driverId).equals("declined")||isPendingSubscribed(driverId).equals("canceled")){
-                        btn_cancel.setText("Subscribe");
-                    }else if(isPendingSubscribed(driverId).equals("accepted")){
-                        btn_cancel.setText("Go to work");
-                    }else{
-                        btn_cancel.setText("Subscribe");
-                    }
+                    isPendingSubscribed(driverId, new SimpleCallback<String>() {
+                        @Override
+                        public void callback(String data) {
+                            if(data.equals("pending")){
+                                btn_cancel.setText("Pending");
+                            }else if(data.equals("declined")||data.equals("canceled")){
+                                btn_cancel.setText("Subscribe");
+                            }else if(data.equals("accepted")){
+                                btn_cancel.setText("Go to work");
+                            }else{
+                                btn_cancel.setText("Subscribe");
+                            }
+                        }
+                    });
                 }
             }
 
@@ -488,29 +484,28 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         });
     }
 
-    private String status="";
-    private String isPendingSubscribed(String driverId){
+    private void isPendingSubscribed(String customerId, SimpleCallback<String> simpleCallback){
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Customers").child(FirebaseAuth.getInstance().getUid()).child("Requests");
-        reference.addValueEventListener(new ValueEventListener() {
+        ValueEventListener listener=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     for(DataSnapshot snap:snapshot.getChildren()){
-                        if(snap.child("userId").getValue().toString().equals(driverId)){
-                            status=  snap.child("status").getValue().toString();
-                            return;
+                        if(snap.child("userId").getValue().toString().equals(customerId)){
+                            simpleCallback.callback(snap.child("status").getValue().toString());
+                            break;
                         }
                     }
+                }else{
+                    simpleCallback.callback("");
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
-
-        return status;
+        };
+        reference.addValueEventListener(listener);
     }
 
     private void getRouteToMarker(LatLng startDestination,LatLng myPosition){
@@ -1180,6 +1175,10 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         drawable.draw(canvas);
 
         return bitmap;
+    }
+
+    private interface SimpleCallback<T> {
+        void callback(T data);
     }
 
 }
