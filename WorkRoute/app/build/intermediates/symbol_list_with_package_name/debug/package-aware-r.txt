@@ -3871,6 +3871,7 @@ id txt_pay_message
 id txt_plateNumber
 id txt_startLocation
 id txt_startLocation_cost
+id txt_status_message
 id txt_title
 id txt_total_pay_travel
 id txt_total_pay_travel_cost

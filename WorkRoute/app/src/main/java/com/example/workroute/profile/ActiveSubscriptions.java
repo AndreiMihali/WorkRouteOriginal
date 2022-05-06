@@ -209,25 +209,29 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
         btn_accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(havePayMethod()<=0){
-                    new MaterialAlertDialogBuilder(ActiveSubscriptions.this,R.style.ThemeOverlay_App_MaterialAlertDialog)
-                            .setCancelable(false)
-                            .setTitle("Payment method required")
-                            .setMessage("Before you accept you need tu have at least one pay method added. Do you want to add one?")
-                            .setPositiveButton("CONTINUE", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    startActivity(new Intent(ActiveSubscriptions.this, PayMethod.class));
-                                }
-                            })
-                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            }).show();
+                if(btn_accept.getText().toString().equals("SUBSCRIBE")){
+                    updateStateSubscription("pending");
                 }else{
-                    updateStateSubscription("accepted");
+                    if(havePayMethod()<0){
+                        new MaterialAlertDialogBuilder(ActiveSubscriptions.this,R.style.ThemeOverlay_App_MaterialAlertDialog)
+                                .setCancelable(false)
+                                .setTitle("Payment method required")
+                                .setMessage("Before you accept you need tu have at least one pay method added. Do you want to add one?")
+                                .setPositiveButton("CONTINUE", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        startActivity(new Intent(ActiveSubscriptions.this, PayMethod.class));
+                                    }
+                                })
+                                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                }).show();
+                    }else{
+                        updateStateSubscription("accepted");
+                    }
                 }
             }
         });
@@ -300,7 +304,7 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
                         HashMap<String,Object> map=new HashMap<>();
-                        map.put("userId",data.get(adapter.itemSelected).getUserUid());
+                        map.put("userId",FirebaseAuth.getInstance().getUid());
                         map.put("status",status);
                         referenceCustomerRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -335,7 +339,7 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
                         HashMap<String,Object> map=new HashMap<>();
-                        map.put("userId",FirebaseAuth.getInstance().getUid());
+                        map.put("userId",data.get(adapter.itemSelected).getUserUid());
                         map.put("status",status);
                         referenceCustomerRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -369,6 +373,8 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
                 String name=documentSnapshot.get("nombre").toString();
                 if(status.equals("canceled")){
                     getToken(name,receiverId,name+" "+status+" your subscription","REQUEST "+status);
+                }else if(status.equals("pending")){
+                    getToken(name,receiverId,"Yo have a new request from "+name,"NEW REQUEST");
                 }else{
                     getToken(name,receiverId,name+" "+status+" your request","REQUEST "+status);
                 }

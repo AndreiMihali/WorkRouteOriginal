@@ -90,6 +90,9 @@ public final class ActivityDriverMapBinding implements ViewBinding {
   public final TextView txtStartLocation;
 
   @NonNull
+  public final TextView txtStatusMessage;
+
+  @NonNull
   public final TextView txtTotalPayTravel;
 
   @NonNull
@@ -107,7 +110,8 @@ public final class ActivityDriverMapBinding implements ViewBinding {
       @NonNull FrameLayout secondSheet, @NonNull FrameLayout sheet,
       @NonNull RelativeLayout toolbarBottomSheet, @NonNull TextView txtDestination,
       @NonNull TextView txtDistance, @NonNull TextView txtName, @NonNull TextView txtStartLocation,
-      @NonNull TextView txtTotalPayTravel, @NonNull TextView txtTravelInformation) {
+      @NonNull TextView txtStatusMessage, @NonNull TextView txtTotalPayTravel,
+      @NonNull TextView txtTravelInformation) {
     this.rootView = rootView;
     this.botonDrag = botonDrag;
     this.btnRideStatus = btnRideStatus;
@@ -130,6 +134,7 @@ public final class ActivityDriverMapBinding implements ViewBinding {
     this.txtDistance = txtDistance;
     this.txtName = txtName;
     this.txtStartLocation = txtStartLocation;
+    this.txtStatusMessage = txtStatusMessage;
     this.txtTotalPayTravel = txtTotalPayTravel;
     this.txtTravelInformation = txtTravelInformation;
   }
@@ -283,6 +288,12 @@ public final class ActivityDriverMapBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.txt_status_message;
+      TextView txtStatusMessage = ViewBindings.findChildViewById(rootView, id);
+      if (txtStatusMessage == null) {
+        break missingId;
+      }
+
       id = R.id.txt_total_pay_travel;
       TextView txtTotalPayTravel = ViewBindings.findChildViewById(rootView, id);
       if (txtTotalPayTravel == null) {
@@ -299,7 +310,7 @@ public final class ActivityDriverMapBinding implements ViewBinding {
           buttonMenu, buttonMessage, buttonMessages, buttonNotifications, buttonProfile, buttonUbi,
           divider, informationUser, locationIcon, locationIcon1, profilePhotoSheet, rela,
           secondSheet, sheet, toolbarBottomSheet, txtDestination, txtDistance, txtName,
-          txtStartLocation, txtTotalPayTravel, txtTravelInformation);
+          txtStartLocation, txtStatusMessage, txtTotalPayTravel, txtTravelInformation);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

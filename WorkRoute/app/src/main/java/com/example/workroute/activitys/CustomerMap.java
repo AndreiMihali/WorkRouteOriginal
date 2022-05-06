@@ -2,7 +2,6 @@ package com.example.workroute.activitys;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,7 +9,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -48,14 +46,6 @@ import androidx.biometric.BiometricPrompt;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
@@ -90,7 +80,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
@@ -104,7 +93,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -120,13 +108,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.protobuf.Method;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -287,7 +269,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     HashMap<String,Object> map=new HashMap<>();
-                    map.put("userId",firebaseAuth.getUid());
+                    map.put("userId",driverId);
                     map.put("status","pending");
                     referenceCustomerRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -487,6 +469,15 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                             startActivity(intent);
                         }
                     });
+                    if(isPendingSubscribed(driverId).equals("pending")){
+                        btn_cancel.setText("Pending");
+                    }else if(isPendingSubscribed(driverId).equals("declined")||isPendingSubscribed(driverId).equals("canceled")){
+                        btn_cancel.setText("Subscribe");
+                    }else if(isPendingSubscribed(driverId).equals("accepted")){
+                        btn_cancel.setText("Go to work");
+                    }else{
+                        btn_cancel.setText("Subscribe");
+                    }
                 }
             }
 
@@ -495,6 +486,31 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
             }
         });
+    }
+
+    private String status="";
+    private String isPendingSubscribed(String driverId){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Customers").child(FirebaseAuth.getInstance().getUid()).child("Requests");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot snap:snapshot.getChildren()){
+                        if(snap.child("userId").getValue().toString().equals(driverId)){
+                            status=  snap.child("status").getValue().toString();
+                            return;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return status;
     }
 
     private void getRouteToMarker(LatLng startDestination,LatLng myPosition){
@@ -646,7 +662,13 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog();
+                if(btn_cancel.getText().toString().equals("Pending")){
+                    Toast.makeText(getApplicationContext(),"Your request is pending acceptance",Toast.LENGTH_SHORT).show();
+                }else if(btn_cancel.getText().toString().equals("Subscribe")){
+                    showDialog();
+                }else{
+                    Toast.makeText(getApplicationContext(),"We notified the driver that you want to go to work",Toast.LENGTH_LONG).show();
+                }
             }
         });
 

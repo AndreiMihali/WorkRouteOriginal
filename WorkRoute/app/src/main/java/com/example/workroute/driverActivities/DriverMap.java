@@ -142,6 +142,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     private String customerDestination;
     private LatLng destinationCustomerLatLng;
     private LatLng customerLatLng;
+    private TextView txt_statusMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -380,6 +381,27 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                             startActivity(intent);
                         }
                     });
+                    if(isPendingSubscribed(customerId).equals("pending")){
+                        txt_statusMessage.setVisibility(View.VISIBLE);
+                        txt_statusMessage.setText("You have to accept the user request");
+                        btnRideStatus.setVisibility(View.GONE);
+                        txt_total_pay_travel.setText("20$/month");
+                    }else if(isPendingSubscribed(customerId).equals("declined")||isPendingSubscribed(customerId).equals("canceled")){
+                        txt_statusMessage.setVisibility(View.VISIBLE);
+                        txt_statusMessage.setText("You canceled or declined the user request");
+                        btnRideStatus.setVisibility(View.GONE);
+                        txt_total_pay_travel.setText("0$/month");
+                    }else if(isPendingSubscribed(customerId).equals("accepted")){
+                        txt_statusMessage.setVisibility(View.GONE);
+                        btnRideStatus.setVisibility(View.VISIBLE);
+                        btnRideStatus.setText("PickUp customer");
+                        txt_total_pay_travel.setText("20$/month");
+                    }else{
+                        txt_statusMessage.setVisibility(View.VISIBLE);
+                        txt_statusMessage.setText("This user isn`t subscribed yet");
+                        btnRideStatus.setVisibility(View.GONE);
+                        txt_total_pay_travel.setText("0$/month");
+                    }
                 }
             }
 
@@ -388,6 +410,31 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
             }
         });
+    }
+
+    private String status="";
+    private String isPendingSubscribed(String customerId){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Drivers").child(FirebaseAuth.getInstance().getUid()).child("Requests");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot snap:snapshot.getChildren()){
+                        if(snap.child("userId").getValue().toString().equals(customerId)){
+                            status=  snap.child("status").getValue().toString();
+                            return;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return status;
     }
 
     private String getGeocoderAddress(){
@@ -412,6 +459,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         txt_total_pay_travel = findViewById(R.id.txt_total_pay_travel);
         txt_startLocation = findViewById(R.id.txt_startLocation);
         txt_destination = findViewById(R.id.txt_destination);
+        txt_statusMessage= findViewById(R.id.txt_status_message);
 
         bottomSheetBehavior.setPeekHeight(200);
         bottomSheetBehavior.setState(state);
@@ -551,7 +599,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         btnRideStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getApplicationContext(),"PENDING TO CODE",Toast.LENGTH_SHORT).show();
             }
 
         });

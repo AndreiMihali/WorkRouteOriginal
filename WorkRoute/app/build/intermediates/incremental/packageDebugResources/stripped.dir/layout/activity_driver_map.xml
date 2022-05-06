@@ -159,10 +159,22 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:text="Go to customer"
+                            android:visibility="invisible"
                             android:textColor="@color/secondary"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             app:strokeColor="#CC1204" />
+
+                       <TextView
+                           android:layout_width="250dp"
+                           android:layout_centerInParent="true"
+                           android:textSize="16sp"
+                           android:gravity="center"
+                           android:textColor="@color/secondary"
+                           android:lineSpacingExtra="3dp"
+                           android:text="You have to accept the user request"
+                           android:id="@+id/txt_status_message"
+                           android:layout_height="wrap_content"/>
 
                         <ImageButton
                             android:id="@+id/button_message"
