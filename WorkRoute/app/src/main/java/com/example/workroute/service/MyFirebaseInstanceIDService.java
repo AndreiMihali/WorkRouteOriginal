@@ -14,6 +14,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.workroute.R;
 import com.example.workroute.companion.UserType;
+import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.profile.ActiveSubscriptions;
 import com.example.workroute.activitys.MainActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
@@ -96,7 +97,7 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
         switch (activity){
             case "MessagesActivity":{
                 UserType.type="customer";
-                nf=new Intent(getApplicationContext(),MessagesActivity.class);
+                nf=new Intent(getApplicationContext(), ChatsActivity.class);
                 nf.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 return PendingIntent.getActivity(this,0,nf,0);
             }
