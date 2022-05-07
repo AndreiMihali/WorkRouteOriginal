@@ -56,8 +56,10 @@ import com.directions.route.RoutingListener;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.companion.UserType;
+import com.example.workroute.driverActivities.DriverMap;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
+import com.example.workroute.kotlin.model.NotificationItem;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.example.workroute.notifications.Notifications;
 import com.example.workroute.profile.Profile;
@@ -184,6 +186,33 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
             circleMap.remove();
             setDestination();
         }
+    }
+
+    private void getNotificationsCount(SimpleCallback<Long> callback){
+        FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Notifications").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<NotificationItem> data=new ArrayList<>();
+                int contChats=0;
+                int contElse=0;
+                if(snapshot.exists()){
+                    for(DataSnapshot snap:snapshot.getChildren()){
+                        if(snap.child("type").equals("Subscription")){
+                            contElse++;
+                        }else{
+                            contChats++;
+                        }
+                        data.add(snap.getValue(NotificationItem.class));
+                    }
+                    callback.callback(snapshot.getChildrenCount(),data,contElse,contChats);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void init() {
@@ -344,7 +373,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                 if (!key.equals(firebaseAuth.getUid())) {
                     isPendingSubscribed(key, new SimpleCallback<String>() {
                         @Override
-                        public void callback(String data) {
+                        public void callback(String data,Object ...secondary) {
                             Marker mDriverMarker = null;
                             if (mDriverMarker != null) {
                                 mDriverMarker.remove();
@@ -467,7 +496,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                     });
                     isPendingSubscribed(driverId, new SimpleCallback<String>() {
                         @Override
-                        public void callback(String data) {
+                        public void callback(String data,Object ...secondary) {
                             if (data.equals("pending")) {
                                 btn_cancel.setText("Pending");
                             } else if (data.equals("declined") || data.equals("canceled")) {
@@ -592,20 +621,42 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
 
     private void initListeners() {
-        /** MÉTODO PARA AÑADIR ICONOS DE NOTIFICACIÓN A LOS BOTONES*/
-        button_notifications.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+        button_menu.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @SuppressLint("UnsafeOptInUsageError")
             @Override
             public void onGlobalLayout() {
-                BadgeDrawable badgeDrawable = BadgeDrawable.create(CustomerMap.this);
-                badgeDrawable.setNumber(2);
-                //Important to change the position of the Badge
-                badgeDrawable.setHorizontalOffset(30);
-                badgeDrawable.setVerticalOffset(20);
+                getNotificationsCount(new SimpleCallback<Long>() {
+                    @Override
+                    public void callback(Long data, Object... secondary) {
+                        if(data.intValue()>=0){
+                            ArrayList<NotificationItem> notificationItems=(ArrayList<NotificationItem>)secondary[0];
+                            for(NotificationItem x:notificationItems){
+                                if(x.getRead().equals("false")){
+                                    BadgeDrawable badgeDrawable = BadgeDrawable.create(CustomerMap.this);
+                                    badgeDrawable.setNumber(data.intValue());
+                                    badgeDrawable.setHorizontalOffset(30);
+                                    badgeDrawable.setVerticalOffset(20);
+                                    BadgeUtils.attachBadgeDrawable(badgeDrawable, button_menu, null);
+                                    if(x.getType().equals("Message")){
+                                        BadgeDrawable badgeDrawable2 = BadgeDrawable.create(CustomerMap.this);
+                                        badgeDrawable2.setNumber((int)secondary[2]);
+                                        badgeDrawable2.setHorizontalOffset(30);
+                                        badgeDrawable2.setVerticalOffset(20);
+                                        BadgeUtils.attachBadgeDrawable(badgeDrawable2, button_chats, null);
+                                    }else{
+                                        BadgeDrawable badgeDrawable2 = BadgeDrawable.create(CustomerMap.this);
+                                        badgeDrawable2.setNumber((int)secondary[3]);
+                                        badgeDrawable2.setHorizontalOffset(30);
+                                        badgeDrawable2.setVerticalOffset(20);
+                                        BadgeUtils.attachBadgeDrawable(badgeDrawable2, button_notifications, null);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
 
-                BadgeUtils.attachBadgeDrawable(badgeDrawable, button_notifications, null);
-
-                button_notifications.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
 
@@ -1171,7 +1222,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     }
 
     private interface SimpleCallback<T> {
-        void callback(T data);
+        void callback(T data,Object... secondary);
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.workroute.driverActivities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
@@ -52,6 +54,7 @@ import com.example.workroute.companion.Companion;
 import com.example.workroute.companion.UserType;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
+import com.example.workroute.kotlin.model.NotificationItem;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.example.workroute.notifications.Notifications;
 import com.example.workroute.profile.Profile;
@@ -170,6 +173,33 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         }
     }
 
+    private void getNotificationsCount(SimpleCallback<Long> callback){
+        FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Notifications").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<NotificationItem> data=new ArrayList<>();
+                int contChats=0;
+                int contElse=0;
+                if(snapshot.exists()){
+                    for(DataSnapshot snap:snapshot.getChildren()){
+                        if(snap.child("type").equals("Subscription")){
+                            contElse++;
+                        }else{
+                            contChats++;
+                        }
+                        data.add(snap.getValue(NotificationItem.class));
+                    }
+                    callback.callback(snapshot.getChildrenCount(),data,contElse,contChats);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void getAllCustomers() {
         getCustomersAroundStarted = true;
         DatabaseReference customersReference = FirebaseDatabase.getInstance().getReference().child("locationUpdates").child("Customers");
@@ -189,7 +219,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                 if (!key.equals(firebaseAuth.getUid())) {
                     isPendingSubscribed(key, new SimpleCallback<String>() {
                         @Override
-                        public void callback(String data) {
+                        public void callback(String data,Object... secondary) {
                             Marker mCustomerMarker = null;
                             if (mCustomerMarker != null) {
                                 mCustomerMarker.remove();
@@ -389,7 +419,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
                     isPendingSubscribed(customerId, new SimpleCallback<String>() {
                         @Override
-                        public void callback(String data) {
+                        public void callback(String data,Object... secondary) {
                             if (data.equals("pending")) {
                                 txt_statusMessage.setVisibility(View.VISIBLE);
                                 txt_statusMessage.setText("You have to accept the user request");
@@ -515,22 +545,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     }
 
     private void initListeners() {
-        /** MÉTODO PARA AÑADIR ICONOS DE NOTIFICACIÓN A LOS BOTONES*/
-        button_notifications.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @SuppressLint("UnsafeOptInUsageError")
-            @Override
-            public void onGlobalLayout() {
-                BadgeDrawable badgeDrawable = BadgeDrawable.create(DriverMap.this);
-                badgeDrawable.setNumber(2);
-                //Important to change the position of the Badge
-                badgeDrawable.setHorizontalOffset(30);
-                badgeDrawable.setVerticalOffset(20);
-
-                BadgeUtils.attachBadgeDrawable(badgeDrawable, button_notifications, null);
-
-                button_notifications.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-            }
-        });
 
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -550,6 +564,44 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
             @Override
             public void onClick(View view) {
                 animateMenu();
+            }
+        });
+
+        button_menu.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @SuppressLint("UnsafeOptInUsageError")
+            @Override
+            public void onGlobalLayout() {
+                getNotificationsCount(new SimpleCallback<Long>() {
+                    @Override
+                    public void callback(Long data, Object... secondary) {
+                        if(data.intValue()>=0){
+                            ArrayList<NotificationItem> notificationItems=(ArrayList<NotificationItem>)secondary[0];
+                            for(NotificationItem x:notificationItems){
+                               if(x.getRead().equals("false")){
+                                   BadgeDrawable badgeDrawable = BadgeDrawable.create(DriverMap.this);
+                                   badgeDrawable.setNumber(data.intValue());
+                                   badgeDrawable.setHorizontalOffset(30);
+                                   badgeDrawable.setVerticalOffset(20);
+                                   BadgeUtils.attachBadgeDrawable(badgeDrawable, button_menu, null);
+                                   if(x.getType().equals("Message")){
+                                       BadgeDrawable badgeDrawable2 = BadgeDrawable.create(DriverMap.this);
+                                       badgeDrawable2.setNumber((int)secondary[2]);
+                                       badgeDrawable2.setHorizontalOffset(30);
+                                       badgeDrawable2.setVerticalOffset(20);
+                                       BadgeUtils.attachBadgeDrawable(badgeDrawable2, button_chats, null);
+                                   }else{
+                                       BadgeDrawable badgeDrawable2 = BadgeDrawable.create(DriverMap.this);
+                                       badgeDrawable2.setNumber((int)secondary[3]);
+                                       badgeDrawable2.setHorizontalOffset(30);
+                                       badgeDrawable2.setVerticalOffset(20);
+                                       BadgeUtils.attachBadgeDrawable(badgeDrawable2, button_notifications, null);
+                                   }
+                               }
+                            }
+                        }
+                    }
+                });
+
             }
         });
 
@@ -965,6 +1017,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     }
 
     private interface SimpleCallback<T> {
-        void callback(T data);
+        void callback(T data,Object... secondary);
     }
 }
