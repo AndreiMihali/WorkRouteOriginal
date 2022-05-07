@@ -1,101 +1,36 @@
 package com.example.workroute.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 public class User {
     private String uid;
     private String nombre;
     private int edad;
     private String fecha_naci;
     private String localidad;
-    private String direccion;
-    private int nivel;
     private boolean activo;
-    private boolean suscrito;
     private boolean online;
-    private int nivelSuscripcion;
     private String fotoPerfil;
     private boolean conductor;
-    private ArrayList<Viaje> viajes;
     private int vecesConectadas;
     private String workAddress;
-
-    public ArrayList<User> getFollowersProfile() {
-        return followersProfile;
-    }
-
-    public void setFollowersProfile(ArrayList<User> followersProfile) {
-        this.followersProfile = followersProfile;
-    }
-
-    public ArrayList<User> getFollowingProfile() {
-        return followingProfile;
-    }
-
-    public void setFollowingProfile(ArrayList<User> followingProfile) {
-        this.followingProfile = followingProfile;
-    }
-
-    private ArrayList<User> followersProfile;
-    private ArrayList<User> followingProfile;
-
-    public int getFollowers() {
-        return followers;
-    }
-
-    public void setFollowers(int followers) {
-        this.followers = followers;
-    }
-
-    public int getFollowing() {
-        return following;
-    }
-
-    public void setFollowing(int following) {
-        this.following = following;
-    }
-
-    public int getOpinions() {
-        return opinions;
-    }
-
-    public void setOpinions(int opinions) {
-        this.opinions = opinions;
-    }
-
-    private int followers;
-    private int following;
-    private int opinions;
 
     public User() {
     }
 
-    public User(String uid, String nombre, int edad, String fecha_naci, String localidad, String direccion, int nivel, boolean activo,
-                boolean suscrito, boolean online, int nivelSuscripcion, String fotoPerfil, boolean conductor,
-                ArrayList<Viaje> viajes, int vecesConectadas,int followers,int following,int opinions,ArrayList<User> followersProfile,ArrayList<User> followingProfile,String workAddress) {
+    public User(String uid, String nombre, int edad, String fecha_naci, String localidad, boolean activo,
+                boolean online, String fotoPerfil, boolean conductor, int vecesConectadas, String workAddress) {
         this.uid = uid;
         this.nombre = nombre;
         this.edad = edad;
         this.fecha_naci = fecha_naci;
         this.localidad = localidad;
-        this.direccion = direccion;
-        this.nivel = nivel;
         this.activo = activo;
-        this.suscrito = suscrito;
         this.online = online;
-        this.nivelSuscripcion = nivelSuscripcion;
         this.fotoPerfil = fotoPerfil;
         this.conductor = conductor;
-        this.viajes = viajes;
         this.vecesConectadas = vecesConectadas;
-        this.followers=followers;
-        this.following=following;
-        this.opinions=opinions;
-        this.followingProfile=followingProfile;
-        this.followersProfile=followersProfile;
-        this.workAddress=workAddress;
+        this.workAddress = workAddress;
     }
+
 
     public String getWorkAddress() {
         return workAddress;
@@ -145,22 +80,6 @@ public class User {
         this.localidad = localidad;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public int getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
-
     public boolean isActivo() {
         return activo;
     }
@@ -169,28 +88,12 @@ public class User {
         this.activo = activo;
     }
 
-    public boolean isSuscrito() {
-        return suscrito;
-    }
-
-    public void setSuscrito(boolean suscrito) {
-        this.suscrito = suscrito;
-    }
-
     public boolean isOnline() {
         return online;
     }
 
     public void setOnline(boolean online) {
         this.online = online;
-    }
-
-    public int getNivelSuscripcion() {
-        return nivelSuscripcion;
-    }
-
-    public void setNivelSuscripcion(int nivelSuscripcion) {
-        this.nivelSuscripcion = nivelSuscripcion;
     }
 
     public String getFotoPerfil() {
@@ -207,14 +110,6 @@ public class User {
 
     public void setConductor(boolean conductor) {
         this.conductor = conductor;
-    }
-
-    public ArrayList<Viaje> getViajes() {
-        return viajes;
-    }
-
-    public void setViajes(ArrayList<Viaje> viajes) {
-        this.viajes = viajes;
     }
 
     public int getVecesConectadas() {

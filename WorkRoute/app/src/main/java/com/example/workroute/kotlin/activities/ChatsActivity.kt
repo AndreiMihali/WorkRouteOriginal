@@ -21,16 +21,16 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 
 class ChatsActivity : AppCompatActivity() {
-    private lateinit var toolbar:MaterialToolbar
-    private lateinit var recycler:RecyclerView
-    private lateinit var data:ArrayList<UserChatModel>
-    private  var adapter:AdapterChatsList?=null
-    private lateinit var firestore:FirebaseFirestore
-    private lateinit var firebaseUser:FirebaseUser
-    private lateinit var reference:DatabaseReference
-    private lateinit var allUsers:ArrayList<UserList>
-    private lateinit var progressCircular:ProgressBar
-    private lateinit var txtNull:TextView
+    private lateinit var toolbar: MaterialToolbar
+    private lateinit var recycler: RecyclerView
+    private lateinit var data: ArrayList<UserChatModel>
+    private var adapter: AdapterChatsList? = null
+    private lateinit var firestore: FirebaseFirestore
+    private lateinit var firebaseUser: FirebaseUser
+    private lateinit var reference: DatabaseReference
+    private lateinit var allUsers: ArrayList<UserList>
+    private lateinit var progressCircular: ProgressBar
+    private lateinit var txtNull: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Register)
@@ -46,25 +46,25 @@ class ChatsActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    private fun init(){
-        toolbar=findViewById(R.id.toolbar)
-        txtNull=findViewById(R.id.txt_null)
-        progressCircular=findViewById(R.id.progress_circular)
-        recycler=findViewById(R.id.recycler_chats)
-        recycler.layoutManager=LinearLayoutManager(applicationContext)
-        firestore= FirebaseFirestore.getInstance()
-        firebaseUser= FirebaseAuth.getInstance().currentUser!!
-        reference= FirebaseDatabase.getInstance().reference
-        data= ArrayList()
-        allUsers= ArrayList()
+    private fun init() {
+        toolbar = findViewById(R.id.toolbar)
+        txtNull = findViewById(R.id.txt_null)
+        progressCircular = findViewById(R.id.progress_circular)
+        recycler = findViewById(R.id.recycler_chats)
+        recycler.layoutManager = LinearLayoutManager(applicationContext)
+        firestore = FirebaseFirestore.getInstance()
+        firebaseUser = FirebaseAuth.getInstance().currentUser!!
+        reference = FirebaseDatabase.getInstance().reference
+        data = ArrayList()
+        allUsers = ArrayList()
         initListeners()
-        if(firebaseUser!=null){
+        if (firebaseUser != null) {
             getData()
         }
     }
 
     private fun getData() {
-        progressCircular.visibility=View.VISIBLE
+        progressCircular.visibility = View.VISIBLE
         allUsers.clear()
         data.clear()
         adapter?.notifyDataSetChanged()
@@ -73,24 +73,24 @@ class ChatsActivity : AppCompatActivity() {
                 allUsers.clear()
                 data.clear()
                 adapter?.notifyDataSetChanged()
-                for(snapshot in dataSnapshot.children){
-                    val userId= Objects.requireNonNull(snapshot.child("chat_id").value.toString())
-                    val lastMessage=snapshot.child("message").value.toString()
-                    val time=snapshot.child("time").value.toString()
-                    val read=snapshot.child("read").value.toString()
-                    allUsers.add(UserList(userId,lastMessage,time,read))
+                for (snapshot in dataSnapshot.children) {
+                    val userId = Objects.requireNonNull(snapshot.child("chat_id").value.toString())
+                    val lastMessage = snapshot.child("message").value.toString()
+                    val time = snapshot.child("time").value.toString()
+                    val read = snapshot.child("read").value.toString()
+                    allUsers.add(UserList(userId, lastMessage, time, read))
                 }
-                progressCircular.visibility=View.GONE
-                if(allUsers.isEmpty()){
-                    txtNull.visibility=View.VISIBLE
-                }else{
-                    txtNull.visibility=View.GONE
+                progressCircular.visibility = View.GONE
+                if (allUsers.isEmpty()) {
+                    txtNull.visibility = View.VISIBLE
+                } else {
+                    txtNull.visibility = View.GONE
                     getUserData()
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                progressCircular.visibility=View.GONE
+                progressCircular.visibility = View.GONE
             }
         }
         reference.child("ChatList").child(firebaseUser.uid).addValueEventListener(postListener)
@@ -98,17 +98,26 @@ class ChatsActivity : AppCompatActivity() {
 
     private fun getUserData() {
         Handler().post {
-            for(user in allUsers){
+            for (user in allUsers) {
                 firestore.collection("Usuarios").document(user.userId).get().addOnSuccessListener {
-                    val userId=it.get("uid").toString()
-                    val userPhoto=it.get("fotoPerfil").toString()
-                    val userName=it.get("nombre").toString()
-                    data.add(UserChatModel(userName,userPhoto,userId,user.lastMessage,user.time,user.read))
-                    if(adapter!=null){
+                    val userId = it.get("uid").toString()
+                    val userPhoto = it.get("fotoPerfil").toString()
+                    val userName = it.get("nombre").toString()
+                    data.add(
+                        UserChatModel(
+                            userName,
+                            userPhoto,
+                            userId,
+                            user.lastMessage,
+                            user.time,
+                            user.read
+                        )
+                    )
+                    if (adapter != null) {
                         adapter?.notifyDataSetChanged()
-                    }else{
-                        adapter= AdapterChatsList(applicationContext,data)
-                        recycler.adapter=adapter
+                    } else {
+                        adapter = AdapterChatsList(applicationContext, data)
+                        recycler.adapter = adapter
                     }
                 }
 
@@ -123,5 +132,10 @@ class ChatsActivity : AppCompatActivity() {
         }
     }
 
-    private data class UserList(val userId:String,val lastMessage: String,val time:String,val read:String)
+    private data class UserList(
+        val userId: String,
+        val lastMessage: String,
+        val time: String,
+        val read: String
+    )
 }

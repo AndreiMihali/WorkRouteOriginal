@@ -1,37 +1,29 @@
 package com.example.workroute.profile;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.workroute.R;
-import com.example.workroute.activitys.CustomerMap;
 import com.example.workroute.activitys.MainActivity;
 import com.example.workroute.activitys.PayMethod;
 import com.example.workroute.adapters.ActiveSubAdapter;
 import com.example.workroute.companion.UserType;
-import com.example.workroute.driverActivities.DriverMap;
 import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.model.SubscribedUser;
 import com.example.workroute.service.NotificationService;
@@ -55,13 +47,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
-public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubAdapter.MyItemClickListener{
+public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubAdapter.MyItemClickListener {
 
     private MaterialToolbar toolbarSubs;
-    private ArrayList <SubscribedUser> data;
-    private ActiveSubAdapter adapter=null;
+    private ArrayList<SubscribedUser> data;
+    private ActiveSubAdapter adapter = null;
     private RecyclerView recyclerView;
     private ArrayList<User> customersId;
     private ProgressBar progressBar;
@@ -79,76 +70,75 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
     }
 
     private void main() {
-         controls();
-         listeners();
+        controls();
+        listeners();
     }
-
 
 
     private void controls() {
         toolbarSubs = findViewById(R.id.toolbar_subs);
-        recyclerView=findViewById(R.id.recyclerSubs);
+        recyclerView = findViewById(R.id.recyclerSubs);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        data=new ArrayList<>();
-        txt_null=findViewById(R.id.txt_null);
-        progressBar=findViewById(R.id.progress_circular);
-        customersId=new ArrayList<>();
+        data = new ArrayList<>();
+        txt_null = findViewById(R.id.txt_null);
+        progressBar = findViewById(R.id.progress_circular);
+        customersId = new ArrayList<>();
         bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.sheet));
         bottomSheetBehavior.setHideable(true);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        progressDialog=new ProgressDialog(this,R.style.ProgressDialog);
+        progressDialog = new ProgressDialog(this, R.style.ProgressDialog);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCanceledOnTouchOutside(false);
         getData();
     }
 
     private void displayInformationCustomer(int state) {
-        TextView txt_subscriber=findViewById(R.id.txt_name_subscriber);
-        MaterialButton btn_accept=findViewById(R.id.btn_accept);
-        MaterialButton btn_decline=findViewById(R.id.btn_decline);
-        ImageButton btn_message=findViewById(R.id.button_message);
-        TextView txt_customerHome=findViewById(R.id.txt_homeAddressCustomer);
-        TextView txt_customerWork=findViewById(R.id.txt_workAddressCustomer);
-        ImageView userPhoto=findViewById(R.id.profile_photo_sheet);
-        LinearLayout lnUnsubscribed=findViewById(R.id.ln_accept_or_decline);
-        MaterialButton btn_cancel=findViewById(R.id.btn_cancel);
-        TextView totalPay=findViewById(R.id.txt_total_pay_travel);
-        TextView txtMessage=findViewById(R.id.txt_pay_message);
+        TextView txt_subscriber = findViewById(R.id.txt_name_subscriber);
+        MaterialButton btn_accept = findViewById(R.id.btn_accept);
+        MaterialButton btn_decline = findViewById(R.id.btn_decline);
+        ImageButton btn_message = findViewById(R.id.button_message);
+        TextView txt_customerHome = findViewById(R.id.txt_homeAddressCustomer);
+        TextView txt_customerWork = findViewById(R.id.txt_workAddressCustomer);
+        ImageView userPhoto = findViewById(R.id.profile_photo_sheet);
+        LinearLayout lnUnsubscribed = findViewById(R.id.ln_accept_or_decline);
+        MaterialButton btn_cancel = findViewById(R.id.btn_cancel);
+        TextView totalPay = findViewById(R.id.txt_total_pay_travel);
+        TextView txtMessage = findViewById(R.id.txt_pay_message);
 
-        if(UserType.type.equals("driver")){
-            if(data.get(adapter.itemSelected).getStatus().equals("pending")){
-                txt_subscriber.setText(data.get(adapter.itemSelected).getUserName()+" wants to subscribe to you");
+        if (UserType.type.equals("driver")) {
+            if (data.get(adapter.itemSelected).getStatus().equals("pending")) {
+                txt_subscriber.setText(data.get(adapter.itemSelected).getUserName() + " wants to subscribe to you");
                 btn_cancel.setVisibility(View.GONE);
                 lnUnsubscribed.setVisibility(View.VISIBLE);
                 txtMessage.setText("You will receive:");
                 totalPay.setText("20$/month");
-            }else if(data.get(adapter.itemSelected).getStatus().equals("accepted")){
-                txt_subscriber.setText(data.get(adapter.itemSelected).getUserName()+" is already subscribed to you");
+            } else if (data.get(adapter.itemSelected).getStatus().equals("accepted")) {
+                txt_subscriber.setText(data.get(adapter.itemSelected).getUserName() + " is already subscribed to you");
                 lnUnsubscribed.setVisibility(View.GONE);
                 btn_cancel.setVisibility(View.VISIBLE);
                 txtMessage.setText("You will receive:");
                 totalPay.setText("20$/month");
-            }else if(data.get(adapter.itemSelected).getStatus().equals("declined")||data.get(adapter.itemSelected).getStatus().equals("canceled")){
+            } else if (data.get(adapter.itemSelected).getStatus().equals("declined") || data.get(adapter.itemSelected).getStatus().equals("canceled")) {
                 txt_subscriber.setText("You declined or canceled this user. Ask the user to send you another request");
                 lnUnsubscribed.setVisibility(View.GONE);
                 btn_cancel.setVisibility(View.GONE);
                 txtMessage.setText("You will receive:");
                 totalPay.setText("0$/month");
             }
-        }else{
-            if(data.get(adapter.itemSelected).getStatus().equals("pending")){
+        } else {
+            if (data.get(adapter.itemSelected).getStatus().equals("pending")) {
                 txt_subscriber.setText("Your request is pending acceptance");
                 btn_cancel.setVisibility(View.VISIBLE);
                 lnUnsubscribed.setVisibility(View.GONE);
                 txtMessage.setText("You will pay:");
                 totalPay.setText("20$/month");
-            }else if(data.get(adapter.itemSelected).getStatus().equals("accepted")){
-                txt_subscriber.setText("You already subscribed to "+data.get(adapter.itemSelected).getUserName());
+            } else if (data.get(adapter.itemSelected).getStatus().equals("accepted")) {
+                txt_subscriber.setText("You already subscribed to " + data.get(adapter.itemSelected).getUserName());
                 lnUnsubscribed.setVisibility(View.GONE);
                 btn_cancel.setVisibility(View.VISIBLE);
                 txtMessage.setText("You will pay:");
                 totalPay.setText("20$/month");
-            }else if(data.get(adapter.itemSelected).getStatus().equals("declined")||data.get(adapter.itemSelected).getStatus().equals("canceled")){
+            } else if (data.get(adapter.itemSelected).getStatus().equals("declined") || data.get(adapter.itemSelected).getStatus().equals("canceled")) {
                 txt_subscriber.setText("Your request was canceled or declined. Send another request");
                 lnUnsubscribed.setVisibility(View.VISIBLE);
                 btn_accept.setText("SUBSCRIBE");
@@ -160,13 +150,13 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
         }
 
 
-        if(data.get(adapter.itemSelected).getProfilePhoto().equals("")){
+        if (data.get(adapter.itemSelected).getProfilePhoto().equals("")) {
             userPhoto.setImageResource(R.drawable.default_user_login);
-        }else{
+        } else {
             Glide.with(this).load(data.get(adapter.itemSelected).getProfilePhoto()).into(userPhoto);
         }
 
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(data.get(adapter.itemSelected).getUserUid());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(data.get(adapter.itemSelected).getUserUid());
 
         new Handler().post(new Runnable() {
             @Override
@@ -174,11 +164,12 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
                 reference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
+                        if (snapshot.exists()) {
                             txt_customerHome.setText(snapshot.child("localidad").getValue().toString());
                             txt_customerWork.setText(snapshot.child("workAddress").getValue().toString());
                         }
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
@@ -209,30 +200,30 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
         btn_accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btn_accept.getText().toString().equals("SUBSCRIBE")){
+                if (btn_accept.getText().toString().equals("SUBSCRIBE")) {
                     updateStateSubscription("pending");
-                }else{
+                } else {
                     havePayMethod(new SimpleCallback<Long>() {
                         @Override
                         public void callback(Long data) {
-                            if(data<=0L){
-                                new MaterialAlertDialogBuilder(ActiveSubscriptions.this,R.style.ThemeOverlay_App_MaterialAlertDialog)
-                                    .setCancelable(false)
-                                    .setTitle("Payment method required")
-                                    .setMessage("Before you accept you need tu have at least one pay method added. Do you want to add one?")
-                                    .setPositiveButton("CONTINUE", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            startActivity(new Intent(ActiveSubscriptions.this, PayMethod.class));
-                                        }
-                                    })
-                                    .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                        }
-                                    }).show();
-                            }else{
+                            if (data <= 0L) {
+                                new MaterialAlertDialogBuilder(ActiveSubscriptions.this, R.style.ThemeOverlay_App_MaterialAlertDialog)
+                                        .setCancelable(false)
+                                        .setTitle("Payment method required")
+                                        .setMessage("Before you accept you need tu have at least one pay method added. Do you want to add one?")
+                                        .setPositiveButton("CONTINUE", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                startActivity(new Intent(ActiveSubscriptions.this, PayMethod.class));
+                                            }
+                                        })
+                                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        }).show();
+                            } else {
                                 updateStateSubscription("accepted");
                             }
                         }
@@ -244,9 +235,9 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(UserType.type.equals("driver")){
+                if (UserType.type.equals("driver")) {
                     showDialogCancel("If you cancel you will stop receiving payments from this user. Are you sure you want to continue?");
-                }else{
+                } else {
                     showDialogCancel("If you cancel you will stop paying this user. Are you sure you want to continue?");
                 }
             }
@@ -257,17 +248,18 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
         bottomSheetBehavior.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
     }
 
-    private void havePayMethod(SimpleCallback<Long> callback){
-        ValueEventListener postListener=new ValueEventListener() {
+    private void havePayMethod(SimpleCallback<Long> callback) {
+        ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     callback.callback(snapshot.getChildrenCount());
-                }else{
+                } else {
                     callback.callback(0L);
                 }
 
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -276,8 +268,8 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
         FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("payMethods").addListenerForSingleValueEvent(postListener);
     }
 
-    private void showDialogCancel(String message){
-        new MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_App_MaterialAlertDialog)
+    private void showDialogCancel(String message) {
+        new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
                 .setCancelable(false)
                 .setTitle("Confirm cancel")
                 .setMessage(message)
@@ -296,33 +288,33 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
     }
 
 
-    private void updateStateSubscription(String status){
+    private void updateStateSubscription(String status) {
         progressDialog.show();
-        if(UserType.type.equals("driver")){
-            DatabaseReference referenceDriverRequest=FirebaseDatabase.getInstance().getReference("Drivers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Requests").child(data.get(adapter.itemSelected).getUserUid());
-            DatabaseReference referenceCustomerRequest=FirebaseDatabase.getInstance().getReference("Customers").child(data.get(adapter.itemSelected).getUserUid()).child("Requests").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-            HashMap<String,Object> map=new HashMap<>();
-            map.put("userId",data.get(adapter.itemSelected).getUserUid());
-            map.put("status",status);
+        if (UserType.type.equals("driver")) {
+            DatabaseReference referenceDriverRequest = FirebaseDatabase.getInstance().getReference("Drivers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Requests").child(data.get(adapter.itemSelected).getUserUid());
+            DatabaseReference referenceCustomerRequest = FirebaseDatabase.getInstance().getReference("Customers").child(data.get(adapter.itemSelected).getUserUid()).child("Requests").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("userId", data.get(adapter.itemSelected).getUserUid());
+            map.put("status", status);
             referenceDriverRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        HashMap<String,Object> map=new HashMap<>();
-                        map.put("userId",FirebaseAuth.getInstance().getCurrentUser().getUid());
-                        map.put("status",status);
+                    if (task.isSuccessful()) {
+                        HashMap<String, Object> map = new HashMap<>();
+                        map.put("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        map.put("status", status);
                         referenceCustomerRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     progressDialog.dismiss();
-                                    getSenderName(FirebaseAuth.getInstance().getCurrentUser().getUid(),data.get(adapter.itemSelected).getUserUid(),status);
-                                }else{
+                                    getSenderName(FirebaseAuth.getInstance().getCurrentUser().getUid(), data.get(adapter.itemSelected).getUserUid(), status);
+                                } else {
                                     progressDialog.dismiss();
                                 }
                             }
                         });
-                    }else{
+                    } else {
                         progressDialog.dismiss();
                     }
                 }
@@ -330,34 +322,34 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
-                    Log.e("ERROR EN EL ENVIO DE PETICION",e.toString());
+                    Log.e("ERROR EN EL ENVIO DE PETICION", e.toString());
                 }
             });
-        }else{
-            DatabaseReference referenceDriverRequest=FirebaseDatabase.getInstance().getReference("Drivers").child(data.get(adapter.itemSelected).getUserUid()).child("Requests").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-            DatabaseReference referenceCustomerRequest=FirebaseDatabase.getInstance().getReference("Customers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Requests").child(data.get(adapter.itemSelected).getUserUid());
-            HashMap<String,Object> map=new HashMap<>();
-            map.put("userId",FirebaseAuth.getInstance().getCurrentUser().getUid());
-            map.put("status",status);
+        } else {
+            DatabaseReference referenceDriverRequest = FirebaseDatabase.getInstance().getReference("Drivers").child(data.get(adapter.itemSelected).getUserUid()).child("Requests").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            DatabaseReference referenceCustomerRequest = FirebaseDatabase.getInstance().getReference("Customers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Requests").child(data.get(adapter.itemSelected).getUserUid());
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
+            map.put("status", status);
             referenceDriverRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        HashMap<String,Object> map=new HashMap<>();
-                        map.put("userId",data.get(adapter.itemSelected).getUserUid());
-                        map.put("status",status);
+                    if (task.isSuccessful()) {
+                        HashMap<String, Object> map = new HashMap<>();
+                        map.put("userId", data.get(adapter.itemSelected).getUserUid());
+                        map.put("status", status);
                         referenceCustomerRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     progressDialog.dismiss();
-                                    getSenderName(FirebaseAuth.getInstance().getCurrentUser().getUid(),data.get(adapter.itemSelected).getUserUid(),status);
-                                }else{
+                                    getSenderName(FirebaseAuth.getInstance().getCurrentUser().getUid(), data.get(adapter.itemSelected).getUserUid(), status);
+                                } else {
                                     progressDialog.dismiss();
                                 }
                             }
                         });
-                    }else{
+                    } else {
                         progressDialog.dismiss();
                     }
                 }
@@ -365,34 +357,34 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
-                    Log.e("ERROR EN EL ENVIO DE PETICION",e.toString());
+                    Log.e("ERROR EN EL ENVIO DE PETICION", e.toString());
                 }
             });
         }
     }
 
-    private void getSenderName(String sender,String receiverId,String status){
+    private void getSenderName(String sender, String receiverId, String status) {
         FirebaseFirestore.getInstance().collection("Usuarios").document(sender).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                String name=documentSnapshot.get("nombre").toString();
-                if(status.equals("canceled")){
-                    getToken(name,receiverId,name+" "+status+" your subscription","REQUEST "+status);
-                }else if(status.equals("pending")){
-                    getToken(name,receiverId,"Yo have a new request from "+name,"NEW REQUEST");
-                }else{
-                    getToken(name,receiverId,name+" "+status+" your request","REQUEST "+status);
+                String name = documentSnapshot.get("nombre").toString();
+                if (status.equals("canceled")) {
+                    getToken(name, receiverId, name + " " + status + " your subscription", "REQUEST " + status);
+                } else if (status.equals("pending")) {
+                    getToken(name, receiverId, "Yo have a new request from " + name, "NEW REQUEST");
+                } else {
+                    getToken(name, receiverId, name + " " + status + " your request", "REQUEST " + status);
                 }
             }
         });
     }
 
-    private void getToken(String sender,String receiver,String message, String title){
+    private void getToken(String sender, String receiver, String message, String title) {
         FirebaseDatabase.getInstance().getReference().child("Token").child(receiver).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String tokenUser=snapshot.getValue().toString();
-                sendNotification(tokenUser,message,title,sender);
+                String tokenUser = snapshot.getValue().toString();
+                sendNotification(tokenUser, message, title, sender);
             }
 
             @Override
@@ -402,31 +394,31 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
         });
     }
 
-    private void sendNotification(String token,String message, String title,String receiver) {
-        new NotificationService(getApplicationContext(),token,message,title,receiver,"ActiveSubscriptions").start();
-        new NotificationsInDatabase(message,"false","Subscription",data.get(adapter.itemSelected).getUserUid()).start();
+    private void sendNotification(String token, String message, String title, String receiver) {
+        new NotificationService(getApplicationContext(), token, message, title, receiver, "ActiveSubscriptions").start();
+        new NotificationsInDatabase(message, "false", "Subscription", data.get(adapter.itemSelected).getUserUid()).start();
         displayInformationCustomer(BottomSheetBehavior.STATE_HIDDEN);
     }
 
-    private void getData(){
+    private void getData() {
         progressBar.setVisibility(View.VISIBLE);
-        if(UserType.type.equals("driver")){
-            DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Drivers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Requests");
+        if (UserType.type.equals("driver")) {
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Drivers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Requests");
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     data.clear();
                     customersId.clear();
-                    for(DataSnapshot snap:snapshot.getChildren()){
-                        String userId=  snap.child("userId").getValue().toString();
-                        String status=  snap.child("status").getValue().toString();
-                        customersId.add(new User(userId,status));
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+                        String userId = snap.child("userId").getValue().toString();
+                        String status = snap.child("status").getValue().toString();
+                        customersId.add(new User(userId, status));
                     }
                     progressBar.setVisibility(View.GONE);
 
-                    if(customersId.isEmpty()){
+                    if (customersId.isEmpty()) {
                         txt_null.setVisibility(View.VISIBLE);
-                    }else{
+                    } else {
                         txt_null.setVisibility(View.GONE);
                         getCustomerInformation();
                     }
@@ -437,23 +429,23 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
 
                 }
             });
-        }else{
-            DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Customers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Requests");
+        } else {
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Customers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Requests");
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     data.clear();
                     customersId.clear();
-                    for(DataSnapshot snap:snapshot.getChildren()){
-                        String userId=  snap.child("userId").getValue().toString();
-                        String status=  snap.child("status").getValue().toString();
-                        customersId.add(new User(userId,status));
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+                        String userId = snap.child("userId").getValue().toString();
+                        String status = snap.child("status").getValue().toString();
+                        customersId.add(new User(userId, status));
                     }
                     progressBar.setVisibility(View.GONE);
 
-                    if(customersId.isEmpty()){
+                    if (customersId.isEmpty()) {
                         txt_null.setVisibility(View.VISIBLE);
-                    }else{
+                    } else {
                         txt_null.setVisibility(View.GONE);
                         getCustomerInformation();
                     }
@@ -467,22 +459,22 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
         }
     }
 
-    private void getCustomerInformation(){
+    private void getCustomerInformation() {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                for(User customer:customersId){
+                for (User customer : customersId) {
                     FirebaseDatabase.getInstance().getReference().child("Usuarios").child(customer.getUi()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                         @Override
                         public void onSuccess(DataSnapshot dataSnapshot) {
-                            String photo=dataSnapshot.child("fotoPerfil").getValue().toString();
-                            String name=dataSnapshot.child("nombre").getValue().toString();
-                            String direction=dataSnapshot.child("workAddress").getValue().toString();
-                            data.add(new SubscribedUser(photo,name,direction,customer.getStatus(),customer.getUi()));
-                            if(adapter!=null){
+                            String photo = dataSnapshot.child("fotoPerfil").getValue().toString();
+                            String name = dataSnapshot.child("nombre").getValue().toString();
+                            String direction = dataSnapshot.child("workAddress").getValue().toString();
+                            data.add(new SubscribedUser(photo, name, direction, customer.getStatus(), customer.getUi()));
+                            if (adapter != null) {
                                 adapter.notifyDataSetChanged();
-                            }else{
-                                adapter= new ActiveSubAdapter(data,getApplicationContext());
+                            } else {
+                                adapter = new ActiveSubAdapter(data, getApplicationContext());
                                 setListenerToAdapter();
                                 recyclerView.setAdapter(adapter);
                             }
@@ -493,10 +485,9 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
         });
     }
 
-    private void setListenerToAdapter(){
+    private void setListenerToAdapter() {
         adapter.setMyItemClickListener(this);
     }
-
 
 
     private void listeners() {
@@ -522,17 +513,22 @@ public class ActiveSubscriptions extends AppCompatActivity implements ActiveSubA
         displayInformationCustomer(BottomSheetBehavior.STATE_EXPANDED);
     }
 
-    private interface SimpleCallback<T>{
+    private interface SimpleCallback<T> {
         void callback(T data);
     }
 }
 
-class User{
+class User {
     private String ui;
     private String status;
 
-    public User(){
+    public User() {
 
+    }
+
+    public User(String ui, String status) {
+        this.ui = ui;
+        this.status = status;
     }
 
     public String getUi() {
@@ -548,11 +544,6 @@ class User{
     }
 
     public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public User(String ui, String status) {
-        this.ui = ui;
         this.status = status;
     }
 }

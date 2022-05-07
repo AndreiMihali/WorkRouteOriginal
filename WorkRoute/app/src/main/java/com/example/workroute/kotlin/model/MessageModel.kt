@@ -5,7 +5,7 @@ class MessageModel {
     var textMessage: String? = null
     var sender: String? = null
     var receiver: String? = null
-    var time:String?=null
+    var time: String? = null
 
     constructor() {}
     constructor(
@@ -13,12 +13,12 @@ class MessageModel {
         textMessage: String?,
         sender: String?,
         receiver: String?,
-        time:String?,
+        time: String?,
     ) {
         this.dateTime = dateTime
         this.textMessage = textMessage
         this.sender = sender
         this.receiver = receiver
-        this.time=time
+        this.time = time
     }
 }

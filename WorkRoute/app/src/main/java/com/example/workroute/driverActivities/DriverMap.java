@@ -2,7 +2,6 @@ package com.example.workroute.driverActivities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,7 +9,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
@@ -21,7 +19,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -29,8 +26,6 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.Interpolator;
-import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -52,7 +47,6 @@ import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.workroute.R;
-import com.example.workroute.activitys.CustomerMap;
 import com.example.workroute.activitys.MainActivity;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.companion.UserType;
@@ -86,8 +80,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -100,8 +92,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -143,6 +133,15 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     private LatLng destinationCustomerLatLng;
     private LatLng customerLatLng;
     private TextView txt_statusMessage;
+    private boolean getCustomersAroundStarted = false;
+    private List<Marker> markerList = new ArrayList<Marker>();
+    private Marker markerFinal;
+    private Circle circleMap;
+    private Marker myWorkMarker;
+    private LocationManager locationManager;
+    private ActivityResultLauncher<Intent> activityResultLauncher;
+    private Marker myWork;
+    private Marker myHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,7 +155,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
-        UserType.type="driver";
+        UserType.type = "driver";
         init();
         startService(new Intent(this, ServicioOnline.class));
     }
@@ -164,7 +163,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     @Override
     protected void onResume() {
         super.onResume();
-        if(circleMap!=null&&myWork!=null&&myHome!=null){
+        if (circleMap != null && myWork != null && myHome != null) {
             myWork.remove();
             myHome.remove();
             circleMap.remove();
@@ -172,36 +171,34 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         }
     }
 
-    private boolean getCustomersAroundStarted=false;
-    private List<Marker> markerList=new ArrayList<Marker>();
-    private void getAllCustomers(){
-        getCustomersAroundStarted=true;
-        DatabaseReference customersReference=FirebaseDatabase.getInstance().getReference().child("locationUpdates").child("Customers");
-        GeoFire geoFire=new GeoFire(customersReference);
-        GeoQuery geoQuery=geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(),myLastLocation.getLongitude()),300000);
+    private void getAllCustomers() {
+        getCustomersAroundStarted = true;
+        DatabaseReference customersReference = FirebaseDatabase.getInstance().getReference().child("locationUpdates").child("Customers");
+        GeoFire geoFire = new GeoFire(customersReference);
+        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(), myLastLocation.getLongitude()), 300000);
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
-                for(Marker markerIt:markerList){
-                    if(markerIt.getTag().toString().equals(key)){
+                for (Marker markerIt : markerList) {
+                    if (markerIt.getTag().toString().equals(key)) {
                         markerIt.remove();
                         return;
                     }
                 }
-                LatLng customerLocation=new LatLng(location.latitude,location.longitude);
+                LatLng customerLocation = new LatLng(location.latitude, location.longitude);
 
                 if (!key.equals(firebaseAuth.getUid())) {
                     isPendingSubscribed(key, new SimpleCallback<String>() {
                         @Override
                         public void callback(String data) {
-                            Marker mCustomerMarker=null;
-                            if (mCustomerMarker!=null) {
+                            Marker mCustomerMarker = null;
+                            if (mCustomerMarker != null) {
                                 mCustomerMarker.remove();
                             }
-                            if(data.equals("pending")||data.equals("accepted")){
+                            if (data.equals("pending") || data.equals("accepted")) {
                                 mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
                                         .flat(true).anchor(0.5f, 0.5f));
-                            }else{
+                            } else {
                                 mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.user_marker))))
                                         .flat(true).anchor(0.5f, 0.5f));
                             }
@@ -214,8 +211,8 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
             @Override
             public void onKeyExited(String key) {
-                for (Marker markerIt:markerList){
-                    if(markerIt.getTag().equals(key)){
+                for (Marker markerIt : markerList) {
+                    if (markerIt.getTag().equals(key)) {
                         markerIt.remove();
                         markerList.remove(markerIt);
                         return;
@@ -225,9 +222,9 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
             @Override
             public void onKeyMoved(String key, GeoLocation location) {
-                for(Marker markerIt:markerList){
-                    if(markerIt.getTag().equals(key)){
-                        markerIt.setPosition(new LatLng(location.latitude,location.longitude));
+                for (Marker markerIt : markerList) {
+                    if (markerIt.getTag().equals(key)) {
+                        markerIt.setPosition(new LatLng(location.latitude, location.longitude));
                     }
                 }
             }
@@ -244,31 +241,31 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         });
     }
 
-    private void getCustomerDestination(String customerId){
-        DatabaseReference customerDestinationRef=FirebaseDatabase.getInstance().getReference().child("Customers").child(customerId).child("destinations");
+    private void getCustomerDestination(String customerId) {
+        DatabaseReference customerDestinationRef = FirebaseDatabase.getInstance().getReference().child("Customers").child(customerId).child("destinations");
         customerDestinationRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    Map<String,Object> map=(Map<String, Object>) snapshot.getValue();
-                    if(map.get("destination")!=null){
-                        customerDestination=map.get("destination").toString();
-                    }else{
-                        customerDestination="--";
+                if (snapshot.exists()) {
+                    Map<String, Object> map = (Map<String, Object>) snapshot.getValue();
+                    if (map.get("destination") != null) {
+                        customerDestination = map.get("destination").toString();
+                    } else {
+                        customerDestination = "--";
                     }
-                    Double destinationLat=0.0;
-                    Double destinationLong=0.0;
+                    Double destinationLat = 0.0;
+                    Double destinationLong = 0.0;
 
-                    if(map.get("destinationLat")!=null){
-                        destinationLat=Double.valueOf(map.get("destinationLat").toString());
-                    }
-
-                    if(map.get("destinationLong")!=null){
-                        destinationLong=Double.valueOf(map.get("destinationLong").toString());
-                        destinationCustomerLatLng=new LatLng(destinationLat,destinationLong);
+                    if (map.get("destinationLat") != null) {
+                        destinationLat = Double.valueOf(map.get("destinationLat").toString());
                     }
 
-                    getRouteToMarker(customerLatLng,new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()));
+                    if (map.get("destinationLong") != null) {
+                        destinationLong = Double.valueOf(map.get("destinationLong").toString());
+                        destinationCustomerLatLng = new LatLng(destinationLat, destinationLong);
+                    }
+
+                    getRouteToMarker(customerLatLng, new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude()));
                     getCustomerInfo(customerId);
                 }
             }
@@ -280,23 +277,20 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         });
     }
 
-    private void getRouteToMarker(LatLng customerPosition,LatLng myPosition){
-        Routing routing=new Routing.Builder()
+    private void getRouteToMarker(LatLng customerPosition, LatLng myPosition) {
+        Routing routing = new Routing.Builder()
                 .travelMode(AbstractRouting.TravelMode.DRIVING)
                 .withListener(this)
                 .alternativeRoutes(false)
-                .waypoints(myPosition,customerPosition)
+                .waypoints(myPosition, customerPosition)
                 .key(getString(R.string.google_maps_key))
                 .build();
         routing.execute();
         getRouteToDestination(customerPosition);
     }
 
-    private Marker markerFinal;
-    private Circle circleMap;
-    private Marker myWorkMarker;
-    private void getRouteToDestination(LatLng startDestination){
-        Routing routing=new Routing.Builder()
+    private void getRouteToDestination(LatLng startDestination) {
+        Routing routing = new Routing.Builder()
                 .travelMode(AbstractRouting.TravelMode.DRIVING)
                 .withListener(new RoutingListener() {
                     @Override
@@ -314,7 +308,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                         new Handler().post(new Runnable() {
                             @Override
                             public void run() {
-                                if(polylines2.size()>0) {
+                                if (polylines2.size() > 0) {
                                     for (Polyline poly : polylines2) {
                                         poly.remove();
                                     }
@@ -322,7 +316,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
                                 polylines2 = new ArrayList<>();
                                 //add route(s) to the map.
-                                for (int i = 0; i <route.size(); i++) {
+                                for (int i = 0; i < route.size(); i++) {
                                     //In case of more than 5 alternative routes
                                     PolylineOptions polyOptions = new PolylineOptions();
                                     polyOptions.color(getColor(R.color.secondaryLine));
@@ -331,8 +325,8 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                                     Polyline polyline = mMap.addPolyline(polyOptions);
                                     polylines2.add(polyline);
                                 }
-                                markerFinal=mMap.addMarker(new MarkerOptions().position(destinationCustomerLatLng).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.flag))))
-                                        .flat(true).anchor(0.5f,0.5f));
+                                markerFinal = mMap.addMarker(new MarkerOptions().position(destinationCustomerLatLng).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.flag))))
+                                        .flat(true).anchor(0.5f, 0.5f));
                             }
                         });
                     }
@@ -343,14 +337,13 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                     }
                 })
                 .alternativeRoutes(false)
-                .waypoints(startDestination,destinationCustomerLatLng)
+                .waypoints(startDestination, destinationCustomerLatLng)
                 .key(getString(R.string.google_maps_key))
                 .build();
         routing.execute();
     }
 
-
-    private Bitmap drawableToBitmap (Drawable drawable) {
+    private Bitmap drawableToBitmap(Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();
         }
@@ -363,21 +356,21 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         return bitmap;
     }
 
-    private void getCustomerInfo(String customerId){
+    private void getCustomerInfo(String customerId) {
         displayInformationCustomer(BottomSheetBehavior.STATE_EXPANDED);
-        DatabaseReference customerInfoRef=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(customerId);
+        DatabaseReference customerInfoRef = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(customerId);
         customerInfoRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists() && snapshot.getChildrenCount()>0){
-                    Map<String,Object> map=(Map<String, Object>) snapshot.getValue();
-                    if(map.get("nombre")!=null){
+                if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                    Map<String, Object> map = (Map<String, Object>) snapshot.getValue();
+                    if (map.get("nombre") != null) {
                         txt_name.setText(map.get("nombre").toString());
                     }
-                    if(map.get("fotoPerfil")!=null){
-                        if(map.get("fotoPerfil").toString().equals("")){
+                    if (map.get("fotoPerfil") != null) {
+                        if (map.get("fotoPerfil").toString().equals("")) {
                             customer_photo.setImageResource(R.drawable.default_user_login);
-                        }else{
+                        } else {
                             Glide.with(getApplicationContext()).load(map.get("fotoPerfil").toString()).into(customer_photo);
                         }
                     }
@@ -398,22 +391,22 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                     isPendingSubscribed(customerId, new SimpleCallback<String>() {
                         @Override
                         public void callback(String data) {
-                            if(data.equals("pending")){
+                            if (data.equals("pending")) {
                                 txt_statusMessage.setVisibility(View.VISIBLE);
                                 txt_statusMessage.setText("You have to accept the user request");
                                 btnRideStatus.setVisibility(View.GONE);
                                 txt_total_pay_travel.setText("20$/month");
-                            }else if(data.equals("declined")||data.equals("canceled")){
+                            } else if (data.equals("declined") || data.equals("canceled")) {
                                 txt_statusMessage.setVisibility(View.VISIBLE);
                                 txt_statusMessage.setText("You canceled or declined the user request");
                                 btnRideStatus.setVisibility(View.GONE);
                                 txt_total_pay_travel.setText("0$/month");
-                            }else if(data.equals("accepted")){
+                            } else if (data.equals("accepted")) {
                                 txt_statusMessage.setVisibility(View.GONE);
                                 btnRideStatus.setVisibility(View.VISIBLE);
                                 btnRideStatus.setText("PickUp customer");
                                 txt_total_pay_travel.setText("20$/month");
-                            }else{
+                            } else {
                                 txt_statusMessage.setVisibility(View.VISIBLE);
                                 txt_statusMessage.setText("This user isn`t subscribed yet");
                                 btnRideStatus.setVisibility(View.GONE);
@@ -431,22 +424,23 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         });
     }
 
-    private void isPendingSubscribed(String customerId,SimpleCallback<String> simpleCallback){
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Drivers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Requests");
-        ValueEventListener listener=new ValueEventListener() {
+    private void isPendingSubscribed(String customerId, SimpleCallback<String> simpleCallback) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Drivers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Requests");
+        ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot snap:snapshot.getChildren()){
-                        if(snap.child("userId").getValue().toString().equals(customerId)){
+                if (snapshot.exists()) {
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+                        if (snap.child("userId").getValue().toString().equals(customerId)) {
                             simpleCallback.callback(snap.child("status").getValue().toString());
                             break;
                         }
                     }
-                }else{
+                } else {
                     simpleCallback.callback("");
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -455,16 +449,16 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         reference.addValueEventListener(listener);
     }
 
-    private String getGeocoderAddress(){
-        Geocoder geocoder=new Geocoder(DriverMap.this,Locale.getDefault());
-        String address="";
-        try{
-            List<Address> listAddress=geocoder.getFromLocation(customerLatLng.latitude,customerLatLng.longitude,1);
-            if(listAddress.size()>0){
-                address=listAddress.get(0).getAddressLine(0);
+    private String getGeocoderAddress() {
+        Geocoder geocoder = new Geocoder(DriverMap.this, Locale.getDefault());
+        String address = "";
+        try {
+            List<Address> listAddress = geocoder.getFromLocation(customerLatLng.latitude, customerLatLng.longitude, 1);
+            if (listAddress.size() > 0) {
+                address = listAddress.get(0).getAddressLine(0);
             }
-        }catch (IOException e){
-            Log.e("Error",e.toString());
+        } catch (IOException e) {
+            Log.e("Error", e.toString());
         }
         return address;
     }
@@ -477,7 +471,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         txt_total_pay_travel = findViewById(R.id.txt_total_pay_travel);
         txt_startLocation = findViewById(R.id.txt_startLocation);
         txt_destination = findViewById(R.id.txt_destination);
-        txt_statusMessage= findViewById(R.id.txt_status_message);
+        txt_statusMessage = findViewById(R.id.txt_status_message);
 
         bottomSheetBehavior.setPeekHeight(200);
         bottomSheetBehavior.setState(state);
@@ -493,8 +487,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         txt_startLocation.setText("");
         txt_destination.setText("--");
     }
-
-
 
     private void init() {
         addActivityResultLauncher();
@@ -517,7 +509,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         btn_message = findViewById(R.id.button_message);
         polylines = new ArrayList<>();
-        polylines2=new ArrayList<>();
+        polylines2 = new ArrayList<>();
         btnRideStatus = findViewById(R.id.btn_rideStatus);
         iniciarMapa();
         initListeners();
@@ -544,7 +536,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if(newState==BottomSheetBehavior.STATE_HIDDEN){
+                if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                     erasePolylines();
                 }
             }
@@ -565,8 +557,8 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         button_ubi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(myLastLocation!=null){
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()),12f));
+                if (myLastLocation != null) {
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude()), 12f));
                 }
             }
         });
@@ -593,7 +585,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
             @Override
             public void onClick(View v) {
                 animateMenu();
-                Intent i=new Intent(DriverMap.this, Notifications.class);
+                Intent i = new Intent(DriverMap.this, Notifications.class);
                 startActivity(i);
             }
         });
@@ -601,7 +593,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         btnRideStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"PENDING TO CODE",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "PENDING TO CODE", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -661,9 +653,9 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
-     *
-     *                             AQUI EMPIEZAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA
-     *
+     * <p>
+     * AQUI EMPIEZAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA
+     * <p>
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
      ***********************************************************************************************************************************/
@@ -686,8 +678,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         mMap.setOnMarkerClickListener(this);
         buildGoogleApiClient();
     }
-
-    private LocationManager locationManager;
 
     private boolean isLocationEnabled() {
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -728,8 +718,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         activityResultLauncher.launch(settingsIntent);
     }
 
-    private ActivityResultLauncher<Intent> activityResultLauncher;
-
     private void addActivityResultLauncher() {
         activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -759,75 +747,72 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-       if(getApplicationContext()!=null){
-           myLastLocation=location;
-           LatLng latlng=new LatLng(location.getLatitude(),location.getLongitude());
-           mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng,12f));
-           setMyLocationInDatabase(location);
-           setDestination();
-           if(!getCustomersAroundStarted){
-               getAllCustomers();
-           }
-           LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
-           button_ubi.setVisibility(View.VISIBLE);
-       }
+        if (getApplicationContext() != null) {
+            myLastLocation = location;
+            LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 12f));
+            setMyLocationInDatabase(location);
+            setDestination();
+            if (!getCustomersAroundStarted) {
+                getAllCustomers();
+            }
+            LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
+            button_ubi.setVisibility(View.VISIBLE);
+        }
     }
 
-    private Marker myWork;
-    private Marker myHome;
-
-    private void setDestination(){
-        DatabaseReference driverReference=FirebaseDatabase.getInstance().getReference("Drivers");
-        Map<String,Object> map=new HashMap<>();
-        LatLng destination=new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(),"latitude")),Double.valueOf(getDestination(Companion.user.getWorkAddress(),"longitude")));
-        if(destination==new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude())){
+    private void setDestination() {
+        DatabaseReference driverReference = FirebaseDatabase.getInstance().getReference("Drivers");
+        Map<String, Object> map = new HashMap<>();
+        LatLng destination = new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(), "latitude")), Double.valueOf(getDestination(Companion.user.getWorkAddress(), "longitude")));
+        if (destination == new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude())) {
             map.put("destination", Companion.user.getLocalidad());
-            map.put("destinationLat",getDestination(Companion.user.getLocalidad(),"latitude"));
-            map.put("destinationLong",getDestination(Companion.user.getLocalidad(),"longitude"));
-        }else{
+            map.put("destinationLat", getDestination(Companion.user.getLocalidad(), "latitude"));
+            map.put("destinationLong", getDestination(Companion.user.getLocalidad(), "longitude"));
+        } else {
             map.put("destination", Companion.user.getWorkAddress());
-            map.put("destinationLat",getDestination(Companion.user.getWorkAddress(),"latitude"));
-            map.put("destinationLong",getDestination(Companion.user.getWorkAddress(),"longitude"));
+            map.put("destinationLat", getDestination(Companion.user.getWorkAddress(), "latitude"));
+            map.put("destinationLong", getDestination(Companion.user.getWorkAddress(), "longitude"));
         }
         driverReference.child(firebaseAuth.getUid()).child("destinations").updateChildren(map);
         setMarkers();
 
     }
 
-    private void setMarkers(){
-        LatLng myDestination=new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(),"latitude")),Double.valueOf(getDestination(Companion.user.getWorkAddress(),"longitude")));
-        CircleOptions circleOptions=new CircleOptions()
+    private void setMarkers() {
+        LatLng myDestination = new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(), "latitude")), Double.valueOf(getDestination(Companion.user.getWorkAddress(), "longitude")));
+        CircleOptions circleOptions = new CircleOptions()
                 .center(myDestination)
                 .radius(1500)
                 .strokeColor(getColor(R.color.secondary))
                 .clickable(false)
                 .strokeWidth(7);
-        circleMap=mMap.addCircle(circleOptions);
-        myWork=mMap.addMarker(new MarkerOptions().position(myDestination).title("My work").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.work))))
-                .flat(true).anchor(0.5f,0.5f));
+        circleMap = mMap.addCircle(circleOptions);
+        myWork = mMap.addMarker(new MarkerOptions().position(myDestination).title("My work").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.work))))
+                .flat(true).anchor(0.5f, 0.5f));
 
-        LatLng myHomeLatLng=new LatLng(Double.valueOf(getDestination(Companion.user.getLocalidad(),"latitude")),Double.valueOf(getDestination(Companion.user.getLocalidad(),"longitude")));
-        myHome=mMap.addMarker(new MarkerOptions().position(myHomeLatLng).title("My home").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.home))))
-                .flat(true).anchor(0.5f,0.5f));
+        LatLng myHomeLatLng = new LatLng(Double.valueOf(getDestination(Companion.user.getLocalidad(), "latitude")), Double.valueOf(getDestination(Companion.user.getLocalidad(), "longitude")));
+        myHome = mMap.addMarker(new MarkerOptions().position(myHomeLatLng).title("My home").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.home))))
+                .flat(true).anchor(0.5f, 0.5f));
     }
 
-    private void setMyLocationInDatabase(Location location){
-        String userId=firebaseAuth.getUid();
-        DatabaseReference driverReference=FirebaseDatabase.getInstance().getReference("locationUpdates").child("Drivers");
-        GeoFire geofireRef=new GeoFire(driverReference);
-        geofireRef.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
+    private void setMyLocationInDatabase(Location location) {
+        String userId = firebaseAuth.getUid();
+        DatabaseReference driverReference = FirebaseDatabase.getInstance().getReference("locationUpdates").child("Drivers");
+        GeoFire geofireRef = new GeoFire(driverReference);
+        geofireRef.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
     }
 
-    private Double getDestination(String destination,String field){
+    private Double getDestination(String destination, String field) {
         Geocoder geocoder = new Geocoder(DriverMap.this, Locale.getDefault());
         Double address = 0.0;
         try {
-            List<Address> listAddress = geocoder.getFromLocationName(destination,1);
+            List<Address> listAddress = geocoder.getFromLocationName(destination, 1);
             if (listAddress.size() > 0) {
-                if(field.equals("latitude")){
+                if (field.equals("latitude")) {
                     address = listAddress.get(0).getLatitude();
-                }else if(field.equals("longitude")){
-                    address=listAddress.get(0).getLongitude();
+                } else if (field.equals("longitude")) {
+                    address = listAddress.get(0).getLongitude();
                 }
 
             }
@@ -836,7 +821,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         }
         return address;
     }
-
 
 
     @Override
@@ -887,20 +871,20 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
-     *
-     *                             AQUI TERMINAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA
-     *
+     * <p>
+     * AQUI TERMINAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA
+     * <p>
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
      ***********************************************************************************************************************************/
 
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-        if(marker!=null&&marker.getTag()!=null){
+        if (marker != null && marker.getTag() != null) {
             erasePolylines();
-            if(!marker.getTag().toString().equals(firebaseAuth.getUid())&&(marker.getTag()!=null||marker.getTag().toString().equals(""))){
-                customerId=marker.getTag().toString();
-                customerLatLng= marker.getPosition();
+            if (!marker.getTag().toString().equals(firebaseAuth.getUid()) && (marker.getTag() != null || marker.getTag().toString().equals(""))) {
+                customerId = marker.getTag().toString();
+                customerLatLng = marker.getPosition();
                 getCustomerDestination(customerId);
             }
         }
@@ -926,7 +910,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                if(polylines.size()>0) {
+                if (polylines.size() > 0) {
                     for (Polyline poly : polylines) {
                         poly.remove();
                     }
@@ -934,7 +918,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
                 polylines = new ArrayList<>();
                 //add route(s) to the map.
-                for (int i = 0; i <route.size(); i++) {
+                for (int i = 0; i < route.size(); i++) {
                     //In case of more than 5 alternative routes
                     PolylineOptions polyOptions = new PolylineOptions();
                     polyOptions.color(getColor(R.color.secondary));
@@ -957,7 +941,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
     private void erasePolylines() {
 
-        if(markerFinal!=null){
+        if (markerFinal != null) {
             markerFinal.remove();
         }
         for (Polyline line : polylines) {
@@ -965,7 +949,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         }
         polylines.clear();
 
-        for(Polyline line:polylines2){
+        for (Polyline line : polylines2) {
             line.remove();
         }
         polylines2.clear();

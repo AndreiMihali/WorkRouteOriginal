@@ -26,12 +26,12 @@ import com.google.firebase.auth.FirebaseAuth
 
 class ForgotPasswordActivity : AppCompatActivity() {
 
-    private lateinit var layoutEmail:TextInputLayout
-    private lateinit var edEmail:TextInputEditText
-    private lateinit var btnSend:MaterialButton
-    private lateinit var toolbar:MaterialToolbar
-    private lateinit var progressDialog:ProgressDialog
-    private lateinit var cardEmail:MaterialCardView
+    private lateinit var layoutEmail: TextInputLayout
+    private lateinit var edEmail: TextInputEditText
+    private lateinit var btnSend: MaterialButton
+    private lateinit var toolbar: MaterialToolbar
+    private lateinit var progressDialog: ProgressDialog
+    private lateinit var cardEmail: MaterialCardView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Register)
@@ -40,20 +40,20 @@ class ForgotPasswordActivity : AppCompatActivity() {
         init()
     }
 
-    private fun init(){
-        toolbar=findViewById(R.id.toolbar_recovery_password)
-        layoutEmail=findViewById(R.id.layout_email_recover_password)
-        edEmail=findViewById(R.id.ed_email_recover_password)
-        btnSend=findViewById(R.id.btn_send_email)
-        progressDialog= ProgressDialog(this,R.style.ProgressDialog)
+    private fun init() {
+        toolbar = findViewById(R.id.toolbar_recovery_password)
+        layoutEmail = findViewById(R.id.layout_email_recover_password)
+        edEmail = findViewById(R.id.ed_email_recover_password)
+        btnSend = findViewById(R.id.btn_send_email)
+        progressDialog = ProgressDialog(this, R.style.ProgressDialog)
         progressDialog.setMessage("Please wait...")
         progressDialog.setTitle("Sending email")
         progressDialog.setCancelable(false)
-        cardEmail=findViewById(R.id.card_email)
+        cardEmail = findViewById(R.id.card_email)
         initListeners()
     }
 
-    private fun initListeners(){
+    private fun initListeners() {
         toolbar.setNavigationOnClickListener {
             onBackPressed()
             finish()
@@ -70,13 +70,13 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
 
         btnSend.setOnClickListener {
-            if(edEmail.text.toString().trim().isEmpty()){
-                Snackbar.make(it,"Yoy must fill the email field",Snackbar.LENGTH_SHORT).show()
+            if (edEmail.text.toString().trim().isEmpty()) {
+                Snackbar.make(it, "Yoy must fill the email field", Snackbar.LENGTH_SHORT).show()
                 clearEmail()
-            }else if(!Patterns.EMAIL_ADDRESS.matcher(edEmail.text.toString().trim()).matches()){
-                Snackbar.make(it,"Yoy must insert a valid email",Snackbar.LENGTH_SHORT).show()
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(edEmail.text.toString().trim()).matches()) {
+                Snackbar.make(it, "Yoy must insert a valid email", Snackbar.LENGTH_SHORT).show()
                 clearEmail()
-            }else{
+            } else {
                 progressDialog.show()
                 sendEmail(it)
             }
@@ -108,27 +108,28 @@ class ForgotPasswordActivity : AppCompatActivity() {
         txt.setEndIconTintList(ColorStateList.valueOf(Color.parseColor("#D5D5D5")))
     }
 
-    private fun sendEmail(view:View){
-        val auth=FirebaseAuth.getInstance()
-        val emailAddress=edEmail.text.toString()
+    private fun sendEmail(view: View) {
+        val auth = FirebaseAuth.getInstance()
+        val emailAddress = edEmail.text.toString()
 
-        auth.sendPasswordResetEmail(emailAddress).addOnCompleteListener{
-            if(it.isSuccessful){
+        auth.sendPasswordResetEmail(emailAddress).addOnCompleteListener {
+            if (it.isSuccessful) {
                 progressDialog.dismiss()
-                val intent=Intent(this,ConfirmLogin::class.java)
-                val view=layoutInflater.inflate(R.layout.layout_confirmations,null)
-                val toast=Toast(applicationContext)
+                val intent = Intent(this, ConfirmLogin::class.java)
+                val view = layoutInflater.inflate(R.layout.layout_confirmations, null)
+                val toast = Toast(applicationContext)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     toast.apply {
-                        setGravity(Gravity.CENTER_VERTICAL,0,0)
-                        duration=Toast.LENGTH_LONG
+                        setGravity(Gravity.CENTER_VERTICAL, 0, 0)
+                        duration = Toast.LENGTH_LONG
                         setView(view)
-                        view.findViewById<TextView>(R.id.txt_description).text="The email was send successfully"
+                        view.findViewById<TextView>(R.id.txt_description).text =
+                            "The email was send successfully"
                         val img = view.findViewById<ImageView>(R.id.image_confirmation)
                         img.setImageDrawable(getDrawable(R.drawable.bx_check))
                         img.imageTintList = ColorStateList.valueOf(Color.WHITE)
                     }.addCallback(@RequiresApi(Build.VERSION_CODES.R)
-                    object:Toast.Callback(){
+                    object : Toast.Callback() {
                         override fun onToastHidden() {
                             super.onToastHidden()
                             startActivity(intent)
@@ -137,15 +138,15 @@ class ForgotPasswordActivity : AppCompatActivity() {
                     })
                     toast.show()
                 }
-            }else{
+            } else {
                 progressDialog.dismiss()
-                Snackbar.make(view,"The email is incorrect",Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(view, "The email is incorrect", Snackbar.LENGTH_SHORT).show()
                 clearEmail()
             }
         }
     }
 
-    private fun clearEmail(){
+    private fun clearEmail() {
         edEmail.setText("")
     }
 }

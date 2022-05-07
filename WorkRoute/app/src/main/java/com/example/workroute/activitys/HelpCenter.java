@@ -1,12 +1,12 @@
 package com.example.workroute.activitys;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.workroute.R;
 import com.example.workroute.network.callback.NetworkCallback;

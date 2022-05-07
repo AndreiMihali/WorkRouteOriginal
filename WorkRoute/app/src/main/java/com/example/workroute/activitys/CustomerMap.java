@@ -46,6 +46,7 @@ import androidx.biometric.BiometricPrompt;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+
 import com.bumptech.glide.Glide;
 import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
@@ -55,7 +56,6 @@ import com.directions.route.RoutingListener;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.companion.UserType;
-import com.example.workroute.driverActivities.DriverMap;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.network.callback.NetworkCallback;
@@ -108,7 +108,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.messaging.FirebaseMessaging;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -148,6 +148,15 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     private LatLng driverLatLng;
     private BiometricPrompt.PromptInfo biometricPrompt;
     private BiometricPrompt biometricPromptExecuter;
+    private boolean getDriversStarted = false;
+    private List<Marker> markerList = new ArrayList<Marker>();
+    private Marker markerFinal;
+    private Circle circleMap;
+    private LocationManager locationManager;
+    private ActivityResultLauncher<Intent> activityResultLauncher;
+    private Marker myHomeMarker;
+    private Marker myWorkMarker;
+    private LocationCallback locationCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,7 +170,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
-        UserType.type="customer";
+        UserType.type = "customer";
         init();
         startService(new Intent(this, ServicioOnline.class));
     }
@@ -169,14 +178,13 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     @Override
     protected void onResume() {
         super.onResume();
-        if(circleMap!=null&&myWorkMarker!=null&&myHomeMarker!=null){
+        if (circleMap != null && myWorkMarker != null && myHomeMarker != null) {
             myWorkMarker.remove();
             myHomeMarker.remove();
             circleMap.remove();
             setDestination();
         }
     }
-
 
     private void init() {
         addActivityResultLauncher();
@@ -197,11 +205,11 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.sheet));
         bottomSheetBehavior.setHideable(true);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        btn_cancel=findViewById(R.id.button_cancel);
-        btn_message=findViewById(R.id.button_message_cost);
-        polylines=new ArrayList<>();
-        polylines2=new ArrayList<>();
-        driverId="";
+        btn_cancel = findViewById(R.id.button_cancel);
+        btn_message = findViewById(R.id.button_message_cost);
+        polylines = new ArrayList<>();
+        polylines2 = new ArrayList<>();
+        driverId = "";
         setBiometricBuilder();
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         iniciarMapa();
@@ -209,10 +217,10 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     }
 
     private void setBiometricBuilder() {
-        if(BiometricManager.from(this).canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG
-                | BiometricManager.Authenticators.DEVICE_CREDENTIAL)==BiometricManager.BIOMETRIC_SUCCESS){
+        if (BiometricManager.from(this).canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG
+                | BiometricManager.Authenticators.DEVICE_CREDENTIAL) == BiometricManager.BIOMETRIC_SUCCESS) {
 
-            biometricPromptExecuter=new BiometricPrompt(CustomerMap.this, ContextCompat.getMainExecutor(this), new BiometricPrompt.AuthenticationCallback(){
+            biometricPromptExecuter = new BiometricPrompt(CustomerMap.this, ContextCompat.getMainExecutor(this), new BiometricPrompt.AuthenticationCallback() {
                 @Override
                 public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                     super.onAuthenticationSucceeded(result);
@@ -222,7 +230,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                 }
             });
 
-            biometricPrompt=new androidx.biometric.BiometricPrompt.PromptInfo.Builder()
+            biometricPrompt = new androidx.biometric.BiometricPrompt.PromptInfo.Builder()
                     .setTitle("Biometric authentication")
                     .setSubtitle("Authenticate to complete the payment")
                     .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG | BiometricManager.Authenticators.DEVICE_CREDENTIAL)
@@ -233,31 +241,31 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
     private void setPendingSubscription() {
         progressDialog.show();
-        DatabaseReference referenceDriverRequest=FirebaseDatabase.getInstance().getReference("Drivers").child(driverId).child("Requests").child(firebaseAuth.getUid());
-        DatabaseReference referenceCustomerRequest=FirebaseDatabase.getInstance().getReference("Customers").child(firebaseAuth.getUid()).child("Requests").child(driverId);
-        HashMap<String,Object> map=new HashMap<>();
-        map.put("userId",firebaseAuth.getUid());
-        map.put("status","pending");
+        DatabaseReference referenceDriverRequest = FirebaseDatabase.getInstance().getReference("Drivers").child(driverId).child("Requests").child(firebaseAuth.getUid());
+        DatabaseReference referenceCustomerRequest = FirebaseDatabase.getInstance().getReference("Customers").child(firebaseAuth.getUid()).child("Requests").child(driverId);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("userId", firebaseAuth.getUid());
+        map.put("status", "pending");
         referenceDriverRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    HashMap<String,Object> map=new HashMap<>();
-                    map.put("userId",driverId);
-                    map.put("status","pending");
+                if (task.isSuccessful()) {
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("userId", driverId);
+                    map.put("status", "pending");
                     referenceCustomerRequest.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 progressDialog.dismiss();
-                                View view=getLayoutInflater().inflate(R.layout.layout_confirmations,null);
-                                Toast toast=new Toast(getApplicationContext());
-                                toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
+                                View view = getLayoutInflater().inflate(R.layout.layout_confirmations, null);
+                                Toast toast = new Toast(getApplicationContext());
+                                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                                 toast.setDuration(Toast.LENGTH_SHORT);
                                 toast.setView(view);
-                                TextView message=view.findViewById(R.id.txt_description);
-                                message.setText("We sent the request to the driver "+txt_name.getText().toString());
-                                ImageView img=view.findViewById(R.id.image_confirmation);
+                                TextView message = view.findViewById(R.id.txt_description);
+                                message.setText("We sent the request to the driver " + txt_name.getText().toString());
+                                ImageView img = view.findViewById(R.id.image_confirmation);
                                 img.setImageTintList(ColorStateList.valueOf(Color.WHITE));
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                                     toast.addCallback(new Toast.Callback() {
@@ -265,17 +273,17 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                                         public void onToastHidden() {
                                             super.onToastHidden();
                                             btn_cancel.setText("Pending");
-                                            getSenderName(firebaseAuth.getUid(),driverId);
+                                            getSenderName(firebaseAuth.getUid(), driverId);
                                         }
                                     });
                                 }
                                 toast.show();
-                            }else{
+                            } else {
                                 progressDialog.dismiss();
                             }
                         }
                     });
-                }else{
+                } else {
                     progressDialog.dismiss();
                 }
             }
@@ -283,28 +291,27 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
             @Override
             public void onFailure(@NonNull Exception e) {
                 progressDialog.dismiss();
-                Log.e("ERROR EN EL ENVIO DE PETICION",e.toString());
+                Log.e("ERROR EN EL ENVIO DE PETICION", e.toString());
             }
         });
     }
 
-
-    private void getSenderName(String sender,String receiverId){
+    private void getSenderName(String sender, String receiverId) {
         FirebaseFirestore.getInstance().collection("Usuarios").document(sender).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                String name=documentSnapshot.get("nombre").toString();
-                getToken(name,receiverId,"Yo have a new request from "+name,"NEW REQUEST");
+                String name = documentSnapshot.get("nombre").toString();
+                getToken(name, receiverId, "Yo have a new request from " + name, "NEW REQUEST");
             }
         });
     }
 
-    private void getToken(String sender,String receiver,String message, String title){
+    private void getToken(String sender, String receiver, String message, String title) {
         FirebaseDatabase.getInstance().getReference().child("Token").child(receiver).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String tokenUser=snapshot.getValue().toString();
-                sendNotification(tokenUser,message,title,sender);
+                String tokenUser = snapshot.getValue().toString();
+                sendNotification(tokenUser, message, title, sender);
             }
 
             @Override
@@ -314,41 +321,39 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         });
     }
 
-    private void sendNotification(String token,String message, String title,String receiver) {
-        new NotificationService(getApplicationContext(),token,message,title,receiver,"ActiveSubscriptions").start();
-        new NotificationsInDatabase("You have a new subscription request","false","Subscription",driverId).start();
+    private void sendNotification(String token, String message, String title, String receiver) {
+        new NotificationService(getApplicationContext(), token, message, title, receiver, "ActiveSubscriptions").start();
+        new NotificationsInDatabase("You have a new subscription request", "false", "Subscription", driverId).start();
     }
 
-    private boolean getDriversStarted=false;
-    private List<Marker> markerList=new ArrayList<Marker>();
-    private void getAllDrivers(){
-        getDriversStarted=true;
-        DatabaseReference driversReference=FirebaseDatabase.getInstance().getReference().child("locationUpdates").child("Drivers");
-        GeoFire geoFire=new GeoFire(driversReference);
-        GeoQuery geoQuery=geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(),myLastLocation.getLongitude()),300000);
+    private void getAllDrivers() {
+        getDriversStarted = true;
+        DatabaseReference driversReference = FirebaseDatabase.getInstance().getReference().child("locationUpdates").child("Drivers");
+        GeoFire geoFire = new GeoFire(driversReference);
+        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(), myLastLocation.getLongitude()), 300000);
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
-                for(Marker markerIt:markerList){
-                    if(markerIt.getTag().toString().equals(key)){
+                for (Marker markerIt : markerList) {
+                    if (markerIt.getTag().toString().equals(key)) {
                         return;
                     }
                 }
-                LatLng driverLocation=new LatLng(location.latitude,location.longitude);
+                LatLng driverLocation = new LatLng(location.latitude, location.longitude);
 
                 if (!key.equals(firebaseAuth.getUid())) {
                     isPendingSubscribed(key, new SimpleCallback<String>() {
                         @Override
                         public void callback(String data) {
-                            Marker mDriverMarker=null;
-                            if (mDriverMarker!=null) {
+                            Marker mDriverMarker = null;
+                            if (mDriverMarker != null) {
                                 mDriverMarker.remove();
                             }
-                            if(data.equals("pending")||data.equals("accepted")){
+                            if (data.equals("pending") || data.equals("accepted")) {
                                 mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
                                         .flat(true).anchor(0.5f, 0.5f));
-                            }else{
-                                if (mDriverMarker!=null) {
+                            } else {
+                                if (mDriverMarker != null) {
                                     mDriverMarker.remove();
                                 }
                                 mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.user_marker))))
@@ -363,7 +368,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
             @Override
             public void onKeyExited(String key) {
-                for(Marker markerIt:markerList){
+                for (Marker markerIt : markerList) {
                     if (markerIt.getTag().equals(key)) {
                         markerIt.remove();
                         markerList.remove(markerIt);
@@ -374,9 +379,9 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
             @Override
             public void onKeyMoved(String key, GeoLocation location) {
-                for(Marker markerIt:markerList){
-                    if(markerIt.getTag().equals(key)){
-                        markerIt.setPosition(new LatLng(location.latitude,location.longitude));
+                for (Marker markerIt : markerList) {
+                    if (markerIt.getTag().equals(key)) {
+                        markerIt.setPosition(new LatLng(location.latitude, location.longitude));
                     }
                 }
             }
@@ -393,31 +398,31 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         });
     }
 
-    private void getDriverDestination(String driverId){
-        DatabaseReference driverDestinationRef=FirebaseDatabase.getInstance().getReference().child("Drivers").child(driverId).child("destinations");
+    private void getDriverDestination(String driverId) {
+        DatabaseReference driverDestinationRef = FirebaseDatabase.getInstance().getReference().child("Drivers").child(driverId).child("destinations");
         driverDestinationRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    Map<String,Object> map=(Map<String, Object>) snapshot.getValue();
-                    if(map.get("destination")!=null){
-                        driverDestination=map.get("destination").toString();
-                    }else{
-                        driverDestination="--";
+                if (snapshot.exists()) {
+                    Map<String, Object> map = (Map<String, Object>) snapshot.getValue();
+                    if (map.get("destination") != null) {
+                        driverDestination = map.get("destination").toString();
+                    } else {
+                        driverDestination = "--";
                     }
-                    Double destinationLat=0.0;
-                    Double destinationLong=0.0;
+                    Double destinationLat = 0.0;
+                    Double destinationLong = 0.0;
 
-                    if(map.get("destinationLat")!=null){
-                        destinationLat=Double.valueOf(map.get("destinationLat").toString());
-                    }
-
-                    if(map.get("destinationLong")!=null){
-                        destinationLong=Double.valueOf(map.get("destinationLong").toString());
-                        destinationDriverLatLng=new LatLng(destinationLat,destinationLong);
+                    if (map.get("destinationLat") != null) {
+                        destinationLat = Double.valueOf(map.get("destinationLat").toString());
                     }
 
-                    getRouteToMarker(driverLatLng,new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()));
+                    if (map.get("destinationLong") != null) {
+                        destinationLong = Double.valueOf(map.get("destinationLong").toString());
+                        destinationDriverLatLng = new LatLng(destinationLat, destinationLong);
+                    }
+
+                    getRouteToMarker(driverLatLng, new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude()));
                     getDriverInfo(driverId);
                 }
             }
@@ -431,23 +436,23 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
     private void getDriverInfo(String driverId) {
         displayInformationDriver(BottomSheetBehavior.STATE_EXPANDED);
-        DatabaseReference customerInfoRef=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverId);
+        DatabaseReference customerInfoRef = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(driverId);
         customerInfoRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists() && snapshot.getChildrenCount()>0){
-                    Map<String,Object> map=(Map<String, Object>) snapshot.getValue();
-                    if(map.get("nombre")!=null){
+                if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                    Map<String, Object> map = (Map<String, Object>) snapshot.getValue();
+                    if (map.get("nombre") != null) {
                         txt_name.setText(map.get("nombre").toString());
                     }
-                    if(map.get("fotoPerfil")!=null){
-                        if(map.get("fotoPerfil").toString().equals("")){
+                    if (map.get("fotoPerfil") != null) {
+                        if (map.get("fotoPerfil").toString().equals("")) {
                             customer_photo.setImageResource(R.drawable.default_user_login);
-                        }else{
+                        } else {
                             Glide.with(getApplicationContext()).load(map.get("fotoPerfil").toString()).into(customer_photo);
                         }
                     }
-                    txt_startLocation.setText(getGeocoderAddress(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude())));
+                    txt_startLocation.setText(getGeocoderAddress(new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude())));
                     txt_destination.setText(driverDestination);
                     btn_message.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -463,13 +468,13 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                     isPendingSubscribed(driverId, new SimpleCallback<String>() {
                         @Override
                         public void callback(String data) {
-                            if(data.equals("pending")){
+                            if (data.equals("pending")) {
                                 btn_cancel.setText("Pending");
-                            }else if(data.equals("declined")||data.equals("canceled")){
+                            } else if (data.equals("declined") || data.equals("canceled")) {
                                 btn_cancel.setText("Subscribe");
-                            }else if(data.equals("accepted")){
+                            } else if (data.equals("accepted")) {
                                 btn_cancel.setText("Go to work");
-                            }else{
+                            } else {
                                 btn_cancel.setText("Subscribe");
                             }
                         }
@@ -484,22 +489,23 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         });
     }
 
-    private void isPendingSubscribed(String customerId, SimpleCallback<String> simpleCallback){
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Customers").child(FirebaseAuth.getInstance().getUid()).child("Requests");
-        ValueEventListener listener=new ValueEventListener() {
+    private void isPendingSubscribed(String customerId, SimpleCallback<String> simpleCallback) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Customers").child(FirebaseAuth.getInstance().getUid()).child("Requests");
+        ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot snap:snapshot.getChildren()){
-                        if(snap.child("userId").getValue().toString().equals(customerId)){
+                if (snapshot.exists()) {
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+                        if (snap.child("userId").getValue().toString().equals(customerId)) {
                             simpleCallback.callback(snap.child("status").getValue().toString());
                             break;
                         }
                     }
-                }else{
+                } else {
                     simpleCallback.callback("");
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -508,22 +514,31 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         reference.addValueEventListener(listener);
     }
 
-    private void getRouteToMarker(LatLng startDestination,LatLng myPosition){
-        Routing routing=new Routing.Builder()
+    /**
+     * *********************************************************************************************************************************
+     * *********************************************************************************************************************************
+     * *********************************************************************************************************************************
+     *
+     *                             AQUI EMPIEZAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA
+     *
+     * *********************************************************************************************************************************
+     * *********************************************************************************************************************************
+     ***********************************************************************************************************************************/
+
+    private void getRouteToMarker(LatLng startDestination, LatLng myPosition) {
+        Routing routing = new Routing.Builder()
                 .travelMode(AbstractRouting.TravelMode.DRIVING)
                 .withListener(this)
                 .alternativeRoutes(false)
-                .waypoints(startDestination,myPosition)
+                .waypoints(startDestination, myPosition)
                 .key(getString(R.string.google_maps_key))
                 .build();
         routing.execute();
         getRouteToDestination(startDestination);
     }
 
-    private Marker markerFinal;
-    private Circle circleMap;
-    private void getRouteToDestination(LatLng startDestination){
-        Routing routing=new Routing.Builder()
+    private void getRouteToDestination(LatLng startDestination) {
+        Routing routing = new Routing.Builder()
                 .travelMode(AbstractRouting.TravelMode.DRIVING)
                 .withListener(new RoutingListener() {
                     @Override
@@ -540,7 +555,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                         new Handler().post(new Runnable() {
                             @Override
                             public void run() {
-                                if(polylines2.size()>0) {
+                                if (polylines2.size() > 0) {
                                     for (Polyline poly : polylines2) {
                                         poly.remove();
                                     }
@@ -548,7 +563,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
                                 polylines2 = new ArrayList<>();
                                 //add route(s) to the map.
-                                for (int i = 0; i <route.size(); i++) {
+                                for (int i = 0; i < route.size(); i++) {
                                     //In case of more than 5 alternative routes
                                     PolylineOptions polyOptions = new PolylineOptions();
                                     polyOptions.color(getColor(R.color.secondaryLine));
@@ -557,8 +572,8 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                                     Polyline polyline = mMap.addPolyline(polyOptions);
                                     polylines2.add(polyline);
                                 }
-                                markerFinal= mMap.addMarker(new MarkerOptions().position(destinationDriverLatLng).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.flag))))
-                                .flat(true).anchor(0.5f,0.5f));
+                                markerFinal = mMap.addMarker(new MarkerOptions().position(destinationDriverLatLng).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.flag))))
+                                        .flat(true).anchor(0.5f, 0.5f));
                             }
                         });
                     }
@@ -569,11 +584,12 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                     }
                 })
                 .alternativeRoutes(false)
-                .waypoints(startDestination,destinationDriverLatLng)
+                .waypoints(startDestination, destinationDriverLatLng)
                 .key(getString(R.string.google_maps_key))
                 .build();
         routing.execute();
     }
+
 
     private void initListeners() {
         /** MÉTODO PARA AÑADIR ICONOS DE NOTIFICACIÓN A LOS BOTONES*/
@@ -603,7 +619,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if(newState==BottomSheetBehavior.STATE_HIDDEN){
+                if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                     erasePolylines();
                 }
             }
@@ -617,8 +633,8 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         button_ubi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(myLastLocation!=null){
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()),12f));
+                if (myLastLocation != null) {
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude()), 12f));
                 }
             }
         });
@@ -645,7 +661,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
             @Override
             public void onClick(View v) {
                 animateMenu();
-                Intent i=new Intent(CustomerMap.this, Notifications.class);
+                Intent i = new Intent(CustomerMap.this, Notifications.class);
                 startActivity(i);
             }
         });
@@ -657,20 +673,20 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btn_cancel.getText().toString().equals("Pending")){
-                    Toast.makeText(getApplicationContext(),"Your request is pending acceptance",Toast.LENGTH_SHORT).show();
-                }else if(btn_cancel.getText().toString().equals("Subscribe")){
+                if (btn_cancel.getText().toString().equals("Pending")) {
+                    Toast.makeText(getApplicationContext(), "Your request is pending acceptance", Toast.LENGTH_SHORT).show();
+                } else if (btn_cancel.getText().toString().equals("Subscribe")) {
                     showDialog();
-                }else{
-                    Toast.makeText(getApplicationContext(),"We notified the driver that you want to go to work",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "We notified the driver that you want to go to work", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
     }
 
-    private void showDialog(){
-        new MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_App_MaterialAlertDialog)
+    private void showDialog() {
+        new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
                 .setCancelable(false)
                 .setTitle("Confirm")
                 .setMessage("Are you sure you want to subscribe to this driver?")
@@ -688,57 +704,46 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                 }).show();
     }
 
+    private void havePayMethod() {
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getChildrenCount() > 0) {
+                    if (biometricPrompt == null) {
+                        //TODO : TOAST PERSONALIZADO PARA METER EL CVV PARA ACEPTAR EL PAGO
+                        View view = getLayoutInflater().inflate(R.layout.message_toast_type_cvv, null);
+                        AlertDialog.Builder MyAlert = new AlertDialog.Builder(getApplicationContext(), R.style.DialogAlert);
+                        MyAlert.setPositiveButton("CONTINUE", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-    private void havePayMethod(){
-            ValueEventListener postListener=new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.getChildrenCount()>0){
-                        if (biometricPrompt==null) {
-                            //TODO : TOAST PERSONALIZADO PARA METER EL CVV PARA ACEPTAR EL PAGO
-                            View view=getLayoutInflater().inflate(R.layout.message_toast_type_cvv,null);
-                            AlertDialog.Builder MyAlert = new AlertDialog.Builder(getApplicationContext(),R.style.DialogAlert);
-                            MyAlert.setPositiveButton("CONTINUE", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            });
-                            MyAlert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            MyAlert.setView(view);
-                            AlertDialog dialog = MyAlert.create();
-                            dialog.show();
-                        }else {
-                            biometricPromptExecuter.authenticate(biometricPrompt);
-                        }
-                    }else{
-                        startActivity(new Intent(CustomerMap.this,PayMethod.class));
+                            }
+                        });
+                        MyAlert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        MyAlert.setView(view);
+                        AlertDialog dialog = MyAlert.create();
+                        dialog.show();
+                    } else {
+                        biometricPromptExecuter.authenticate(biometricPrompt);
                     }
-
+                } else {
+                    startActivity(new Intent(CustomerMap.this, PayMethod.class));
                 }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
-            };
 
-            FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("payMethods").addListenerForSingleValueEvent(postListener);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        };
+
+        FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getUid()).child("payMethods").addListenerForSingleValueEvent(postListener);
     }
-
-    /**
-     * *********************************************************************************************************************************
-     * *********************************************************************************************************************************
-     * *********************************************************************************************************************************
-     *
-     *                             AQUI EMPIEZAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA
-     *
-     * *********************************************************************************************************************************
-     * *********************************************************************************************************************************
-     ***********************************************************************************************************************************/
 
     /**
      * METODO PARA PEDIR UN VIAJE A UN CONDUCTOR
@@ -746,7 +751,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
 
     //Método para resetear los campos de informacion del conducotr en el sheet
-    private void clearAllCustomerInformation(){
+    private void clearAllCustomerInformation() {
         txt_distance.setText("");
         customer_photo.setImageResource(R.drawable.default_user_login);
         txt_name.setText("");
@@ -758,18 +763,19 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
     /**
      * INICIO METODOS PARA DESPLEGAR LOS BOTTOM SHEETS
+     *
      * @param state
      */
 
 
-    private void displayInformationDriver(int state){
-        txt_distance=findViewById(R.id.txt_distance_cost);
-        customer_photo=findViewById(R.id.profile_photo_sheet_cost);
-        txt_name=findViewById(R.id.txt_name_cost);
-        txt_travelInformation=findViewById(R.id.txt_travel_information_cost);
-        txt_total_pay_travel=findViewById(R.id.txt_total_pay_travel_cost);
-        txt_startLocation=findViewById(R.id.txt_startLocation_cost);
-        txt_destination=findViewById(R.id.txt_destination_cost);
+    private void displayInformationDriver(int state) {
+        txt_distance = findViewById(R.id.txt_distance_cost);
+        customer_photo = findViewById(R.id.profile_photo_sheet_cost);
+        txt_name = findViewById(R.id.txt_name_cost);
+        txt_travelInformation = findViewById(R.id.txt_travel_information_cost);
+        txt_total_pay_travel = findViewById(R.id.txt_total_pay_travel_cost);
+        txt_startLocation = findViewById(R.id.txt_startLocation_cost);
+        txt_destination = findViewById(R.id.txt_destination_cost);
 
         bottomSheetBehavior.setPeekHeight(200);
         bottomSheetBehavior.setState(state);
@@ -778,29 +784,24 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     }
 
     /**
-     * FIN METODOS PARA DESPLEGAR LOS BOTTOM SHEETS
-     * @param state
-     */
-
-
-    /**
      * UNA VEZ ENCONTRADO EL CONDUCTOR RECOGEMOS SUS DATOS PARA MOSTRARLO
      */
 
 
-    private String getGeocoderAddress(LatLng location){
-        Geocoder geocoder=new Geocoder(CustomerMap.this, Locale.getDefault());
-        String address="";
-        try{
-            List<Address> listAddress=geocoder.getFromLocation(location.latitude,location.longitude,1);
-            if(listAddress.size()>0){
-                address=listAddress.get(0).getAddressLine(0);
+    private String getGeocoderAddress(LatLng location) {
+        Geocoder geocoder = new Geocoder(CustomerMap.this, Locale.getDefault());
+        String address = "";
+        try {
+            List<Address> listAddress = geocoder.getFromLocation(location.latitude, location.longitude, 1);
+            if (listAddress.size() > 0) {
+                address = listAddress.get(0).getAddressLine(0);
             }
-        }catch (IOException e){
-            Log.e("Error",e.toString());
+        } catch (IOException e) {
+            Log.e("Error", e.toString());
         }
         return address;
     }
+
     @Override
     protected void onDestroy() {
         new MainActivity.Destroy(CustomerMap.this).start();
@@ -841,7 +842,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
             //button_settings.startAnimation(open);
 
 
-
             button_chats.setVisibility(View.VISIBLE);
             button_profile.setVisibility(View.VISIBLE);
             button_notifications.setVisibility(View.VISIBLE);
@@ -856,7 +856,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
             isOpen = true;
         }
     }
-
 
     private void iniciarMapa() {
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapCustomer);
@@ -876,20 +875,18 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         buildGoogleApiClient();
     }
 
-    private LocationManager locationManager;
-
-    private boolean isLocationEnabled(){
-        locationManager=(LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)||locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+    private boolean isLocationEnabled() {
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    private void showDialogMessageGpsEnable(){
+    private void showDialogMessageGpsEnable() {
 
-        new MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_App_MaterialAlertDialog)
+        new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
                 .setTitle("GPS DISABLED")
                 .setIcon(R.drawable.ic_baseline_gps_off_24)
                 .setMessage("In order to continue, please activate the gps")
@@ -897,7 +894,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(CustomerMap.this,MainActivity.class));
+                        startActivity(new Intent(CustomerMap.this, MainActivity.class));
                         dialog.dismiss();
                     }
                 })
@@ -917,44 +914,42 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         activityResultLauncher.launch(settingsIntent);
     }
 
-    private ActivityResultLauncher<Intent> activityResultLauncher;
     private void addActivityResultLauncher() {
-        activityResultLauncher=registerForActivityResult(
+        activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        if(result.getResultCode()==RESULT_CANCELED){
-                           buildGoogleApiClient();
+                        if (result.getResultCode() == RESULT_CANCELED) {
+                            buildGoogleApiClient();
                         }
                     }
                 }
         );
     }
 
-
     protected synchronized void buildGoogleApiClient() {
-        if(isLocationEnabled()){
-            googleApiClient=new GoogleApiClient.Builder(this)
+        if (isLocationEnabled()) {
+            googleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
                     .build();
             googleApiClient.connect();
-        }else{
+        } else {
             showDialogMessageGpsEnable();
         }
     }
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        if(getApplicationContext()!=null){
-            myLastLocation=location;
-            LatLng latlng=new LatLng(location.getLatitude(),location.getLongitude());
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng,12f));
+        if (getApplicationContext() != null) {
+            myLastLocation = location;
+            LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 12f));
             setMyLocationInDatabase(location);
             setDestination();
-            if(!getDriversStarted){
+            if (!getDriversStarted) {
                 getAllDrivers();
             }
 
@@ -963,61 +958,58 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         }
     }
 
-    private Marker myHomeMarker;
-    private Marker myWorkMarker;
-    private void setDestination(){
-        DatabaseReference customerReference=FirebaseDatabase.getInstance().getReference("Customers");
-        Map<String,Object> map=new HashMap<>();
-        LatLng destination=new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(),"latitude")),Double.valueOf(getDestination(Companion.user.getWorkAddress(),"longitude")));
-        if(destination==new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude())){
+    private void setDestination() {
+        DatabaseReference customerReference = FirebaseDatabase.getInstance().getReference("Customers");
+        Map<String, Object> map = new HashMap<>();
+        LatLng destination = new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(), "latitude")), Double.valueOf(getDestination(Companion.user.getWorkAddress(), "longitude")));
+        if (destination == new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude())) {
             map.put("destination", Companion.user.getLocalidad());
-            map.put("destinationLat",getDestination(Companion.user.getLocalidad(),"latitude"));
-            map.put("destinationLong",getDestination(Companion.user.getLocalidad(),"longitude"));
-        }else{
+            map.put("destinationLat", getDestination(Companion.user.getLocalidad(), "latitude"));
+            map.put("destinationLong", getDestination(Companion.user.getLocalidad(), "longitude"));
+        } else {
             map.put("destination", Companion.user.getWorkAddress());
-            map.put("destinationLat",getDestination(Companion.user.getWorkAddress(),"latitude"));
-            map.put("destinationLong",getDestination(Companion.user.getWorkAddress(),"longitude"));
+            map.put("destinationLat", getDestination(Companion.user.getWorkAddress(), "latitude"));
+            map.put("destinationLong", getDestination(Companion.user.getWorkAddress(), "longitude"));
         }
         customerReference.child(firebaseAuth.getUid()).child("destinations").updateChildren(map);
         setMarkers();
 
     }
 
-    private void setMarkers(){
-        LatLng myDestination=new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(),"latitude")),Double.valueOf(getDestination(Companion.user.getWorkAddress(),"longitude")));
-        CircleOptions circleOptions=new CircleOptions()
+    private void setMarkers() {
+        LatLng myDestination = new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(), "latitude")), Double.valueOf(getDestination(Companion.user.getWorkAddress(), "longitude")));
+        CircleOptions circleOptions = new CircleOptions()
                 .center(myDestination)
                 .radius(1500)
                 .strokeColor(getColor(R.color.secondary))
                 .clickable(false)
                 .strokeWidth(7);
-        circleMap=mMap.addCircle(circleOptions);
-        myWorkMarker=mMap.addMarker(new MarkerOptions().position(myDestination).title("My work").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.work))))
-                .flat(true).anchor(0.5f,0.5f));
+        circleMap = mMap.addCircle(circleOptions);
+        myWorkMarker = mMap.addMarker(new MarkerOptions().position(myDestination).title("My work").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.work))))
+                .flat(true).anchor(0.5f, 0.5f));
 
-        LatLng myHome=new LatLng(Double.valueOf(getDestination(Companion.user.getLocalidad(),"latitude")),Double.valueOf(getDestination(Companion.user.getLocalidad(),"longitude")));
-       myHomeMarker=mMap.addMarker(new MarkerOptions().position(myHome).title("My home").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.home))))
-                .flat(true).anchor(0.5f,0.5f));
+        LatLng myHome = new LatLng(Double.valueOf(getDestination(Companion.user.getLocalidad(), "latitude")), Double.valueOf(getDestination(Companion.user.getLocalidad(), "longitude")));
+        myHomeMarker = mMap.addMarker(new MarkerOptions().position(myHome).title("My home").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.home))))
+                .flat(true).anchor(0.5f, 0.5f));
     }
 
-    private void setMyLocationInDatabase(Location location){
-        String userId=firebaseAuth.getUid();
-        DatabaseReference customerReference=FirebaseDatabase.getInstance().getReference("locationUpdates").child("Customers");
-        GeoFire geoFire=new GeoFire(customerReference);
-        geoFire.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
+    private void setMyLocationInDatabase(Location location) {
+        String userId = firebaseAuth.getUid();
+        DatabaseReference customerReference = FirebaseDatabase.getInstance().getReference("locationUpdates").child("Customers");
+        GeoFire geoFire = new GeoFire(customerReference);
+        geoFire.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
     }
 
-
-    private Double getDestination(String destination,String field){
+    private Double getDestination(String destination, String field) {
         Geocoder geocoder = new Geocoder(CustomerMap.this, Locale.getDefault());
         Double address = 0.0;
         try {
-            List<Address> listAddress = geocoder.getFromLocationName(destination,1);
+            List<Address> listAddress = geocoder.getFromLocationName(destination, 1);
             if (listAddress.size() > 0) {
-                if(field.equals("latitude")){
+                if (field.equals("latitude")) {
                     address = listAddress.get(0).getLatitude();
-                }else if(field.equals("longitude")){
-                    address=listAddress.get(0).getLongitude();
+                } else if (field.equals("longitude")) {
+                    address = listAddress.get(0).getLongitude();
                 }
 
             }
@@ -1027,7 +1019,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         return address;
     }
 
-    private LocationCallback locationCallback;
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         locationRequest = new LocationRequest();
@@ -1077,9 +1068,9 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
-     *
-     *                             AQUI TERMINAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA
-     *
+     * <p>
+     * AQUI TERMINAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA
+     * <p>
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
      ***********************************************************************************************************************************/
@@ -1087,11 +1078,11 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-        if(marker!=null&&marker.getTag()!=null){
+        if (marker != null && marker.getTag() != null) {
             erasePolylines();
-            if(!marker.getTag().toString().equals(firebaseAuth.getUid())&&(marker.getTag()!=null||marker.getTag().toString().equals(""))){
-                driverId=marker.getTag().toString();
-                driverLatLng= marker.getPosition();
+            if (!marker.getTag().toString().equals(firebaseAuth.getUid()) && (marker.getTag() != null || marker.getTag().toString().equals(""))) {
+                driverId = marker.getTag().toString();
+                driverLatLng = marker.getPosition();
                 getDriverDestination(driverId);
             }
         }
@@ -1113,7 +1104,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                if(polylines.size()>0) {
+                if (polylines.size() > 0) {
                     for (Polyline poly : polylines) {
                         poly.remove();
                     }
@@ -1121,7 +1112,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
                 polylines = new ArrayList<>();
                 //add route(s) to the map.
-                for (int i = 0; i <route.size(); i++) {
+                for (int i = 0; i < route.size(); i++) {
                     //In case of more than 5 alternative routes
                     PolylineOptions polyOptions = new PolylineOptions();
                     polyOptions.color(getColor(R.color.secondary));
@@ -1130,7 +1121,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                     Polyline polyline = mMap.addPolyline(polyOptions);
                     polylines.add(polyline);
                     txt_travelInformation.setText("The driver arrive in " + route.get(i).getDurationText());
-                    txt_distance.setText("The driver is "+route.get(i).getDistanceText()+" away");
+                    txt_distance.setText("The driver is " + route.get(i).getDistanceText() + " away");
                 }
             }
         });
@@ -1141,17 +1132,17 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
     }
 
-    private void erasePolylines(){
+    private void erasePolylines() {
 
-        if(markerFinal!=null){
+        if (markerFinal != null) {
             markerFinal.remove();
         }
-        for(Polyline line:polylines){
+        for (Polyline line : polylines) {
             line.remove();
         }
         polylines.clear();
 
-        for(Polyline line:polylines2){
+        for (Polyline line : polylines2) {
             line.remove();
         }
         polylines2.clear();
@@ -1159,12 +1150,12 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        if(locationCallback!=null){
+        if (locationCallback != null) {
             LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
         }
     }
 
-    private Bitmap drawableToBitmap (Drawable drawable) {
+    private Bitmap drawableToBitmap(Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();
         }

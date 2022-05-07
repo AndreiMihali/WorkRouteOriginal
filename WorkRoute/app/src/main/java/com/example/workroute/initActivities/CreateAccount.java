@@ -1,9 +1,5 @@
 package com.example.workroute.initActivities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,9 +11,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.workroute.R;
 import com.example.workroute.model.User;
-import com.example.workroute.model.Viaje;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,8 +31,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.ArrayList;
 
 public class CreateAccount extends AppCompatActivity {
 
@@ -221,27 +218,17 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     private void setDataFirebaseDatabase(){
-        User user=new User(
+        User user = new User(
                 firebaseAuth.getCurrentUser().getUid(),
                 ed_name.getText().toString().trim(),
                 0,
                 "",
                 "",
-                "",
-                0,
                 true,
-                false,
-                false,
-                0,
+                true,
                 "",
                 false,
-                new ArrayList<Viaje>(),
                 0,
-                0,
-                0,
-                0,
-                new ArrayList<User>(),
-                new ArrayList<User>(),
                 ""
         );
 
@@ -255,27 +242,17 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     private void setDataFirebaseFirestore(){
-        User user=new User(
+        User user = new User(
                 firebaseAuth.getCurrentUser().getUid(),
                 ed_name.getText().toString().trim(),
                 0,
                 "",
                 "",
-                "",
-                0,
                 true,
-                false,
-                false,
-                0,
+                true,
                 "",
                 false,
-                new ArrayList<Viaje>(),
                 0,
-                0,
-                0,
-                0,
-                new ArrayList<User>(),
-                new ArrayList<User>(),
                 ""
         );
 

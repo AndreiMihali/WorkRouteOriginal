@@ -3,6 +3,18 @@ package com.example.workroute.model;
 import java.util.Locale;
 
 public class CardItem {
+    private int status;
+    private String numberCard;
+    private String cardName;
+    private int cardType;
+
+    public CardItem(int status, String numberCard, String cardName, int cardType) {
+        this.status = status;
+        this.numberCard = numberCard.replaceFirst("[0-9]{12}", "XXXX XXXX XXXX ");
+        this.cardName = cardName.toUpperCase(Locale.ROOT);
+        this.cardType = cardType;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -16,7 +28,7 @@ public class CardItem {
     }
 
     public void setNumberCard(String numberCard) {
-        this.numberCard =numberCard.replaceFirst("[0-9]{12}","XXXX XXXX XXXX ");
+        this.numberCard = numberCard.replaceFirst("[0-9]{12}", "XXXX XXXX XXXX ");
     }
 
     public String getCardName() {
@@ -33,18 +45,6 @@ public class CardItem {
 
     public void setCardType(int cardType) {
         this.cardType = cardType;
-    }
-
-    private int status;
-    private String numberCard;
-    private String cardName;
-    private int cardType;
-
-    public CardItem(int status,String numberCard,String cardName,int cardType){
-        this.status=status;
-        this.numberCard=numberCard.replaceFirst("[0-9]{12}","XXXX XXXX XXXX ");
-        this.cardName=cardName.toUpperCase(Locale.ROOT);
-        this.cardType=cardType;
     }
 
 

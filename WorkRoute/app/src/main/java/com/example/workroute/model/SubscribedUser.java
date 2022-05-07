@@ -1,7 +1,5 @@
 package com.example.workroute.model;
 
-import android.widget.ImageView;
-
 public class SubscribedUser {
 
     private String profilePhoto;
@@ -11,12 +9,12 @@ public class SubscribedUser {
     private String userUid;
 
 
-    public SubscribedUser(String profilePhoto, String userName, String userWorkDirection,String status,String userUid) {
+    public SubscribedUser(String profilePhoto, String userName, String userWorkDirection, String status, String userUid) {
         this.profilePhoto = profilePhoto;
         this.userName = userName;
         this.userWorkDirection = userWorkDirection;
-        this.status=status;
-        this.userUid=userUid;
+        this.status = status;
+        this.userUid = userUid;
     }
 
     public String getUserUid() {
@@ -58,7 +56,6 @@ public class SubscribedUser {
     public void setUserWorkDirection(String userWorkDirection) {
         this.userWorkDirection = userWorkDirection;
     }
-
 
 
 }

@@ -1,14 +1,14 @@
 package com.example.workroute.notifications;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.workroute.R;
 import com.example.workroute.activitys.MainActivity;
@@ -29,7 +29,7 @@ public class Notifications extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ArrayList<NotificationItem> data;
-    private AdapterNotifications adapterNotifications=null;
+    private AdapterNotifications adapterNotifications = null;
     private ProgressBar progressBar;
     private TextView txt_null;
     private MaterialToolbar toolbar;
@@ -43,18 +43,18 @@ public class Notifications extends AppCompatActivity {
         init();
     }
 
-    private void init(){
-        toolbar=findViewById(R.id.toolbar);
-        recyclerView=findViewById(R.id.recycler_notifications);
-        progressBar=findViewById(R.id.progress_circular_notifications);
-        txt_null=findViewById(R.id.txt_null_notifications);
+    private void init() {
+        toolbar = findViewById(R.id.toolbar);
+        recyclerView = findViewById(R.id.recycler_notifications);
+        progressBar = findViewById(R.id.progress_circular_notifications);
+        txt_null = findViewById(R.id.txt_null_notifications);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        data=new ArrayList<>();
+        data = new ArrayList<>();
         initListeners();
         getData();
     }
 
-    private void initListeners(){
+    private void initListeners() {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,30 +64,30 @@ public class Notifications extends AppCompatActivity {
         });
     }
 
-    private void getData(){
+    private void getData() {
         progressBar.setVisibility(View.VISIBLE);
-        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Notifications");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Notifications");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 data.clear();
-                for(DataSnapshot snap:snapshot.getChildren()){
-                    NotificationItem not=snap.getValue(NotificationItem.class);
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    NotificationItem not = snap.getValue(NotificationItem.class);
                     not.setId(snap.getKey());
                     data.add(not);
                 }
                 progressBar.setVisibility(View.GONE);
 
-                if(data.isEmpty()){
+                if (data.isEmpty()) {
                     txt_null.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     txt_null.setVisibility(View.GONE);
                 }
 
-                if(adapterNotifications!=null){
+                if (adapterNotifications != null) {
                     adapterNotifications.notifyDataSetChanged();
-                }else{
-                    adapterNotifications=new AdapterNotifications(data,getApplicationContext());
+                } else {
+                    adapterNotifications = new AdapterNotifications(data, getApplicationContext());
                     recyclerView.setAdapter(adapterNotifications);
                 }
             }

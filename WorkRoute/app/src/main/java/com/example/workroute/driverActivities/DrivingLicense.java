@@ -1,13 +1,5 @@
 package com.example.workroute.driverActivities;
 //NO ESTÁ EN USO, SE PUEDE BORRAR PERO POR SI ACASO DE MOMENTO NO
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,6 +12,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.example.workroute.R;
 import com.example.workroute.activitys.MainActivity;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -27,20 +28,19 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class DrivingLicense extends AppCompatActivity {
 
+    private static final int PICK_IMAGE = 100;
+    private static final int PERMISSION_CODE_GALLERY = 100;
+    public int lugarFoto = 0;
     MaterialToolbar toolbarDrivingLicense;
+    RelativeLayout layout;
+    Uri imageUri;
+    ActivityResultLauncher<Intent> activityResultLauncher;
     private ImageView imgFront;
     private ImageView imgReverse;
     private Button selectFront;
     private Button selectReverse;
     private Button saveLicense;
-    RelativeLayout layout;
 
-    private static final int PICK_IMAGE = 100;
-    Uri imageUri;
-    public int lugarFoto=0;
-    ActivityResultLauncher <Intent> activityResultLauncher;
-    private static final int PERMISSION_CODE_GALLERY = 100;
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Register);
@@ -60,16 +60,16 @@ public class DrivingLicense extends AppCompatActivity {
             @Override
             public void onActivityResult(ActivityResult result) {
 
-                if (result.getResultCode()==RESULT_OK) {
-                    Intent foto=result.getData();
+                if (result.getResultCode() == RESULT_OK) {
+                    Intent foto = result.getData();
                     imageUri = (Uri) foto.getData();
-                    if (lugarFoto==1) {
+                    if (lugarFoto == 1) {
                         imgFront.setImageURI(imageUri);
-                    } else if (lugarFoto==2) {
+                    } else if (lugarFoto == 2) {
                         imgReverse.setImageURI(imageUri);
                     }
-                } else if (result.getResultCode()==RESULT_CANCELED) {
-                    Toast.makeText(getApplicationContext(),"No image selected", Toast.LENGTH_SHORT).show();
+                } else if (result.getResultCode() == RESULT_CANCELED) {
+                    Toast.makeText(getApplicationContext(), "No image selected", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -117,29 +117,29 @@ public class DrivingLicense extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-               Snackbar.make(
-                       layout,
-                       "DATA SENT, PENDING REVIEW",
-                       Snackbar.LENGTH_LONG
-               ).show();
+                Snackbar.make(
+                        layout,
+                        "DATA SENT, PENDING REVIEW",
+                        Snackbar.LENGTH_LONG
+                ).show();
 
             }
         });
 
     }
 
-    private void abrirGaleria( ) {
-        int  permissionCheck= ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_EXTERNAL_STORAGE);
+    private void abrirGaleria() {
+        int permissionCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
 
-        if(permissionCheck!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},PERMISSION_CODE_GALLERY);
-        }else{
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_CODE_GALLERY);
+        } else {
             llamarGaleria();
         }
     }
 
-    private void llamarGaleria( ) {
-        Intent gallery=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+    private void llamarGaleria() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         activityResultLauncher.launch(gallery);
     }
 

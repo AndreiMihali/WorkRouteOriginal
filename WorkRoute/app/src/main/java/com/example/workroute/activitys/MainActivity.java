@@ -1,16 +1,15 @@
 package com.example.workroute.activitys;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
@@ -35,7 +34,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference reference;
-    private MaterialButton button_customer,button_driver;
+    private MaterialButton button_customer, button_driver;
     private FirebaseFirestore firestore;
     private FirebaseAuth firebaseAuth;
 
@@ -51,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
         getUserData();
     }
 
-    private void init(){
-        button_customer=findViewById(R.id.btn_customer);
-        button_driver=findViewById(R.id.btn_driver);
-        firestore=FirebaseFirestore.getInstance();
-        firebaseAuth=FirebaseAuth.getInstance();
+    private void init() {
+        button_customer = findViewById(R.id.btn_customer);
+        button_driver = findViewById(R.id.btn_driver);
+        firestore = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
         initListeners();
     }
 
@@ -63,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
         button_driver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isDriver()){
-                    showDialog("Configure driver profile","Before you can continue, set up your driver profile",new Intent(MainActivity.this, AddDriverInformation.class));
-                }else{
+                if (!isDriver()) {
+                    showDialog("Configure driver profile", "Before you can continue, set up your driver profile", new Intent(MainActivity.this, AddDriverInformation.class));
+                } else {
                     startActivity(new Intent(MainActivity.this, DriverMap.class));
                 }
             }
@@ -74,13 +73,13 @@ public class MainActivity extends AppCompatActivity {
         button_customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,CustomerMap.class));
+                startActivity(new Intent(MainActivity.this, CustomerMap.class));
             }
         });
     }
 
-    private void showDialog(String title,String message,Intent intent){
-        new MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_App_MaterialAlertDialog)
+    private void showDialog(String title, String message, Intent intent) {
+        new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
                 .setCancelable(false)
                 .setTitle(title)
                 .setMessage(message)
@@ -116,22 +115,7 @@ public class MainActivity extends AppCompatActivity {
         reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(token);
     }
 
-
-    public static class Destroy extends Thread{
-
-        private Activity activity;
-
-        public Destroy(Activity activity){
-            this.activity=activity;
-        }
-
-        @Override
-        public void run() {
-            activity.stopService(new Intent(activity,ServicioOnline.class));
-        }
-    }
-
-    private void getUserData(){
+    private void getUserData() {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
@@ -143,19 +127,29 @@ public class MainActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d("ERROR AL OBTENER LOS DATOS DEL USUARIO","ERROR AL OBTENER LOS DATOS DEL USUARIO "+e);
+                        Log.d("ERROR AL OBTENER LOS DATOS DEL USUARIO", "ERROR AL OBTENER LOS DATOS DEL USUARIO " + e);
                     }
                 });
             }
         });
     }
 
-    private Boolean isDriver(){
-        return (Companion.user.isConductor())?true:false;
+    private Boolean isDriver() {
+        return (Companion.user.isConductor()) ? true : false;
     }
 
-    private Boolean isSubscribed(){
-        return (Companion.user.isSuscrito())?true:false;
+    public static class Destroy extends Thread {
+
+        private Activity activity;
+
+        public Destroy(Activity activity) {
+            this.activity = activity;
+        }
+
+        @Override
+        public void run() {
+            activity.stopService(new Intent(activity, ServicioOnline.class));
+        }
     }
 
 }

@@ -6,16 +6,17 @@ public class SubscriptionItem {
     private String descriptionSubscription;
     private String colorBackground;
 
-    public SubscriptionItem(){ }
-
-    public SubscriptionItem(String price,String titleSubscription,String descriptionSubscription,String colorBackground){
-        this.price=price;
-        this.titleSubscription=titleSubscription;
-        this.descriptionSubscription=descriptionSubscription;
-        this.colorBackground=colorBackground;
+    public SubscriptionItem() {
     }
 
-    public String  getPrice() {
+    public SubscriptionItem(String price, String titleSubscription, String descriptionSubscription, String colorBackground) {
+        this.price = price;
+        this.titleSubscription = titleSubscription;
+        this.descriptionSubscription = descriptionSubscription;
+        this.colorBackground = colorBackground;
+    }
+
+    public String getPrice() {
         return price;
     }
 
@@ -23,12 +24,12 @@ public class SubscriptionItem {
         this.price = price;
     }
 
-    public String getColorBackground(){
+    public String getColorBackground() {
         return colorBackground;
     }
 
-    public void setColorBackground(String colorBackground){
-        this.colorBackground=colorBackground;
+    public void setColorBackground(String colorBackground) {
+        this.colorBackground = colorBackground;
     }
 
     public String getTitleSubscription() {
