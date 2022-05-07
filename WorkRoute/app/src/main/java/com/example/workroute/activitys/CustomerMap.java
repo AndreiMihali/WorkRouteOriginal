@@ -31,6 +31,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,7 +57,6 @@ import com.directions.route.RoutingListener;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.companion.UserType;
-import com.example.workroute.driverActivities.DriverMap;
 import com.example.workroute.kotlin.activities.ChatsActivity;
 import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.kotlin.model.NotificationItem;
@@ -186,33 +186,11 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
             circleMap.remove();
             setDestination();
         }
-    }
 
-    private void getNotificationsCount(SimpleCallback<Long> callback){
-        FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Notifications").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<NotificationItem> data=new ArrayList<>();
-                int contChats=0;
-                int contElse=0;
-                if(snapshot.exists()){
-                    for(DataSnapshot snap:snapshot.getChildren()){
-                        if(snap.child("type").equals("Subscription")){
-                            contElse++;
-                        }else{
-                            contChats++;
-                        }
-                        data.add(snap.getValue(NotificationItem.class));
-                    }
-                    callback.callback(snapshot.getChildrenCount(),data,contElse,contChats);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        if (button_menu!=null) {
+            button_menu.setVisibility(View.INVISIBLE);
+            button_menu.setVisibility(View.VISIBLE);
+        }
     }
 
     private void init() {
@@ -373,7 +351,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                 if (!key.equals(firebaseAuth.getUid())) {
                     isPendingSubscribed(key, new SimpleCallback<String>() {
                         @Override
-                        public void callback(String data,Object ...secondary) {
+                        public void callback(String data, Object... secondary) {
                             Marker mDriverMarker = null;
                             if (mDriverMarker != null) {
                                 mDriverMarker.remove();
@@ -496,7 +474,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                     });
                     isPendingSubscribed(driverId, new SimpleCallback<String>() {
                         @Override
-                        public void callback(String data,Object ...secondary) {
+                        public void callback(String data, Object... secondary) {
                             if (data.equals("pending")) {
                                 btn_cancel.setText("Pending");
                             } else if (data.equals("declined") || data.equals("canceled")) {
@@ -547,9 +525,9 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
-     *
-     *                             AQUI EMPIEZAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA
-     *
+     * <p>
+     * AQUI EMPIEZAN LOS METODOS QUE TIENEN QUE VER CON EL MAPA
+     * <p>
      * *********************************************************************************************************************************
      * *********************************************************************************************************************************
      ***********************************************************************************************************************************/
@@ -621,44 +599,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
 
     private void initListeners() {
-
-        button_menu.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @SuppressLint("UnsafeOptInUsageError")
-            @Override
-            public void onGlobalLayout() {
-                getNotificationsCount(new SimpleCallback<Long>() {
-                    @Override
-                    public void callback(Long data, Object... secondary) {
-                        if(data.intValue()>=0){
-                            ArrayList<NotificationItem> notificationItems=(ArrayList<NotificationItem>)secondary[0];
-                            for(NotificationItem x:notificationItems){
-                                if(x.getRead().equals("false")){
-                                    BadgeDrawable badgeDrawable = BadgeDrawable.create(CustomerMap.this);
-                                    badgeDrawable.setNumber(data.intValue());
-                                    badgeDrawable.setHorizontalOffset(30);
-                                    badgeDrawable.setVerticalOffset(20);
-                                    BadgeUtils.attachBadgeDrawable(badgeDrawable, button_menu, null);
-                                    if(x.getType().equals("Message")){
-                                        BadgeDrawable badgeDrawable2 = BadgeDrawable.create(CustomerMap.this);
-                                        badgeDrawable2.setNumber((int)secondary[2]);
-                                        badgeDrawable2.setHorizontalOffset(30);
-                                        badgeDrawable2.setVerticalOffset(20);
-                                        BadgeUtils.attachBadgeDrawable(badgeDrawable2, button_chats, null);
-                                    }else{
-                                        BadgeDrawable badgeDrawable2 = BadgeDrawable.create(CustomerMap.this);
-                                        badgeDrawable2.setNumber((int)secondary[3]);
-                                        badgeDrawable2.setHorizontalOffset(30);
-                                        badgeDrawable2.setVerticalOffset(20);
-                                        BadgeUtils.attachBadgeDrawable(badgeDrawable2, button_notifications, null);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-
-            }
-        });
 
         button_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1185,7 +1125,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
     private void erasePolylines() {
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()), 12f));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude()), 12f));
 
         if (markerFinal != null) {
             markerFinal.remove();
@@ -1222,7 +1162,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     }
 
     private interface SimpleCallback<T> {
-        void callback(T data,Object... secondary);
+        void callback(T data, Object... secondary);
     }
 
 }

@@ -2,7 +2,6 @@ package com.example.workroute.driverActivities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,7 +9,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
@@ -30,6 +28,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +48,7 @@ import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.workroute.R;
+import com.example.workroute.activitys.CustomerMap;
 import com.example.workroute.activitys.MainActivity;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.companion.UserType;
@@ -113,7 +113,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     private boolean isOpen = false;
     private boolean isOpen2 = false;
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference reference;
     private ProgressDialog progressDialog;
     private GoogleApiClient googleApiClient;
     private Location myLastLocation;
@@ -171,35 +170,13 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
             circleMap.remove();
             setDestination();
         }
+
+        if (button_menu!=null) {
+            button_menu.setVisibility(View.INVISIBLE);
+            button_menu.setVisibility(View.VISIBLE);
+        }
     }
-
-    private void getNotificationsCount(SimpleCallback<Long> callback){
-        FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Notifications").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<NotificationItem> data=new ArrayList<>();
-                int contChats=0;
-                int contElse=0;
-                if(snapshot.exists()){
-                    for(DataSnapshot snap:snapshot.getChildren()){
-                        if(snap.child("type").equals("Subscription")){
-                            contElse++;
-                        }else{
-                            contChats++;
-                        }
-                        data.add(snap.getValue(NotificationItem.class));
-                    }
-                    callback.callback(snapshot.getChildrenCount(),data,contElse,contChats);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
+    
     private void getAllCustomers() {
         getCustomersAroundStarted = true;
         DatabaseReference customersReference = FirebaseDatabase.getInstance().getReference().child("locationUpdates").child("Customers");
@@ -219,7 +196,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                 if (!key.equals(firebaseAuth.getUid())) {
                     isPendingSubscribed(key, new SimpleCallback<String>() {
                         @Override
-                        public void callback(String data,Object... secondary) {
+                        public void callback(String data, Object... secondary) {
                             Marker mCustomerMarker = null;
                             if (mCustomerMarker != null) {
                                 mCustomerMarker.remove();
@@ -419,7 +396,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
                     isPendingSubscribed(customerId, new SimpleCallback<String>() {
                         @Override
-                        public void callback(String data,Object... secondary) {
+                        public void callback(String data, Object... secondary) {
                             if (data.equals("pending")) {
                                 txt_statusMessage.setVisibility(View.VISIBLE);
                                 txt_statusMessage.setText("You have to accept the user request");
@@ -567,49 +544,11 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
             }
         });
 
-        button_menu.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @SuppressLint("UnsafeOptInUsageError")
-            @Override
-            public void onGlobalLayout() {
-                getNotificationsCount(new SimpleCallback<Long>() {
-                    @Override
-                    public void callback(Long data, Object... secondary) {
-                        if(data.intValue()>=0){
-                            ArrayList<NotificationItem> notificationItems=(ArrayList<NotificationItem>)secondary[0];
-                            for(NotificationItem x:notificationItems){
-                               if(x.getRead().equals("false")){
-                                   BadgeDrawable badgeDrawable = BadgeDrawable.create(DriverMap.this);
-                                   badgeDrawable.setNumber(data.intValue());
-                                   badgeDrawable.setHorizontalOffset(30);
-                                   badgeDrawable.setVerticalOffset(20);
-                                   BadgeUtils.attachBadgeDrawable(badgeDrawable, button_menu, null);
-                                   if(x.getType().equals("Message")){
-                                       BadgeDrawable badgeDrawable2 = BadgeDrawable.create(DriverMap.this);
-                                       badgeDrawable2.setNumber((int)secondary[2]);
-                                       badgeDrawable2.setHorizontalOffset(30);
-                                       badgeDrawable2.setVerticalOffset(20);
-                                       BadgeUtils.attachBadgeDrawable(badgeDrawable2, button_chats, null);
-                                   }else{
-                                       BadgeDrawable badgeDrawable2 = BadgeDrawable.create(DriverMap.this);
-                                       badgeDrawable2.setNumber((int)secondary[3]);
-                                       badgeDrawable2.setHorizontalOffset(30);
-                                       badgeDrawable2.setVerticalOffset(20);
-                                       BadgeUtils.attachBadgeDrawable(badgeDrawable2, button_notifications, null);
-                                   }
-                               }
-                            }
-                        }
-                    }
-                });
-
-            }
-        });
-
         button_ubi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (myLastLocation != null) {
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()), 40f));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude()), 40f));
                 }
             }
         });
@@ -644,7 +583,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         btnRideStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()),40f,80,0)));
+                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude()), 40f, 80, 0)));
             }
 
         });
@@ -802,7 +741,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         if (getApplicationContext() != null) {
             myLastLocation = location;
             LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
-            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(latlng,12f,0,0)));
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(latlng, 12f, 0, 0)));
 
             setMyLocationInDatabase(location);
             setDestination();
@@ -992,7 +931,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
     private void erasePolylines() {
 
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()),12f,0,0)));
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude()), 12f, 0, 0)));
 
         if (markerFinal != null) {
             markerFinal.remove();
@@ -1017,6 +956,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     }
 
     private interface SimpleCallback<T> {
-        void callback(T data,Object... secondary);
+        void callback(T data, Object... secondary);
     }
 }

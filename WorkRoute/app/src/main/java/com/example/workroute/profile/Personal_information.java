@@ -203,7 +203,7 @@ public class Personal_information extends AppCompatActivity {
                             FirebaseFirestore.getInstance().collection("Usuarios").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).update(hasMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-
+                                    Companion.user.setFotoPerfil(downloadUrl);
                                 }
                             });
 
