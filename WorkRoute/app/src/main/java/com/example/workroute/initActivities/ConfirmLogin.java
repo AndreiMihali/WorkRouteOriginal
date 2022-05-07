@@ -224,6 +224,7 @@ public class ConfirmLogin extends AppCompatActivity {
     }
 
     private void showHome() {
+        getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().putInt("faseConexion", 2).commit();
         Intent i = new Intent(ConfirmLogin.this, MainActivity.class);
         startActivity(i);
         //Toast.makeText(getApplicationContext(),"El usuario ya existe",Toast.LENGTH_SHORT).show();
@@ -265,7 +266,16 @@ public class ConfirmLogin extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            setDataFirebaseDatabase(name);
+                            exist(new SimpleCallback<Boolean>() {
+                                @Override
+                                public void callback(Boolean data) {
+                                    if(data){
+                                        showHome();
+                                    }else{
+                                        setDataFirebaseDatabase(name);
+                                    }
+                                }
+                            });
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "signInWithCredential:failure", task.getException());
@@ -298,6 +308,34 @@ public class ConfirmLogin extends AppCompatActivity {
 
     }
 
+    private void exist(SimpleCallback<Boolean> simpleCallback){
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
+        firestore.collection("Usuarios").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                boolean existe = false;
+                for (QueryDocumentSnapshot x : queryDocumentSnapshots) {
+                    if (x.getId().equals(auth.getCurrentUser().getUid())) {
+                        existe = true;
+                        break;
+                    }
+                }
+                simpleCallback.callback(existe);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
+            }
+        });
+    }
+
+    private interface SimpleCallback<T> {
+        void callback(T data);
+    }
+
     private void setDataInFirebase(String name) {
         User user = new User(
                 auth.getCurrentUser().getUid(),
@@ -312,21 +350,12 @@ public class ConfirmLogin extends AppCompatActivity {
                 0,
                 ""
         );
-
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-
-        firestore.collection("Usuarios").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        progressDialog.dismiss();
+        exist(new SimpleCallback<Boolean>() {
             @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                boolean existe = false;
-                for (QueryDocumentSnapshot x : queryDocumentSnapshots) {
-                    if (x.getId().equals(auth.getCurrentUser().getUid())) {
-                        existe = true;
-                        break;
-                    }
-                }
-                progressDialog.dismiss();
-                if (existe) {
+            public void callback(Boolean data) {
+                if (data) {
                     isFirstTime(name);
                     getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().putString("name", name).commit();
                 } else {
@@ -344,12 +373,6 @@ public class ConfirmLogin extends AppCompatActivity {
                     });
                 }
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                Log.d("INSERTAR DATOS", "Error al insertar los datos");
-            }
         });
     }
 
@@ -360,6 +383,7 @@ public class ConfirmLogin extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 int veces = Integer.parseInt(documentSnapshot.get("vecesConectadas").toString());
                 if (veces <= 0) {
+                    getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().putInt("faseConexion", 1).commit();
                     Intent intent = new Intent(ConfirmLogin.this, FirstTimeActivity.class);
                     intent.putExtra("Name", name);
                     startActivity(intent);

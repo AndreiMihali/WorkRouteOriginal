@@ -189,7 +189,7 @@ public class FirstTimeActivity extends AppCompatActivity {
             actualizarDatos(1, "vecesConectadas");
             actualizarDatos(calcularEdad(fechaNac), "edad");
             actualizarDatos(fechaNac, "fecha_naci");
-            getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().putInt("faseConexion", 1).commit();
+            getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().putInt("faseConexion", 2).commit();
             startActivity(new Intent(FirstTimeActivity.this, MainActivity.class));
             this.finish();
         }

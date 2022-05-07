@@ -59,8 +59,10 @@ public class SplashScreen extends AppCompatActivity {
                         public void run() {
                             if (user != null) {
                                 if (sp.getInt("faseConexion", 0) == 0) {
-                                    startActivity(new Intent(SplashScreen.this, FirstTimeActivity.class).putExtra("name", sp.getString("name", "")));
-                                } else {
+                                    startActivity(new Intent(SplashScreen.this, ConfirmLogin.class).putExtra("name", sp.getString("name", "")));
+                                } else if(sp.getInt("faseConexion", 0) == 1) {
+                                    startActivity(new Intent(SplashScreen.this, FirstTimeActivity.class));
+                                }else{
                                     startActivity(new Intent(SplashScreen.this, MainActivity.class));
                                 }
                             } else {
@@ -154,8 +156,10 @@ public class SplashScreen extends AppCompatActivity {
                 public void run() {
                     if (user != null) {
                         if (sp.getInt("faseConexion", 0) == 0) {
-                            startActivity(new Intent(SplashScreen.this, FirstTimeActivity.class).putExtra("name", sp.getString("name", "")));
-                        } else {
+                            startActivity(new Intent(SplashScreen.this, ConfirmLogin.class).putExtra("name", sp.getString("name", "")));
+                        } else if(sp.getInt("faseConexion", 0) == 1) {
+                            startActivity(new Intent(SplashScreen.this, FirstTimeActivity.class));
+                        }else{
                             startActivity(new Intent(SplashScreen.this, MainActivity.class));
                         }
                     } else {

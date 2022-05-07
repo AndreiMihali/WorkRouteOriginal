@@ -73,6 +73,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -128,7 +129,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     private List<Polyline> polylines2;
     private LocationCallback locationCallback;
     private MaterialButton btnRideStatus;
-    private Marker myPositionMarker;
     private String customerDestination;
     private LatLng destinationCustomerLatLng;
     private LatLng customerLatLng;
@@ -137,7 +137,6 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     private List<Marker> markerList = new ArrayList<Marker>();
     private Marker markerFinal;
     private Circle circleMap;
-    private Marker myWorkMarker;
     private LocationManager locationManager;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private Marker myWork;
@@ -197,10 +196,10 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                             }
                             if (data.equals("pending") || data.equals("accepted")) {
                                 mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
-                                        .flat(true).anchor(0.5f, 0.5f));
+                                        .anchor(0.5f, 0.5f));
                             } else {
                                 mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.user_marker))))
-                                        .flat(true).anchor(0.5f, 0.5f));
+                                        .anchor(0.5f, 0.5f));
                             }
                             mCustomerMarker.setTag(key);
                             markerList.add(mCustomerMarker);
@@ -558,7 +557,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
             @Override
             public void onClick(View v) {
                 if (myLastLocation != null) {
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude()), 12f));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()), 40f));
                 }
             }
         });
@@ -593,7 +592,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         btnRideStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "PENDING TO CODE", Toast.LENGTH_SHORT).show();
+                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()),40f,80,0)));
             }
 
         });
@@ -676,6 +675,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         mMap.setMyLocationEnabled(true);
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.setOnMarkerClickListener(this);
+        mMap.setBuildingsEnabled(false);
         buildGoogleApiClient();
     }
 
@@ -750,7 +750,8 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         if (getApplicationContext() != null) {
             myLastLocation = location;
             LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 12f));
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(latlng,12f,0,0)));
+
             setMyLocationInDatabase(location);
             setDestination();
             if (!getCustomersAroundStarted) {
@@ -788,12 +789,10 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                 .clickable(false)
                 .strokeWidth(7);
         circleMap = mMap.addCircle(circleOptions);
-        myWork = mMap.addMarker(new MarkerOptions().position(myDestination).title("My work").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.work))))
-                .flat(true).anchor(0.5f, 0.5f));
+        myWork = mMap.addMarker(new MarkerOptions().position(myDestination).title("My work").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.work)))).anchor(0.5f, 0.5f));
 
         LatLng myHomeLatLng = new LatLng(Double.valueOf(getDestination(Companion.user.getLocalidad(), "latitude")), Double.valueOf(getDestination(Companion.user.getLocalidad(), "longitude")));
-        myHome = mMap.addMarker(new MarkerOptions().position(myHomeLatLng).title("My home").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.home))))
-                .flat(true).anchor(0.5f, 0.5f));
+        myHome = mMap.addMarker(new MarkerOptions().position(myHomeLatLng).title("My home").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.home)))).anchor(0.5f, 0.5f));
     }
 
     private void setMyLocationInDatabase(Location location) {
@@ -940,6 +939,8 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     }
 
     private void erasePolylines() {
+
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()),12f,0,0)));
 
         if (markerFinal != null) {
             markerFinal.remove();

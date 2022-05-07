@@ -351,13 +351,13 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                             }
                             if (data.equals("pending") || data.equals("accepted")) {
                                 mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
-                                        .flat(true).anchor(0.5f, 0.5f));
+                                        .anchor(0.5f, 0.5f));
                             } else {
                                 if (mDriverMarker != null) {
                                     mDriverMarker.remove();
                                 }
                                 mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.user_marker))))
-                                        .flat(true).anchor(0.5f, 0.5f));
+                                        .anchor(0.5f, 0.5f));
                             }
                             mDriverMarker.setTag(key);
                             markerList.add(mDriverMarker);
@@ -573,7 +573,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                                     polylines2.add(polyline);
                                 }
                                 markerFinal = mMap.addMarker(new MarkerOptions().position(destinationDriverLatLng).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.flag))))
-                                        .flat(true).anchor(0.5f, 0.5f));
+                                        .anchor(0.5f, 0.5f));
                             }
                         });
                     }
@@ -986,11 +986,11 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                 .strokeWidth(7);
         circleMap = mMap.addCircle(circleOptions);
         myWorkMarker = mMap.addMarker(new MarkerOptions().position(myDestination).title("My work").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.work))))
-                .flat(true).anchor(0.5f, 0.5f));
+                .anchor(0.5f, 0.5f));
 
         LatLng myHome = new LatLng(Double.valueOf(getDestination(Companion.user.getLocalidad(), "latitude")), Double.valueOf(getDestination(Companion.user.getLocalidad(), "longitude")));
         myHomeMarker = mMap.addMarker(new MarkerOptions().position(myHome).title("My home").icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.home))))
-                .flat(true).anchor(0.5f, 0.5f));
+                .anchor(0.5f, 0.5f));
     }
 
     private void setMyLocationInDatabase(Location location) {
@@ -1133,6 +1133,8 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     }
 
     private void erasePolylines() {
+
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()), 12f));
 
         if (markerFinal != null) {
             markerFinal.remove();
