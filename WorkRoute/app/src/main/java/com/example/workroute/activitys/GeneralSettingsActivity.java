@@ -47,8 +47,7 @@ public class GeneralSettingsActivity extends AppCompatActivity {
         appBox = findViewById(R.id.checkBoxAppNotifications);
         tv_HowToUseWorkRoute = findViewById(R.id.tvHowToUseWorkRoute);
         tv_AboutUs = findViewById(R.id.tvAboutUs);
-
-
+        appBox.setChecked(getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).getBoolean("notificationsApp",true));
     }
 
     private void initListeners() {

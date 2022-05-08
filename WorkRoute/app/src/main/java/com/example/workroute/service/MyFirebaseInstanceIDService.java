@@ -57,7 +57,7 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
         }
 
         if (message.getData().size() > 0) {
-            if(getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getBoolean("notificationsApp",true)){
+            if(getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getBoolean("notificationsApp",true)&&FirebaseAuth.getInstance().getCurrentUser().getUid()!=null){
                 String titulo = message.getData().get("titulo");
                 String detalle = message.getData().get("detalle");
                 String activityOpen = message.getData().get("activityOpen");
