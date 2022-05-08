@@ -153,7 +153,9 @@ int attr backgroundSplit 0x7f040048
 int attr backgroundStacked 0x7f040049
 int attr backgroundTint 0x7f04004a
 int attr backgroundTintMode 0x7f04004b
+int attr badgeBackgroundColor 0x7f04046a
 int attr badgeGravity 0x7f04004c
+int attr badgePosition 0x7f04046b
 int attr badgeRadius 0x7f04004d
 int attr badgeStyle 0x7f04004e
 int attr badgeTextColor 0x7f04004f
@@ -3138,8 +3140,12 @@ int id BOTTOM_END 0x7f0a0001
 int id BOTTOM_START 0x7f0a0002
 int id CTRL 0x7f0a0003
 int id FUNCTION 0x7f0a0004
+int id LeftBottom 0x7f0a0309
+int id LeftTop 0x7f0a030a
 int id META 0x7f0a0005
 int id NO_DEBUG 0x7f0a0006
+int id RightBottom 0x7f0a030b
+int id RightTop 0x7f0a030c
 int id SHIFT 0x7f0a0007
 int id SHOW_ALL 0x7f0a0008
 int id SHOW_PATH 0x7f0a0009
@@ -6351,6 +6357,10 @@ int styleable CoordinatorLayout_Layout_layout_behavior 3
 int styleable CoordinatorLayout_Layout_layout_dodgeInsetEdges 4
 int styleable CoordinatorLayout_Layout_layout_insetEdge 5
 int styleable CoordinatorLayout_Layout_layout_keyline 6
+int[] styleable CounterFab { 0x7f04004f, 0x7f04046a, 0x7f04046b }
+int styleable CounterFab_badgeTextColor 0
+int styleable CounterFab_badgeBackgroundColor 1
+int styleable CounterFab_badgePosition 2
 int[] styleable CustomAttribute { 0x7f040038, 0x7f040139, 0x7f04013a, 0x7f04013b, 0x7f04013c, 0x7f04013d, 0x7f04013e, 0x7f040140, 0x7f040141, 0x7f040142, 0x7f0402c8 }
 int styleable CustomAttribute_attributeName 0
 int styleable CustomAttribute_customBoolean 1

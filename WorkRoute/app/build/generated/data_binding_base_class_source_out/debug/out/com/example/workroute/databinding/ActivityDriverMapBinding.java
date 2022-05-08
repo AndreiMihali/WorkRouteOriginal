@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.andremion.counterfab.CounterFab;
 import com.example.workroute.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.divider.MaterialDivider;
@@ -33,19 +34,19 @@ public final class ActivityDriverMapBinding implements ViewBinding {
   public final MaterialButton btnRideStatus;
 
   @NonNull
-  public final FloatingActionButton buttonMenu;
+  public final CounterFab buttonMenu;
 
   @NonNull
   public final ImageButton buttonMessage;
 
   @NonNull
-  public final FloatingActionButton buttonMessages;
+  public final CounterFab buttonMessages;
 
   @NonNull
-  public final FloatingActionButton buttonNotifications;
+  public final CounterFab buttonNotifications;
 
   @NonNull
-  public final FloatingActionButton buttonProfile;
+  public final CounterFab buttonProfile;
 
   @NonNull
   public final FloatingActionButton buttonUbi;
@@ -100,10 +101,9 @@ public final class ActivityDriverMapBinding implements ViewBinding {
 
   private ActivityDriverMapBinding(@NonNull CoordinatorLayout rootView,
       @NonNull ImageView botonDrag, @NonNull MaterialButton btnRideStatus,
-      @NonNull FloatingActionButton buttonMenu, @NonNull ImageButton buttonMessage,
-      @NonNull FloatingActionButton buttonMessages,
-      @NonNull FloatingActionButton buttonNotifications,
-      @NonNull FloatingActionButton buttonProfile, @NonNull FloatingActionButton buttonUbi,
+      @NonNull CounterFab buttonMenu, @NonNull ImageButton buttonMessage,
+      @NonNull CounterFab buttonMessages, @NonNull CounterFab buttonNotifications,
+      @NonNull CounterFab buttonProfile, @NonNull FloatingActionButton buttonUbi,
       @NonNull MaterialDivider divider, @NonNull RelativeLayout informationUser,
       @NonNull ImageButton locationIcon, @NonNull ImageButton locationIcon1,
       @NonNull ImageView profilePhotoSheet, @NonNull CoordinatorLayout rela,
@@ -179,7 +179,7 @@ public final class ActivityDriverMapBinding implements ViewBinding {
       }
 
       id = R.id.buttonMenu;
-      FloatingActionButton buttonMenu = ViewBindings.findChildViewById(rootView, id);
+      CounterFab buttonMenu = ViewBindings.findChildViewById(rootView, id);
       if (buttonMenu == null) {
         break missingId;
       }
@@ -191,19 +191,19 @@ public final class ActivityDriverMapBinding implements ViewBinding {
       }
 
       id = R.id.buttonMessages;
-      FloatingActionButton buttonMessages = ViewBindings.findChildViewById(rootView, id);
+      CounterFab buttonMessages = ViewBindings.findChildViewById(rootView, id);
       if (buttonMessages == null) {
         break missingId;
       }
 
       id = R.id.button_notifications;
-      FloatingActionButton buttonNotifications = ViewBindings.findChildViewById(rootView, id);
+      CounterFab buttonNotifications = ViewBindings.findChildViewById(rootView, id);
       if (buttonNotifications == null) {
         break missingId;
       }
 
       id = R.id.buttonProfile;
-      FloatingActionButton buttonProfile = ViewBindings.findChildViewById(rootView, id);
+      CounterFab buttonProfile = ViewBindings.findChildViewById(rootView, id);
       if (buttonProfile == null) {
         break missingId;
       }

@@ -48,6 +48,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.andremion.counterfab.CounterFab;
 import com.bumptech.glide.Glide;
 import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
@@ -120,7 +121,8 @@ import java.util.Map;
 
 public class CustomerMap extends FragmentActivity implements RoutingListener, LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    private FloatingActionButton button_menu, button_chats, button_profile, button_notifications, button_ubi;
+    private CounterFab button_menu, button_chats, button_profile, button_notifications;
+    private FloatingActionButton button_ubi;
     private Animation open, close, rotateForward, rotateBackWard;
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
@@ -174,6 +176,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         }
         UserType.type = "customer";
         init();
+        getNotifications();
         startService(new Intent(this, ServicioOnline.class));
     }
 
@@ -185,11 +188,6 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
             myHomeMarker.remove();
             circleMap.remove();
             setDestination();
-        }
-
-        if (button_menu!=null) {
-            button_menu.setVisibility(View.INVISIBLE);
-            button_menu.setVisibility(View.VISIBLE);
         }
     }
 
@@ -221,6 +219,34 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         iniciarMapa();
         initListeners();
+    }
+
+    private void getNotifications(){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(firebaseAuth.getCurrentUser().getUid()).child("Notifications");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                button_menu.setCount(0);
+                button_notifications.setCount(0);
+                button_chats.setCount(0);
+                if(snapshot.exists()){
+                    for(DataSnapshot snap:snapshot.getChildren()){
+                        if(snap.child("read").getValue().toString().equals("false")){
+                            button_menu.increase();
+                            if(snap.child("type").getValue().toString().equals("Message")){
+                                button_chats.increase();
+                            }
+                            button_notifications.increase();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void setBiometricBuilder() {

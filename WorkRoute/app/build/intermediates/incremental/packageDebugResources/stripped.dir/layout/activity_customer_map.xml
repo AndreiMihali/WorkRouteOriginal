@@ -20,7 +20,7 @@
             android:tag="mapFragment" />
 
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.andremion.counterfab.CounterFab
             android:id="@+id/buttonMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,10 +29,13 @@
             android:layout_marginEnd="20dp"
             android:backgroundTint="@color/secondary"
             android:src="@drawable/ic_baseline_menu_24"
+            app:badgeBackgroundColor="@color/quantum_googred"
+            app:badgePosition="RightTop"
+            app:badgeTextColor="@color/white"
             app:tint="@color/white"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.andremion.counterfab.CounterFab
             android:id="@+id/buttonMessages"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,9 +46,13 @@
             android:backgroundTint="@color/secondary"
             android:src="@drawable/ic_outline_chat_24"
             android:visibility="invisible"
-            app:tint="@color/white" />
+            app:badgeBackgroundColor="@color/quantum_googred"
+            app:badgePosition="RightTop"
+            app:badgeTextColor="@color/white"
+            app:tint="@color/white"
+            tools:visibility="visible" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.andremion.counterfab.CounterFab
             android:id="@+id/buttonProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,9 +63,13 @@
             android:backgroundTint="@color/secondary"
             android:src="@drawable/ic_baseline_person_outline_24"
             android:visibility="invisible"
-            app:tint="@color/white" />
+            app:badgeBackgroundColor="@color/quantum_googred"
+            app:badgePosition="RightTop"
+            app:badgeTextColor="@color/white"
+            app:tint="@color/white"
+            tools:visibility="visible" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.andremion.counterfab.CounterFab
             android:id="@+id/button_notifications"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,7 +80,11 @@
             android:backgroundTint="@color/secondary"
             android:src="@drawable/ic_outline_notifications_24"
             android:visibility="invisible"
-            app:tint="@color/white" />
+            app:badgeBackgroundColor="@color/quantum_googred"
+            app:badgePosition="RightTop"
+            app:badgeTextColor="@color/white"
+            app:tint="@color/white"
+            tools:visibility="visible" />
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -84,7 +99,8 @@
             android:src="@drawable/ic_baseline_location_on_24"
             android:visibility="invisible"
             app:tint="@color/white"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:visibility="visible" />
 
     </RelativeLayout>
 

@@ -61,7 +61,7 @@ class AdapterNotifications(val data: ArrayList<NotificationItem>, val context: C
 
         if (data[position].read == "false") {
             holder.card.strokeColor = context.getColor(android.R.color.holo_red_dark)
-            holder.card.strokeWidth = 1
+            holder.card.strokeWidth = 2
         } else {
             holder.card.strokeWidth = 0
         }

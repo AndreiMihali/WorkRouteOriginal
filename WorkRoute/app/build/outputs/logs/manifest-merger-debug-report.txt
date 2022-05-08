@@ -5,6 +5,7 @@ INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\a
 INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-115:12
 INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:2:1-115:12
 MERGED from [androidx.databinding:viewbinding:7.1.3] C:\Users\andre\.gradle\caches\transforms-3\6daa7fffc9d010bcf72b7ffca40dfd2b\transformed\viewbinding-7.1.3\AndroidManifest.xml:17:1-24:12
+MERGED from [com.github.andremion:counterfab:1.2.1] C:\Users\andre\.gradle\caches\transforms-3\2c1050380be55095dc0ee1e476e00d52\transformed\counterfab-1.2.1\AndroidManifest.xml:2:1-13:12
 MERGED from [com.google.android.material:material:1.5.0] C:\Users\andre\.gradle\caches\transforms-3\159938b0043343ca6af37c3367f7a16d\transformed\material-1.5.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-inappmessaging-display:20.1.1] C:\Users\andre\.gradle\caches\transforms-3\097ed1f45103e5bc34e68a8882be70f0\transformed\firebase-inappmessaging-display-20.1.1\AndroidManifest.xml:2:1-32:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.3] C:\Users\andre\.gradle\caches\transforms-3\4406d8e358a214629c64e4db01c555a6\transformed\constraintlayout-2.1.3\AndroidManifest.xml:2:1-11:12
@@ -209,6 +210,8 @@ ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\
 		ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:14:19-61
 application
 ADDED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml:16:5-113:19
+MERGED from [com.github.andremion:counterfab:1.2.1] C:\Users\andre\.gradle\caches\transforms-3\2c1050380be55095dc0ee1e476e00d52\transformed\counterfab-1.2.1\AndroidManifest.xml:11:5-20
+MERGED from [com.github.andremion:counterfab:1.2.1] C:\Users\andre\.gradle\caches\transforms-3\2c1050380be55095dc0ee1e476e00d52\transformed\counterfab-1.2.1\AndroidManifest.xml:11:5-20
 MERGED from [com.google.android.material:material:1.5.0] C:\Users\andre\.gradle\caches\transforms-3\159938b0043343ca6af37c3367f7a16d\transformed\material-1.5.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.5.0] C:\Users\andre\.gradle\caches\transforms-3\159938b0043343ca6af37c3367f7a16d\transformed\material-1.5.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.firebase:firebase-inappmessaging-display:20.1.1] C:\Users\andre\.gradle\caches\transforms-3\097ed1f45103e5bc34e68a8882be70f0\transformed\firebase-inappmessaging-display-20.1.1\AndroidManifest.xml:22:5-30:19
@@ -479,6 +482,8 @@ INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\a
 INJECTED from C:\Users\andre\AndroidStudioProjects\WorkRouteOriginal\WorkRoute\app\src\main\AndroidManifest.xml
 MERGED from [androidx.databinding:viewbinding:7.1.3] C:\Users\andre\.gradle\caches\transforms-3\6daa7fffc9d010bcf72b7ffca40dfd2b\transformed\viewbinding-7.1.3\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.databinding:viewbinding:7.1.3] C:\Users\andre\.gradle\caches\transforms-3\6daa7fffc9d010bcf72b7ffca40dfd2b\transformed\viewbinding-7.1.3\AndroidManifest.xml:20:5-22:41
+MERGED from [com.github.andremion:counterfab:1.2.1] C:\Users\andre\.gradle\caches\transforms-3\2c1050380be55095dc0ee1e476e00d52\transformed\counterfab-1.2.1\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.andremion:counterfab:1.2.1] C:\Users\andre\.gradle\caches\transforms-3\2c1050380be55095dc0ee1e476e00d52\transformed\counterfab-1.2.1\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.android.material:material:1.5.0] C:\Users\andre\.gradle\caches\transforms-3\159938b0043343ca6af37c3367f7a16d\transformed\material-1.5.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.material:material:1.5.0] C:\Users\andre\.gradle\caches\transforms-3\159938b0043343ca6af37c3367f7a16d\transformed\material-1.5.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-inappmessaging-display:20.1.1] C:\Users\andre\.gradle\caches\transforms-3\097ed1f45103e5bc34e68a8882be70f0\transformed\firebase-inappmessaging-display-20.1.1\AndroidManifest.xml:7:5-9:41
