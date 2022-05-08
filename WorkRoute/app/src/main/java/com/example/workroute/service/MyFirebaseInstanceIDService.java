@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.example.workroute.R;
+import com.example.workroute.activitys.CustomerMap;
 import com.example.workroute.activitys.MainActivity;
 import com.example.workroute.companion.UserType;
 import com.example.workroute.kotlin.activities.ChatsActivity;
@@ -56,10 +57,12 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
         }
 
         if (message.getData().size() > 0) {
-            String titulo = message.getData().get("titulo");
-            String detalle = message.getData().get("detalle");
-            String activityOpen = message.getData().get("activityOpen");
-            mayorQueOreo(titulo, detalle, activityOpen);
+            if(getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getBoolean("notificationsApp",true)){
+                String titulo = message.getData().get("titulo");
+                String detalle = message.getData().get("detalle");
+                String activityOpen = message.getData().get("activityOpen");
+                mayorQueOreo(titulo, detalle, activityOpen);
+            }
         }
     }
 
@@ -104,6 +107,12 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
             case "ActiveSubscriptions": {
                 UserType.type = "driver";
                 nf = new Intent(getApplicationContext(), ActiveSubscriptions.class);
+                nf.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                return PendingIntent.getActivity(this, 0, nf, 0);
+            }
+            case "CustomerMap":{
+                UserType.type = "customer";
+                nf = new Intent(getApplicationContext(), CustomerMap.class);
                 nf.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 return PendingIntent.getActivity(this, 0, nf, 0);
             }

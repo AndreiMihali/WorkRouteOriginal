@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workroute.R
+import com.example.workroute.activitys.CustomerMap
 import com.example.workroute.kotlin.activities.ChatsActivity
 import com.example.workroute.kotlin.model.NotificationItem
 import com.example.workroute.profile.ActiveSubscriptions
@@ -51,6 +52,11 @@ class AdapterNotifications(val data: ArrayList<NotificationItem>, val context: C
                 holder.icon.imageTintList =
                     ColorStateList.valueOf(context.getColor(R.color.secondary))
             }
+            "Travel" ->{
+                holder.icon.setImageResource(R.drawable.ic_baseline_add_location_24)
+                holder.icon.imageTintList =
+                    ColorStateList.valueOf(context.getColor(R.color.secondary))
+            }
             else -> {
                 holder.icon.setImageResource(R.drawable.bx_error_alt)
                 holder.icon.imageTintList =
@@ -77,6 +83,13 @@ class AdapterNotifications(val data: ArrayList<NotificationItem>, val context: C
                 }
                 "Subscription" -> {
                     context.startActivity(Intent(context, ActiveSubscriptions::class.java).apply {
+                        flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK
+                    })
+                    setReadMessage(data[position].id!!)
+                }
+                "Travel" -> {
+                    context.startActivity(Intent(context, CustomerMap::class.java).apply {
                         flags =
                             Intent.FLAG_ACTIVITY_NEW_TASK
                     })

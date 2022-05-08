@@ -1,5 +1,6 @@
 package com.example.workroute.activitys;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -81,12 +82,12 @@ public class GeneralSettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
                 if (appBox.isChecked()) {
-                    //TODO: CODIGO QUE SE QUIERA METER
-                    Toast.makeText(getApplicationContext(),"app siii",Toast.LENGTH_SHORT).show();
+                    getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit()
+                            .putBoolean("notificationsApp",true).commit();
 
                 } else {
-                    //TODO: CODIGO QUE SE QUIERA METER
-                    Toast.makeText(getApplicationContext(),"app nooo",Toast.LENGTH_SHORT).show();
+                    getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit()
+                            .putBoolean("notificationsApp",false).commit();
 
                 }
 

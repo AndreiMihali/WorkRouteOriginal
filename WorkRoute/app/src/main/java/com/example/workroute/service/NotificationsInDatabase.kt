@@ -34,7 +34,7 @@ class NotificationsInDatabase(var message:String,var read:String,var type:String
         val listener=object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 for(snap in snapshot.children){
-                    if(snap.child("message").value.toString()==notificationItem.message){
+                    if(snap.child("message").value.toString()==notificationItem.message && snap.child("read").value.toString()=="false"){
                         exist=true
                         break
                     }

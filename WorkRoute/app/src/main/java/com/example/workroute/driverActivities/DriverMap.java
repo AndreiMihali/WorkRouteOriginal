@@ -55,6 +55,8 @@ import com.example.workroute.kotlin.activities.MessagesActivity;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.example.workroute.notifications.Notifications;
 import com.example.workroute.profile.Profile;
+import com.example.workroute.service.NotificationService;
+import com.example.workroute.service.NotificationsInDatabase;
 import com.example.workroute.service.ServicioOnline;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -81,6 +83,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -92,6 +95,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -366,6 +371,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                                     if(customerPicked){
                                         txt_travelInformation.setText("You will arrive in " + route.get(i).getDurationText());
                                         txt_distance.setText("You are " + route.get(i).getDistanceText() + " away");
+                                        distance=route.get(i).getDistanceValue();
                                     }
                                 }
                                 markerFinal = mMap.addMarker(new MarkerOptions().position(destinationCustomerLatLng).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.flag))))
@@ -784,11 +790,46 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                                 buildGoogleApiClient();
                             }else if(response==1) {
                                 displayInformationCustomer(BottomSheetBehavior.STATE_EXPANDED);
+                                if(distance<=50){
+                                    if (!customerPicked) {
+                                        getSenderName(firebaseAuth.getCurrentUser().getUid(), customerId);
+                                    }
+                                }
                             }
                         }
                     }
                 }
         );
+    }
+
+    private void getSenderName(String sender, String receiverId) {
+        FirebaseFirestore.getInstance().collection("Usuarios").document(sender).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String name = documentSnapshot.get("nombre").toString();
+                getToken(name, receiverId,  name + " was arrived at your location", "The driver wsa arrived");
+            }
+        });
+    }
+
+    private void getToken(String sender, String receiver, String message, String title) {
+        FirebaseDatabase.getInstance().getReference().child("Token").child(receiver).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String tokenUser = snapshot.getValue().toString();
+                sendNotification(tokenUser, message, title, sender);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void sendNotification(String token, String message, String title, String receiver) {
+        new NotificationService(getApplicationContext(), token, message, title, receiver, "CustomerMap").start();
+        new NotificationsInDatabase("Your driver arrived at your location", "false", "Travel", customerId).start();
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -987,8 +1028,8 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                     if(!customerPicked){
                         txt_travelInformation.setText("You will arrive in " + route.get(i).getDurationText());
                         txt_distance.setText("You are " + route.get(i).getDistanceText() + " away");
+                        distance=route.get(i).getDistanceValue();
                     }
-                    distance=route.get(i).getDistanceValue();
                 }
             }
         });

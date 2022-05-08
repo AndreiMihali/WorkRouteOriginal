@@ -300,7 +300,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                                         public void onToastHidden() {
                                             super.onToastHidden();
                                             btn_cancel.setText("Pending");
-                                            getSenderName(firebaseAuth.getUid(), driverId);
+                                            getSenderName(firebaseAuth.getCurrentUser().getUid(), driverId);
                                         }
                                     });
                                 }
