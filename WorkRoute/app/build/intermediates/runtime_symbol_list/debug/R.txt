@@ -2916,6 +2916,7 @@ int drawable back_driver_information 0x7f08005a
 int drawable back_extended_button 0x7f08005b
 int drawable back_extended_button_green 0x7f08005c
 int drawable back_img_icons_search 0x7f08005d
+int drawable back_search 0x7f080136
 int drawable back_second_sheet 0x7f08005e
 int drawable background_login 0x7f08005f
 int drawable background_messages 0x7f080060
@@ -3315,6 +3316,7 @@ int id card_password 0x7f0a00b0
 int id card_password_confirm 0x7f0a00b1
 int id card_photo 0x7f0a00b2
 int id card_root 0x7f0a00b3
+int id card_search 0x7f0a0319
 int id card_spiiner 0x7f0a00b4
 int id card_status 0x7f0a00b5
 int id card_tarjeta 0x7f0a00b6
@@ -3412,7 +3414,6 @@ int id ed_message 0x7f0a0111
 int id ed_pass 0x7f0a0112
 int id ed_pass_register 0x7f0a0113
 int id ed_plate 0x7f0a0114
-int id ed_postalCodes 0x7f0a0318
 int id ed_username_register 0x7f0a0115
 int id editProfile 0x7f0a0116
 int id editProfilePhoto 0x7f0a0117
@@ -3542,6 +3543,7 @@ int id linear 0x7f0a0192
 int id linears_datos 0x7f0a0193
 int id listMode 0x7f0a0194
 int id list_item 0x7f0a0195
+int id list_view_postalCodes 0x7f0a031a
 int id ln_accept_or_decline 0x7f0a0196
 int id ln_escribir 0x7f0a0197
 int id ln_information 0x7f0a0198
@@ -3724,6 +3726,7 @@ int id search_edit_frame 0x7f0a0248
 int id search_go_btn 0x7f0a0249
 int id search_mag_icon 0x7f0a024a
 int id search_plate 0x7f0a024b
+int id search_postalCodes 0x7f0a031d
 int id search_src_text 0x7f0a024c
 int id search_voice_btn 0x7f0a024d
 int id second_sheet 0x7f0a024e

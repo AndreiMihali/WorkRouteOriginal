@@ -21,41 +21,40 @@
 
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_search"
             android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
             android:theme="@style/Theme.MaterialComponents.DayNight"
             app:cardCornerRadius="100dp"
             app:cardElevation="0dp"
-            android:layout_marginTop="50dp"
-            app:contentPadding="10dp"
             app:strokeColor="@color/secondary"
-            app:strokeWidth="1dp"
-            android:layout_centerHorizontal="true"
-            android:layout_height="50dp">
+            app:strokeWidth="1dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/ed_postalCodes"
-                    android:drawableStart="@drawable/ic_baseline_search_24"
-                    android:hint="Search for postal codes"
-                    android:textColorHint="@color/black"
-                    android:textColor="@color/secondary"
-                    android:drawableTint="@color/secondary"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:background="@android:color/transparent"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_postalCodes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:inputType="number"
+                android:outlineProvider="none"
+                app:iconifiedByDefault="false"
+                app:queryHint="Search for a postal code" />
 
         </com.google.android.material.card.MaterialCardView>
 
+        <ListView
+            android:id="@+id/list_view_postalCodes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_search"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/back_search"
+            android:layout_marginHorizontal="80dp"
+            android:divider="@color/secondary"
+            android:dividerHeight="2dp" />
 
         <com.andremion.counterfab.CounterFab
             android:id="@+id/buttonMenu"
@@ -63,12 +62,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="50dp"
-            app:badgePosition="RightTop"
-            app:badgeBackgroundColor="@color/quantum_googred"
-            app:badgeTextColor="@color/white"
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/secondary"
             android:src="@drawable/ic_baseline_menu_24"
+            app:badgeBackgroundColor="@color/quantum_googred"
+            app:badgePosition="RightTop"
+            app:badgeTextColor="@color/white"
             app:tint="@color/white"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -79,13 +78,13 @@
             android:layout_below="@id/buttonMenu"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
-            app:badgePosition="RightTop"
-            app:badgeBackgroundColor="@color/quantum_googred"
-            app:badgeTextColor="@color/white"
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/secondary"
             android:src="@drawable/ic_outline_chat_24"
             android:visibility="invisible"
+            app:badgeBackgroundColor="@color/quantum_googred"
+            app:badgePosition="RightTop"
+            app:badgeTextColor="@color/white"
             app:tint="@color/white"
             tools:visibility="visible" />
 
@@ -95,14 +94,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/buttonMessages"
             android:layout_marginStart="10dp"
-            app:badgePosition="RightTop"
-            app:badgeBackgroundColor="@color/quantum_googred"
-            app:badgeTextColor="@color/white"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/secondary"
             android:src="@drawable/ic_baseline_person_outline_24"
             android:visibility="invisible"
+            app:badgeBackgroundColor="@color/quantum_googred"
+            app:badgePosition="RightTop"
+            app:badgeTextColor="@color/white"
             app:tint="@color/white"
             tools:visibility="visible" />
 

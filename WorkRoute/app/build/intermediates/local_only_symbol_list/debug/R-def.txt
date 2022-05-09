@@ -35,6 +35,7 @@ drawable back_driver_information
 drawable back_extended_button
 drawable back_extended_button_green
 drawable back_img_icons_search
+drawable back_search
 drawable back_second_sheet
 drawable background_login
 drawable background_messages
@@ -209,6 +210,7 @@ id card_number
 id card_password
 id card_password_confirm
 id card_photo
+id card_search
 id card_spiiner
 id card_status
 id card_tarjeta
@@ -230,7 +232,6 @@ id ed_message
 id ed_pass
 id ed_pass_register
 id ed_plate
-id ed_postalCodes
 id ed_username_register
 id editProfile
 id editProfilePhoto
@@ -277,6 +278,7 @@ id layout_email_recover_password
 id layout_name
 id layout_pass
 id linears_datos
+id list_view_postalCodes
 id ln_accept_or_decline
 id ln_escribir
 id ln_information
@@ -310,6 +312,7 @@ id rela
 id relativeChangingColorOnClick
 id relativeLayout
 id rl
+id search_postalCodes
 id second_sheet
 id settings
 id sheet

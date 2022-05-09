@@ -27,8 +27,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +42,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SearchView;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.app.ActivityCompat;
@@ -113,7 +117,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class CustomerMap extends FragmentActivity implements RoutingListener, LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class CustomerMap extends FragmentActivity implements SearchView.OnQueryTextListener,RoutingListener, LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private CounterFab button_menu, button_chats, button_profile, button_notifications;
     private FloatingActionButton button_ubi;
@@ -156,6 +160,10 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     private Marker myWorkMarker;
     private LocationCallback locationCallback;
     private Marker mDriverMarker;
+    private SearchView searchView;
+    private ListView listPostalCodes;
+    private ArrayList<String> data=new ArrayList<>();
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,6 +179,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         }
         UserType.type = "customer";
         init();
+        getPostalCodes();
         getNotifications();
         startService(new Intent(this, ServicioOnline.class));
     }
@@ -210,11 +219,44 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         polylines = new ArrayList<>();
         polylines2 = new ArrayList<>();
         driverId = "";
+        searchView=findViewById(R.id.search_postalCodes);
+        listPostalCodes=findViewById(R.id.list_view_postalCodes);
         setBiometricBuilder();
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         iniciarMapa();
         initListeners();
     }
+
+    private void getPostalCodes(){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap:snapshot.getChildren()){
+                    data.add(snap.child("postalCodeWork").getValue().toString());
+                }
+                setAdapterInList();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void setAdapterInList() {
+        adapter=new ArrayAdapter<String>(this,R.layout.list_item,data);
+        listPostalCodes.setAdapter(adapter);
+        listPostalCodes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                searchView.setQuery((String)adapter.getItem(position),false);
+            }
+        });
+        searchView.setOnQueryTextListener(this);
+    }
+
 
     private void getNotifications() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(firebaseAuth.getCurrentUser().getUid()).child("Notifications");
@@ -1178,6 +1220,23 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
         return bitmap;
     }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        if(data.contains(query)){
+            adapter.getFilter().filter(query);
+        }else{
+            Toast.makeText(getApplicationContext(), "No Match found",Toast.LENGTH_LONG).show();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        adapter.getFilter().filter(newText);
+        return false;
+    }
+
 
     private interface SimpleCallback<T> {
         void callback(T data, Object... secondary);

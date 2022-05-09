@@ -2917,6 +2917,7 @@ drawable back_driver_information
 drawable back_extended_button
 drawable back_extended_button_green
 drawable back_img_icons_search
+drawable back_search
 drawable back_second_sheet
 drawable background_login
 drawable background_messages
@@ -3316,6 +3317,7 @@ id card_password
 id card_password_confirm
 id card_photo
 id card_root
+id card_search
 id card_spiiner
 id card_status
 id card_tarjeta
@@ -3413,7 +3415,6 @@ id ed_message
 id ed_pass
 id ed_pass_register
 id ed_plate
-id ed_postalCodes
 id ed_username_register
 id editProfile
 id editProfilePhoto
@@ -3543,6 +3544,7 @@ id linear
 id linears_datos
 id listMode
 id list_item
+id list_view_postalCodes
 id ln_accept_or_decline
 id ln_escribir
 id ln_information
@@ -3725,6 +3727,7 @@ id search_edit_frame
 id search_go_btn
 id search_mag_icon
 id search_plate
+id search_postalCodes
 id search_src_text
 id search_voice_btn
 id second_sheet

@@ -25,8 +25,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +39,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -105,7 +109,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class DriverMap extends FragmentActivity implements com.google.android.gms.location.LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, RoutingListener {
+public class DriverMap extends FragmentActivity implements SearchView.OnQueryTextListener,com.google.android.gms.location.LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, RoutingListener {
 
     private CounterFab button_menu, button_chats, button_profile, button_notifications;
     private FloatingActionButton button_ubi;
@@ -148,6 +152,10 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     private int response = -1;
     private boolean isGoingToWork=false;
     private Marker mCustomerMarker;
+    private SearchView searchView;
+    private ListView listPostalCodes;
+    private ArrayList<String> data=new ArrayList<>();
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,6 +171,7 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         }
         UserType.type = "driver";
         init();
+        getPostalCodes();
         getNotifications();
         startService(new Intent(this, ServicioOnline.class));
     }
@@ -178,6 +187,37 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         }
 
     }
+
+    private void getPostalCodes(){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap:snapshot.getChildren()){
+                    data.add(snap.child("postalCodeWork").getValue().toString());
+                }
+                setAdapterInList();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void setAdapterInList() {
+        adapter=new ArrayAdapter<String>(this,R.layout.list_item,data);
+        listPostalCodes.setAdapter(adapter);
+        listPostalCodes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                searchView.setQuery((String)adapter.getItem(position),false);
+            }
+        });
+        searchView.setOnQueryTextListener(this);
+    }
+
 
     private void getNavigationToCustomer(LatLng destination) {
         Uri gmmIntentUri = Uri.parse("google.navigation:q=" + destination.latitude + "," + destination.longitude);
@@ -565,6 +605,8 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         polylines = new ArrayList<>();
         polylines2 = new ArrayList<>();
         btnRideStatus = findViewById(R.id.btn_rideStatus);
+        searchView=findViewById(R.id.search_postalCodes);
+        listPostalCodes=findViewById(R.id.list_view_postalCodes);
         iniciarMapa();
         initListeners();
     }
@@ -582,6 +624,17 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
 
+            }
+        });
+
+        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    listPostalCodes.setVisibility(View.VISIBLE);
+                }else{
+                    listPostalCodes.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -1067,6 +1120,22 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
 
             LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        if(data.contains(query)){
+            adapter.getFilter().filter(query);
+        }else{
+            Toast.makeText(getApplicationContext(), "No Match found",Toast.LENGTH_LONG).show();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        adapter.getFilter().filter(newText);
+        return false;
     }
 
     private interface SimpleCallback<T> {
