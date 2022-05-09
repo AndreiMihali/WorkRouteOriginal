@@ -155,6 +155,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     private Marker myHomeMarker;
     private Marker myWorkMarker;
     private LocationCallback locationCallback;
+    private Marker mDriverMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,19 +216,19 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         initListeners();
     }
 
-    private void getNotifications(){
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Usuarios").child(firebaseAuth.getCurrentUser().getUid()).child("Notifications");
+    private void getNotifications() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(firebaseAuth.getCurrentUser().getUid()).child("Notifications");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 button_menu.setCount(0);
                 button_notifications.setCount(0);
                 button_chats.setCount(0);
-                if(snapshot.exists()){
-                    for(DataSnapshot snap:snapshot.getChildren()){
-                        if(snap.child("read").getValue().toString().equals("false")){
+                if (snapshot.exists()) {
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+                        if (snap.child("read").getValue().toString().equals("false")) {
                             button_menu.increase();
-                            if(snap.child("type").getValue().toString().equals("Message")){
+                            if (snap.child("type").getValue().toString().equals("Message")) {
                                 button_chats.increase();
                             }
                             button_notifications.increase();
@@ -372,17 +373,14 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                     isPendingSubscribed(key, new SimpleCallback<String>() {
                         @Override
                         public void callback(String data, Object... secondary) {
-                            Marker mDriverMarker = null;
                             if (mDriverMarker != null) {
                                 mDriverMarker.remove();
                             }
+
                             if (data.equals("pending") || data.equals("accepted")) {
                                 mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
                                         .anchor(0.5f, 0.5f));
                             } else {
-                                if (mDriverMarker != null) {
-                                    mDriverMarker.remove();
-                                }
                                 mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.user_marker))))
                                         .anchor(0.5f, 0.5f));
                             }
