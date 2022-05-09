@@ -3290,7 +3290,6 @@ int id button_login 0x7f0a0097
 int id button_message 0x7f0a0098
 int id button_message_cost 0x7f0a0099
 int id button_notifications 0x7f0a009a
-int id button_send 0x7f0a0317
 int id button_signin 0x7f0a009b
 int id button_signup 0x7f0a009c
 int id cache_measures 0x7f0a009d

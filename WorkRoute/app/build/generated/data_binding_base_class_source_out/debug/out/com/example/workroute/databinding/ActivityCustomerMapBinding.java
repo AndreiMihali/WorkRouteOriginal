@@ -4,6 +4,7 @@ package com.example.workroute.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -55,6 +56,9 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
   public final MaterialDivider divider;
 
   @NonNull
+  public final EditText edPostalCodes;
+
+  @NonNull
   public final RelativeLayout informationUserCost;
 
   @NonNull
@@ -101,10 +105,10 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
       @NonNull CounterFab buttonMenu, @NonNull ImageButton buttonMessageCost,
       @NonNull CounterFab buttonMessages, @NonNull CounterFab buttonNotifications,
       @NonNull CounterFab buttonProfile, @NonNull FloatingActionButton buttonUbi,
-      @NonNull MaterialDivider divider, @NonNull RelativeLayout informationUserCost,
-      @NonNull ImageButton locationIcon, @NonNull ImageButton locationIcon1,
-      @NonNull ImageView profilePhotoSheetCost, @NonNull CoordinatorLayout rela,
-      @NonNull FrameLayout secondSheet, @NonNull FrameLayout sheet,
+      @NonNull MaterialDivider divider, @NonNull EditText edPostalCodes,
+      @NonNull RelativeLayout informationUserCost, @NonNull ImageButton locationIcon,
+      @NonNull ImageButton locationIcon1, @NonNull ImageView profilePhotoSheetCost,
+      @NonNull CoordinatorLayout rela, @NonNull FrameLayout secondSheet, @NonNull FrameLayout sheet,
       @NonNull RelativeLayout toolbarBottomSheet, @NonNull TextView txtDestinationCost,
       @NonNull TextView txtDistanceCost, @NonNull TextView txtNameCost,
       @NonNull TextView txtStartLocationCost, @NonNull TextView txtTotalPayTravelCost,
@@ -119,6 +123,7 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
     this.buttonProfile = buttonProfile;
     this.buttonUbi = buttonUbi;
     this.divider = divider;
+    this.edPostalCodes = edPostalCodes;
     this.informationUserCost = informationUserCost;
     this.locationIcon = locationIcon;
     this.locationIcon1 = locationIcon1;
@@ -216,6 +221,12 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.ed_postalCodes;
+      EditText edPostalCodes = ViewBindings.findChildViewById(rootView, id);
+      if (edPostalCodes == null) {
+        break missingId;
+      }
+
       id = R.id.information_user_cost;
       RelativeLayout informationUserCost = ViewBindings.findChildViewById(rootView, id);
       if (informationUserCost == null) {
@@ -298,7 +309,7 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
 
       return new ActivityCustomerMapBinding((CoordinatorLayout) rootView, botonDrag, buttonCancel,
           buttonMenu, buttonMessageCost, buttonMessages, buttonNotifications, buttonProfile,
-          buttonUbi, divider, informationUserCost, locationIcon, locationIcon1,
+          buttonUbi, divider, edPostalCodes, informationUserCost, locationIcon, locationIcon1,
           profilePhotoSheetCost, rela, secondSheet, sheet, toolbarBottomSheet, txtDestinationCost,
           txtDistanceCost, txtNameCost, txtStartLocationCost, txtTotalPayTravelCost,
           txtTravelInformationCost);

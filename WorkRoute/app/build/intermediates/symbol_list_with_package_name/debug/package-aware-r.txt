@@ -3291,7 +3291,6 @@ id button_login
 id button_message
 id button_message_cost
 id button_notifications
-id button_send
 id button_signin
 id button_signup
 id cache_measures

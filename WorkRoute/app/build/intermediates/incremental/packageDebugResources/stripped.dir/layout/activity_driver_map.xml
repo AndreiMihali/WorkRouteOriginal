@@ -52,14 +52,6 @@
                     android:background="@android:color/transparent"
                     android:layout_height="wrap_content"/>
 
-                <ImageButton
-                    android:id="@+id/button_send"
-                    android:layout_width="wrap_content"
-                    android:src="@drawable/ic_baseline_send_24"
-                    android:background="@android:color/transparent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    app:tint="@color/secondary" />
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
