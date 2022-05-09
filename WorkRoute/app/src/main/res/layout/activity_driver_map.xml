@@ -26,33 +26,20 @@
             app:cardCornerRadius="100dp"
             app:cardElevation="0dp"
             android:layout_marginTop="50dp"
-            app:contentPadding="10dp"
             app:strokeColor="@color/secondary"
             app:strokeWidth="1dp"
             android:layout_centerHorizontal="true"
             android:layout_height="50dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/ed_postalCodes"
-                    android:drawableStart="@drawable/ic_baseline_search_24"
-                    android:hint="Search for postal codes"
-                    android:textColorHint="@color/black"
-                    android:textColor="@color/secondary"
-                    android:drawableTint="@color/secondary"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:background="@android:color/transparent"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_postalCodes"
+                android:inputType="number"
+                android:layout_width="match_parent"
+                app:iconifiedByDefault="false"
+                android:outlineProvider="none"
+                android:background="@android:color/transparent"
+                app:queryHint="Search for a postal code"
+                android:layout_height="wrap_content"/>
 
         </com.google.android.material.card.MaterialCardView>
 

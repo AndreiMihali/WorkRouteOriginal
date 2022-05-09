@@ -4,7 +4,6 @@ package com.example.workroute.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -12,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -56,7 +56,7 @@ public final class ActivityDriverMapBinding implements ViewBinding {
   public final MaterialDivider divider;
 
   @NonNull
-  public final EditText edPostalCodes;
+  public final SearchView edPostalCodes;
 
   @NonNull
   public final RelativeLayout informationUser;
@@ -108,7 +108,7 @@ public final class ActivityDriverMapBinding implements ViewBinding {
       @NonNull CounterFab buttonMenu, @NonNull ImageButton buttonMessage,
       @NonNull CounterFab buttonMessages, @NonNull CounterFab buttonNotifications,
       @NonNull CounterFab buttonProfile, @NonNull FloatingActionButton buttonUbi,
-      @NonNull MaterialDivider divider, @NonNull EditText edPostalCodes,
+      @NonNull MaterialDivider divider, @NonNull SearchView edPostalCodes,
       @NonNull RelativeLayout informationUser, @NonNull ImageButton locationIcon,
       @NonNull ImageButton locationIcon1, @NonNull ImageView profilePhotoSheet,
       @NonNull CoordinatorLayout rela, @NonNull FrameLayout secondSheet, @NonNull FrameLayout sheet,
@@ -226,7 +226,7 @@ public final class ActivityDriverMapBinding implements ViewBinding {
       }
 
       id = R.id.ed_postalCodes;
-      EditText edPostalCodes = ViewBindings.findChildViewById(rootView, id);
+      SearchView edPostalCodes = ViewBindings.findChildViewById(rootView, id);
       if (edPostalCodes == null) {
         break missingId;
       }
