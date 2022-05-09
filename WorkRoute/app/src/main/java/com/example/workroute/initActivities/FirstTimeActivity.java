@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -189,6 +191,7 @@ public class FirstTimeActivity extends AppCompatActivity {
             actualizarDatos(1, "vecesConectadas");
             actualizarDatos(calcularEdad(fechaNac), "edad");
             actualizarDatos(fechaNac, "fecha_naci");
+            actualizarDatos(getGeocoderAddress(workAddress.getText().toString().trim()),"postalCodeWork");
             getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().putInt("faseConexion", 2).commit();
             startActivity(new Intent(FirstTimeActivity.this, MainActivity.class));
             this.finish();
@@ -314,6 +317,21 @@ public class FirstTimeActivity extends AppCompatActivity {
                 .build(this);
         startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
     }
+
+    private String getGeocoderAddress(String name) {
+        Geocoder geocoder = new Geocoder(FirstTimeActivity.this, Locale.getDefault());
+        String address = "";
+        try {
+            List<Address> listAddress = geocoder.getFromLocationName(name,1);
+            if (listAddress.size() > 0) {
+                address = listAddress.get(0).getPostalCode();
+            }
+        } catch (IOException e) {
+            Log.e("Error", e.toString());
+        }
+        return address;
+    }
+
 
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

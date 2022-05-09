@@ -12,12 +12,13 @@ public class User {
     private boolean conductor;
     private int vecesConectadas;
     private String workAddress;
+    private String postalCodeWork;
 
     public User() {
     }
 
     public User(String uid, String nombre, int edad, String fecha_naci, String localidad, boolean activo,
-                boolean online, String fotoPerfil, boolean conductor, int vecesConectadas, String workAddress) {
+                boolean online, String fotoPerfil, boolean conductor, int vecesConectadas, String workAddress, String postalCodeWork) {
         this.uid = uid;
         this.nombre = nombre;
         this.edad = edad;
@@ -29,8 +30,16 @@ public class User {
         this.conductor = conductor;
         this.vecesConectadas = vecesConectadas;
         this.workAddress = workAddress;
+        this.postalCodeWork = postalCodeWork;
     }
 
+    public String getPostalCodeWork() {
+        return postalCodeWork;
+    }
+
+    public void setPostalCodeWork(String postalCodeWork) {
+        this.postalCodeWork = postalCodeWork;
+    }
 
     public String getWorkAddress() {
         return workAddress;

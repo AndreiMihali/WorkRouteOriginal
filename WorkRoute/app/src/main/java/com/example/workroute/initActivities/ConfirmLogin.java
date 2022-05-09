@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.workroute.R;
 import com.example.workroute.activitys.MainActivity;
+import com.example.workroute.driverActivities.DriverMap;
 import com.example.workroute.model.User;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -45,6 +48,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class ConfirmLogin extends AppCompatActivity {
 
@@ -296,6 +303,7 @@ public class ConfirmLogin extends AppCompatActivity {
                 "",
                 false,
                 0,
+                "",
                 ""
         );
 
@@ -348,6 +356,7 @@ public class ConfirmLogin extends AppCompatActivity {
                 "",
                 false,
                 0,
+                "",
                 ""
         );
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -375,6 +384,7 @@ public class ConfirmLogin extends AppCompatActivity {
             }
         });
     }
+
 
     private void isFirstTime(String name) {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
