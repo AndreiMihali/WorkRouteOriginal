@@ -40,7 +40,7 @@
                 android:inputType="number"
                 android:outlineProvider="none"
                 app:iconifiedByDefault="false"
-                app:queryHint="Search for a postal code" />
+                app:queryHint="Search by a postal code" />
 
         </com.google.android.material.card.MaterialCardView>
 
