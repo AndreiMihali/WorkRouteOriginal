@@ -50,11 +50,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/card_search"
             android:layout_marginHorizontal="80dp"
-            android:visibility="gone"
             android:layout_marginTop="10dp"
             android:background="@drawable/back_search"
-            android:divider="@color/secondary"
-            android:dividerHeight="2dp" />
+            android:dividerHeight="2dp"
+            android:padding="10dp"
+            android:scrollbars="none"
+            android:visibility="gone"
+            tools:listitem="@tools:sample/full_names"
+            tools:visibility="visible" />
 
 
         <com.andremion.counterfab.CounterFab

@@ -48,12 +48,15 @@
             android:id="@+id/list_view_postalCodes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:layout_below="@id/card_search"
             android:visibility="gone"
             android:layout_marginTop="10dp"
             android:background="@drawable/back_search"
+            android:scrollbars="none"
+            tools:visibility="visible"
+            tools:listitem="@tools:sample/full_names"
             android:layout_marginHorizontal="80dp"
-            android:divider="@color/secondary"
             android:dividerHeight="2dp" />
 
         <com.andremion.counterfab.CounterFab

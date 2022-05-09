@@ -24,6 +24,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -233,9 +234,15 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snap:snapshot.getChildren()){
-                    data.add(snap.child("postalCodeWork").getValue().toString());
+                    if(snap.child("postalCodeWork").exists()){
+                        if(!data.contains(snap.child("postalCodeWork").getValue().toString())){
+                            data.add(snap.child("postalCodeWork").getValue().toString());
+                        }
+                    }
                 }
-                setAdapterInList();
+                if(!data.isEmpty()){
+                    setAdapterInList();
+                }
             }
 
             @Override
@@ -259,7 +266,7 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
 
 
     private void getNotifications() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(firebaseAuth.getCurrentUser().getUid()).child("Notifications");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Notifications");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -714,6 +721,17 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
                 animateMenu();
                 Intent i = new Intent(CustomerMap.this, Notifications.class);
                 startActivity(i);
+            }
+        });
+
+        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    listPostalCodes.setVisibility(View.VISIBLE);
+                }else{
+                    listPostalCodes.setVisibility(View.GONE);
+                }
             }
         });
 

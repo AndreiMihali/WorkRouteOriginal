@@ -7,10 +7,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -41,6 +44,7 @@ import com.bumptech.glide.Glide;
 import com.example.workroute.R;
 import com.example.workroute.companion.Companion;
 import com.example.workroute.companion.UserType;
+import com.example.workroute.initActivities.FirstTimeActivity;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -68,6 +72,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class Personal_information extends AppCompatActivity {
 
@@ -278,9 +283,13 @@ public class Personal_information extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (sw) {
-                    updateFields();
-                    relativeChangeColors.setBackgroundColor(Color.parseColor("#DC1C1C"));
-                    img_lockChange.setImageResource(R.drawable.ic_baseline_lock_24);
+                    if (getGeocoderAddress(txt_work.getText().toString())==null) {
+                        Snackbar.make(findViewById(R.id.rel_layout_general), "You must introduce a valid work address", Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        updateFields();
+                        relativeChangeColors.setBackgroundColor(Color.parseColor("#DC1C1C"));
+                        img_lockChange.setImageResource(R.drawable.ic_baseline_lock_24);
+                    }
                 }
             }
         });
@@ -354,6 +363,7 @@ public class Personal_information extends AppCompatActivity {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("workAddress", txt_work.getText().toString());
         hashMap.put("localidad", txt_home.getText().toString());
+        hashMap.put("postalCodeWork",getGeocoderAddress(txt_work.getText().toString().trim()));
         new Handler().post(new Runnable() {
             @Override
             public void run() {
@@ -365,6 +375,7 @@ public class Personal_information extends AppCompatActivity {
                             public void onSuccess(Void unused) {
                                 Companion.user.setWorkAddress(txt_work.getText().toString());
                                 Companion.user.setLocalidad(txt_home.getText().toString());
+                                Companion.user.setPostalCodeWork(getGeocoderAddress(txt_work.getText().toString().trim()));
                                 progressDialog.dismiss();
                                 Snackbar.make(findViewById(R.id.rel_layout_general), "The changes was saved succesfully", Snackbar.LENGTH_LONG).show();
                             }
@@ -375,6 +386,21 @@ public class Personal_information extends AppCompatActivity {
             }
         });
     }
+
+    private String getGeocoderAddress(String name) {
+        Geocoder geocoder = new Geocoder(Personal_information.this, Locale.getDefault());
+        String address = "";
+        try {
+            List<Address> listAddress = geocoder.getFromLocationName(name,1);
+            if (listAddress.size() > 0) {
+                address = listAddress.get(0).getPostalCode();
+            }
+        } catch (IOException e) {
+            Log.e("Error", e.toString());
+        }
+        return address;
+    }
+
 
     private void openGallery() {
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);

@@ -22,6 +22,7 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -194,9 +195,15 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snap:snapshot.getChildren()){
-                    data.add(snap.child("postalCodeWork").getValue().toString());
+                    if(snap.child("postalCodeWork").exists()){
+                        if(!data.contains(snap.child("postalCodeWork").getValue().toString())){
+                            data.add(snap.child("postalCodeWork").getValue().toString());
+                        }
+                    }
                 }
-                setAdapterInList();
+                if(!data.isEmpty()){
+                    setAdapterInList();
+                }
             }
 
             @Override
@@ -228,7 +235,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
     }
 
     private void getNotifications() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(firebaseAuth.getCurrentUser().getUid()).child("Notifications");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Notifications");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

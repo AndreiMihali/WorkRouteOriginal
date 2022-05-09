@@ -33,6 +33,7 @@ import com.example.workroute.R;
 import com.example.workroute.activitys.MainActivity;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
@@ -181,8 +182,13 @@ public class FirstTimeActivity extends AppCompatActivity {
     private void checkData(View v) {
         if (birth.getText().toString().trim().equals("Choose your day of birth")
                 || locality.getText().toString().trim().equals("Enter your home address")
-                || workAddress.getText().toString().trim().equals("Enter your work address")) {
-            Snackbar.make(v, "You need to fill all fields", Snackbar.LENGTH_SHORT).show();
+                || workAddress.getText().toString().trim().equals("Enter your work address")
+                || getGeocoderAddress(workAddress.getText().toString())==null) {
+            if(getGeocoderAddress(workAddress.getText().toString())==null){
+                Snackbar.make(v, "You must introduce a valid work address", Snackbar.LENGTH_SHORT).show();
+            }else{
+                Snackbar.make(v, "You need to fill all fields", Snackbar.LENGTH_SHORT).show();
+            }
         } else {
             progressDialog.setMessage("Please wait...");
             progressDialog.show();
@@ -191,7 +197,7 @@ public class FirstTimeActivity extends AppCompatActivity {
             actualizarDatos(1, "vecesConectadas");
             actualizarDatos(calcularEdad(fechaNac), "edad");
             actualizarDatos(fechaNac, "fecha_naci");
-            actualizarDatos(getGeocoderAddress(workAddress.getText().toString().trim()),"postalCodeWork");
+            actualizarDatos(getGeocoderAddress(workAddress.getText().toString()),"postalCodeWork");
             getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().putInt("faseConexion", 2).commit();
             startActivity(new Intent(FirstTimeActivity.this, MainActivity.class));
             this.finish();
@@ -388,6 +394,11 @@ public class FirstTimeActivity extends AppCompatActivity {
                     public void onSuccess(Void unused) {
                         Log.d("Gucci", "Todo gucci");
                         progressDialog.dismiss();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println(e);
                     }
                 });
 
