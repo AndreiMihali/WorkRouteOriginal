@@ -143,11 +143,10 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
     private Circle circleMap;
     private LocationManager locationManager;
     private ActivityResultLauncher<Intent> activityResultLauncher;
-    private boolean customerPicked = false;
     private Marker myWork;
     private Marker myHome;
     private int response = -1;
-    private int distance = 0;
+    private boolean isGoingToWork=false;
     private Marker mCustomerMarker;
 
     @Override
@@ -369,10 +368,9 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                                     polyOptions.addAll(route.get(i).getPoints());
                                     Polyline polyline = mMap.addPolyline(polyOptions);
                                     polylines2.add(polyline);
-                                    if (customerPicked) {
+                                    if(isGoingToWork){
                                         txt_travelInformation.setText("You will arrive in " + route.get(i).getDurationText());
                                         txt_distance.setText("You are " + route.get(i).getDistanceText() + " away");
-                                        distance = route.get(i).getDistanceValue();
                                     }
                                 }
                                 markerFinal = mMap.addMarker(new MarkerOptions().position(destinationCustomerLatLng).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.flag))))
@@ -456,24 +454,10 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                             } else if (data.equals("accepted")) {
                                 txt_statusMessage.setVisibility(View.GONE);
                                 btnRideStatus.setVisibility(View.VISIBLE);
-                                if (distance <= 100) {
-                                    if (btnRideStatus.getText().toString().equals("Go to customer")) {
-                                        btnRideStatus.setText("Go to work");
-                                        Snackbar.make(findViewById(R.id.rela), "You are near the customer", Snackbar.LENGTH_SHORT).show();
-                                        customerPicked = true;
-                                    } else {
-                                        btnRideStatus.setText("Go to customer");
-                                        Snackbar.make(findViewById(R.id.rela), "You are near the work place", Snackbar.LENGTH_SHORT).show();
-                                        customerPicked = false;
-                                    }
-                                } else {
-                                    if (btnRideStatus.getText().toString().equals("Go to customer")) {
-                                        btnRideStatus.setText("Go to work");
-                                        customerPicked = true;
-                                    } else {
-                                        btnRideStatus.setText("Go to customer");
-                                        customerPicked = false;
-                                    }
+                                if(isGoingToWork){
+                                    btnRideStatus.setText("Go to work");
+                                }else{
+                                    btnRideStatus.setText("Go to customer");
                                 }
                                 txt_total_pay_travel.setText("20$/month");
                             } else {
@@ -647,12 +631,12 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
         btnRideStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (customerPicked) {
+                if(isGoingToWork){
                     getNavigationToCustomer(destinationCustomerLatLng);
-                    getRouteToDestination(new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude()));
-                } else {
+                    getRouteToDestination(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()));
+                }else{
                     getNavigationToCustomer(customerLatLng);
-                    getRouteToDestination(customerLatLng);
+                    getRouteToMarker(customerLatLng,new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()));
                 }
                 displayInformationCustomer(BottomSheetBehavior.SAVE_HIDEABLE);
             }
@@ -790,17 +774,36 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                             if (response == 0) {
                                 buildGoogleApiClient();
                             } else if (response == 1) {
-                                displayInformationCustomer(BottomSheetBehavior.STATE_EXPANDED);
-                                if (distance <= 50) {
-                                    if (!customerPicked) {
-                                        getSenderName(firebaseAuth.getCurrentUser().getUid(), customerId);
-                                    }
-                                }
+                                isArrived();
                             }
                         }
                     }
                 }
         );
+    }
+
+    private void isArrived(){
+        Location destination=new Location("destination");
+        if(isGoingToWork){
+            destination.setLatitude(destinationCustomerLatLng.latitude);
+            destination.setLongitude(destinationCustomerLatLng.longitude);
+            if(myLastLocation.distanceTo(destination)<=100){
+                Snackbar.make(findViewById(R.id.rela),"You arrived to the work",Snackbar.LENGTH_SHORT).show();
+                isGoingToWork=false;
+            }else{
+                displayInformationCustomer(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        }else{
+            destination.setLatitude(customerLatLng.latitude);
+            destination.setLongitude(customerLatLng.longitude);
+            if(myLastLocation.distanceTo(destination)<=100){
+                Snackbar.make(findViewById(R.id.rela),"You arrived to the customer address",Snackbar.LENGTH_SHORT).show();
+                getSenderName(firebaseAuth.getCurrentUser().getUid(),customerId);
+                isGoingToWork=true;
+            }else{
+                displayInformationCustomer(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        }
     }
 
     private void getSenderName(String sender, String receiverId) {
@@ -1026,10 +1029,9 @@ public class DriverMap extends FragmentActivity implements com.google.android.gm
                     polyOptions.addAll(route.get(i).getPoints());
                     Polyline polyline = mMap.addPolyline(polyOptions);
                     polylines.add(polyline);
-                    if (!customerPicked) {
+                    if(!isGoingToWork){
                         txt_travelInformation.setText("You will arrive in " + route.get(i).getDurationText());
                         txt_distance.setText("You are " + route.get(i).getDistanceText() + " away");
-                        distance = route.get(i).getDistanceValue();
                     }
                 }
             }
