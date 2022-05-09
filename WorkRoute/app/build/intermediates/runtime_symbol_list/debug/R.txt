@@ -3290,6 +3290,7 @@ int id button_login 0x7f0a0097
 int id button_message 0x7f0a0098
 int id button_message_cost 0x7f0a0099
 int id button_notifications 0x7f0a009a
+int id button_send 0x7f0a0317
 int id button_signin 0x7f0a009b
 int id button_signup 0x7f0a009c
 int id cache_measures 0x7f0a009d
@@ -3412,6 +3413,7 @@ int id ed_message 0x7f0a0111
 int id ed_pass 0x7f0a0112
 int id ed_pass_register 0x7f0a0113
 int id ed_plate 0x7f0a0114
+int id ed_postalCodes 0x7f0a0318
 int id ed_username_register 0x7f0a0115
 int id editProfile 0x7f0a0116
 int id editProfilePhoto 0x7f0a0117

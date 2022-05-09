@@ -190,6 +190,7 @@ id button_login
 id button_message
 id button_message_cost
 id button_notifications
+id button_send
 id button_signin
 id button_signup
 id cardImageFrente
@@ -230,6 +231,7 @@ id ed_message
 id ed_pass
 id ed_pass_register
 id ed_plate
+id ed_postalCodes
 id ed_username_register
 id editProfile
 id editProfilePhoto

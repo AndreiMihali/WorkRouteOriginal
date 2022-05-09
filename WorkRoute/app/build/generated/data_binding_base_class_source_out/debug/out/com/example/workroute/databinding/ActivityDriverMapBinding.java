@@ -4,6 +4,7 @@ package com.example.workroute.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -49,10 +50,16 @@ public final class ActivityDriverMapBinding implements ViewBinding {
   public final CounterFab buttonProfile;
 
   @NonNull
+  public final ImageButton buttonSend;
+
+  @NonNull
   public final FloatingActionButton buttonUbi;
 
   @NonNull
   public final MaterialDivider divider;
+
+  @NonNull
+  public final EditText edPostalCodes;
 
   @NonNull
   public final RelativeLayout informationUser;
@@ -103,8 +110,9 @@ public final class ActivityDriverMapBinding implements ViewBinding {
       @NonNull ImageView botonDrag, @NonNull MaterialButton btnRideStatus,
       @NonNull CounterFab buttonMenu, @NonNull ImageButton buttonMessage,
       @NonNull CounterFab buttonMessages, @NonNull CounterFab buttonNotifications,
-      @NonNull CounterFab buttonProfile, @NonNull FloatingActionButton buttonUbi,
-      @NonNull MaterialDivider divider, @NonNull RelativeLayout informationUser,
+      @NonNull CounterFab buttonProfile, @NonNull ImageButton buttonSend,
+      @NonNull FloatingActionButton buttonUbi, @NonNull MaterialDivider divider,
+      @NonNull EditText edPostalCodes, @NonNull RelativeLayout informationUser,
       @NonNull ImageButton locationIcon, @NonNull ImageButton locationIcon1,
       @NonNull ImageView profilePhotoSheet, @NonNull CoordinatorLayout rela,
       @NonNull FrameLayout secondSheet, @NonNull FrameLayout sheet,
@@ -120,8 +128,10 @@ public final class ActivityDriverMapBinding implements ViewBinding {
     this.buttonMessages = buttonMessages;
     this.buttonNotifications = buttonNotifications;
     this.buttonProfile = buttonProfile;
+    this.buttonSend = buttonSend;
     this.buttonUbi = buttonUbi;
     this.divider = divider;
+    this.edPostalCodes = edPostalCodes;
     this.informationUser = informationUser;
     this.locationIcon = locationIcon;
     this.locationIcon1 = locationIcon1;
@@ -208,6 +218,12 @@ public final class ActivityDriverMapBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.button_send;
+      ImageButton buttonSend = ViewBindings.findChildViewById(rootView, id);
+      if (buttonSend == null) {
+        break missingId;
+      }
+
       id = R.id.buttonUbi;
       FloatingActionButton buttonUbi = ViewBindings.findChildViewById(rootView, id);
       if (buttonUbi == null) {
@@ -217,6 +233,12 @@ public final class ActivityDriverMapBinding implements ViewBinding {
       id = R.id.divider;
       MaterialDivider divider = ViewBindings.findChildViewById(rootView, id);
       if (divider == null) {
+        break missingId;
+      }
+
+      id = R.id.ed_postalCodes;
+      EditText edPostalCodes = ViewBindings.findChildViewById(rootView, id);
+      if (edPostalCodes == null) {
         break missingId;
       }
 
@@ -307,10 +329,11 @@ public final class ActivityDriverMapBinding implements ViewBinding {
       }
 
       return new ActivityDriverMapBinding((CoordinatorLayout) rootView, botonDrag, btnRideStatus,
-          buttonMenu, buttonMessage, buttonMessages, buttonNotifications, buttonProfile, buttonUbi,
-          divider, informationUser, locationIcon, locationIcon1, profilePhotoSheet, rela,
-          secondSheet, sheet, toolbarBottomSheet, txtDestination, txtDistance, txtName,
-          txtStartLocation, txtStatusMessage, txtTotalPayTravel, txtTravelInformation);
+          buttonMenu, buttonMessage, buttonMessages, buttonNotifications, buttonProfile, buttonSend,
+          buttonUbi, divider, edPostalCodes, informationUser, locationIcon, locationIcon1,
+          profilePhotoSheet, rela, secondSheet, sheet, toolbarBottomSheet, txtDestination,
+          txtDistance, txtName, txtStartLocation, txtStatusMessage, txtTotalPayTravel,
+          txtTravelInformation);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
