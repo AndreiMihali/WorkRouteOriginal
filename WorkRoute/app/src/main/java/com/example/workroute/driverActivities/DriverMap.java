@@ -303,7 +303,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
             @Override
             public void onKeyExited(String key) {
                 for (Marker markerIt : markerList) {
-                    if (markerIt.getTag().equals(key)) {
+                    if (markerIt.getTag().toString().equals(key)) {
                         markerIt.remove();
                         markerList.remove(markerIt);
                         return;
@@ -314,7 +314,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
             @Override
             public void onKeyMoved(String key, GeoLocation location) {
                 for (Marker markerIt : markerList) {
-                    if (markerIt.getTag().equals(key)) {
+                    if (markerIt.getTag().toString().equals(key)) {
                         markerIt.setPosition(new LatLng(location.latitude, location.longitude));
                     }
                 }
@@ -339,7 +339,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     Map<String, Object> map = (Map<String, Object>) snapshot.getValue();
-                    if (map.get("destination") != null) {
+                    if (map.get("destination") != null && map.get("destination").equals("")) {
                         customerDestination = map.get("destination").toString();
                     } else {
                         customerDestination = "--";
