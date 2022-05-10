@@ -234,6 +234,7 @@ public class ConfirmLogin extends AppCompatActivity {
         getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().putInt("faseConexion", 2).commit();
         Intent i = new Intent(ConfirmLogin.this, MainActivity.class);
         startActivity(i);
+        this.finish();
         //Toast.makeText(getApplicationContext(),"El usuario ya existe",Toast.LENGTH_SHORT).show();
     }
 
@@ -397,6 +398,7 @@ public class ConfirmLogin extends AppCompatActivity {
                     Intent intent = new Intent(ConfirmLogin.this, FirstTimeActivity.class);
                     intent.putExtra("Name", name);
                     startActivity(intent);
+                    finish();
                 } else {
                     showHome();
                 }

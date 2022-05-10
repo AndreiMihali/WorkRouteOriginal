@@ -22,7 +22,6 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -110,7 +109,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class DriverMap extends FragmentActivity implements SearchView.OnQueryTextListener,com.google.android.gms.location.LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, RoutingListener {
+public class DriverMap extends FragmentActivity implements SearchView.OnQueryTextListener, com.google.android.gms.location.LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, RoutingListener {
 
     private CounterFab button_menu, button_chats, button_profile, button_notifications;
     private FloatingActionButton button_ubi;
@@ -151,11 +150,11 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
     private Marker myWork;
     private Marker myHome;
     private int response = -1;
-    private boolean isGoingToWork=false;
+    private boolean isGoingToWork = false;
     private Marker mCustomerMarker;
     private SearchView searchView;
     private ListView listPostalCodes;
-    private ArrayList<String> data=new ArrayList<>();
+    private ArrayList<String> data = new ArrayList<>();
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -189,19 +188,19 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
 
     }
 
-    private void getPostalCodes(){
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Usuarios");
+    private void getPostalCodes() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snap:snapshot.getChildren()){
-                    if(snap.child("postalCodeWork").exists()){
-                        if(!data.contains(snap.child("postalCodeWork").getValue().toString())){
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    if (snap.child("postalCodeWork").exists()) {
+                        if (!data.contains(snap.child("postalCodeWork").getValue().toString())) {
                             data.add(snap.child("postalCodeWork").getValue().toString());
                         }
                     }
                 }
-                if(!data.isEmpty()){
+                if (!data.isEmpty()) {
                     setAdapterInList();
                 }
             }
@@ -214,12 +213,12 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
     }
 
     private void setAdapterInList() {
-        adapter=new ArrayAdapter<String>(this,R.layout.list_item,data);
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, data);
         listPostalCodes.setAdapter(adapter);
         listPostalCodes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                searchView.setQuery((String)adapter.getItem(position),false);
+                searchView.setQuery((String) adapter.getItem(position), false);
             }
         });
         searchView.setOnQueryTextListener(this);
@@ -266,34 +265,41 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
         getCustomersAroundStarted = true;
         DatabaseReference customersReference = FirebaseDatabase.getInstance().getReference().child("locationUpdates").child("Customers");
         GeoFire geoFire = new GeoFire(customersReference);
-        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(), myLastLocation.getLongitude()), 300000);
+        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(), myLastLocation.getLongitude()), 350000);
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
-                for (Marker markerIt : markerList) {
-                    if (markerIt.getTag()!=null && markerIt.getTag().toString().equals(key)) {
-                        markerIt.remove();
-                        return;
-                    }
-                }
 
                 LatLng customerLocation = new LatLng(location.latitude, location.longitude);
 
-                if (!key.equals(firebaseAuth.getUid())) {
-                    isPendingSubscribed(key, new SimpleCallback<String>() {
+
+                if (!key.equals(firebaseAuth.getCurrentUser().getUid())) {
+                    existUserSubscription(new ExistListener() {
                         @Override
-                        public void callback(String data, Object... secondary) {
-                            if (data.equals("pending") || data.equals("accepted")) {
-                                mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
-                                        .anchor(0.5f, 0.5f));
+                        public void existCallback(boolean exist) {
+                            if (exist) {
+                                isPendingSubscribed(key, new SimpleCallback<String>() {
+                                    @Override
+                                    public void callback(String data, Object... secondary) {
+                                        if (data.equals("pending") || data.equals("accepted")) {
+                                            mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
+                                                    .anchor(0.5f, 0.5f));
+                                        } else {
+                                            mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.user_marker))))
+                                                    .anchor(0.5f, 0.5f));
+                                        }
+                                        mCustomerMarker.setTag(key);
+                                        markerList.add(mCustomerMarker);
+                                    }
+                                });
                             } else {
                                 mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.user_marker))))
                                         .anchor(0.5f, 0.5f));
+                                mCustomerMarker.setTag(key);
+                                markerList.add(mCustomerMarker);
                             }
-                            mCustomerMarker.setTag(key);
-                            markerList.add(mCustomerMarker);
                         }
-                    });
+                    }, key);
                 }
             }
 
@@ -311,7 +317,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
             @Override
             public void onKeyMoved(String key, GeoLocation location) {
                 for (Marker markerIt : markerList) {
-                    if (markerIt.getTag()!=null && markerIt.getTag().toString().equals(key)) {
+                    if (markerIt.getTag() != null && markerIt.getTag().toString().equals(key)) {
                         markerIt.setPosition(new LatLng(location.latitude, location.longitude));
                     }
                 }
@@ -412,7 +418,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
                                     polyOptions.addAll(route.get(i).getPoints());
                                     Polyline polyline = mMap.addPolyline(polyOptions);
                                     polylines2.add(polyline);
-                                    if(isGoingToWork){
+                                    if (isGoingToWork) {
                                         txt_travelInformation.setText("You will arrive in " + route.get(i).getDurationText());
                                         txt_distance.setText("You are " + route.get(i).getDistanceText() + " away");
                                     }
@@ -481,37 +487,48 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
                         }
                     });
 
-
-                    isPendingSubscribed(customerId, new SimpleCallback<String>() {
+                    existUserSubscription(new ExistListener() {
                         @Override
-                        public void callback(String data, Object... secondary) {
-                            if (data.equals("pending")) {
-                                txt_statusMessage.setVisibility(View.VISIBLE);
-                                txt_statusMessage.setText("You have to accept the user request");
-                                btnRideStatus.setVisibility(View.GONE);
-                                txt_total_pay_travel.setText("20$/month");
-                            } else if (data.equals("declined") || data.equals("canceled")) {
-                                txt_statusMessage.setVisibility(View.VISIBLE);
-                                txt_statusMessage.setText("You canceled or declined the user request");
-                                btnRideStatus.setVisibility(View.GONE);
-                                txt_total_pay_travel.setText("0$/month");
-                            } else if (data.equals("accepted")) {
-                                txt_statusMessage.setVisibility(View.GONE);
-                                btnRideStatus.setVisibility(View.VISIBLE);
-                                if(isGoingToWork){
-                                    btnRideStatus.setText("Go to work");
-                                }else{
-                                    btnRideStatus.setText("Go to customer");
-                                }
-                                txt_total_pay_travel.setText("20$/month");
-                            } else {
+                        public void existCallback(boolean exist) {
+                            if(exist){
+                                isPendingSubscribed(customerId, new SimpleCallback<String>() {
+                                    @Override
+                                    public void callback(String data, Object... secondary) {
+                                        if (data.equals("pending")) {
+                                            txt_statusMessage.setVisibility(View.VISIBLE);
+                                            txt_statusMessage.setText("You have to accept the user request");
+                                            btnRideStatus.setVisibility(View.GONE);
+                                            txt_total_pay_travel.setText("20$/month");
+                                        } else if (data.equals("declined") || data.equals("canceled")) {
+                                            txt_statusMessage.setVisibility(View.VISIBLE);
+                                            txt_statusMessage.setText("You canceled or declined the user request");
+                                            btnRideStatus.setVisibility(View.GONE);
+                                            txt_total_pay_travel.setText("0$/month");
+                                        } else if (data.equals("accepted")) {
+                                            txt_statusMessage.setVisibility(View.GONE);
+                                            btnRideStatus.setVisibility(View.VISIBLE);
+                                            if (isGoingToWork) {
+                                                btnRideStatus.setText("Go to work");
+                                            } else {
+                                                btnRideStatus.setText("Go to customer");
+                                            }
+                                            txt_total_pay_travel.setText("20$/month");
+                                        } else {
+                                            txt_statusMessage.setVisibility(View.VISIBLE);
+                                            txt_statusMessage.setText("This user isn`t subscribed yet");
+                                            btnRideStatus.setVisibility(View.GONE);
+                                            txt_total_pay_travel.setText("0$/month");
+                                        }
+                                    }
+                                });
+                            }else{
                                 txt_statusMessage.setVisibility(View.VISIBLE);
                                 txt_statusMessage.setText("This user isn`t subscribed yet");
                                 btnRideStatus.setVisibility(View.GONE);
                                 txt_total_pay_travel.setText("0$/month");
                             }
                         }
-                    });
+                    },customerId);
                 }
             }
 
@@ -520,6 +537,21 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
 
             }
         });
+    }
+
+    private void existUserSubscription(ExistListener existListener, String key) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Customers").child(key).child("Requests");
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                existListener.existCallback(snapshot.exists());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        };
+        reference.addValueEventListener(listener);
     }
 
     private void isPendingSubscribed(String customerId, SimpleCallback<String> simpleCallback) {
@@ -534,14 +566,13 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
                             break;
                         }
                     }
-                } else {
-                    simpleCallback.callback("");
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                simpleCallback.callback(error.toString());
             }
         };
         reference.addValueEventListener(listener);
@@ -609,8 +640,8 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
         polylines = new ArrayList<>();
         polylines2 = new ArrayList<>();
         btnRideStatus = findViewById(R.id.btn_rideStatus);
-        searchView=findViewById(R.id.search_postalCodes);
-        listPostalCodes=findViewById(R.id.list_view_postalCodes);
+        searchView = findViewById(R.id.search_postalCodes);
+        listPostalCodes = findViewById(R.id.list_view_postalCodes);
         iniciarMapa();
         initListeners();
     }
@@ -634,9 +665,9 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
+                if (hasFocus) {
                     listPostalCodes.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     listPostalCodes.setVisibility(View.GONE);
                 }
             }
@@ -688,12 +719,12 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
         btnRideStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isGoingToWork){
+                if (isGoingToWork) {
                     getNavigationToCustomer(destinationCustomerLatLng);
-                    getRouteToDestination(new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()));
-                }else{
+                    getRouteToDestination(new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude()));
+                } else {
                     getNavigationToCustomer(customerLatLng);
-                    getRouteToMarker(customerLatLng,new LatLng(myLastLocation.getLatitude(),myLastLocation.getLongitude()));
+                    getRouteToMarker(customerLatLng, new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude()));
                 }
                 displayInformationCustomer(BottomSheetBehavior.SAVE_HIDEABLE);
             }
@@ -839,28 +870,32 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
         );
     }
 
-    private void isArrived(){
-        Location destination=new Location("destination");
-        if(isGoingToWork){
+    private void isArrived() {
+        Location destination = new Location("destination");
+        if (isGoingToWork) {
             destination.setLatitude(destinationCustomerLatLng.latitude);
             destination.setLongitude(destinationCustomerLatLng.longitude);
-            if(myLastLocation.distanceTo(destination)<=100){
-                Snackbar.make(findViewById(R.id.rela),"You arrived to the work",Snackbar.LENGTH_SHORT).show();
-                isGoingToWork=false;
-            }else{
+            if (getDistance(myLastLocation,destination)<=100) {
+                Snackbar.make(findViewById(R.id.rela), "You arrived to the work", Snackbar.LENGTH_SHORT).show();
+                isGoingToWork = false;
+            } else {
                 displayInformationCustomer(BottomSheetBehavior.STATE_EXPANDED);
             }
-        }else{
+        } else {
             destination.setLatitude(customerLatLng.latitude);
             destination.setLongitude(customerLatLng.longitude);
-            if(myLastLocation.distanceTo(destination)<=100){
-                Snackbar.make(findViewById(R.id.rela),"You arrived to the customer address",Snackbar.LENGTH_SHORT).show();
-                getSenderName(firebaseAuth.getCurrentUser().getUid(),customerId);
-                isGoingToWork=true;
-            }else{
+            if (getDistance(myLastLocation,destination)<=100) {
+                Snackbar.make(findViewById(R.id.rela), "You arrived to the customer address", Snackbar.LENGTH_SHORT).show();
+                getSenderName(firebaseAuth.getCurrentUser().getUid(), customerId);
+                isGoingToWork = true;
+            } else {
                 displayInformationCustomer(BottomSheetBehavior.STATE_EXPANDED);
             }
         }
+    }
+
+    private float getDistance(Location one, Location two){
+        return one.distanceTo(two);
     }
 
     private void getSenderName(String sender, String receiverId) {
@@ -927,15 +962,20 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
         DatabaseReference driverReference = FirebaseDatabase.getInstance().getReference("Drivers");
         Map<String, Object> map = new HashMap<>();
         LatLng destination = new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(), "latitude")), Double.valueOf(getDestination(Companion.user.getWorkAddress(), "longitude")));
-        if (destination == new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude())) {
+        Location locDest=new Location("destination");
+        locDest.setLatitude(destination.latitude);
+        locDest.setLongitude(destination.longitude);
+
+        if(getDistance(myLastLocation,locDest)<=50){
             map.put("destination", Companion.user.getLocalidad());
             map.put("destinationLat", getDestination(Companion.user.getLocalidad(), "latitude"));
             map.put("destinationLong", getDestination(Companion.user.getLocalidad(), "longitude"));
-        } else {
+        }else{
             map.put("destination", Companion.user.getWorkAddress());
             map.put("destinationLat", getDestination(Companion.user.getWorkAddress(), "latitude"));
             map.put("destinationLong", getDestination(Companion.user.getWorkAddress(), "longitude"));
         }
+
         driverReference.child(firebaseAuth.getUid()).child("destinations").updateChildren(map);
         setMarkers();
 
@@ -1086,7 +1126,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
                     polyOptions.addAll(route.get(i).getPoints());
                     Polyline polyline = mMap.addPolyline(polyOptions);
                     polylines.add(polyline);
-                    if(!isGoingToWork){
+                    if (!isGoingToWork) {
                         txt_travelInformation.setText("You will arrive in " + route.get(i).getDurationText());
                         txt_distance.setText("You are " + route.get(i).getDistanceText() + " away");
                     }
@@ -1128,10 +1168,10 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        if(data.contains(query)){
+        if (data.contains(query)) {
             adapter.getFilter().filter(query);
-        }else{
-            Toast.makeText(getApplicationContext(), "No Match found",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "No Match found", Toast.LENGTH_LONG).show();
         }
         return false;
     }
@@ -1144,5 +1184,9 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
 
     private interface SimpleCallback<T> {
         void callback(T data, Object... secondary);
+    }
+
+    private interface ExistListener {
+        void existCallback(boolean exist);
     }
 }
