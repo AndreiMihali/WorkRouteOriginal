@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        button_customer = findViewById(R.id.card_driver_general);
-        button_driver = findViewById(R.id.card_customer_general);
+        button_customer =findViewById(R.id.card_customer_general);
+        button_driver = findViewById(R.id.card_driver_general);
         firestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         initListeners();
