@@ -412,11 +412,9 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
                 for (Marker markerIt : markerList) {
-                    if(markerIt.getTag()!=null){
-                        if (markerIt.getTag().toString().equals(key)) {
-                            markerIt.remove();
-                            return;
-                        }
+                    if (markerIt.getTag()!=null && markerIt.getTag().toString().equals(key)) {
+                        markerIt.remove();
+                        return;
                     }
                 }
                 LatLng driverLocation = new LatLng(location.latitude, location.longitude);
@@ -425,10 +423,6 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
                     isPendingSubscribed(key, new SimpleCallback<String>() {
                         @Override
                         public void callback(String data, Object... secondary) {
-                            if (mDriverMarker != null) {
-                                mDriverMarker.remove();
-                            }
-
                             if (data.equals("pending") || data.equals("accepted")) {
                                 mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
                                         .anchor(0.5f, 0.5f));
@@ -457,10 +451,8 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
             @Override
             public void onKeyMoved(String key, GeoLocation location) {
                 for (Marker markerIt : markerList) {
-                    if(markerIt.getTag()!=null){
-                        if (markerIt.getTag().toString().equals(key)) {
-                            markerIt.setPosition(new LatLng(location.latitude, location.longitude));
-                        }
+                    if (markerIt.getTag()!=null && markerIt.getTag().toString().equals(key)) {
+                        markerIt.setPosition(new LatLng(location.latitude, location.longitude));
                     }
                 }
             }

@@ -271,11 +271,9 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
                 for (Marker markerIt : markerList) {
-                    if(markerIt.getTag()!=null){
-                        if (markerIt.getTag().toString().equals(key)) {
-                            markerIt.remove();
-                            return;
-                        }
+                    if (markerIt.getTag()!=null && markerIt.getTag().toString().equals(key)) {
+                        markerIt.remove();
+                        return;
                     }
                 }
 
@@ -285,10 +283,6 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
                     isPendingSubscribed(key, new SimpleCallback<String>() {
                         @Override
                         public void callback(String data, Object... secondary) {
-                            if (mCustomerMarker != null) {
-                                mCustomerMarker.remove();
-                            }
-                            
                             if (data.equals("pending") || data.equals("accepted")) {
                                 mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
                                         .anchor(0.5f, 0.5f));
@@ -317,10 +311,8 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
             @Override
             public void onKeyMoved(String key, GeoLocation location) {
                 for (Marker markerIt : markerList) {
-                    if(markerIt.getTag()!=null){
-                        if (markerIt.getTag().toString().equals(key)) {
-                            markerIt.setPosition(new LatLng(location.latitude, location.longitude));
-                        }
+                    if (markerIt.getTag()!=null && markerIt.getTag().toString().equals(key)) {
+                        markerIt.setPosition(new LatLng(location.latitude, location.longitude));
                     }
                 }
             }

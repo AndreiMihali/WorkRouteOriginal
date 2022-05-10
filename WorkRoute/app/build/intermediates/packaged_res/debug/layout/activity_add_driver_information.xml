@@ -13,7 +13,7 @@
     <ImageView
         android:id="@+id/img"
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
+        android:layout_height="220dp"
         android:src="@drawable/ic_mobile_login_amico" />
 
     <TextView
@@ -25,7 +25,7 @@
         android:fontFamily="@font/andada"
         android:text="Complete the information"
         android:textColor="@color/white"
-        android:textSize="30sp" />
+        android:textSize="25sp" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -48,9 +48,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="DNI/NIE"
-                app:hintTextColor="@color/secondary"
+                android:textColorHint="@color/secondary"
                 app:boxStrokeColor="@color/secondary"
-                android:textColorHint="@color/secondary">
+                app:hintTextColor="@color/secondary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ed_idNumber"
@@ -64,11 +64,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                app:boxStrokeColor="@color/secondary"
                 android:hint="Select your car type"
-                app:hintTextColor="@color/secondary"
                 android:textColorHint="@color/secondary"
-                app:endIconTint="@color/secondary">
+                app:boxStrokeColor="@color/secondary"
+                app:endIconTint="@color/secondary"
+                app:hintTextColor="@color/secondary">
 
                 <AutoCompleteTextView
                     android:id="@+id/autocompleteTypes"
@@ -82,11 +82,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                app:hintTextColor="@color/secondary"
                 android:hint="Plate number"
-                app:boxStrokeColor="@color/secondary"
                 android:textColorHint="@color/secondary"
-                app:endIconTint="@color/secondary">
+                app:boxStrokeColor="@color/secondary"
+                app:endIconTint="@color/secondary"
+                app:hintTextColor="@color/secondary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ed_plate"
@@ -101,10 +101,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:hint="Select your car color"
-                app:hintTextColor="@color/secondary"
-                app:boxStrokeColor="@color/secondary"
                 android:textColorHint="@color/secondary"
-                app:endIconTint="@color/secondary">
+                app:boxStrokeColor="@color/secondary"
+                app:endIconTint="@color/secondary"
+                app:hintTextColor="@color/secondary">
 
                 <AutoCompleteTextView
                     android:id="@+id/autocompleteColors"
@@ -118,7 +118,7 @@
                 android:id="@+id/btn_continue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:paddingHorizontal="15dp"
                 android:paddingVertical="10dp"
                 android:text="Continue"
