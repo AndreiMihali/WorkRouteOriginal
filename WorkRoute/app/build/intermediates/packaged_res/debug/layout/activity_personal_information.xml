@@ -321,8 +321,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
-                                android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
                                 android:background="@android:color/transparent"
+                                android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
                                 app:tint="@color/secondary" />
                         </RelativeLayout>
 

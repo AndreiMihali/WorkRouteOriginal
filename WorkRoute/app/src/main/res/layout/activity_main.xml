@@ -16,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="40dp"
         android:layout_marginTop="15dp"
         android:theme="@style/Theme.MaterialComponents.DayNight"
         app:cardCornerRadius="20dp"
@@ -64,22 +65,8 @@
                     android:lineSpacingExtra="5dp"
                     android:text="Earn some extra money taking people to their destination while you go to work."
                     android:textSize="16sp"
+                    android:layout_marginBottom="20dp"
                     android:textColor="#515151" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_driver"
-                    style="@style/Widget.Material3.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    app:backgroundTint="@color/secondary"
-                    app:cornerRadius="100dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Be the driver"
-                    android:paddingVertical="10dp"
-                    android:paddingHorizontal="20dp"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
-                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
         </RelativeLayout>
@@ -127,7 +114,6 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -140,24 +126,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:lineSpacingExtra="5dp"
+                    android:layout_marginBottom="20dp"
                     android:text="Simply walk in, request a ride and go to your workplace."
                     android:textColor="#515151"
                     android:textSize="16sp" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_customer"
-                    style="@style/Widget.Material3.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="10dp"
-                    android:text="Be the customer"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    app:backgroundTint="@color/secondary"
-                    app:cornerRadius="100dp" />
             </LinearLayout>
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>

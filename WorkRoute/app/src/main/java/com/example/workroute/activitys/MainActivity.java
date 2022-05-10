@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +35,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference reference;
-    private MaterialButton button_customer, button_driver;
+    private MaterialCardView button_customer, button_driver;
     private FirebaseFirestore firestore;
     private FirebaseAuth firebaseAuth;
 
@@ -51,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        button_customer = findViewById(R.id.btn_customer);
-        button_driver = findViewById(R.id.btn_driver);
+        button_customer = findViewById(R.id.card_driver_general);
+        button_driver = findViewById(R.id.card_customer_general);
         firestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         initListeners();

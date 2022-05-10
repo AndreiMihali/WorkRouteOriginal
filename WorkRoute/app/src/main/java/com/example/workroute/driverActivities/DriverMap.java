@@ -339,7 +339,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     Map<String, Object> map = (Map<String, Object>) snapshot.getValue();
-                    if (map.get("destination") != null && map.get("destination").equals("")) {
+                    if (map.get("destination") != null && !map.get("destination").equals("")) {
                         customerDestination = map.get("destination").toString();
                     } else {
                         customerDestination = "--";
