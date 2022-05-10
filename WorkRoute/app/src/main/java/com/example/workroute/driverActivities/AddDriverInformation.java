@@ -11,6 +11,7 @@ import android.widget.AutoCompleteTextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.workroute.R;
+import com.example.workroute.companion.Companion;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -103,6 +104,7 @@ public class AddDriverInformation extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void unused) {
                                         progressDialog.dismiss();
+                                        Companion.user.setConductor(true);
                                         startActivity(new Intent(AddDriverInformation.this, DriverMap.class));
                                         finish();
                                     }

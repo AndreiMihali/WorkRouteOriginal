@@ -3263,10 +3263,8 @@ id btn_accept
 id btn_addPayMethod
 id btn_cancel
 id btn_continue
-id btn_customer
 id btn_decline
 id btn_deletePayMethods
-id btn_driver
 id btn_edit_home
 id btn_edit_work
 id btn_otherMethods

@@ -3262,10 +3262,8 @@ int id btn_accept 0x7f0a007a
 int id btn_addPayMethod 0x7f0a007b
 int id btn_cancel 0x7f0a007c
 int id btn_continue 0x7f0a007d
-int id btn_customer 0x7f0a007e
 int id btn_decline 0x7f0a007f
 int id btn_deletePayMethods 0x7f0a0080
-int id btn_driver 0x7f0a0081
 int id btn_edit_home 0x7f0a0082
 int id btn_edit_work 0x7f0a0083
 int id btn_otherMethods 0x7f0a0084

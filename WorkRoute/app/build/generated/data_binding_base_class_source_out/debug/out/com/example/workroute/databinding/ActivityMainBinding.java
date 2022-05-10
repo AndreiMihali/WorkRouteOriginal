@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -19,12 +18,6 @@ import java.lang.String;
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   private final RelativeLayout rootView;
-
-  @NonNull
-  public final MaterialButton btnCustomer;
-
-  @NonNull
-  public final MaterialButton btnDriver;
 
   @NonNull
   public final MaterialCardView cardCustomer;
@@ -41,13 +34,11 @@ public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   public final RelativeLayout rela;
 
-  private ActivityMainBinding(@NonNull RelativeLayout rootView, @NonNull MaterialButton btnCustomer,
-      @NonNull MaterialButton btnDriver, @NonNull MaterialCardView cardCustomer,
-      @NonNull MaterialCardView cardCustomerGeneral, @NonNull MaterialCardView cardDriver,
-      @NonNull MaterialCardView cardDriverGeneral, @NonNull RelativeLayout rela) {
+  private ActivityMainBinding(@NonNull RelativeLayout rootView,
+      @NonNull MaterialCardView cardCustomer, @NonNull MaterialCardView cardCustomerGeneral,
+      @NonNull MaterialCardView cardDriver, @NonNull MaterialCardView cardDriverGeneral,
+      @NonNull RelativeLayout rela) {
     this.rootView = rootView;
-    this.btnCustomer = btnCustomer;
-    this.btnDriver = btnDriver;
     this.cardCustomer = cardCustomer;
     this.cardCustomerGeneral = cardCustomerGeneral;
     this.cardDriver = cardDriver;
@@ -82,18 +73,6 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.btn_customer;
-      MaterialButton btnCustomer = ViewBindings.findChildViewById(rootView, id);
-      if (btnCustomer == null) {
-        break missingId;
-      }
-
-      id = R.id.btn_driver;
-      MaterialButton btnDriver = ViewBindings.findChildViewById(rootView, id);
-      if (btnDriver == null) {
-        break missingId;
-      }
-
       id = R.id.card_customer;
       MaterialCardView cardCustomer = ViewBindings.findChildViewById(rootView, id);
       if (cardCustomer == null) {
@@ -120,8 +99,8 @@ public final class ActivityMainBinding implements ViewBinding {
 
       RelativeLayout rela = (RelativeLayout) rootView;
 
-      return new ActivityMainBinding((RelativeLayout) rootView, btnCustomer, btnDriver,
-          cardCustomer, cardCustomerGeneral, cardDriver, cardDriverGeneral, rela);
+      return new ActivityMainBinding((RelativeLayout) rootView, cardCustomer, cardCustomerGeneral,
+          cardDriver, cardDriverGeneral, rela);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
