@@ -412,8 +412,11 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
                 for (Marker markerIt : markerList) {
-                    if (markerIt.getTag().toString().equals(key)) {
-                        return;
+                    if(markerIt.getTag()!=null){
+                        if (markerIt.getTag().toString().equals(key)) {
+                            markerIt.remove();
+                            return;
+                        }
                     }
                 }
                 LatLng driverLocation = new LatLng(location.latitude, location.longitude);
@@ -454,8 +457,10 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
             @Override
             public void onKeyMoved(String key, GeoLocation location) {
                 for (Marker markerIt : markerList) {
-                    if (markerIt.getTag().toString().equals(key)) {
-                        markerIt.setPosition(new LatLng(location.latitude, location.longitude));
+                    if(markerIt.getTag()!=null){
+                        if (markerIt.getTag().toString().equals(key)) {
+                            markerIt.setPosition(new LatLng(location.latitude, location.longitude));
+                        }
                     }
                 }
             }

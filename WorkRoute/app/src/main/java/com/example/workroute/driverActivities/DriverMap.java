@@ -271,11 +271,14 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
                 for (Marker markerIt : markerList) {
-                    if (markerIt.getTag().toString().equals(key)) {
-                        markerIt.remove();
-                        return;
+                    if(markerIt.getTag()!=null){
+                        if (markerIt.getTag().toString().equals(key)) {
+                            markerIt.remove();
+                            return;
+                        }
                     }
                 }
+
                 LatLng customerLocation = new LatLng(location.latitude, location.longitude);
 
                 if (!key.equals(firebaseAuth.getUid())) {
@@ -314,8 +317,10 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
             @Override
             public void onKeyMoved(String key, GeoLocation location) {
                 for (Marker markerIt : markerList) {
-                    if (markerIt.getTag().toString().equals(key)) {
-                        markerIt.setPosition(new LatLng(location.latitude, location.longitude));
+                    if(markerIt.getTag()!=null){
+                        if (markerIt.getTag().toString().equals(key)) {
+                            markerIt.setPosition(new LatLng(location.latitude, location.longitude));
+                        }
                     }
                 }
             }
