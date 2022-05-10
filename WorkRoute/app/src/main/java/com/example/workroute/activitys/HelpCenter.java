@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.workroute.R;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.card.MaterialCardView;
 
 public class HelpCenter extends AppCompatActivity {
 
@@ -61,6 +62,13 @@ public class HelpCenter extends AppCompatActivity {
     private ImageButton boton13;
     private TextView txt13;
 
+
+    private MaterialCardView cardPersonalInfo;
+    private MaterialCardView cardPayMethod;
+    private MaterialCardView cardActiveSubs;
+    private MaterialCardView cardGeneralSettings;
+    private MaterialCardView cardDeleteAccount;
+    private MaterialCardView cardLogOut;
     private MaterialToolbar toolbar;
 
 
@@ -104,26 +112,32 @@ public class HelpCenter extends AppCompatActivity {
         txt6=findViewById(R.id.txt_6);
         txt6.setVisibility(View.GONE);
 
+        cardPersonalInfo = findViewById(R.id.cardViewPersonalInfo);
         boton7=findViewById(R.id.expandir_7);
         txt7=findViewById(R.id.txt_7);
         txt7.setVisibility(View.GONE);
 
+        cardPayMethod = findViewById(R.id.cardViewPayMethod);
         boton8=findViewById(R.id.expandir_8);
         txt8=findViewById(R.id.txt_8);
         txt8.setVisibility(View.GONE);
 
+        cardActiveSubs = findViewById(R.id.cardViewActiveSubs);
         boton9=findViewById(R.id.expandir_9);
         txt9=findViewById(R.id.txt_9);
         txt9.setVisibility(View.GONE);
 
+        cardGeneralSettings = findViewById(R.id.cardViewGeneralSettings);
         boton10=findViewById(R.id.expandir_10);
         txt10=findViewById(R.id.txt_10);
         txt10.setVisibility(View.GONE);
 
+        cardDeleteAccount = findViewById(R.id.cardViewDeleteAccount);
         boton11=findViewById(R.id.expandir_11);
         txt11=findViewById(R.id.txt_11);
         txt11.setVisibility(View.GONE);
 
+        cardLogOut = findViewById(R.id.cardViewLogOut);
         boton12=findViewById(R.id.expandir_12);
         txt12=findViewById(R.id.txt_12);
         txt12.setVisibility(View.GONE);
@@ -221,9 +235,21 @@ public class HelpCenter extends AppCompatActivity {
                     txt6.setVisibility(View.VISIBLE);
                     txt6.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_up_in));
                     boton6.setImageResource(R.drawable.bx_chevron_up);
+                    cardPersonalInfo.setVisibility(View.VISIBLE);
+                    cardPayMethod.setVisibility(View.VISIBLE);
+                    cardActiveSubs.setVisibility(View.VISIBLE);
+                    cardGeneralSettings.setVisibility(View.VISIBLE);
+                    cardDeleteAccount.setVisibility(View.VISIBLE);
+                    cardLogOut.setVisibility(View.VISIBLE);
                 }else if(txt6.getVisibility()==View.VISIBLE){
                     txt6.setVisibility(View.GONE);
                     boton6.setImageResource(R.drawable.bx_chevron_down);
+                    cardPersonalInfo.setVisibility(View.GONE);
+                    cardPayMethod.setVisibility(View.GONE);
+                    cardActiveSubs.setVisibility(View.GONE);
+                    cardGeneralSettings.setVisibility(View.GONE);
+                    cardDeleteAccount.setVisibility(View.GONE);
+                    cardLogOut.setVisibility(View.GONE);
                 }
             }
         });
