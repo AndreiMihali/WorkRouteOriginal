@@ -59,7 +59,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
             finish()
         }
 
-        edEmail.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+        edEmail.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 setColorsFocus(cardEmail, edEmail, layoutEmail)
             } else {

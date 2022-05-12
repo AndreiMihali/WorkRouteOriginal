@@ -95,7 +95,6 @@ class AdapterNotifications(val data: ArrayList<NotificationItem>, val context: C
                     })
                     setReadMessage(data[position].id!!)
                 }
-                else -> ""
             }
         }
     }

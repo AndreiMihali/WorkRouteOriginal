@@ -23,20 +23,20 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\d72e31093f64a4da5ca67333f3dec202\\transformed\\play-services-basement-18.0.0\\res\\values-kn\\values.xml",
+                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\189e3950c27317383f9ff4a04182f0aa\\transformed\\jetified-places-2.6.0\\res\\values-kn\\values.xml",
                     "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "141",
-                        "endOffsets": "336"
+                        "startLines": "4,5,6,7,8,9,10,11",
+                        "startColumns": "0,0,0,0,0,0,0,0",
+                        "startOffsets": "184,261,331,432,495,543,618,708",
+                        "endColumns": "76,69,100,62,47,74,89,56",
+                        "endOffsets": "260,330,431,494,542,617,707,764"
                     },
                     "to": {
-                        "startLines": "45",
-                        "startColumns": "4",
-                        "startOffsets": "4423",
-                        "endColumns": "145",
-                        "endOffsets": "4564"
+                        "startLines": "117,118,119,120,121,122,123,124",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "11198,11279,11353,11458,11525,11577,11656,11750",
+                        "endColumns": "80,73,104,66,51,78,93,60",
+                        "endOffsets": "11274,11348,11453,11520,11572,11651,11745,11806"
                     }
                 },
                 {
@@ -91,24 +91,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\654829e7703ea001acec2fc848dad6a0\\transformed\\places-2.6.0\\res\\values-kn\\values.xml",
+                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\ba3d3026d6e740e1145ee4eadd9472a6\\transformed\\jetified-play-services-basement-18.0.0\\res\\values-kn\\values.xml",
                     "from": {
-                        "startLines": "4,5,6,7,8,9,10,11",
-                        "startColumns": "0,0,0,0,0,0,0,0",
-                        "startOffsets": "184,261,331,432,495,543,618,708",
-                        "endColumns": "76,69,100,62,47,74,89,56",
-                        "endOffsets": "260,330,431,494,542,617,707,764"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "141",
+                        "endOffsets": "336"
                     },
                     "to": {
-                        "startLines": "117,118,119,120,121,122,123,124",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "11198,11279,11353,11458,11525,11577,11656,11750",
-                        "endColumns": "80,73,104,66,51,78,93,60",
-                        "endOffsets": "11274,11348,11453,11520,11572,11651,11745,11806"
+                        "startLines": "45",
+                        "startColumns": "4",
+                        "startOffsets": "4423",
+                        "endColumns": "145",
+                        "endOffsets": "4564"
                     }
                 },
                 {
-                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\98ec2afca18e30041eee5772d4ba2fc4\\transformed\\play-services-base-18.0.1\\res\\values-kn\\values.xml",
+                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\234320b4bf9bad1a86af29d0d074af0f\\transformed\\jetified-play-services-base-18.0.1\\res\\values-kn\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
