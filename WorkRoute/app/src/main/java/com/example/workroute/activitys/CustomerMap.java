@@ -141,6 +141,8 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
     private TextView txt_total_pay_travel;
     private TextView txt_startLocation;
     private TextView txt_destination;
+    private TextView txt_departure_home;
+    private TextView txt_departure_work;
     private MaterialButton btn_cancel;
     private List<Polyline> polylines;
     private List<Polyline> polylines2;
@@ -528,6 +530,20 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
                             Glide.with(getApplicationContext()).load(map.get("fotoPerfil").toString()).into(customer_photo);
                         }
                     }
+                    Map<String,Object> departureHome=(Map<String, Object>)map.get(("hourDepartureHome"));
+
+                    if(departureHome.get("hour")!=null && departureHome.get("minute")!=null){
+                        String time=String.format("HH",departureHome.get("hour")).concat(":").concat(String.format("mm",departureHome.get("minute")));
+                        txt_departure_home.setText(time);
+                    }
+
+                    Map<String,Object> departureWork=(Map<String, Object>)map.get(("hourDepartureWork"));
+
+                    if(departureWork.get("hour")!=null && departureWork.get("minute")!=null){
+                        String time=String.format("HH",departureWork.get("hour")).concat(":").concat(String.format("mm",departureWork.get("minute")));
+                        txt_departure_home.setText(time);
+                    }
+
                     txt_startLocation.setText(getGeocoderAddress(new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude())));
                     txt_destination.setText(driverDestination);
                     btn_message.setOnClickListener(new View.OnClickListener() {
@@ -873,6 +889,8 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
         txt_total_pay_travel = findViewById(R.id.txt_total_pay_travel_cost);
         txt_startLocation = findViewById(R.id.txt_startLocation_cost);
         txt_destination = findViewById(R.id.txt_destination_cost);
+        txt_departure_home=findViewById(R.id.txt_departure_home);
+        txt_departure_work=findViewById(R.id.txt_departure_work);
 
         bottomSheetBehavior.setPeekHeight(200);
         bottomSheetBehavior.setState(state);
