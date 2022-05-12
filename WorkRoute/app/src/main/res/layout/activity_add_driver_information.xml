@@ -8,7 +8,7 @@
     android:background="@drawable/back_driver_information"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".driverActivities.DrivingLicense">
+    tools:context=".driverActivities.AddDriverInformation">
 
     <ImageView
         android:id="@+id/img"
