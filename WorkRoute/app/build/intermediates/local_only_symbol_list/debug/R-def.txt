@@ -172,13 +172,10 @@ id btn_otherMethods
 id btn_rideStatus
 id btn_send
 id btn_send_email
-id buttonFront
 id buttonMenu
 id buttonMessages
 id buttonProfile
-id buttonReverse
 id buttonSave
-id buttonSaveLicense
 id buttonUbi
 id buttonUpDown
 id button_cancel
@@ -191,9 +188,13 @@ id button_message_cost
 id button_notifications
 id button_signin
 id button_signup
-id cardImageFrente
-id cardImageReverse
+id cardViewActiveSubs
+id cardViewDeleteAccount
+id cardViewGeneralSettings
 id cardViewImage
+id cardViewLogOut
+id cardViewPayMethod
+id cardViewPersonalInfo
 id card_birthday
 id card_car_information
 id card_chat
@@ -220,7 +221,6 @@ id checkBoxEmailNotifications
 id cord_layout
 id deleteAccount
 id divider
-id divider2
 id ed_confirmpass_register
 id ed_email
 id ed_email_recover_password
@@ -251,8 +251,6 @@ id fab_camera
 id global_card
 id helpMenu
 id image
-id imageCarnetFrente
-id imageCarnetReverso
 id imageLock
 id imageView
 id imageViewStar
@@ -324,6 +322,7 @@ id textUnlock_Save
 id textView
 id textView2
 id textView3
+id textView5
 id texto_bienvenida
 id texts
 id title
@@ -338,10 +337,8 @@ id toolbar_messages
 id toolbar_recovery_password
 id toolbar_subs
 id tvAboutUs
-id tvFront
 id tvHowToUseWorkRoute
 id tvNotificationPreferences
-id tvReverse
 id tv_userMail
 id tv_user_work_direction_sub
 id txt_1
@@ -404,7 +401,6 @@ layout activity_confirm_login
 layout activity_create_account
 layout activity_customer_map
 layout activity_driver_map
-layout activity_driving_license
 layout activity_first_time
 layout activity_forgot_password
 layout activity_general_settings
@@ -468,6 +464,7 @@ style Register
 style Splash
 style Subscribe
 style ThemeOverlay.App.MaterialAlertDialog
+style ThemeOverlay.App.TimePicker
 style Theme.EditProfile
 style Theme.WorkRoute
 style Widget.App.Button

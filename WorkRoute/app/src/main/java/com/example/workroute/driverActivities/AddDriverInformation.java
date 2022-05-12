@@ -1,9 +1,11 @@
 package com.example.workroute.driverActivities;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -16,11 +18,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.timepicker.MaterialTimePicker;
+import com.google.android.material.timepicker.TimeFormat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class AddDriverInformation extends AppCompatActivity {
 
@@ -32,6 +37,8 @@ public class AddDriverInformation extends AppCompatActivity {
     private TextInputEditText documentId,plateNumber;
     private MaterialButton btnContinue;
     private ProgressDialog progressDialog;
+    private HashMap<String,Object> hourDepartureHome=new HashMap<>();
+    private HashMap<String,Object> hourDepartureWork=new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +68,48 @@ public class AddDriverInformation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(isAllFieldsOk()){
-                    progressDialog.show();
-                    setDataInDatabase();
+                    showMaterialTimePicker("Departure time of your home",7,"home");
                 }else{
                     Snackbar.make(v,"You must need fill all fields",Snackbar.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    private void showMaterialTimePicker(String title,int hour,String placeDeparture){
+        int timeFormat=(DateFormat.is24HourFormat(this))?TimeFormat.CLOCK_24H:TimeFormat.CLOCK_12H;
+        MaterialTimePicker builder=new MaterialTimePicker.Builder()
+                .setTimeFormat(timeFormat)
+                .setHour(hour)
+                .setTheme(R.style.ThemeOverlay_App_TimePicker)
+                .setMinute(0)
+                .setTitleText(title)
+                .build();
+
+        builder.addOnPositiveButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(placeDeparture.equals("home")){
+                    hourDepartureHome.put("hour",String.valueOf(builder.getHour()));
+                    hourDepartureHome.put("minute",String.valueOf(builder.getMinute()));
+                    showMaterialTimePicker("Departure time of your work",15,"work");
+                }else{
+                    hourDepartureWork.put("hour",String.valueOf(builder.getHour()));
+                    hourDepartureWork.put("minute",String.valueOf(builder.getMinute()));
+                    progressDialog.show();
+                    setDataInDatabase();
+                }
+            }
+        });
+
+        builder.addOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                dialog.dismiss();
+            }
+        });
+        builder.show(getSupportFragmentManager(),"A");
+
     }
 
     private boolean isAllFieldsOk(){
@@ -90,6 +132,8 @@ public class AddDriverInformation extends AppCompatActivity {
                 hashMap2.put("PlateNumber",plateNumber.getText().toString().trim());
                 hashMap2.put("CarType",autoCompleteCars.getText().toString().trim());
                 hashMap2.put("CarColor",autoCompleteColors.getText().toString().trim());
+                hashMap2.put("hourDepartureHome",hourDepartureHome);
+                hashMap2.put("hourDepartureWork",hourDepartureWork);
                 FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("DriverInformation").setValue(hashMap2).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

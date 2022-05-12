@@ -87,9 +87,6 @@
             android:name="com.example.workroute.activitys.PayMethod"
             android:exported="false" />
         <activity
-            android:name="com.example.workroute.driverActivities.DrivingLicense"
-            android:exported="false" />
-        <activity
             android:name="com.example.workroute.kotlin.activities.MessagesActivity"
             android:exported="false" />
         <activity

@@ -13,6 +13,7 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.card.MaterialCardView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -20,6 +21,24 @@ import java.lang.String;
 public final class ActivityHelpCenterBinding implements ViewBinding {
   @NonNull
   private final RelativeLayout rootView;
+
+  @NonNull
+  public final MaterialCardView cardViewActiveSubs;
+
+  @NonNull
+  public final MaterialCardView cardViewDeleteAccount;
+
+  @NonNull
+  public final MaterialCardView cardViewGeneralSettings;
+
+  @NonNull
+  public final MaterialCardView cardViewLogOut;
+
+  @NonNull
+  public final MaterialCardView cardViewPayMethod;
+
+  @NonNull
+  public final MaterialCardView cardViewPersonalInfo;
 
   @NonNull
   public final ImageButton expandir1;
@@ -59,6 +78,9 @@ public final class ActivityHelpCenterBinding implements ViewBinding {
 
   @NonNull
   public final ImageButton expandir9;
+
+  @NonNull
+  public final TextView textView5;
 
   @NonNull
   public final MaterialToolbar toolbarUseWorkRoute;
@@ -103,19 +125,28 @@ public final class ActivityHelpCenterBinding implements ViewBinding {
   public final TextView txt9;
 
   private ActivityHelpCenterBinding(@NonNull RelativeLayout rootView,
+      @NonNull MaterialCardView cardViewActiveSubs, @NonNull MaterialCardView cardViewDeleteAccount,
+      @NonNull MaterialCardView cardViewGeneralSettings, @NonNull MaterialCardView cardViewLogOut,
+      @NonNull MaterialCardView cardViewPayMethod, @NonNull MaterialCardView cardViewPersonalInfo,
       @NonNull ImageButton expandir1, @NonNull ImageButton expandir10,
       @NonNull ImageButton expandir11, @NonNull ImageButton expandir12,
       @NonNull ImageButton expandir13, @NonNull ImageButton expandir2,
       @NonNull ImageButton expandir3, @NonNull ImageButton expandir4,
       @NonNull ImageButton expandir5, @NonNull ImageButton expandir6,
       @NonNull ImageButton expandir7, @NonNull ImageButton expandir8,
-      @NonNull ImageButton expandir9, @NonNull MaterialToolbar toolbarUseWorkRoute,
-      @NonNull TextView txt1, @NonNull TextView txt10, @NonNull TextView txt11,
-      @NonNull TextView txt12, @NonNull TextView txt13, @NonNull TextView txt2,
-      @NonNull TextView txt3, @NonNull TextView txt4, @NonNull TextView txt5,
-      @NonNull TextView txt6, @NonNull TextView txt7, @NonNull TextView txt8,
-      @NonNull TextView txt9) {
+      @NonNull ImageButton expandir9, @NonNull TextView textView5,
+      @NonNull MaterialToolbar toolbarUseWorkRoute, @NonNull TextView txt1, @NonNull TextView txt10,
+      @NonNull TextView txt11, @NonNull TextView txt12, @NonNull TextView txt13,
+      @NonNull TextView txt2, @NonNull TextView txt3, @NonNull TextView txt4,
+      @NonNull TextView txt5, @NonNull TextView txt6, @NonNull TextView txt7,
+      @NonNull TextView txt8, @NonNull TextView txt9) {
     this.rootView = rootView;
+    this.cardViewActiveSubs = cardViewActiveSubs;
+    this.cardViewDeleteAccount = cardViewDeleteAccount;
+    this.cardViewGeneralSettings = cardViewGeneralSettings;
+    this.cardViewLogOut = cardViewLogOut;
+    this.cardViewPayMethod = cardViewPayMethod;
+    this.cardViewPersonalInfo = cardViewPersonalInfo;
     this.expandir1 = expandir1;
     this.expandir10 = expandir10;
     this.expandir11 = expandir11;
@@ -129,6 +160,7 @@ public final class ActivityHelpCenterBinding implements ViewBinding {
     this.expandir7 = expandir7;
     this.expandir8 = expandir8;
     this.expandir9 = expandir9;
+    this.textView5 = textView5;
     this.toolbarUseWorkRoute = toolbarUseWorkRoute;
     this.txt1 = txt1;
     this.txt10 = txt10;
@@ -172,6 +204,42 @@ public final class ActivityHelpCenterBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.cardViewActiveSubs;
+      MaterialCardView cardViewActiveSubs = ViewBindings.findChildViewById(rootView, id);
+      if (cardViewActiveSubs == null) {
+        break missingId;
+      }
+
+      id = R.id.cardViewDeleteAccount;
+      MaterialCardView cardViewDeleteAccount = ViewBindings.findChildViewById(rootView, id);
+      if (cardViewDeleteAccount == null) {
+        break missingId;
+      }
+
+      id = R.id.cardViewGeneralSettings;
+      MaterialCardView cardViewGeneralSettings = ViewBindings.findChildViewById(rootView, id);
+      if (cardViewGeneralSettings == null) {
+        break missingId;
+      }
+
+      id = R.id.cardViewLogOut;
+      MaterialCardView cardViewLogOut = ViewBindings.findChildViewById(rootView, id);
+      if (cardViewLogOut == null) {
+        break missingId;
+      }
+
+      id = R.id.cardViewPayMethod;
+      MaterialCardView cardViewPayMethod = ViewBindings.findChildViewById(rootView, id);
+      if (cardViewPayMethod == null) {
+        break missingId;
+      }
+
+      id = R.id.cardViewPersonalInfo;
+      MaterialCardView cardViewPersonalInfo = ViewBindings.findChildViewById(rootView, id);
+      if (cardViewPersonalInfo == null) {
+        break missingId;
+      }
+
       id = R.id.expandir_1;
       ImageButton expandir1 = ViewBindings.findChildViewById(rootView, id);
       if (expandir1 == null) {
@@ -247,6 +315,12 @@ public final class ActivityHelpCenterBinding implements ViewBinding {
       id = R.id.expandir_9;
       ImageButton expandir9 = ViewBindings.findChildViewById(rootView, id);
       if (expandir9 == null) {
+        break missingId;
+      }
+
+      id = R.id.textView5;
+      TextView textView5 = ViewBindings.findChildViewById(rootView, id);
+      if (textView5 == null) {
         break missingId;
       }
 
@@ -334,10 +408,12 @@ public final class ActivityHelpCenterBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityHelpCenterBinding((RelativeLayout) rootView, expandir1, expandir10,
-          expandir11, expandir12, expandir13, expandir2, expandir3, expandir4, expandir5, expandir6,
-          expandir7, expandir8, expandir9, toolbarUseWorkRoute, txt1, txt10, txt11, txt12, txt13,
-          txt2, txt3, txt4, txt5, txt6, txt7, txt8, txt9);
+      return new ActivityHelpCenterBinding((RelativeLayout) rootView, cardViewActiveSubs,
+          cardViewDeleteAccount, cardViewGeneralSettings, cardViewLogOut, cardViewPayMethod,
+          cardViewPersonalInfo, expandir1, expandir10, expandir11, expandir12, expandir13,
+          expandir2, expandir3, expandir4, expandir5, expandir6, expandir7, expandir8, expandir9,
+          textView5, toolbarUseWorkRoute, txt1, txt10, txt11, txt12, txt13, txt2, txt3, txt4, txt5,
+          txt6, txt7, txt8, txt9);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

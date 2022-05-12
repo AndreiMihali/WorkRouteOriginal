@@ -3272,14 +3272,11 @@ id btn_rideStatus
 id btn_send
 id btn_send_email
 id button
-id buttonFront
 id buttonMenu
 id buttonMessages
 id buttonPanel
 id buttonProfile
-id buttonReverse
 id buttonSave
-id buttonSaveLicense
 id buttonUbi
 id buttonUpDown
 id button_cancel
@@ -3296,9 +3293,13 @@ id cache_measures
 id callMeasure
 id cancel_action
 id cancel_button
-id cardImageFrente
-id cardImageReverse
+id cardViewActiveSubs
+id cardViewDeleteAccount
+id cardViewGeneralSettings
 id cardViewImage
+id cardViewLogOut
+id cardViewPayMethod
+id cardViewPersonalInfo
 id card_birthday
 id card_car_information
 id card_chat
@@ -3388,7 +3389,6 @@ id disablePostScroll
 id disableScroll
 id disjoint
 id divider
-id divider2
 id dragAnticlockwise
 id dragClockwise
 id dragDown
@@ -3490,8 +3490,6 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
-id imageCarnetFrente
-id imageCarnetReverso
 id imageLock
 id imageView
 id imageViewStar
@@ -3810,6 +3808,7 @@ id textUnlock_Save
 id textView
 id textView2
 id textView3
+id textView5
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3848,10 +3847,8 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tvAboutUs
-id tvFront
 id tvHowToUseWorkRoute
 id tvNotificationPreferences
-id tvReverse
 id tv_userMail
 id tv_user_work_direction_sub
 id txt_1
@@ -4030,7 +4027,6 @@ layout activity_confirm_login
 layout activity_create_account
 layout activity_customer_map
 layout activity_driver_map
-layout activity_driving_license
 layout activity_first_time
 layout activity_forgot_password
 layout activity_general_settings
@@ -5012,6 +5008,7 @@ style Theme_MaterialComponents_NoActionBar
 style Theme_MaterialComponents_NoActionBar_Bridge
 style Theme_WorkRoute
 style ThemeOverlay_App_MaterialAlertDialog
+style ThemeOverlay_App_TimePicker
 style ThemeOverlay_AppCompat
 style ThemeOverlay_AppCompat_ActionBar
 style ThemeOverlay_AppCompat_Dark

@@ -153,5 +153,9 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="ThemeOverlay.App.TimePicker" parent="ThemeOverlay.MaterialComponents.TimePicker">
+        <item name="colorPrimary">@color/secondary</item>
+        <item name="colorSecondary">#8FBAEC</item>
+    </style>
 
 </resources>

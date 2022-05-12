@@ -1,13 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.gms:play-services-cloud-messaging:17.0.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/eac7e3be48f29e2f57e550b5bfb4fe3f/transformed/play-services-cloud-messaging-17.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/000eee9be2460533e2db27d6ef402cdb/transformed/play-services-cloud-messaging-17.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f0984d256b91563664c9d95f8975c068/transformed/play-services-cloud-messaging-17.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2d334ed53125969f29674bd8be9f52fc/transformed/play-services-cloud-messaging-17.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/90ab9df9b97f3ab71fdd191beb0b0ca9/transformed/play-services-cloud-messaging-17.0.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/38269a58b9f9d21fc26d2c4aa1a354ce/transformed/play-services-cloud-messaging-17.0.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/38269a58b9f9d21fc26d2c4aa1a354ce/transformed/play-services-cloud-messaging-17.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/38269a58b9f9d21fc26d2c4aa1a354ce/transformed/play-services-cloud-messaging-17.0.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/90ab9df9b97f3ab71fdd191beb0b0ca9/transformed/play-services-cloud-messaging-17.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/90ab9df9b97f3ab71fdd191beb0b0ca9/transformed/play-services-cloud-messaging-17.0.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-cloud-messaging/17.0.1/5b54e40c89bf1882a551b10312acdf03dcf34e82/play-services-cloud-messaging-17.0.1-javadoc.jar!/" />
