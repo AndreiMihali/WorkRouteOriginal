@@ -111,7 +111,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -530,18 +532,19 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
                             Glide.with(getApplicationContext()).load(map.get("fotoPerfil").toString()).into(customer_photo);
                         }
                     }
-                    Map<String,Object> departureHome=(Map<String, Object>)map.get(("hourDepartureHome"));
+
+                    Map<String,Object> departureHome=(Map<String, Object>)snapshot.child("DriverInformation").child("hourDepartureHome").getValue();
 
                     if(departureHome.get("hour")!=null && departureHome.get("minute")!=null){
-                        String time=String.format("HH",departureHome.get("hour")).concat(":").concat(String.format("mm",departureHome.get("minute")));
-                        txt_departure_home.setText(time);
+                        String hora= String.format("%02d:%02d",Integer.parseInt((String) departureHome.get("hour")),Integer.parseInt((String) departureHome.get("minute")));
+                        txt_departure_home.setText(hora);
                     }
 
-                    Map<String,Object> departureWork=(Map<String, Object>)map.get(("hourDepartureWork"));
+                    Map<String,Object> departureWork=(Map<String, Object>)snapshot.child("DriverInformation").child("hourDepartureWork").getValue();
 
                     if(departureWork.get("hour")!=null && departureWork.get("minute")!=null){
-                        String time=String.format("HH",departureWork.get("hour")).concat(":").concat(String.format("mm",departureWork.get("minute")));
-                        txt_departure_home.setText(time);
+                        String hora= String.format("%02d:%02d",Integer.parseInt((String) departureWork.get("hour")),Integer.parseInt((String) departureWork.get("minute")));
+                        txt_departure_work.setText(hora);
                     }
 
                     txt_startLocation.setText(getGeocoderAddress(new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude())));

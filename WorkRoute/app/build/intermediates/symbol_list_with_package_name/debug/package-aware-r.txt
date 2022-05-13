@@ -3868,6 +3868,8 @@ id txt_car_color
 id txt_car_type
 id txt_ciudad
 id txt_cumple
+id txt_departure_home
+id txt_departure_work
 id txt_description
 id txt_destination
 id txt_destination_cost

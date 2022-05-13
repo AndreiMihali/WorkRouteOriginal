@@ -91,6 +91,12 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
   public final RelativeLayout toolbarBottomSheet;
 
   @NonNull
+  public final TextView txtDepartureHome;
+
+  @NonNull
+  public final TextView txtDepartureWork;
+
+  @NonNull
   public final TextView txtDestinationCost;
 
   @NonNull
@@ -119,6 +125,7 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
       @NonNull ImageView profilePhotoSheetCost, @NonNull CoordinatorLayout rela,
       @NonNull SearchView searchPostalCodes, @NonNull FrameLayout secondSheet,
       @NonNull FrameLayout sheet, @NonNull RelativeLayout toolbarBottomSheet,
+      @NonNull TextView txtDepartureHome, @NonNull TextView txtDepartureWork,
       @NonNull TextView txtDestinationCost, @NonNull TextView txtDistanceCost,
       @NonNull TextView txtNameCost, @NonNull TextView txtStartLocationCost,
       @NonNull TextView txtTotalPayTravelCost, @NonNull TextView txtTravelInformationCost) {
@@ -143,6 +150,8 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
     this.secondSheet = secondSheet;
     this.sheet = sheet;
     this.toolbarBottomSheet = toolbarBottomSheet;
+    this.txtDepartureHome = txtDepartureHome;
+    this.txtDepartureWork = txtDepartureWork;
     this.txtDestinationCost = txtDestinationCost;
     this.txtDistanceCost = txtDistanceCost;
     this.txtNameCost = txtNameCost;
@@ -294,6 +303,18 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.txt_departure_home;
+      TextView txtDepartureHome = ViewBindings.findChildViewById(rootView, id);
+      if (txtDepartureHome == null) {
+        break missingId;
+      }
+
+      id = R.id.txt_departure_work;
+      TextView txtDepartureWork = ViewBindings.findChildViewById(rootView, id);
+      if (txtDepartureWork == null) {
+        break missingId;
+      }
+
       id = R.id.txt_destination_cost;
       TextView txtDestinationCost = ViewBindings.findChildViewById(rootView, id);
       if (txtDestinationCost == null) {
@@ -334,8 +355,9 @@ public final class ActivityCustomerMapBinding implements ViewBinding {
           buttonMenu, buttonMessageCost, buttonMessages, buttonNotifications, buttonProfile,
           buttonUbi, cardSearch, divider, informationUserCost, listViewPostalCodes, locationIcon,
           locationIcon1, profilePhotoSheetCost, rela, searchPostalCodes, secondSheet, sheet,
-          toolbarBottomSheet, txtDestinationCost, txtDistanceCost, txtNameCost,
-          txtStartLocationCost, txtTotalPayTravelCost, txtTravelInformationCost);
+          toolbarBottomSheet, txtDepartureHome, txtDepartureWork, txtDestinationCost,
+          txtDistanceCost, txtNameCost, txtStartLocationCost, txtTotalPayTravelCost,
+          txtTravelInformationCost);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
