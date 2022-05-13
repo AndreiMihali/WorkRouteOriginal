@@ -99,13 +99,11 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
         Intent nf;
         switch (activity) {
             case "MessagesActivity": {
-                UserType.type = "customer";
                 nf = new Intent(getApplicationContext(), ChatsActivity.class);
                 nf.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 return PendingIntent.getActivity(this, 0, nf, 0);
             }
             case "ActiveSubscriptions": {
-                UserType.type = "driver";
                 nf = new Intent(getApplicationContext(), ActiveSubscriptions.class);
                 nf.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 return PendingIntent.getActivity(this, 0, nf, 0);
