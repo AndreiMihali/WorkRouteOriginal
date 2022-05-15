@@ -68,11 +68,11 @@
 
                     <TextView
                         android:id="@+id/txt_1"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="Floating button menu"
+                        android:text="@string/floatingButton"
                         android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>
@@ -123,7 +123,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="Ubication button"
+                        android:text="@string/ubicationButton"
                         android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>
@@ -174,8 +174,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="Driver map"
-                        android:textSize="16sp"
+                        android:text="@string/driverMapButton"                        android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -225,8 +224,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="Customer map"
-                        android:textSize="16sp"
+                        android:text="@string/customerMapButton"                            android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -276,8 +274,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="Chat"
-                        android:textSize="16sp"
+                        android:text="@string/chatButton"                            android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -335,8 +332,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="Profile"
-                        android:textSize="16sp"
+                        android:text="@string/profileButton"                            android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -388,7 +384,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="Personal Information"
+                        android:text="@string/personalInfo"
                         android:textSize="16sp"
                         android:visibility="gone" />
                 </LinearLayout>
@@ -441,7 +437,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="Pay Method"
+                        android:text="@string/payMethod"
                         android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>
@@ -494,7 +490,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="Active Subscriptions"
+                        android:text="@string/activeSubs"
                         android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>
@@ -547,7 +543,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="General Settings"
+                        android:text="@string/generalSettings"
                         android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>
@@ -600,7 +596,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="Delete Account"
+                        android:text="@string/deleteAccount"
                         android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>
@@ -653,7 +649,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="Log Out"
+                        android:text="@string/logOut"
                         android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>
@@ -704,7 +700,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="Notifications"
+                        android:text="@string/notificationsButton"
                         android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>

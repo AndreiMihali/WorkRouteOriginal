@@ -4218,6 +4218,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string activeSubs
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
@@ -4227,6 +4228,7 @@ string card_content_descriptor
 string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
+string chatButton
 string chip_text
 string clear_text_end_icon_content_description
 string common_google_play_services_enable_button
@@ -4248,8 +4250,11 @@ string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
 string confirm_device_credential_password
+string customerMapButton
 string default_error_msg
 string default_web_client_id
+string deleteAccount
+string driverMapButton
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
@@ -4262,7 +4267,10 @@ string fingerprint_error_lockout
 string fingerprint_error_no_fingerprints
 string fingerprint_error_user_canceled
 string fingerprint_not_recognized
+string firebase_database_url
+string floatingButton
 string gcm_defaultSenderId
+string generalSettings
 string generic_error_no_device_credential
 string generic_error_no_keyguard
 string generic_error_user_canceled
@@ -4276,6 +4284,7 @@ string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
 string label
+string logOut
 string m3_ref_typeface_brand_medium
 string m3_ref_typeface_brand_regular
 string m3_ref_typeface_plain_medium
@@ -4349,11 +4358,14 @@ string mtrl_picker_toggle_to_day_selection
 string mtrl_picker_toggle_to_text_input_mode
 string mtrl_picker_toggle_to_year_selection
 string mtrl_timepicker_confirm
+string notificationsButton
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string payMethod
+string personalInfo
 string places_autocomplete_clear_button
 string places_autocomplete_label
 string places_autocomplete_no_results_for_query
@@ -4362,11 +4374,13 @@ string places_cancel
 string places_powered_by_google
 string places_search_error
 string places_try_again
+string profileButton
 string project_id
 string search_menu_title
 string sharedPreferences
 string status_bar_notification_info_overflow
 string title_activity_customer_map
+string ubicationButton
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style AndroidThemeColorAccentYellow
