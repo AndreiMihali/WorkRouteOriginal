@@ -20,46 +20,6 @@
             android:tag="mapFragmentDriver" />
 
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_search"
-            android:layout_width="260dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:theme="@style/Theme.MaterialComponents.DayNight"
-            app:cardCornerRadius="100dp"
-            app:cardElevation="0dp"
-            app:strokeColor="@color/secondary"
-            app:strokeWidth="1dp">
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_postalCodes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:inputType="number"
-                android:outlineProvider="none"
-                app:iconifiedByDefault="false"
-                app:queryHint="Search by a postal code" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <ListView
-            android:id="@+id/list_view_postalCodes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/card_search"
-            android:layout_marginHorizontal="80dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/back_search"
-            android:dividerHeight="2dp"
-            android:padding="10dp"
-            android:scrollbars="none"
-            android:visibility="gone"
-            tools:listitem="@tools:sample/full_names"
-            tools:visibility="visible" />
-
-
         <com.andremion.counterfab.CounterFab
             android:id="@+id/buttonMenu"
             android:layout_width="wrap_content"
@@ -90,6 +50,7 @@
             app:badgePosition="RightTop"
             app:badgeTextColor="@color/white"
             app:tint="@color/white"
+            tools:ignore="SpeakableTextPresentCheck"
             tools:visibility="visible" />
 
         <com.andremion.counterfab.CounterFab
@@ -107,6 +68,7 @@
             app:badgePosition="RightTop"
             app:badgeTextColor="@color/white"
             app:tint="@color/white"
+            tools:ignore="SpeakableTextPresentCheck"
             tools:visibility="visible" />
 
         <com.andremion.counterfab.CounterFab
@@ -124,6 +86,7 @@
             app:badgePosition="RightTop"
             app:badgeTextColor="@color/white"
             app:tint="@color/white"
+            tools:ignore="SpeakableTextPresentCheck"
             tools:visibility="visible" />
 
 
@@ -403,11 +366,7 @@
                         </RelativeLayout>
                     </LinearLayout>
                 </RelativeLayout>
-
             </FrameLayout>
-
         </RelativeLayout>
-
     </FrameLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -171,7 +171,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
         }
         UserType.type = "driver";
         init();
-        getPostalCodes();
+        //getPostalCodes();
         getNotifications();
         startService(new Intent(this, ServicioOnline.class));
     }
@@ -187,7 +187,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
         }
 
     }
-
+    /*
     private void getPostalCodes() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         reference.addValueEventListener(new ValueEventListener() {
@@ -223,7 +223,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
         });
         searchView.setOnQueryTextListener(this);
     }
-
+     */
 
     private void getNavigationToCustomer(LatLng destination) {
         Uri gmmIntentUri = Uri.parse("google.navigation:q=" + destination.latitude + "," + destination.longitude);
@@ -640,8 +640,8 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
         polylines = new ArrayList<>();
         polylines2 = new ArrayList<>();
         btnRideStatus = findViewById(R.id.btn_rideStatus);
-        searchView = findViewById(R.id.search_postalCodes);
-        listPostalCodes = findViewById(R.id.list_view_postalCodes);
+        //searchView = findViewById(R.id.search_postalCodes);
+        //listPostalCodes = findViewById(R.id.list_view_postalCodes);
         iniciarMapa();
         initListeners();
     }
@@ -661,7 +661,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
 
             }
         });
-
+        /*
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -672,6 +672,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
                 }
             }
         });
+         */
 
         button_menu.setOnClickListener(new View.OnClickListener() {
             @Override

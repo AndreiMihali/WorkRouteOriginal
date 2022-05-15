@@ -3315,7 +3315,6 @@ int id card_password 0x7f0a00af
 int id card_password_confirm 0x7f0a00b0
 int id card_photo 0x7f0a00b1
 int id card_root 0x7f0a00b2
-int id card_search 0x7f0a00b3
 int id card_spiiner 0x7f0a00b4
 int id card_status 0x7f0a00b5
 int id card_tarjeta 0x7f0a00b6
@@ -3539,7 +3538,6 @@ int id linear 0x7f0a018f
 int id linears_datos 0x7f0a0190
 int id listMode 0x7f0a0191
 int id list_item 0x7f0a0192
-int id list_view_postalCodes 0x7f0a0193
 int id ln_accept_or_decline 0x7f0a0194
 int id ln_escribir 0x7f0a0195
 int id ln_information 0x7f0a0196
@@ -3722,7 +3720,6 @@ int id search_edit_frame 0x7f0a0246
 int id search_go_btn 0x7f0a0247
 int id search_mag_icon 0x7f0a0248
 int id search_plate 0x7f0a0249
-int id search_postalCodes 0x7f0a024a
 int id search_src_text 0x7f0a024b
 int id search_voice_btn 0x7f0a024c
 int id second_sheet 0x7f0a024d

@@ -8,12 +8,12 @@
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_splash_screen.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\mipmap-hdpi_work_icon.png.flat",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\mipmap-hdpi\\work_icon.png"
-    },
-    {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\drawable_ic_baseline_camera_alt_24.xml.flat",
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\drawable\\ic_baseline_camera_alt_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\mipmap-hdpi_work_icon.png.flat",
+        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\mipmap-hdpi\\work_icon.png"
     },
     {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\drawable_ic_outline_navigation_24.xml.flat",
@@ -32,12 +32,12 @@
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\mipmap-xhdpi_arrow_my_location_round.png.flat",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\mipmap-xhdpi\\arrow_my_location_round.png"
-    },
-    {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\mipmap-xxxhdpi_arrow_my_location_background.png.flat",
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\mipmap-xxxhdpi\\arrow_my_location_background.png"
+    },
+    {
+        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\mipmap-xhdpi_arrow_my_location_round.png.flat",
+        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\mipmap-xhdpi\\arrow_my_location_round.png"
     },
     {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\drawable_back_img_icons_search.xml.flat",
@@ -56,12 +56,12 @@
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\drawable\\card_cvv.png"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\mipmap-xhdpi_car_map_foreground.png.flat",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\mipmap-xhdpi\\car_map_foreground.png"
-    },
-    {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\layout_activity_forgot_password.xml.flat",
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_forgot_password.xml"
+    },
+    {
+        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\mipmap-xhdpi_car_map_foreground.png.flat",
+        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\mipmap-xhdpi\\car_map_foreground.png"
     },
     {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\mipmap-xxxhdpi_location_pin_map_foreground.png.flat",
@@ -132,6 +132,10 @@
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\drawable\\ic_baseline_settings_24.xml"
     },
     {
+        "merged": "com.example.workroute.app-merged_res-40:/layout_activity_driver_map.xml.flat",
+        "source": "com.example.workroute.app-main-42:/layout/activity_driver_map.xml"
+    },
+    {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\mipmap-anydpi-v26_car_map_round.xml.flat",
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\mipmap-anydpi-v26\\car_map_round.xml"
     },
@@ -168,12 +172,12 @@
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\mipmap-hdpi\\arrow_my_location_foreground.png"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
-    },
-    {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\drawable_bx_chevron_up.xml.flat",
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\drawable\\bx_chevron_up.xml"
+    },
+    {
+        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\mipmap-xxhdpi_location_pin_map_round.png.flat",
@@ -184,12 +188,12 @@
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\color\\tablayout_style.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\drawable_ic_outline_arrow_forward_24.xml.flat",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\drawable\\ic_outline_arrow_forward_24.xml"
-    },
-    {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\layout_activity_help_center.xml.flat",
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_help_center.xml"
+    },
+    {
+        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\drawable_ic_outline_arrow_forward_24.xml.flat",
+        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\drawable\\ic_outline_arrow_forward_24.xml"
     },
     {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\anim_slide_up_in.xml.flat",
@@ -244,12 +248,12 @@
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_profile.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\font_allerta.xml.flat",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\font\\allerta.xml"
-    },
-    {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\layout_activity_messages.xml.flat",
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_messages.xml"
+    },
+    {
+        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\font_allerta.xml.flat",
+        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\font\\allerta.xml"
     },
     {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\layout_activity_driver_map.xml.flat",
@@ -810,10 +814,6 @@
     {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\drawable_blue_wallpaper.jpg.flat",
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\drawable\\blue_wallpaper.jpg"
-    },
-    {
-        "merged": "com.example.workroute.app-merged_res-40:/layout_activity_customer_map.xml.flat",
-        "source": "com.example.workroute.app-main-42:/layout/activity_customer_map.xml"
     },
     {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\drawable_favorite.png.flat",

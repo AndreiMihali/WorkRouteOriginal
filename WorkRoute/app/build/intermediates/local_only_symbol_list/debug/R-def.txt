@@ -209,7 +209,6 @@ id card_number
 id card_password
 id card_password_confirm
 id card_photo
-id card_search
 id card_spiiner
 id card_status
 id card_tarjeta
@@ -274,7 +273,6 @@ id layout_email_recover_password
 id layout_name
 id layout_pass
 id linears_datos
-id list_view_postalCodes
 id ln_accept_or_decline
 id ln_escribir
 id ln_information
@@ -308,7 +306,6 @@ id rela
 id relativeChangingColorOnClick
 id relativeLayout
 id rl
-id search_postalCodes
 id second_sheet
 id settings
 id sheet

@@ -7,19 +7,16 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.andremion.counterfab.CounterFab;
 import com.example.workroute.R;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.divider.MaterialDivider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.NullPointerException;
@@ -55,16 +52,10 @@ public final class ActivityDriverMapBinding implements ViewBinding {
   public final FloatingActionButton buttonUbi;
 
   @NonNull
-  public final MaterialCardView cardSearch;
-
-  @NonNull
   public final MaterialDivider divider;
 
   @NonNull
   public final RelativeLayout informationUser;
-
-  @NonNull
-  public final ListView listViewPostalCodes;
 
   @NonNull
   public final ImageButton locationIcon;
@@ -77,9 +68,6 @@ public final class ActivityDriverMapBinding implements ViewBinding {
 
   @NonNull
   public final CoordinatorLayout rela;
-
-  @NonNull
-  public final SearchView searchPostalCodes;
 
   @NonNull
   public final FrameLayout secondSheet;
@@ -116,15 +104,14 @@ public final class ActivityDriverMapBinding implements ViewBinding {
       @NonNull CounterFab buttonMenu, @NonNull ImageButton buttonMessage,
       @NonNull CounterFab buttonMessages, @NonNull CounterFab buttonNotifications,
       @NonNull CounterFab buttonProfile, @NonNull FloatingActionButton buttonUbi,
-      @NonNull MaterialCardView cardSearch, @NonNull MaterialDivider divider,
-      @NonNull RelativeLayout informationUser, @NonNull ListView listViewPostalCodes,
+      @NonNull MaterialDivider divider, @NonNull RelativeLayout informationUser,
       @NonNull ImageButton locationIcon, @NonNull ImageButton locationIcon1,
       @NonNull ImageView profilePhotoSheet, @NonNull CoordinatorLayout rela,
-      @NonNull SearchView searchPostalCodes, @NonNull FrameLayout secondSheet,
-      @NonNull FrameLayout sheet, @NonNull RelativeLayout toolbarBottomSheet,
-      @NonNull TextView txtDestination, @NonNull TextView txtDistance, @NonNull TextView txtName,
-      @NonNull TextView txtStartLocation, @NonNull TextView txtStatusMessage,
-      @NonNull TextView txtTotalPayTravel, @NonNull TextView txtTravelInformation) {
+      @NonNull FrameLayout secondSheet, @NonNull FrameLayout sheet,
+      @NonNull RelativeLayout toolbarBottomSheet, @NonNull TextView txtDestination,
+      @NonNull TextView txtDistance, @NonNull TextView txtName, @NonNull TextView txtStartLocation,
+      @NonNull TextView txtStatusMessage, @NonNull TextView txtTotalPayTravel,
+      @NonNull TextView txtTravelInformation) {
     this.rootView = rootView;
     this.botonDrag = botonDrag;
     this.btnRideStatus = btnRideStatus;
@@ -134,15 +121,12 @@ public final class ActivityDriverMapBinding implements ViewBinding {
     this.buttonNotifications = buttonNotifications;
     this.buttonProfile = buttonProfile;
     this.buttonUbi = buttonUbi;
-    this.cardSearch = cardSearch;
     this.divider = divider;
     this.informationUser = informationUser;
-    this.listViewPostalCodes = listViewPostalCodes;
     this.locationIcon = locationIcon;
     this.locationIcon1 = locationIcon1;
     this.profilePhotoSheet = profilePhotoSheet;
     this.rela = rela;
-    this.searchPostalCodes = searchPostalCodes;
     this.secondSheet = secondSheet;
     this.sheet = sheet;
     this.toolbarBottomSheet = toolbarBottomSheet;
@@ -230,12 +214,6 @@ public final class ActivityDriverMapBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.card_search;
-      MaterialCardView cardSearch = ViewBindings.findChildViewById(rootView, id);
-      if (cardSearch == null) {
-        break missingId;
-      }
-
       id = R.id.divider;
       MaterialDivider divider = ViewBindings.findChildViewById(rootView, id);
       if (divider == null) {
@@ -245,12 +223,6 @@ public final class ActivityDriverMapBinding implements ViewBinding {
       id = R.id.information_user;
       RelativeLayout informationUser = ViewBindings.findChildViewById(rootView, id);
       if (informationUser == null) {
-        break missingId;
-      }
-
-      id = R.id.list_view_postalCodes;
-      ListView listViewPostalCodes = ViewBindings.findChildViewById(rootView, id);
-      if (listViewPostalCodes == null) {
         break missingId;
       }
 
@@ -273,12 +245,6 @@ public final class ActivityDriverMapBinding implements ViewBinding {
       }
 
       CoordinatorLayout rela = (CoordinatorLayout) rootView;
-
-      id = R.id.search_postalCodes;
-      SearchView searchPostalCodes = ViewBindings.findChildViewById(rootView, id);
-      if (searchPostalCodes == null) {
-        break missingId;
-      }
 
       id = R.id.second_sheet;
       FrameLayout secondSheet = ViewBindings.findChildViewById(rootView, id);
@@ -342,10 +308,9 @@ public final class ActivityDriverMapBinding implements ViewBinding {
 
       return new ActivityDriverMapBinding((CoordinatorLayout) rootView, botonDrag, btnRideStatus,
           buttonMenu, buttonMessage, buttonMessages, buttonNotifications, buttonProfile, buttonUbi,
-          cardSearch, divider, informationUser, listViewPostalCodes, locationIcon, locationIcon1,
-          profilePhotoSheet, rela, searchPostalCodes, secondSheet, sheet, toolbarBottomSheet,
-          txtDestination, txtDistance, txtName, txtStartLocation, txtStatusMessage,
-          txtTotalPayTravel, txtTravelInformation);
+          divider, informationUser, locationIcon, locationIcon1, profilePhotoSheet, rela,
+          secondSheet, sheet, toolbarBottomSheet, txtDestination, txtDistance, txtName,
+          txtStartLocation, txtStatusMessage, txtTotalPayTravel, txtTravelInformation);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -100,10 +100,6 @@
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\layout_confirmations.xml"
     },
     {
-        "merged": "com.example.workroute.app-mergeDebugResources-39:/layout/activity_customer_map.xml",
-        "source": "com.example.workroute.app-main-42:/layout/activity_customer_map.xml"
-    },
-    {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_pay_method.xml",
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_pay_method.xml"
     },
@@ -114,6 +110,10 @@
     {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_main.xml",
         "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "com.example.workroute.app-mergeDebugResources-39:/layout/activity_driver_map.xml",
+        "source": "com.example.workroute.app-main-42:/layout/activity_driver_map.xml"
     },
     {
         "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_notifications.xml",
