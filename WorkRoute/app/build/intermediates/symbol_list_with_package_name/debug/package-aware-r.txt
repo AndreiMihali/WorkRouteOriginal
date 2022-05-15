@@ -3007,6 +3007,7 @@ drawable ic_baseline_chat_24
 drawable ic_baseline_close_24
 drawable ic_baseline_credit_card_24
 drawable ic_baseline_date_range_24
+drawable ic_baseline_departure_board_24
 drawable ic_baseline_directions_car_24
 drawable ic_baseline_drive_eta_24
 drawable ic_baseline_edit_24
@@ -3441,6 +3442,7 @@ id expandir_6
 id expandir_7
 id expandir_8
 id expandir_9
+id extras
 id fab_camera
 id fade
 id fill
@@ -4264,7 +4266,6 @@ string fingerprint_error_lockout
 string fingerprint_error_no_fingerprints
 string fingerprint_error_user_canceled
 string fingerprint_not_recognized
-string firebase_database_url
 string floatingButton
 string gcm_defaultSenderId
 string generalSettings

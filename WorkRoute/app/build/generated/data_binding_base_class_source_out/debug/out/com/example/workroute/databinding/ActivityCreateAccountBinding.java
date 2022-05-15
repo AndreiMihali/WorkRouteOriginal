@@ -5,10 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
@@ -23,7 +23,7 @@ import java.lang.String;
 
 public final class ActivityCreateAccountBinding implements ViewBinding {
   @NonNull
-  private final RelativeLayout rootView;
+  private final ConstraintLayout rootView;
 
   @NonNull
   public final MaterialButton buttonCreate;
@@ -76,7 +76,7 @@ public final class ActivityCreateAccountBinding implements ViewBinding {
   @NonNull
   public final MaterialToolbar toolbar;
 
-  private ActivityCreateAccountBinding(@NonNull RelativeLayout rootView,
+  private ActivityCreateAccountBinding(@NonNull ConstraintLayout rootView,
       @NonNull MaterialButton buttonCreate, @NonNull TextView buttonSignin,
       @NonNull MaterialCardView cardEmail, @NonNull MaterialCardView cardName,
       @NonNull MaterialCardView cardPassword, @NonNull MaterialCardView cardPasswordConfirm,
@@ -108,7 +108,7 @@ public final class ActivityCreateAccountBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public RelativeLayout getRoot() {
+  public ConstraintLayout getRoot() {
     return rootView;
   }
 
@@ -235,10 +235,10 @@ public final class ActivityCreateAccountBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityCreateAccountBinding((RelativeLayout) rootView, buttonCreate, buttonSignin,
-          cardEmail, cardName, cardPassword, cardPasswordConfirm, edConfirmpassRegister,
-          edEmailRegister, edPassRegister, edUsernameRegister, inputs, layoutConfirmPass,
-          layoutEmail, layoutName, layoutPass, texts, toolbar);
+      return new ActivityCreateAccountBinding((ConstraintLayout) rootView, buttonCreate,
+          buttonSignin, cardEmail, cardName, cardPassword, cardPasswordConfirm,
+          edConfirmpassRegister, edEmailRegister, edPassRegister, edUsernameRegister, inputs,
+          layoutConfirmPass, layoutEmail, layoutName, layoutPass, texts, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

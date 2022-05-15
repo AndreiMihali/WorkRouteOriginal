@@ -1,126 +1,126 @@
 [
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\item_people_subscribe.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\item_people_subscribe.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_pay_method.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_pay_method.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\item_notification.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\item_notification.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\network_lose.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\network_lose.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_messages.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_messages.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_personal_information.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_personal_information.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_chats.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_chats.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_login.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_login.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\item_chat_right.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\item_chat_right.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\tarjeta_metodo_pago_layout.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\tarjeta_metodo_pago_layout.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_general_settings.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_general_settings.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\message_toast_type_cvv.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\message_toast_type_cvv.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_active_subscriptions.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_active_subscriptions.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_create_account.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_create_account.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_app_information.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_app_information.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\item_chat_right.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\item_chat_right.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_confirm_login.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_confirm_login.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_help_center.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_help_center.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_add_driver_information.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_add_driver_information.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_active_subscriptions.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_active_subscriptions.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_profile.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_profile.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_driver_map.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_driver_map.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_personal_information.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_personal_information.xml"
+        "merged": "com.example.workroute.app-mergeDebugResources-39:/layout/activity_personal_information.xml",
+        "source": "com.example.workroute.app-main-42:/layout/activity_personal_information.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_first_time.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_first_time.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_profile.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_profile.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\chats_list_item.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\chats_list_item.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_driver_map.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_driver_map.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_messages.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_messages.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_splash_screen.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_splash_screen.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_notifications.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_notifications.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_forgot_password.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_forgot_password.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_chats.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_chats.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\network_lose.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\network_lose.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\chats_list_item.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\chats_list_item.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\message_toast_type_cvv.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\message_toast_type_cvv.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_customer_map.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_customer_map.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\tarjeta_metodo_pago_layout.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\tarjeta_metodo_pago_layout.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_first_time.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_first_time.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_login.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_login.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_app_information.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_app_information.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_create_account.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_create_account.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_splash_screen.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_splash_screen.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_help_center.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_help_center.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_confirm_login.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_confirm_login.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_customer_map.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_customer_map.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\item_people_subscribe.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\item_people_subscribe.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\layout_confirmations.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\layout_confirmations.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\list_item.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\list_item.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_pay_method.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_pay_method.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\item_chat_left.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\item_chat_left.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\item_chat_left.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\item_chat_left.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\item_notification.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\item_notification.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_main.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_main.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_general_settings.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_general_settings.xml"
     },
     {
-        "merged": "com.example.workroute.app-mergeDebugResources-39:/layout/activity_driver_map.xml",
-        "source": "com.example.workroute.app-main-42:/layout/activity_driver_map.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\layout_confirmations.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\layout_confirmations.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_notifications.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_notifications.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_forgot_password.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_forgot_password.xml"
     },
     {
-        "merged": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\list_item.xml",
-        "source": "C:\\Users\\valin\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\list_item.xml"
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-39:\\layout\\activity_add_driver_information.xml",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_add_driver_information.xml"
     }
 ]

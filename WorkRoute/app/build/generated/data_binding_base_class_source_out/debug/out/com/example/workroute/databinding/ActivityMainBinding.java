@@ -4,9 +4,9 @@ package com.example.workroute.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
@@ -17,7 +17,7 @@ import java.lang.String;
 
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
-  private final RelativeLayout rootView;
+  private final ConstraintLayout rootView;
 
   @NonNull
   public final MaterialCardView cardCustomer;
@@ -32,12 +32,12 @@ public final class ActivityMainBinding implements ViewBinding {
   public final MaterialCardView cardDriverGeneral;
 
   @NonNull
-  public final RelativeLayout rela;
+  public final ConstraintLayout rela;
 
-  private ActivityMainBinding(@NonNull RelativeLayout rootView,
+  private ActivityMainBinding(@NonNull ConstraintLayout rootView,
       @NonNull MaterialCardView cardCustomer, @NonNull MaterialCardView cardCustomerGeneral,
       @NonNull MaterialCardView cardDriver, @NonNull MaterialCardView cardDriverGeneral,
-      @NonNull RelativeLayout rela) {
+      @NonNull ConstraintLayout rela) {
     this.rootView = rootView;
     this.cardCustomer = cardCustomer;
     this.cardCustomerGeneral = cardCustomerGeneral;
@@ -48,7 +48,7 @@ public final class ActivityMainBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public RelativeLayout getRoot() {
+  public ConstraintLayout getRoot() {
     return rootView;
   }
 
@@ -97,9 +97,9 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      RelativeLayout rela = (RelativeLayout) rootView;
+      ConstraintLayout rela = (ConstraintLayout) rootView;
 
-      return new ActivityMainBinding((RelativeLayout) rootView, cardCustomer, cardCustomerGeneral,
+      return new ActivityMainBinding((ConstraintLayout) rootView, cardCustomer, cardCustomerGeneral,
           cardDriver, cardDriverGeneral, rela);
     }
     String missingId = rootView.getResources().getResourceName(id);

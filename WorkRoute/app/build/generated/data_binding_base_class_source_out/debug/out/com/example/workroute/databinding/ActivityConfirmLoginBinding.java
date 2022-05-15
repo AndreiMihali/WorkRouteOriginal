@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
@@ -23,7 +23,7 @@ import java.lang.String;
 
 public final class ActivityConfirmLoginBinding implements ViewBinding {
   @NonNull
-  private final RelativeLayout rootView;
+  private final ConstraintLayout rootView;
 
   @NonNull
   public final MaterialButton buttonGoogle;
@@ -65,18 +65,18 @@ public final class ActivityConfirmLoginBinding implements ViewBinding {
   public final TextView passwordForgot;
 
   @NonNull
-  public final RelativeLayout rl;
+  public final ConstraintLayout rl;
 
   @NonNull
   public final LinearLayout texts;
 
-  private ActivityConfirmLoginBinding(@NonNull RelativeLayout rootView,
+  private ActivityConfirmLoginBinding(@NonNull ConstraintLayout rootView,
       @NonNull MaterialButton buttonGoogle, @NonNull MaterialButton buttonLogin,
       @NonNull TextView buttonSignup, @NonNull MaterialCardView cardEmail,
       @NonNull MaterialCardView cardPassword, @NonNull TextInputEditText edEmail,
       @NonNull TextInputEditText edPass, @NonNull ImageView image, @NonNull LinearLayout inputs,
       @NonNull TextInputLayout layoutEmail, @NonNull TextInputLayout layoutPass,
-      @NonNull TextView or, @NonNull TextView passwordForgot, @NonNull RelativeLayout rl,
+      @NonNull TextView or, @NonNull TextView passwordForgot, @NonNull ConstraintLayout rl,
       @NonNull LinearLayout texts) {
     this.rootView = rootView;
     this.buttonGoogle = buttonGoogle;
@@ -98,7 +98,7 @@ public final class ActivityConfirmLoginBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public RelativeLayout getRoot() {
+  public ConstraintLayout getRoot() {
     return rootView;
   }
 
@@ -201,7 +201,7 @@ public final class ActivityConfirmLoginBinding implements ViewBinding {
         break missingId;
       }
 
-      RelativeLayout rl = (RelativeLayout) rootView;
+      ConstraintLayout rl = (ConstraintLayout) rootView;
 
       id = R.id.texts;
       LinearLayout texts = ViewBindings.findChildViewById(rootView, id);
@@ -209,7 +209,7 @@ public final class ActivityConfirmLoginBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityConfirmLoginBinding((RelativeLayout) rootView, buttonGoogle, buttonLogin,
+      return new ActivityConfirmLoginBinding((ConstraintLayout) rootView, buttonGoogle, buttonLogin,
           buttonSignup, cardEmail, cardPassword, edEmail, edPass, image, inputs, layoutEmail,
           layoutPass, or, passwordForgot, rl, texts);
     }

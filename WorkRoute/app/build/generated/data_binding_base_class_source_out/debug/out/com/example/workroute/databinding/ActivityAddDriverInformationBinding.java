@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
@@ -21,7 +21,7 @@ import java.lang.String;
 
 public final class ActivityAddDriverInformationBinding implements ViewBinding {
   @NonNull
-  private final RelativeLayout rootView;
+  private final ConstraintLayout rootView;
 
   @NonNull
   public final AutoCompleteTextView autocompleteColors;
@@ -42,16 +42,17 @@ public final class ActivityAddDriverInformationBinding implements ViewBinding {
   public final ImageView img;
 
   @NonNull
-  public final RelativeLayout relativeLayout;
+  public final ConstraintLayout relativeLayout;
 
   @NonNull
   public final TextView txtTitle;
 
-  private ActivityAddDriverInformationBinding(@NonNull RelativeLayout rootView,
+  private ActivityAddDriverInformationBinding(@NonNull ConstraintLayout rootView,
       @NonNull AutoCompleteTextView autocompleteColors,
       @NonNull AutoCompleteTextView autocompleteTypes, @NonNull MaterialButton btnContinue,
       @NonNull TextInputEditText edIdNumber, @NonNull TextInputEditText edPlate,
-      @NonNull ImageView img, @NonNull RelativeLayout relativeLayout, @NonNull TextView txtTitle) {
+      @NonNull ImageView img, @NonNull ConstraintLayout relativeLayout,
+      @NonNull TextView txtTitle) {
     this.rootView = rootView;
     this.autocompleteColors = autocompleteColors;
     this.autocompleteTypes = autocompleteTypes;
@@ -65,7 +66,7 @@ public final class ActivityAddDriverInformationBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public RelativeLayout getRoot() {
+  public ConstraintLayout getRoot() {
     return rootView;
   }
 
@@ -126,7 +127,7 @@ public final class ActivityAddDriverInformationBinding implements ViewBinding {
         break missingId;
       }
 
-      RelativeLayout relativeLayout = (RelativeLayout) rootView;
+      ConstraintLayout relativeLayout = (ConstraintLayout) rootView;
 
       id = R.id.txt_title;
       TextView txtTitle = ViewBindings.findChildViewById(rootView, id);
@@ -134,8 +135,9 @@ public final class ActivityAddDriverInformationBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityAddDriverInformationBinding((RelativeLayout) rootView, autocompleteColors,
-          autocompleteTypes, btnContinue, edIdNumber, edPlate, img, relativeLayout, txtTitle);
+      return new ActivityAddDriverInformationBinding((ConstraintLayout) rootView,
+          autocompleteColors, autocompleteTypes, btnContinue, edIdNumber, edPlate, img,
+          relativeLayout, txtTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

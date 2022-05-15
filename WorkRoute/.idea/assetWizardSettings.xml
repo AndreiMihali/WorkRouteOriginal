@@ -373,7 +373,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/keyboard_arrow_up/baseline_keyboard_arrow_up_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/departure_board/baseline_departure_board_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -384,7 +384,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="0f0f6b" />
-                            <entry key="outputName" value="bx_chevron_up" />
+                            <entry key="outputName" value="ic_baseline_departure_board_24" />
                             <entry key="sourceFile" value="C:\Users\valin\Downloads\bx-lock-open.svg" />
                           </map>
                         </option>

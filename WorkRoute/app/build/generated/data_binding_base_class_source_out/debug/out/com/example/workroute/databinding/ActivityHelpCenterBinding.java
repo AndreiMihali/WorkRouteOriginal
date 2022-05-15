@@ -5,10 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
@@ -20,7 +20,7 @@ import java.lang.String;
 
 public final class ActivityHelpCenterBinding implements ViewBinding {
   @NonNull
-  private final RelativeLayout rootView;
+  private final ConstraintLayout rootView;
 
   @NonNull
   public final MaterialCardView cardViewActiveSubs;
@@ -124,7 +124,7 @@ public final class ActivityHelpCenterBinding implements ViewBinding {
   @NonNull
   public final TextView txt9;
 
-  private ActivityHelpCenterBinding(@NonNull RelativeLayout rootView,
+  private ActivityHelpCenterBinding(@NonNull ConstraintLayout rootView,
       @NonNull MaterialCardView cardViewActiveSubs, @NonNull MaterialCardView cardViewDeleteAccount,
       @NonNull MaterialCardView cardViewGeneralSettings, @NonNull MaterialCardView cardViewLogOut,
       @NonNull MaterialCardView cardViewPayMethod, @NonNull MaterialCardView cardViewPersonalInfo,
@@ -179,7 +179,7 @@ public final class ActivityHelpCenterBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public RelativeLayout getRoot() {
+  public ConstraintLayout getRoot() {
     return rootView;
   }
 
@@ -408,7 +408,7 @@ public final class ActivityHelpCenterBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityHelpCenterBinding((RelativeLayout) rootView, cardViewActiveSubs,
+      return new ActivityHelpCenterBinding((ConstraintLayout) rootView, cardViewActiveSubs,
           cardViewDeleteAccount, cardViewGeneralSettings, cardViewLogOut, cardViewPayMethod,
           cardViewPersonalInfo, expandir1, expandir10, expandir11, expandir12, expandir13,
           expandir2, expandir3, expandir4, expandir5, expandir6, expandir7, expandir8, expandir9,

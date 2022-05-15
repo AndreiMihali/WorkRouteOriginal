@@ -684,12 +684,12 @@
         "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\drawable\\ic_baseline_edit_24.xml"
     },
     {
-        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\drawable_ic_baseline_add_24.xml.flat",
-        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\drawable\\ic_baseline_add_24.xml"
-    },
-    {
         "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\layout_activity_main.xml.flat",
         "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\drawable_ic_baseline_add_24.xml.flat",
+        "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-42:\\drawable\\ic_baseline_add_24.xml"
     },
     {
         "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-merged_res-40:\\mipmap-hdpi_arrow_my_location_foreground.png.flat",

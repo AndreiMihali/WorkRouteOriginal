@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/back_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activitys.HelpCenter">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarUseWorkRoute"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/Theme.MaterialComponents.DayNight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
         app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
         app:navigationIconTint="@color/secondary"
         app:title="Help Center"
@@ -18,8 +24,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbarUseWorkRoute"
+        android:layout_height="wrap_content"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarUseWorkRoute"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="30dp">
 
         <LinearLayout
@@ -174,7 +184,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="@string/driverMapButton"                        android:textSize="16sp"
+                        android:text="@string/driverMapButton"
+                        android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -224,7 +235,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="@string/customerMapButton"                            android:textSize="16sp"
+                        android:text="@string/customerMapButton"
+                        android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -274,7 +286,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="@string/chatButton"                            android:textSize="16sp"
+                        android:text="@string/chatButton"
+                        android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -322,8 +335,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:textColor="@color/secondary"
-                            android:text="+6" />
+                            android:text="+6"
+                            android:textColor="@color/secondary" />
                     </RelativeLayout>
 
                     <TextView
@@ -332,7 +345,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:lineSpacingExtra="8sp"
-                        android:text="@string/profileButton"                            android:textSize="16sp"
+                        android:text="@string/profileButton"
+                        android:textSize="16sp"
                         tools:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -709,4 +723,4 @@
 
         </LinearLayout>
     </ScrollView>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

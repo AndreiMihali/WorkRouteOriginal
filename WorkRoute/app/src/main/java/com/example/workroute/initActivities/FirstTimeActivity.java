@@ -110,7 +110,11 @@ public class FirstTimeActivity extends AppCompatActivity {
         workAddress = findViewById(R.id.txt_work_direction);
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         Bundle bundle = getIntent().getExtras();
-        username.setText(bundle.getString("Name", "Username"));
+        if(bundle==null){
+            username.setText(getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getString("name","default name"));
+        }else{
+            username.setText(bundle.getString("Name", "Username"));
+        }
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         initActivityResultLauncher();
         initListeners();

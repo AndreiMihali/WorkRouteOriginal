@@ -43,7 +43,6 @@
     <string name="default_web_client_id" translatable="false">789989127519-t29vd0ruodrb86um9d1lmggdh8h9k83h.apps.googleusercontent.com</string>
     <string name="deleteAccount">You can request the desactivation or deletion of your account through this section</string>
     <string name="driverMapButton">With the driver view, drivers registered as "Customer" will be displayed</string>
-    <string name="firebase_database_url" translatable="false">https://workroute-6f6c4-default-rtdb.firebaseio.com</string>
     <string name="floatingButton"> By clicking on the menu button, the chat, profile and notification buttons become visible. When displayed, clicking on it again closes the menu</string>
     <string name="gcm_defaultSenderId" translatable="false">789989127519</string>
     <string name="generalSettings">In this section you will find different options and menus, as well as notification preferences or information about the application</string>
@@ -66,7 +65,7 @@
         <item name="colorPrimary">@color/secondary</item>
         <item name="colorOnPrimary">#B0CAE7</item>
     </style>
-    <style name="CustomTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="CustomTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
     <style name="DialogAlert" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
         <item name="colorPrimary">@color/secondary</item>
         <item name="colorOnPrimary">#B0CAE7</item>

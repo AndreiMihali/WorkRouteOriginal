@@ -247,6 +247,7 @@ id expandir_6
 id expandir_7
 id expandir_8
 id expandir_9
+id extras
 id fab_camera
 id global_card
 id helpMenu
@@ -448,7 +449,6 @@ string customerMapButton
 string default_web_client_id
 string deleteAccount
 string driverMapButton
-string firebase_database_url
 string floatingButton
 string gcm_defaultSenderId
 string generalSettings

@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
@@ -22,7 +22,7 @@ import java.lang.String;
 
 public final class ActivityFirstTimeBinding implements ViewBinding {
   @NonNull
-  private final RelativeLayout rootView;
+  private final ConstraintLayout rootView;
 
   @NonNull
   public final MaterialButton buttonContinue;
@@ -66,7 +66,7 @@ public final class ActivityFirstTimeBinding implements ViewBinding {
   @NonNull
   public final TextView userName;
 
-  private ActivityFirstTimeBinding(@NonNull RelativeLayout rootView,
+  private ActivityFirstTimeBinding(@NonNull ConstraintLayout rootView,
       @NonNull MaterialButton buttonContinue, @NonNull MaterialCardView cardBirthday,
       @NonNull MaterialCardView cardPhoto, @NonNull MaterialCardView cardSpiiner,
       @NonNull MaterialCardView cardWorkDirection, @NonNull FloatingActionButton fabCamera,
@@ -92,7 +92,7 @@ public final class ActivityFirstTimeBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public RelativeLayout getRoot() {
+  public ConstraintLayout getRoot() {
     return rootView;
   }
 
@@ -201,7 +201,7 @@ public final class ActivityFirstTimeBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityFirstTimeBinding((RelativeLayout) rootView, buttonContinue, cardBirthday,
+      return new ActivityFirstTimeBinding((ConstraintLayout) rootView, buttonContinue, cardBirthday,
           cardPhoto, cardSpiiner, cardWorkDirection, fabCamera, layoutEdAlias, linearsDatos,
           profileImage, texts, txtCiudad, txtCumple, txtWorkDirection, userName);
     }

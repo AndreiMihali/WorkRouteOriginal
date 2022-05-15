@@ -4,7 +4,7 @@
             "outputFile": "com.example.workroute.app-mergeDebugResources-38:/values-v27/values-v27.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\valin\\Desktop\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\values-v27\\themes.xml",
+                    "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\values-v27\\themes.xml",
                     "from": {
                         "startLines": "3,19",
                         "startColumns": "4,4",

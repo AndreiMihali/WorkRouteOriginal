@@ -2,25 +2,30 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
     android:id="@+id/rel_layout_general"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".profile.Personal_information">
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
         android:id="@+id/nestedScroll"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:id="@+id/cord_layout"
-                android:layout_width="match_parent"
-                android:layout_height="350dp">
+                android:layout_width="0dp"
+                android:layout_height="350dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0">
 
                 <LinearLayout
                     android:id="@+id/rel_layout"
@@ -69,11 +74,11 @@
                             android:id="@+id/editProfilePhoto"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
-                            android:layout_weight="1"
                             android:layout_gravity="center_vertical"
                             android:layout_marginTop="30dp"
-                            app:tint="@color/white"
-                            app:srcCompat="@drawable/gallery" />
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/gallery"
+                            app:tint="@color/white" />
 
                     </LinearLayout>
 
@@ -133,11 +138,15 @@
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/cord_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="40dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cord_layout"
+                app:layout_constraintVertical_bias="1">
 
                 <TextView
                     android:id="@+id/textView3"
@@ -149,151 +158,151 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
-                    android:gravity="center"
-                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="35dp"
-                        android:src="@drawable/ic_baseline_person_24"
                         android:layout_height="35dp"
+                        android:src="@drawable/ic_baseline_person_24"
                         app:tint="@color/secondary" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_height="wrap_content">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:text="Name"
-                            android:textSize="18sp"
                             android:textColor="@color/black"
-                            android:layout_height="wrap_content"/>
+                            android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/txt_name"
-                            android:layout_marginTop="2dp"
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
                             android:text="Andrei Mihali"
-                            android:textSize="16sp"
                             android:textColor="@color/secondary"
-                            android:layout_height="wrap_content"/>
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:gravity="center_vertical"
-                    android:layout_marginStart="10dp"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="30dp"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="35dp"
-                        android:src="@drawable/ic_baseline_work_24"
                         android:layout_height="35dp"
+                        android:src="@drawable/ic_baseline_work_24"
                         app:tint="@color/secondary" />
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_height="wrap_content">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:text="Work Address"
-                            android:textSize="18sp"
                             android:textColor="@color/black"
-                            android:layout_height="wrap_content"/>
+                            android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/txt_work_address"
-                            android:layout_marginTop="2dp"
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
                             android:text="Marismas 9 Madrid"
-                            android:textSize="16sp"
                             android:textColor="@color/secondary"
-                            android:layout_height="wrap_content"/>
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <ImageButton
-                        android:background="@android:color/transparent"
                         android:id="@+id/btn_edit_work"
                         android:layout_width="wrap_content"
-                        android:src="@drawable/ic_baseline_edit_24"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_baseline_edit_24" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:gravity="center_vertical"
-                    android:layout_marginStart="10dp"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="30dp"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="35dp"
-                        android:src="@drawable/ic_baseline_home_24"
                         android:layout_height="35dp"
+                        android:src="@drawable/ic_baseline_home_24"
                         app:tint="@color/secondary" />
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_height="wrap_content">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:text="Home Address"
-                            android:textSize="18sp"
                             android:textColor="@color/black"
-                            android:layout_height="wrap_content"/>
+                            android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/txt_home_address"
-                            android:layout_marginTop="2dp"
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
                             android:text="Marismas 9 Madrid"
-                            android:textSize="16sp"
                             android:textColor="@color/secondary"
-                            android:layout_height="wrap_content"/>
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <ImageButton
-                        android:background="@android:color/transparent"
                         android:id="@+id/btn_edit_home"
                         android:layout_width="wrap_content"
-                        android:src="@drawable/ic_baseline_edit_24"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_baseline_edit_24" />
                 </LinearLayout>
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_car_information"
                     android:layout_width="match_parent"
-                    app:cardCornerRadius="20dp"
-                    android:layout_marginBottom="10dp"
-                    app:cardBackgroundColor="#E5E5E6"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
-                    app:contentPadding="15dp"
-                    app:cardPreventCornerOverlap="true"
+                    android:layout_marginBottom="10dp"
                     android:theme="@style/Theme.MaterialComponents.DayNight"
-                    android:layout_height="wrap_content">
+                    app:cardBackgroundColor="#E5E5E6"
+                    app:cardCornerRadius="20dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:contentPadding="15dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -301,19 +310,19 @@
 
                             <ImageView
                                 android:layout_width="35dp"
+                                android:layout_height="35dp"
                                 android:layout_centerVertical="true"
                                 android:src="@drawable/ic_baseline_drive_eta_24"
-                                android:layout_height="35dp"
                                 app:tint="@color/secondary" />
 
                             <TextView
                                 android:layout_width="wrap_content"
-                                android:text="Car information"
-                                android:textSize="18sp"
-                                android:textColor="@color/secondary"
-                                android:textStyle="bold"
+                                android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
-                                android:layout_height="wrap_content"/>
+                                android:text="Car information"
+                                android:textColor="@color/secondary"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
 
                             <ImageButton
                                 android:id="@+id/buttonUpDown"
@@ -327,84 +336,84 @@
                         </RelativeLayout>
 
                         <LinearLayout
-                            android:visibility="gone"
                             android:id="@+id/ln_information"
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:orientation="vertical"
-                            android:layout_height="wrap_content">
+                            android:visibility="gone">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:orientation="horizontal"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
                                 <TextView
                                     android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:text="Plate Number:"
-                                    android:textSize="18sp"
                                     android:textColor="@color/black"
-                                    android:layout_height="wrap_content"/>
+                                    android:textSize="18sp" />
 
                                 <TextView
                                     android:id="@+id/txt_plateNumber"
                                     android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:layout_marginStart="10dp"
                                     android:text="ASDC 1223"
                                     android:textColor="@color/secondary"
-                                    android:textSize="16sp"
-                                    android:layout_height="wrap_content"/>
+                                    android:textSize="16sp" />
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_marginTop="10dp"
                                 android:layout_width="match_parent"
-                                android:orientation="horizontal"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal">
 
                                 <TextView
                                     android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:text="Car Type:"
-                                    android:textSize="18sp"
                                     android:textColor="@color/black"
-                                    android:layout_height="wrap_content"/>
+                                    android:textSize="18sp" />
 
                                 <TextView
                                     android:id="@+id/txt_car_type"
                                     android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:layout_marginStart="10dp"
                                     android:text="Minivan"
                                     android:textColor="@color/secondary"
-                                    android:textSize="16sp"
-                                    android:layout_height="wrap_content"/>
+                                    android:textSize="16sp" />
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_marginTop="10dp"
                                 android:layout_width="match_parent"
-                                android:orientation="horizontal"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal">
 
                                 <TextView
                                     android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:text="Car color:"
-                                    android:textSize="18sp"
                                     android:textColor="@color/black"
-                                    android:layout_height="wrap_content"/>
+                                    android:textSize="18sp" />
 
                                 <TextView
                                     android:id="@+id/txt_car_color"
                                     android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:layout_marginStart="10dp"
                                     android:text="Orange"
                                     android:textColor="@color/secondary"
-                                    android:textSize="16sp"
-                                    android:layout_height="wrap_content"/>
+                                    android:textSize="16sp" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
