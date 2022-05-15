@@ -164,7 +164,7 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
     private Marker myWorkMarker;
     private LocationCallback locationCallback;
     private Marker mDriverMarker;
-    private SearchView searchView;
+    //private SearchView searchView;
     private ListView listPostalCodes;
     private ArrayList<String> data = new ArrayList<>();
     private ArrayAdapter<String> adapter;
@@ -183,7 +183,7 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
         }
         UserType.type = "customer";
         init();
-        getPostalCodes();
+        //getPostalCodes();
         getNotifications();
         startService(new Intent(this, ServicioOnline.class));
     }
@@ -223,14 +223,14 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
         polylines = new ArrayList<>();
         polylines2 = new ArrayList<>();
         driverId = "";
-        searchView = findViewById(R.id.search_postalCodes);
-        listPostalCodes = findViewById(R.id.list_view_postalCodes);
+        //searchView = findViewById(R.id.search_postalCodes);
+        //listPostalCodes = findViewById(R.id.list_view_postalCodes);
         setBiometricBuilder();
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         iniciarMapa();
         initListeners();
     }
-
+    /*
     private void getPostalCodes() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         reference.addValueEventListener(new ValueEventListener() {
@@ -266,7 +266,7 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
         });
         searchView.setOnQueryTextListener(this);
     }
-
+     */
 
     private void getNotifications() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Notifications");
@@ -770,7 +770,7 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
                 startActivity(i);
             }
         });
-
+        /*
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -781,6 +781,7 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
                 }
             }
         });
+         */
 
 
         /**

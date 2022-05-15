@@ -65,11 +65,11 @@ public class GeneralSettingsActivity extends AppCompatActivity {
 
                 if (emailBox.isChecked()) {
                     //TODO: CODIGO QUE SE QUIERA METER
-                    Toast.makeText(getApplicationContext(),"email siii",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Email notifications enabled",Toast.LENGTH_SHORT).show();
 
                 } else {
                     //TODO: CODIGO QUE SE QUIERA METER
-                    Toast.makeText(getApplicationContext(),"email nooo",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Email notifications disabled",Toast.LENGTH_SHORT).show();
 
                 }
 
