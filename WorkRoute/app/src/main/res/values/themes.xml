@@ -48,7 +48,7 @@
             <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
 
-    <style name="CustomTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="CustomTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
 
     <style name="Login" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
