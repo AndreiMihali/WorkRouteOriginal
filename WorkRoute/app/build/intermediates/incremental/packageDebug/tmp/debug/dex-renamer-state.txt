@@ -1,4 +1,4 @@
-#Sun May 15 14:53:32 CEST 2022
+#Fri May 27 21:27:02 CEST 2022
 path.4=14/classes.dex
 path.3=13/classes.dex
 path.2=10/classes.dex
@@ -8,6 +8,7 @@ renamed.8=classes9.dex
 path.8=5/classes.dex
 path.7=4/classes.dex
 path.6=2/classes.dex
+renamed.12=classes13.dex
 path.5=15/classes.dex
 renamed.11=classes12.dex
 renamed.10=classes11.dex
@@ -18,6 +19,7 @@ base.2=C\:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\a
 base.1=C\:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.0=C\:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 renamed.3=classes4.dex
+path.12=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 path.10=classes2.dex
@@ -33,5 +35,6 @@ renamed.5=classes6.dex
 base.6=C\:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
 renamed.4=classes5.dex
 base.5=C\:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex
+base.12=C\:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes4.dex
 base.11=C\:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
 base.10=C\:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex

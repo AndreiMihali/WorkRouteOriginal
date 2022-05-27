@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: de.halfbit:edge-to-edge:1.0-rc1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ff550f8ce54f103be1c493462c74e32b/transformed/jetified-edge-to-edge-1.0-rc1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ff550f8ce54f103be1c493462c74e32b/transformed/jetified-edge-to-edge-1.0-rc1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ff550f8ce54f103be1c493462c74e32b/transformed/jetified-edge-to-edge-1.0-rc1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.halfbit/edge-to-edge/1.0-rc1/6b8a3aa191e6317fdbc27148d62cf6df9bbdd0ff/edge-to-edge-1.0-rc1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.halfbit/edge-to-edge/1.0-rc1/308b0d9a0908ecbaea529fc838d5dc1494c5b5a3/edge-to-edge-1.0-rc1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -27,11 +27,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +39,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.SearchView;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.app.ActivityCompat;
@@ -111,15 +107,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class CustomerMap extends FragmentActivity implements SearchView.OnQueryTextListener, RoutingListener, LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class CustomerMap extends FragmentActivity implements RoutingListener, LocationListener, GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private CounterFab button_menu, button_chats, button_profile, button_notifications;
     private FloatingActionButton button_ubi;
@@ -164,10 +158,7 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
     private Marker myWorkMarker;
     private LocationCallback locationCallback;
     private Marker mDriverMarker;
-    //private SearchView searchView;
-    private ListView listPostalCodes;
     private ArrayList<String> data = new ArrayList<>();
-    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,7 +174,6 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
         }
         UserType.type = "customer";
         init();
-        //getPostalCodes();
         getNotifications();
         startService(new Intent(this, ServicioOnline.class));
     }
@@ -223,50 +213,11 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
         polylines = new ArrayList<>();
         polylines2 = new ArrayList<>();
         driverId = "";
-        //searchView = findViewById(R.id.search_postalCodes);
-        //listPostalCodes = findViewById(R.id.list_view_postalCodes);
         setBiometricBuilder();
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         iniciarMapa();
         initListeners();
     }
-    /*
-    private void getPostalCodes() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snap : snapshot.getChildren()) {
-                    if (snap.child("postalCodeWork").exists()) {
-                        if (!data.contains(snap.child("postalCodeWork").getValue().toString())) {
-                            data.add(snap.child("postalCodeWork").getValue().toString());
-                        }
-                    }
-                }
-                if (!data.isEmpty()) {
-                    setAdapterInList();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void setAdapterInList() {
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, data);
-        listPostalCodes.setAdapter(adapter);
-        listPostalCodes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                searchView.setQuery((String) adapter.getItem(position), false);
-            }
-        });
-        searchView.setOnQueryTextListener(this);
-    }
-     */
 
     private void getNotifications() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Notifications");
@@ -376,12 +327,12 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
         });
     }
 
-    private void getSenderName(String sender, String receiverId) {
+    private void getSenderName(String sender, String receiverId, String... message) {
         FirebaseFirestore.getInstance().collection("Usuarios").document(sender).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String name = documentSnapshot.get("nombre").toString();
-                getToken(name, receiverId, "Yo have a new request from " + name, "NEW REQUEST");
+                getToken(name, receiverId, (message[0].isEmpty() || message[0] == null) ? "Yo have a new request from " + name : message + name, "NEW REQUEST");
             }
         });
     }
@@ -533,17 +484,17 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
                         }
                     }
 
-                    Map<String,Object> departureHome=(Map<String, Object>)snapshot.child("DriverInformation").child("hourDepartureHome").getValue();
+                    Map<String, Object> departureHome = (Map<String, Object>) snapshot.child("DriverInformation").child("hourDepartureHome").getValue();
 
-                    if(departureHome.get("hour")!=null && departureHome.get("minute")!=null){
-                        String hora= String.format("%02d:%02d",Integer.parseInt((String) departureHome.get("hour")),Integer.parseInt((String) departureHome.get("minute")));
+                    if (departureHome.get("hour") != null && departureHome.get("minute") != null) {
+                        String hora = String.format("%02d:%02d", Integer.parseInt((String) departureHome.get("hour")), Integer.parseInt((String) departureHome.get("minute")));
                         txt_departure_home.setText(hora);
                     }
 
-                    Map<String,Object> departureWork=(Map<String, Object>)snapshot.child("DriverInformation").child("hourDepartureWork").getValue();
+                    Map<String, Object> departureWork = (Map<String, Object>) snapshot.child("DriverInformation").child("hourDepartureWork").getValue();
 
-                    if(departureWork.get("hour")!=null && departureWork.get("minute")!=null){
-                        String hora= String.format("%02d:%02d",Integer.parseInt((String) departureWork.get("hour")),Integer.parseInt((String) departureWork.get("minute")));
+                    if (departureWork.get("hour") != null && departureWork.get("minute") != null) {
+                        String hora = String.format("%02d:%02d", Integer.parseInt((String) departureWork.get("hour")), Integer.parseInt((String) departureWork.get("minute")));
                         txt_departure_work.setText(hora);
                     }
 
@@ -564,7 +515,7 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
                     existUserSubscription(new ExistListener() {
                         @Override
                         public void existCallback(boolean exist) {
-                            if(exist){
+                            if (exist) {
                                 isPendingSubscribed(driverId, new SimpleCallback<String>() {
                                     @Override
                                     public void callback(String data, Object... secondary) {
@@ -579,11 +530,11 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
                                         }
                                     }
                                 });
-                            }else{
+                            } else {
                                 btn_cancel.setText("Subscribe");
                             }
                         }
-                    },driverId);
+                    }, driverId);
                 }
             }
 
@@ -770,19 +721,6 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
                 startActivity(i);
             }
         });
-        /*
-        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    listPostalCodes.setVisibility(View.VISIBLE);
-                } else {
-                    listPostalCodes.setVisibility(View.GONE);
-                }
-            }
-        });
-         */
-
 
         /**
          * BOTÓN SUBSCRIBE
@@ -795,6 +733,7 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
                 } else if (btn_cancel.getText().toString().equals("Subscribe")) {
                     showDialog();
                 } else {
+                    getSenderName(firebaseAuth.getCurrentUser().getUid(),driverId,"We notified the driver that you want to go to work");
                     Toast.makeText(getApplicationContext(), "We notified the driver that you want to go to work", Toast.LENGTH_LONG).show();
                 }
             }
@@ -893,8 +832,8 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
         txt_total_pay_travel = findViewById(R.id.txt_total_pay_travel_cost);
         txt_startLocation = findViewById(R.id.txt_startLocation_cost);
         txt_destination = findViewById(R.id.txt_destination_cost);
-        txt_departure_home=findViewById(R.id.txt_departure_home);
-        txt_departure_work=findViewById(R.id.txt_departure_work);
+        txt_departure_home = findViewById(R.id.txt_departure_home);
+        txt_departure_work = findViewById(R.id.txt_departure_work);
 
         bottomSheetBehavior.setPeekHeight(200);
         bottomSheetBehavior.setState(state);
@@ -1077,7 +1016,7 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
         }
     }
 
-    private float getDistance(Location one, Location two){
+    private float getDistance(Location one, Location two) {
         return one.distanceTo(two);
     }
 
@@ -1085,15 +1024,15 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
         DatabaseReference customerReference = FirebaseDatabase.getInstance().getReference("Customers");
         Map<String, Object> map = new HashMap<>();
         LatLng destination = new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(), "latitude")), Double.valueOf(getDestination(Companion.user.getWorkAddress(), "longitude")));
-        Location locDest=new Location("destination");
+        Location locDest = new Location("destination");
         locDest.setLatitude(destination.latitude);
         locDest.setLongitude(destination.longitude);
 
-        if(getDistance(myLastLocation,locDest)<=50){
+        if (getDistance(myLastLocation, locDest) <= 50) {
             map.put("destination", Companion.user.getLocalidad());
             map.put("destinationLat", getDestination(Companion.user.getLocalidad(), "latitude"));
             map.put("destinationLong", getDestination(Companion.user.getLocalidad(), "longitude"));
-        }else{
+        } else {
             map.put("destination", Companion.user.getWorkAddress());
             map.put("destinationLat", getDestination(Companion.user.getWorkAddress(), "latitude"));
             map.put("destinationLong", getDestination(Companion.user.getWorkAddress(), "longitude"));
@@ -1296,23 +1235,6 @@ public class CustomerMap extends FragmentActivity implements SearchView.OnQueryT
 
         return bitmap;
     }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        if (data.contains(query)) {
-            adapter.getFilter().filter(query);
-        } else {
-            Toast.makeText(getApplicationContext(), "No Match found", Toast.LENGTH_LONG).show();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        adapter.getFilter().filter(newText);
-        return false;
-    }
-
 
     private interface SimpleCallback<T> {
         void callback(T data, Object... secondary);

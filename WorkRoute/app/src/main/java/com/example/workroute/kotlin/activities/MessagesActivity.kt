@@ -128,6 +128,7 @@ class MessagesActivity : AppCompatActivity() {
         reference.child("Chats").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 data.clear()
+                adapterMessages?.notifyDataSetChanged()
                 for (snap in snapshot.children) {
                     val message = snap.getValue(MessageModel::class.java)
                     if ((message?.sender == firebaseUser.uid && message?.receiver == receiverId)
