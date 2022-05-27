@@ -70,6 +70,10 @@
         <item name="colorPrimary">@color/secondary</item>
         <item name="colorOnPrimary">#B0CAE7</item>
     </style>
+    <style name="DialogFullScreen" parent="Theme.AppCompat.DayNight.DialogWhenLarge">
+        <item name="android:statusBarColor">@color/secondary</item>
+        <item name="windowNoTitle">true</item>
+    </style>
     <style name="Login" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         
         <item name="colorPrimary">@color/primary</item>
@@ -197,7 +201,7 @@
             <item name="android:windowTranslucentNavigation">true</item>
             <item name="android:windowLightNavigationBar" ns1:targetApi="o_mr1">true</item>
     </style>
-    <style name="dialogFullAniamtion">
+    <style name="dialogFullAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_up_in</item>
         <item name="android:windowExitAnimation">@anim/slide_up_out</item>
     </style>

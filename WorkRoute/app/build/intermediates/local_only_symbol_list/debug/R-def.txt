@@ -160,7 +160,6 @@ id appNotifications
 id autocompleteColors
 id autocompleteTypes
 id boton_drag
-id bottom_sheet_payMethod
 id btn_accept
 id btn_addPayMethod
 id btn_cancel
@@ -169,14 +168,12 @@ id btn_decline
 id btn_deletePayMethods
 id btn_edit_home
 id btn_edit_work
-id btn_otherMethods
 id btn_rideStatus
 id btn_send
 id btn_send_email
 id buttonMenu
 id buttonMessages
 id buttonProfile
-id buttonSave
 id buttonUbi
 id buttonUpDown
 id button_cancel
@@ -218,6 +215,8 @@ id card_work_direction
 id cardsImage
 id checkBoxAppNotifications
 id checkBoxEmailNotifications
+id close_fullScreen
+id content
 id cord_layout
 id deleteAccount
 id divider
@@ -305,9 +304,11 @@ id recycler_payMethods
 id rel_layout
 id rel_layout_general
 id rela
+id rela_toolbar
 id relativeChangingColorOnClick
 id relativeLayout
 id rl
+id saveMethod
 id second_sheet
 id settings
 id sheet
@@ -415,6 +416,7 @@ layout activity_personal_information
 layout activity_profile
 layout activity_splash_screen
 layout chats_list_item
+layout dialog_full_screen_pay_method
 layout item_chat_left
 layout item_chat_right
 layout item_notification
@@ -470,6 +472,7 @@ string ubicationButton
 style CalendarPicker
 style CustomTheme
 style DialogAlert
+style DialogFullScreen
 style Login
 style MaterialAlertDialog.App.Title.Icon
 style MaterialAlertDialog.App.Title.Text
@@ -483,4 +486,4 @@ style Theme.EditProfile
 style Theme.WorkRoute
 style Widget.App.Button
 style backDriverInformation
-style dialogFullAniamtion
+style dialogFullAnimation

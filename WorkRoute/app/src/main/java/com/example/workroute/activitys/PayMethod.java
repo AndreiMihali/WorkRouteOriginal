@@ -3,9 +3,6 @@ package com.example.workroute.activitys;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,13 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.workroute.R;
 import com.example.workroute.adapters.CardItemAdapter;
 import com.example.workroute.model.CardItem;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,26 +30,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class PayMethod extends AppCompatActivity implements CardItemAdapter.ItemClickListener{
+public class PayMethod extends AppCompatActivity implements CardItemAdapter.ItemClickListener {
 
     private MaterialToolbar toolbar;
     private RecyclerView recyclerView;
     private TextView nullMessage;
     private ProgressBar progressBar;
-    private CardItemAdapter myAdapter=null;
+    private CardItemAdapter myAdapter = null;
     private ArrayList<CardItem> data;
     private Button addNewPayMethod;
     private FirebaseAuth firebaseAuth;
-    private BottomSheetBehavior bottomSheetBehavior;
-    private TextInputEditText inputName;
-    private TextInputEditText inputCardNumber;
-    private TextInputEditText inputCardMonth;
-    private TextInputEditText inputCardYear;
-    private TextInputEditText inputCardCVV;
-    private Button savePayMethod;
     private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Register);
@@ -65,27 +51,24 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
         init();
     }
 
-    private void init(){
+    private void init() {
 
-        toolbar=findViewById(R.id.toolbarPay);
+        toolbar = findViewById(R.id.toolbarPay);
         setSupportActionBar(toolbar);
-        recyclerView=findViewById(R.id.recycler_payMethods);
-        nullMessage=findViewById(R.id.txt_null);
-        progressBar=findViewById(R.id.loadContent);
-        addNewPayMethod=findViewById(R.id.btn_addPayMethod);
-        firebaseAuth=FirebaseAuth.getInstance();
-        bottomSheetBehavior=BottomSheetBehavior.from(findViewById(R.id.bottom_sheet_payMethod));
-        bottomSheetBehavior.setHideable(true);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        data=new ArrayList<>();
-        progressDialog=new ProgressDialog(this);
+        recyclerView = findViewById(R.id.recycler_payMethods);
+        nullMessage = findViewById(R.id.txt_null);
+        progressBar = findViewById(R.id.loadContent);
+        addNewPayMethod = findViewById(R.id.btn_addPayMethod);
+        firebaseAuth = FirebaseAuth.getInstance();
+        data = new ArrayList<>();
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         initListeners();
-        if(firebaseAuth.getCurrentUser()!=null){
+        if (firebaseAuth.getCurrentUser() != null) {
             getCardData();
         }
 
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -93,7 +76,7 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                new MaterialAlertDialogBuilder(PayMethod.this,R.style.ThemeOverlay_App_MaterialAlertDialog)
+                new MaterialAlertDialogBuilder(PayMethod.this, R.style.ThemeOverlay_App_MaterialAlertDialog)
                         .setTitle("CAUTION")
                         .setCancelable(false)
                         .setMessage("Are you sure do you want to delete this payment method?")
@@ -110,18 +93,10 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
                         .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(),"Action cancelled",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Action cancelled", Toast.LENGTH_SHORT).show();
                                 getCardData();
                             }
                         }).show();
-
-
-                /*
-                deletePayMethod(data.get(myAdapter.itemIndexSelected).getNumberCard());
-                data.remove(viewHolder.getAdapterPosition());
-                myAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-                 */
-
             }
         };
 
@@ -133,15 +108,15 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_toolbar_paymethods,menu);
+        getMenuInflater().inflate(R.menu.menu_toolbar_paymethods, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.helpMenu :
-                Toast.makeText(getApplicationContext(),"To delete a payment method, swipe it to the left",Toast.LENGTH_LONG).show();
+            case R.id.helpMenu:
+                Toast.makeText(getApplicationContext(), "To delete a payment method, swipe it to the left", Toast.LENGTH_LONG).show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -150,30 +125,30 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
         progressBar.setVisibility(View.VISIBLE);
         data.clear();
 
-        ValueEventListener postListener=new ValueEventListener() {
+        ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 progressBar.setVisibility(View.VISIBLE);
                 data.clear();
                 myAdapter.notifyDataSetChanged();
-                for(DataSnapshot snap:snapshot.getChildren()){
-                    String cardNumber=snap.child("cardNumber").getValue().toString();
-                    String cardName=snap.child("cardName").getValue().toString();
-                    String cardActive=snap.child("cardActive").getValue().toString();
-                    String cardType=snap.child("cardType").getValue().toString();
-                    data.add(new CardItem((cardActive.equals("true"))?R.drawable.bx_check:R.drawable.bx_x,cardNumber,cardName,(cardType.equals("visa"))?R.drawable.bxl_visa:R.drawable.bxl_mastercard));
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    String cardNumber = snap.child("cardNumber").getValue().toString();
+                    String cardName = snap.child("cardName").getValue().toString();
+                    String cardActive = snap.child("cardActive").getValue().toString();
+                    String cardType = snap.child("cardType").getValue().toString();
+                    data.add(new CardItem((cardActive.equals("true")) ? R.drawable.bx_check : R.drawable.bx_x, cardNumber, cardName, (cardType.equals("visa")) ? R.drawable.bxl_visa : R.drawable.bxl_mastercard));
                 }
                 progressBar.setVisibility(View.GONE);
-                if(data.isEmpty()){
+                if (data.isEmpty()) {
                     nullMessage.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     nullMessage.setVisibility(View.GONE);
                 }
 
-                if(myAdapter!=null){
+                if (myAdapter != null) {
                     myAdapter.notifyDataSetChanged();
-                }else{
-                    myAdapter=new CardItemAdapter(getApplicationContext(),data);
+                } else {
+                    myAdapter = new CardItemAdapter(getApplicationContext(), data);
                     recyclerView.setAdapter(myAdapter);
                 }
             }
@@ -186,7 +161,7 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
 
         FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("payMethods").addValueEventListener(postListener);
 
-        myAdapter=new CardItemAdapter(getApplicationContext(),data);
+        myAdapter = new CardItemAdapter(getApplicationContext(), data);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(myAdapter);
         myAdapter.notifyDataSetChanged();
@@ -210,116 +185,26 @@ public class PayMethod extends AppCompatActivity implements CardItemAdapter.Item
         addNewPayMethod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showBottomSheet();
+                showDialog();
             }
         });
     }
 
-    private void showBottomSheet(){
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        bottomSheetBehavior.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
-        inputName = findViewById(R.id.inputFullName);
-        inputCardNumber = findViewById(R.id.inputCardNumber);
-        inputCardMonth = findViewById(R.id.inputMonth);
-        inputCardYear = findViewById(R.id.inputYear);
-        inputCardCVV = findViewById(R.id.inputCVV);
-        savePayMethod = findViewById(R.id.buttonSave);
-        TextInputLayout cardNumber=findViewById(R.id.textLayoutCardNumber);
-
-        savePayMethod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                progressDialog.show();
-
-                if (inputName.getText().toString().trim().equals("")
-                        || inputCardNumber.getText().toString().equals("")
-                        || inputCardNumber.getText().toString().length()!=16
-                        || inputCardMonth.getText().toString().length()!=2
-                        || inputCardYear.getText().toString().length()!=2
-                        || inputCardCVV.getText().toString().length()!=3
-                ) {
-                    progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext().getApplicationContext(),"Error while validating, check all fields", Toast.LENGTH_SHORT).show();
-                    clearFields();
-                } else {
-                    addDataFirebase();
-                }
-            }
-        });
-
-        inputCardNumber.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length()>0) {
-                    if(s.toString().startsWith("5")){
-                        cardNumber.setStartIconDrawable(R.drawable.bxl_mastercard);
-                    }else if(s.toString().startsWith("4")){
-                        cardNumber.setStartIconDrawable(R.drawable.bxl_visa);
-                    }
-                }else{
-                    cardNumber.setStartIconDrawable(R.drawable.ic_baseline_credit_card_24);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-
+    private void showDialog() {
+        FullDialogPayMethod dialogPayMethod = FullDialogPayMethod.newInstance();
+        dialogPayMethod.show(getSupportFragmentManager(), "TAG");
     }
 
-    private void clearFields() {
-        inputName.setText("");
-        inputCardNumber.setText("");
-        inputCardMonth.setText("");
-        inputCardYear.setText("");
-        inputCardCVV.setText("");
-    }
+    private void deletePayMethod(String number) {
 
-    private void addDataFirebase(){
-        HashMap<String,Object> map=new HashMap<>();
-        map.put("cardNumber",inputCardNumber.getText().toString());
-        map.put("cardName",inputName.getText().toString());
-        map.put("cardExpiration",inputCardMonth.getText().toString()+" "+inputCardYear.getText().toString());
-        map.put("cardCvv",inputCardCVV.getText().toString());
-        map.put("cardActive","true");
-        map.put("cardType",(inputCardNumber.getText().toString().startsWith("5"))?"mastercard":"visa");
-
-        FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("payMethods").child(inputCardNumber.getText().toString().replaceFirst("[0-9]{12}","XXXX XXXX XXXX ")).setValue(map)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+        FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("payMethods")
+                .child(number).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
                     public void onSuccess(Void unused) {
                         progressDialog.dismiss();
-                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                        bottomSheetBehavior.setSaveFlags(BottomSheetBehavior.SAVE_ALL);
-                        clearFields();
+                        data.remove(number);
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                Log.e("ERROR AL INSERTAR LOS METODOS DE PAGO",e.getMessage());
-                progressDialog.dismiss();
-            }
-        });
-    }
-
-    private void deletePayMethod(String number){
-
-            FirebaseDatabase.getInstance().getReference("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("payMethods")
-                    .child(number).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    progressDialog.dismiss();
-                    data.remove(number);
-                }
-            });
+                });
 
     }
 

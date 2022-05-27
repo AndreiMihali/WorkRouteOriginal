@@ -4,9 +4,6 @@ package com.example.workroute.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -18,8 +15,6 @@ import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -29,64 +24,19 @@ public final class ActivityPayMethodBinding implements ViewBinding {
   private final CoordinatorLayout rootView;
 
   @NonNull
-  public final ImageView botonDrag;
-
-  @NonNull
-  public final FrameLayout bottomSheetPayMethod;
-
-  @NonNull
   public final MaterialButton btnAddPayMethod;
 
   @NonNull
   public final MaterialButton btnDeletePayMethods;
 
   @NonNull
-  public final MaterialButton btnOtherMethods;
-
-  @NonNull
-  public final Button buttonSave;
-
-  @NonNull
-  public final ImageView cardsImage;
-
-  @NonNull
-  public final TextInputEditText inputCVV;
-
-  @NonNull
-  public final TextInputEditText inputCardNumber;
-
-  @NonNull
-  public final TextInputEditText inputFullName;
-
-  @NonNull
-  public final TextInputEditText inputMonth;
-
-  @NonNull
-  public final TextInputEditText inputYear;
+  public final CoordinatorLayout content;
 
   @NonNull
   public final ProgressBar loadContent;
 
   @NonNull
-  public final TextView or;
-
-  @NonNull
   public final RecyclerView recyclerPayMethods;
-
-  @NonNull
-  public final TextInputLayout textLayoutCVV;
-
-  @NonNull
-  public final TextInputLayout textLayoutCardNumber;
-
-  @NonNull
-  public final TextInputLayout textLayoutMonth;
-
-  @NonNull
-  public final TextInputLayout textLayoutName;
-
-  @NonNull
-  public final TextInputLayout textLayoutYear;
 
   @NonNull
   public final MaterialToolbar toolbarPay;
@@ -95,38 +45,16 @@ public final class ActivityPayMethodBinding implements ViewBinding {
   public final TextView txtNull;
 
   private ActivityPayMethodBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull ImageView botonDrag, @NonNull FrameLayout bottomSheetPayMethod,
       @NonNull MaterialButton btnAddPayMethod, @NonNull MaterialButton btnDeletePayMethods,
-      @NonNull MaterialButton btnOtherMethods, @NonNull Button buttonSave,
-      @NonNull ImageView cardsImage, @NonNull TextInputEditText inputCVV,
-      @NonNull TextInputEditText inputCardNumber, @NonNull TextInputEditText inputFullName,
-      @NonNull TextInputEditText inputMonth, @NonNull TextInputEditText inputYear,
-      @NonNull ProgressBar loadContent, @NonNull TextView or,
-      @NonNull RecyclerView recyclerPayMethods, @NonNull TextInputLayout textLayoutCVV,
-      @NonNull TextInputLayout textLayoutCardNumber, @NonNull TextInputLayout textLayoutMonth,
-      @NonNull TextInputLayout textLayoutName, @NonNull TextInputLayout textLayoutYear,
-      @NonNull MaterialToolbar toolbarPay, @NonNull TextView txtNull) {
+      @NonNull CoordinatorLayout content, @NonNull ProgressBar loadContent,
+      @NonNull RecyclerView recyclerPayMethods, @NonNull MaterialToolbar toolbarPay,
+      @NonNull TextView txtNull) {
     this.rootView = rootView;
-    this.botonDrag = botonDrag;
-    this.bottomSheetPayMethod = bottomSheetPayMethod;
     this.btnAddPayMethod = btnAddPayMethod;
     this.btnDeletePayMethods = btnDeletePayMethods;
-    this.btnOtherMethods = btnOtherMethods;
-    this.buttonSave = buttonSave;
-    this.cardsImage = cardsImage;
-    this.inputCVV = inputCVV;
-    this.inputCardNumber = inputCardNumber;
-    this.inputFullName = inputFullName;
-    this.inputMonth = inputMonth;
-    this.inputYear = inputYear;
+    this.content = content;
     this.loadContent = loadContent;
-    this.or = or;
     this.recyclerPayMethods = recyclerPayMethods;
-    this.textLayoutCVV = textLayoutCVV;
-    this.textLayoutCardNumber = textLayoutCardNumber;
-    this.textLayoutMonth = textLayoutMonth;
-    this.textLayoutName = textLayoutName;
-    this.textLayoutYear = textLayoutYear;
     this.toolbarPay = toolbarPay;
     this.txtNull = txtNull;
   }
@@ -158,18 +86,6 @@ public final class ActivityPayMethodBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.boton_drag;
-      ImageView botonDrag = ViewBindings.findChildViewById(rootView, id);
-      if (botonDrag == null) {
-        break missingId;
-      }
-
-      id = R.id.bottom_sheet_payMethod;
-      FrameLayout bottomSheetPayMethod = ViewBindings.findChildViewById(rootView, id);
-      if (bottomSheetPayMethod == null) {
-        break missingId;
-      }
-
       id = R.id.btn_addPayMethod;
       MaterialButton btnAddPayMethod = ViewBindings.findChildViewById(rootView, id);
       if (btnAddPayMethod == null) {
@@ -182,53 +98,7 @@ public final class ActivityPayMethodBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.btn_otherMethods;
-      MaterialButton btnOtherMethods = ViewBindings.findChildViewById(rootView, id);
-      if (btnOtherMethods == null) {
-        break missingId;
-      }
-
-      id = R.id.buttonSave;
-      Button buttonSave = ViewBindings.findChildViewById(rootView, id);
-      if (buttonSave == null) {
-        break missingId;
-      }
-
-      id = R.id.cardsImage;
-      ImageView cardsImage = ViewBindings.findChildViewById(rootView, id);
-      if (cardsImage == null) {
-        break missingId;
-      }
-
-      id = R.id.inputCVV;
-      TextInputEditText inputCVV = ViewBindings.findChildViewById(rootView, id);
-      if (inputCVV == null) {
-        break missingId;
-      }
-
-      id = R.id.inputCardNumber;
-      TextInputEditText inputCardNumber = ViewBindings.findChildViewById(rootView, id);
-      if (inputCardNumber == null) {
-        break missingId;
-      }
-
-      id = R.id.inputFullName;
-      TextInputEditText inputFullName = ViewBindings.findChildViewById(rootView, id);
-      if (inputFullName == null) {
-        break missingId;
-      }
-
-      id = R.id.inputMonth;
-      TextInputEditText inputMonth = ViewBindings.findChildViewById(rootView, id);
-      if (inputMonth == null) {
-        break missingId;
-      }
-
-      id = R.id.inputYear;
-      TextInputEditText inputYear = ViewBindings.findChildViewById(rootView, id);
-      if (inputYear == null) {
-        break missingId;
-      }
+      CoordinatorLayout content = (CoordinatorLayout) rootView;
 
       id = R.id.loadContent;
       ProgressBar loadContent = ViewBindings.findChildViewById(rootView, id);
@@ -236,45 +106,9 @@ public final class ActivityPayMethodBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.or;
-      TextView or = ViewBindings.findChildViewById(rootView, id);
-      if (or == null) {
-        break missingId;
-      }
-
       id = R.id.recycler_payMethods;
       RecyclerView recyclerPayMethods = ViewBindings.findChildViewById(rootView, id);
       if (recyclerPayMethods == null) {
-        break missingId;
-      }
-
-      id = R.id.textLayoutCVV;
-      TextInputLayout textLayoutCVV = ViewBindings.findChildViewById(rootView, id);
-      if (textLayoutCVV == null) {
-        break missingId;
-      }
-
-      id = R.id.textLayoutCardNumber;
-      TextInputLayout textLayoutCardNumber = ViewBindings.findChildViewById(rootView, id);
-      if (textLayoutCardNumber == null) {
-        break missingId;
-      }
-
-      id = R.id.textLayoutMonth;
-      TextInputLayout textLayoutMonth = ViewBindings.findChildViewById(rootView, id);
-      if (textLayoutMonth == null) {
-        break missingId;
-      }
-
-      id = R.id.textLayoutName;
-      TextInputLayout textLayoutName = ViewBindings.findChildViewById(rootView, id);
-      if (textLayoutName == null) {
-        break missingId;
-      }
-
-      id = R.id.textLayoutYear;
-      TextInputLayout textLayoutYear = ViewBindings.findChildViewById(rootView, id);
-      if (textLayoutYear == null) {
         break missingId;
       }
 
@@ -290,11 +124,8 @@ public final class ActivityPayMethodBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityPayMethodBinding((CoordinatorLayout) rootView, botonDrag,
-          bottomSheetPayMethod, btnAddPayMethod, btnDeletePayMethods, btnOtherMethods, buttonSave,
-          cardsImage, inputCVV, inputCardNumber, inputFullName, inputMonth, inputYear, loadContent,
-          or, recyclerPayMethods, textLayoutCVV, textLayoutCardNumber, textLayoutMonth,
-          textLayoutName, textLayoutYear, toolbarPay, txtNull);
+      return new ActivityPayMethodBinding((CoordinatorLayout) rootView, btnAddPayMethod,
+          btnDeletePayMethods, content, loadContent, recyclerPayMethods, toolbarPay, txtNull);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

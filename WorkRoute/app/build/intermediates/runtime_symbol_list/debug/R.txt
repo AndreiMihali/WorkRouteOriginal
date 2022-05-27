@@ -3462,7 +3462,6 @@ int id blocking 0x7f0a006e
 int id body_scroll 0x7f0a006f
 int id boton_drag 0x7f0a0070
 int id bottom 0x7f0a0071
-int id bottom_sheet_payMethod 0x7f0a0072
 int id bounce 0x7f0a0073
 int id bounceBoth 0x7f0a0074
 int id bounceEnd 0x7f0a0075
@@ -3480,7 +3479,6 @@ int id btn_decline 0x7f0a0080
 int id btn_deletePayMethods 0x7f0a0081
 int id btn_edit_home 0x7f0a0082
 int id btn_edit_work 0x7f0a0083
-int id btn_otherMethods 0x7f0a0084
 int id btn_rideStatus 0x7f0a0085
 int id btn_send 0x7f0a0086
 int id btn_send_email 0x7f0a0087
@@ -3489,7 +3487,6 @@ int id buttonMenu 0x7f0a0089
 int id buttonMessages 0x7f0a008a
 int id buttonPanel 0x7f0a008b
 int id buttonProfile 0x7f0a008c
-int id buttonSave 0x7f0a008d
 int id buttonUbi 0x7f0a008e
 int id buttonUpDown 0x7f0a008f
 int id button_cancel 0x7f0a0090
@@ -3559,6 +3556,7 @@ int id clear_text 0x7f0a00cf
 int id clip_horizontal 0x7f0a00d0
 int id clip_vertical 0x7f0a00d1
 int id clockwise 0x7f0a00d2
+int id close_fullScreen 0x7f0a0364
 int id closest 0x7f0a00d3
 int id collapseActionView 0x7f0a00d4
 int id collapse_button 0x7f0a00d5
@@ -3973,6 +3971,7 @@ int id recycler_payMethods 0x7f0a026d
 int id rel_layout 0x7f0a026e
 int id rel_layout_general 0x7f0a026f
 int id rela 0x7f0a0270
+int id rela_toolbar 0x7f0a0365
 int id relativeChangingColorOnClick 0x7f0a0271
 int id relativeLayout 0x7f0a0272
 int id reverseSawtooth 0x7f0a0273
@@ -3985,6 +3984,7 @@ int id rounded 0x7f0a0279
 int id row_index_key 0x7f0a027a
 int id rtl 0x7f0a027b
 int id satellite 0x7f0a027c
+int id saveMethod 0x7f0a0366
 int id save_non_transition_alpha 0x7f0a027d
 int id save_overlay_view 0x7f0a027e
 int id sawtooth 0x7f0a027f
@@ -4355,6 +4355,7 @@ int layout design_navigation_menu 0x7f0d0043
 int layout design_navigation_menu_item 0x7f0d0044
 int layout design_text_input_end_icon 0x7f0d0045
 int layout design_text_input_start_icon 0x7f0d0046
+int layout dialog_full_screen_pay_method 0x7f0d00bb
 int layout dynamic_feature_install_fragment 0x7f0d0047
 int layout exo_list_divider 0x7f0d0048
 int layout exo_player_control_view 0x7f0d0049
@@ -5036,6 +5037,7 @@ int style CardView_Dark 0x7f13010f
 int style CardView_Light 0x7f130110
 int style CustomTheme 0x7f130111
 int style DialogAlert 0x7f130112
+int style DialogFullScreen 0x7f13046a
 int style DialogWindowTheme 0x7f130113
 int style EmptyTheme 0x7f130114
 int style ExoMediaButton 0x7f130115
@@ -5889,7 +5891,7 @@ int style Widget_MaterialComponents_Toolbar_Surface 0x7f130464
 int style Widget_MaterialComponents_Tooltip 0x7f130465
 int style Widget_Support_CoordinatorLayout 0x7f130466
 int style backDriverInformation 0x7f130467
-int style dialogFullAniamtion 0x7f130468
+int style dialogFullAnimation 0x7f130469
 int[] styleable ActionBar { 0x7f04004a, 0x7f040051, 0x7f040052, 0x7f040125, 0x7f040126, 0x7f040127, 0x7f040128, 0x7f040129, 0x7f04012a, 0x7f040151, 0x7f040167, 0x7f040168, 0x7f040187, 0x7f0401f6, 0x7f0401fd, 0x7f040205, 0x7f040206, 0x7f04020a, 0x7f04021d, 0x7f040232, 0x7f0402b3, 0x7f040320, 0x7f04035a, 0x7f040362, 0x7f040363, 0x7f0403e3, 0x7f0403e7, 0x7f040468, 0x7f040475 }
 int styleable ActionBar_background 0
 int styleable ActionBar_backgroundSplit 1

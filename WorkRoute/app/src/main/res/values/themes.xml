@@ -18,6 +18,11 @@
         <item name="enableEdgeToEdge">true</item>
     </style>
 
+    <style name="dialogFullAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_up_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_up_out</item>
+    </style>
+
     <style name="Theme.EditProfile" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
@@ -35,9 +40,9 @@
         <item name="enableEdgeToEdge">true</item>
     </style>
 
-    <style name="dialogFullAniamtion">
-        <item name="android:windowEnterAnimation">@anim/slide_up_in</item>
-        <item name="android:windowExitAnimation">@anim/slide_up_out</item>
+    <style name="DialogFullScreen" parent="Theme.AppCompat.DayNight.DialogWhenLarge">
+        <item name="android:statusBarColor">@color/secondary</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="backDriverInformation" parent="Theme.MaterialComponents.DayNight.NoActionBar">

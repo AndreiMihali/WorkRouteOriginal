@@ -3463,7 +3463,6 @@ id blocking
 id body_scroll
 id boton_drag
 id bottom
-id bottom_sheet_payMethod
 id bounce
 id bounceBoth
 id bounceEnd
@@ -3481,7 +3480,6 @@ id btn_decline
 id btn_deletePayMethods
 id btn_edit_home
 id btn_edit_work
-id btn_otherMethods
 id btn_rideStatus
 id btn_send
 id btn_send_email
@@ -3490,7 +3488,6 @@ id buttonMenu
 id buttonMessages
 id buttonPanel
 id buttonProfile
-id buttonSave
 id buttonUbi
 id buttonUpDown
 id button_cancel
@@ -3560,6 +3557,7 @@ id clear_text
 id clip_horizontal
 id clip_vertical
 id clockwise
+id close_fullScreen
 id closest
 id collapseActionView
 id collapse_button
@@ -3974,6 +3972,7 @@ id recycler_payMethods
 id rel_layout
 id rel_layout_general
 id rela
+id rela_toolbar
 id relativeChangingColorOnClick
 id relativeLayout
 id reverseSawtooth
@@ -3986,6 +3985,7 @@ id rounded
 id row_index_key
 id rtl
 id satellite
+id saveMethod
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -4356,6 +4356,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout dialog_full_screen_pay_method
 layout dynamic_feature_install_fragment
 layout exo_list_divider
 layout exo_player_control_view
@@ -5037,6 +5038,7 @@ style CardView_Dark
 style CardView_Light
 style CustomTheme
 style DialogAlert
+style DialogFullScreen
 style DialogWindowTheme
 style EmptyTheme
 style ExoMediaButton
@@ -5890,7 +5892,7 @@ style Widget_MaterialComponents_Toolbar_Surface
 style Widget_MaterialComponents_Tooltip
 style Widget_Support_CoordinatorLayout
 style backDriverInformation
-style dialogFullAniamtion
+style dialogFullAnimation
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth
