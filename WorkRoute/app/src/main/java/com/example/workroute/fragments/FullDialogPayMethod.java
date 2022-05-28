@@ -1,4 +1,4 @@
-package com.example.workroute.activitys;
+package com.example.workroute.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -42,7 +42,7 @@ public class FullDialogPayMethod extends DialogFragment {
     private TextInputLayout cardMonth;
     private TextInputLayout cardYear;
 
-    static FullDialogPayMethod newInstance() {
+    public static FullDialogPayMethod newInstance() {
         return new FullDialogPayMethod();
     }
 

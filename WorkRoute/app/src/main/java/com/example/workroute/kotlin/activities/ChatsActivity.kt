@@ -67,8 +67,13 @@ class ChatsActivity : AppCompatActivity() {
     private fun getData() {
         progressCircular.visibility = View.VISIBLE
         allUsers.clear()
+        data.clear()
+        adapter?.notifyDataSetChanged()
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                allUsers.clear()
+                data.clear()
+                adapter?.notifyDataSetChanged()
                 for (snapshot in dataSnapshot.children) {
                     val userId = Objects.requireNonNull(snapshot.child("chat_id").value.toString())
                     val lastMessage = snapshot.child("message").value.toString()
