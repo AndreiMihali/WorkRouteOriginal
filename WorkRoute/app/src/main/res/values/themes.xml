@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.WorkRoute" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimary">#C3C3C3</item>
         <item name="colorPrimaryVariant">@color/secondary</item>
         <item name="colorOnPrimary">@color/textOnPrimary</item>
         <!-- Secondary brand color. -->

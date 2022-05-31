@@ -635,11 +635,12 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                                 }
 
                                 polylines2 = new ArrayList<>();
+                                int color = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getInt("workColor",getColor(R.color.secondaryLine));
                                 //add route(s) to the map.
                                 for (int i = 0; i < route.size(); i++) {
                                     //In case of more than 5 alternative routes
                                     PolylineOptions polyOptions = new PolylineOptions();
-                                    polyOptions.color(getColor(R.color.secondaryLine));
+                                    polyOptions.color(color);
                                     polyOptions.width(15 + i * 10);
                                     polyOptions.addAll(route.get(i).getPoints());
                                     Polyline polyline = mMap.addPolyline(polyOptions);
@@ -1045,11 +1046,12 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
     private void setMarkers() {
         float radius = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getFloat("workRadius",1.5f);
+        int color = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getInt("radiusColor",getColor(R.color.secondary));
         LatLng myDestination = new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(), "latitude")), Double.valueOf(getDestination(Companion.user.getWorkAddress(), "longitude")));
         CircleOptions circleOptions = new CircleOptions()
                 .center(myDestination)
                 .radius(radius*1000)
-                .strokeColor(getColor(R.color.secondary))
+                .strokeColor(color)
                 .clickable(false)
                 .strokeWidth(7);
         circleMap = mMap.addCircle(circleOptions);
@@ -1179,11 +1181,12 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                 }
 
                 polylines = new ArrayList<>();
+                int color = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getInt("homeColor",getColor(R.color.secondary));
                 //add route(s) to the map.
                 for (int i = 0; i < route.size(); i++) {
                     //In case of more than 5 alternative routes
                     PolylineOptions polyOptions = new PolylineOptions();
-                    polyOptions.color(getColor(R.color.secondary));
+                    polyOptions.color(color);
                     polyOptions.width(15 + i * 10);
                     polyOptions.addAll(route.get(i).getPoints());
                     Polyline polyline = mMap.addPolyline(polyOptions);
