@@ -332,7 +332,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String name = documentSnapshot.get("nombre").toString();
-                getToken(name, receiverId, (message[0].isEmpty() || message[0] == null) ? "Yo have a new request from " + name : message + name, "NEW REQUEST");
+                getToken(name, receiverId, (message[0].isEmpty() || message[0] == null) ? "Yo have a new request from " + name : message[0] + name, "NEW REQUEST");
             }
         });
     }
