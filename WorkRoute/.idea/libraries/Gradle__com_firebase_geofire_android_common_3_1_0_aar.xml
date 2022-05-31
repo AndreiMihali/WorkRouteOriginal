@@ -4,11 +4,12 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/fa4aa1590d20e37547646afe4db6525b/transformed/geofire-android-common-3.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2e3f2d70e4cddb29e7338b4f7ed2d5f0/transformed/geofire-android-common-3.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0744dfcfe7bd4ca2477b8b1f3f49d7ab/transformed/jetified-geofire-android-common-3.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0744dfcfe7bd4ca2477b8b1f3f49d7ab/transformed/jetified-geofire-android-common-3.1.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/0744dfcfe7bd4ca2477b8b1f3f49d7ab/transformed/jetified-geofire-android-common-3.1.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4e9a3f63eb13bf07ae243b240beac920/transformed/jetified-geofire-android-common-3.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4e9a3f63eb13bf07ae243b240beac920/transformed/jetified-geofire-android-common-3.1.0/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4e9a3f63eb13bf07ae243b240beac920/transformed/jetified-geofire-android-common-3.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5443cce443a231a29e3cceed09cab8d2/transformed/jetified-geofire-android-common-3.1.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/5443cce443a231a29e3cceed09cab8d2/transformed/jetified-geofire-android-common-3.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5443cce443a231a29e3cceed09cab8d2/transformed/jetified-geofire-android-common-3.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.firebase/geofire-android-common/3.1.0/e6167220273775adf5b7265c0785e81b14664aae/geofire-android-common-3.1.0-javadoc.jar!/" />

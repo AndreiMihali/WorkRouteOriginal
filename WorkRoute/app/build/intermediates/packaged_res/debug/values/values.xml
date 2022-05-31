@@ -19,6 +19,14 @@
         <item>@font/andada</item>
         <item>@font/bigshot_one</item>
     </array>
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
     <color name="back_login">#F6F6F6</color>
     <color name="black">#FF000000</color>
     <color name="car_map_background">#3DDC84</color>
@@ -38,11 +46,16 @@
     <color name="work_icon_background">#FFFFFF</color>
     <string name="activeSubs">In this section, active subscriptions or pending acceptance by the driver are displayed and managed</string>
     <string name="app_name">WorkRoute</string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_title">Download incoming attachments</string>
     <string name="chatButton">Through the chat you can talk with other users</string>
     <string name="customerMapButton">With the Customer view, only users registered as "Driver" will be displayed, thus allowing you to subscribe to them</string>
     <string name="default_web_client_id" translatable="false">789989127519-t29vd0ruodrb86um9d1lmggdh8h9k83h.apps.googleusercontent.com</string>
     <string name="deleteAccount">You can request the desactivation or deletion of your account through this section</string>
     <string name="driverMapButton">With the driver view, drivers registered as "Customer" will be displayed</string>
+    <string name="firebase_database_url" translatable="false">https://workroute-6f6c4-default-rtdb.firebaseio.com</string>
     <string name="floatingButton"> By clicking on the menu button, the chat, profile and notification buttons become visible. When displayed, clicking on it again closes the menu</string>
     <string name="gcm_defaultSenderId" translatable="false">789989127519</string>
     <string name="generalSettings">In this section you will find different options and menus, as well as notification preferences or information about the application</string>
@@ -53,13 +66,19 @@
     <string name="google_storage_bucket" translatable="false">workroute-6f6c4.appspot.com</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="logOut">Section to log out of the account and return to the authentication screen</string>
+    <string name="messages_header">Messages</string>
     <string name="notificationsButton">In this menu you will find all notifications regarding your account, as well as new chats or updates on the status of a subscription</string>
     <string name="payMethod">In this window you can manage your payment methods, either to receive money or make payments</string>
     <string name="personalInfo">Here you can view and update user account information</string>
     <string name="profileButton">In this menu you will find your profile picture, in addition to 6 submenus that are named below</string>
     <string name="project_id" translatable="false">workroute-6f6c4</string>
+    <string name="reply_title">Default reply action</string>
     <string name="sharedPreferences"/>
+    <string name="signature_title">Your signature</string>
+    <string name="sync_header">Sync</string>
+    <string name="sync_title">Sync email periodically</string>
     <string name="title_activity_customer_map">CustomerMap</string>
+    <string name="title_activity_settings">SettingsActivity</string>
     <string name="ubicationButton">This button places you at your current location on the map</string>
     <style name="CalendarPicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
         <item name="colorPrimary">@color/secondary</item>

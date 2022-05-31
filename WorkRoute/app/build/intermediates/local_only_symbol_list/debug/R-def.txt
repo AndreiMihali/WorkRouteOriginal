@@ -10,6 +10,8 @@ array com_google_android_gms_fonts_certs
 array com_google_android_gms_fonts_certs_dev
 array com_google_android_gms_fonts_certs_prod
 array preloaded_fonts
+array reply_entries
+array reply_values
 color back_login
 color black
 color bottom_navigation_view
@@ -106,6 +108,7 @@ drawable ic_baseline_keyboard_backspace_24
 drawable ic_baseline_location_city_24
 drawable ic_baseline_location_on_24
 drawable ic_baseline_lock_24
+drawable ic_baseline_map_24
 drawable ic_baseline_menu_24
 drawable ic_baseline_menu_open_24
 drawable ic_baseline_mic_none_24
@@ -213,8 +216,6 @@ id card_tarjeta
 id card_type
 id card_work_direction
 id cardsImage
-id checkBoxAppNotifications
-id checkBoxEmailNotifications
 id close_fullScreen
 id content
 id cord_layout
@@ -232,7 +233,6 @@ id ed_plate
 id ed_username_register
 id editProfile
 id editProfilePhoto
-id emailNotifications
 id expandir_1
 id expandir_10
 id expandir_11
@@ -309,10 +309,12 @@ id relativeChangingColorOnClick
 id relativeLayout
 id rl
 id saveMethod
+id searchRadius
 id second_sheet
 id settings
 id sheet
 id status
+id switchApp
 id textLayoutCVV
 id textLayoutCardNumber
 id textLayoutMonth
@@ -338,6 +340,7 @@ id toolbar_recovery_password
 id toolbar_subs
 id tvAboutUs
 id tvHowToUseWorkRoute
+id tvMapSettings
 id tvNotificationPreferences
 id tv_userMail
 id tv_user_work_direction_sub
@@ -395,6 +398,9 @@ id txt_work_direction
 id user_name
 id user_name_messages
 id wifi_signal
+id workRadius
+id workRadiusColor
+id workRadiusSlider
 layout activity_active_subscriptions
 layout activity_add_driver_information
 layout activity_app_information
@@ -446,11 +452,15 @@ mipmap work_icon_foreground
 mipmap work_icon_round
 string activeSubs
 string app_name
+string attachment_summary_off
+string attachment_summary_on
+string attachment_title
 string chatButton
 string customerMapButton
 string default_web_client_id
 string deleteAccount
 string driverMapButton
+string firebase_database_url
 string floatingButton
 string gcm_defaultSenderId
 string generalSettings
@@ -461,13 +471,19 @@ string google_maps_key
 string google_storage_bucket
 string hello_blank_fragment
 string logOut
+string messages_header
 string notificationsButton
 string payMethod
 string personalInfo
 string profileButton
 string project_id
+string reply_title
 string sharedPreferences
+string signature_title
+string sync_header
+string sync_title
 string title_activity_customer_map
+string title_activity_settings
 string ubicationButton
 style CalendarPicker
 style CustomTheme
@@ -487,3 +503,4 @@ style Theme.WorkRoute
 style Widget.App.Button
 style backDriverInformation
 style dialogFullAnimation
+xml root_preferences

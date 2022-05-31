@@ -359,9 +359,10 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
     private void getAllDrivers() {
         getDriversStarted = true;
+        float radius = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getFloat("searchRadius",30f);
         DatabaseReference driversReference = FirebaseDatabase.getInstance().getReference().child("locationUpdates").child("Drivers");
         GeoFire geoFire = new GeoFire(driversReference);
-        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(), myLastLocation.getLongitude()), 300000);
+        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(), myLastLocation.getLongitude()), radius*1000);
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
@@ -1043,10 +1044,11 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     }
 
     private void setMarkers() {
+        float radius = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getFloat("workRadius",1.5f);
         LatLng myDestination = new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(), "latitude")), Double.valueOf(getDestination(Companion.user.getWorkAddress(), "longitude")));
         CircleOptions circleOptions = new CircleOptions()
                 .center(myDestination)
-                .radius(1500)
+                .radius(radius*1000)
                 .strokeColor(getColor(R.color.secondary))
                 .clickable(false)
                 .strokeWidth(7);

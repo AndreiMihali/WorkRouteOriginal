@@ -4,7 +4,6 @@ package com.example.workroute.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -13,6 +12,8 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.slider.Slider;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -25,13 +26,10 @@ public final class ActivityGeneralSettingsBinding implements ViewBinding {
   public final TextView appNotifications;
 
   @NonNull
-  public final CheckBox checkBoxAppNotifications;
+  public final Slider searchRadius;
 
   @NonNull
-  public final CheckBox checkBoxEmailNotifications;
-
-  @NonNull
-  public final TextView emailNotifications;
+  public final SwitchMaterial switchApp;
 
   @NonNull
   public final MaterialToolbar toolbarSettings;
@@ -43,22 +41,39 @@ public final class ActivityGeneralSettingsBinding implements ViewBinding {
   public final TextView tvHowToUseWorkRoute;
 
   @NonNull
+  public final TextView tvMapSettings;
+
+  @NonNull
   public final TextView tvNotificationPreferences;
 
+  @NonNull
+  public final TextView workRadius;
+
+  @NonNull
+  public final TextView workRadiusColor;
+
+  @NonNull
+  public final Slider workRadiusSlider;
+
   private ActivityGeneralSettingsBinding(@NonNull LinearLayout rootView,
-      @NonNull TextView appNotifications, @NonNull CheckBox checkBoxAppNotifications,
-      @NonNull CheckBox checkBoxEmailNotifications, @NonNull TextView emailNotifications,
-      @NonNull MaterialToolbar toolbarSettings, @NonNull TextView tvAboutUs,
-      @NonNull TextView tvHowToUseWorkRoute, @NonNull TextView tvNotificationPreferences) {
+      @NonNull TextView appNotifications, @NonNull Slider searchRadius,
+      @NonNull SwitchMaterial switchApp, @NonNull MaterialToolbar toolbarSettings,
+      @NonNull TextView tvAboutUs, @NonNull TextView tvHowToUseWorkRoute,
+      @NonNull TextView tvMapSettings, @NonNull TextView tvNotificationPreferences,
+      @NonNull TextView workRadius, @NonNull TextView workRadiusColor,
+      @NonNull Slider workRadiusSlider) {
     this.rootView = rootView;
     this.appNotifications = appNotifications;
-    this.checkBoxAppNotifications = checkBoxAppNotifications;
-    this.checkBoxEmailNotifications = checkBoxEmailNotifications;
-    this.emailNotifications = emailNotifications;
+    this.searchRadius = searchRadius;
+    this.switchApp = switchApp;
     this.toolbarSettings = toolbarSettings;
     this.tvAboutUs = tvAboutUs;
     this.tvHowToUseWorkRoute = tvHowToUseWorkRoute;
+    this.tvMapSettings = tvMapSettings;
     this.tvNotificationPreferences = tvNotificationPreferences;
+    this.workRadius = workRadius;
+    this.workRadiusColor = workRadiusColor;
+    this.workRadiusSlider = workRadiusSlider;
   }
 
   @Override
@@ -94,21 +109,15 @@ public final class ActivityGeneralSettingsBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.checkBoxAppNotifications;
-      CheckBox checkBoxAppNotifications = ViewBindings.findChildViewById(rootView, id);
-      if (checkBoxAppNotifications == null) {
+      id = R.id.searchRadius;
+      Slider searchRadius = ViewBindings.findChildViewById(rootView, id);
+      if (searchRadius == null) {
         break missingId;
       }
 
-      id = R.id.checkBoxEmailNotifications;
-      CheckBox checkBoxEmailNotifications = ViewBindings.findChildViewById(rootView, id);
-      if (checkBoxEmailNotifications == null) {
-        break missingId;
-      }
-
-      id = R.id.emailNotifications;
-      TextView emailNotifications = ViewBindings.findChildViewById(rootView, id);
-      if (emailNotifications == null) {
+      id = R.id.switchApp;
+      SwitchMaterial switchApp = ViewBindings.findChildViewById(rootView, id);
+      if (switchApp == null) {
         break missingId;
       }
 
@@ -130,15 +139,39 @@ public final class ActivityGeneralSettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvMapSettings;
+      TextView tvMapSettings = ViewBindings.findChildViewById(rootView, id);
+      if (tvMapSettings == null) {
+        break missingId;
+      }
+
       id = R.id.tvNotificationPreferences;
       TextView tvNotificationPreferences = ViewBindings.findChildViewById(rootView, id);
       if (tvNotificationPreferences == null) {
         break missingId;
       }
 
+      id = R.id.workRadius;
+      TextView workRadius = ViewBindings.findChildViewById(rootView, id);
+      if (workRadius == null) {
+        break missingId;
+      }
+
+      id = R.id.workRadiusColor;
+      TextView workRadiusColor = ViewBindings.findChildViewById(rootView, id);
+      if (workRadiusColor == null) {
+        break missingId;
+      }
+
+      id = R.id.workRadiusSlider;
+      Slider workRadiusSlider = ViewBindings.findChildViewById(rootView, id);
+      if (workRadiusSlider == null) {
+        break missingId;
+      }
+
       return new ActivityGeneralSettingsBinding((LinearLayout) rootView, appNotifications,
-          checkBoxAppNotifications, checkBoxEmailNotifications, emailNotifications, toolbarSettings,
-          tvAboutUs, tvHowToUseWorkRoute, tvNotificationPreferences);
+          searchRadius, switchApp, toolbarSettings, tvAboutUs, tvHowToUseWorkRoute, tvMapSettings,
+          tvNotificationPreferences, workRadius, workRadiusColor, workRadiusSlider);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

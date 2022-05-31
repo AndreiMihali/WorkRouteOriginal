@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.workroute.app-mergeDebugResources-80:/values-v31/values-v31.xml",
+            "outputFile": "com.example.workroute.app-mergeDebugResources-81:/values-v31/values-v31.xml",
             "map": [
                 {
                     "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\67ff3591a9413c6c40d3cef80751da8e\\transformed\\material-1.6.0\\res\\values-v31\\values-v31.xml",

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.workroute.app-mergeDebugResources-80:/values-v27/values-v27.xml",
+            "outputFile": "com.example.workroute.app-mergeDebugResources-81:/values-v27/values-v27.xml",
             "map": [
                 {
                     "source": "C:\\Users\\andre\\AndroidStudioProjects\\WorkRouteOriginal\\WorkRoute\\app\\src\\main\\res\\values-v27\\themes.xml",

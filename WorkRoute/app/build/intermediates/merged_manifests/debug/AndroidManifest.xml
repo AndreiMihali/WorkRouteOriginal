@@ -53,6 +53,10 @@
         android:theme="@style/Theme.WorkRoute"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name="com.example.workroute.SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_settings" />
+        <activity
             android:name="com.example.workroute.activitys.AppInformation"
             android:exported="false" />
         <activity
