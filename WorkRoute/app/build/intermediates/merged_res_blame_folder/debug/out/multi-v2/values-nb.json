@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.workroute.app-mergeDebugResources-81:/values-nb/values-nb.xml",
+            "outputFile": "com.example.workroute.app-mergeDebugResources-82:/values-nb/values-nb.xml",
             "map": [
                 {
                     "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\eddc07cb6a8bdc70455ddb3d3e9a002b\\transformed\\jetified-exoplayer-ui-2.17.1\\res\\values-nb\\values-nb.xml",

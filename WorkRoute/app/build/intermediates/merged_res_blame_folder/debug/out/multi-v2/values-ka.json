@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.workroute.app-mergeDebugResources-81:/values-ka/values-ka.xml",
+            "outputFile": "com.example.workroute.app-mergeDebugResources-82:/values-ka/values-ka.xml",
             "map": [
                 {
                     "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\5cfa3b388664c119fe04e22f36206fd8\\transformed\\jetified-navigation-dynamic-features-fragment-2.4.2\\res\\values-ka\\values-ka.xml",

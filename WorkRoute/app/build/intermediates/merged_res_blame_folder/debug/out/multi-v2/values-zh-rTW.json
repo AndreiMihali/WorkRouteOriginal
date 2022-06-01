@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.workroute.app-mergeDebugResources-81:/values-zh-rTW/values-zh-rTW.xml",
+            "outputFile": "com.example.workroute.app-mergeDebugResources-82:/values-zh-rTW/values-zh-rTW.xml",
             "map": [
                 {
                     "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\0f1cb5d9ca50f938bd6e6bf66f14eeba\\transformed\\jetified-play-services-basement-18.0.0\\res\\values-zh-rTW\\values.xml",

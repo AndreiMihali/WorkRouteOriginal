@@ -4,14 +4,16 @@ package com.example.workroute.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.workroute.R;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.lang.NullPointerException;
@@ -20,10 +22,31 @@ import java.lang.String;
 
 public final class ActivityGeneralSettingsBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
   public final TextView appNotifications;
+
+  @NonNull
+  public final AppBarLayout appbar;
+
+  @NonNull
+  public final MaterialCardView colorHomeTrack;
+
+  @NonNull
+  public final MaterialCardView colorRadius;
+
+  @NonNull
+  public final TextView colorTrackHome;
+
+  @NonNull
+  public final TextView colorTrackWork;
+
+  @NonNull
+  public final TextView colorTracks;
+
+  @NonNull
+  public final MaterialCardView colorWorkTrack;
 
   @NonNull
   public final Slider searchRadius;
@@ -41,6 +64,9 @@ public final class ActivityGeneralSettingsBinding implements ViewBinding {
   public final TextView tvHowToUseWorkRoute;
 
   @NonNull
+  public final TextView tvMapColors;
+
+  @NonNull
   public final TextView tvMapSettings;
 
   @NonNull
@@ -55,20 +81,32 @@ public final class ActivityGeneralSettingsBinding implements ViewBinding {
   @NonNull
   public final Slider workRadiusSlider;
 
-  private ActivityGeneralSettingsBinding(@NonNull LinearLayout rootView,
-      @NonNull TextView appNotifications, @NonNull Slider searchRadius,
-      @NonNull SwitchMaterial switchApp, @NonNull MaterialToolbar toolbarSettings,
-      @NonNull TextView tvAboutUs, @NonNull TextView tvHowToUseWorkRoute,
+  private ActivityGeneralSettingsBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull TextView appNotifications, @NonNull AppBarLayout appbar,
+      @NonNull MaterialCardView colorHomeTrack, @NonNull MaterialCardView colorRadius,
+      @NonNull TextView colorTrackHome, @NonNull TextView colorTrackWork,
+      @NonNull TextView colorTracks, @NonNull MaterialCardView colorWorkTrack,
+      @NonNull Slider searchRadius, @NonNull SwitchMaterial switchApp,
+      @NonNull MaterialToolbar toolbarSettings, @NonNull TextView tvAboutUs,
+      @NonNull TextView tvHowToUseWorkRoute, @NonNull TextView tvMapColors,
       @NonNull TextView tvMapSettings, @NonNull TextView tvNotificationPreferences,
       @NonNull TextView workRadius, @NonNull TextView workRadiusColor,
       @NonNull Slider workRadiusSlider) {
     this.rootView = rootView;
     this.appNotifications = appNotifications;
+    this.appbar = appbar;
+    this.colorHomeTrack = colorHomeTrack;
+    this.colorRadius = colorRadius;
+    this.colorTrackHome = colorTrackHome;
+    this.colorTrackWork = colorTrackWork;
+    this.colorTracks = colorTracks;
+    this.colorWorkTrack = colorWorkTrack;
     this.searchRadius = searchRadius;
     this.switchApp = switchApp;
     this.toolbarSettings = toolbarSettings;
     this.tvAboutUs = tvAboutUs;
     this.tvHowToUseWorkRoute = tvHowToUseWorkRoute;
+    this.tvMapColors = tvMapColors;
     this.tvMapSettings = tvMapSettings;
     this.tvNotificationPreferences = tvNotificationPreferences;
     this.workRadius = workRadius;
@@ -78,7 +116,7 @@ public final class ActivityGeneralSettingsBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -106,6 +144,48 @@ public final class ActivityGeneralSettingsBinding implements ViewBinding {
       id = R.id.appNotifications;
       TextView appNotifications = ViewBindings.findChildViewById(rootView, id);
       if (appNotifications == null) {
+        break missingId;
+      }
+
+      id = R.id.appbar;
+      AppBarLayout appbar = ViewBindings.findChildViewById(rootView, id);
+      if (appbar == null) {
+        break missingId;
+      }
+
+      id = R.id.colorHomeTrack;
+      MaterialCardView colorHomeTrack = ViewBindings.findChildViewById(rootView, id);
+      if (colorHomeTrack == null) {
+        break missingId;
+      }
+
+      id = R.id.colorRadius;
+      MaterialCardView colorRadius = ViewBindings.findChildViewById(rootView, id);
+      if (colorRadius == null) {
+        break missingId;
+      }
+
+      id = R.id.colorTrackHome;
+      TextView colorTrackHome = ViewBindings.findChildViewById(rootView, id);
+      if (colorTrackHome == null) {
+        break missingId;
+      }
+
+      id = R.id.colorTrackWork;
+      TextView colorTrackWork = ViewBindings.findChildViewById(rootView, id);
+      if (colorTrackWork == null) {
+        break missingId;
+      }
+
+      id = R.id.colorTracks;
+      TextView colorTracks = ViewBindings.findChildViewById(rootView, id);
+      if (colorTracks == null) {
+        break missingId;
+      }
+
+      id = R.id.colorWorkTrack;
+      MaterialCardView colorWorkTrack = ViewBindings.findChildViewById(rootView, id);
+      if (colorWorkTrack == null) {
         break missingId;
       }
 
@@ -139,6 +219,12 @@ public final class ActivityGeneralSettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvMapColors;
+      TextView tvMapColors = ViewBindings.findChildViewById(rootView, id);
+      if (tvMapColors == null) {
+        break missingId;
+      }
+
       id = R.id.tvMapSettings;
       TextView tvMapSettings = ViewBindings.findChildViewById(rootView, id);
       if (tvMapSettings == null) {
@@ -169,9 +255,11 @@ public final class ActivityGeneralSettingsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityGeneralSettingsBinding((LinearLayout) rootView, appNotifications,
-          searchRadius, switchApp, toolbarSettings, tvAboutUs, tvHowToUseWorkRoute, tvMapSettings,
-          tvNotificationPreferences, workRadius, workRadiusColor, workRadiusSlider);
+      return new ActivityGeneralSettingsBinding((CoordinatorLayout) rootView, appNotifications,
+          appbar, colorHomeTrack, colorRadius, colorTrackHome, colorTrackWork, colorTracks,
+          colorWorkTrack, searchRadius, switchApp, toolbarSettings, tvAboutUs, tvHowToUseWorkRoute,
+          tvMapColors, tvMapSettings, tvNotificationPreferences, workRadius, workRadiusColor,
+          workRadiusSlider);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

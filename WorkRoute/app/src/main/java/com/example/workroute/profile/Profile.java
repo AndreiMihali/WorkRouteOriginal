@@ -1,6 +1,7 @@
 package com.example.workroute.profile;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.workroute.companion.Companion;
 import com.example.workroute.initActivities.LoginActivity;
 import com.example.workroute.network.callback.NetworkCallback;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Profile extends AppCompatActivity {
@@ -113,12 +115,33 @@ public class Profile extends AppCompatActivity {
         ln_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseAuth.signOut();
-                new MainActivity.Destroy(Profile.this);
-                startActivity(new Intent(Profile.this, LoginActivity.class));
-                getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().clear().commit();
-                finish();
+                showDialog();
             }
         });
+    }
+
+    private void showDialog() {
+        new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
+                .setTitle("CAUTION")
+                .setIcon(getDrawable(R.drawable.bx_error))
+                .setCancelable(false)
+                .setMessage("Are you sure you want to log out?")
+                .setPositiveButton("LOG OUT", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        firebaseAuth.signOut();
+                        new MainActivity.Destroy(Profile.this);
+                        startActivity(new Intent(Profile.this, LoginActivity.class));
+                        getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).edit().clear().commit();
+                        finish();
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
     }
 }

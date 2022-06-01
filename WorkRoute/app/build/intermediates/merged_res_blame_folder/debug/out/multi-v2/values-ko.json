@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.workroute.app-mergeDebugResources-81:/values-ko/values-ko.xml",
+            "outputFile": "com.example.workroute.app-mergeDebugResources-82:/values-ko/values-ko.xml",
             "map": [
                 {
                     "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\115d8b1886eb45ca778eef1f4013c817\\transformed\\biometric-1.1.0\\res\\values-ko\\values-ko.xml",

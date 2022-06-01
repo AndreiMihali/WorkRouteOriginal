@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.workroute.app-mergeDebugResources-81:/values-uz/values-uz.xml",
+            "outputFile": "com.example.workroute.app-mergeDebugResources-82:/values-uz/values-uz.xml",
             "map": [
                 {
                     "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\f738dd5611a9ee0511abb1179e691747\\transformed\\jetified-places-2.6.0\\res\\values-uz\\values.xml",

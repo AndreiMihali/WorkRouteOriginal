@@ -54,6 +54,7 @@ drawable bx_check
 drawable bx_check_double
 drawable bx_chevron_down
 drawable bx_chevron_up
+drawable bx_error
 drawable bx_error_alt
 drawable bx_hourglass
 drawable bx_id_card
@@ -87,6 +88,7 @@ drawable ic_baseline_card_membership_24
 drawable ic_baseline_change_circle_24
 drawable ic_baseline_chat_24
 drawable ic_baseline_close_24
+drawable ic_baseline_color_lens_24
 drawable ic_baseline_credit_card_24
 drawable ic_baseline_date_range_24
 drawable ic_baseline_departure_board_24
@@ -160,6 +162,7 @@ font andada
 font bigshot_one
 id activeSubscriptions
 id appNotifications
+id appbar
 id autocompleteColors
 id autocompleteTypes
 id boton_drag
@@ -217,6 +220,12 @@ id card_type
 id card_work_direction
 id cardsImage
 id close_fullScreen
+id colorHomeTrack
+id colorRadius
+id colorTrackHome
+id colorTrackWork
+id colorTracks
+id colorWorkTrack
 id content
 id cord_layout
 id deleteAccount
@@ -340,6 +349,7 @@ id toolbar_recovery_password
 id toolbar_subs
 id tvAboutUs
 id tvHowToUseWorkRoute
+id tvMapColors
 id tvMapSettings
 id tvNotificationPreferences
 id tv_userMail
@@ -503,4 +513,3 @@ style Theme.WorkRoute
 style Widget.App.Button
 style backDriverInformation
 style dialogFullAnimation
-xml root_preferences

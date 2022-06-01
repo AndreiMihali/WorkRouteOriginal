@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.workroute.app-mergeDebugResources-81:/values-pt-rBR/values-pt-rBR.xml",
+            "outputFile": "com.example.workroute.app-mergeDebugResources-82:/values-pt-rBR/values-pt-rBR.xml",
             "map": [
                 {
                     "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\993a2be53a9d61742d1b737a05c33358\\transformed\\navigation-ui-2.4.2\\res\\values-pt-rBR\\values-pt-rBR.xml",

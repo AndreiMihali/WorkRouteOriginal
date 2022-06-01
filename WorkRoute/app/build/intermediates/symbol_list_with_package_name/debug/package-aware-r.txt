@@ -1141,6 +1141,7 @@ attr suggestionRowLayout
 attr summary
 attr summaryOff
 attr summaryOn
+attr supportsAlpha
 attr surface_type
 attr switchMinWidth
 attr switchPadding
@@ -2451,6 +2452,10 @@ dimen abc_text_size_subtitle_material_toolbar
 dimen abc_text_size_title_material
 dimen abc_text_size_title_material_toolbar
 dimen action_bar_size
+dimen ambilwarna_hsvHeight
+dimen ambilwarna_hsvWidth
+dimen ambilwarna_hueWidth
+dimen ambilwarna_spacer
 dimen appcompat_dialog_background_inset
 dimen bannerContentWeight
 dimen bannerWeightSum
@@ -3102,6 +3107,13 @@ drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable account_amico
+drawable ambilwarna_alphacheckered
+drawable ambilwarna_alphacheckered_tiled
+drawable ambilwarna_arrow_down
+drawable ambilwarna_arrow_right
+drawable ambilwarna_cursor
+drawable ambilwarna_hue
+drawable ambilwarna_target
 drawable avd_hide_password
 drawable avd_show_password
 drawable back_arrow_back
@@ -3135,6 +3147,7 @@ drawable bx_check
 drawable bx_check_double
 drawable bx_chevron_down
 drawable bx_chevron_up
+drawable bx_error
 drawable bx_error_alt
 drawable bx_hourglass
 drawable bx_id_card
@@ -3280,6 +3293,7 @@ drawable ic_baseline_card_membership_24
 drawable ic_baseline_change_circle_24
 drawable ic_baseline_chat_24
 drawable ic_baseline_close_24
+drawable ic_baseline_color_lens_24
 drawable ic_baseline_credit_card_24
 drawable ic_baseline_date_range_24
 drawable ic_baseline_departure_board_24
@@ -3500,6 +3514,19 @@ id aligned
 id all
 id allStates
 id always
+id ambilwarna_alphaCheckered
+id ambilwarna_alphaCursor
+id ambilwarna_cursor
+id ambilwarna_dialogView
+id ambilwarna_newColor
+id ambilwarna_oldColor
+id ambilwarna_overlay
+id ambilwarna_pref_widget_box
+id ambilwarna_state
+id ambilwarna_target
+id ambilwarna_viewContainer
+id ambilwarna_viewHue
+id ambilwarna_viewSatBri
 id androidx_compose_ui_view_composition_context
 id androidx_window_activity_scope
 id animateToEnd
@@ -3507,6 +3534,7 @@ id animateToStart
 id antiClockwise
 id anticipate
 id appNotifications
+id appbar
 id arc
 id asConfigured
 id async
@@ -3626,6 +3654,12 @@ id close_fullScreen
 id closest
 id collapseActionView
 id collapse_button
+id colorHomeTrack
+id colorRadius
+id colorTrackHome
+id colorTrackWork
+id colorTracks
+id colorWorkTrack
 id compose_view_saveable_id_tag
 id compress
 id confirm_button
@@ -4205,6 +4239,7 @@ id transition_transform
 id triangle
 id tvAboutUs
 id tvHowToUseWorkRoute
+id tvMapColors
 id tvMapSettings
 id tvNotificationPreferences
 id tv_userMail
@@ -4409,6 +4444,8 @@ layout activity_pay_method
 layout activity_personal_information
 layout activity_profile
 layout activity_splash_screen
+layout ambilwarna_dialog
+layout ambilwarna_pref_widget
 layout banner
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
@@ -6045,6 +6082,7 @@ styleable ActivityFilter activityAction activityName
 styleable ActivityNavigator android_name action data dataPattern targetPackage
 styleable ActivityRule alwaysExpand
 styleable AlertDialog android_layout buttonIconDimen buttonPanelSideLayout listItemLayout listLayout multiChoiceItemLayout showTitle singleChoiceItemLayout
+styleable AmbilWarnaPreference supportsAlpha
 styleable AnimatedStateListDrawableCompat android_dither android_visible android_variablePadding android_constantSize android_enterFadeDuration android_exitFadeDuration
 styleable AnimatedStateListDrawableItem android_id android_drawable
 styleable AnimatedStateListDrawableTransition android_drawable android_toId android_fromId android_reversible
@@ -6230,7 +6268,6 @@ styleable ViewPager2 android_orientation
 styleable ViewStubCompat android_id android_layout android_inflatedId
 styleable ViewTransition android_id SharedValue SharedValueId clearsTag duration ifTagNotSet ifTagSet motionInterpolator motionTarget onStateTransition pathMotionArc setsTag transitionDisable upDuration viewTransitionMode
 styleable include constraintSet
-xml root_preferences
 xml standalone_badge
 xml standalone_badge_gravity_bottom_end
 xml standalone_badge_gravity_bottom_start

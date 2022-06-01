@@ -63,6 +63,7 @@ MERGED from [com.github.jd-alexander:library:1.1.0] C:\Users\andre\.gradle\cache
 MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\andre\.gradle\caches\transforms-3\0791e7f3109c85d410ad89fc7868e07b\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:17:1-44:12
 MERGED from [com.google.android.gms:play-services-location:19.0.1] C:\Users\andre\.gradle\caches\transforms-3\8b945ce093db92d43dd73b3591b7be4d\transformed\jetified-play-services-location-19.0.1\AndroidManifest.xml:2:1-9:12
 MERGED from [com.firebase:geofire-android-common:3.1.0] C:\Users\andre\.gradle\caches\transforms-3\5443cce443a231a29e3cceed09cab8d2\transformed\jetified-geofire-android-common-3.1.0\AndroidManifest.xml:2:1-11:12
+MERGED from [com.github.yukuku:ambilwarna:2.0.1] C:\Users\andre\.gradle\caches\transforms-3\883d45766d9d7947e86534f8481eefd0\transformed\jetified-ambilwarna-2.0.1\AndroidManifest.xml:2:1-12:12
 MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] C:\Users\andre\.gradle\caches\transforms-3\bfa7ce71a95431f4e61d1e3da6cf5957\transformed\lifecycle-extensions-2.2.0\AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.palette:palette:1.0.0] C:\Users\andre\.gradle\caches\transforms-3\06886d556639f9278209060c888a25d5\transformed\palette-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\andre\.gradle\caches\transforms-3\f10c42349a890a04ddafc4796570948a\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:17:1-24:12
@@ -667,6 +668,8 @@ MERGED from [com.google.android.gms:play-services-location:19.0.1] C:\Users\andr
 MERGED from [com.google.android.gms:play-services-location:19.0.1] C:\Users\andre\.gradle\caches\transforms-3\8b945ce093db92d43dd73b3591b7be4d\transformed\jetified-play-services-location-19.0.1\AndroidManifest.xml:5:5-44
 MERGED from [com.firebase:geofire-android-common:3.1.0] C:\Users\andre\.gradle\caches\transforms-3\5443cce443a231a29e3cceed09cab8d2\transformed\jetified-geofire-android-common-3.1.0\AndroidManifest.xml:7:5-9:41
 MERGED from [com.firebase:geofire-android-common:3.1.0] C:\Users\andre\.gradle\caches\transforms-3\5443cce443a231a29e3cceed09cab8d2\transformed\jetified-geofire-android-common-3.1.0\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.yukuku:ambilwarna:2.0.1] C:\Users\andre\.gradle\caches\transforms-3\883d45766d9d7947e86534f8481eefd0\transformed\jetified-ambilwarna-2.0.1\AndroidManifest.xml:8:5-10:41
+MERGED from [com.github.yukuku:ambilwarna:2.0.1] C:\Users\andre\.gradle\caches\transforms-3\883d45766d9d7947e86534f8481eefd0\transformed\jetified-ambilwarna-2.0.1\AndroidManifest.xml:8:5-10:41
 MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] C:\Users\andre\.gradle\caches\transforms-3\bfa7ce71a95431f4e61d1e3da6cf5957\transformed\lifecycle-extensions-2.2.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] C:\Users\andre\.gradle\caches\transforms-3\bfa7ce71a95431f4e61d1e3da6cf5957\transformed\lifecycle-extensions-2.2.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.palette:palette:1.0.0] C:\Users\andre\.gradle\caches\transforms-3\06886d556639f9278209060c888a25d5\transformed\palette-1.0.0\AndroidManifest.xml:20:5-44

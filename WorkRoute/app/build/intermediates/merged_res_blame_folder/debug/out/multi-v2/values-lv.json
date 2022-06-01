@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.workroute.app-mergeDebugResources-81:/values-lv/values-lv.xml",
+            "outputFile": "com.example.workroute.app-mergeDebugResources-82:/values-lv/values-lv.xml",
             "map": [
                 {
                     "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\445e5d074a677817b7a012c69d09b076\\transformed\\appcompat-1.4.1\\res\\values-lv\\values-lv.xml",

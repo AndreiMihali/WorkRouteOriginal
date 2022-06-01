@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.workroute.app-mergeDebugResources-81:/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "outputFile": "com.example.workroute.app-mergeDebugResources-82:/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
                     "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\babf7d7fa80a2d83cf2765f69900932a\\transformed\\jetified-firebase-inappmessaging-display-20.1.2\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
