@@ -228,7 +228,6 @@ id colorTracks
 id colorWorkTrack
 id content
 id cord_layout
-id deleteAccount
 id divider
 id ed_confirmpass_register
 id ed_email
@@ -351,6 +350,7 @@ id tvAboutUs
 id tvHowToUseWorkRoute
 id tvMapColors
 id tvMapSettings
+id tvName
 id tvNotificationPreferences
 id tv_userMail
 id tv_user_work_direction_sub

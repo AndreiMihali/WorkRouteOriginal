@@ -3683,7 +3683,6 @@ id decelerate
 id decelerateAndComplete
 id decor_content_parent
 id default_activity_button
-id deleteAccount
 id deltaRelative
 id dependency_ordering
 id design_bottom_sheet
@@ -4241,6 +4240,7 @@ id tvAboutUs
 id tvHowToUseWorkRoute
 id tvMapColors
 id tvMapSettings
+id tvName
 id tvNotificationPreferences
 id tv_userMail
 id tv_user_work_direction_sub

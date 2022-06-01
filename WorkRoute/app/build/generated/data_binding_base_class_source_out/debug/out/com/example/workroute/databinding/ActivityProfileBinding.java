@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -29,9 +30,6 @@ public final class ActivityProfileBinding implements ViewBinding {
   public final MaterialCardView cardViewImage;
 
   @NonNull
-  public final LinearLayout deleteAccount;
-
-  @NonNull
   public final LinearLayout extras;
 
   @NonNull
@@ -52,16 +50,17 @@ public final class ActivityProfileBinding implements ViewBinding {
   @NonNull
   public final MaterialToolbar toolbar;
 
+  @NonNull
+  public final TextView tvName;
+
   private ActivityProfileBinding(@NonNull ConstraintLayout rootView,
       @NonNull LinearLayout activeSubscriptions, @NonNull MaterialCardView cardViewImage,
-      @NonNull LinearLayout deleteAccount, @NonNull LinearLayout extras,
-      @NonNull LinearLayout logout, @NonNull LinearLayout payMethod,
+      @NonNull LinearLayout extras, @NonNull LinearLayout logout, @NonNull LinearLayout payMethod,
       @NonNull LinearLayout personalInformation, @NonNull ImageView profileImage,
-      @NonNull LinearLayout settings, @NonNull MaterialToolbar toolbar) {
+      @NonNull LinearLayout settings, @NonNull MaterialToolbar toolbar, @NonNull TextView tvName) {
     this.rootView = rootView;
     this.activeSubscriptions = activeSubscriptions;
     this.cardViewImage = cardViewImage;
-    this.deleteAccount = deleteAccount;
     this.extras = extras;
     this.logout = logout;
     this.payMethod = payMethod;
@@ -69,6 +68,7 @@ public final class ActivityProfileBinding implements ViewBinding {
     this.profileImage = profileImage;
     this.settings = settings;
     this.toolbar = toolbar;
+    this.tvName = tvName;
   }
 
   @Override
@@ -107,12 +107,6 @@ public final class ActivityProfileBinding implements ViewBinding {
       id = R.id.cardViewImage;
       MaterialCardView cardViewImage = ViewBindings.findChildViewById(rootView, id);
       if (cardViewImage == null) {
-        break missingId;
-      }
-
-      id = R.id.deleteAccount;
-      LinearLayout deleteAccount = ViewBindings.findChildViewById(rootView, id);
-      if (deleteAccount == null) {
         break missingId;
       }
 
@@ -158,9 +152,15 @@ public final class ActivityProfileBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvName;
+      TextView tvName = ViewBindings.findChildViewById(rootView, id);
+      if (tvName == null) {
+        break missingId;
+      }
+
       return new ActivityProfileBinding((ConstraintLayout) rootView, activeSubscriptions,
-          cardViewImage, deleteAccount, extras, logout, payMethod, personalInformation,
-          profileImage, settings, toolbar);
+          cardViewImage, extras, logout, payMethod, personalInformation, profileImage, settings,
+          toolbar, tvName);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

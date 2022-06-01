@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintVertical_bias="0">
+        app:layout_constraintVertical_bias="0.05">
 
         <ImageView
             android:id="@+id/profileImage"
@@ -39,6 +39,19 @@
             android:src="@drawable/steven_binotto_9vduc_sgrsi_unsplash" />
     </com.google.android.material.card.MaterialCardView>
 
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/secondary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardViewImage"
+        tools:text="Andrei Mihali" />
+
     <LinearLayout
         android:id="@+id/extras"
         android:layout_width="wrap_content"
@@ -47,8 +60,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardViewImage"
-        app:layout_constraintVertical_bias="0.04">
+        app:layout_constraintTop_toBottomOf="@id/tvName"
+        app:layout_constraintVertical_bias="0.05">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -298,45 +311,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             app:dividerColor="#BDBABA" />
-
-        <LinearLayout
-            android:id="@+id/deleteAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingVertical="10dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_outline_delete_forever_24"
-                app:tint="@color/secondary" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:text="Delete Account"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                app:tint="#737272" />
-        </LinearLayout>
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:dividerColor="#BDBABA" />
-
 
         <LinearLayout
             android:id="@+id/logout"

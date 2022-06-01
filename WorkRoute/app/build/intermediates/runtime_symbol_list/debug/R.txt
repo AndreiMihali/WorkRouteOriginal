@@ -3682,7 +3682,6 @@ int id decelerate 0x7f0a00f9
 int id decelerateAndComplete 0x7f0a00fa
 int id decor_content_parent 0x7f0a00fb
 int id default_activity_button 0x7f0a00fc
-int id deleteAccount 0x7f0a00fd
 int id deltaRelative 0x7f0a00fe
 int id dependency_ordering 0x7f0a00ff
 int id design_bottom_sheet 0x7f0a0100
@@ -4240,6 +4239,7 @@ int id tvAboutUs 0x7f0a0327
 int id tvHowToUseWorkRoute 0x7f0a0328
 int id tvMapColors 0x7f0a0329
 int id tvMapSettings 0x7f0a032a
+int id tvName 0x7f0a0382
 int id tvNotificationPreferences 0x7f0a032b
 int id tv_userMail 0x7f0a032c
 int id tv_user_work_direction_sub 0x7f0a032d

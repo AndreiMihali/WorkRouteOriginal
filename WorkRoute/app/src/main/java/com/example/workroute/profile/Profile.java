@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,8 +26,9 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Profile extends AppCompatActivity {
     private MaterialToolbar toolbar;
     private FirebaseAuth firebaseAuth;
-    private LinearLayout ln_profile, ln_pay, ln_activeSubs, ln_settings, ln_delete, ln_logout;
+    private LinearLayout ln_profile, ln_pay, ln_activeSubs, ln_settings, ln_logout;
     private ImageView profileImage;
+    private TextView tvName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +60,9 @@ public class Profile extends AppCompatActivity {
         ln_pay = findViewById(R.id.payMethod);
         ln_activeSubs = findViewById(R.id.activeSubscriptions);
         ln_settings = findViewById(R.id.settings);
-        ln_delete = findViewById(R.id.deleteAccount);
         ln_logout = findViewById(R.id.logout);
         profileImage = findViewById(R.id.profileImage);
+        tvName = findViewById(R.id.tvName);
         initListeners();
         setData();
     }
@@ -72,6 +74,7 @@ public class Profile extends AppCompatActivity {
             } else {
                 Glide.with(getApplicationContext()).load(Companion.user.getFotoPerfil()).into(profileImage);
             }
+            tvName.setText(Companion.user.getNombre());
         }
     }
 
