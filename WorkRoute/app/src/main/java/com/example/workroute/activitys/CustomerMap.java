@@ -362,7 +362,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
         float radius = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getFloat("searchRadius",30f);
         DatabaseReference driversReference = FirebaseDatabase.getInstance().getReference().child("locationUpdates").child("Drivers");
         GeoFire geoFire = new GeoFire(driversReference);
-        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(), myLastLocation.getLongitude()), radius*1000);
+        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(), myLastLocation.getLongitude()), radius);
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {

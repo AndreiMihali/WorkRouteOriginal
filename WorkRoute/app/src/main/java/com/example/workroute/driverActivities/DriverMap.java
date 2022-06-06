@@ -266,7 +266,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
         float radius = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getFloat("searchRadius",30f);
         DatabaseReference customersReference = FirebaseDatabase.getInstance().getReference().child("locationUpdates").child("Customers");
         GeoFire geoFire = new GeoFire(customersReference);
-        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(), myLastLocation.getLongitude()), radius*1000);
+        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(), myLastLocation.getLongitude()), radius);
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
