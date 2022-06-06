@@ -20,6 +20,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.webkit.MimeTypeMap;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -84,7 +86,8 @@ public class Personal_information extends AppCompatActivity {
     private MaterialCardView card_car;
     private TextView plateNumber, carType, carColor;
     private LinearLayout lnCarContent;
-    private ImageButton btn_edit_work, btn_edit_home, btnUpDown;
+    private ImageButton btn_edit_work, btn_edit_home;
+    private CheckBox btnUpDown;
     private boolean sw = false;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
@@ -265,16 +268,14 @@ public class Personal_information extends AppCompatActivity {
             }
         });
 
-        btnUpDown.setOnClickListener(new View.OnClickListener() {
+        btnUpDown.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (lnCarContent.getVisibility() == View.GONE) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
                     lnCarContent.setVisibility(View.VISIBLE);
                     lnCarContent.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up_in));
-                    btnUpDown.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_24);
-                } else if (lnCarContent.getVisibility() == View.VISIBLE) {
+                }else{
                     lnCarContent.setVisibility(View.GONE);
-                    btnUpDown.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_24);
                 }
             }
         });

@@ -324,14 +324,14 @@
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
 
-                            <ImageButton
+                            <CheckBox
                                 android:id="@+id/buttonUpDown"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
-                                android:background="@android:color/transparent"
-                                android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                                android:button="@drawable/up_down_arrow"
+                                android:buttonTint="@color/secondary"
                                 app:tint="@color/secondary" />
                         </RelativeLayout>
 

@@ -3422,9 +3422,10 @@ int drawable test_custom_background 0x7f08018f
 int drawable test_level_drawable 0x7f080190
 int drawable tooltip_frame_dark 0x7f080191
 int drawable tooltip_frame_light 0x7f080192
-int drawable user_marker 0x7f080193
-int drawable work 0x7f080194
-int drawable workroute2icono 0x7f080195
+int drawable up_down_arrow 0x7f080193
+int drawable user_marker 0x7f080194
+int drawable work 0x7f080195
+int drawable workroute2icono 0x7f080196
 int font allerta 0x7f090000
 int font andada 0x7f090001
 int font bigshot_one 0x7f090002

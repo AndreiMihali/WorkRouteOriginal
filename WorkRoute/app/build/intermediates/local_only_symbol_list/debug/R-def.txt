@@ -154,6 +154,7 @@ drawable payments
 drawable reversocarnet
 drawable round_bottom_sheet
 drawable steven_binotto_9vduc_sgrsi_unsplash
+drawable up_down_arrow
 drawable user_marker
 drawable work
 drawable workroute2icono

@@ -4,6 +4,7 @@ package com.example.workroute.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,7 +34,7 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
   public final ImageButton btnEditWork;
 
   @NonNull
-  public final ImageButton buttonUpDown;
+  public final CheckBox buttonUpDown;
 
   @NonNull
   public final MaterialCardView cardCarInformation;
@@ -100,7 +101,7 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
 
   private ActivityPersonalInformationBinding(@NonNull CoordinatorLayout rootView,
       @NonNull ImageButton btnEditHome, @NonNull ImageButton btnEditWork,
-      @NonNull ImageButton buttonUpDown, @NonNull MaterialCardView cardCarInformation,
+      @NonNull CheckBox buttonUpDown, @NonNull MaterialCardView cardCarInformation,
       @NonNull MaterialCardView cardViewImage, @NonNull CoordinatorLayout cordLayout,
       @NonNull ImageView editProfilePhoto, @NonNull ImageView imageLock,
       @NonNull LinearLayout lnInformation, @NonNull NestedScrollView nestedScroll,
@@ -178,7 +179,7 @@ public final class ActivityPersonalInformationBinding implements ViewBinding {
       }
 
       id = R.id.buttonUpDown;
-      ImageButton buttonUpDown = ViewBindings.findChildViewById(rootView, id);
+      CheckBox buttonUpDown = ViewBindings.findChildViewById(rootView, id);
       if (buttonUpDown == null) {
         break missingId;
       }
