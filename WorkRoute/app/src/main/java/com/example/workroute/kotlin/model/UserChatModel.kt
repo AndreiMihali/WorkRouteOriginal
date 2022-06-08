@@ -7,5 +7,5 @@ data class UserChatModel(
     val lastMessage: String?,
     val lastMessageHour: String?,
     val read: String?,
-    val time:String?
+    val time: Long
 )

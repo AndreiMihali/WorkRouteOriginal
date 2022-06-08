@@ -24,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Notifications extends AppCompatActivity {
 
@@ -66,8 +68,8 @@ public class Notifications extends AppCompatActivity {
 
     private void getData() {
         progressBar.setVisibility(View.VISIBLE);
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Notifications");;
-        reference.orderByChild("time").addValueEventListener(new ValueEventListener() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Notifications");
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 data.clear();
@@ -75,6 +77,9 @@ public class Notifications extends AppCompatActivity {
                     NotificationItem not = snap.getValue(NotificationItem.class);
                     not.setId(snap.getKey());
                     data.add(not);
+                }
+                if(data.size()>1){
+                    Collections.sort(data,new DateComparator());
                 }
                 progressBar.setVisibility(View.GONE);
 
@@ -104,5 +109,19 @@ public class Notifications extends AppCompatActivity {
     protected void onDestroy() {
         new MainActivity.Destroy(Notifications.this).start();
         super.onDestroy();
+    }
+
+    private class DateComparator implements Comparator<NotificationItem> {
+
+        @Override
+        public int compare(NotificationItem n1, NotificationItem n2)
+        {
+            if (n1.getTime()==n2.getTime())
+                return 0;
+            else if (n1.getTime()<n2.getTime())
+                return 1;
+            else
+                return -1;
+        }
     }
 }

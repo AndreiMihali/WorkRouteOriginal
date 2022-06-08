@@ -7,10 +7,10 @@ class NotificationItem {
     var type: String? = null
     var read: String? = null
     var id: String? = null
-    var time: String? = null
+    var time: Long? = null
 
     constructor() {
-        time = Calendar.getInstance().time.toLocaleString()
+        time = Calendar.getInstance().timeInMillis
     }
 
     constructor(
@@ -21,7 +21,7 @@ class NotificationItem {
         this.message = message
         this.type = type
         this.read = read
-        time = Calendar.getInstance().time.toLocaleString()
+        time = Calendar.getInstance().timeInMillis
     }
 
 }

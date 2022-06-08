@@ -191,6 +191,7 @@ class MessagesActivity : AppCompatActivity() {
             chatRef.child("time").setValue(time.toString())
             chatRef.child("typing").setValue("false")
             chatRef.child("isInChat").setValue("false")
+            chatRef.child("timeMillis").setValue(Calendar.getInstance().timeInMillis)
 
             val chatRef2 = FirebaseDatabase.getInstance().getReference("ChatList").child(receiverId)
                 .child(firebaseUser.uid)
@@ -198,6 +199,7 @@ class MessagesActivity : AppCompatActivity() {
             chatRef2.child("message").setValue(message)
             chatRef2.child("time").setValue(time.toString())
             chatRef2.child("typing").setValue("false")
+            chatRef2.child("timeMillis").setValue(Calendar.getInstance().timeInMillis)
 
             getSenderName(firebaseUser.uid, receiverId, message, nameUserString)
         }.run()

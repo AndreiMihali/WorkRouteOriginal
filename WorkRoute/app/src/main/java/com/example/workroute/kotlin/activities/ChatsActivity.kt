@@ -79,7 +79,8 @@ class ChatsActivity : AppCompatActivity() {
                     val lastMessage = snapshot.child("message").value.toString()
                     val time = snapshot.child("time").value.toString()
                     val read = snapshot.child("read").value.toString()
-                    allUsers.add(UserList(userId, lastMessage, time, read))
+                    val timeMillis = snapshot.child("timeMillis").value.toString().toLong()
+                    allUsers.add(UserList(userId, lastMessage, time, read, timeMillis))
                 }
                 progressCircular.visibility = View.GONE
                 if (allUsers.isEmpty()) {
@@ -114,9 +115,11 @@ class ChatsActivity : AppCompatActivity() {
                             user.lastMessage,
                             user.time,
                             user.read,
-                            Calendar.getInstance().time.toLocaleString()
+                            user.timeMillis
                         )
                     )
+                    Collections.sort(data, DateComparator())
+
                     if (adapter != null) {
                         adapter?.notifyDataSetChanged()
                     } else {
@@ -140,6 +143,14 @@ class ChatsActivity : AppCompatActivity() {
         val userId: String,
         val lastMessage: String,
         val time: String,
-        val read: String
+        val read: String,
+        val timeMillis: Long
     )
+
+    private class DateComparator : Comparator<UserChatModel> {
+
+        override fun compare(o1: UserChatModel, o2: UserChatModel): Int {
+            return if (o1.time === o2.time) 0 else if (o1.time!! < o2.time!!) 1 else -1
+        }
+    }
 }
