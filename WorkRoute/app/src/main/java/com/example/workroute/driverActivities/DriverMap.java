@@ -25,7 +25,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -263,7 +262,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
 
     private void getAllCustomers() {
         getCustomersAroundStarted = true;
-        float radius = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getFloat("searchRadius",30f);
+        float radius = getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).getFloat("searchRadius", 30f);
         DatabaseReference customersReference = FirebaseDatabase.getInstance().getReference().child("locationUpdates").child("Customers");
         GeoFire geoFire = new GeoFire(customersReference);
         GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(), myLastLocation.getLongitude()), radius);
@@ -282,9 +281,14 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
                                 isPendingSubscribed(key, new SimpleCallback<String>() {
                                     @Override
                                     public void callback(String data, Object... secondary) {
-                                        if (data.equals("pending") || data.equals("accepted")) {
-                                            mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
-                                                    .anchor(0.5f, 0.5f));
+                                        if (data != null) {
+                                            if (data.equals("pending") || data.equals("accepted")) {
+                                                mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
+                                                        .anchor(0.5f, 0.5f));
+                                            } else {
+                                                mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.user_marker))))
+                                                        .anchor(0.5f, 0.5f));
+                                            }
                                         } else {
                                             mCustomerMarker = mMap.addMarker(new MarkerOptions().position(customerLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.user_marker))))
                                                     .anchor(0.5f, 0.5f));
@@ -410,7 +414,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
                                 }
 
                                 polylines2 = new ArrayList<>();
-                                int color = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getInt("workColor",getColor(R.color.secondaryLine));
+                                int color = getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).getInt("workColor", getColor(R.color.secondaryLine));
                                 //add route(s) to the map.
                                 for (int i = 0; i < route.size(); i++) {
                                     //In case of more than 5 alternative routes
@@ -492,29 +496,36 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
                     existUserSubscription(new ExistListener() {
                         @Override
                         public void existCallback(boolean exist) {
-                            if(exist){
+                            if (exist) {
                                 isPendingSubscribed(customerId, new SimpleCallback<String>() {
                                     @Override
                                     public void callback(String data, Object... secondary) {
-                                        if (data.equals("pending")) {
-                                            txt_statusMessage.setVisibility(View.VISIBLE);
-                                            txt_statusMessage.setText("You have to accept the user request");
-                                            btnRideStatus.setVisibility(View.GONE);
-                                            txt_total_pay_travel.setText("20$/month");
-                                        } else if (data.equals("declined") || data.equals("canceled")) {
-                                            txt_statusMessage.setVisibility(View.VISIBLE);
-                                            txt_statusMessage.setText("You canceled or declined the user request");
-                                            btnRideStatus.setVisibility(View.GONE);
-                                            txt_total_pay_travel.setText("0$/month");
-                                        } else if (data.equals("accepted")) {
-                                            txt_statusMessage.setVisibility(View.GONE);
-                                            btnRideStatus.setVisibility(View.VISIBLE);
-                                            if (isGoingToWork) {
-                                                btnRideStatus.setText("Go to work");
+                                        if (data != null) {
+                                            if (data.equals("pending")) {
+                                                txt_statusMessage.setVisibility(View.VISIBLE);
+                                                txt_statusMessage.setText("You have to accept the user request");
+                                                btnRideStatus.setVisibility(View.GONE);
+                                                txt_total_pay_travel.setText("20$/month");
+                                            } else if (data.equals("declined") || data.equals("canceled")) {
+                                                txt_statusMessage.setVisibility(View.VISIBLE);
+                                                txt_statusMessage.setText("You canceled or declined the user request");
+                                                btnRideStatus.setVisibility(View.GONE);
+                                                txt_total_pay_travel.setText("0$/month");
+                                            } else if (data.equals("accepted")) {
+                                                txt_statusMessage.setVisibility(View.GONE);
+                                                btnRideStatus.setVisibility(View.VISIBLE);
+                                                if (isGoingToWork) {
+                                                    btnRideStatus.setText("Go to work");
+                                                } else {
+                                                    btnRideStatus.setText("Go to customer");
+                                                }
+                                                txt_total_pay_travel.setText("20$/month");
                                             } else {
-                                                btnRideStatus.setText("Go to customer");
+                                                txt_statusMessage.setVisibility(View.VISIBLE);
+                                                txt_statusMessage.setText("This user isn`t subscribed yet");
+                                                btnRideStatus.setVisibility(View.GONE);
+                                                txt_total_pay_travel.setText("0$/month");
                                             }
-                                            txt_total_pay_travel.setText("20$/month");
                                         } else {
                                             txt_statusMessage.setVisibility(View.VISIBLE);
                                             txt_statusMessage.setText("This user isn`t subscribed yet");
@@ -523,14 +534,14 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
                                         }
                                     }
                                 });
-                            }else{
+                            } else {
                                 txt_statusMessage.setVisibility(View.VISIBLE);
                                 txt_statusMessage.setText("This user isn`t subscribed yet");
                                 btnRideStatus.setVisibility(View.GONE);
                                 txt_total_pay_travel.setText("0$/month");
                             }
                         }
-                    },customerId);
+                    }, customerId);
                 }
             }
 
@@ -878,7 +889,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
         if (isGoingToWork) {
             destination.setLatitude(destinationCustomerLatLng.latitude);
             destination.setLongitude(destinationCustomerLatLng.longitude);
-            if (getDistance(myLastLocation,destination)<=100) {
+            if (getDistance(myLastLocation, destination) <= 100) {
                 Snackbar.make(findViewById(R.id.rela), "You arrived to the work", Snackbar.LENGTH_SHORT).show();
                 isGoingToWork = false;
             } else {
@@ -887,7 +898,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
         } else {
             destination.setLatitude(customerLatLng.latitude);
             destination.setLongitude(customerLatLng.longitude);
-            if (getDistance(myLastLocation,destination)<=100) {
+            if (getDistance(myLastLocation, destination) <= 100) {
                 Snackbar.make(findViewById(R.id.rela), "You arrived to the customer address", Snackbar.LENGTH_SHORT).show();
                 getSenderName(firebaseAuth.getCurrentUser().getUid(), customerId);
                 isGoingToWork = true;
@@ -897,7 +908,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
         }
     }
 
-    private float getDistance(Location one, Location two){
+    private float getDistance(Location one, Location two) {
         return one.distanceTo(two);
     }
 
@@ -965,15 +976,15 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
         DatabaseReference driverReference = FirebaseDatabase.getInstance().getReference("Drivers");
         Map<String, Object> map = new HashMap<>();
         LatLng destination = new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(), "latitude")), Double.valueOf(getDestination(Companion.user.getWorkAddress(), "longitude")));
-        Location locDest=new Location("destination");
+        Location locDest = new Location("destination");
         locDest.setLatitude(destination.latitude);
         locDest.setLongitude(destination.longitude);
 
-        if(getDistance(myLastLocation,locDest)<=50){
+        if (getDistance(myLastLocation, locDest) <= 50) {
             map.put("destination", Companion.user.getLocalidad());
             map.put("destinationLat", getDestination(Companion.user.getLocalidad(), "latitude"));
             map.put("destinationLong", getDestination(Companion.user.getLocalidad(), "longitude"));
-        }else{
+        } else {
             map.put("destination", Companion.user.getWorkAddress());
             map.put("destinationLat", getDestination(Companion.user.getWorkAddress(), "latitude"));
             map.put("destinationLong", getDestination(Companion.user.getWorkAddress(), "longitude"));
@@ -985,12 +996,12 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
     }
 
     private void setMarkers() {
-        float radius = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getFloat("workRadius",1.5f);
-        int color = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getInt("radiusColor",getColor(R.color.secondary));
+        float radius = getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).getFloat("workRadius", 1.5f);
+        int color = getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).getInt("radiusColor", getColor(R.color.secondary));
         LatLng myDestination = new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(), "latitude")), Double.valueOf(getDestination(Companion.user.getWorkAddress(), "longitude")));
         CircleOptions circleOptions = new CircleOptions()
                 .center(myDestination)
-                .radius(radius*1000)
+                .radius(radius * 1000)
                 .strokeColor(color)
                 .clickable(false)
                 .strokeWidth(7);
@@ -1122,7 +1133,7 @@ public class DriverMap extends FragmentActivity implements SearchView.OnQueryTex
                 }
 
                 polylines = new ArrayList<>();
-                int color = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getInt("homeColor",getColor(R.color.secondary));
+                int color = getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).getInt("homeColor", getColor(R.color.secondary));
                 //add route(s) to the map.
                 for (int i = 0; i < route.size(); i++) {
                     //In case of more than 5 alternative routes

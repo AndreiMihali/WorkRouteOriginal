@@ -332,7 +332,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String name = documentSnapshot.get("nombre").toString();
-                getToken(name, receiverId, (message.length<=0  || message == null) ? "You have a new request from " + name : message[0] + name, "NEW REQUEST");
+                getToken(name, receiverId, (message.length <= 0 || message == null) ? "You have a new request from " + name : message[0] + name, "NEW REQUEST");
             }
         });
     }
@@ -359,7 +359,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
 
     private void getAllDrivers() {
         getDriversStarted = true;
-        float radius = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getFloat("searchRadius",30f);
+        float radius = getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).getFloat("searchRadius", 30f);
         DatabaseReference driversReference = FirebaseDatabase.getInstance().getReference().child("locationUpdates").child("Drivers");
         GeoFire geoFire = new GeoFire(driversReference);
         GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(myLastLocation.getLatitude(), myLastLocation.getLongitude()), radius);
@@ -376,13 +376,19 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                                 isPendingSubscribed(key, new SimpleCallback<String>() {
                                     @Override
                                     public void callback(String data, Object... secondary) {
-                                        if (data.equals("pending") || data.equals("accepted")) {
-                                            mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
-                                                    .anchor(0.5f, 0.5f));
+                                        if (data != null) {
+                                            if (data.equals("pending") || data.equals("accepted")) {
+                                                mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.favorite))))
+                                                        .anchor(0.5f, 0.5f));
+                                            } else {
+                                                mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.user_marker))))
+                                                        .anchor(0.5f, 0.5f));
+                                            }
                                         } else {
                                             mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(getDrawable(R.drawable.user_marker))))
                                                     .anchor(0.5f, 0.5f));
                                         }
+
                                         mDriverMarker.setTag(key);
                                         markerList.add(mDriverMarker);
                                     }
@@ -520,13 +526,17 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                                 isPendingSubscribed(driverId, new SimpleCallback<String>() {
                                     @Override
                                     public void callback(String data, Object... secondary) {
-                                        if (data.equals("pending")) {
-                                            btn_cancel.setText("Pending");
-                                        } else if (data.equals("declined") || data.equals("canceled")) {
-                                            btn_cancel.setText("Subscribe");
-                                        } else if (data.equals("accepted")) {
-                                            btn_cancel.setText("Go to work");
-                                        } else {
+                                        if(data!=null){
+                                            if (data.equals("pending")) {
+                                                btn_cancel.setText("Pending");
+                                            } else if (data.equals("declined") || data.equals("canceled")) {
+                                                btn_cancel.setText("Subscribe");
+                                            } else if (data.equals("accepted")) {
+                                                btn_cancel.setText("Go to work");
+                                            } else {
+                                                btn_cancel.setText("Subscribe");
+                                            }
+                                        }else{
                                             btn_cancel.setText("Subscribe");
                                         }
                                     }
@@ -635,7 +645,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                                 }
 
                                 polylines2 = new ArrayList<>();
-                                int color = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getInt("workColor",getColor(R.color.secondaryLine));
+                                int color = getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).getInt("workColor", getColor(R.color.secondaryLine));
                                 //add route(s) to the map.
                                 for (int i = 0; i < route.size(); i++) {
                                     //In case of more than 5 alternative routes
@@ -735,7 +745,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                 } else if (btn_cancel.getText().toString().equals("Subscribe")) {
                     showDialog();
                 } else {
-                    getSenderName(firebaseAuth.getCurrentUser().getUid(),driverId,"We notified the driver that you want to go to work");
+                    getSenderName(firebaseAuth.getCurrentUser().getUid(), driverId, "We notified the driver that you want to go to work");
                     Toast.makeText(getApplicationContext(), "We notified the driver that you want to go to work", Toast.LENGTH_LONG).show();
                 }
             }
@@ -1045,12 +1055,12 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
     }
 
     private void setMarkers() {
-        float radius = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getFloat("workRadius",1.5f);
-        int color = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getInt("radiusColor",getColor(R.color.secondary));
+        float radius = getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).getFloat("workRadius", 1.5f);
+        int color = getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).getInt("radiusColor", getColor(R.color.secondary));
         LatLng myDestination = new LatLng(Double.valueOf(getDestination(Companion.user.getWorkAddress(), "latitude")), Double.valueOf(getDestination(Companion.user.getWorkAddress(), "longitude")));
         CircleOptions circleOptions = new CircleOptions()
                 .center(myDestination)
-                .radius(radius*1000)
+                .radius(radius * 1000)
                 .strokeColor(color)
                 .clickable(false)
                 .strokeWidth(7);
@@ -1181,7 +1191,7 @@ public class CustomerMap extends FragmentActivity implements RoutingListener, Lo
                 }
 
                 polylines = new ArrayList<>();
-                int color = getSharedPreferences(getString(R.string.sharedPreferences),Context.MODE_PRIVATE).getInt("homeColor",getColor(R.color.secondary));
+                int color = getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE).getInt("homeColor", getColor(R.color.secondary));
                 //add route(s) to the map.
                 for (int i = 0; i < route.size(); i++) {
                     //In case of more than 5 alternative routes
