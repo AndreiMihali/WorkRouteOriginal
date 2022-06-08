@@ -1,12 +1,17 @@
 package com.example.workroute.kotlin.model
 
+import java.util.*
+
 class NotificationItem {
     var message: String? = null
     var type: String? = null
     var read: String? = null
     var id: String? = null
+    var time: String? = null
 
-    constructor() {}
+    constructor() {
+        time = Calendar.getInstance().time.toLocaleString()
+    }
 
     constructor(
         message: String?,
@@ -16,6 +21,7 @@ class NotificationItem {
         this.message = message
         this.type = type
         this.read = read
+        time = Calendar.getInstance().time.toLocaleString()
     }
 
 }

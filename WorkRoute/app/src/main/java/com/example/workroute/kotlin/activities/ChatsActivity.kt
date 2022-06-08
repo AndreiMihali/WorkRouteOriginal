@@ -113,7 +113,8 @@ class ChatsActivity : AppCompatActivity() {
                             userId,
                             user.lastMessage,
                             user.time,
-                            user.read
+                            user.read,
+                            Calendar.getInstance().time.toLocaleString()
                         )
                     )
                     if (adapter != null) {

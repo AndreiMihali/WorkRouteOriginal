@@ -6,5 +6,6 @@ data class UserChatModel(
     val userUID: String,
     val lastMessage: String?,
     val lastMessageHour: String?,
-    val read: String?
+    val read: String?,
+    val time:String?
 )
