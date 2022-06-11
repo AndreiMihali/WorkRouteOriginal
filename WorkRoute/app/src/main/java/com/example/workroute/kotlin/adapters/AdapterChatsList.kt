@@ -14,7 +14,7 @@ import com.example.workroute.kotlin.activities.MessagesActivity
 import com.example.workroute.kotlin.model.UserChatModel
 import com.google.android.material.card.MaterialCardView
 
-class AdapterChatsList(val context: Context,val data:ArrayList<UserChatModel>): RecyclerView.Adapter<AdapterChatsList.ViewHolder>() {
+class AdapterChatsList(val context: Context,val data:MutableList<UserChatModel>): RecyclerView.Adapter<AdapterChatsList.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val profilePhoto:ImageView

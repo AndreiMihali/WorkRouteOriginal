@@ -24,7 +24,7 @@ import java.util.*
 class ChatsActivity : AppCompatActivity() {
     private lateinit var toolbar: MaterialToolbar
     private lateinit var recycler: RecyclerView
-    private lateinit var data: ArrayList<UserChatModel>
+    private lateinit var data: MutableList<UserChatModel>
     private var adapter: AdapterChatsList? = null
     private lateinit var firestore: FirebaseFirestore
     private lateinit var firebaseUser: FirebaseUser
@@ -59,9 +59,7 @@ class ChatsActivity : AppCompatActivity() {
         data = ArrayList()
         allUsers = ArrayList()
         initListeners()
-        if (firebaseUser != null) {
-            getData()
-        }
+        getData()
     }
 
     private fun getData() {
@@ -150,7 +148,7 @@ class ChatsActivity : AppCompatActivity() {
     private class DateComparator : Comparator<UserChatModel> {
 
         override fun compare(o1: UserChatModel, o2: UserChatModel): Int {
-            return if (o1.time === o2.time) 0 else if (o1.time!! < o2.time!!) 1 else -1
+            return if (o1.time == o2.time) 0 else if (o1.time < o2.time) 1 else -1
         }
     }
 }
