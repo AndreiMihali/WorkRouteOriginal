@@ -8,6 +8,10 @@
         "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-86:\\layout\\list_item.xml"
     },
     {
+        "merged": "com.example.workroute.app-mergeDebugResources-83:/layout/dialog_full_screen_pay_method.xml",
+        "source": "com.example.workroute.app-main-86:/layout/dialog_full_screen_pay_method.xml"
+    },
+    {
         "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-83:\\layout\\activity_forgot_password.xml",
         "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-86:\\layout\\activity_forgot_password.xml"
     },
@@ -22,6 +26,10 @@
     {
         "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-83:\\layout\\message_toast_type_cvv.xml",
         "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-86:\\layout\\message_toast_type_cvv.xml"
+    },
+    {
+        "merged": "com.example.workroute.app-mergeDebugResources-83:/layout/activity_splash_screen.xml",
+        "source": "com.example.workroute.app-main-86:/layout/activity_splash_screen.xml"
     },
     {
         "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-83:\\layout\\item_chat_right.xml",
@@ -46,10 +54,6 @@
     {
         "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-83:\\layout\\chats_list_item.xml",
         "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-86:\\layout\\chats_list_item.xml"
-    },
-    {
-        "merged": "com.example.workroute.app-mergeDebugResources-83:/layout/activity_personal_information.xml",
-        "source": "com.example.workroute.app-main-86:/layout/activity_personal_information.xml"
     },
     {
         "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-83:\\layout\\layout_confirmations.xml",
@@ -98,6 +102,10 @@
     {
         "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-83:\\layout\\activity_personal_information.xml",
         "source": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-main-86:\\layout\\activity_personal_information.xml"
+    },
+    {
+        "merged": "com.example.workroute.app-mergeDebugResources-83:/layout/chats_list_item.xml",
+        "source": "com.example.workroute.app-main-86:/layout/chats_list_item.xml"
     },
     {
         "merged": "C:\\Users\\andre\\.gradle\\daemon\\7.3.3\\com.example.workroute.app-mergeDebugResources-83:\\layout\\dialog_full_screen_pay_method.xml",

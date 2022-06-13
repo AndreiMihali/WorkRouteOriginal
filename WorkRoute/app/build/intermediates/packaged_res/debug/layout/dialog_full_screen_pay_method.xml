@@ -87,7 +87,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:textColor="@color/secondary"
-                android:textSize="18sp"></com.google.android.material.textfield.TextInputEditText>
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textSize="18sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,8 +118,9 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:textColor="@color/secondary"
+                android:textCursorDrawable="@drawable/cursor_color"
                 android:textSize="18sp"
-                tools:ignore="DuplicateClickableBoundsCheck"></com.google.android.material.textfield.TextInputEditText>
+                tools:ignore="DuplicateClickableBoundsCheck" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -153,6 +155,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:textColor="@color/secondary"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:textSize="18sp">
 
                 </com.google.android.material.textfield.TextInputEditText>
@@ -184,6 +187,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:textColor="@color/secondary"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:textSize="18sp">
 
                 </com.google.android.material.textfield.TextInputEditText>
@@ -220,6 +224,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:textColor="@color/secondary"
+                android:textCursorDrawable="@drawable/cursor_color"
                 android:textSize="18sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

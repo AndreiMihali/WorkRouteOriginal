@@ -8,37 +8,37 @@
     android:layout_marginVertical="10dp"
     android:background="@color/back_login"
     android:theme="@style/Theme.MaterialComponents.DayNight"
-    app:cardCornerRadius="10dp"
     app:cardBackgroundColor="#7EADC3"
+    app:cardCornerRadius="10dp"
     app:cardElevation="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_photo"
             android:layout_width="70dp"
-            app:cardCornerRadius="10dp"
-            android:layout_height="70dp">
+            android:layout_height="70dp"
+            app:cardCornerRadius="10dp">
 
             <ImageView
                 android:id="@+id/profile_photo_chat_list"
                 android:layout_width="match_parent"
-                android:src="@drawable/steven_binotto_9vduc_sgrsi_unsplash"
+                android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:layout_height="match_parent"/>
+                android:src="@drawable/steven_binotto_9vduc_sgrsi_unsplash" />
         </com.google.android.material.card.MaterialCardView>
 
 
         <LinearLayout
-            android:layout_toEndOf="@id/card_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_centerVertical="true"
+            android:layout_gravity="center"
             android:layout_marginStart="20dp"
+            android:layout_toEndOf="@id/card_photo"
             android:orientation="vertical">
 
             <TextView
@@ -52,23 +52,24 @@
 
             <TextView
                 android:id="@+id/txt_lastMessage_chat_list"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="I wiil be there in 15 min"
                 android:maxWidth="150dp"
                 android:maxLines="1"
+                android:singleLine="true"
+                android:text="I wiil be there in 15 min"
                 android:textColor="#F4F0F0"
                 android:textSize="14sp" />
         </LinearLayout>
 
         <TextView
-            android:layout_gravity="center"
             android:id="@+id/txt_last_message_time_chat_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:layout_marginEnd="10dp"
             android:text="10:20"
             android:textColor="#F4F0F0"

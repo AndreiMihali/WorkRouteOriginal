@@ -69,6 +69,7 @@ drawable bxs_x_circle
 drawable card_cvv
 drawable carnetfrente
 drawable creditcards
+drawable cursor_color
 drawable customer
 drawable default_user_login
 drawable driver

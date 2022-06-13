@@ -3182,6 +3182,7 @@ drawable common_google_signin_btn_text_light_focused
 drawable common_google_signin_btn_text_light_normal
 drawable common_google_signin_btn_text_light_normal_background
 drawable creditcards
+drawable cursor_color
 drawable customer
 drawable default_user_login
 drawable design_fab_background
